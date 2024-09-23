@@ -1,4 +1,4 @@
-import { HomeIcon, CardStackIcon, GamepadIcon, InfoIcon, UserPlusIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
 
@@ -12,7 +12,7 @@ export const navItems = [
   {
     title: "Cards",
     to: "/cards",
-    icon: <CardStackIcon className="h-4 w-4" />,
+    icon: <LayoutGridIcon className="h-4 w-4" />,
     page: <CardsPage />,
   },
   {

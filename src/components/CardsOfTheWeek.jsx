@@ -21,7 +21,7 @@ const Card = ({ card }) => {
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src="/card-back.jpg"
+            src="/card-back.png"
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -40,10 +40,10 @@ const Card = ({ card }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Cloud Warden', image: '/cloud-warden.jpg' },
-    { id: 2, name: 'Ancient Roots', image: '/ancient-roots.jpg' },
-    { id: 3, name: 'Flame Ravager', image: '/flame-ravager.jpg' },
-    { id: 4, name: 'Aqua Shade', image: '/aqua-shade.jpg' },
+    { id: 1, name: 'Cloud Warden', image: '/cloud-warden.png' },
+    { id: 2, name: 'Ancient Roots', image: '/ancient-roots.png' },
+    { id: 3, name: 'Flame Ravager', image: '/flame-ravager.png' },
+    { id: 4, name: 'Aqua Shade', image: '/aqua-shade.png' },
   ];
 
   return (

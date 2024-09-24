@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 const Card = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const handleHover = () => {
+    if (!isFlipped) {
+      setIsFlipped(true);
+    }
+  };
+
   return (
     <div className="w-64 h-96 perspective">
       <motion.div
@@ -11,7 +17,7 @@ const Card = ({ card }) => {
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        onHoverStart={() => !isFlipped && setIsFlipped(true)}
+        onHoverStart={handleHover}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
@@ -34,10 +40,10 @@ const Card = ({ card }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Fire Dragon', image: '/fire-dragon.jpg' },
-    { id: 2, name: 'Water Nymph', image: '/water-nymph.jpg' },
-    { id: 3, name: 'Earth Golem', image: '/earth-golem.jpg' },
-    { id: 4, name: 'Air Elemental', image: '/air-elemental.jpg' },
+    { id: 1, name: 'Cloud Warden', image: '/cloud-warden.jpg' },
+    { id: 2, name: 'Ancient Roots', image: '/ancient-roots.jpg' },
+    { id: 3, name: 'Flame Ravager', image: '/flame-ravager.jpg' },
+    { id: 4, name: 'Aqua Shade', image: '/aqua-shade.jpg' },
   ];
 
   return (

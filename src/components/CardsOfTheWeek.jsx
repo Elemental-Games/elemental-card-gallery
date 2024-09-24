@@ -1,8 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { getImageFromS3 } from '../utils/awsUtils';
+import { useQuery } from '@tanstack/react-query';
 
 const Card = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [cardImage, setCardImage] = useState(null);
+
+  useEffect(() => {
+    const fetchImage = async () => {
+      const imageUrl = await getImageFromS3('your-bucket-name', card.imageKey);
+      setCardImage(imageUrl);
+    };
+    fetchImage();
+  }, [card.imageKey]);
 
   const handleHover = () => {
     if (!isFlipped) {
@@ -27,24 +38,37 @@ const Card = ({ card }) => {
           />
         </div>
         <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
-          <img
-            src={card.image}
-            alt={card.name}
-            className="w-full h-full object-cover rounded-lg"
-          />
+          {cardImage && (
+            <img
+              src={cardImage}
+              alt={card.name}
+              className="w-full h-full object-cover rounded-lg"
+            />
+          )}
         </div>
       </motion.div>
     </div>
   );
 };
 
-const CardsOfTheWeek = () => {
-  const cards = [
-    { id: 1, name: 'Cloud Warden', image: '/cards/air/cloud-warden.png' },
-    { id: 2, name: 'Ancient Roots', image: '/cards/earth/ancient-roots.png' },
-    { id: 3, name: 'Flame Ravager', image: '/cards/fire/flame-ravager.png' },
-    { id: 4, name: 'Aqua Shade', image: '/cards/water/aqua-shade.png' },
+const fetchCards = async () => {
+  // This is a placeholder. In a real application, you would fetch this data from your API.
+  return [
+    { id: 1, name: 'Cloud Warden', imageKey: 'air/cloud-warden.png' },
+    { id: 2, name: 'Ancient Roots', imageKey: 'earth/ancient-roots.png' },
+    { id: 3, name: 'Flame Ravager', imageKey: 'fire/flame-ravager.png' },
+    { id: 4, name: 'Aqua Shade', imageKey: 'water/aqua-shade.png' },
   ];
+};
+
+const CardsOfTheWeek = () => {
+  const { data: cards, isLoading, error } = useQuery({
+    queryKey: ['cardsOfTheWeek'],
+    queryFn: fetchCards,
+  });
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error loading cards</div>;
 
   return (
     <div className="py-16 bg-gray-900">

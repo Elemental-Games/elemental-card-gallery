@@ -19,7 +19,7 @@ const VideoSection = () => {
         loop
         playsInline
       >
-        <source src="/path-to-your-video.mp4" type="video/mp4" />
+        <source src="https://assets.mixkit.co/videos/preview/mixkit-cards-being-thrown-on-a-green-table-4927-large.mp4" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
       <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center">

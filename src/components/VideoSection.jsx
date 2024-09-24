@@ -5,7 +5,9 @@ const VideoSection = () => {
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.play();
+      videoRef.current.play().catch(error => {
+        console.error("Error attempting to play video:", error);
+      });
     }
   }, []);
 

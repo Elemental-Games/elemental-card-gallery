@@ -5,9 +5,7 @@ const Card = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const handleFlip = () => {
-    if (!isFlipped) {
-      setIsFlipped(true);
-    }
+    setIsFlipped(!isFlipped);
   };
 
   return (
@@ -24,7 +22,7 @@ const Card = ({ card }) => {
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src="/card-back.jpg"
+            src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -43,10 +41,10 @@ const Card = ({ card }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Fire Dragon', image: '/fire-dragon.jpg', element: 'Fire' },
-    { id: 2, name: 'Water Nymph', image: '/water-nymph.jpg', element: 'Water' },
-    { id: 3, name: 'Earth Golem', image: '/earth-golem.jpg', element: 'Earth' },
-    { id: 4, name: 'Air Elemental', image: '/air-elemental.jpg', element: 'Air' },
+    { id: 1, name: 'Fire Dragon', image: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1203&q=80', element: 'Fire' },
+    { id: 2, name: 'Water Nymph', image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Water' },
+    { id: 3, name: 'Earth Golem', image: 'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Earth' },
+    { id: 4, name: 'Air Elemental', image: 'https://images.unsplash.com/photo-1534294228306-bd54eb9a7ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Air' },
   ];
 
   return (

@@ -1,34 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { getImageFromS3 } from '../utils/awsUtils';
 import { useQuery } from '@tanstack/react-query';
 
 const Card = ({ card }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-  const [cardImage, setCardImage] = useState(null);
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      const imageUrl = await getImageFromS3(card.imageKey);
-      setCardImage(imageUrl);
-    };
-    fetchImage();
-  }, [card.imageKey]);
-
-  const handleHover = () => {
-    if (!isFlipped) {
-      setIsFlipped(true);
-    }
-  };
+  const { data: cardImage, isLoading } = useQuery({
+    queryKey: ['cardImage', card.imageKey],
+    queryFn: () => getImageFromS3(card.imageKey),
+  });
 
   return (
     <div className="w-64 h-96 perspective">
       <motion.div
         className="w-full h-full relative transform-style-3d cursor-pointer"
-        initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        whileHover={{ rotateY: 180 }}
         transition={{ duration: 0.6 }}
-        onHoverStart={handleHover}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
@@ -38,7 +24,11 @@ const Card = ({ card }) => {
           />
         </div>
         <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
-          {cardImage && (
+          {isLoading ? (
+            <div className="w-full h-full flex items-center justify-center bg-gray-200 rounded-lg">
+              Loading...
+            </div>
+          ) : (
             <img
               src={cardImage}
               alt={card.name}

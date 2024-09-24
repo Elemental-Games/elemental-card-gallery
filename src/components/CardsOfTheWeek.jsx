@@ -1,22 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <div className="w-64 h-96 perspective">
       <motion.div
         className="w-full h-full relative transform-style-3d cursor-pointer"
-        whileHover={{ rotateY: 180 }}
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
+        onHoverStart={() => setIsFlipped(true)}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src="https://images.unsplash.com/photo-1635805737707-575885ab0820?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80"
+            src="/card-back.jpg"
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
         </div>
-        <div className="absolute w-full h-full backface-hidden rotate-y-180">
+        <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
           <img
             src={card.image}
             alt={card.name}

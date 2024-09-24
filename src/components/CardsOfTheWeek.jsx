@@ -4,6 +4,12 @@ import { motion } from 'framer-motion';
 const Card = ({ card }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
+  const handleHover = () => {
+    if (!isFlipped) {
+      setIsFlipped(true);
+    }
+  };
+
   return (
     <div className="w-64 h-96 perspective">
       <motion.div
@@ -11,7 +17,7 @@ const Card = ({ card }) => {
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        onHoverStart={() => setIsFlipped(true)}
+        onHoverStart={handleHover}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
@@ -34,10 +40,10 @@ const Card = ({ card }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Fire Dragon', image: 'https://images.unsplash.com/photo-1500964757637-c85e8a162699?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1203&q=80', element: 'Fire' },
-    { id: 2, name: 'Water Nymph', image: 'https://images.unsplash.com/photo-1518837695005-2083093ee35b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Water' },
-    { id: 3, name: 'Earth Golem', image: 'https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Earth' },
-    { id: 4, name: 'Air Elemental', image: 'https://images.unsplash.com/photo-1534294228306-bd54eb9a7ba8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80', element: 'Air' },
+    { id: 1, name: 'Cloud Warden', image: '/cloud-warden.jpg' },
+    { id: 2, name: 'Ancient Roots', image: '/ancient-roots.jpg' },
+    { id: 3, name: 'Flame Ravager', image: '/flame-ravager.jpg' },
+    { id: 4, name: 'Aqua Shade', image: '/aqua-shade.jpg' },
   ];
 
   return (

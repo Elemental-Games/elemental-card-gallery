@@ -1,23 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
-
-  const handleFlip = () => {
-    setIsFlipped(!isFlipped);
-  };
-
   return (
-    <motion.div
-      className="w-64 h-96 cursor-pointer perspective"
-      onClick={handleFlip}
-      whileHover={{ scale: 1.05 }}
-    >
+    <div className="w-64 h-96 perspective">
       <motion.div
-        className="w-full h-full relative transform-style-3d"
-        initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        className="w-full h-full relative transform-style-3d cursor-pointer"
+        whileHover={{ rotateY: 180 }}
         transition={{ duration: 0.6 }}
       >
         <div className="absolute w-full h-full backface-hidden">
@@ -35,7 +24,7 @@ const Card = ({ card }) => {
           />
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

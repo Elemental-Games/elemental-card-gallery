@@ -9,7 +9,7 @@ const Card = ({ card }) => {
 
   useEffect(() => {
     const fetchImage = async () => {
-      const imageUrl = await getImageFromS3('your-bucket-name', card.imageKey);
+      const imageUrl = await getImageFromS3(card.imageKey);
       setCardImage(imageUrl);
     };
     fetchImage();

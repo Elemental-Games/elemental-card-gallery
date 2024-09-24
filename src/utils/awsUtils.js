@@ -1,16 +1,16 @@
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 
 const s3Client = new S3Client({
-  region: "YOUR_AWS_REGION",
+  region: "us-east-1",
   credentials: {
-    accessKeyId: "YOUR_ACCESS_KEY_ID",
-    secretAccessKey: "YOUR_SECRET_ACCESS_KEY",
+    accessKeyId: "AKIAXWHDLSHV7AVRNDGP",
+    secretAccessKey: "HVOzLL6R3Kp7ZW4Ngous3hG64hlfb4frSm7llzGl",
   },
 });
 
-export const getImageFromS3 = async (bucketName, key) => {
+export const getImageFromS3 = async (key) => {
   const command = new GetObjectCommand({
-    Bucket: bucketName,
+    Bucket: "elementalgames",
     Key: key,
   });
 

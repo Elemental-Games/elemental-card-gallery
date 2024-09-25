@@ -7,6 +7,7 @@ import { navItems } from "./nav-items";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CardDetailPage from "./pages/CardDetailPage";
+import ThemeToggle from "./components/ThemeToggle";
 
 const queryClient = new QueryClient();
 
@@ -16,7 +17,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <BrowserRouter>
-          <div className="flex flex-col min-h-screen">
+          <div className="flex flex-col min-h-screen bg-background text-foreground">
             <Header />
             <main className="flex-grow">
               <Routes>
@@ -27,6 +28,7 @@ const App = () => (
               </Routes>
             </main>
             <Footer />
+            <ThemeToggle />
           </div>
         </BrowserRouter>
       </TooltipProvider>

@@ -31,79 +31,44 @@ const CardDetailPage = () => {
     queryFn: () => fetchCardByName(cardName),
   });
 
-  // Fake card data for Water Elemental
-  const fakeCard = {
-    id: 'water-elemental',
-    name: 'Water Elemental',
-    image: '/images/water-elemental.jpg',
-    element: 'Water',
-    type: 'Creature',
-    rarity: 'Rare',
-    description: 'A creature made of the element of water.',
-    strength: 7,
-    agility: 5,
-    ability: 'Tidal Wave: Deal 3 damage to all enemy creatures.',
-    specialAbility: 'Hydro Pump: Once per game, deal 10 damage to a single target.',
-    essconeCost: 4,
-    essenceGeneration: 2,
-    background: 'Water Elementals are ancient beings that embody the raw power of the seas. They are known for their fluid tactics and overwhelming force in battle.',
-    synergies: [
-      { card: { id: 'leaf-spirit', name: 'Leaf Spirit', image: '/placeholder.svg' }, rating: 'S', color: 'text-green-500' },
-      { card: { id: 'flame-wisp', name: 'Flame Wisp', image: '/placeholder.svg' }, rating: 'A', color: 'text-red-500' }
-    ],
-    counters: [
-      { card: { id: 'wind-rider', name: 'Wind Rider', image: '/placeholder.svg' }, rating: 'S', color: 'text-blue-300' }
-    ],
-    news: [
-      { 
-        title: 'Water Elemental Showcase', 
-        date: '2023-05-01', 
-        description: 'Check out our latest video showcasing the Water Elemental in action!', 
-        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
-      }
-    ]
-  };
-
-  // Use fake card data for demonstration
-  const displayCard = fakeCard;
-
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
+  if (!card) return <div>Card not found</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2">
-          <img src={displayCard.image} alt={displayCard.name} className="w-full h-auto rounded-lg shadow-lg" />
+          <img src={card.image} alt={card.name} className="w-full h-auto rounded-lg shadow-lg" />
         </div>
         <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-bold mb-4">{displayCard.name}</h1>
-          <p className="text-xl mb-2">{displayCard.element} | {displayCard.type} | {displayCard.rarity}</p>
-          <p className="text-lg mb-4">{displayCard.description}</p>
+          <h1 className="text-4xl font-bold mb-4">{card.name}</h1>
+          <p className="text-xl mb-2">{card.element} | {card.type} | {card.rarity}</p>
+          <p className="text-lg mb-4">{card.description}</p>
           <div className="grid grid-cols-2 gap-4">
             <div>
               <h3 className="text-xl font-semibold mb-2">Strength</h3>
-              <p>{displayCard.strength}</p>
+              <p>{card.strength}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Agility</h3>
-              <p>{displayCard.agility}</p>
+              <p>{card.agility}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Ability</h3>
-              <p>{displayCard.ability}</p>
+              <p>{card.ability}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Special Ability</h3>
-              <p>{displayCard.specialAbility}</p>
+              <p>{card.specialAbility}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Esscone Cost</h3>
-              <p>{displayCard.essconeCost}</p>
+              <p>{card.essconeCost}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Essence Generation</h3>
-              <p>{displayCard.essenceGeneration}</p>
+              <p>{card.essenceGeneration}</p>
             </div>
           </div>
         </div>
@@ -111,13 +76,13 @@ const CardDetailPage = () => {
 
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Card Background</h2>
-        <p className="text-lg">{displayCard.background}</p>
+        <p className="text-lg">{card.background}</p>
       </div>
 
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Synergies</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {displayCard.synergies.map((synergy) => (
+          {card.synergies.map((synergy) => (
             <SynergyCard key={synergy.card.id} card={synergy.card} synergy={synergy} />
           ))}
         </div>
@@ -126,7 +91,7 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Counters</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {displayCard.counters.map((counter) => (
+          {card.counters.map((counter) => (
             <SynergyCard key={counter.card.id} card={counter.card} synergy={counter} />
           ))}
         </div>
@@ -135,7 +100,7 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">News</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayCard.news.map((item, index) => (
+          {card.news.map((item, index) => (
             <NewsItem key={index} item={item} />
           ))}
         </div>

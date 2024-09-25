@@ -82,8 +82,8 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Synergies</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {card.synergies.map((synergy) => (
-            <SynergyCard key={synergy.card.id} card={synergy.card} synergy={synergy} />
+          {card.synergies.map((synergy, index) => (
+            <SynergyCard key={index} card={synergy.card} synergy={synergy} />
           ))}
         </div>
       </div>
@@ -91,8 +91,8 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Counters</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {card.counters.map((counter) => (
-            <SynergyCard key={counter.card.id} card={counter.card} synergy={counter} />
+          {card.counters.map((counter, index) => (
+            <SynergyCard key={index} card={counter.card} synergy={counter} />
           ))}
         </div>
       </div>

@@ -31,11 +31,16 @@ export const fetchCardsFromS3 = async () => {
       type: card.type,
       rarity: card.rarity,
       description: card.description,
-      attack: card.attack,
-      defense: card.defense,
+      strength: card.strength,
+      agility: card.agility,
+      ability: card.ability,
       specialAbility: card.specialAbility,
+      essconeCost: card.essconeCost,
+      essenceGeneration: card.essenceGeneration,
+      background: card.background,
       synergies: card.synergies ? JSON.parse(card.synergies) : [],
       counters: card.counters ? JSON.parse(card.counters) : [],
+      news: card.news ? JSON.parse(card.news) : [],
     }));
   } catch (error) {
     console.error("Error fetching cards from S3:", error);
@@ -43,7 +48,7 @@ export const fetchCardsFromS3 = async () => {
   }
 };
 
-export const fetchCardById = async (id) => {
+export const fetchCardByName = async (cardName) => {
   const cards = await fetchCardsFromS3();
-  return cards.find(card => card.id === id);
+  return cards.find(card => card.name.toLowerCase() === cardName.toLowerCase());
 };

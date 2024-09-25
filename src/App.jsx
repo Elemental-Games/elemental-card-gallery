@@ -21,7 +21,7 @@ const App = () => (
               {navItems.map(({ to, page }) => (
                 <Route key={to} path={to} element={page} />
               ))}
-              <Route path="/cards/:id" element={<CardDetailPage />} />
+              <Route path="/cards/:cardName" element={<CardDetailPage />} />
             </Routes>
           </main>
           <Footer />

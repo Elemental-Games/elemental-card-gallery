@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { fetchCardById } from '../utils/awsUtils';
+import { fetchCardByName } from '../utils/awsUtils';
 
 const SynergyCard = ({ card, synergy }) => (
   <div className={`w-40 h-60 rounded-lg overflow-hidden shadow-lg m-2 relative ${synergy.color}`}>
@@ -15,11 +15,20 @@ const SynergyCard = ({ card, synergy }) => (
   </div>
 );
 
+const NewsItem = ({ item }) => (
+  <div className="bg-white p-4 rounded-lg shadow-md">
+    <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
+    <p className="text-sm text-gray-600 mb-2">{item.date}</p>
+    <p>{item.description}</p>
+    <a href={item.link} className="text-blue-500 hover:underline mt-2 inline-block">Read more</a>
+  </div>
+);
+
 const CardDetailPage = () => {
-  const { id } = useParams();
+  const { cardName } = useParams();
   const { data: card, isLoading, error } = useQuery({
-    queryKey: ['card', id],
-    queryFn: () => fetchCardById(id),
+    queryKey: ['card', cardName],
+    queryFn: () => fetchCardByName(cardName),
   });
 
   if (isLoading) return <div>Loading...</div>;
@@ -37,19 +46,36 @@ const CardDetailPage = () => {
           <p className="text-lg mb-4">{card.description}</p>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <h3 className="text-xl font-semibold mb-2">Attack</h3>
-              <p>{card.attack}</p>
+              <h3 className="text-xl font-semibold mb-2">Strength</h3>
+              <p>{card.strength}</p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Defense</h3>
-              <p>{card.defense}</p>
+              <h3 className="text-xl font-semibold mb-2">Agility</h3>
+              <p>{card.agility}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Ability</h3>
+              <p>{card.ability}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Special Ability</h3>
               <p>{card.specialAbility}</p>
             </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Esscone Cost</h3>
+              <p>{card.essconeCost}</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-semibold mb-2">Essence Generation</h3>
+              <p>{card.essenceGeneration}</p>
+            </div>
           </div>
         </div>
+      </div>
+
+      <div className="mt-12">
+        <h2 className="text-3xl font-bold mb-4">Card Background</h2>
+        <p className="text-lg">{card.background}</p>
       </div>
 
       <div className="mt-12">
@@ -66,6 +92,15 @@ const CardDetailPage = () => {
         <div className="overflow-x-auto whitespace-nowrap pb-4">
           {card.counters.map((counter) => (
             <SynergyCard key={counter.card.id} card={counter.card} synergy={counter} />
+          ))}
+        </div>
+      </div>
+
+      <div className="mt-12">
+        <h2 className="text-3xl font-bold mb-4">News</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 overflow-x-auto pb-4">
+          {card.news.map((item, index) => (
+            <NewsItem key={index} item={item} />
           ))}
         </div>
       </div>

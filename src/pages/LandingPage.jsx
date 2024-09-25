@@ -7,12 +7,14 @@ import AboutUsSection from '../components/AboutUsSection';
 
 const LandingPage = () => {
   return (
-    <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white">
+    <div className="relative">
       <ImageHero />
-      <CardsOfTheWeek />
-      <GameplaySection />
-      <AboutUsSection />
-      <JoinNowSection />
+      <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white">
+        <CardsOfTheWeek />
+        <GameplaySection />
+        <AboutUsSection />
+        <JoinNowSection />
+      </div>
     </div>
   );
 };

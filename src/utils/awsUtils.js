@@ -41,7 +41,7 @@ export const fetchCardsFromS3 = async () => {
       agility: card.agility,
       ability: card.ability,
       specialAbility: card.specialAbility,
-      essconeCost: card.essconeCost,
+      essenceCost: card.essenceCost,
       essenceGeneration: card.essenceGeneration,
       background: card.background,
       synergies: card.synergies ? JSON.parse(card.synergies) : [],
@@ -69,7 +69,7 @@ export const fetchCardByName = async (cardName) => {
       agility: 5,
       ability: 'Tidal Wave: Deal 3 damage to all enemy creatures.',
       specialAbility: 'Hydro Pump: Once per game, deal 10 damage to a single target.',
-      essconeCost: 4,
+      essenceCost: 4,
       essenceGeneration: 2,
       background: 'Water Elementals are ancient beings that embody the raw power of the seas. They are known for their fluid tactics and overwhelming force in battle.',
       synergies: [

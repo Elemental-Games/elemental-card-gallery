@@ -63,8 +63,8 @@ const CardDetailPage = () => {
               <p>{card.specialAbility}</p>
             </div>
             <div>
-              <h3 className="text-xl font-semibold mb-2">Esscone Cost</h3>
-              <p>{card.essconeCost}</p>
+              <h3 className="text-xl font-semibold mb-2">Essence Cost</h3>
+              <p>{card.essenceCost}</p>
             </div>
             <div>
               <h3 className="text-xl font-semibold mb-2">Essence Generation</h3>

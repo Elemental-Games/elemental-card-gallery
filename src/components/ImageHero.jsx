@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const ImageHero = () => {
-  const [showImage, setShowImage] = useState(true);
+  const [showVideo, setShowVideo] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setShowImage(false);
+      setShowVideo(false);
     }, 5000);
 
     return () => clearTimeout(timer);
@@ -15,18 +15,22 @@ const ImageHero = () => {
   return (
     <div className="relative h-screen">
       <AnimatePresence>
-        {showImage && (
+        {showVideo && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
             className="absolute inset-0"
           >
-            <img
-              src="/hero-image.jpg"
-              alt="Elemental Masters Hero"
+            <video
+              autoPlay
+              loop
+              muted
               className="w-full h-full object-cover"
-            />
+            >
+              <source src="/leaves-background.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
           </motion.div>
         )}
       </AnimatePresence>

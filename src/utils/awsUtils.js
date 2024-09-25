@@ -9,6 +9,12 @@ const s3Client = new S3Client({
   },
 });
 
+const getImageUrl = (cardName) => {
+  // Replace spaces with hyphens and convert to lowercase
+  const formattedName = cardName.toLowerCase().replace(/\s+/g, '-');
+  return `https://your-s3-bucket-url.s3.amazonaws.com/cards/${formattedName}.png`;
+};
+
 export const fetchCardsFromS3 = async () => {
   try {
     const command = new GetObjectCommand({
@@ -26,7 +32,7 @@ export const fetchCardsFromS3 = async () => {
     return jsonData.map(card => ({
       id: card.id,
       name: card.name,
-      image: card.image,
+      image: getImageUrl(card.name),
       element: card.element,
       type: card.type,
       rarity: card.rarity,

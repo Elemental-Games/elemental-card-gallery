@@ -16,16 +16,7 @@ const Card = ({ card }) => {
   );
 };
 
-const CardGallery = () => {
-  // This is a placeholder array of cards. In a real application, you would fetch this data from an API.
-  const cards = [
-    { id: 1, name: 'Fire Dragon', image: '/fire-dragon.jpg', element: 'Fire', type: 'Creature', rarity: 'Legendary' },
-    { id: 2, name: 'Water Nymph', image: '/water-nymph.jpg', element: 'Water', type: 'Creature', rarity: 'Rare' },
-    { id: 3, name: 'Earth Golem', image: '/earth-golem.jpg', element: 'Earth', type: 'Creature', rarity: 'Uncommon' },
-    { id: 4, name: 'Air Elemental', image: '/air-elemental.jpg', element: 'Air', type: 'Creature', rarity: 'Epic' },
-    // Add more cards here...
-  ];
-
+const CardGallery = ({ cards }) => {
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
       {cards.map((card) => (

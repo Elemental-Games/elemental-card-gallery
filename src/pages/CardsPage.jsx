@@ -18,7 +18,7 @@ const CardsPage = () => {
     element: 'Water',
     type: 'Creature',
     rarity: 'Rare',
-    description: 'A powerful entity born from the depths of the ocean.',
+    description: 'A creature made of the element of water.',
     strength: 7,
     agility: 5,
     ability: 'Tidal Wave: Deal 3 damage to all enemy creatures.',
@@ -27,16 +27,19 @@ const CardsPage = () => {
     essenceGeneration: 2,
     background: 'Water Elementals are ancient beings that embody the raw power of the seas. They are known for their fluid tactics and overwhelming force in battle.',
     synergies: [
-      { card: { id: 'rain-maker', name: 'Rain Maker' }, rating: 8, color: 'text-blue-500' },
-      { card: { id: 'ice-sculptor', name: 'Ice Sculptor' }, rating: 7, color: 'text-blue-300' }
+      { card: { id: 'leaf-spirit', name: 'Leaf Spirit' }, rating: 'S', color: 'text-green-500' },
+      { card: { id: 'flame-wisp', name: 'Flame Wisp' }, rating: 'A', color: 'text-red-500' }
     ],
     counters: [
-      { card: { id: 'lightning-bolt', name: 'Lightning Bolt' }, rating: 9, color: 'text-yellow-500' },
-      { card: { id: 'desert-nomad', name: 'Desert Nomad' }, rating: 6, color: 'text-orange-500' }
+      { card: { id: 'wind-rider', name: 'Wind Rider' }, rating: 'S', color: 'text-blue-300' }
     ],
     news: [
-      { title: 'Water Elemental Dominates in Recent Tournament', date: '2023-03-15', description: 'The Water Elemental card showed its strength in last week\'s Elemental Masters Championship.', link: '#' },
-      { title: 'New Synergy Discovered with Rain Maker', date: '2023-02-28', description: 'Players have found a powerful combo using Water Elemental and Rain Maker cards.', link: '#' }
+      { 
+        title: 'Water Elemental Showcase', 
+        date: '2023-05-01', 
+        description: 'Check out our latest video showcasing the Water Elemental in action!', 
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      }
     ]
   };
 

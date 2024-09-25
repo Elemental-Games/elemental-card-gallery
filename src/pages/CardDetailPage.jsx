@@ -16,11 +16,11 @@ const SynergyCard = ({ card, synergy }) => (
 );
 
 const NewsItem = ({ item }) => (
-  <div className="bg-white p-4 rounded-lg shadow-md">
+  <div className="bg-white dark:bg-gray-800 p-4 rounded-lg shadow-md">
     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
-    <p className="text-sm text-gray-600 mb-2">{item.date}</p>
+    <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{item.date}</p>
     <p>{item.description}</p>
-    <a href={item.link} className="text-blue-500 hover:underline mt-2 inline-block">Read more</a>
+    <a href={item.link} className="text-blue-500 hover:underline mt-2 inline-block">Watch video</a>
   </div>
 );
 
@@ -39,7 +39,7 @@ const CardDetailPage = () => {
     element: 'Water',
     type: 'Creature',
     rarity: 'Rare',
-    description: 'A powerful entity born from the depths of the ocean.',
+    description: 'A creature made of the element of water.',
     strength: 7,
     agility: 5,
     ability: 'Tidal Wave: Deal 3 damage to all enemy creatures.',
@@ -48,16 +48,19 @@ const CardDetailPage = () => {
     essenceGeneration: 2,
     background: 'Water Elementals are ancient beings that embody the raw power of the seas. They are known for their fluid tactics and overwhelming force in battle.',
     synergies: [
-      { card: { id: 'rain-maker', name: 'Rain Maker', image: '/placeholder.svg' }, rating: 8, color: 'text-blue-500' },
-      { card: { id: 'ice-sculptor', name: 'Ice Sculptor', image: '/placeholder.svg' }, rating: 7, color: 'text-blue-300' }
+      { card: { id: 'leaf-spirit', name: 'Leaf Spirit', image: '/placeholder.svg' }, rating: 'S', color: 'text-green-500' },
+      { card: { id: 'flame-wisp', name: 'Flame Wisp', image: '/placeholder.svg' }, rating: 'A', color: 'text-red-500' }
     ],
     counters: [
-      { card: { id: 'lightning-bolt', name: 'Lightning Bolt', image: '/placeholder.svg' }, rating: 9, color: 'text-yellow-500' },
-      { card: { id: 'desert-nomad', name: 'Desert Nomad', image: '/placeholder.svg' }, rating: 6, color: 'text-orange-500' }
+      { card: { id: 'wind-rider', name: 'Wind Rider', image: '/placeholder.svg' }, rating: 'S', color: 'text-blue-300' }
     ],
     news: [
-      { title: 'Water Elemental Dominates in Recent Tournament', date: '2023-03-15', description: 'The Water Elemental card showed its strength in last week\'s Elemental Masters Championship.', link: '#' },
-      { title: 'New Synergy Discovered with Rain Maker', date: '2023-02-28', description: 'Players have found a powerful combo using Water Elemental and Rain Maker cards.', link: '#' }
+      { 
+        title: 'Water Elemental Showcase', 
+        date: '2023-05-01', 
+        description: 'Check out our latest video showcasing the Water Elemental in action!', 
+        link: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ'
+      }
     ]
   };
 

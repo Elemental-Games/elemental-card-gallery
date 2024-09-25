@@ -1,8 +1,8 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
+import { Link } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import FilterOptions from '../components/FilterOptions';
-import CardGallery from '../components/CardGallery';
 import { fetchCardsFromS3 } from '../utils/awsUtils';
 
 const CardsPage = () => {
@@ -23,7 +23,19 @@ const CardsPage = () => {
       <div className="mb-8">
         <FilterOptions />
       </div>
-      <CardGallery cards={cards} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+        {cards.map((card) => (
+          <Link key={card.id} to={`/cards/${card.id}`} className="block">
+            <div className="w-full h-96 rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <img src={card.image} alt={card.name} className="w-full h-full object-cover" />
+              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4">
+                <h3 className="text-lg font-semibold">{card.name}</h3>
+                <p className="text-sm">{card.element} | {card.type} | {card.rarity}</p>
+              </div>
+            </div>
+          </Link>
+        ))}
+      </div>
     </div>
   );
 };

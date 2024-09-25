@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { navItems } from "./nav-items";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import CardDetailPage from "./pages/CardDetailPage";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
               {navItems.map(({ to, page }) => (
                 <Route key={to} path={to} element={page} />
               ))}
+              <Route path="/cards/:id" element={<CardDetailPage />} />
             </Routes>
           </main>
           <Footer />

@@ -2,23 +2,22 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import * as XLSX from 'xlsx';
 
 const s3Client = new S3Client({
-  region: "YOUR_AWS_REGION",
+  region: import.meta.env.VITE_AWS_REGION,
   credentials: {
-    accessKeyId: "YOUR_ACCESS_KEY_ID",
-    secretAccessKey: "YOUR_SECRET_ACCESS_KEY",
+    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
   },
 });
 
 const getImageUrl = (cardName) => {
-  // Replace spaces with hyphens and convert to lowercase
   const formattedName = cardName.toLowerCase().replace(/\s+/g, '-');
-  return `https://your-s3-bucket-url.s3.amazonaws.com/cards/${formattedName}.png`;
+  return `${import.meta.env.VITE_S3_BUCKET_URL}/cards/${formattedName}.png`;
 };
 
 export const fetchCardsFromS3 = async () => {
   try {
     const command = new GetObjectCommand({
-      Bucket: "YOUR_BUCKET_NAME",
+      Bucket: import.meta.env.VITE_S3_BUCKET_NAME,
       Key: "path/to/your/excel/file.xlsx",
     });
 

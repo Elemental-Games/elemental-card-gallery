@@ -1,32 +1,29 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Facebook, Instagram, X } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-white dark:bg-darkPurple text-darkPurple dark:text-white">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">Elemental Masters</h3>
-            <p>A trading card game by Elemental Games</p>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2">
-              <li><Link to="/" className="hover:text-accent transition-colors">Home</Link></li>
-              <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
-              <li><Link to="/gameplay" className="hover:text-accent transition-colors">Gameplay</Link></li>
-              <li><Link to="/about" className="hover:text-accent transition-colors">About Us</Link></li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
-            <div className="flex space-x-4">
-              {/* Add social media icons here */}
-            </div>
-          </div>
+    <footer className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4">
+      <div className="container mx-auto px-4 flex flex-wrap justify-between items-center">
+        <div className="flex items-center space-x-4">
+          <Link to="/" className="hover:text-accent transition-colors">Home</Link>
+          <Link to="/cards" className="hover:text-accent transition-colors">Cards</Link>
+          <Link to="/gameplay" className="hover:text-accent transition-colors">Gameplay</Link>
+          <Link to="/about" className="hover:text-accent transition-colors">About Us</Link>
         </div>
-        <div className="mt-8 text-center">
+        <div className="flex items-center space-x-4">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+            <Facebook className="w-6 h-6 hover:text-accent transition-colors" />
+          </a>
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+            <Instagram className="w-6 h-6 hover:text-accent transition-colors" />
+          </a>
+          <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+            <X className="w-6 h-6 hover:text-accent transition-colors" />
+          </a>
+        </div>
+        <div className="w-full md:w-auto text-center md:text-left mt-4 md:mt-0">
           <p>&copy; 2023 Elemental Games. All rights reserved.</p>
         </div>
       </div>

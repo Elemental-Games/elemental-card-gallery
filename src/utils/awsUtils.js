@@ -18,7 +18,7 @@ export const fetchCardsFromS3 = async () => {
   try {
     const command = new GetObjectCommand({
       Bucket: import.meta.env.VITE_S3_BUCKET_NAME,
-      Key: "data/elemental_masters_cards.xlsx", // Update this path if your spreadsheet has a different name or location
+      Key: "data/elemental_masters_cards.xlsx",
     });
 
     const response = await s3Client.send(command);

@@ -1,6 +1,8 @@
-import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, BookOpenIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
+import GameplayPage from "./pages/GameplayPage.jsx";
+import RulesPage from "./pages/RulesPage.jsx";
 
 export const navItems = [
   {
@@ -19,7 +21,15 @@ export const navItems = [
     title: "Gameplay",
     to: "/gameplay",
     icon: <GamepadIcon className="h-4 w-4" />,
-    page: <div>Gameplay Page</div>, // Placeholder for now
+    page: <GameplayPage />,
+    subItems: [
+      {
+        title: "Rules",
+        to: "/gameplay/rules",
+        icon: <BookOpenIcon className="h-4 w-4" />,
+        page: <RulesPage />,
+      },
+    ],
   },
   {
     title: "About Us",

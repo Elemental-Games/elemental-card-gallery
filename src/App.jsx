@@ -21,8 +21,13 @@ const App = () => (
             <Header />
             <main className="flex-grow">
               <Routes>
-                {navItems.map(({ to, page }) => (
-                  <Route key={to} path={to} element={page} />
+                {navItems.map((item) => (
+                  <React.Fragment key={item.to}>
+                    <Route path={item.to} element={item.page} />
+                    {item.subItems && item.subItems.map((subItem) => (
+                      <Route key={subItem.to} path={subItem.to} element={subItem.page} />
+                    ))}
+                  </React.Fragment>
                 ))}
                 <Route path="/cards/:cardName" element={<CardDetailPage />} />
               </Routes>

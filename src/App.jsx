@@ -7,6 +7,7 @@ import { navItems } from "./nav-items";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CardDetailPage from "./pages/CardDetailPage";
+import DeckBuilderPage from "./pages/DeckBuilderPage";
 import ThemeToggle from "./components/ThemeToggle";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
                   </React.Fragment>
                 ))}
                 <Route path="/cards/:cardName" element={<CardDetailPage />} />
+                <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
               </Routes>
             </main>
             <Footer />

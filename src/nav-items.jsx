@@ -1,6 +1,7 @@
-import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, BookOpenIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, BookOpenIcon, LayersIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
+import DeckBuilderPage from "./pages/DeckBuilderPage.jsx";
 import GameplayPage from "./pages/GameplayPage.jsx";
 import RulesPage from "./pages/RulesPage.jsx";
 
@@ -16,6 +17,14 @@ export const navItems = [
     to: "/cards",
     icon: <LayoutGridIcon className="h-4 w-4" />,
     page: <CardsPage />,
+    subItems: [
+      {
+        title: "Deck Builder",
+        to: "/cards/deck-builder",
+        icon: <LayersIcon className="h-4 w-4" />,
+        page: <DeckBuilderPage />,
+      },
+    ],
   },
   {
     title: "Gameplay",

@@ -17,12 +17,14 @@
    npm install
    ```
 
-4. Start the development server:
+4. Set up environment variables as described in the AWS_README.md file.
+
+5. Start the development server:
    ```
    npm run dev
    ```
 
-5. Open your browser and visit `http://localhost:5173`
+6. Open your browser and visit `http://localhost:5173`
 
 ## Deploying to BlueHost
 
@@ -47,22 +49,17 @@
    </IfModule>
    ```
 
-## Using AWS S3 for Images
+## AWS S3 Integration
 
-To use images from AWS S3, you need to update the `src/utils/awsUtils.js` file:
+For detailed instructions on setting up AWS S3 for storing card data and images, please refer to the `AWS_README.md` file in this repository.
 
-1. Replace `YOUR_AWS_REGION`, `YOUR_ACCESS_KEY_ID`, and `YOUR_SECRET_ACCESS_KEY` with your actual AWS credentials.
+## Troubleshooting
 
-2. Update the `getImageUrl` function to use your S3 bucket URL:
-   ```javascript
-   const getImageUrl = (cardName) => {
-     const formattedName = cardName.toLowerCase().replace(/\s+/g, '-');
-     return `https://your-s3-bucket-name.s3.amazonaws.com/cards/${formattedName}.png`;
-   };
-   ```
+If you encounter any issues with AWS S3 integration or image loading, please check the following:
 
-3. Replace `YOUR_BUCKET_NAME` with your actual S3 bucket name in the `fetchCardsFromS3` function.
+1. Ensure all environment variables are correctly set as described in `AWS_README.md`.
+2. Verify that your AWS IAM user has the correct permissions.
+3. Check that your S3 bucket is properly configured for public access.
+4. Confirm that your card images are named correctly and uploaded to the right folder in your S3 bucket.
 
-4. Ensure that your S3 bucket is configured for public access and has the appropriate CORS settings.
-
-Remember to keep your AWS credentials secure and never commit them to version control. Consider using environment variables for sensitive information in a production environment.
+For any other issues, please refer to the project documentation or contact the development team.

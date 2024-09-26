@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
@@ -12,12 +13,16 @@ const RulesPage = () => {
   });
 
   const handlePlayCard = (card) => {
-    // Simplified battle logic
     alert(`You played ${card}! In a real game, this would affect the battle state.`);
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="container mx-auto px-4 py-8"
+    >
       <h1 className="text-4xl font-bold mb-6">Elemental Masters Rulebook</h1>
       
       <Button className="mb-6" onClick={() => window.open('/rulebook.pdf', '_blank')}>
@@ -30,6 +35,7 @@ const RulesPage = () => {
           <TabsTrigger value="fullrules">Full Rules</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
           <TabsTrigger value="interactive">Interactive</TabsTrigger>
+          <TabsTrigger value="glossary">Glossary</TabsTrigger>
         </TabsList>
 
         <TabsContent value="quickstart">
@@ -117,6 +123,30 @@ const RulesPage = () => {
             </div>
           </div>
         </TabsContent>
+
+        <TabsContent value="glossary">
+          <h2 className="text-2xl font-semibold mb-4">Glossary of Terms</h2>
+          <Accordion type="single" collapsible>
+            <AccordionItem value="element">
+              <AccordionTrigger>Element</AccordionTrigger>
+              <AccordionContent>
+                The primary type of a card, representing one of the four basic elements: Air, Water, Earth, or Fire.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="essence">
+              <AccordionTrigger>Essence</AccordionTrigger>
+              <AccordionContent>
+                The resource used to play cards and activate abilities. Each element has its own type of essence.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="fusion">
+              <AccordionTrigger>Fusion</AccordionTrigger>
+              <AccordionContent>
+                A mechanic that allows you to combine two or more element cards to create a more powerful card.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </TabsContent>
       </Tabs>
 
       <section className="mt-8">
@@ -127,7 +157,7 @@ const RulesPage = () => {
           <li>v1.0: Initial release of Elemental Masters ruleset.</li>
         </ul>
       </section>
-    </div>
+    </motion.div>
   );
 };
 

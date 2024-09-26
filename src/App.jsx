@@ -9,6 +9,10 @@ import Footer from "./components/Footer";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import ThemeToggle from "./components/ThemeToggle";
+import CookieConsent from "./components/CookieConsent";
+import TermsOfService from "./pages/TermsOfService";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import SupportPage from "./pages/SupportPage";
 
 const queryClient = new QueryClient();
 
@@ -32,10 +36,14 @@ const App = () => (
                 ))}
                 <Route path="/cards/:cardName" element={<CardDetailPage />} />
                 <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/support" element={<SupportPage />} />
               </Routes>
             </main>
             <Footer />
             <ThemeToggle />
+            <CookieConsent />
           </div>
         </BrowserRouter>
       </TooltipProvider>

@@ -16,7 +16,7 @@ const LandingPage = () => {
             <ElementIcon element="fire" className="mr-2" />
             Discover the Elements
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {['Air', 'Water', 'Earth', 'Fire'].map((element) => (
               <div key={element} className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
                 <ElementIcon element={element} className="mb-4 text-4xl" />

@@ -12,23 +12,7 @@ This guide will help you set up and use AWS S3 for storing your card data spread
 ## 2. Uploading Files
 
 ### Spreadsheet
-1. Prepare your card data spreadsheet with the following columns:
-   - id
-   - name
-   - element
-   - type
-   - rarity
-   - description
-   - strength
-   - agility
-   - ability
-   - specialAbility
-   - essenceCost
-   - essenceGeneration
-   - background
-   - synergies (JSON string)
-   - counters (JSON string)
-   - news (JSON string)
+1. Prepare your card data spreadsheet with the required columns. For detailed instructions on how to structure your Excel spreadsheet, including how to format the synergies, counters, and news columns, please refer to the `EXCEL_README.md` file.
 2. Save the spreadsheet as an Excel file (.xlsx).
 3. Upload the spreadsheet to the `data` folder in your S3 bucket.
 

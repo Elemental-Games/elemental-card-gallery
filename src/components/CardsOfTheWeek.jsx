@@ -23,7 +23,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
         className="w-full h-full relative transform-style-3d cursor-pointer"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }}
+        transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img

@@ -31,11 +31,10 @@ export const fetchCardsFromS3 = async () => {
     return jsonData.map(card => ({
       ...card,
       image: getImageUrl(card.name),
-      element: ['Frost', 'Sand', 'Lightning', 'Crystal', 'Lava', 'Poison'].includes(card.element) ? 'Combination' : card.element,
     }));
   } catch (error) {
     console.error("Error fetching cards from S3:", error);
-    throw new Error("Failed to fetch cards. Please try again later.");
+    return [];
   }
 };
 
@@ -43,12 +42,9 @@ export const fetchCardByName = async (cardName) => {
   try {
     const allCards = await fetchCardsFromS3();
     const card = allCards.find(c => c.name.toLowerCase() === cardName.toLowerCase());
-    if (!card) {
-      throw new Error("Card not found");
-    }
-    return card;
+    return card || null;
   } catch (error) {
     console.error("Error fetching card by name:", error);
-    throw error;
+    return null;
   }
 };

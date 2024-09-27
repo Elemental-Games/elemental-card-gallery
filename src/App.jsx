@@ -25,7 +25,7 @@ const App = () => (
         <BrowserRouter>
           <div className="flex flex-col min-h-screen bg-background text-foreground">
             <Header />
-            <main className="flex-grow pt-16"> {/* Added padding-top to account for fixed header */}
+            <main className="flex-grow">
               <Routes>
                 {navItems.map((item) => (
                   <React.Fragment key={item.to}>

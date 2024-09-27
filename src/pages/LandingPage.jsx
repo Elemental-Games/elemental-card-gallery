@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { ElementIcon } from '../components/ElementIcon';
 import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import NewsFeed from '../components/NewsFeed';
+import LightBox from '../components/LightBox';
 
 const LandingPage = () => {
+  const [showLightBox, setShowLightBox] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLightBox(true);
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
@@ -64,6 +75,12 @@ const LandingPage = () => {
 
         <NewsFeed />
       </div>
+      {showLightBox && (
+        <LightBox
+          cardImage={`${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png`}
+          onClose={() => setShowLightBox(false)}
+        />
+      )}
     </div>
   );
 };

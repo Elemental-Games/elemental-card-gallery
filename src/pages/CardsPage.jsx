@@ -13,12 +13,24 @@ const CardsPage = () => {
   });
 
   const [filteredCards, setFilteredCards] = useState([]);
+  const [filters, setFilters] = useState({
+    element: 'all',
+    type: 'all',
+    rarity: 'all',
+  });
   const [strengthSort, setStrengthSort] = useState('');
   const [agilitySort, setAgilitySort] = useState('');
 
   useEffect(() => {
     if (cards) {
       let sorted = [...cards];
+      // Apply filters
+      sorted = sorted.filter(card => 
+        (filters.element === 'all' || card.element.toLowerCase() === filters.element) &&
+        (filters.type === 'all' || card.type.toLowerCase() === filters.type) &&
+        (filters.rarity === 'all' || card.rarity.toLowerCase() === filters.rarity)
+      );
+      // Apply sorting
       if (strengthSort) {
         sorted.sort((a, b) => strengthSort === 'highest' ? b.strength - a.strength : a.strength - b.strength);
       } else if (agilitySort) {
@@ -26,7 +38,11 @@ const CardsPage = () => {
       }
       setFilteredCards(sorted);
     }
-  }, [cards, strengthSort, agilitySort]);
+  }, [cards, filters, strengthSort, agilitySort]);
+
+  const handleFilterChange = (filterType, value) => {
+    setFilters(prev => ({ ...prev, [filterType]: value }));
+  };
 
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
@@ -38,7 +54,7 @@ const CardsPage = () => {
         <SearchBar />
       </div>
       <div className="mb-8">
-        <FilterOptions />
+        <FilterOptions onFilterChange={handleFilterChange} />
         <div className="flex space-x-4 mt-4">
           <Select onValueChange={setStrengthSort} value={strengthSort}>
             <SelectTrigger className="w-[180px]">

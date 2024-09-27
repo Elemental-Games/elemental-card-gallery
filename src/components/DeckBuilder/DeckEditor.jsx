@@ -3,32 +3,42 @@ import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
+import { Plus, Minus } from 'lucide-react';
 
 const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, canAddCard }) => {
   const [deckName, setDeckName] = useState('New Deck');
 
-  const removeCardFromDeck = (index, isMainDeck) => {
+  const adjustCardQuantity = (card, amount, isMainDeck) => {
+    const updateDeck = (deck, setDeck) => {
+      const index = deck.findIndex(c => c.id === card.id);
+      if (index === -1 && amount > 0) {
+        setDeck([...deck, card]);
+      } else if (index !== -1) {
+        const newDeck = [...deck];
+        if (amount < 0 && newDeck[index].quantity === 1) {
+          newDeck.splice(index, 1);
+        } else {
+          newDeck[index] = { ...newDeck[index], quantity: (newDeck[index].quantity || 1) + amount };
+        }
+        setDeck(newDeck);
+      }
+    };
+
     if (isMainDeck) {
-      const newDeck = [...mainDeck];
-      newDeck.splice(index, 1);
-      setMainDeck(newDeck);
+      updateDeck(mainDeck, setMainDeck);
     } else {
-      const newDeck = [...sideDeck];
-      newDeck.splice(index, 1);
-      setSideDeck(newDeck);
+      updateDeck(sideDeck, setSideDeck);
     }
   };
 
-  const addCardToDeck = (card, isMainDeck) => {
-    if (canAddCard(card)) {
-      if (isMainDeck) {
-        setMainDeck([...mainDeck, card]);
-      } else {
-        setSideDeck([...sideDeck, card]);
-      }
-    } else {
-      toast.error(`You can't add more copies of ${card.name}`);
-    }
+  const isCardLimited = (card) => {
+    const limitedCards = ["Ancient Sigil", "Ancient Winds", "Ancient Roots", "Ancient Ember", "Ancient Tide"];
+    return limitedCards.includes(card.name);
+  };
+
+  const getCardCount = (card) => {
+    return (mainDeck.find(c => c.id === card.id)?.quantity || 0) +
+           (sideDeck.find(c => c.id === card.id)?.quantity || 0);
   };
 
   const saveDeck = () => {
@@ -50,39 +60,59 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
         <Button onClick={saveDeck}>Save Deck</Button>
       </div>
       <div className="mb-4">
-        <h3 className="text-xl font-semibold mb-2">Main Deck ({mainDeck.length} cards)</h3>
+        <h3 className="text-xl font-semibold mb-2">Main Deck ({mainDeck.reduce((sum, card) => sum + (card.quantity || 1), 0)} cards)</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {mainDeck.map((card, index) => (
-            <Card key={`${card.id}-${index}`} className="p-2 cursor-move relative group">
+          {mainDeck.map((card) => (
+            <Card key={card.id} className="p-2 relative group">
               <img src={card.image} alt={card.name} className="w-full h-auto" />
               <p className="text-center mt-2">{card.name}</p>
-              <Button
-                variant="destructive"
-                size="sm"
-                className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={() => removeCardFromDeck(index, true)}
-              >
-                X
-              </Button>
+              <div className="flex justify-center items-center mt-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => adjustCardQuantity(card, -1, true)}
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="mx-2">{card.quantity || 1}</span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => adjustCardQuantity(card, 1, true)}
+                  disabled={getCardCount(card) === 3 || (isCardLimited(card) && getCardCount(card) === 1)}
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
             </Card>
           ))}
         </div>
       </div>
       <div>
-        <h3 className="text-xl font-semibold mb-2">Side Deck (Shields)</h3>
+        <h3 className="text-xl font-semibold mb-2">Side Deck (Shields) ({sideDeck.reduce((sum, card) => sum + (card.quantity || 1), 0)} cards)</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {sideDeck.map((card, index) => (
-            <Card key={`${card.id}-${index}`} className="p-2 cursor-move relative group">
+          {sideDeck.map((card) => (
+            <Card key={card.id} className="p-2 relative group">
               <img src={card.image} alt={card.name} className="w-full h-auto" />
               <p className="text-center mt-2">{card.name}</p>
-              <Button
-                variant="destructive"
-                size="sm"
-                className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity"
-                onClick={() => removeCardFromDeck(index, false)}
-              >
-                X
-              </Button>
+              <div className="flex justify-center items-center mt-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => adjustCardQuantity(card, -1, false)}
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="mx-2">{card.quantity || 1}</span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={() => adjustCardQuantity(card, 1, false)}
+                  disabled={getCardCount(card) === 3 || (isCardLimited(card) && getCardCount(card) === 1)}
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
             </Card>
           ))}
         </div>
@@ -94,7 +124,7 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
             <Card 
               key={card.id} 
               className={`p-2 cursor-pointer ${!canAddCard(card) ? 'opacity-50' : ''}`}
-              onClick={() => addCardToDeck(card, true)}
+              onClick={() => adjustCardQuantity(card, 1, true)}
             >
               <img src={card.image} alt={card.name} className="w-full h-auto" />
               <p className="text-center mt-2">{card.name}</p>

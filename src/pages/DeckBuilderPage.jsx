@@ -61,8 +61,8 @@ const DeckBuilderPage = () => {
   };
 
   const getCardCount = (card) => {
-    return mainDeck.filter(c => c.id === card.id).length + 
-           sideDeck.filter(c => c.id === card.id).length;
+    return (mainDeck.find(c => c.id === card.id)?.quantity || 0) +
+           (sideDeck.find(c => c.id === card.id)?.quantity || 0);
   };
 
   const canAddCard = (card) => {

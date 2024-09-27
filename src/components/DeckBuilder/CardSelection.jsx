@@ -1,16 +1,39 @@
 import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { Plus, Minus } from 'lucide-react';
 
 const CardSelection = ({ cards, count, onSelect, stepType, canAddCard }) => {
-  const [selectedCards, setSelectedCards] = useState([]);
+  const [selectedCards, setSelectedCards] = useState({});
 
   const toggleCard = (card) => {
-    if (selectedCards.includes(card)) {
-      setSelectedCards(selectedCards.filter(c => c !== card));
-    } else if (selectedCards.length < count && canAddCard(card)) {
-      setSelectedCards([...selectedCards, card]);
-    }
+    setSelectedCards(prev => {
+      const currentCount = prev[card.id] || 0;
+      if (currentCount === 0 && Object.values(prev).reduce((a, b) => a + b, 0) >= count) {
+        return prev;
+      }
+      return {
+        ...prev,
+        [card.id]: currentCount > 0 ? 0 : 1
+      };
+    });
+  };
+
+  const adjustQuantity = (card, amount) => {
+    setSelectedCards(prev => {
+      const currentCount = prev[card.id] || 0;
+      const newCount = Math.max(0, Math.min(3, currentCount + amount));
+      if (newCount === 0) {
+        const { [card.id]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [card.id]: newCount };
+    });
+  };
+
+  const isCardLimited = (card) => {
+    const limitedCards = ["Ancient Sigil", "Ancient Winds", "Ancient Roots", "Ancient Ember", "Ancient Tide"];
+    return limitedCards.includes(card.name);
   };
 
   return (
@@ -22,17 +45,44 @@ const CardSelection = ({ cards, count, onSelect, stepType, canAddCard }) => {
         {cards.map(card => (
           <Card
             key={card.id}
-            className={`p-2 cursor-pointer ${selectedCards.includes(card) ? 'border-2 border-blue-500' : ''} ${!canAddCard(card) ? 'opacity-50' : ''}`}
+            className={`p-2 cursor-pointer ${selectedCards[card.id] ? 'border-2 border-blue-500' : ''} ${!canAddCard(card) ? 'opacity-50' : ''}`}
             onClick={() => toggleCard(card)}
           >
             <img src={card.image} alt={card.name} className="w-full h-auto" />
             <p className="text-center mt-2">{card.name}</p>
+            {selectedCards[card.id] > 0 && (
+              <div className="flex justify-center items-center mt-2">
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    adjustQuantity(card, -1);
+                  }}
+                  disabled={selectedCards[card.id] === 0}
+                >
+                  <Minus className="h-4 w-4" />
+                </Button>
+                <span className="mx-2">{selectedCards[card.id]}</span>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    adjustQuantity(card, 1);
+                  }}
+                  disabled={selectedCards[card.id] === 3 || (isCardLimited(card) && selectedCards[card.id] === 1)}
+                >
+                  <Plus className="h-4 w-4" />
+                </Button>
+              </div>
+            )}
           </Card>
         ))}
       </div>
       <Button
-        onClick={() => onSelect(selectedCards)}
-        disabled={selectedCards.length !== count}
+        onClick={() => onSelect(Object.entries(selectedCards).flatMap(([id, count]) => Array(count).fill(cards.find(card => card.id === id))))}
+        disabled={Object.values(selectedCards).reduce((a, b) => a + b, 0) !== count}
       >
         Continue
       </Button>

@@ -23,7 +23,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
         className="w-full h-full relative transform-style-3d cursor-pointer"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 1.5, ease: "easeInOut" }} // Increased duration to 1.5 seconds
+        transition={{ duration: 1.5, ease: "easeInOut" }}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
@@ -34,14 +34,12 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           />
         </div>
         <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
-          {isFlipped && (
-            <img
-              src={card.image}
-              alt={card.name}
-              className="w-full h-full object-cover rounded-lg"
-              style={{ imageRendering: 'high-quality' }}
-            />
-          )}
+          <img
+            src={card.image}
+            alt={card.name}
+            className="w-full h-full object-cover rounded-lg"
+            style={{ imageRendering: 'high-quality' }}
+          />
         </div>
       </motion.div>
     </div>

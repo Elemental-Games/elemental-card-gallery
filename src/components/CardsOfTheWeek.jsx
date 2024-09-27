@@ -15,7 +15,7 @@ const Card = ({ card }) => {
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src={`${import.meta.env.VITE_S3_BUCKET_URL}/cards/card_back.png`}
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/card_back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />

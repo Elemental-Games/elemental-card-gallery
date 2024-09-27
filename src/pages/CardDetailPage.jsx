@@ -43,6 +43,7 @@ const CardDetailPage = () => {
         </div>
         <div className="w-full md:w-1/2">
           <h1 className="text-4xl font-bold mb-4">{card.name}</h1>
+          <p className="text-xl mb-2">Card Number: {card.cardNumber}</p>
           <p className="text-xl mb-2">{card.element} | {card.type} | {card.rune} | Tier {card.tier} | {card.rarity}</p>
           <p className="text-lg mb-4">{card.description}</p>
           <div className="grid grid-cols-2 gap-4">

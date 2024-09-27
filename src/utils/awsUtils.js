@@ -29,6 +29,7 @@ export const fetchCardsFromS3 = async () => {
     const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
     return jsonData.map(card => ({
+      cardNumber: card.cardNumber,
       id: card.id,
       name: card.name,
       image: getImageUrl(card.name),

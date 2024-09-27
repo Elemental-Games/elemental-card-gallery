@@ -12,7 +12,14 @@ const CardsPage = () => {
   });
 
   const [filteredCards, setFilteredCards] = useState([]);
-  const [filters, setFilters] = useState({ element: 'all', type: 'all', rarity: 'all' });
+  const [filters, setFilters] = useState({
+    number: 'all',
+    type: 'all',
+    element: 'all',
+    rarity: 'all',
+    strength: 'all',
+    agility: 'all'
+  });
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -20,9 +27,12 @@ const CardsPage = () => {
       let result = allCards;
 
       // Apply filters
-      if (filters.element !== 'all') result = result.filter(card => card.element === filters.element);
+      if (filters.number !== 'all') result = result.filter(card => card.cardNumber.toString() === filters.number);
       if (filters.type !== 'all') result = result.filter(card => card.type === filters.type);
+      if (filters.element !== 'all') result = result.filter(card => card.element === filters.element);
       if (filters.rarity !== 'all') result = result.filter(card => card.rarity === filters.rarity);
+      if (filters.strength !== 'all') result = result.filter(card => card.strength.toString() === filters.strength);
+      if (filters.agility !== 'all') result = result.filter(card => card.agility.toString() === filters.agility);
 
       // Apply search
       if (searchTerm) {

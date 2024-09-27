@@ -4,6 +4,9 @@ import SearchBar from '../components/SearchBar';
 import FilterOptions from '../components/FilterOptions';
 import CardDisplay from '../components/CardDisplay';
 import { fetchCardsFromS3 } from '../utils/awsUtils';
+import { Skeleton } from "@/components/ui/skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const CardsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -18,6 +21,8 @@ const CardsPage = () => {
   const { data: cards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
+    staleTime: 1000 * 60 * 5, // 5 minutes
+    cacheTime: 1000 * 60 * 30, // 30 minutes
   });
 
   const filterOptions = useMemo(() => {
@@ -56,8 +61,32 @@ const CardsPage = () => {
     setFilters(prev => ({ ...prev, [filterType]: value }));
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Loading Cards...</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          {[...Array(8)].map((_, index) => (
+            <Skeleton key={index} className="w-full h-96" />
+          ))}
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>
+            There was an error loading the cards. Please try again later.
+          </AlertDescription>
+        </Alert>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">

@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card }) => {
+  const [isFlipped, setIsFlipped] = useState(false);
+
   return (
     <div className="w-64 h-96 perspective">
       <motion.div
         className="w-full h-full relative transform-style-3d cursor-pointer"
-        whileHover={{ rotateY: 180 }}
+        initial={false}
+        animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
+        onClick={() => setIsFlipped(true)}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src="/cards/card-back.png"
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
@@ -30,10 +34,10 @@ const Card = ({ card }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Cloud Warden', image: '/cards/air/cloud-warden.png' },
-    { id: 2, name: 'Ancient Roots', image: '/cards/earth/ancient-roots.png' },
-    { id: 3, name: 'Flame Ravager', image: '/cards/fire/flame-ravager.png' },
-    { id: 4, name: 'Aqua Shade', image: '/cards/water/aqua-shade.png' },
+    { id: 1, name: 'Cloud Warden', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/air/cloud-warden.png` },
+    { id: 2, name: 'Ancient Roots', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/earth/ancient-roots.png` },
+    { id: 3, name: 'Flame Ravager', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/fire/flame-ravager.png` },
+    { id: 4, name: 'Aqua Shade', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/water/aqua-shade.png` },
   ];
 
   return (

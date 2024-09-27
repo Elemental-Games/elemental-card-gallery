@@ -26,7 +26,13 @@ This guide will help you set up and use AWS S3 for storing your card data spread
 1. Go to IAM in the AWS Management Console.
 2. Create a new IAM user with programmatic access.
 3. Attach the `AmazonS3ReadOnlyAccess` policy to this user.
-4. Save the Access Key ID and Secret Access Key securely.
+4. After creating the user, you'll be presented with the Access Key ID and Secret Access Key. Make sure to save these securely, as the Secret Access Key will only be shown once.
+5. If you need to create a new access key later:
+   - Go to the IAM dashboard and select the user.
+   - Navigate to the "Security credentials" tab.
+   - Scroll down to "Access keys" and click "Create access key".
+   - Choose the appropriate use case (see below for guidance).
+   - Save the new Access Key ID and Secret Access Key securely.
 
 ## 4. Environment Variables
 
@@ -43,3 +49,13 @@ Set up the following environment variables in your project:
 The `src/utils/awsUtils.js` file has been updated to fetch data from your S3 bucket. Make sure the spreadsheet path in the `fetchCardsFromS3` function matches your actual file path in the S3 bucket.
 
 If you need to make any changes or encounter issues, refer to the code comments in `src/utils/awsUtils.js` for guidance.
+
+## Use Case for Access Keys
+
+When creating access keys, AWS asks for the use case. For this project, select "Application running outside AWS" as the use case. This option is appropriate because:
+
+1. The access key will be used in a web application that's not hosted on AWS infrastructure.
+2. It allows the application to securely access AWS services (in this case, S3) from an external environment.
+3. It's suitable for client-side applications that need to read data from S3, which aligns with our project's needs.
+
+Remember to always keep your access keys secure and never commit them to version control systems.

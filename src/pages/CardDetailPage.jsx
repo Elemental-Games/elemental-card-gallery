@@ -2,15 +2,16 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCardByName } from '../utils/awsUtils';
+import { ElementIcon } from '../components/ElementIcon';
 
 const SynergyCard = ({ card, synergy }) => (
-  <div className={`w-40 h-60 rounded-lg overflow-hidden shadow-lg m-2 relative ${synergy.color}`}>
-    <img src={card.image || '/placeholder.svg'} alt={card.name} className="w-full h-full object-cover" />
+  <div className={`w-[125px] h-[175px] rounded-lg overflow-hidden shadow-lg m-2 relative ${synergy.color}`}>
+    <img src={card.image} alt={card.name} className="w-full h-full object-cover" />
     <div className="absolute top-2 right-2 bg-black bg-opacity-70 text-white p-2 rounded-full">
       {synergy.rating}
     </div>
     <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
-      <p className="text-sm font-semibold">{card.name}</p>
+      <p className="text-xs font-semibold">{card.name}</p>
     </div>
   </div>
 );
@@ -20,7 +21,7 @@ const NewsItem = ({ item }) => (
     <h3 className="text-lg font-semibold mb-2">{item.title}</h3>
     <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">{item.date}</p>
     <p>{item.description}</p>
-    <a href={item.link} className="text-blue-500 hover:underline mt-2 inline-block">Watch video</a>
+    <a href={item.link} className="text-blue-500 hover:underline mt-2 inline-block">Read more</a>
   </div>
 );
 
@@ -44,7 +45,10 @@ const CardDetailPage = () => {
         <div className="w-full md:w-1/2">
           <h1 className="text-4xl font-bold mb-4">{card.name}</h1>
           <p className="text-xl mb-2">Card Number: {card.cardNumber}</p>
-          <p className="text-xl mb-2">{card.element} | {card.type} | {card.rune} | Tier {card.tier} | {card.rarity}</p>
+          <p className="text-xl mb-2 flex items-center">
+            <ElementIcon element={card.element} className="mr-2" />
+            {card.element} | {card.type} | {card.rune} | Tier {card.tier} | {card.rarity}
+          </p>
           <p className="text-lg mb-4">{card.description}</p>
           <div className="grid grid-cols-2 gap-4">
             <div>
@@ -90,7 +94,7 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Synergies</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {card.synergies.map((synergy, index) => (
+          {card.synergies && card.synergies.map((synergy, index) => (
             <SynergyCard key={index} card={synergy.card} synergy={synergy} />
           ))}
         </div>
@@ -99,7 +103,7 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Counters</h2>
         <div className="flex overflow-x-auto whitespace-nowrap pb-4">
-          {card.counters.map((counter, index) => (
+          {card.counters && card.counters.map((counter, index) => (
             <SynergyCard key={index} card={counter.card} synergy={counter} />
           ))}
         </div>
@@ -108,7 +112,7 @@ const CardDetailPage = () => {
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">News</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {card.news.map((item, index) => (
+          {card.news && card.news.map((item, index) => (
             <NewsItem key={index} item={item} />
           ))}
         </div>

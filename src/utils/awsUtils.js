@@ -45,7 +45,6 @@ export const fetchCardsFromS3 = async () => {
       specialAbilityCost: card.specialAbilityCost,
       essenceCost: card.essenceCost,
       essenceGeneration: card.essenceGeneration,
-      background: card.background,
       quote: card.quote,
       synergies: card.synergies ? JSON.parse(card.synergies) : [],
       counters: card.counters ? JSON.parse(card.counters) : [],

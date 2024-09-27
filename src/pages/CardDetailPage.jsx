@@ -79,13 +79,6 @@ const CardDetailPage = () => {
         </div>
       </div>
 
-      {card.background && (
-        <div className="mt-12">
-          <h2 className="text-3xl font-bold mb-4">Card Background</h2>
-          <p className="text-lg">{card.background}</p>
-        </div>
-      )}
-
       {card.quote && (
         <div className="mt-12">
           <h2 className="text-3xl font-bold mb-4">Quote</h2>

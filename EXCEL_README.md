@@ -14,11 +14,14 @@ Your spreadsheet should have the following columns:
 - description
 - strength
 - agility
+- abilityName
 - ability
+- specialAbilityName
 - specialAbility
+- specialAbilityCost
 - essenceCost
 - essenceGeneration
-- background
+- quote
 - synergies
 - counters
 - news
@@ -49,8 +52,8 @@ Example:
 
 Here's an example of how a complete row might look:
 
-| id | name | element | type | rarity | description | strength | agility | ability | specialAbility | essenceCost | essenceGeneration | background | synergies | counters | news |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| water-elemental | Water Elemental | Water | Creature | Rare | A creature made of the element of water. | 7 | 5 | Tidal Wave: Deal 3 damage to all enemy creatures. | Hydro Pump: Once per game, deal 10 damage to a single target. | 4 | 2 | Water Elementals are ancient beings that embody the raw power of the seas. They are known for their fluid tactics and overwhelming force in battle. | [{"card":{"id":"leaf-spirit","name":"Leaf Spirit"},"rating":"S","color":"text-green-500"},{"card":{"id":"flame-wisp","name":"Flame Wisp"},"rating":"A","color":"text-red-500"}] | [{"card":{"id":"wind-rider","name":"Wind Rider"},"rating":"S","color":"text-blue-300"}] | [{"title":"Water Elemental Showcase","date":"2023-05-01","description":"Check out our latest video showcasing the Water Elemental in action!","link":"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}] |
+| id | name | element | type | rarity | description | strength | agility | abilityName | ability | specialAbilityName | specialAbility | specialAbilityCost | essenceCost | essenceGeneration | quote | synergies | counters | news |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| water-elemental | Water Elemental | Water | Creature | Rare | A creature made of the element of water. | 7 | 5 | Tidal Wave | Deal 3 damage to all enemy creatures. | Hydro Pump | Once per game, deal 10 damage to a single target. | 4 | 4 | 2 | "The ocean's might flows through me." | [{"card":{"id":"leaf-spirit","name":"Leaf Spirit"},"rating":"S","color":"text-green-500"},{"card":{"id":"flame-wisp","name":"Flame Wisp"},"rating":"A","color":"text-red-500"}] | [{"card":{"id":"wind-rider","name":"Wind Rider"},"rating":"S","color":"text-blue-300"}] | [{"title":"Water Elemental Showcase","date":"2023-05-01","description":"Check out our latest video showcasing the Water Elemental in action!","link":"https://www.youtube.com/watch?v=dQw4w9WgXcQ"}] |
 
 Remember to input all JSON data as a single line of text in each cell, without line breaks.

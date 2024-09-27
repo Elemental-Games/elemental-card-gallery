@@ -1,11 +1,9 @@
 import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { toast } from 'sonner';
 import { Plus, Minus } from 'lucide-react';
 
-const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, canAddCard, selectedElements }) => {
+const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, canAddCard }) => {
   const adjustCardQuantity = (card, amount, isMainDeck) => {
     const updateDeck = (deck, setDeck) => {
       const index = deck.findIndex(c => c.id === card.id);
@@ -29,20 +27,6 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
       updateDeck(sideDeck, setSideDeck);
     }
   };
-
-  const isCardLimited = (card) => {
-    const limitedCards = ["Ancient Sigil", "Ancient Winds", "Ancient Roots", "Ancient Ember", "Ancient Tide"];
-    return limitedCards.includes(card.name);
-  };
-
-  const getCardCount = (card) => {
-    return (mainDeck.find(c => c.id === card.id)?.quantity || 0) +
-           (sideDeck.find(c => c.id === card.id)?.quantity || 0);
-  };
-
-  const filteredCards = allCards.filter(card => 
-    selectedElements.length === 0 || selectedElements.includes(card.element)
-  );
 
   return (
     <div className="mt-8">
@@ -101,22 +85,6 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
                   <Plus className="h-4 w-4" />
                 </Button>
               </div>
-            </Card>
-          ))}
-        </div>
-      </div>
-      <div className="mt-8">
-        <h3 className="text-xl font-semibold mb-2">All Cards</h3>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {filteredCards.map((card) => (
-            <Card 
-              key={card.id} 
-              className={`p-2 cursor-pointer ${!canAddCard(card) ? 'opacity-50' : ''}`}
-              onClick={() => adjustCardQuantity(card, 1, card.type !== 'Shield')}
-            >
-              <img src={card.image} alt={card.name} className="w-full h-auto" />
-              <p className="text-center mt-2">{card.name}</p>
-              <p className="text-center text-sm">{getCardCount(card)}/3</p>
             </Card>
           ))}
         </div>

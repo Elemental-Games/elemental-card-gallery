@@ -4,6 +4,7 @@ import { fetchCardsFromS3 } from '../utils/awsUtils';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
+import CardGallery from '../components/DeckBuilder/CardGallery';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 
@@ -13,6 +14,7 @@ const DeckBuilderPage = () => {
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
   const [email, setEmail] = useState('');
+  const [showCardList, setShowCardList] = useState(false);
   const { data: allCards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
@@ -63,7 +65,7 @@ const DeckBuilderPage = () => {
         <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
         <p className="text-xl mb-4">Total cards selected: {totalCards}</p>
         {showWizard === null && (
-          <div className="fixed inset-0 bg-purple-900 bg-opacity-90 flex items-center justify-center z-50">
+          <div className="fixed inset-0 bg-purple-900 bg-opacity-95 flex items-center justify-center z-50">
             <div className="bg-purple-800 p-8 rounded-lg max-w-md w-full text-purple-100">
               <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
               <p className="mb-4">Would you like to use our deck builder wizard?</p>
@@ -94,6 +96,23 @@ const DeckBuilderPage = () => {
               <div>
                 <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
               </div>
+            </div>
+            <div className="mt-8">
+              <Button onClick={() => setShowCardList(!showCardList)}>
+                {showCardList ? 'Hide Card List' : 'Show Card List'}
+              </Button>
+              {showCardList && (
+                <CardGallery
+                  cards={allCards}
+                  onCardSelect={(card) => {
+                    if (card.type === 'Shield') {
+                      setSideDeck([...sideDeck, { ...card, quantity: 1 }]);
+                    } else {
+                      setMainDeck([...mainDeck, { ...card, quantity: 1 }]);
+                    }
+                  }}
+                />
+              )}
             </div>
             <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
               <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>

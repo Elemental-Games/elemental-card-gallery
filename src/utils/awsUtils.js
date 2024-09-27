@@ -34,6 +34,8 @@ export const fetchCardsFromS3 = async () => {
       image: getImageUrl(card.name),
       element: card.element,
       type: card.type,
+      rune: card.rune,
+      tier: card.tier,
       rarity: card.rarity,
       description: card.description,
       strength: card.strength,

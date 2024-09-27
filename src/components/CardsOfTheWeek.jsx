@@ -11,7 +11,7 @@ const Card = ({ card }) => {
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        onClick={() => setIsFlipped(true)}
+        onClick={() => setIsFlipped(!isFlipped)}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img

@@ -6,6 +6,7 @@ import CardSelection from '../components/DeckBuilder/CardSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
 
 const DeckBuilderPage = () => {
   const [showWizard, setShowWizard] = useState(null);
@@ -13,6 +14,7 @@ const DeckBuilderPage = () => {
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
+  const [email, setEmail] = useState('');
   const { data: allCards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
@@ -71,6 +73,14 @@ const DeckBuilderPage = () => {
     return count < 3;
   };
 
+  const handleSignUp = (e) => {
+    e.preventDefault();
+    // Here you would typically send the email and deck data to your backend
+    console.log('Signing up with email:', email);
+    console.log('Deck data:', { mainDeck, sideDeck });
+    alert('Thank you for signing up! Your deck has been saved.');
+  };
+
   if (isLoading) return <div>Loading cards...</div>;
   if (error) return <div>Error loading cards: {error.message}</div>;
 
@@ -78,18 +88,22 @@ const DeckBuilderPage = () => {
     <div className="relative">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
-        {showWizard === null ? (
+        {showWizard === null && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-8 rounded-lg max-w-md w-full">
+            <div className="bg-purple-900 p-8 rounded-lg max-w-md w-full text-purple-100">
               <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
               <p className="mb-4">Would you like to use our deck builder wizard?</p>
               <div className="flex justify-center space-x-4">
-                <Button onClick={() => handleWizardChoice('yes')}>Yes</Button>
-                <Button onClick={() => handleWizardChoice('no')}>No</Button>
+                <Button onClick={() => handleWizardChoice('yes')} className="bg-purple-500 hover:bg-purple-600">Yes</Button>
+                <Button onClick={() => handleWizardChoice('no')} className="bg-purple-500 hover:bg-purple-600">No</Button>
               </div>
             </div>
           </div>
-        ) : showWizard && step < steps.length ? (
+        )}
+        {showWizard && step === 0 && (
+          <ElementSelection onSelect={handleElementSelection} />
+        )}
+        {showWizard && step > 0 && step < steps.length && (
           <CardSelection
             cards={allCards.filter(steps[step].filter)}
             count={steps[step].count}
@@ -97,22 +111,40 @@ const DeckBuilderPage = () => {
             stepType={steps[step].type}
             canAddCard={canAddCard}
           />
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="md:col-span-2">
-              <DeckEditor 
-                mainDeck={mainDeck} 
-                sideDeck={sideDeck} 
-                setMainDeck={setMainDeck} 
-                setSideDeck={setSideDeck}
-                allCards={allCards}
-                canAddCard={canAddCard}
-              />
+        )}
+        {(!showWizard || (showWizard && step >= steps.length)) && (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="md:col-span-2">
+                <DeckEditor 
+                  mainDeck={mainDeck} 
+                  sideDeck={sideDeck} 
+                  setMainDeck={setMainDeck} 
+                  setSideDeck={setSideDeck}
+                  allCards={allCards}
+                  canAddCard={canAddCard}
+                />
+              </div>
+              <div>
+                <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
+              </div>
             </div>
-            <div>
-              <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
+            <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
+              <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>
+              <p className="mb-4">Sign up to our website to save your deck and access it anytime!</p>
+              <form onSubmit={handleSignUp} className="flex items-center">
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  className="mr-4 bg-purple-800 text-purple-100 placeholder-purple-300"
+                />
+                <Button type="submit" className="bg-purple-500 hover:bg-purple-600">Sign Up & Save Deck</Button>
+              </form>
             </div>
-          </div>
+          </>
         )}
       </div>
     </div>

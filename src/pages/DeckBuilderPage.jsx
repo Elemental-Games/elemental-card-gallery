@@ -74,49 +74,46 @@ const DeckBuilderPage = () => {
   if (isLoading) return <div>Loading cards...</div>;
   if (error) return <div>Error loading cards: {error.message}</div>;
 
-  if (showWizard === null) {
-    return (
+  return (
+    <div className="relative">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
-        <p className="mb-4">Would you like to use our deck builder wizard?</p>
-        <div className="space-x-4">
-          <Button onClick={() => handleWizardChoice('yes')}>Yes</Button>
-          <Button onClick={() => handleWizardChoice('no')}>No</Button>
-        </div>
-      </div>
-    );
-  }
-
-  if (showWizard && step < steps.length) {
-    const currentStep = steps[step];
-    return (
-      <CardSelection
-        cards={allCards.filter(currentStep.filter)}
-        count={currentStep.count}
-        onSelect={handleCardSelection}
-        stepType={currentStep.type}
-        canAddCard={canAddCard}
-      />
-    );
-  }
-
-  return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="md:col-span-2">
-          <DeckEditor 
-            mainDeck={mainDeck} 
-            sideDeck={sideDeck} 
-            setMainDeck={setMainDeck} 
-            setSideDeck={setSideDeck}
-            allCards={allCards}
+        {showWizard === null ? (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-white p-8 rounded-lg max-w-md w-full">
+              <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
+              <p className="mb-4">Would you like to use our deck builder wizard?</p>
+              <div className="flex justify-center space-x-4">
+                <Button onClick={() => handleWizardChoice('yes')}>Yes</Button>
+                <Button onClick={() => handleWizardChoice('no')}>No</Button>
+              </div>
+            </div>
+          </div>
+        ) : showWizard && step < steps.length ? (
+          <CardSelection
+            cards={allCards.filter(steps[step].filter)}
+            count={steps[step].count}
+            onSelect={handleCardSelection}
+            stepType={steps[step].type}
             canAddCard={canAddCard}
           />
-        </div>
-        <div>
-          <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="md:col-span-2">
+              <DeckEditor 
+                mainDeck={mainDeck} 
+                sideDeck={sideDeck} 
+                setMainDeck={setMainDeck} 
+                setSideDeck={setSideDeck}
+                allCards={allCards}
+                canAddCard={canAddCard}
+              />
+            </div>
+            <div>
+              <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

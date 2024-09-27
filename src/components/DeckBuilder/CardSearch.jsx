@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDrag } from 'react-dnd';
 import { Input } from '@/components/ui/input';
 import { Card } from '@/components/ui/card';
@@ -20,6 +20,10 @@ const DraggableCard = ({ card }) => {
 const CardSearch = ({ cards }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [filteredCards, setFilteredCards] = useState(cards);
+
+  useEffect(() => {
+    setFilteredCards(cards);
+  }, [cards]);
 
   const handleSearch = (e) => {
     const term = e.target.value.toLowerCase();

@@ -8,35 +8,47 @@ import {
 } from "@/components/ui/select";
 
 const FilterOptions = ({ cards, onFilterChange }) => {
-  const numbers = [...new Set(cards.map(card => card.cardNumber))].sort((a, b) => a - b);
-  const types = [...new Set(cards.map(card => card.type))];
   const elements = [...new Set(cards.map(card => card.element))];
-  const rarities = ['C', 'U', 'R', 'E', 'L'];
-  const strengths = [...new Set(cards.map(card => card.strength))].sort((a, b) => b - a);
-  const agilities = [...new Set(cards.map(card => card.agility))].sort((a, b) => b - a);
-
-  const createFilter = (name, options, placeholder) => (
-    <Select onValueChange={(value) => onFilterChange(name.toLowerCase(), value)}>
-      <SelectTrigger className="w-[180px]">
-        <SelectValue placeholder={placeholder} />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="all">All {placeholder}</SelectItem>
-        {options.map((option) => (
-          <SelectItem key={option} value={option.toString()}>{option}</SelectItem>
-        ))}
-      </SelectContent>
-    </Select>
-  );
+  const types = [...new Set(cards.map(card => card.type))];
+  const rarities = [...new Set(cards.map(card => card.rarity))];
 
   return (
-    <div className="flex flex-wrap gap-4">
-      {createFilter('Number', numbers, 'Number')}
-      {createFilter('Type', types, 'Type')}
-      {createFilter('Element', elements, 'Element')}
-      {createFilter('Rarity', rarities, 'Rarity')}
-      {createFilter('Strength', strengths, 'Strength')}
-      {createFilter('Agility', agilities, 'Agility')}
+    <div className="flex space-x-4">
+      <Select onValueChange={(value) => onFilterChange('element', value)}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Element" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Elements</SelectItem>
+          {elements.map((element) => (
+            <SelectItem key={element} value={element}>{element}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select onValueChange={(value) => onFilterChange('type', value)}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Type" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Types</SelectItem>
+          {types.map((type) => (
+            <SelectItem key={type} value={type}>{type}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+
+      <Select onValueChange={(value) => onFilterChange('rarity', value)}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Rarity" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="all">All Rarities</SelectItem>
+          {rarities.map((rarity) => (
+            <SelectItem key={rarity} value={rarity}>{rarity}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 };

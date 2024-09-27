@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 import { Plus, Minus } from 'lucide-react';
 
-const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, canAddCard }) => {
-  const [deckName, setDeckName] = useState('New Deck');
-
+const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, canAddCard, selectedElements }) => {
   const adjustCardQuantity = (card, amount, isMainDeck) => {
     const updateDeck = (deck, setDeck) => {
       const index = deck.findIndex(c => c.id === card.id);
       if (index === -1 && amount > 0) {
-        setDeck([...deck, card]);
+        setDeck([...deck, { ...card, quantity: 1 }]);
       } else if (index !== -1) {
         const newDeck = [...deck];
-        if (amount < 0 && newDeck[index].quantity === 1) {
+        const newQuantity = (newDeck[index].quantity || 1) + amount;
+        if (newQuantity <= 0) {
           newDeck.splice(index, 1);
         } else {
-          newDeck[index] = { ...newDeck[index], quantity: (newDeck[index].quantity || 1) + amount };
+          newDeck[index] = { ...newDeck[index], quantity: newQuantity };
         }
         setDeck(newDeck);
       }
@@ -41,24 +40,13 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
            (sideDeck.find(c => c.id === card.id)?.quantity || 0);
   };
 
-  const saveDeck = () => {
-    console.log('Saving deck:', { name: deckName, mainDeck, sideDeck });
-    toast.success('Deck saved successfully!');
-  };
+  const filteredCards = allCards.filter(card => 
+    selectedElements.length === 0 || selectedElements.includes(card.element)
+  );
 
   return (
     <div className="mt-8">
       <h2 className="text-2xl font-bold mb-4">Deck Editor</h2>
-      <div className="flex items-center mb-4">
-        <Input
-          type="text"
-          value={deckName}
-          onChange={(e) => setDeckName(e.target.value)}
-          placeholder="Deck Name"
-          className="mr-4"
-        />
-        <Button onClick={saveDeck}>Save Deck</Button>
-      </div>
       <div className="mb-4">
         <h3 className="text-xl font-semibold mb-2">Main Deck ({mainDeck.reduce((sum, card) => sum + (card.quantity || 1), 0)} cards)</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -79,7 +67,7 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
                   size="sm"
                   variant="outline"
                   onClick={() => adjustCardQuantity(card, 1, true)}
-                  disabled={getCardCount(card) === 3 || (isCardLimited(card) && getCardCount(card) === 1)}
+                  disabled={!canAddCard(card)}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -108,7 +96,7 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
                   size="sm"
                   variant="outline"
                   onClick={() => adjustCardQuantity(card, 1, false)}
-                  disabled={getCardCount(card) === 3 || (isCardLimited(card) && getCardCount(card) === 1)}
+                  disabled={!canAddCard(card)}
                 >
                   <Plus className="h-4 w-4" />
                 </Button>
@@ -120,14 +108,15 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, ca
       <div className="mt-8">
         <h3 className="text-xl font-semibold mb-2">All Cards</h3>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {allCards.map((card) => (
+          {filteredCards.map((card) => (
             <Card 
               key={card.id} 
               className={`p-2 cursor-pointer ${!canAddCard(card) ? 'opacity-50' : ''}`}
-              onClick={() => adjustCardQuantity(card, 1, true)}
+              onClick={() => adjustCardQuantity(card, 1, card.type !== 'Shield')}
             >
               <img src={card.image} alt={card.name} className="w-full h-auto" />
               <p className="text-center mt-2">{card.name}</p>
+              <p className="text-center text-sm">{getCardCount(card)}/3</p>
             </Card>
           ))}
         </div>

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCardsFromS3 } from '../utils/awsUtils';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
-import CardSelection from '../components/DeckBuilder/CardSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
 import { Button } from '@/components/ui/button';
@@ -10,7 +9,6 @@ import { Input } from '@/components/ui/input';
 
 const DeckBuilderPage = () => {
   const [showWizard, setShowWizard] = useState(null);
-  const [step, setStep] = useState(0);
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
@@ -20,39 +18,15 @@ const DeckBuilderPage = () => {
     queryFn: fetchCardsFromS3,
   });
 
-  const steps = [
-    { type: 'element', count: 2, filter: () => true },
-    { type: 'creature', count: 20, filter: (card) => card.type === 'Creature' && selectedElements.includes(card.element) },
-    { type: 'rune', count: 5, filter: (card) => card.type === 'Rune' },
-    { type: 'counter', count: 5, filter: (card) => card.type === 'Counter' },
-    { type: 'epicLegendary', count: 5, filter: (card) => (card.rarity === 'E' || card.rarity === 'L') && card.type === 'Creature' },
-    { type: 'shield', count: 1, filter: (card) => card.type === 'Shield' && card.tier === 1 },
-    { type: 'shield', count: 1, filter: (card) => card.type === 'Shield' && card.tier === 2 },
-    { type: 'shield', count: 1, filter: (card) => card.type === 'Shield' && card.tier === 3 },
-    { type: 'any', count: 5, filter: () => true },
-  ];
+  const totalCards = mainDeck.reduce((sum, card) => sum + card.quantity, 0) +
+                     sideDeck.reduce((sum, card) => sum + card.quantity, 0);
 
   const handleWizardChoice = (choice) => {
     setShowWizard(choice === 'yes');
-    if (choice === 'yes') {
-      setStep(0);
-    }
   };
 
   const handleElementSelection = (elements) => {
     setSelectedElements(elements);
-    setStep(1);
-  };
-
-  const handleCardSelection = (selectedCards) => {
-    if (step < 5) {
-      setMainDeck([...mainDeck, ...selectedCards]);
-    } else if (step < 8) {
-      setSideDeck([...sideDeck, ...selectedCards]);
-    } else {
-      setMainDeck([...mainDeck, ...selectedCards]);
-    }
-    setStep(step + 1);
   };
 
   const isCardLimited = (card) => {
@@ -75,7 +49,6 @@ const DeckBuilderPage = () => {
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    // Here you would typically send the email and deck data to your backend
     console.log('Signing up with email:', email);
     console.log('Deck data:', { mainDeck, sideDeck });
     alert('Thank you for signing up! Your deck has been saved.');
@@ -88,9 +61,10 @@ const DeckBuilderPage = () => {
     <div className="relative">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
+        <p className="text-xl mb-4">Total cards selected: {totalCards}</p>
         {showWizard === null && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-purple-900 p-8 rounded-lg max-w-md w-full text-purple-100">
+          <div className="fixed inset-0 bg-purple-900 bg-opacity-90 flex items-center justify-center z-50">
+            <div className="bg-purple-800 p-8 rounded-lg max-w-md w-full text-purple-100">
               <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
               <p className="mb-4">Would you like to use our deck builder wizard?</p>
               <div className="flex justify-center space-x-4">
@@ -100,19 +74,10 @@ const DeckBuilderPage = () => {
             </div>
           </div>
         )}
-        {showWizard && step === 0 && (
+        {showWizard && selectedElements.length < 2 && (
           <ElementSelection onSelect={handleElementSelection} />
         )}
-        {showWizard && step > 0 && step < steps.length && (
-          <CardSelection
-            cards={allCards.filter(steps[step].filter)}
-            count={steps[step].count}
-            onSelect={handleCardSelection}
-            stepType={steps[step].type}
-            canAddCard={canAddCard}
-          />
-        )}
-        {(!showWizard || (showWizard && step >= steps.length)) && (
+        {(!showWizard || (showWizard && selectedElements.length === 2)) && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               <div className="md:col-span-2">
@@ -123,6 +88,7 @@ const DeckBuilderPage = () => {
                   setSideDeck={setSideDeck}
                   allCards={allCards}
                   canAddCard={canAddCard}
+                  selectedElements={selectedElements}
                 />
               </div>
               <div>

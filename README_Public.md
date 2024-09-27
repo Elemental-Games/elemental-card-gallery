@@ -13,8 +13,17 @@
    ```
 
 3. Install dependencies:
+   If you encounter issues with the package lock file, try the following:
    ```
-   npm install
+   # Remove the existing package-lock.json file
+   rm package-lock.json
+
+   # Install dependencies without using the package lock
+   npm install --no-package-lock
+   ```
+   If you still encounter issues, you can try forcing a clean install:
+   ```
+   npm ci
    ```
 
 4. Set up environment variables as described in the AWS_README.md file.

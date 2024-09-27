@@ -5,11 +5,11 @@ import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import CardSelection from '../components/DeckBuilder/CardSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
-import LightBox from '../components/LightBox';
+import { Button } from '@/components/ui/button';
 
 const DeckBuilderPage = () => {
-  const [showHelper, setShowHelper] = useState(false);
-  const [step, setStep] = useState(-1); // Start at -1 to show the helper prompt
+  const [showWizard, setShowWizard] = useState(null);
+  const [step, setStep] = useState(0);
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
@@ -17,13 +17,6 @@ const DeckBuilderPage = () => {
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
   });
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setStep(-1); // Show helper prompt
-    }, 100);
-    return () => clearTimeout(timer);
-  }, []);
 
   const steps = [
     { type: 'element', count: 2, filter: () => true },
@@ -37,9 +30,11 @@ const DeckBuilderPage = () => {
     { type: 'any', count: 5, filter: () => true },
   ];
 
-  const handleHelperChoice = (choice) => {
-    setShowHelper(choice === 'yes');
-    setStep(choice === 'yes' ? 0 : 9); // Skip to free build if 'no'
+  const handleWizardChoice = (choice) => {
+    setShowWizard(choice === 'yes');
+    if (choice === 'yes') {
+      setStep(0);
+    }
   };
 
   const handleElementSelection = (elements) => {
@@ -79,22 +74,20 @@ const DeckBuilderPage = () => {
   if (isLoading) return <div>Loading cards...</div>;
   if (error) return <div>Error loading cards: {error.message}</div>;
 
-  if (step === -1) {
+  if (showWizard === null) {
     return (
-      <LightBox
-        onClose={() => handleHelperChoice('no')}
-        content={
-          <div>
-            <h2>Would you like to use our deck builder helper?</h2>
-            <button onClick={() => handleHelperChoice('yes')}>Yes</button>
-            <button onClick={() => handleHelperChoice('no')}>No</button>
-          </div>
-        }
-      />
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
+        <p className="mb-4">Would you like to use our deck builder wizard?</p>
+        <div className="space-x-4">
+          <Button onClick={() => handleWizardChoice('yes')}>Yes</Button>
+          <Button onClick={() => handleWizardChoice('no')}>No</Button>
+        </div>
+      </div>
     );
   }
 
-  if (showHelper && step < steps.length) {
+  if (showWizard && step < steps.length) {
     const currentStep = steps[step];
     return (
       <CardSelection

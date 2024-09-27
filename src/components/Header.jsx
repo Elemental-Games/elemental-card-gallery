@@ -12,6 +12,7 @@ const Header = () => {
     { title: 'Home', path: '/' },
     { title: 'Cards', path: '/cards' },
     { title: 'Gameplay', path: '/gameplay' },
+    { title: 'Deck Builder', path: '/cards/deck-builder' }, // New Deck Builder link
     { title: 'Join Now', path: '/join' },
   ];
 

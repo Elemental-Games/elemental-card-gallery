@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import SearchBar from '../components/SearchBar';
 import FilterOptions from '../components/FilterOptions';
@@ -7,6 +7,7 @@ import { fetchCardsFromS3 } from '../utils/awsUtils';
 import { Skeleton } from "@/components/ui/skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import useInfiniteScroll from '../hooks/useInfiniteScroll';
 
 const CardsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,12 +18,13 @@ const CardsPage = () => {
     strength: 'all',
     agility: 'all',
   });
+  const [visibleCards, setVisibleCards] = useState(8);
 
   const { data: cards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
-    staleTime: 1000 * 60 * 5, // 5 minutes
-    cacheTime: 1000 * 60 * 30, // 30 minutes
+    staleTime: 1000 * 60 * 5,
+    cacheTime: 1000 * 60 * 30,
   });
 
   const filterOptions = useMemo(() => {
@@ -53,12 +55,20 @@ const CardsPage = () => {
     });
   }, [cards, searchTerm, filters]);
 
+  const loadMoreCards = useCallback(() => {
+    setVisibleCards(prevVisibleCards => prevVisibleCards + 8);
+  }, []);
+
+  const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreCards);
+
   const handleSearch = (term) => {
     setSearchTerm(term);
+    setVisibleCards(8);
   };
 
   const handleFilterChange = (filterType, value) => {
     setFilters(prev => ({ ...prev, [filterType]: value }));
+    setVisibleCards(8);
   };
 
   if (isLoading) {
@@ -98,10 +108,11 @@ const CardsPage = () => {
         <FilterOptions filters={filterOptions} onFilterChange={handleFilterChange} />
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {filteredCards.map((card) => (
+        {filteredCards.slice(0, visibleCards).map((card) => (
           <CardDisplay key={card.id} card={card} />
         ))}
       </div>
+      {isFetching && <p className="text-center mt-4">Loading more cards...</p>}
     </div>
   );
 };

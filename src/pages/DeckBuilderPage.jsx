@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useQuery } from '@tanstack/react-query';
@@ -7,13 +7,21 @@ import CardSearch from '../components/DeckBuilder/CardSearch';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
 import PlaytestArea from '../components/DeckBuilder/PlaytestArea';
+import useInfiniteScroll from '../hooks/useInfiniteScroll';
 
 const DeckBuilderPage = () => {
   const [deck, setDeck] = useState([]);
+  const [visibleCards, setVisibleCards] = useState(4);
   const { data: allCards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
   });
+
+  const loadMoreCards = useCallback(() => {
+    setVisibleCards(prevVisibleCards => prevVisibleCards + 4);
+  }, []);
+
+  const [isFetching, setIsFetching] = useInfiniteScroll(loadMoreCards);
 
   if (isLoading) return <div>Loading cards...</div>;
   if (error) return <div>Error loading cards: {error.message}</div>;
@@ -24,7 +32,8 @@ const DeckBuilderPage = () => {
         <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="md:col-span-2">
-            <CardSearch cards={allCards} />
+            <CardSearch cards={allCards.slice(0, visibleCards)} />
+            {isFetching && <p className="text-center mt-4">Loading more cards...</p>}
             <DeckEditor deck={deck} setDeck={setDeck} allCards={allCards} />
           </div>
           <div>

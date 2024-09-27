@@ -19,7 +19,7 @@ const FilterOptions = ({ cards, onFilterChange }) => {
           <SelectValue placeholder="Element" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="">All Elements</SelectItem>
+          <SelectItem value="all">All Elements</SelectItem>
           {elements.map((element) => (
             <SelectItem key={element} value={element}>{element}</SelectItem>
           ))}
@@ -31,7 +31,7 @@ const FilterOptions = ({ cards, onFilterChange }) => {
           <SelectValue placeholder="Type" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="">All Types</SelectItem>
+          <SelectItem value="all">All Types</SelectItem>
           {types.map((type) => (
             <SelectItem key={type} value={type}>{type}</SelectItem>
           ))}
@@ -43,7 +43,7 @@ const FilterOptions = ({ cards, onFilterChange }) => {
           <SelectValue placeholder="Rarity" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="">All Rarities</SelectItem>
+          <SelectItem value="all">All Rarities</SelectItem>
           {rarities.map((rarity) => (
             <SelectItem key={rarity} value={rarity}>{rarity}</SelectItem>
           ))}

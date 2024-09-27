@@ -29,29 +29,8 @@ export const fetchCardsFromS3 = async () => {
     const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
     return jsonData.map(card => ({
-      cardNumber: card.cardNumber,
-      id: card.id,
-      name: card.name,
+      ...card,
       image: getImageUrl(card.name),
-      element: card.element,
-      type: card.type,
-      rune: card.rune,
-      tier: card.tier,
-      rarity: card.rarity,
-      description: card.description,
-      strength: card.strength,
-      agility: card.agility,
-      abilityName: card.abilityName,
-      ability: card.ability,
-      specialAbilityName: card.specialAbilityName,
-      specialAbility: card.specialAbility,
-      specialAbilityCost: card.specialAbilityCost,
-      essenceCost: card.essenceCost,
-      essenceGeneration: card.essenceGeneration,
-      quote: card.quote,
-      synergies: card.synergies ? JSON.parse(card.synergies) : [],
-      counters: card.counters ? JSON.parse(card.counters) : [],
-      news: card.news ? JSON.parse(card.news) : [],
     }));
   } catch (error) {
     console.error("Error fetching cards from S3:", error);

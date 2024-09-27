@@ -12,7 +12,7 @@ const Header = () => {
     { title: 'Home', path: '/' },
     { title: 'Cards', path: '/cards' },
     { title: 'Gameplay', path: '/gameplay' },
-    { title: 'Deck Builder', path: '/cards/deck-builder' }, // New Deck Builder link
+    { title: 'Deck Builder', path: '/cards/deck-builder' },
     { title: 'Join Now', path: '/join' },
   ];
 
@@ -20,7 +20,11 @@ const Header = () => {
     <header className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <img src="/ancient-rune.png" alt="Ancient Rune" className="w-10 h-10 mr-2" />
+          <img 
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/Masters_Logo.png`} 
+            alt="Elemental Masters Logo" 
+            className="w-10 h-10 mr-2"
+          />
           <Link to="/" className="text-2xl font-bold">Elemental Masters</Link>
         </div>
         <nav className="hidden md:flex space-x-4">

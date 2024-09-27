@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [prevScrollPos, setPrevScrollPos] = useState(0);
-  const [visible, setVisible] = useState(true);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -18,19 +16,8 @@ const Header = () => {
     { title: 'Join Now', path: '/join' },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollPos = window.pageYOffset;
-      setVisible(prevScrollPos > currentScrollPos || currentScrollPos < 10);
-      setPrevScrollPos(currentScrollPos);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, [prevScrollPos]);
-
   return (
-    <header className={`fixed top-0 left-0 right-0 bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4 px-6 transition-transform duration-300 z-50 ${visible ? 'translate-y-0' : '-translate-y-full'}`}>
+    <header className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img 

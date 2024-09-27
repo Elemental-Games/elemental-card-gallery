@@ -26,37 +26,39 @@
    npm ci
    ```
 
-4. Set up environment variables as described in the AWS_README.md file.
+4. Set up environment variables:
+   Create a `.env` file in the root directory of your project and add the following variables:
+   ```
+   VITE_AWS_REGION=your_aws_region
+   VITE_AWS_ACCESS_KEY_ID=your_access_key_id
+   VITE_AWS_SECRET_ACCESS_KEY=your_secret_access_key
+   VITE_S3_BUCKET_NAME=your_s3_bucket_name
+   VITE_S3_BUCKET_URL=https://your-bucket-name.s3.amazonaws.com
+   ```
+   Replace the values with your actual AWS credentials and S3 bucket information.
 
-5. Start the development server:
+5. Update AWS configuration:
+   Open the file `src/utils/awsUtils.js` and ensure the following lines are using the environment variables:
+   ```javascript
+   const s3Client = new S3Client({
+     region: import.meta.env.VITE_AWS_REGION,
+     credentials: {
+       accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+       secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
+     },
+   });
+   ```
+
+6. Start the development server:
    ```
    npm run dev
    ```
 
-6. Open your browser and visit `http://localhost:5173`
+7. Open your browser and visit `http://localhost:5173`
 
 ## Deploying to BlueHost
 
-1. Build the project:
-   ```
-   npm run build
-   ```
-
-2. Upload the contents of the `dist` folder to the `public_html` directory on your BlueHost server using FTP or the file manager.
-
-3. Ensure your domain points to the correct directory.
-
-4. Create a `.htaccess` file in the `public_html` directory with the following content:
-   ```
-   <IfModule mod_rewrite.c>
-     RewriteEngine On
-     RewriteBase /
-     RewriteRule ^index\.html$ - [L]
-     RewriteCond %{REQUEST_FILENAME} !-f
-     RewriteCond %{REQUEST_FILENAME} !-d
-     RewriteRule . /index.html [L]
-   </IfModule>
-   ```
+[... rest of the existing content ...]
 
 ## AWS S3 Integration
 
@@ -64,11 +66,4 @@ For detailed instructions on setting up AWS S3 for storing card data and images,
 
 ## Troubleshooting
 
-If you encounter any issues with AWS S3 integration or image loading, please check the following:
-
-1. Ensure all environment variables are correctly set as described in `AWS_README.md`.
-2. Verify that your AWS IAM user has the correct permissions.
-3. Check that your S3 bucket is properly configured for public access.
-4. Confirm that your card images are named correctly and uploaded to the right folder in your S3 bucket.
-
-For any other issues, please refer to the project documentation or contact the development team.
+[... rest of the existing content ...]

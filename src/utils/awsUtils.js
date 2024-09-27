@@ -31,6 +31,7 @@ export const fetchCardsFromS3 = async () => {
     return jsonData.map(card => ({
       ...card,
       image: getImageUrl(card.name),
+      element: ['Frost', 'Sand', 'Lightning', 'Crystal', 'Lava', 'Poison'].includes(card.element) ? 'Combination' : card.element,
     }));
   } catch (error) {
     console.error("Error fetching cards from S3:", error);

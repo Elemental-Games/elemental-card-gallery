@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const Card = ({ card }) => {
-  const [isFlipped, setIsFlipped] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
-    <div className="w-64 h-96 perspective">
+    <div 
+      className="w-64 h-96 perspective"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       <motion.div
         className="w-full h-full relative transform-style-3d cursor-pointer"
         initial={false}
-        animate={{ rotateY: isFlipped ? 180 : 0 }}
+        animate={{ rotateY: isHovered ? 180 : 0 }}
         transition={{ duration: 0.6 }}
-        onClick={() => setIsFlipped(!isFlipped)}
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src={`${import.meta.env.VITE_S3_BUCKET_URL}/card_back.png`}
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
+            style={{ imageRendering: 'crisp-edges' }}
           />
         </div>
         <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
@@ -25,6 +29,7 @@ const Card = ({ card }) => {
             src={card.image}
             alt={card.name}
             className="w-full h-full object-cover rounded-lg"
+            style={{ imageRendering: 'crisp-edges' }}
           />
         </div>
       </motion.div>

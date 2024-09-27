@@ -33,11 +33,13 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           />
         </div>
         <div className="absolute w-full h-full backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
-          <img
-            src={card.image}
-            alt={card.name}
-            className="w-full h-full object-cover rounded-lg"
-          />
+          {isFlipped && (
+            <img
+              src={card.image}
+              alt={card.name}
+              className="w-full h-full object-cover rounded-lg"
+            />
+          )}
         </div>
       </motion.div>
     </div>

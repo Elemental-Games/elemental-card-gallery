@@ -54,14 +54,19 @@ const CardDetailPage = () => {
               <h3 className="text-xl font-semibold mb-2">Agility</h3>
               <p>{card.agility}</p>
             </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Ability</h3>
-              <p>{card.ability}</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-semibold mb-2">Special Ability</h3>
-              <p>{card.specialAbility}</p>
-            </div>
+            {card.abilityName && (
+              <div className="col-span-2">
+                <h3 className="text-xl font-semibold mb-2">{card.abilityName}</h3>
+                <p>{card.ability}</p>
+              </div>
+            )}
+            {card.specialAbilityName && (
+              <div className="col-span-2">
+                <h3 className="text-xl font-semibold mb-2">{card.specialAbilityName}</h3>
+                <p>{card.specialAbility}</p>
+                <p className="text-sm text-gray-600">Cost: {card.specialAbilityCost}</p>
+              </div>
+            )}
             <div>
               <h3 className="text-xl font-semibold mb-2">Essence Cost</h3>
               <p>{card.essenceCost}</p>
@@ -74,10 +79,19 @@ const CardDetailPage = () => {
         </div>
       </div>
 
-      <div className="mt-12">
-        <h2 className="text-3xl font-bold mb-4">Card Background</h2>
-        <p className="text-lg">{card.background}</p>
-      </div>
+      {card.background && (
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold mb-4">Card Background</h2>
+          <p className="text-lg">{card.background}</p>
+        </div>
+      )}
+
+      {card.quote && (
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold mb-4">Quote</h2>
+          <blockquote className="text-lg italic border-l-4 border-gray-300 pl-4">"{card.quote}"</blockquote>
+        </div>
+      )}
 
       <div className="mt-12">
         <h2 className="text-3xl font-bold mb-4">Synergies</h2>

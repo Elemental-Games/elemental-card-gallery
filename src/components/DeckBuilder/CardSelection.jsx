@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 
-const CardSelection = ({ cards, count, onSelect, stepType }) => {
+const CardSelection = ({ cards, count, onSelect, stepType, canAddCard }) => {
   const [selectedCards, setSelectedCards] = useState([]);
 
   const toggleCard = (card) => {
     if (selectedCards.includes(card)) {
       setSelectedCards(selectedCards.filter(c => c !== card));
-    } else if (selectedCards.length < count) {
+    } else if (selectedCards.length < count && canAddCard(card)) {
       setSelectedCards([...selectedCards, card]);
     }
   };
@@ -22,7 +22,7 @@ const CardSelection = ({ cards, count, onSelect, stepType }) => {
         {cards.map(card => (
           <Card
             key={card.id}
-            className={`p-2 cursor-pointer ${selectedCards.includes(card) ? 'border-2 border-blue-500' : ''}`}
+            className={`p-2 cursor-pointer ${selectedCards.includes(card) ? 'border-2 border-blue-500' : ''} ${!canAddCard(card) ? 'opacity-50' : ''}`}
             onClick={() => toggleCard(card)}
           >
             <img src={card.image} alt={card.name} className="w-full h-auto" />

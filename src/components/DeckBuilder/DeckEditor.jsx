@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { toast } from 'sonner';
 
-const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck }) => {
+const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck, allCards, canAddCard }) => {
   const [deckName, setDeckName] = useState('New Deck');
 
   const removeCardFromDeck = (index, isMainDeck) => {
@@ -19,8 +19,19 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck }) => {
     }
   };
 
+  const addCardToDeck = (card, isMainDeck) => {
+    if (canAddCard(card)) {
+      if (isMainDeck) {
+        setMainDeck([...mainDeck, card]);
+      } else {
+        setSideDeck([...sideDeck, card]);
+      }
+    } else {
+      toast.error(`You can't add more copies of ${card.name}`);
+    }
+  };
+
   const saveDeck = () => {
-    // Here you would typically save the deck to a backend or local storage
     console.log('Saving deck:', { name: deckName, mainDeck, sideDeck });
     toast.success('Deck saved successfully!');
   };
@@ -72,6 +83,21 @@ const DeckEditor = ({ mainDeck, sideDeck, setMainDeck, setSideDeck }) => {
               >
                 X
               </Button>
+            </Card>
+          ))}
+        </div>
+      </div>
+      <div className="mt-8">
+        <h3 className="text-xl font-semibold mb-2">All Cards</h3>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {allCards.map((card) => (
+            <Card 
+              key={card.id} 
+              className={`p-2 cursor-pointer ${!canAddCard(card) ? 'opacity-50' : ''}`}
+              onClick={() => addCardToDeck(card, true)}
+            >
+              <img src={card.image} alt={card.name} className="w-full h-auto" />
+              <p className="text-center mt-2">{card.name}</p>
             </Card>
           ))}
         </div>

@@ -1,13 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCardsFromS3 } from '../utils/awsUtils';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import CardSelection from '../components/DeckBuilder/CardSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
+import LightBox from '../components/LightBox';
 
 const DeckBuilderPage = () => {
-  const [step, setStep] = useState(0);
+  const [showHelper, setShowHelper] = useState(false);
+  const [step, setStep] = useState(-1); // Start at -1 to show the helper prompt
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
@@ -15,6 +17,13 @@ const DeckBuilderPage = () => {
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
   });
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setStep(-1); // Show helper prompt
+    }, 100);
+    return () => clearTimeout(timer);
+  }, []);
 
   const steps = [
     { type: 'element', count: 2, filter: () => true },
@@ -27,6 +36,11 @@ const DeckBuilderPage = () => {
     { type: 'shield', count: 1, filter: (card) => card.type === 'Shield' && card.tier === 3 },
     { type: 'any', count: 5, filter: () => true },
   ];
+
+  const handleHelperChoice = (choice) => {
+    setShowHelper(choice === 'yes');
+    setStep(choice === 'yes' ? 0 : 9); // Skip to free build if 'no'
+  };
 
   const handleElementSelection = (elements) => {
     setSelectedElements(elements);
@@ -44,14 +58,43 @@ const DeckBuilderPage = () => {
     setStep(step + 1);
   };
 
+  const isCardLimited = (card) => {
+    const limitedCards = ["Ancient Sigil", "Ancient Winds", "Ancient Roots", "Ancient Ember", "Ancient Tide"];
+    return limitedCards.includes(card.name);
+  };
+
+  const getCardCount = (card) => {
+    return mainDeck.filter(c => c.id === card.id).length + 
+           sideDeck.filter(c => c.id === card.id).length;
+  };
+
+  const canAddCard = (card) => {
+    const count = getCardCount(card);
+    if (isCardLimited(card)) {
+      return count < 1;
+    }
+    return count < 3;
+  };
+
   if (isLoading) return <div>Loading cards...</div>;
   if (error) return <div>Error loading cards: {error.message}</div>;
 
-  if (step === 0) {
-    return <ElementSelection onSelect={handleElementSelection} />;
+  if (step === -1) {
+    return (
+      <LightBox
+        onClose={() => handleHelperChoice('no')}
+        content={
+          <div>
+            <h2>Would you like to use our deck builder helper?</h2>
+            <button onClick={() => handleHelperChoice('yes')}>Yes</button>
+            <button onClick={() => handleHelperChoice('no')}>No</button>
+          </div>
+        }
+      />
+    );
   }
 
-  if (step < steps.length) {
+  if (showHelper && step < steps.length) {
     const currentStep = steps[step];
     return (
       <CardSelection
@@ -59,6 +102,7 @@ const DeckBuilderPage = () => {
         count={currentStep.count}
         onSelect={handleCardSelection}
         stepType={currentStep.type}
+        canAddCard={canAddCard}
       />
     );
   }
@@ -68,7 +112,14 @@ const DeckBuilderPage = () => {
       <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div className="md:col-span-2">
-          <DeckEditor mainDeck={mainDeck} sideDeck={sideDeck} setMainDeck={setMainDeck} setSideDeck={setSideDeck} />
+          <DeckEditor 
+            mainDeck={mainDeck} 
+            sideDeck={sideDeck} 
+            setMainDeck={setMainDeck} 
+            setSideDeck={setSideDeck}
+            allCards={allCards}
+            canAddCard={canAddCard}
+          />
         </div>
         <div>
           <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />

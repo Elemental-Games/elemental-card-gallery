@@ -70,10 +70,13 @@ const LightBox = ({ cardImage, onClose }) => {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
-            className="bg-yellow-300 p-8 rounded-lg shadow-lg max-w-4xl w-full text-center flex items-center justify-center"
+            className="bg-yellow-300 p-8 rounded-lg shadow-lg max-w-4xl w-full flex items-center justify-center"
             style={{ height: '400px' }} // Adjust this value to match the height of your original lightbox
           >
-            <p className="text-3xl font-bold text-yellow-800">Thanks for signing up! You're now one step closer to being an Elemental Master</p>
+            <div className="text-center">
+              <p className="text-3xl font-bold text-yellow-800">Thanks for signing up!</p>
+              <p className="text-xl text-yellow-800 mt-4">You're now one step closer to being an Elemental Master</p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

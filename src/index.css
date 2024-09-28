@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=MedievalSharp&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -74,7 +74,7 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'MedievalSharp', cursive;
+    font-family: 'Quicksand', sans-serif;
   }
 }
 

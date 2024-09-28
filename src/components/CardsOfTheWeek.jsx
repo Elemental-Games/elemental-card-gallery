@@ -21,7 +21,11 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
     >
       <motion.div
         className="w-full relative transform-style-3d cursor-pointer"
-        style={{ paddingBottom: '140%' }} // This creates a 2.5:3.5 aspect ratio
+        style={{ 
+          paddingBottom: '140%', // Maintains 2.5:3.5 aspect ratio
+          width: '100%',
+          height: '0',
+        }}
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
@@ -31,7 +35,11 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
-            style={{ imageRendering: 'high-quality' }}
+            style={{ 
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
           />
         </div>
         <div className="absolute inset-0 backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
@@ -39,7 +47,11 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             src={card.image}
             alt={card.name}
             className="w-full h-full object-cover rounded-lg"
-            style={{ imageRendering: 'high-quality' }}
+            style={{ 
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+            }}
           />
         </div>
       </motion.div>

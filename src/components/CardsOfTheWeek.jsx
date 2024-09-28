@@ -14,18 +14,13 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
 
   return (
     <motion.div 
-      className="w-64 perspective"
+      className="w-64 h-96 perspective cursor-pointer"
       whileHover={isFlipped ? { scale: 1.05 } : { scale: 1.05, rotate: [0, -1, 1, -1, 1, 0] }}
       transition={{ duration: 0.3 }}
       onClick={handleClick}
     >
       <motion.div
-        className="w-full relative transform-style-3d cursor-pointer"
-        style={{ 
-          paddingBottom: '140%', // Maintains 2.5:3.5 aspect ratio
-          width: '100%',
-          height: '0',
-        }}
+        className="w-full h-full relative transform-style-3d"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
@@ -35,11 +30,6 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
-            style={{ 
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
           />
         </div>
         <div className="absolute inset-0 backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
@@ -47,11 +37,6 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             src={card.image}
             alt={card.name}
             className="w-full h-full object-cover rounded-lg"
-            style={{ 
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-            }}
           />
         </div>
       </motion.div>
@@ -63,7 +48,7 @@ const CardsOfTheWeek = () => {
   const cards = [
     { id: 1, name: 'Deepseer', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png` },
     { id: 2, name: 'Kindro', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/kindro.png` },
-    { id: 3, name: 'cloud Sprinter', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/cloud-sprinter.png` },
+    { id: 3, name: 'Cloud Sprinter', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/cloud-sprinter.png` },
     { id: 4, name: 'Terra the Earth Titan', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/terra-the-earth-titan.png` },
   ];
 

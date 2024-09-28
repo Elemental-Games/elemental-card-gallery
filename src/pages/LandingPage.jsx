@@ -18,7 +18,12 @@ const LandingPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const elements = ['Air', 'Water', 'Earth', 'Fire'];
+  const elements = [
+    { name: 'Air', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
+    { name: 'Water', color: 'bg-blue-300', hoverColor: 'hover:bg-blue-400' },
+    { name: 'Earth', color: 'bg-green-300', hoverColor: 'hover:bg-green-400' },
+    { name: 'Fire', color: 'bg-red-300', hoverColor: 'hover:bg-red-400' }
+  ];
 
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
@@ -35,16 +40,19 @@ const LandingPage = () => {
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {elements.map((element) => (
-              <div key={element} className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
+              <div 
+                key={element.name} 
+                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor}`}
+              >
                 <img 
-                  src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element}.png`}
-                  alt={`${element} Icon`}
+                  src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element.name}.png`}
+                  alt={`${element.name} Icon`}
                   className="w-16 h-16 mb-4 mx-auto"
                 />
-                <h3 className="text-2xl font-semibold mb-2">{element}</h3>
-                <p className="mb-4">Master the power of {element.toLowerCase()} in Elemental Masters.</p>
+                <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
+                <p className="mb-4">Master the power of {element.name.toLowerCase()} in Elemental Masters.</p>
                 <Link to="/cards">
-                  <Button variant="outline">Explore {element} Cards</Button>
+                  <Button variant="outline">Explore {element.name} Cards</Button>
                 </Link>
               </div>
             ))}

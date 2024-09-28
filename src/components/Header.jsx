@@ -23,9 +23,9 @@ const Header = () => {
           <img 
             src={`${import.meta.env.VITE_S3_BUCKET_URL}/Games_Logo.jpg`} 
             alt="Elemental Games Logo" 
-            className="w-10 h-10 mr-2"
+            style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
           />
-          <Link to="/" className="text-2xl font-bold">Elemental Masters</Link>
+          <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
         </div>
         <nav className="hidden md:flex space-x-4">
           {navItems.map((item) => (

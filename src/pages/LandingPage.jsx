@@ -28,29 +28,29 @@ const LandingPage = () => {
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
-      <div className="container mx-auto px-16 py-32">
-        <section className="mb-64">
-          <h2 className="text-4xl font-bold mb-32 flex items-center">
+      <div className="container mx-auto px-4 py-16">
+        <section className="mb-16">
+          <h2 className="text-4xl font-bold mb-8 flex items-center">
             <img 
               src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/Fire.png`} 
               alt="Fire Icon" 
-              className="w-48 h-48 mr-16"
+              className="w-12 h-12 mr-4"
             />
             Game Features
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-32">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {elements.map((element) => (
               <div 
                 key={element.name} 
-                className={`${element.color} bg-opacity-30 p-24 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor}`}
+                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor}`}
               >
                 <img 
                   src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element.name}.png`}
                   alt={`${element.name} Icon`}
-                  className="w-64 h-64 mb-16 mx-auto"
+                  className="w-16 h-16 mb-4 mx-auto"
                 />
-                <h3 className="text-2xl font-semibold mb-8">{element.name}</h3>
-                <p className="mb-16">Master the power of {element.name.toLowerCase()} in Elemental Masters.</p>
+                <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
+                <p className="mb-4">Master the power of {element.name.toLowerCase()} in Elemental Masters.</p>
                 <Link to="/cards">
                   <Button variant="outline">Explore {element.name} Cards</Button>
                 </Link>
@@ -61,13 +61,13 @@ const LandingPage = () => {
 
         <CardsOfTheWeek />
 
-        <section className="mb-64">
-          <h2 className="text-4xl font-bold mb-32 flex items-center">
-            <ElementIcon element="earth" className="mr-8" />
+        <section className="mb-16">
+          <h2 className="text-4xl font-bold mb-8 flex items-center">
+            <ElementIcon element="earth" className="mr-2" />
             Gameplay
           </h2>
-          <div className="bg-white bg-opacity-10 p-32 rounded-lg shadow-lg">
-            <p className="text-xl mb-24">
+          <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg">
+            <p className="text-xl mb-6">
               Master the elements and outsmart your opponents in epic card battles!
             </p>
             <Link to="/gameplay">
@@ -76,13 +76,13 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="mb-64">
-          <h2 className="text-4xl font-bold mb-32 flex items-center">
-            <ElementIcon element="water" className="mr-8" />
+        <section className="mb-16">
+          <h2 className="text-4xl font-bold mb-8 flex items-center">
+            <ElementIcon element="water" className="mr-2" />
             Join Now
           </h2>
-          <div className="bg-white bg-opacity-10 p-32 rounded-lg shadow-lg">
-            <p className="text-xl mb-24">
+          <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg">
+            <p className="text-xl mb-6">
               Be part of the Elemental Masters community and start your journey today!
             </p>
             <Link to="/join">

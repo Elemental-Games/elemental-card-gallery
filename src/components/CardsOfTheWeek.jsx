@@ -15,7 +15,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
   return (
     <motion.div 
       className="w-full pb-[140%] perspective cursor-pointer relative"
-      whileHover={isFlipped ? { scale: 1.05 } : { scale: 1.05, rotate: [0, -1, 1, -1, 1, 0] }}
+      whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.3 }}
       onClick={handleClick}
     >

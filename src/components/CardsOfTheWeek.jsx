@@ -14,13 +14,13 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
 
   return (
     <motion.div 
-      className="w-64 h-96 perspective cursor-pointer"
+      className="w-full pb-[140%] perspective cursor-pointer relative"
       whileHover={isFlipped ? { scale: 1.05 } : { scale: 1.05, rotate: [0, -1, 1, -1, 1, 0] }}
       transition={{ duration: 0.3 }}
       onClick={handleClick}
     >
       <motion.div
-        className="w-full h-full relative transform-style-3d"
+        className="absolute inset-0 transform-style-3d"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
@@ -58,7 +58,7 @@ const CardsOfTheWeek = () => {
     <div className="py-16 bg-gray-900">
       <div className="container mx-auto">
         <h2 className="text-4xl font-bold mb-8 text-center text-white">Cards of the Week</h2>
-        <div className="flex flex-wrap justify-center gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {cards.map((card, index) => (
             <Card 
               key={card.id} 

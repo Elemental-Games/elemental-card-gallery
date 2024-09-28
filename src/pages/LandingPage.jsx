@@ -18,23 +18,29 @@ const LandingPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const elements = ['Air', 'Water', 'Earth', 'Fire'];
+
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
       <div className="container mx-auto px-4 py-16">
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
-          <img 
-            src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/Fire.png`} 
-            alt="Elemental Games Logo" 
-            style={{ width: '100px', height: '110px', marginRight: '8px', marginBottom: '-25px' }}
-          />
+            <img 
+              src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/Fire.png`} 
+              alt="Fire Icon" 
+              className="w-12 h-12 mr-4"
+            />
             Game Features
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {['Air', 'Water', 'Earth', 'Fire'].map((element) => (
+            {elements.map((element) => (
               <div key={element} className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
-                <ElementIcon element={element} className="mb-4 text-4xl" />
+                <img 
+                  src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element}.png`}
+                  alt={`${element} Icon`}
+                  className="w-16 h-16 mb-4 mx-auto"
+                />
                 <h3 className="text-2xl font-semibold mb-2">{element}</h3>
                 <p className="mb-4">Master the power of {element.toLowerCase()} in Elemental Masters.</p>
                 <Link to="/cards">

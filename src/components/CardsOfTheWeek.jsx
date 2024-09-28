@@ -23,14 +23,24 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.5 }}
         style={{ transformStyle: 'preserve-3d' }}
+        whileHover={{ 
+          scale: 1.05, 
+          transition: { duration: 0.2 }
+        }}
       >
-        <div className="absolute inset-0 w-full h-full backface-hidden">
+        <motion.div 
+          className="absolute inset-0 w-full h-full backface-hidden"
+          whileHover={{ 
+            rotate: [0, -1, 1, -1, 1, 0],
+            transition: { duration: 0.3 }
+          }}
+        >
           <img
             src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
-        </div>
+        </motion.div>
         <div 
           className="absolute inset-0 w-full h-full backface-hidden" 
           style={{ transform: 'rotateY(180deg)' }}

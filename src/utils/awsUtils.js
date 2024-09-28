@@ -2,22 +2,22 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import * as XLSX from 'xlsx';
 
 const s3Client = new S3Client({
-  region: import.meta.env.AWS_REGION,
+  region: process.env.AWS_REGION,
   credentials: {
-    accessKeyId: import.meta.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
 const getImageUrl = (cardName) => {
   const formattedName = cardName.toLowerCase().replace(/\s+/g, '-');
-  return `${import.meta.env.S3_BUCKET_URL}/cards/${formattedName}.png`;
+  return `${process.env.S3_BUCKET_URL}/cards/${formattedName}.png`;
 };
 
 export const fetchCardsFromS3 = async () => {
   try {
     const command = new GetObjectCommand({
-      Bucket: import.meta.env.S3_BUCKET_NAME,
+      Bucket: process.env.S3_BUCKET_NAME,
       Key: "data/elemental_masters_cards.xlsx",
     });
 

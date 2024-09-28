@@ -11,7 +11,7 @@ import CookieConsent from "./components/CookieConsent";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SupportPage from "./pages/SupportPage";
-import { AuthProvider } from './hooks/useAuth';
+import { AuthProvider } from './hooks/useAuth'; // Updated import
 import './aws-config';
 
 const queryClient = new QueryClient();

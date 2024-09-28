@@ -42,7 +42,7 @@ const LightBox = ({ cardImage, onClose }) => {
               <X size={24} />
             </Button>
             <div className="flex flex-col md:flex-row items-center justify-between">
-              <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4">
+              <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4 text-center">
                 <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements to your Inbox</h2>
                 <p className="text-xl mb-6 text-primary">Gain access to all website features and stay up-to-date on our progress</p>
                 <form onSubmit={handleSubmit} className="space-y-4 w-full">
@@ -71,7 +71,7 @@ const LightBox = ({ cardImage, onClose }) => {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0.9 }}
             className="bg-yellow-300 p-8 rounded-lg shadow-lg max-w-4xl w-full flex items-center justify-center"
-            style={{ height: '400px' }} // Adjust this value to match the height of your original lightbox
+            style={{ height: '400px' }}
           >
             <div className="text-center">
               <p className="text-3xl font-bold text-yellow-800">Thanks for signing up!</p>

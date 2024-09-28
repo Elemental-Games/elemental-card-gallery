@@ -1,4 +1,4 @@
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001'; // Update this URL for production
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
 
 export const fetchCardsFromS3 = async () => {
   try {

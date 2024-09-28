@@ -9,7 +9,7 @@ export const fetchCardsFromS3 = async () => {
     return await response.json();
   } catch (error) {
     console.error("Error fetching cards:", error);
-    return [];
+    throw error;
   }
 };
 
@@ -19,6 +19,6 @@ export const fetchCardByName = async (cardName) => {
     return allCards.find(c => c.name.toLowerCase() === cardName.toLowerCase()) || null;
   } catch (error) {
     console.error("Error fetching card by name:", error);
-    return null;
+    throw error;
   }
 };

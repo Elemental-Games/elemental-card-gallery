@@ -44,8 +44,8 @@ const CardsPage = () => {
     setSearchTerm(term);
   };
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  if (isLoading) return <div className="text-center mt-8">Loading cards...</div>;
+  if (error) return <div className="text-center mt-8 text-red-500">Error loading cards: {error.message}</div>;
 
   return (
     <div className="container mx-auto px-4 py-8">

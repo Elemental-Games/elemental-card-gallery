@@ -18,10 +18,10 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
       onClick={handleClick}
     >
       <motion.div
-        className="absolute inset-0 w-full h-full transition-transform duration-500"
+        className="absolute inset-0 w-full h-full transition-transform duration-300"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.3 }}
         style={{ transformStyle: 'preserve-3d' }}
         whileHover={{ 
           scale: 1.05, 
@@ -32,7 +32,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           className="absolute inset-0 w-full h-full backface-hidden"
           whileHover={{ 
             rotate: [0, -1, 1, -1, 1, 0],
-            transition: { duration: 0.3 }
+            transition: { duration: 0.2 }
           }}
         >
           <img

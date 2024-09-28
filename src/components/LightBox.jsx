@@ -15,8 +15,8 @@ const LightBox = ({ cardImage, onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-      <div className="bg-popover p-8 rounded-lg max-w-4xl w-full relative border-4 border-accent flex">
+    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+      <div className="bg-popover p-8 rounded-lg max-w-4xl w-full relative border-4 border-accent flex flex-col md:flex-row items-center">
         <Button
           onClick={onClose}
           variant="ghost"
@@ -24,7 +24,7 @@ const LightBox = ({ cardImage, onClose }) => {
         >
           <X size={24} />
         </Button>
-        <div className="flex-1 pr-8">
+        <div className="flex-1 text-center md:text-left mb-6 md:mb-0 md:mr-8">
           <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements to your Inbox</h2>
           <p className="text-xl mb-6 text-primary">Gain access to all website features and stay up-to-date on our progress</p>
           {!isSubmitted ? (
@@ -35,16 +35,16 @@ const LightBox = ({ cardImage, onClose }) => {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="text-primary"
+                className="text-primary w-full md:w-3/4"
               />
-              <Button type="submit" className="w-full bg-accent text-primary hover:bg-accent/90">Sign Up</Button>
+              <Button type="submit" className="w-full md:w-3/4 bg-accent text-primary hover:bg-accent/90">Sign Up</Button>
             </form>
           ) : (
             <p className="text-xl text-primary">Thanks for signing up! You're now one step closer to being an Elemental Master</p>
           )}
         </div>
-        <div className="flex-1">
-          <img src={cardImage} alt="Card of the Week" className="w-full h-auto rounded" />
+        <div className="flex-1 flex justify-center">
+          <img src={cardImage} alt="Card of the Week" className="w-full max-w-sm rounded shadow-lg" />
         </div>
       </div>
     </div>

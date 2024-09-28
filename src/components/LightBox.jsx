@@ -43,10 +43,10 @@ const LightBox = ({ cardImage, onClose }) => {
             >
               <X size={24} />
             </Button>
-            <div className="flex-1 pr-8">
+            <div className="flex-1 pr-8 flex flex-col justify-center items-center text-center space-y-6">
               <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements to your Inbox</h2>
               <p className="text-xl mb-6 text-primary">Gain access to all website features and stay up-to-date on our progress</p>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md">
                 <Input
                   type="email"
                   placeholder="Enter your email"

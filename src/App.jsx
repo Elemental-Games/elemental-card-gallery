@@ -1,5 +1,3 @@
-import { Toaster } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
@@ -13,14 +11,15 @@ import CookieConsent from "./components/CookieConsent";
 import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SupportPage from "./pages/SupportPage";
+import { AuthProvider } from './hooks/useAuth';
+import './aws-config';
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <TooltipProvider>
-        <Toaster />
+      <AuthProvider>
         <BrowserRouter>
           <div className="flex flex-col min-h-screen bg-background text-foreground">
             <Header />
@@ -41,7 +40,7 @@ const App = () => (
             <CookieConsent />
           </div>
         </BrowserRouter>
-      </TooltipProvider>
+      </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );

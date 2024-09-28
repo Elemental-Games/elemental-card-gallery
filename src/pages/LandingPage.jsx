@@ -6,17 +6,21 @@ import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import NewsFeed from '../components/NewsFeed';
 import LightBox from '../components/LightBox';
+import { useAuth } from '../hooks/useAuth'; // We'll create this hook
 
 const LandingPage = () => {
   const [showLightBox, setShowLightBox] = useState(false);
+  const { user } = useAuth(); // Use the auth hook to get the user state
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLightBox(true);
-    }, 3000);
+    if (!user) {
+      const timer = setTimeout(() => {
+        setShowLightBox(true);
+      }, 3000);
 
-    return () => clearTimeout(timer);
-  }, []);
+      return () => clearTimeout(timer);
+    }
+  }, [user]);
 
   const elements = [
     { name: 'Air', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
@@ -61,7 +65,7 @@ const LandingPage = () => {
 
         <CardsOfTheWeek />
 
-        <section className="mb-16">
+        <section className="mb-32"> {/* Increased margin-bottom */}
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <ElementIcon element="earth" className="mr-2" />
             Gameplay
@@ -93,7 +97,7 @@ const LandingPage = () => {
 
         <NewsFeed />
       </div>
-      {showLightBox && (
+      {showLightBox && !user && (
         <LightBox
           cardImage={`${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png`}
           onClose={() => setShowLightBox(false)}

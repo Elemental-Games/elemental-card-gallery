@@ -70,7 +70,7 @@ const LightBox = ({ cardImage, onClose }) => {
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -50 }}
-            className="bg-yellow-300 p-4 rounded-lg shadow-lg absolute bottom-4 left-1/2 transform -translate-x-1/2"
+            className="bg-yellow-300 p-4 rounded-lg shadow-lg fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
           >
             <p className="text-xl font-bold text-yellow-800">Thanks for signing up! You're now one step closer to being an Elemental Master</p>
           </motion.div>

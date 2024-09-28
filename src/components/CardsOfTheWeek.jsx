@@ -27,7 +27,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
       >
         <div className="absolute w-full h-full backface-hidden">
           <img
-            src={`${process.env.S3_BUCKET_URL}/Card_Back.png`}
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
             style={{ imageRendering: 'high-quality' }}
@@ -48,10 +48,10 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
 
 const CardsOfTheWeek = () => {
   const cards = [
-    { id: 1, name: 'Deepseer', image: `${process.env.S3_BUCKET_URL}/cards/deepseer.png` },
-    { id: 2, name: 'Kindro', image: `${process.env.S3_BUCKET_URL}/cards/kindro.png` },
-    { id: 3, name: 'Storm Ghost', image: `${process.env.S3_BUCKET_URL}/cards/storm-ghost.png` },
-    { id: 4, name: 'Terra the Earth Titan', image: `${process.env.S3_BUCKET_URL}/cards/terra-the-earth-titan.png` },
+    { id: 1, name: 'Deepseer', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png` },
+    { id: 2, name: 'Kindro', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/kindro.png` },
+    { id: 3, name: 'Storm Ghost', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/storm-ghost.png` },
+    { id: 4, name: 'Terra the Earth Titan', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/terra-the-earth-titan.png` },
   ];
 
   const [flippedCards, setFlippedCards] = useState(new Array(cards.length).fill(false));

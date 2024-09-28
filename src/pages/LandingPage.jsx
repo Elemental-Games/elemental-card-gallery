@@ -59,7 +59,7 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-8 mb-32">
+        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-6 mb-32 border border-yellow-500">
           <CardsOfTheWeek />
         </div>
 

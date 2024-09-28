@@ -1,4 +1,3 @@
-import React from 'react';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -28,12 +27,7 @@ const App = () => (
             <main className="flex-grow">
               <Routes>
                 {navItems.map((item) => (
-                  <React.Fragment key={item.to}>
-                    <Route path={item.to} element={item.page} />
-                    {item.subItems && item.subItems.map((subItem) => (
-                      <Route key={subItem.to} path={subItem.to} element={subItem.page} />
-                    ))}
-                  </React.Fragment>
+                  <Route key={item.to} path={item.to} element={item.page} />
                 ))}
                 <Route path="/cards/:cardName" element={<CardDetailPage />} />
                 <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />

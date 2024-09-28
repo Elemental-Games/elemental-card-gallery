@@ -20,19 +20,23 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
       onClick={handleClick}
     >
       <motion.div
-        className="absolute inset-0 transform-style-3d"
+        className="absolute inset-0 w-full h-full"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
         transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
+        style={{ transformStyle: 'preserve-3d' }}
       >
-        <div className="absolute inset-0 backface-hidden">
+        <div className="absolute inset-0 w-full h-full backface-hidden">
           <img
             src={`${import.meta.env.VITE_S3_BUCKET_URL}/Card_Back.png`}
             alt="Card Back"
             className="w-full h-full object-cover rounded-lg"
           />
         </div>
-        <div className="absolute inset-0 backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
+        <div 
+          className="absolute inset-0 w-full h-full backface-hidden" 
+          style={{ transform: 'rotateY(180deg)' }}
+        >
           <img
             src={card.image}
             alt={card.name}

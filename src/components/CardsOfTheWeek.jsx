@@ -4,20 +4,20 @@ import { motion } from 'framer-motion';
 const Card = ({ card, index, flippedCards, setFlippedCards }) => {
   const isFlipped = flippedCards[index];
 
-  const handleHover = () => {
-    if (!isFlipped) {
-      setFlippedCards(prev => {
-        const newFlipped = [...prev];
-        newFlipped[index] = true;
-        return newFlipped;
-      });
-    }
+  const handleClick = () => {
+    setFlippedCards(prev => {
+      const newFlipped = [...prev];
+      newFlipped[index] = !newFlipped[index];
+      return newFlipped;
+    });
   };
 
   return (
-    <div 
+    <motion.div 
       className="w-64 perspective"
-      onMouseEnter={handleHover}
+      whileHover={isFlipped ? { scale: 1.05 } : { scale: 1.05, rotate: [0, -1, 1, -1, 1, 0] }}
+      transition={{ duration: 0.3 }}
+      onClick={handleClick}
     >
       <motion.div
         className="w-full relative transform-style-3d cursor-pointer"
@@ -55,7 +55,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           />
         </div>
       </motion.div>
-    </div>
+    </motion.div>
   );
 };
 

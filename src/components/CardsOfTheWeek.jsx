@@ -13,17 +13,15 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
   };
 
   return (
-    <motion.div 
-      className="w-full pb-[140%] perspective cursor-pointer relative"
-      whileHover={{ scale: 1.05 }}
-      transition={{ duration: 0.3 }}
+    <div 
+      className="w-full pb-[140%] perspective-1000 cursor-pointer relative"
       onClick={handleClick}
     >
       <motion.div
-        className="absolute inset-0 w-full h-full"
+        className="absolute inset-0 w-full h-full transition-transform duration-500"
         initial={false}
         animate={{ rotateY: isFlipped ? 180 : 0 }}
-        transition={{ duration: 0.8, ease: [0.4, 0.0, 0.2, 1] }}
+        transition={{ duration: 0.5 }}
         style={{ transformStyle: 'preserve-3d' }}
       >
         <div className="absolute inset-0 w-full h-full backface-hidden">
@@ -44,7 +42,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           />
         </div>
       </motion.div>
-    </motion.div>
+    </div>
   );
 };
 

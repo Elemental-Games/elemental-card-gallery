@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
-import { useAuth } from '../hooks/useAuth'; // Updated import
+import { useAuth } from '../hooks/useAuth';
 
 const LightBox = ({ cardImage, onClose }) => {
   const [email, setEmail] = useState('');

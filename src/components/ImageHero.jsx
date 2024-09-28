@@ -40,7 +40,7 @@ const ImageHero = () => {
             Welcome to Elemental Masters
           </h1>
           <p className="text-2xl text-white">
-            Master the elements and become a legend
+            Unleash the power of the elements
           </p>
         </div>
       </div>

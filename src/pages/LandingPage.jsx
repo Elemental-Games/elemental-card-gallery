@@ -24,8 +24,12 @@ const LandingPage = () => {
       <div className="container mx-auto px-4 py-16">
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
-            <ElementIcon element="fire" className="mr-2" />
-            Discover the Elements
+          <img 
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/Fire.png`} 
+            alt="Elemental Games Logo" 
+            style={{ width: '100px', height: '110px', marginRight: '8px', marginBottom: '-25px' }}
+          />
+            Game Features
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {['Air', 'Water', 'Earth', 'Fire'].map((element) => (

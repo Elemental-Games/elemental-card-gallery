@@ -63,7 +63,7 @@ const CardsOfTheWeek = () => {
   const cards = [
     { id: 1, name: 'Deepseer', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png` },
     { id: 2, name: 'Kindro', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/kindro.png` },
-    { id: 3, name: 'Storm Ghost', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/storm-ghost.png` },
+    { id: 3, name: 'cloud Sprinter', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/cloud-sprinter.png` },
     { id: 4, name: 'Terra the Earth Titan', image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/terra-the-earth-titan.png` },
   ];
 

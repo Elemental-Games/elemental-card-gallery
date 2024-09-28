@@ -59,9 +59,10 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <CardsOfTheWeek />
+        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-8 mb-32">
+          <CardsOfTheWeek />
+        </div>
 
-        {/* Added more space (mb-32) between Cards of the Week and Gameplay sections */}
         <section className="mb-32">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <ElementIcon element="earth" className="mr-2" />

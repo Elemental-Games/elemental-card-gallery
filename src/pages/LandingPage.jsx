@@ -32,9 +32,9 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <img 
-              src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/Fire.png`} 
-              alt="Fire Icon" 
-              className="w-12 h-12 mr-4"
+              src={`${import.meta.env.VITE_S3_BUCKET_URL}/Masters_Logo.jpg`} 
+              alt="Elemental Games Logo" 
+              style={{ width: '200px', height: '125px', marginRight: '8px', marginBottom: '-20px' }}
             />
             Game Features
           </h2>
@@ -47,7 +47,7 @@ const LandingPage = () => {
                 <img 
                   src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element.name}.png`}
                   alt={`${element.name} Icon`}
-                  className="w-16 h-16 mb-4 mx-auto"
+                  style={{ width: '100px', height: '110px', marginLeft: '85px', marginRight: '8px', marginBottom: '-20px' }}
                 />
                 <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
                 <p className="mb-4">Master the power of {element.name.toLowerCase()} in Elemental Masters.</p>

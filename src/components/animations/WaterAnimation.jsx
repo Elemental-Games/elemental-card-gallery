@@ -3,36 +3,34 @@ import React from 'react';
 const WaterAnimation = () => (
   <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <linearGradient id="waterGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <radialGradient id="rippleGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
         <stop offset="0%" stopColor="#0077be" stopOpacity="0.8">
-          <animate attributeName="stop-color" values="#0077be;#4ac7ff;#0077be" dur="4s" repeatCount="indefinite" />
+          <animate attributeName="stop-color" values="#0077be;#4ac7ff;#0077be" dur="6s" repeatCount="indefinite" />
         </stop>
-        <stop offset="100%" stopColor="#4ac7ff" stopOpacity="0.4">
-          <animate attributeName="stop-color" values="#4ac7ff;#0077be;#4ac7ff" dur="4s" repeatCount="indefinite" />
+        <stop offset="100%" stopColor="#4ac7ff" stopOpacity="0">
+          <animate attributeName="stop-opacity" values="0;0.5;0" dur="6s" repeatCount="indefinite" />
         </stop>
-      </linearGradient>
+      </radialGradient>
     </defs>
-    <rect width="100%" height="100%" fill="url(#waterGradient)" />
+    <rect width="100%" height="100%" fill="#0077be">
+      <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+    </rect>
     <g>
-      {[...Array(20)].map((_, i) => (
-        <circle key={i} r="3" fill="#ffffff" opacity="0.5">
-          <animate
-            attributeName="cx"
-            values={`${Math.random() * 100}%;${Math.random() * 100}%`}
-            dur={`${10 + Math.random() * 20}s`}
-            repeatCount="indefinite"
-          />
-          <animate
-            attributeName="cy"
-            values={`${Math.random() * 100}%;${Math.random() * 100}%`}
-            dur={`${10 + Math.random() * 20}s`}
-            repeatCount="indefinite"
-          />
+      {[...Array(5)].map((_, i) => (
+        <circle key={i} cx="50%" cy="50%" r="0" fill="none" stroke="url(#rippleGradient)" strokeWidth="2">
           <animate
             attributeName="r"
-            values="2;4;2"
-            dur={`${3 + Math.random() * 3}s`}
+            values="0;100%"
+            dur={`${6 + i * 2}s`}
             repeatCount="indefinite"
+            begin={`${i * 1.5}s`}
+          />
+          <animate
+            attributeName="opacity"
+            values="1;0"
+            dur={`${6 + i * 2}s`}
+            repeatCount="indefinite"
+            begin={`${i * 1.5}s`}
           />
         </circle>
       ))}

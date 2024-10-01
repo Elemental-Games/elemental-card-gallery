@@ -5,35 +5,35 @@ const FireAnimation = () => (
     <defs>
       <radialGradient id="fireGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
         <stop offset="0%" stopColor="#ff6600" stopOpacity="1">
-          <animate attributeName="stop-color" values="#ff6600;#ff9933;#ff6600" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="stop-color" values="#ff6600;#ff9933;#ff6600" dur="4s" repeatCount="indefinite" />
         </stop>
         <stop offset="100%" stopColor="#ff0000" stopOpacity="0">
-          <animate attributeName="stop-opacity" values="0;0.5;0" dur="2s" repeatCount="indefinite" />
+          <animate attributeName="stop-opacity" values="0;0.5;0" dur="4s" repeatCount="indefinite" />
         </stop>
       </radialGradient>
     </defs>
     <rect width="100%" height="100%" fill="url(#fireGradient)">
-      <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
     </rect>
     <g>
-      {[...Array(20)].map((_, i) => (
+      {[...Array(50)].map((_, i) => (
         <circle key={i} r="2" fill="#ff6600">
           <animate
             attributeName="cx"
             values={`${Math.random() * 100}%;${Math.random() * 100}%`}
-            dur={`${2 + Math.random() * 3}s`}
+            dur={`${6 + Math.random() * 6}s`}
             repeatCount="indefinite"
           />
           <animate
             attributeName="cy"
             values={`${100 + Math.random() * 10}%;-10%`}
-            dur={`${2 + Math.random() * 3}s`}
+            dur={`${6 + Math.random() * 6}s`}
             repeatCount="indefinite"
           />
           <animate
             attributeName="opacity"
             values="0;1;0"
-            dur={`${2 + Math.random() * 3}s`}
+            dur={`${6 + Math.random() * 6}s`}
             repeatCount="indefinite"
           />
         </circle>

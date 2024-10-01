@@ -20,6 +20,8 @@ const Card = ({ card }) => {
 };
 
 const CardGallery = ({ cards }) => {
+  console.log('Cards in CardGallery:', cards); // Add this line for debugging
+
   if (!cards || cards.length === 0) {
     return <div>No cards available.</div>;
   }

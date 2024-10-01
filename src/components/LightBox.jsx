@@ -3,12 +3,10 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useAuth } from '../hooks/useAuth';
 
 const LightBox = ({ cardImage, onClose }) => {
   const [email, setEmail] = useState('');
   const [showThankYou, setShowThankYou] = useState(false);
-  const { user } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -25,10 +23,6 @@ const LightBox = ({ cardImage, onClose }) => {
       return () => clearTimeout(timer);
     }
   }, [showThankYou, onClose]);
-
-  if (user) {
-    return null; // Don't show the lightbox for signed-in users
-  }
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">

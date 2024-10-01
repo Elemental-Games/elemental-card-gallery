@@ -23,11 +23,6 @@ const features = [
     icon: '⚔️'
   },
   {
-    title: 'Elemental Essence',
-    description: 'Each creature generates its own elemental essence which is viewed as a currency, used for summoning powerful creatures and using additional creature abilities.',
-    icon: '💎'
-  },
-  {
     title: 'Quick Yet Strategic',
     description: 'Easy to learn but challenging to master, with games lasting around 20 minutes and a simple gameplay mechanic.',
     icon: '⏱️'
@@ -45,13 +40,22 @@ const FeatureCard = ({ feature, isExpanded, onClick }) => (
       <span className="text-4xl mr-4">{feature.icon}</span>
       <h3 className="text-xl font-semibold">{feature.title}</h3>
     </div>
-    {isExpanded && (
+    {isExpanded ? (
       <motion.p
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
       >
         {feature.description}
+      </motion.p>
+    ) : (
+      <motion.p
+        className="text-sm text-gray-300"
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        Click to learn more
       </motion.p>
     )}
   </motion.div>

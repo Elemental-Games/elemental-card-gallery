@@ -16,21 +16,21 @@ const WaterAnimation = () => (
       <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
     </rect>
     <g>
-      {[...Array(5)].map((_, i) => (
+      {[...Array(10)].map((_, i) => (
         <circle key={i} cx="50%" cy="50%" r="0" fill="none" stroke="url(#rippleGradient)" strokeWidth="2">
           <animate
             attributeName="r"
             values="0;100%"
-            dur={`${6 + i * 2}s`}
+            dur={`${6 + i * 1}s`}
             repeatCount="indefinite"
-            begin={`${i * 1.5}s`}
+            begin={`${i * 0.5}s`}
           />
           <animate
             attributeName="opacity"
             values="1;0"
-            dur={`${6 + i * 2}s`}
+            dur={`${6 + i * 1}s`}
             repeatCount="indefinite"
-            begin={`${i * 1.5}s`}
+            begin={`${i * 0.5}s`}
           />
         </circle>
       ))}

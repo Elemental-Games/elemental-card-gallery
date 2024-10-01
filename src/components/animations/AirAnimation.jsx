@@ -12,36 +12,25 @@ const AirAnimation = () => (
         </stop>
       </linearGradient>
     </defs>
-    <rect width="100%" height="100%" fill="url(#airGradient)">
-      <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
-    </rect>
-    <g>
-      {[...Array(10)].map((_, i) => (
-        <path
-          key={i}
-          d={`M${-50 + i * 20},${50 + Math.sin(i) * 20} Q${25 + i * 20},${25 + Math.cos(i) * 25} ${100 + i * 20},${50 + Math.sin(i) * 20}`}
-          stroke="#FFFFFF"
-          strokeWidth="3"
-          fill="none"
-          opacity="0.5"
-        >
-          <animate
-            attributeName="d"
-            values={`M${-50 + i * 20},${50 + Math.sin(i) * 20} Q${25 + i * 20},${25 + Math.cos(i) * 25} ${100 + i * 20},${50 + Math.sin(i) * 20};
-                     M${-30 + i * 20},${60 + Math.cos(i) * 20} Q${45 + i * 20},${35 + Math.sin(i) * 25} ${120 + i * 20},${60 + Math.cos(i) * 20}`}
-            dur="8s"
-            repeatCount="indefinite"
-          />
-          <animateTransform
-            attributeName="transform"
-            type="translate"
-            values="-100,0;100,0"
-            dur="8s"
-            repeatCount="indefinite"
-          />
-        </path>
-      ))}
-    </g>
+    <path d="M0,0 Q50,0 100,100 T200,100" fill="url(#airGradient)">
+      <animate
+        attributeName="d"
+        values="
+          M0,0 Q50,0 100,100 T200,100;
+          M0,100 Q50,50 100,0 T200,50;
+          M0,50 Q50,100 100,50 T200,0;
+          M0,0 Q50,0 100,100 T200,100
+        "
+        dur="10s"
+        repeatCount="indefinite"
+      />
+      <animate
+        attributeName="opacity"
+        values="0;1"
+        dur="3s"
+        fill="freeze"
+      />
+    </path>
   </svg>
 );
 

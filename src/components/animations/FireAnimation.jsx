@@ -16,25 +16,28 @@ const FireAnimation = () => (
       <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
     </rect>
     <g>
-      {[...Array(50)].map((_, i) => (
+      {[...Array(100)].map((_, i) => (
         <circle key={i} r="2" fill="#ff6600">
           <animate
             attributeName="cx"
             values={`${Math.random() * 100}%;${Math.random() * 100}%`}
-            dur={`${6 + Math.random() * 6}s`}
+            dur={`${4 + Math.random() * 4}s`}
             repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
           />
           <animate
             attributeName="cy"
             values={`${100 + Math.random() * 10}%;-10%`}
-            dur={`${6 + Math.random() * 6}s`}
+            dur={`${4 + Math.random() * 4}s`}
             repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
           />
           <animate
             attributeName="opacity"
             values="0;1;0"
-            dur={`${6 + Math.random() * 6}s`}
+            dur={`${4 + Math.random() * 4}s`}
             repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
           />
         </circle>
       ))}

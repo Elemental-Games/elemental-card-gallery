@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 
 const Card = ({ card, index, flippedCards, setFlippedCards }) => {
   const isFlipped = flippedCards[index];
 
   const handleClick = () => {
-    setFlippedCards(prev => {
-      const newFlipped = [...prev];
-      newFlipped[index] = !newFlipped[index];
-      return newFlipped;
-    });
+    if (!isFlipped) {
+      setFlippedCards(prev => {
+        const newFlipped = [...prev];
+        newFlipped[index] = true;
+        return newFlipped;
+      });
+    }
   };
+
+  const cardLink = `/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}`;
 
   return (
     <div 
@@ -41,7 +46,8 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             className="w-full h-full object-cover"
           />
         </motion.div>
-        <div 
+        <Link 
+          to={cardLink}
           className="absolute inset-0 w-full h-full backface-hidden" 
           style={{ transform: 'rotateY(180deg)' }}
         >
@@ -50,7 +56,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             alt={card.name}
             className="w-full h-full object-cover"
           />
-        </div>
+        </Link>
       </motion.div>
     </div>
   );

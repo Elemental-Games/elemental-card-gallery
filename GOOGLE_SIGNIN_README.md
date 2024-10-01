@@ -4,8 +4,8 @@ This guide will walk you through the process of setting up Google Sign-In for yo
 
 ## Prerequisites
 
-1. You must have a Google account.
-2. Your project should be set up in Firebase.
+1. A Google account
+2. Your project set up in Firebase
 
 ## Steps
 
@@ -35,14 +35,13 @@ This guide will walk you through the process of setting up Google Sign-In for yo
 
 5. **Update environment variables**
    - In your project's `.env` file, add the following variables with your Firebase config:
-
      ```
-     VITE_FIREBASE_API_KEY=your_api_key
-     VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
-     VITE_FIREBASE_PROJECT_ID=your_project_id
-     VITE_FIREBASE_STORAGE_BUCKET=your_storage_bucket
-     VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-     VITE_FIREBASE_APP_ID=your_app_id
+     FIREBASE_API_KEY=your_api_key
+     FIREBASE_AUTH_DOMAIN=your_auth_domain
+     FIREBASE_PROJECT_ID=your_project_id
+     FIREBASE_STORAGE_BUCKET=your_storage_bucket
+     FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+     FIREBASE_APP_ID=your_app_id
      ```
 
 6. **Enable Google Sign-In in Firebase**

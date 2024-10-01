@@ -1,61 +1,47 @@
-# AWS S3 Setup for Elemental Masters
+# AWS S3 Setup Guide
 
-This guide will help you set up and use AWS S3 for storing your card data spreadsheet and images.
+This guide will walk you through the process of setting up AWS S3 for storing card data and images for your Elemental Masters application.
 
-## 1. AWS S3 Bucket Setup
+## Prerequisites
 
-1. Log in to your AWS Management Console.
-2. Navigate to S3 and create a new bucket.
-3. Enable public access for the bucket (make sure to set appropriate permissions).
-4. Create two folders in your bucket: `cards` and `data`.
+1. An AWS account
+2. AWS CLI installed and configured on your local machine
 
-## 2. Uploading Files
+## Steps
 
-### Spreadsheet
-1. Prepare your card data spreadsheet with the required columns. For detailed instructions on how to structure your Excel spreadsheet, including how to format the synergies, counters, and news columns, please refer to the `EXCEL_README.md` file.
-2. Save the spreadsheet as an Excel file (.xlsx).
-3. Upload the spreadsheet to the `data` folder in your S3 bucket.
+1. **Create an S3 bucket**
+   - Go to the AWS S3 console
+   - Click "Create bucket"
+   - Choose a unique name for your bucket
+   - Configure bucket settings (public access, versioning, etc.)
 
-### Card Images
-1. Prepare your card images as PNG files.
-2. Name each image file exactly as the card's name in the spreadsheet, replacing spaces with hyphens and using lowercase. For example, "Fire Elemental" should be named "fire-elemental.png".
-3. Upload all image files to the `cards` folder in your S3 bucket.
+2. **Set up IAM user**
+   - Go to the AWS IAM console
+   - Create a new user with programmatic access
+   - Attach the AmazonS3FullAccess policy to the user
+   - Save the Access Key ID and Secret Access Key
 
-## 3. AWS IAM Setup
+3. **Update environment variables**
+   - In your project's `.env` file, add the following variables:
+     ```
+     AWS_REGION=your_aws_region
+     AWS_ACCESS_KEY_ID=your_access_key_id
+     AWS_SECRET_ACCESS_KEY=your_secret_access_key
+     S3_BUCKET_NAME=your_s3_bucket_name
+     S3_BUCKET_URL=https://your-bucket-name.s3.amazonaws.com
+     ```
 
-1. Go to IAM in the AWS Management Console.
-2. Create a new IAM user with programmatic access.
-3. Attach the `AmazonS3ReadOnlyAccess` policy to this user.
-4. After creating the user, you'll be presented with the Access Key ID and Secret Access Key. Make sure to save these securely, as the Secret Access Key will only be shown once.
-5. If you need to create a new access key later:
-   - Go to the IAM dashboard and select the user.
-   - Navigate to the "Security credentials" tab.
-   - Scroll down to "Access keys" and click "Create access key".
-   - Choose the appropriate use case (see below for guidance).
-   - Save the new Access Key ID and Secret Access Key securely.
+4. **Upload card data and images**
+   - Use the AWS CLI or S3 console to upload your card data (Excel file) and card images to the bucket
 
-## 4. Environment Variables
+5. **Configure CORS (if necessary)**
+   - In the S3 console, go to your bucket's permissions
+   - Add a CORS configuration to allow requests from your application's domain
 
-Set up the following environment variables in your project:
+## Troubleshooting
 
-- VITE_AWS_REGION: Your AWS region (e.g., us-east-1)
-- VITE_AWS_ACCESS_KEY_ID: Your IAM user's Access Key ID
-- VITE_AWS_SECRET_ACCESS_KEY: Your IAM user's Secret Access Key
-- VITE_S3_BUCKET_NAME: Your S3 bucket name
-- VITE_S3_BUCKET_URL: The URL of your S3 bucket (e.g., https://your-bucket-name.s3.amazonaws.com)
+- Ensure your IAM user has the correct permissions
+- Double-check that your environment variables are correctly set
+- Verify that your S3 bucket name and region are correct
 
-## 5. Code Integration
-
-The `src/utils/awsUtils.js` file has been updated to fetch data from your S3 bucket. Make sure the spreadsheet path in the `fetchCardsFromS3` function matches your actual file path in the S3 bucket.
-
-If you need to make any changes or encounter issues, refer to the code comments in `src/utils/awsUtils.js` for guidance.
-
-## Use Case for Access Keys
-
-When creating access keys, AWS asks for the use case. For this project, select "Application running outside AWS" as the use case. This option is appropriate because:
-
-1. The access key will be used in a web application that's not hosted on AWS infrastructure.
-2. It allows the application to securely access AWS services (in this case, S3) from an external environment.
-3. It's suitable for client-side applications that need to read data from S3, which aligns with our project's needs.
-
-Remember to always keep your access keys secure and never commit them to version control systems.
+For more detailed information, refer to the [AWS S3 documentation](https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html).

@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchCardsFromS3 } from '../utils/awsUtils';
+import React, { useState, useEffect } from 'react';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
@@ -17,10 +15,22 @@ const DeckBuilderPage = () => {
   const [sideDeck, setSideDeck] = useState([]);
   const [deckName, setDeckName] = useState('');
   const [showCardList, setShowCardList] = useState(false);
-  const { data: allCards, isLoading, error } = useQuery({
-    queryKey: ['cards'],
-    queryFn: fetchCardsFromS3,
-  });
+  const [allCards, setAllCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('/data/cards.json')
+      .then(response => response.json())
+      .then(data => {
+        setAllCards(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setIsLoading(false);
+      });
+  }, []);
 
   const handleSaveDeck = async () => {
     alert('Deck saving is temporarily disabled.');
@@ -55,6 +65,9 @@ const DeckBuilderPage = () => {
     return count < 3;
   };
 
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error}</div>;
+
   return (
     <div className="relative">
       <div className="container mx-auto px-4 py-8">
@@ -84,7 +97,7 @@ const DeckBuilderPage = () => {
                   sideDeck={sideDeck} 
                   setMainDeck={setMainDeck} 
                   setSideDeck={setSideDeck}
-                  allCards={allCards || []}
+                  allCards={allCards}
                   canAddCard={canAddCard}
                   selectedElements={selectedElements}
                 />
@@ -99,7 +112,7 @@ const DeckBuilderPage = () => {
               </Button>
               {showCardList && (
                 <CardGallery
-                  cards={allCards || []}
+                  cards={allCards}
                   onCardSelect={(card) => {
                     if (card.type === 'Shield') {
                       setSideDeck([...sideDeck, { ...card, quantity: 1 }]);
@@ -123,15 +136,6 @@ const DeckBuilderPage = () => {
               <p className="mt-2">Note: Deck saving is temporarily disabled.</p>
             </div>
           </>
-        )}
-        {error && (
-          <Alert variant="destructive" className="mt-4">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>
-              Failed to load card data. You can still use the deck builder, but card information may be limited.
-            </AlertDescription>
-          </Alert>
         )}
       </div>
     </div>

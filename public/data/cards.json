@@ -1,0 +1,20 @@
+[
+  {
+    "id": "water-elemental",
+    "name": "Water Elemental",
+    "element": "Water",
+    "type": "Creature",
+    "rarity": "Rare",
+    "description": "A creature made of the element of water.",
+    "image": "/images/cards/water-elemental.png"
+  },
+  {
+    "id": "fire-spirit",
+    "name": "Fire Spirit",
+    "element": "Fire",
+    "type": "Creature",
+    "rarity": "Uncommon",
+    "description": "A spirit of flame, quick and dangerous.",
+    "image": "/images/cards/fire-spirit.png"
+  }
+]

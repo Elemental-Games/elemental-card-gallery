@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { fetchCardsFromS3 } from '../utils/awsUtils';
+import React, { useState, useEffect } from 'react';
 import CardGallery from '../components/CardGallery';
 import SearchBar from '../components/SearchBar';
 import FilterOptions from '../components/FilterOptions';
@@ -9,6 +7,9 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
 const CardListPage = () => {
+  const [cards, setCards] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [filters, setFilters] = useState({
     element: 'all',
@@ -16,12 +17,20 @@ const CardListPage = () => {
     rarity: 'all'
   });
 
-  const { data: cards, isLoading, error } = useQuery({
-    queryKey: ['cards'],
-    queryFn: fetchCardsFromS3,
-  });
+  useEffect(() => {
+    fetch('/data/cards.json')
+      .then(response => response.json())
+      .then(data => {
+        setCards(data);
+        setIsLoading(false);
+      })
+      .catch(err => {
+        setError(err.message);
+        setIsLoading(false);
+      });
+  }, []);
 
-  const filteredCards = cards?.filter(card =>
+  const filteredCards = cards.filter(card =>
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (filters.element === 'all' || card.element === filters.element) &&
     (filters.type === 'all' || card.type === filters.type) &&
@@ -50,10 +59,10 @@ const CardListPage = () => {
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
-          <AlertDescription>Failed to load cards: {error.message}</AlertDescription>
+          <AlertDescription>Failed to load cards: {error}</AlertDescription>
         </Alert>
       ) : (
-        <CardGallery cards={filteredCards || []} />
+        <CardGallery cards={filteredCards} />
       )}
     </div>
   );

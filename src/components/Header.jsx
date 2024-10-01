@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import gamesLogo from '/Games_Logo.jpg'; // Updated import path
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -23,9 +22,9 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src={gamesLogo}
+            src="/Games_Logo.jpg"
             alt="Elemental Games Logo" 
-            style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
+            className="w-24 h-24 mr-2 mb-2"
           />
           <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
         </div>

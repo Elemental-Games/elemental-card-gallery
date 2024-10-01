@@ -6,14 +6,14 @@ import { useAuth } from '../hooks/useAuth';
 
 const LightBox = ({ cardImage, onClose }) => {
   const [showThankYou, setShowThankYou] = useState(false);
-  const { signInWithGoogle, error } = useAuth();
+  const { signIn, error } = useAuth();
 
-  const handleGoogleSignUp = async () => {
+  const handleSignUp = async () => {
     try {
-      await signInWithGoogle();
+      await signIn('user@example.com', 'password'); // Replace with actual sign-up logic
       setShowThankYou(true);
     } catch (error) {
-      console.error("Error signing in with Google", error);
+      console.error("Error signing in", error);
     }
   };
 
@@ -49,11 +49,10 @@ const LightBox = ({ cardImage, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements</h2>
                 <p className="text-xl mb-6 text-primary">Gain access to all website features and stay up-to-date on our progress</p>
                 <Button 
-                  onClick={handleGoogleSignUp} 
+                  onClick={handleSignUp} 
                   className="w-full bg-yellow-400 text-purple-800 hover:bg-yellow-500 transition-colors flex items-center justify-center"
                 >
-                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" className="w-6 h-6 mr-2" />
-                  Sign Up with Google
+                  Sign Up
                 </Button>
                 {error && <p className="text-red-500 mt-2">{error}</p>}
               </div>

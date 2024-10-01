@@ -44,19 +44,22 @@ const CardsPage = () => {
     setSearchTerm(term);
   };
 
-  if (isLoading) return <div className="text-center mt-8">Loading cards...</div>;
-  if (error) return <div className="text-center mt-8 text-red-500">Error loading cards: {error.message}</div>;
-
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen text-white">
       <h1 className="text-4xl font-bold mb-8 text-center">Elemental Masters Cards</h1>
       <div className="mb-8">
         <SearchBar onSearch={handleSearch} />
       </div>
       <div className="mb-8">
-        <FilterOptions cards={allCards} onFilterChange={handleFilterChange} />
+        <FilterOptions cards={allCards || []} onFilterChange={handleFilterChange} />
       </div>
-      <CardGallery cards={filteredCards} />
+      {isLoading ? (
+        <div className="text-center mt-8">Loading cards...</div>
+      ) : error ? (
+        <div className="text-center mt-8 text-red-500">Error loading cards: {error.message}</div>
+      ) : (
+        <CardGallery cards={filteredCards} />
+      )}
     </div>
   );
 };

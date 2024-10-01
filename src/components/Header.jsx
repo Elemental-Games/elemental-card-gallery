@@ -22,9 +22,9 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src="/Games_Logo.jpg"
+            src={`${import.meta.env.VITE_S3_BUCKET_URL}/Games_Logo.jpg`} 
             alt="Elemental Games Logo" 
-            className="w-24 h-24 mr-2 mb-2"
+            style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
           />
           <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
         </div>

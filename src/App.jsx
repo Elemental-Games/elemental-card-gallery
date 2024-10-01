@@ -21,7 +21,6 @@ import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
 import GrivossPage from "./pages/GrivossPage";
 import EvermerePage from "./pages/EvermerePage";
-import { AuthProvider } from "./hooks/useAuth";
 
 const queryClient = new QueryClient();
 
@@ -45,41 +44,39 @@ const App = () => (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <TooltipProvider>
         <Toaster />
-        <AuthProvider>
-          <BrowserRouter>
-            <div className="flex flex-col min-h-screen bg-background text-foreground">
-              <Header />
-              <main className="flex-grow">
-                <AnimatePresence mode="wait">
-                  <Routes>
-                    {navItems.map((item) => (
-                      <Route 
-                        key={item.to} 
-                        path={item.to} 
-                        element={<PageWrapper>{item.page}</PageWrapper>} 
-                      />
-                    ))}
-                    <Route path="/cards" element={<PageWrapper><CardsPage /></PageWrapper>} />
-                    <Route path="/cards/card-list" element={<PageWrapper><CardListPage /></PageWrapper>} />
-                    <Route path="/cards/deck-builder" element={<PageWrapper><DeckBuilderPage /></PageWrapper>} />
-                    <Route path="/cards/:cardName" element={<PageWrapper><CardDetailPage /></PageWrapper>} />
-                    <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
-                    <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
-                    <Route path="/support" element={<PageWrapper><SupportPage /></PageWrapper>} />
-                    <Route path="/kinbrold/scarto" element={<PageWrapper><ScartoPage /></PageWrapper>} />
-                    <Route path="/kinbrold/tsunareth" element={<PageWrapper><TsunarethPage /></PageWrapper>} />
-                    <Route path="/kinbrold/zalos" element={<PageWrapper><ZalosPage /></PageWrapper>} />
-                    <Route path="/kinbrold/grivoss" element={<PageWrapper><GrivossPage /></PageWrapper>} />
-                    <Route path="/kinbrold/evermere" element={<PageWrapper><EvermerePage /></PageWrapper>} />
-                  </Routes>
-                </AnimatePresence>
-              </main>
-              <Footer />
-              <ThemeToggle />
-              <CookieConsent />
-            </div>
-          </BrowserRouter>
-        </AuthProvider>
+        <BrowserRouter>
+          <div className="flex flex-col min-h-screen bg-background text-foreground">
+            <Header />
+            <main className="flex-grow">
+              <AnimatePresence mode="wait">
+                <Routes>
+                  {navItems.map((item) => (
+                    <Route 
+                      key={item.to} 
+                      path={item.to} 
+                      element={<PageWrapper>{item.page}</PageWrapper>} 
+                    />
+                  ))}
+                  <Route path="/cards" element={<PageWrapper><CardsPage /></PageWrapper>} />
+                  <Route path="/cards/card-list" element={<PageWrapper><CardListPage /></PageWrapper>} />
+                  <Route path="/cards/deck-builder" element={<PageWrapper><DeckBuilderPage /></PageWrapper>} />
+                  <Route path="/cards/:cardName" element={<PageWrapper><CardDetailPage /></PageWrapper>} />
+                  <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
+                  <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+                  <Route path="/support" element={<PageWrapper><SupportPage /></PageWrapper>} />
+                  <Route path="/kinbrold/scarto" element={<PageWrapper><ScartoPage /></PageWrapper>} />
+                  <Route path="/kinbrold/tsunareth" element={<PageWrapper><TsunarethPage /></PageWrapper>} />
+                  <Route path="/kinbrold/zalos" element={<PageWrapper><ZalosPage /></PageWrapper>} />
+                  <Route path="/kinbrold/grivoss" element={<PageWrapper><GrivossPage /></PageWrapper>} />
+                  <Route path="/kinbrold/evermere" element={<PageWrapper><EvermerePage /></PageWrapper>} />
+                </Routes>
+              </AnimatePresence>
+            </main>
+            <Footer />
+            <ThemeToggle />
+            <CookieConsent />
+          </div>
+        </BrowserRouter>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>

@@ -4,9 +4,9 @@ import { Button } from '@/components/ui/button';
 import { ElementIcon } from '../components/ElementIcon';
 import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
-import NewsFeed from '../components/NewsFeed';
 import LightBox from '../components/LightBox';
 import KeyFeatures from '../components/KeyFeatures';
+import ExploreItem from '../components/ExploreItem';
 
 const LandingPage = () => {
   const [showLightBox, setShowLightBox] = useState(false);
@@ -47,26 +47,12 @@ const LandingPage = () => {
   ];
 
   const exploreItems = [
-    {
-      title: 'Interactive Lore',
-      description: 'Dive into the rich world of Kinbrold and its five unique kingdoms.',
-      image: '/images/book.jpg'
-    },
-    {
-      title: 'Deck Builder',
-      description: 'Create and customize your perfect elemental deck.',
-      image: '/images/deck.jpg'
-    },
-    {
-      title: 'Shield System',
-      description: 'Master the unique shield defense system to outsmart your opponents.',
-      image: '/images/shield.jpg'
-    },
-    {
-      title: 'Elemental Essence',
-      description: 'Harness the power of elemental essence to fuel your strategies.',
-      image: '/images/essence.jpg'
-    }
+    { title: 'Interactive Lore', emoji: '📚' },
+    { title: 'Deck Builder', emoji: '🃏' },
+    { title: 'Shield System', emoji: '🛡️' },
+    { title: 'Elemental Essence', emoji: '💎' },
+    { title: 'Strategic Gameplay', emoji: '♟️' },
+    { title: 'Unique Creatures', emoji: '🐉' },
   ];
 
   return (
@@ -133,13 +119,9 @@ const LandingPage = () => {
             <ElementIcon element="earth" className="mr-2" />
             Explore More
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {exploreItems.map((item, index) => (
-              <div key={index} className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
-                <img src={item.image} alt={item.title} className="w-full h-48 object-cover mb-4 rounded" />
-                <h3 className="text-2xl font-semibold mb-2">{item.title}</h3>
-                <p>{item.description}</p>
-              </div>
+              <ExploreItem key={index} title={item.title} emoji={item.emoji} />
             ))}
           </div>
         </section>

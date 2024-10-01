@@ -62,25 +62,25 @@ const ElementalTransition = ({ element, children }) => {
                 </stop>
               </radialGradient>
             </defs>
-            <rect width="100%" height="100%" fill="#0077be">
-              <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+            <rect width="100%" height="100%" fill="#0077be" opacity="0">
+              <animate attributeName="opacity" values="0;0.5;1" dur="2s" fill="freeze" />
             </rect>
             <g>
-              {[...Array(10)].map((_, i) => (
+              {[...Array(20)].map((_, i) => (
                 <circle key={i} cx="50%" cy="50%" r="0" fill="none" stroke="url(#rippleGradient)" strokeWidth="2">
                   <animate
                     attributeName="r"
                     values="0;100%"
-                    dur={`${6 + i * 1}s`}
+                    dur={`${4 + i * 0.5}s`}
                     repeatCount="indefinite"
-                    begin={`${i * 0.5}s`}
+                    begin={`${i * 0.2}s`}
                   />
                   <animate
                     attributeName="opacity"
                     values="1;0"
-                    dur={`${6 + i * 1}s`}
+                    dur={`${4 + i * 0.5}s`}
                     repeatCount="indefinite"
-                    begin={`${i * 0.5}s`}
+                    begin={`${i * 0.2}s`}
                   />
                 </circle>
               ))}
@@ -91,23 +91,19 @@ const ElementalTransition = ({ element, children }) => {
         return (
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <pattern id="crackPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-                <path d="M0 90 Q 50 10 100 90" fill="none" stroke="#5D4037" strokeWidth="2">
-                  <animate attributeName="d" values="M0 90 Q 50 10 100 90;M0 10 Q 50 90 100 10;M0 90 Q 50 10 100 90" dur="6s" repeatCount="indefinite" />
-                </path>
-              </pattern>
+              <filter id="displacementFilter">
+                <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence" />
+                <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="50" xChannelSelector="R" yChannelSelector="G" />
+              </filter>
             </defs>
             <rect width="100%" height="100%" fill="#8B4513">
-              <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+              <animate attributeName="opacity" values="1;0" dur="3s" fill="freeze" />
             </rect>
-            <g>
+            <g filter="url(#displacementFilter)">
               {[...Array(50)].map((_, i) => (
-                <rect
+                <path
                   key={i}
-                  x={`${Math.random() * 100}%`}
-                  y={`${Math.random() * 100}%`}
-                  width="50"
-                  height="50"
+                  d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
                   fill="#8B4513"
                   opacity="0"
                 >
@@ -119,14 +115,13 @@ const ElementalTransition = ({ element, children }) => {
                     repeatCount="1"
                   />
                   <animate
-                    attributeName="y"
-                    values={`${Math.random() * 100}%;110%`}
+                    attributeName="d"
+                    values={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100};M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
                     dur="4s"
                     begin={`${i * 0.1}s`}
                     repeatCount="1"
-                    fill="freeze"
                   />
-                </rect>
+                </path>
               ))}
             </g>
           </svg>
@@ -144,25 +139,77 @@ const ElementalTransition = ({ element, children }) => {
                 </stop>
               </linearGradient>
             </defs>
-            <path d="M0,0 Q50,0 100,100 T200,100" fill="url(#airGradient)">
-              <animate
-                attributeName="d"
-                values="
-                  M0,0 Q50,0 100,100 T200,100;
-                  M0,100 Q50,50 100,0 T200,50;
-                  M0,50 Q50,100 100,50 T200,0;
-                  M0,0 Q50,0 100,100 T200,100
-                "
-                dur="10s"
-                repeatCount="indefinite"
-              />
-              <animate
-                attributeName="opacity"
-                values="0;1"
-                dur="3s"
-                fill="freeze"
-              />
-            </path>
+            <rect width="100%" height="100%" fill="url(#airGradient)">
+              <animate attributeName="opacity" values="0;1" dur="2s" fill="freeze" />
+            </rect>
+            {[...Array(100)].map((_, i) => (
+              <path
+                key={i}
+                d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
+                fill="none"
+                stroke="#FFFFFF"
+                strokeWidth="1"
+                opacity="0"
+              >
+                <animate
+                  attributeName="opacity"
+                  values="0;0.5;0"
+                  dur={`${3 + Math.random() * 2}s`}
+                  begin={`${i * 0.1}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="d"
+                  values={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100};M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
+                  dur={`${3 + Math.random() * 2}s`}
+                  begin={`${i * 0.1}s`}
+                  repeatCount="indefinite"
+                />
+              </path>
+            ))}
+          </svg>
+        );
+      case 'Neutral':
+        return (
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="neutralGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" stopColor="#8A2BE2" stopOpacity="1">
+                  <animate attributeName="stop-color" values="#8A2BE2;#9370DB;#8A2BE2" dur="8s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#9370DB" stopOpacity="0.4">
+                  <animate attributeName="stop-color" values="#9370DB;#8A2BE2;#9370DB" dur="8s" repeatCount="indefinite" />
+                </stop>
+              </radialGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#neutralGradient)">
+              <animate attributeName="opacity" values="0;1" dur="2s" fill="freeze" />
+            </rect>
+            {[...Array(20)].map((_, i) => (
+              <circle
+                key={i}
+                cx={`${Math.random() * 100}%`}
+                cy={`${Math.random() * 100}%`}
+                r="0"
+                fill="#FFFFFF"
+                opacity="0"
+              >
+                <animate
+                  attributeName="r"
+                  values="0;20;0"
+                  dur={`${5 + Math.random() * 5}s`}
+                  begin={`${i * 0.5}s`}
+                  repeatCount="indefinite"
+                />
+                <animate
+                  attributeName="opacity"
+                  values="0;0.5;0"
+                  dur={`${5 + Math.random() * 5}s`}
+                  begin={`${i * 0.5}s`}
+                  repeatCount="indefinite"
+                />
+              </circle>
+            ))}
           </svg>
         );
       default:

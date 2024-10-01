@@ -8,6 +8,8 @@ import { navItems } from "./nav-items";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CardDetailPage from "./pages/CardDetailPage";
+import CardsPage from "./pages/CardsPage";
+import CardListPage from "./pages/CardListPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
@@ -55,8 +57,10 @@ const App = () => (
                       element={<PageWrapper>{item.page}</PageWrapper>} 
                     />
                   ))}
-                  <Route path="/cards/:cardName" element={<PageWrapper><CardDetailPage /></PageWrapper>} />
+                  <Route path="/cards" element={<PageWrapper><CardsPage /></PageWrapper>} />
+                  <Route path="/cards/card-list" element={<PageWrapper><CardListPage /></PageWrapper>} />
                   <Route path="/cards/deck-builder" element={<PageWrapper><DeckBuilderPage /></PageWrapper>} />
+                  <Route path="/cards/:cardName" element={<PageWrapper><CardDetailPage /></PageWrapper>} />
                   <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
                   <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
                   <Route path="/support" element={<PageWrapper><SupportPage /></PageWrapper>} />

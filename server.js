@@ -8,17 +8,17 @@ const app = express();
 app.use(cors());
 
 const s3Client = new S3Client({
-  region: process.env.VITE_AWS_REGION,
+  region: process.env.AWS_REGION,
   credentials: {
-    accessKeyId: process.env.VITE_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY,
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
   },
 });
 
 app.get('/api/cards', async (req, res) => {
   try {
     const command = new GetObjectCommand({
-      Bucket: process.env.VITE_S3_BUCKET_NAME,
+      Bucket: process.env.S3_BUCKET_NAME,
       Key: "data/elemental_masters_cards.xlsx",
     });
 
@@ -31,7 +31,7 @@ app.get('/api/cards', async (req, res) => {
 
     const cards = jsonData.map(card => ({
       ...card,
-      image: `${process.env.VITE_S3_BUCKET_URL}/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}.png`,
+      image: `${process.env.S3_BUCKET_URL}/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}.png`,
     }));
 
     res.json(cards);

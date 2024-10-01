@@ -12,10 +12,5 @@ Amplify.configure({
       redirectSignOut: import.meta.env.VITE_AWS_REDIRECT_SIGN_OUT,
       responseType: 'code'
     }
-  },
-  Storage: {
-    region: import.meta.env.VITE_AWS_REGION,
-    bucket: import.meta.env.VITE_S3_BUCKET_NAME,
-    identityPoolId: import.meta.env.VITE_AWS_IDENTITY_POOL_ID
   }
 });

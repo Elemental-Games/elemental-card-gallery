@@ -1,5 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import FireAnimation from './animations/FireAnimation';
+import WaterAnimation from './animations/WaterAnimation';
+import EarthAnimation from './animations/EarthAnimation';
+import AirAnimation from './animations/AirAnimation';
 
 const ElementalTransition = ({ element, children }) => {
   const getTransitionEffect = () => {
@@ -10,11 +14,6 @@ const ElementalTransition = ({ element, children }) => {
           animate: { opacity: 1, scale: 1, rotateY: 0 },
           exit: { opacity: 0, scale: 1.2, rotateY: 90 },
           transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-          style: {
-            background: 'url("/images/fire-embers.gif")',
-            backgroundSize: 'cover',
-            boxShadow: '0 0 50px rgba(255, 0, 0, 0.5) inset',
-          },
         };
       case 'Earth':
         return {
@@ -22,11 +21,6 @@ const ElementalTransition = ({ element, children }) => {
           animate: { opacity: 1, scale: 1, rotateX: 0 },
           exit: { opacity: 0, scale: 0.8, rotateX: -90 },
           transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-          style: {
-            background: 'url("/images/earth-texture.jpg")',
-            backgroundSize: 'cover',
-            boxShadow: '0 0 50px rgba(139, 69, 19, 0.5) inset',
-          },
         };
       case 'Air':
         return {
@@ -34,11 +28,6 @@ const ElementalTransition = ({ element, children }) => {
           animate: { opacity: 1, scale: 1, rotateZ: 0 },
           exit: { opacity: 0, scale: 0.5, rotateZ: -180 },
           transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-          style: {
-            background: 'url("/images/air-clouds.gif")',
-            backgroundSize: 'cover',
-            boxShadow: '0 0 50px rgba(135, 206, 235, 0.5) inset',
-          },
         };
       case 'Water':
         return {
@@ -46,11 +35,6 @@ const ElementalTransition = ({ element, children }) => {
           animate: { opacity: 1, scale: 1, rotateY: 0 },
           exit: { opacity: 0, scale: 1.5, rotateY: -180 },
           transition: { duration: 0.8, ease: [0.4, 0, 0.2, 1] },
-          style: {
-            background: 'url("/images/water-ripples.gif")',
-            backgroundSize: 'cover',
-            boxShadow: '0 0 50px rgba(0, 0, 255, 0.5) inset',
-          },
         };
       default:
         return {
@@ -58,8 +42,22 @@ const ElementalTransition = ({ element, children }) => {
           animate: { opacity: 1, scale: 1 },
           exit: { opacity: 0, scale: 1.1 },
           transition: { duration: 0.5 },
-          style: { background: '#800080' },
         };
+    }
+  };
+
+  const getElementalAnimation = () => {
+    switch (element) {
+      case 'Fire':
+        return <FireAnimation />;
+      case 'Water':
+        return <WaterAnimation />;
+      case 'Earth':
+        return <EarthAnimation />;
+      case 'Air':
+        return <AirAnimation />;
+      default:
+        return null;
     }
   };
 
@@ -71,6 +69,7 @@ const ElementalTransition = ({ element, children }) => {
       className="fixed inset-0 z-50 flex items-center justify-center perspective-1000"
     >
       <div className="relative w-full h-full">
+        {getElementalAnimation()}
         <motion.div
           initial={{ opacity: 0, z: -100 }}
           animate={{ opacity: 1, z: 0 }}

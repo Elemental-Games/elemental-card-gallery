@@ -3,14 +3,21 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../hooks/useAuth';
 
 const LightBox = ({ cardImage, onClose }) => {
   const [email, setEmail] = useState('');
   const [showThankYou, setShowThankYou] = useState(false);
+  const { signInWithGoogle } = useAuth();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Email submitted:', email);
+    setShowThankYou(true);
+  };
+
+  const handleGoogleSignIn = () => {
+    signInWithGoogle();
     setShowThankYou(true);
   };
 
@@ -56,6 +63,9 @@ const LightBox = ({ cardImage, onClose }) => {
                   />
                   <Button type="submit" className="w-full bg-accent text-primary hover:bg-accent/90">Sign Up</Button>
                 </form>
+                <Button onClick={handleGoogleSignIn} className="w-full mt-4 bg-blue-500 text-white hover:bg-blue-600">
+                  Sign in with Google
+                </Button>
               </div>
               <div className="md:w-1/2">
                 <img src={cardImage} alt="Card of the Week" className="w-full h-auto rounded shadow-lg" />

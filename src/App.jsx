@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import { navItems } from "./nav-items";
 import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
+import { AuthProvider } from "./hooks/useAuth";
 
 const queryClient = new QueryClient();
 
@@ -15,26 +16,28 @@ const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <TooltipProvider>
-        <Toaster />
-        <BrowserRouter>
-          <div className="flex flex-col min-h-screen bg-background text-foreground">
-            <Header />
-            <main className="flex-grow">
-              <Routes>
-                {navItems.map((item) => (
-                  <Route 
-                    key={item.to} 
-                    path={item.to} 
-                    element={item.page} 
-                  />
-                ))}
-              </Routes>
-            </main>
-            <Footer />
-            <ThemeToggle />
-            <CookieConsent />
-          </div>
-        </BrowserRouter>
+        <AuthProvider>
+          <Toaster />
+          <BrowserRouter>
+            <div className="flex flex-col min-h-screen bg-background text-foreground">
+              <Header />
+              <main className="flex-grow">
+                <Routes>
+                  {navItems.map((item) => (
+                    <Route 
+                      key={item.to} 
+                      path={item.to} 
+                      element={item.page} 
+                    />
+                  ))}
+                </Routes>
+              </main>
+              <Footer />
+              <ThemeToggle />
+              <CookieConsent />
+            </div>
+          </BrowserRouter>
+        </AuthProvider>
       </TooltipProvider>
     </ThemeProvider>
   </QueryClientProvider>

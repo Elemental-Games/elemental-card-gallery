@@ -7,18 +7,45 @@ import DeckStats from '../components/DeckBuilder/DeckStats';
 import CardGallery from '../components/DeckBuilder/CardGallery';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { useAuth } from '../hooks/useAuth';
 
 const DeckBuilderPage = () => {
   const [showWizard, setShowWizard] = useState(null);
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
-  const [email, setEmail] = useState('');
+  const [deckName, setDeckName] = useState('');
   const [showCardList, setShowCardList] = useState(false);
+  const { user, saveDeck, getDecks } = useAuth();
   const { data: allCards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
   });
+
+  useEffect(() => {
+    if (user) {
+      loadDecks();
+    }
+  }, [user]);
+
+  const loadDecks = async () => {
+    const userDecks = await getDecks();
+    // You can set the first deck as the current deck or show a list of decks
+    if (userDecks.length > 0) {
+      setMainDeck(userDecks[0].mainDeck);
+      setSideDeck(userDecks[0].sideDeck);
+      setDeckName(userDecks[0].name);
+    }
+  };
+
+  const handleSaveDeck = async () => {
+    if (!user) {
+      alert('Please sign in to save your deck');
+      return;
+    }
+    await saveDeck(deckName, { mainDeck, sideDeck });
+    alert('Deck saved successfully!');
+  };
 
   const totalCards = mainDeck.reduce((sum, card) => sum + card.quantity, 0) +
                      sideDeck.reduce((sum, card) => sum + card.quantity, 0);
@@ -116,18 +143,20 @@ const DeckBuilderPage = () => {
             </div>
             <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
               <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>
-              <p className="mb-4">Sign up to our website to save your deck and access it anytime!</p>
-              <form onSubmit={handleSignUp} className="flex items-center">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="mr-4 bg-purple-800 text-purple-100 placeholder-purple-300"
-                />
-                <Button type="submit" className="bg-purple-500 hover:bg-purple-600">Sign Up & Save Deck</Button>
-              </form>
+              {user ? (
+                <>
+                  <Input
+                    type="text"
+                    placeholder="Deck Name"
+                    value={deckName}
+                    onChange={(e) => setDeckName(e.target.value)}
+                    className="mb-4 bg-purple-800 text-purple-100 placeholder-purple-300"
+                  />
+                  <Button onClick={handleSaveDeck} className="bg-purple-500 hover:bg-purple-600">Save Deck</Button>
+                </>
+              ) : (
+                <p>Please sign in to save your deck.</p>
+              )}
             </div>
           </>
         )}

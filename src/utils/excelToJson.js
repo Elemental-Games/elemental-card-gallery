@@ -1,10 +1,14 @@
-const XLSX = require('xlsx');
-const fs = require('fs');
-const path = require('path');
+import XLSX from 'xlsx';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 function convertExcelToJson() {
-  const excelFilePath = path.join('C:', 'Users', 'Mark', 'Website', 'elemental-card-gallery', 'storage', 'ElementalMastersCards.xlsx');
-  const jsonOutputPath = path.join('C:', 'Users', 'Mark', 'Website', 'elemental-card-gallery', 'storage', 'cards.json');
+  const excelFilePath = path.join(__dirname, '..', '..', 'storage', 'ElementalMastersCards.xlsx');
+  const jsonOutputPath = path.join(__dirname, '..', '..', 'storage', 'cards.json');
 
   // Read the Excel file
   const workbook = XLSX.readFile(excelFilePath);

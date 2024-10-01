@@ -47,12 +47,10 @@ const LandingPage = () => {
   ];
 
   const exploreItems = [
-    { title: 'Interactive Lore', emoji: '📚' },
-    { title: 'Deck Builder', emoji: '🃏' },
-    { title: 'Shield System', emoji: '🛡️' },
-    { title: 'Elemental Essence', emoji: '💎' },
-    { title: 'Strategic Gameplay', emoji: '♟️' },
-    { title: 'Unique Creatures', emoji: '🐉' },
+    { title: 'Interactive Lore', emoji: '📚', link: '/kinbrold' },
+    { title: 'Deck Builder', emoji: '🃏', link: '/cards/deck-builder' },
+    { title: 'Gameplay', emoji: '♟️', link: '/gameplay' },
+    { title: 'Card Gallery', emoji: '🐉', link: '/cards' },
   ];
 
   return (
@@ -121,7 +119,9 @@ const LandingPage = () => {
           </h2>
           <div className="flex flex-wrap justify-center gap-8">
             {exploreItems.map((item, index) => (
-              <ExploreItem key={index} title={item.title} emoji={item.emoji} />
+              <Link to={item.link} key={index}>
+                <ExploreItem title={item.title} emoji={item.emoji} />
+              </Link>
             ))}
           </div>
         </section>

@@ -7,9 +7,11 @@ import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import LightBox from '../components/LightBox';
 import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
+import ElementalTransition from '../components/ElementalTransition';
 
 const LandingPage = () => {
   const [showLightBox, setShowLightBox] = useState(false);
+  const [transitionElement, setTransitionElement] = useState(null);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -53,6 +55,22 @@ const LandingPage = () => {
     { title: 'Card Gallery', emoji: '🐉', link: '/cards' },
   ];
 
+  const handleElementClick = (element) => {
+    setTransitionElement(element);
+  };
+
+  if (transitionElement) {
+    return (
+      <ElementalTransition element={transitionElement}>
+        <div className={`min-h-screen ${transitionElement.toLowerCase()}-bg text-white p-8`}>
+          <h1 className="text-4xl font-bold mb-8">Welcome to {transitionElement}</h1>
+          <p className="text-xl">Explore the {transitionElement} element</p>
+          <Button onClick={() => setTransitionElement(null)}>Go Back</Button>
+        </div>
+      </ElementalTransition>
+    );
+  }
+
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
@@ -91,7 +109,8 @@ const LandingPage = () => {
             {elements.map((element) => (
               <div 
                 key={element.name} 
-                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor}`}
+                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor} cursor-pointer`}
+                onClick={() => handleElementClick(element.name)}
               >
                 <img 
                   src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element.name}.png`}
@@ -100,9 +119,7 @@ const LandingPage = () => {
                 />
                 <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
                 <p className="mb-4">{element.description}</p>
-                <Link to={`/cards?element=${element.name.toLowerCase()}`}>
-                  <Button variant="outline">Explore {element.name} Cards</Button>
-                </Link>
+                <Button variant="outline">Explore {element.name} Cards</Button>
               </div>
             ))}
           </div>

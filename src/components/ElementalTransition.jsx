@@ -1,108 +1,168 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import FireAnimation from './animations/FireAnimation';
-import WaterAnimation from './animations/WaterAnimation';
-import EarthAnimation from './animations/EarthAnimation';
-import AirAnimation from './animations/AirAnimation';
 
 const ElementalTransition = ({ element, children }) => {
   const getTransitionEffect = () => {
     switch (element) {
       case 'Fire':
-        return {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-          transition: { duration: 5, ease: 'easeInOut' },
-        };
-      case 'Water':
-        return {
-          initial: { scale: 0, opacity: 0 },
-          animate: { scale: 1, opacity: 1 },
-          exit: { scale: 2, opacity: 0 },
-          transition: { duration: 5, ease: 'easeInOut' },
-        };
-      case 'Earth':
-        return {
-          initial: { opacity: 1 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-          transition: { duration: 0.5, ease: 'easeInOut', delay: 4.5 },
-        };
-      case 'Air':
-        return {
-          initial: { x: '-100%' },
-          animate: { x: '0%' },
-          exit: { x: '100%' },
-          transition: { duration: 5, ease: 'easeInOut' },
-        };
-      case 'Neutral':
-        return {
-          initial: { rotate: 0, scale: 0 },
-          animate: { rotate: 360, scale: 1 },
-          exit: { rotate: 720, scale: 0 },
-          transition: { duration: 5, ease: 'easeInOut' },
-        };
-      default:
-        return {
-          initial: { opacity: 0 },
-          animate: { opacity: 1 },
-          exit: { opacity: 0 },
-          transition: { duration: 1 },
-        };
-    }
-  };
-
-  const getElementalAnimation = () => {
-    switch (element) {
-      case 'Fire':
-        return <FireAnimation />;
-      case 'Water':
-        return <WaterAnimation />;
-      case 'Earth':
-        return <EarthAnimation />;
-      case 'Air':
-        return <AirAnimation />;
-      case 'Neutral':
         return (
           <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
             <defs>
-              <linearGradient id="neutralGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#8A2BE2">
-                  <animate attributeName="stop-color" values="#8A2BE2;#9400D3;#8A2BE2" dur="8s" repeatCount="indefinite" />
+              <radialGradient id="fireGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" stopColor="#ff6600" stopOpacity="1">
+                  <animate attributeName="stop-color" values="#ff6600;#ff9933;#ff6600" dur="4s" repeatCount="indefinite" />
                 </stop>
-                <stop offset="100%" stopColor="#9400D3">
-                  <animate attributeName="stop-color" values="#9400D3;#8A2BE2;#9400D3" dur="8s" repeatCount="indefinite" />
+                <stop offset="100%" stopColor="#ff0000" stopOpacity="0">
+                  <animate attributeName="stop-opacity" values="0;0.5;0" dur="4s" repeatCount="indefinite" />
                 </stop>
-              </linearGradient>
+              </radialGradient>
             </defs>
-            <rect width="100%" height="100%" fill="url(#neutralGradient)">
+            <rect width="100%" height="100%" fill="url(#fireGradient)">
               <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
             </rect>
             <g>
-              {[...Array(20)].map((_, i) => (
-                <circle
-                  key={i}
-                  cx={`${50 + 30 * Math.cos(i * Math.PI / 10)}%`}
-                  cy={`${50 + 30 * Math.sin(i * Math.PI / 10)}%`}
-                  r="5"
-                  fill="#FFFFFF"
-                >
+              {[...Array(100)].map((_, i) => (
+                <circle key={i} r="2" fill="#ff6600">
                   <animate
-                    attributeName="r"
-                    values="5;10;5"
-                    dur={`${3 + i * 0.2}s`}
+                    attributeName="cx"
+                    values={`${Math.random() * 100}%;${Math.random() * 100}%`}
+                    dur={`${4 + Math.random() * 4}s`}
                     repeatCount="indefinite"
+                    begin={`${i * 0.05}s`}
+                  />
+                  <animate
+                    attributeName="cy"
+                    values={`${100 + Math.random() * 10}%;-10%`}
+                    dur={`${4 + Math.random() * 4}s`}
+                    repeatCount="indefinite"
+                    begin={`${i * 0.05}s`}
                   />
                   <animate
                     attributeName="opacity"
-                    values="0.5;1;0.5"
-                    dur={`${3 + i * 0.2}s`}
+                    values="0;1;0"
+                    dur={`${4 + Math.random() * 4}s`}
                     repeatCount="indefinite"
+                    begin={`${i * 0.05}s`}
                   />
                 </circle>
               ))}
             </g>
+          </svg>
+        );
+      case 'Water':
+        return (
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <radialGradient id="rippleGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                <stop offset="0%" stopColor="#0077be" stopOpacity="0.8">
+                  <animate attributeName="stop-color" values="#0077be;#4ac7ff;#0077be" dur="6s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#4ac7ff" stopOpacity="0">
+                  <animate attributeName="stop-opacity" values="0;0.5;0" dur="6s" repeatCount="indefinite" />
+                </stop>
+              </radialGradient>
+            </defs>
+            <rect width="100%" height="100%" fill="#0077be">
+              <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+            </rect>
+            <g>
+              {[...Array(10)].map((_, i) => (
+                <circle key={i} cx="50%" cy="50%" r="0" fill="none" stroke="url(#rippleGradient)" strokeWidth="2">
+                  <animate
+                    attributeName="r"
+                    values="0;100%"
+                    dur={`${6 + i * 1}s`}
+                    repeatCount="indefinite"
+                    begin={`${i * 0.5}s`}
+                  />
+                  <animate
+                    attributeName="opacity"
+                    values="1;0"
+                    dur={`${6 + i * 1}s`}
+                    repeatCount="indefinite"
+                    begin={`${i * 0.5}s`}
+                  />
+                </circle>
+              ))}
+            </g>
+          </svg>
+        );
+      case 'Earth':
+        return (
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="crackPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
+                <path d="M0 90 Q 50 10 100 90" fill="none" stroke="#5D4037" strokeWidth="2">
+                  <animate attributeName="d" values="M0 90 Q 50 10 100 90;M0 10 Q 50 90 100 10;M0 90 Q 50 10 100 90" dur="6s" repeatCount="indefinite" />
+                </path>
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="#8B4513">
+              <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+            </rect>
+            <g>
+              {[...Array(50)].map((_, i) => (
+                <rect
+                  key={i}
+                  x={`${Math.random() * 100}%`}
+                  y={`${Math.random() * 100}%`}
+                  width="50"
+                  height="50"
+                  fill="#8B4513"
+                  opacity="0"
+                >
+                  <animate
+                    attributeName="opacity"
+                    values="0;1;0"
+                    dur="4s"
+                    begin={`${i * 0.1}s`}
+                    repeatCount="1"
+                  />
+                  <animate
+                    attributeName="y"
+                    values={`${Math.random() * 100}%;110%`}
+                    dur="4s"
+                    begin={`${i * 0.1}s`}
+                    repeatCount="1"
+                    fill="freeze"
+                  />
+                </rect>
+              ))}
+            </g>
+          </svg>
+        );
+      case 'Air':
+        return (
+          <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="airGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#87CEEB" stopOpacity="0.8">
+                  <animate attributeName="stop-color" values="#87CEEB;#E0F6FF;#87CEEB" dur="8s" repeatCount="indefinite" />
+                </stop>
+                <stop offset="100%" stopColor="#E0F6FF" stopOpacity="0.4">
+                  <animate attributeName="stop-color" values="#E0F6FF;#87CEEB;#E0F6FF" dur="8s" repeatCount="indefinite" />
+                </stop>
+              </linearGradient>
+            </defs>
+            <path d="M0,0 Q50,0 100,100 T200,100" fill="url(#airGradient)">
+              <animate
+                attributeName="d"
+                values="
+                  M0,0 Q50,0 100,100 T200,100;
+                  M0,100 Q50,50 100,0 T200,50;
+                  M0,50 Q50,100 100,50 T200,0;
+                  M0,0 Q50,0 100,100 T200,100
+                "
+                dur="10s"
+                repeatCount="indefinite"
+              />
+              <animate
+                attributeName="opacity"
+                values="0;1"
+                dur="3s"
+                fill="freeze"
+              />
+            </path>
           </svg>
         );
       default:
@@ -110,25 +170,24 @@ const ElementalTransition = ({ element, children }) => {
     }
   };
 
-  const transitionEffect = getTransitionEffect();
-
   return (
     <motion.div
-      {...transitionEffect}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 1 }}
       className="fixed inset-0 z-50 flex items-center justify-center"
     >
-      <div className="relative w-full h-full">
-        {getElementalAnimation()}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1, delay: 4 }}
-          className="absolute inset-0 flex items-center justify-center"
-        >
-          {children}
-        </motion.div>
-      </div>
+      {getTransitionEffect()}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 1, delay: 1 }}
+        className="relative z-10"
+      >
+        {children}
+      </motion.div>
     </motion.div>
   );
 };

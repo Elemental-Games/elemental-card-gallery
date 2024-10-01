@@ -14,6 +14,11 @@ import TermsOfService from "./pages/TermsOfService";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import SupportPage from "./pages/SupportPage";
 import CardFlipTransition from "./components/CardFlipTransition";
+import ScartoPage from "./pages/ScartoPage";
+import TsunarethPage from "./pages/TsunarethPage";
+import ZalosPage from "./pages/ZalosPage";
+import GrivossPage from "./pages/GrivossPage";
+import EvermerePage from "./pages/EvermerePage";
 
 const queryClient = new QueryClient();
 
@@ -48,6 +53,11 @@ const App = () => (
                 <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
                 <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
                 <Route path="/support" element={<PageWrapper><SupportPage /></PageWrapper>} />
+                <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                <Route path="/kinbrold/evermere" element={<EvermerePage />} />
               </Routes>
             </main>
             <Footer />

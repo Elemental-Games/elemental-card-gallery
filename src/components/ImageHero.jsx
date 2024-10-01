@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import leavesBackground from '../assets/leaves-background.mp4';
 
 const ImageHero = () => {
   const [showVideo, setShowVideo] = useState(true);
@@ -28,7 +29,7 @@ const ImageHero = () => {
               muted
               className="w-full h-full object-cover"
             >
-              <source src="/leaves-background.mp4" type="video/mp4" />
+              <source src={leavesBackground} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </motion.div>

@@ -19,10 +19,30 @@ const LandingPage = () => {
   }, []);
 
   const elements = [
-    { name: 'Air', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400' },
-    { name: 'Water', color: 'bg-blue-300', hoverColor: 'hover:bg-blue-400' },
-    { name: 'Earth', color: 'bg-green-300', hoverColor: 'hover:bg-green-400' },
-    { name: 'Fire', color: 'bg-red-300', hoverColor: 'hover:bg-red-400' }
+    { 
+      name: 'Air', 
+      color: 'bg-gray-300', 
+      hoverColor: 'hover:bg-gray-400',
+      description: 'Just like the wind, Air creatures are the fastest and ever-changing.'
+    },
+    { 
+      name: 'Water', 
+      color: 'bg-blue-300', 
+      hoverColor: 'hover:bg-blue-400',
+      description: 'Water creatures focus on their card milling features with a tendency to be faster than most elements.'
+    },
+    { 
+      name: 'Fire', 
+      color: 'bg-red-300', 
+      hoverColor: 'hover:bg-red-400',
+      description: 'These creatures are built for damage and steadily taking down your opponent over time.'
+    },
+    { 
+      name: 'Earth', 
+      color: 'bg-green-300', 
+      hoverColor: 'hover:bg-green-400',
+      description: 'All Earth creatures stand strong and resilient by providing a bolstering defense.'
+    }
   ];
 
   return (
@@ -36,7 +56,7 @@ const LandingPage = () => {
               alt="Elemental Games Logo" 
               style={{ width: '200px', height: '125px', marginRight: '8px', marginBottom: '-20px' }}
             />
-            Game Features
+            Master the Elements
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {elements.map((element) => (
@@ -50,8 +70,8 @@ const LandingPage = () => {
                   style={{ width: '100px', height: '110px', marginLeft: '85px', marginRight: '8px', marginBottom: '-20px' }}
                 />
                 <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
-                <p className="mb-4">Master the power of {element.name.toLowerCase()} in Elemental Masters.</p>
-                <Link to="/cards">
+                <p className="mb-4">{element.description}</p>
+                <Link to={`/cards?element=${element.name.toLowerCase()}`}>
                   <Button variant="outline">Explore {element.name} Cards</Button>
                 </Link>
               </div>

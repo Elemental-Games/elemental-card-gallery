@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import gamesLogo from '../assets/Games_Logo.jpg';
+import gamesLogo from '/Games_Logo.jpg'; // Updated import path
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

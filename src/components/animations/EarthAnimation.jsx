@@ -3,24 +3,20 @@ import React from 'react';
 const EarthAnimation = () => (
   <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
     <defs>
-      <pattern id="crackPattern" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse">
-        <path d="M0 90 Q 50 10 100 90" fill="none" stroke="#5D4037" strokeWidth="2">
-          <animate attributeName="d" values="M0 90 Q 50 10 100 90;M0 10 Q 50 90 100 10;M0 90 Q 50 10 100 90" dur="6s" repeatCount="indefinite" />
-        </path>
-      </pattern>
+      <filter id="displacementFilter">
+        <feTurbulence type="turbulence" baseFrequency="0.05" numOctaves="2" result="turbulence" />
+        <feDisplacementMap in2="turbulence" in="SourceGraphic" scale="50" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
     </defs>
-    <rect width="100%" height="100%" fill="#8B4513">
-      <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+    <rect width="100%" height="100%" fill="#4CAF50">
+      <animate attributeName="opacity" values="0;1" dur="2s" fill="freeze" />
     </rect>
-    <g>
+    <g filter="url(#displacementFilter)">
       {[...Array(50)].map((_, i) => (
-        <rect
+        <path
           key={i}
-          x={`${Math.random() * 100}%`}
-          y={`${Math.random() * 100}%`}
-          width="50"
-          height="50"
-          fill="#8B4513"
+          d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
+          fill="#2E7D32"
           opacity="0"
         >
           <animate
@@ -31,14 +27,13 @@ const EarthAnimation = () => (
             repeatCount="1"
           />
           <animate
-            attributeName="y"
-            values={`${Math.random() * 100}%;110%`}
+            attributeName="d"
+            values={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100};M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
             dur="4s"
             begin={`${i * 0.1}s`}
             repeatCount="1"
-            fill="freeze"
           />
-        </rect>
+        </path>
       ))}
     </g>
   </svg>

@@ -6,6 +6,7 @@ import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import NewsFeed from '../components/NewsFeed';
 import LightBox from '../components/LightBox';
+import KeyFeatures from '../components/KeyFeatures';
 
 const LandingPage = () => {
   const [showLightBox, setShowLightBox] = useState(false);
@@ -89,15 +90,7 @@ const LandingPage = () => {
         <p className="mb-6 text-lg">
           Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
         </p>
-        <h3 className="text-2xl font-semibold mb-4">Key Features:</h3>
-        <ul className="list-disc list-inside space-y-4 mb-8">
-          <li><strong>Interactive Card Technology:</strong> Every card has a unique QR code, unlocking a wealth of information, lore, strategies, and more.</li>
-          <li><strong>Rich World:</strong> Explore the world and five Kingdoms of Kinbrold - consisting of 4 Elemental Kingdoms, a Kingdom for those without elemental control, and 6 regions connecting all 5 major Kingdoms.</li>
-          <li><strong>Diverse Creatures:</strong> Command Air, Water, Fire, and Earth creatures, including exotic combinational types like Lava, Poison, Sand, Frost, Lightning, and Crystal elements in the form of Dragons.</li>
-          <li><strong>Unique Battle Mechanics:</strong> Each creature has a Strength and an Agility which determine their damage dealt, health, and how fast they can attack, block, or dodge respectively. Protecting you from your opponent are three shields, each with an increasingly powerful effect when broken. To win, you must deal 500 damage to your opponent directly or collect all 4 Ancient Elemental cards and use the Ancient Sigil.</li>
-          <li><strong>Elemental Essence:</strong> Each creature generates its own elemental essence which is viewed as a currency, used for summoning powerful creatures and using additional creature abilities.</li>
-          <li><strong>Quick Yet Strategic:</strong> Easy to learn but challenging to master, with games lasting around 20 minutes and a simple gameplay mechanic.</li>
-        </ul>
+        <KeyFeatures />
       </section>
 
       <div className="container mx-auto px-4 py-16">

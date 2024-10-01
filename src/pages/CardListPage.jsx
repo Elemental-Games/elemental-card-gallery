@@ -1,21 +1,38 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
+import { useQuery } from '@tanstack/react-query';
+import { fetchCardsFromS3 } from '../utils/awsUtils';
+import CardGallery from '../components/CardGallery';
+import { Skeleton } from '@/components/ui/skeleton';
 
-const CardsPage = () => {
-  return (
-    <div className="container mx-auto px-4 py-8 bg-gradient-to-br from-purple-900 to-indigo-900 min-h-screen text-white">
-      <h1 className="text-4xl font-bold mb-8 text-center">Elemental Masters Cards</h1>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-8">
-        <Link to="/cards/card-list">
-          <Button className="w-64 h-32 text-xl">View Card Gallery</Button>
-        </Link>
-        <Link to="/cards/deck-builder">
-          <Button className="w-64 h-32 text-xl">Use Deck Builder</Button>
-        </Link>
+const CardListPage = () => {
+  const { data: cards, isLoading, error } = useQuery({
+    queryKey: ['cards'],
+    queryFn: fetchCardsFromS3,
+  });
+
+  if (isLoading) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Card Gallery</h1>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {[...Array(20)].map((_, index) => (
+            <Skeleton key={index} className="w-full h-64" />
+          ))}
+        </div>
       </div>
+    );
+  }
+
+  if (error) {
+    return <div className="text-center text-red-500">Error loading cards: {error.message}</div>;
+  }
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-4xl font-bold mb-8 text-center">Card Gallery</h1>
+      <CardGallery cards={cards} />
     </div>
   );
 };
 
-export default CardsPage;
+export default CardListPage;

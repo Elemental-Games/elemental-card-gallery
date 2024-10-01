@@ -6,7 +6,11 @@ export const fetchCardsFromS3 = async () => {
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    return await response.json();
+    const data = await response.json();
+    return data.map(card => ({
+      ...card,
+      image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}.png`,
+    }));
   } catch (error) {
     console.error("Error fetching cards:", error);
     throw error;

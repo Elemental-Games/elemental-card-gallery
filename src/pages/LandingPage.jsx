@@ -47,7 +47,7 @@ const LandingPage = () => {
   ];
 
   const exploreItems = [
-    { title: 'Interactive Lore', emoji: '📚', link: '/kinbrold' },
+    { title: 'Kinbrold Lore', emoji: '📚', link: '/kinbrold' },
     { title: 'Deck Builder', emoji: '🃏', link: '/cards/deck-builder' },
     { title: 'Gameplay', emoji: '♟️', link: '/gameplay' },
     { title: 'Card Gallery', emoji: '🐉', link: '/cards' },
@@ -125,9 +125,6 @@ const LandingPage = () => {
             ))}
           </div>
         </section>
-
-        {/* NewsFeed component is kept in the code but not rendered */}
-        {/* <NewsFeed /> */}
       </div>
       {showLightBox && (
         <LightBox

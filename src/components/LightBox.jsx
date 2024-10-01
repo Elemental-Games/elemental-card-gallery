@@ -1,17 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import { X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '../hooks/useAuth';
 
 const LightBox = ({ cardImage, onClose }) => {
-  const [email, setEmail] = useState('');
   const [showThankYou, setShowThankYou] = useState(false);
+  const { signInWithGoogle, error } = useAuth();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Email submitted:', email);
-    setShowThankYou(true);
+  const handleGoogleSignUp = async () => {
+    try {
+      await signInWithGoogle();
+      setShowThankYou(true);
+    } catch (error) {
+      console.error("Error signing in with Google", error);
+    }
   };
 
   useEffect(() => {
@@ -43,19 +46,16 @@ const LightBox = ({ cardImage, onClose }) => {
             </Button>
             <div className="flex flex-col md:flex-row items-center justify-between">
               <div className="md:w-1/2 mb-4 md:mb-0 md:pr-4 text-center">
-                <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements to your Inbox</h2>
+                <h2 className="text-3xl font-bold mb-4 text-primary">Get the Latest News & Announcements</h2>
                 <p className="text-xl mb-6 text-primary">Gain access to all website features and stay up-to-date on our progress</p>
-                <form onSubmit={handleSubmit} className="space-y-4 w-full">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                    className="text-primary w-full"
-                  />
-                  <Button type="submit" className="w-full bg-accent text-primary hover:bg-accent/90">Sign Up</Button>
-                </form>
+                <Button 
+                  onClick={handleGoogleSignUp} 
+                  className="w-full bg-yellow-400 text-purple-800 hover:bg-yellow-500 transition-colors flex items-center justify-center"
+                >
+                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" className="w-6 h-6 mr-2" />
+                  Sign Up with Google
+                </Button>
+                {error && <p className="text-red-500 mt-2">{error}</p>}
               </div>
               <div className="md:w-1/2">
                 <img src={cardImage} alt="Card of the Week" className="w-full h-auto rounded shadow-lg" />
@@ -74,8 +74,8 @@ const LightBox = ({ cardImage, onClose }) => {
             style={{ height: '400px' }}
           >
             <div className="text-center">
-              <p className="text-3xl font-bold text-yellow-800">Thanks for signing up!</p>
-              <p className="text-xl text-yellow-800 mt-4">You're now one step closer to being an Elemental Master</p>
+              <p className="text-3xl font-bold text-purple-800">Thanks for signing up!</p>
+              <p className="text-xl text-purple-800 mt-4">You're now one step closer to being an Elemental Master</p>
             </div>
           </motion.div>
         )}

@@ -35,7 +35,7 @@ function convertExcelToJson() {
     });
 
     // Ensure image path is correct
-    card.image = `/images/cards/${card.image}`;
+    card.image = `/storage/images/cards/${card.image}`;
 
     return card;
   });

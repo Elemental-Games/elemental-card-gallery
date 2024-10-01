@@ -1,24 +1,26 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const { S3Client, GetObjectCommand } = require("@aws-sdk/client-s3");
-const XLSX = require('xlsx');
+import dotenv from 'dotenv';
+import express from 'express';
+import cors from 'cors';
+import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
+import XLSX from 'xlsx';
+
+dotenv.config();
 
 const app = express();
 app.use(cors());
 
 const s3Client = new S3Client({
-  region: process.env.VITE_AWS_REGION,
+  region: import.meta.env.VITE_AWS_REGION,
   credentials: {
-    accessKeyId: process.env.VITE_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.VITE_AWS_SECRET_ACCESS_KEY,
+    accessKeyId: import.meta.env.VITE_AWS_ACCESS_KEY_ID,
+    secretAccessKey: import.meta.env.VITE_AWS_SECRET_ACCESS_KEY,
   },
 });
 
 app.get('/api/cards', async (req, res) => {
   try {
     const command = new GetObjectCommand({
-      Bucket: process.env.VITE_S3_BUCKET_NAME,
+      Bucket: import.meta.env.VITE_S3_BUCKET_NAME,
       Key: "data/elemental_masters_cards.xlsx",
     });
 
@@ -31,7 +33,7 @@ app.get('/api/cards', async (req, res) => {
 
     const cards = jsonData.map(card => ({
       ...card,
-      image: `${process.env.VITE_S3_BUCKET_URL}/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}.png`,
+      image: `${import.meta.env.VITE_S3_BUCKET_URL}/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}.png`,
     }));
 
     res.json(cards);
@@ -41,5 +43,5 @@ app.get('/api/cards', async (req, res) => {
   }
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = import.meta.env.VITE_PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

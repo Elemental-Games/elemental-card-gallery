@@ -45,6 +45,29 @@ const LandingPage = () => {
     }
   ];
 
+  const exploreItems = [
+    {
+      title: 'Interactive Lore',
+      description: 'Dive into the rich world of Kinbrold and its five unique kingdoms.',
+      image: '/images/book.jpg'
+    },
+    {
+      title: 'Deck Builder',
+      description: 'Create and customize your perfect elemental deck.',
+      image: '/images/deck.jpg'
+    },
+    {
+      title: 'Shield System',
+      description: 'Master the unique shield defense system to outsmart your opponents.',
+      image: '/images/shield.jpg'
+    },
+    {
+      title: 'Elemental Essence',
+      description: 'Harness the power of elemental essence to fuel your strategies.',
+      image: '/images/essence.jpg'
+    }
+  ];
+
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
@@ -115,34 +138,21 @@ const LandingPage = () => {
         <section className="mb-32">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <ElementIcon element="earth" className="mr-2" />
-            Gameplay
+            Explore More
           </h2>
-          <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg">
-            <p className="text-xl mb-6">
-              Master the elements and outsmart your opponents in epic card battles!
-            </p>
-            <Link to="/gameplay">
-              <Button size="lg" variant="outline">Learn How to Play</Button>
-            </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {exploreItems.map((item, index) => (
+              <div key={index} className="bg-white bg-opacity-10 p-6 rounded-lg shadow-lg">
+                <img src={item.image} alt={item.title} className="w-full h-48 object-cover mb-4 rounded" />
+                <h3 className="text-2xl font-semibold mb-2">{item.title}</h3>
+                <p>{item.description}</p>
+              </div>
+            ))}
           </div>
         </section>
 
-        <section className="mb-16">
-          <h2 className="text-4xl font-bold mb-8 flex items-center">
-            <ElementIcon element="water" className="mr-2" />
-            Join Now
-          </h2>
-          <div className="bg-white bg-opacity-10 p-8 rounded-lg shadow-lg">
-            <p className="text-xl mb-6">
-              Be part of the Elemental Masters community and start your journey today!
-            </p>
-            <Link to="/join">
-              <Button size="lg" variant="outline">Sign Up Now</Button>
-            </Link>
-          </div>
-        </section>
-
-        <NewsFeed />
+        {/* NewsFeed component is kept in the code but not rendered */}
+        {/* <NewsFeed /> */}
       </div>
       {showLightBox && (
         <LightBox

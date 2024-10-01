@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { fetchCardsFromS3 } from '../utils/awsUtils';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
@@ -7,7 +7,6 @@ import DeckStats from '../components/DeckBuilder/DeckStats';
 import CardGallery from '../components/DeckBuilder/CardGallery';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { useAuth } from '../hooks/useAuth';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
 
@@ -18,34 +17,13 @@ const DeckBuilderPage = () => {
   const [sideDeck, setSideDeck] = useState([]);
   const [deckName, setDeckName] = useState('');
   const [showCardList, setShowCardList] = useState(false);
-  const { user, saveDeck, getDecks } = useAuth();
   const { data: allCards, isLoading, error } = useQuery({
     queryKey: ['cards'],
     queryFn: fetchCardsFromS3,
   });
 
-  useEffect(() => {
-    if (user) {
-      loadDecks();
-    }
-  }, [user]);
-
-  const loadDecks = async () => {
-    const userDecks = await getDecks();
-    if (userDecks.length > 0) {
-      setMainDeck(userDecks[0].mainDeck);
-      setSideDeck(userDecks[0].sideDeck);
-      setDeckName(userDecks[0].name);
-    }
-  };
-
   const handleSaveDeck = async () => {
-    if (!user) {
-      alert('Please sign in to save your deck');
-      return;
-    }
-    await saveDeck(deckName, { mainDeck, sideDeck });
-    alert('Deck saved successfully!');
+    alert('Deck saving is temporarily disabled.');
   };
 
   const totalCards = mainDeck.reduce((sum, card) => sum + card.quantity, 0) +
@@ -134,20 +112,15 @@ const DeckBuilderPage = () => {
             </div>
             <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
               <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>
-              {user ? (
-                <>
-                  <Input
-                    type="text"
-                    placeholder="Deck Name"
-                    value={deckName}
-                    onChange={(e) => setDeckName(e.target.value)}
-                    className="mb-4 bg-purple-800 text-purple-100 placeholder-purple-300"
-                  />
-                  <Button onClick={handleSaveDeck} className="bg-purple-500 hover:bg-purple-600">Save Deck</Button>
-                </>
-              ) : (
-                <p>Please sign in to save your deck.</p>
-              )}
+              <Input
+                type="text"
+                placeholder="Deck Name"
+                value={deckName}
+                onChange={(e) => setDeckName(e.target.value)}
+                className="mb-4 bg-purple-800 text-purple-100 placeholder-purple-300"
+              />
+              <Button onClick={handleSaveDeck} className="bg-purple-500 hover:bg-purple-600">Save Deck</Button>
+              <p className="mt-2">Note: Deck saving is temporarily disabled.</p>
             </div>
           </>
         )}

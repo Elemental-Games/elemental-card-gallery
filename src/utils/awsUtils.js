@@ -1,5 +1,5 @@
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import XLSX from 'xlsx';
+import * as XLSX from 'xlsx';
 
 const s3Client = new S3Client({
   region: import.meta.env.VITE_AWS_REGION,

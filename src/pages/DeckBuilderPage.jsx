@@ -8,6 +8,8 @@ import CardGallery from '../components/DeckBuilder/CardGallery';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useAuth } from '../hooks/useAuth';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const DeckBuilderPage = () => {
   const [showWizard, setShowWizard] = useState(null);
@@ -30,7 +32,6 @@ const DeckBuilderPage = () => {
 
   const loadDecks = async () => {
     const userDecks = await getDecks();
-    // You can set the first deck as the current deck or show a list of decks
     if (userDecks.length > 0) {
       setMainDeck(userDecks[0].mainDeck);
       setSideDeck(userDecks[0].sideDeck);
@@ -76,16 +77,6 @@ const DeckBuilderPage = () => {
     return count < 3;
   };
 
-  const handleSignUp = (e) => {
-    e.preventDefault();
-    console.log('Signing up with email:', email);
-    console.log('Deck data:', { mainDeck, sideDeck });
-    alert('Thank you for signing up! Your deck has been saved.');
-  };
-
-  if (isLoading) return <div>Loading cards...</div>;
-  if (error) return <div>Error loading cards: {error.message}</div>;
-
   return (
     <div className="relative">
       <div className="container mx-auto px-4 py-8">
@@ -115,7 +106,7 @@ const DeckBuilderPage = () => {
                   sideDeck={sideDeck} 
                   setMainDeck={setMainDeck} 
                   setSideDeck={setSideDeck}
-                  allCards={allCards}
+                  allCards={allCards || []}
                   canAddCard={canAddCard}
                   selectedElements={selectedElements}
                 />
@@ -130,7 +121,7 @@ const DeckBuilderPage = () => {
               </Button>
               {showCardList && (
                 <CardGallery
-                  cards={allCards}
+                  cards={allCards || []}
                   onCardSelect={(card) => {
                     if (card.type === 'Shield') {
                       setSideDeck([...sideDeck, { ...card, quantity: 1 }]);
@@ -159,6 +150,15 @@ const DeckBuilderPage = () => {
               )}
             </div>
           </>
+        )}
+        {error && (
+          <Alert variant="destructive" className="mt-4">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>
+              Failed to load card data. You can still use the deck builder, but card information may be limited.
+            </AlertDescription>
+          </Alert>
         )}
       </div>
     </div>

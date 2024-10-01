@@ -11,36 +11,58 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_FIREBASE_APP_ID
 };
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+let app;
+let auth;
+
+try {
+  app = initializeApp(firebaseConfig);
+  auth = getAuth(app);
+} catch (error) {
+  console.error("Error initializing Firebase:", error);
+}
 
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
+    if (auth) {
+      const unsubscribe = auth.onAuthStateChanged((user) => {
+        setUser(user);
+      });
 
-    return () => unsubscribe();
+      return () => unsubscribe();
+    }
   }, []);
 
   const signInWithGoogle = async () => {
+    if (!auth) {
+      setError("Firebase authentication is not initialized");
+      return;
+    }
+
     const provider = new GoogleAuthProvider();
     try {
       await signInWithPopup(auth, provider);
     } catch (error) {
       console.error("Error signing in with Google", error);
+      setError(error.message);
     }
   };
 
   const signOut = async () => {
+    if (!auth) {
+      setError("Firebase authentication is not initialized");
+      return;
+    }
+
     try {
       await firebaseSignOut(auth);
     } catch (error) {
       console.error("Error signing out", error);
+      setError(error.message);
     }
   };
 
@@ -48,6 +70,7 @@ export const AuthProvider = ({ children }) => {
     user,
     signInWithGoogle,
     signOut,
+    error
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

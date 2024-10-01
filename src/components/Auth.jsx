@@ -1,12 +1,18 @@
 import React from 'react';
 import { useAuth } from '../hooks/useAuth';
 import { Button } from '@/components/ui/button';
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const Auth = () => {
-  const { user, signInWithGoogle, signOut } = useAuth();
+  const { user, signInWithGoogle, signOut, error } = useAuth();
 
   return (
     <div className="p-4 bg-white bg-opacity-10 rounded-lg shadow-lg">
+      {error && (
+        <Alert variant="destructive" className="mb-4">
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      )}
       {user ? (
         <div>
           <p>Welcome, {user.displayName}!</p>

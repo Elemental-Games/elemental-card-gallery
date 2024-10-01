@@ -18,7 +18,7 @@ const CardListPage = () => {
   });
 
   useEffect(() => {
-    fetch('/data/cards.json')
+    fetch('/storage/cards.json')
       .then(response => response.json())
       .then(data => {
         setCards(data);

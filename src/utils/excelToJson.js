@@ -1,9 +1,13 @@
 const XLSX = require('xlsx');
 const fs = require('fs');
+const path = require('path');
 
-function convertExcelToJson(filePath) {
+function convertExcelToJson() {
+  const excelFilePath = path.join('C:', 'Users', 'Mark', 'Website', 'elemental-card-gallery', 'storage', 'ElementalMastersCards.xlsx');
+  const jsonOutputPath = path.join('C:', 'Users', 'Mark', 'Website', 'elemental-card-gallery', 'storage', 'cards.json');
+
   // Read the Excel file
-  const workbook = XLSX.readFile(filePath);
+  const workbook = XLSX.readFile(excelFilePath);
   const sheetName = workbook.SheetNames[0];
   const worksheet = workbook.Sheets[sheetName];
 
@@ -26,14 +30,16 @@ function convertExcelToJson(filePath) {
       }
     });
 
+    // Ensure image path is correct
+    card.image = `/images/cards/${card.image}`;
+
     return card;
   });
 
   // Write to JSON file
-  fs.writeFileSync('cards.json', JSON.stringify(processedData, null, 2));
-  console.log('Conversion complete. JSON file created: cards.json');
+  fs.writeFileSync(jsonOutputPath, JSON.stringify(processedData, null, 2));
+  console.log('Conversion complete. JSON file created:', jsonOutputPath);
 }
 
-// Usage
-const excelFilePath = 'C:\\Users\\Mark\\Website\\ElementalMastersCards.xlsx';
-convertExcelToJson(excelFilePath);
+// Run the conversion
+convertExcelToJson();

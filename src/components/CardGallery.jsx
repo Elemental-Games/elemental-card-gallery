@@ -10,7 +10,7 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={`/storage/images/cards/${card.image}`} 
+          src={`/cards/${card.image}`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
         />

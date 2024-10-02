@@ -88,7 +88,7 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap">
             <img 
-              src="/storage/Games_Logo.png" 
+              src="/Games_Logo.png" 
               alt="Elemental Games Logo" 
               className="w-40 h-auto mr-4 mb-4 sm:mb-0"
             />
@@ -103,7 +103,7 @@ const LandingPage = () => {
               >
                 <div>
                   <img 
-                    src={`/storage/icons/${element.name}.png`}
+                    src={`/icons/${element.name}.png`}
                     alt={`${element.name} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />

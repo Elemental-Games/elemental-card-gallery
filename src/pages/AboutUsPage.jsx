@@ -13,7 +13,7 @@ const AboutUsPage = () => {
     >
       <h1 className="text-4xl font-bold mb-6">About Us</h1>
       
-      <div className="flex flex-col md:flex-row items-start mb-8">
+      <div className="flex flex-col md:flex-row items-start mb-4">
         <div className="md:w-2/3 md:pr-8">
           <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
           <p className="mb-4">
@@ -63,7 +63,7 @@ const AboutUsPage = () => {
       <section>
         <h2 className="text-2xl font-semibold mb-4">Join Our Quest</h2>
         <p>
-          Whether you're a seasoned TCG veteran or new to the world of elemental mastery, we invite you to join us on this exciting journey. Elemental Games is more than a company—it's a community of players, creators, and dreamers united by our love for strategic gameplay and rich, immersive worlds.
+          Whether you're a seasoned TCG veteran or new to the world of elemental mastery, we invite you to join us on this exciting journey. Elemental Games is more than a company—it's a community of players, creators, and dreamers united by our passion for strategic gameplay and rich, immersive worlds.
         </p>
         <div className="mt-6 mb-4">
           <Link to="/join">

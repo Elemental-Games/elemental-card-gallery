@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -24,7 +24,12 @@ const App = () => (
               <main className="flex-grow">
                 <Routes>
                   {navItems.map((item) => (
-                    <Route key={item.to} path={item.to} element={item.page}>
+                    <Route key={item.to} path={item.to} element={
+                      <>
+                        {item.page}
+                        <Outlet />
+                      </>
+                    }>
                       {item.subItems && item.subItems.map((subItem) => (
                         <Route key={subItem.to} path={subItem.to} element={subItem.page} />
                       ))}

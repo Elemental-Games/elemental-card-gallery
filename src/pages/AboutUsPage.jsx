@@ -72,7 +72,7 @@ const AboutUsPage = () => {
             </Button>
           </Link>
         </div>
-        <p className="text-3xl font-bold mt-4">
+        <p className="text-2xl font-bold mt-4">
           Together, let's forge the future of gaming, one element at a time.
         </p>
       </section>

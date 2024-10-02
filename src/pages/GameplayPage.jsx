@@ -11,7 +11,7 @@ const GameplayPage = () => {
         Elemental Masters is an exciting 2-player trading card game where you harness the power of the elements to defeat your opponents. An average game lasts 20-25 minutes.
       </p>
       <div className="mb-6">
-        <Link to="/gameplay/rules">
+        <Link to="/rules">
           <Button className="mr-4">View Full Rules</Button>
         </Link>
         <Button onClick={() => window.open('/rulebook.pdf', '_blank')}>

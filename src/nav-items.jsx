@@ -1,11 +1,11 @@
-import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, BookOpenIcon, LayersIcon, GraduationCapIcon, MapIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, MapIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import CardGalleryPage from "./pages/CardListPage.jsx";
 import DeckBuilderPage from "./pages/DeckBuilderPage.jsx";
 import GameplayPage from "./pages/GameplayPage.jsx";
 import RulesPage from "./pages/RulesPage.jsx";
-import LearnToPlayPage from "./pages/LearnToPlayPage.jsx";
 import KinbroldPage from "./pages/KinbroldPage.jsx";
+import CardsPage from "./pages/CardsPage.jsx";
 
 export const navItems = [
   {
@@ -13,6 +13,12 @@ export const navItems = [
     to: "/",
     icon: <HomeIcon className="h-4 w-4" />,
     page: <LandingPage />,
+  },
+  {
+    title: "Cards",
+    to: "/cards",
+    icon: <LayoutGridIcon className="h-4 w-4" />,
+    page: <CardsPage />,
   },
   {
     title: "Card Gallery",
@@ -23,7 +29,7 @@ export const navItems = [
   {
     title: "Deck Builder",
     to: "/deck-builder",
-    icon: <LayersIcon className="h-4 w-4" />,
+    icon: <LayoutGridIcon className="h-4 w-4" />,
     page: <DeckBuilderPage />,
   },
   {
@@ -35,14 +41,8 @@ export const navItems = [
   {
     title: "Rules",
     to: "/rules",
-    icon: <BookOpenIcon className="h-4 w-4" />,
+    icon: <GamepadIcon className="h-4 w-4" />,
     page: <RulesPage />,
-  },
-  {
-    title: "Learn to Play",
-    to: "/learn",
-    icon: <GraduationCapIcon className="h-4 w-4" />,
-    page: <LearnToPlayPage />,
   },
   {
     title: "Kinbrold",

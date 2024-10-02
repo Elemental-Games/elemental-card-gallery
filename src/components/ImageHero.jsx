@@ -7,7 +7,7 @@ const ImageHero = () => {
     <div className="relative h-screen overflow-hidden">
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="/storage/Background.jpg"
+          src="/Background.jpg"
           alt="Background Image"
           className="absolute w-full h-full object-cover md:object-center mobile-pan"
         />

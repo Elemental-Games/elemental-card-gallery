@@ -12,7 +12,7 @@ const CardGallery = ({ cards }) => {
       {cards.map((card) => (
         <Link key={card.id} to={`/cards/${card.id}`} className="block">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={`/storage/cards/${card.image}`} alt={card.name} className="w-full h-48 object-cover" />
+            <img src={`/cards/${card.image}`} alt={card.name} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="text-lg font-semibold">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
@@ -36,7 +36,7 @@ const CardListPage = () => {
   });
 
   useEffect(() => {
-    fetch('/storage/data/ElementalMastersCards.json')
+    fetch('/src/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
         setCards(data.cards);

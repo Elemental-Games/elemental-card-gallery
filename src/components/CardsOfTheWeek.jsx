@@ -39,7 +39,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           }}
         >
           <img
-            src="/storage/Card_Back.png"
+            src="/Card_Back.png"
             alt="Card Back"
             className="w-full h-full object-cover"
           />
@@ -49,7 +49,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           style={{ transform: 'rotateY(180deg)' }}
         >
           <img
-            src={`/storage/cards/${card.image}`}
+            src={`/cards/${card.image}`}
             alt={card.name}
             className="w-full h-full object-cover"
           />

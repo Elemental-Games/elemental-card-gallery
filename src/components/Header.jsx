@@ -23,7 +23,7 @@ const Header = () => {
         <div className="flex items-center">
           <Link to="/">
             <img 
-              src="/storage/Games_Logo.png"
+              src="/Games_Logo.png"
               alt="Elemental Games Logo" 
               style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
             />

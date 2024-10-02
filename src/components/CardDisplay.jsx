@@ -19,7 +19,7 @@ const CardDisplay = ({ card }) => {
           transition={{ duration: 0.6 }}
         >
           <div className="absolute inset-0 backface-hidden">
-            <img src={card.image} alt={card.name} className="w-full h-full object-cover" />
+            <img src={`/cards/${card.image}`} alt={card.name} className="w-full h-full object-cover" />
             <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4">
               <h3 className="text-lg font-semibold">{card.name}</h3>
               <p className="text-sm">{card.element} | {card.type} | {card.rarity}</p>

@@ -6,10 +6,14 @@ const Card = ({ card }) => {
   return (
     <Link to={`/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}`}>
       <motion.div
-        className="w-full pb-[140%] rounded-lg overflow-hidden shadow-lg relative"
+        className="w-full pb-[140%] rounded-lg overflow-hidden shadow-lg relative cursor-pointer"
         whileHover={{ scale: 1.05 }}
       >
-        <img src={card.image} alt={card.name} className="absolute inset-0 w-full h-full object-cover" />
+        <img 
+          src={`/storage/images/cards/${card.image}`} 
+          alt={card.name} 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
           <h3 className="text-sm font-semibold">{card.name}</h3>
           <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>

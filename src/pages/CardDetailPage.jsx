@@ -9,10 +9,10 @@ const CardDetailPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/data/cards.json')
+    fetch('/storage/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
-        const foundCard = data.find(c => c.name.toLowerCase() === cardName.replace(/-/g, ' '));
+        const foundCard = data.cards.find(c => c.name.toLowerCase() === cardName.replace(/-/g, ' '));
         if (foundCard) {
           setCard(foundCard);
         } else {
@@ -34,7 +34,11 @@ const CardDetailPage = () => {
     <div className="container mx-auto px-4 py-8">
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2">
-          <img src={card.image} alt={card.name} className="w-full h-auto rounded-lg shadow-lg" />
+          <img 
+            src={`/storage/images/cards/${card.image}`} 
+            alt={card.name} 
+            className="w-full h-auto rounded-lg shadow-lg"
+          />
         </div>
         <div className="w-full md:w-1/2">
           <h1 className="text-4xl font-bold mb-4">{card.name}</h1>

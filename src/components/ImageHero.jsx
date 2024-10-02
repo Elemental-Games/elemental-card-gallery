@@ -9,7 +9,7 @@ const ImageHero = () => {
         <img
           src="/storage/Background.jpg"
           alt="Background Image"
-          className="absolute w-full h-full object-cover md:object-center"
+          className="absolute w-full h-full object-cover md:object-center mobile-pan"
         />
       </div>
       
@@ -38,6 +38,10 @@ const ImageHero = () => {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
         @media (max-width: 768px) {
+          .mobile-pan {
+            width: 200%;
+            animation: panBackground 30s linear infinite;
+          }
           @keyframes panBackground {
             from {
               transform: translateX(0);
@@ -45,10 +49,6 @@ const ImageHero = () => {
             to {
               transform: translateX(-50%);
             }
-          }
-          .absolute {
-            width: 200%;
-            animation: panBackground 30s linear infinite;
           }
         }
       `}</style>

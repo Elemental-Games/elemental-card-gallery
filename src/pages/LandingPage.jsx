@@ -75,9 +75,9 @@ const LandingPage = () => {
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
       
-      {/* Game Overview Section */}
+      {/* Game Test Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
+        <h2 className="text-4xl font-bold mb-8">Game Test</h2>
         <p className="mb-6 text-lg">
           Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
         </p>

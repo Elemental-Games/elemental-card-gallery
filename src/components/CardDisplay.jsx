@@ -8,7 +8,7 @@ const CardDisplay = ({ card }) => {
   return (
     <Link to={`/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}`} className="block">
       <motion.div
-        className="w-full pb-[140%] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative cursor-pointer"
+        className="w-full aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative cursor-pointer"
         whileHover={{ scale: 1.05 }}
         onClick={() => setIsFlipped(!isFlipped)}
       >
@@ -20,16 +20,16 @@ const CardDisplay = ({ card }) => {
         >
           <div className="absolute inset-0 backface-hidden">
             <img src={`/cards/${card.image}`} alt={card.name} className="w-full h-full object-cover" />
-            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4">
-              <h3 className="text-lg font-semibold">{card.name}</h3>
-              <p className="text-sm">{card.element} | {card.type} | {card.rarity}</p>
+            <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
+              <h3 className="text-sm font-semibold">{card.name}</h3>
+              <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
             </div>
           </div>
           <div className="absolute inset-0 backface-hidden" style={{ transform: 'rotateY(180deg)' }}>
-            <div className="bg-gray-800 text-white p-4 h-full">
-              <h3 className="text-lg font-semibold mb-2">{card.name}</h3>
-              <p className="text-sm mb-2">{card.element} | {card.type} | {card.rarity}</p>
-              <p className="text-sm">{card.description}</p>
+            <div className="bg-gray-800 text-white p-4 h-full overflow-y-auto">
+              <h3 className="text-sm font-semibold mb-2">{card.name}</h3>
+              <p className="text-xs mb-2">{card.element} | {card.type} | {card.rarity}</p>
+              <p className="text-xs">{card.description}</p>
             </div>
           </div>
         </motion.div>

@@ -11,7 +11,7 @@ const ImageHero = () => {
         className="absolute z-0 w-full h-full object-cover"
       />
       
-      <div className="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-center">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="text-center px-4">
           <h1 className="text-6xl font-bold text-white mb-4 shadow-text">
             Welcome to Elemental Masters
@@ -30,7 +30,7 @@ const ImageHero = () => {
       </div>
       <style jsx>{`
         .shadow-text {
-          text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
         .shadow-lg {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);

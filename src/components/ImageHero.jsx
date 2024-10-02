@@ -13,10 +13,10 @@ const ImageHero = () => {
       
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="text-center px-4">
-          <h1 className="text-6xl font-bold text-white mb-4 shadow-text">
+          <h1 className="text-6xl font-bold text-white mb-4 shadow-text stroke-text">
             Welcome to Elemental Masters
           </h1>
-          <p className="text-2xl text-white mb-6 shadow-text">
+          <p className="text-2xl text-white mb-6 shadow-text stroke-text">
             Unleash the power of the elements
           </p>
           <Link to="/join">
@@ -30,7 +30,11 @@ const ImageHero = () => {
       </div>
       <style jsx>{`
         .shadow-text {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .stroke-text {
+          -webkit-text-stroke: 2px black;
+          text-stroke: 2px black;
         }
         .shadow-lg {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);

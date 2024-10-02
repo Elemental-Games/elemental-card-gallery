@@ -99,7 +99,7 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <img 
-              src={`${import.meta.env.VITE_S3_BUCKET_URL}/Masters_Logo.jpg`} 
+              src="/storage/Elemental Masters - 1MB.png" 
               alt="Elemental Games Logo" 
               style={{ width: '200px', height: '125px', marginRight: '8px', marginBottom: '-20px' }}
             />
@@ -113,7 +113,7 @@ const LandingPage = () => {
                 onClick={() => handleElementClick(element.name)}
               >
                 <img 
-                  src={`${import.meta.env.VITE_S3_BUCKET_URL}/icons/${element.name}.png`}
+                  src={`/storage/icons/${element.name}.png`}
                   alt={`${element.name} Icon`}
                   style={{ width: '100px', height: '110px', marginLeft: '85px', marginRight: '8px', marginBottom: '-20px' }}
                 />
@@ -145,7 +145,7 @@ const LandingPage = () => {
       </div>
       {showLightBox && (
         <LightBox
-          cardImage={`${import.meta.env.VITE_S3_BUCKET_URL}/cards/deepseer.png`}
+          cardImage="/storage/images/cards/deepseer.png"
           onClose={() => setShowLightBox(false)}
         />
       )}

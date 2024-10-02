@@ -8,6 +8,7 @@ import KinbroldPage from "./pages/KinbroldPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
 import LearnToPlayPage from "./pages/LearnToPlayPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
+import JoinNowPage from "./pages/JoinNowPage.jsx";
 
 export const navItems = [
   {
@@ -68,6 +69,6 @@ export const navItems = [
     title: "Join Now",
     to: "/join",
     icon: <UserPlusIcon className="h-4 w-4" />,
-    page: <div>Join Now Page</div>, // Placeholder for now
+    page: <JoinNowPage />,
   },
 ];

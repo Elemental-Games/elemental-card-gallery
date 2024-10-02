@@ -70,8 +70,8 @@ const CardsOfTheWeek = () => {
     fetch('/storage/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
-        // Select the first 4 cards from the JSON data
-        const selectedCards = data.cards.slice(0, 4);
+        const cardNames = ['deepseer', 'cloud-sprinter', 'kindro', 'terra'];
+        const selectedCards = data.cards.filter(card => cardNames.includes(card.id));
         setCards(selectedCards);
         setFlippedCards(new Array(selectedCards.length).fill(false));
       })

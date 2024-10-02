@@ -14,9 +14,12 @@ const GameplayPage = () => {
         <Link to="/rules">
           <Button className="mr-4">View Full Rules</Button>
         </Link>
-        <Button onClick={() => window.open('/rulebook.pdf', '_blank')}>
+        <Button onClick={() => window.open('/rulebook.pdf', '_blank')} className="mr-4">
           <Download className="mr-2 h-4 w-4" /> Download Rulebook PDF
         </Button>
+        <Link to="/learn-to-play">
+          <Button>Learn More</Button>
+        </Link>
       </div>
       <h2 className="text-2xl font-semibold mb-4">Quick Overview</h2>
       <ul className="list-disc list-inside mb-6 space-y-2">

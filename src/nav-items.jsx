@@ -1,4 +1,4 @@
-import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, MapIcon } from "lucide-react";
+import { HomeIcon, LayoutGridIcon, GamepadIcon, InfoIcon, UserPlusIcon, MapIcon, BookOpenIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import CardGalleryPage from "./pages/CardListPage.jsx";
 import DeckBuilderPage from "./pages/DeckBuilderPage.jsx";
@@ -6,6 +6,8 @@ import GameplayPage from "./pages/GameplayPage.jsx";
 import RulesPage from "./pages/RulesPage.jsx";
 import KinbroldPage from "./pages/KinbroldPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
+import LearnToPlayPage from "./pages/LearnToPlayPage.jsx";
+import AboutUsPage from "./pages/AboutUsPage.jsx";
 
 export const navItems = [
   {
@@ -45,6 +47,12 @@ export const navItems = [
     page: <RulesPage />,
   },
   {
+    title: "Learn to Play",
+    to: "/learn-to-play",
+    icon: <BookOpenIcon className="h-4 w-4" />,
+    page: <LearnToPlayPage />,
+  },
+  {
     title: "Kinbrold",
     to: "/kinbrold",
     icon: <MapIcon className="h-4 w-4" />,
@@ -54,7 +62,7 @@ export const navItems = [
     title: "About Us",
     to: "/about",
     icon: <InfoIcon className="h-4 w-4" />,
-    page: <div>About Us Page</div>, // Placeholder for now
+    page: <AboutUsPage />,
   },
   {
     title: "Join Now",

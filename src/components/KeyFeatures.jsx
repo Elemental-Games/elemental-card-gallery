@@ -36,7 +36,7 @@ const FeatureCard = ({ feature, isExpanded, onClick }) => (
     layout
     transition={{ duration: 0.5, type: 'spring' }}
   >
-    <div className="flex items-center mb-4 justify-center">
+    <div className="flex items-center mb-4">
       <span className="text-4xl mr-4">{feature.icon}</span>
       <h3 className="text-xl font-semibold">{feature.title}</h3>
     </div>
@@ -45,13 +45,12 @@ const FeatureCard = ({ feature, isExpanded, onClick }) => (
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.5 }}
-        className="text-center"
       >
         {feature.description}
       </motion.p>
     ) : (
       <motion.p
-        className="text-sm text-gray-300 text-center"
+        className="text-sm text-gray-300"
         initial={{ opacity: 1 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
@@ -66,7 +65,7 @@ const KeyFeatures = () => {
   const [expandedIndex, setExpandedIndex] = useState(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {features.map((feature, index) => (
         <FeatureCard
           key={index}

@@ -46,7 +46,7 @@ const ImageHero = () => {
           </p>
           <Link to="/join">
             <Button 
-              className="bg-purple-800 text-yellow-300 border-4 border-yellow-300 px-12 py-6 text-3xl font-bold rounded-2xl transition-all duration-300 hover:bg-purple-600 hover:scale-110 hover:text-yellow-200 hover:border-yellow-200"
+              className="bg-purple-800 text-yellow-300 border-2 border-yellow-300 px-6 py-3 text-xl font-bold rounded-lg transition-all duration-300 hover:bg-purple-600 hover:scale-110 hover:text-yellow-200 hover:border-yellow-200"
             >
               Join Now
             </Button>

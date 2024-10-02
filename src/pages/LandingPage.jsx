@@ -75,6 +75,17 @@ const LandingPage = () => {
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
       
+      {/* Join Now Button */}
+      <div className="text-center mt-8">
+        <Link to="/join">
+          <Button 
+            className="bg-purple-800 text-yellow-300 border-2 border-yellow-300 px-6 py-3 text-xl font-bold rounded-lg transition-all duration-300 hover:bg-purple-600 hover:scale-110 hover:text-yellow-200 hover:border-yellow-200"
+          >
+            Join Now
+          </Button>
+        </Link>
+      </div>
+
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">
         <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
@@ -86,7 +97,7 @@ const LandingPage = () => {
 
       <div className="container mx-auto px-4 py-16">
         <section className="mb-16">
-          <h2 className="text-4xl font-bold mb-8 flex items-center justify-center">
+          <h2 className="text-4xl font-bold mb-8 flex items-center">
             <img 
               src="/storage/Elemental Masters - 1MB.png" 
               alt="Elemental Games Logo" 
@@ -107,7 +118,7 @@ const LandingPage = () => {
                     alt={`${element.name} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-semibold mb-2 text-center">{element.name}</h3>
+                  <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
                   <p className="mb-4">{element.description}</p>
                 </div>
                 <Button variant="outline" className="mt-auto">Explore {element.name} Cards</Button>

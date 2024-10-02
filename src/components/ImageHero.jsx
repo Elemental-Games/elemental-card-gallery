@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 const ImageHero = () => {
   return (
     <div className="relative h-screen overflow-hidden">
-      <img
-        src="/storage/Background.jpg"
-        alt="Background Image"
-        className="absolute z-0 w-full h-full object-cover"
-      />
+      <div className="absolute inset-0 w-[200%] h-full animate-pan-background md:animate-none">
+        <img
+          src="/storage/Background.jpg"
+          alt="Background Image"
+          className="absolute w-full h-full object-cover"
+        />
+      </div>
       
       <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
         <div className="text-center px-4">
@@ -34,6 +36,17 @@ const ImageHero = () => {
         }
         .shadow-lg {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes panBackground {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        .animate-pan-background {
+          animation: panBackground 30s linear infinite;
         }
       `}</style>
     </div>

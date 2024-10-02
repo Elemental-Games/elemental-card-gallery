@@ -52,7 +52,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           style={{ transform: 'rotateY(180deg)' }}
         >
           <img
-            src={card.image}
+            src={`/storage/images/cards/${card.image}`}
             alt={card.name}
             className="w-full h-full object-cover"
           />
@@ -70,6 +70,7 @@ const CardsOfTheWeek = () => {
     fetch('/storage/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
+        // Select the first 4 cards from the JSON data
         const selectedCards = data.cards.slice(0, 4);
         setCards(selectedCards);
         setFlippedCards(new Array(selectedCards.length).fill(false));

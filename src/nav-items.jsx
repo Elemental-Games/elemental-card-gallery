@@ -42,18 +42,18 @@ export const navItems = [
     page: <GameplayPage />,
     subItems: [
       {
-        title: "Rules",
-        to: "rules",
-        icon: <BookOpenIcon className="h-4 w-4" />,
-        page: <RulesPage />,
-      },
-      {
         title: "Learn to Play",
         to: "learn",
         icon: <GraduationCapIcon className="h-4 w-4" />,
         page: <LearnToPlayPage />,
       },
     ],
+  },
+  {
+    title: "Rules",
+    to: "/rules",
+    icon: <BookOpenIcon className="h-4 w-4" />,
+    page: <RulesPage />,
   },
   {
     title: "Kinbrold",

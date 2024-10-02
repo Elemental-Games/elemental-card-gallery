@@ -14,6 +14,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import CardListPage from "./pages/CardListPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import RulesPage from "./pages/RulesPage";
+import LearnToPlayPage from "./pages/LearnToPlayPage";
 import ScartoPage from "./pages/ScartoPage";
 import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
@@ -42,7 +43,8 @@ const App = () => (
                   ))}
                   <Route path="/cards/card-list" element={<CardListPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
-                  <Route path="/gameplay/rules" element={<RulesPage />} />
+                  <Route path="/rules" element={<RulesPage />} />
+                  <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
                   <Route path="/kinbrold/scarto" element={<ScartoPage />} />
                   <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
                   <Route path="/kinbrold/zalos" element={<ZalosPage />} />

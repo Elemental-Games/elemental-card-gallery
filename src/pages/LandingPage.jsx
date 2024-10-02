@@ -88,7 +88,7 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap">
             <img 
-              src="/storage/Elemental Masters - 1MB.png" 
+              src="/storage/Games_Logo.png" 
               alt="Elemental Games Logo" 
               className="w-40 h-auto mr-4 mb-4 sm:mb-0"
             />
@@ -136,7 +136,6 @@ const LandingPage = () => {
       </div>
       {showLightBox && (
         <LightBox
-          cardImage="/storage/images/cards/deepseer.png"
           onClose={() => setShowLightBox(false)}
         />
       )}

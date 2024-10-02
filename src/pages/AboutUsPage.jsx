@@ -13,7 +13,7 @@ const AboutUsPage = () => {
     >
       <h1 className="text-4xl font-bold mb-6">About Us</h1>
       
-      <div className="flex flex-col md:flex-row items-start mb-8">
+      <div className="flex flex-col md:flex-row items-start mb-4">
         <div className="md:w-2/3 md:pr-8">
           <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
           <p className="mb-4">

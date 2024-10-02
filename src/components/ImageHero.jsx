@@ -5,15 +5,11 @@ import { Button } from "@/components/ui/button";
 const ImageHero = () => {
   return (
     <div className="relative h-screen overflow-hidden">
-      <video
-        autoPlay
-        loop
-        muted
+      <img
+        src="/background_gif2.gif"
+        alt="Background GIF"
         className="absolute z-0 w-full h-full object-cover"
-      >
-        <source src="/background_video.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      />
       
       <div className="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-center">
         <div className="text-center px-4">

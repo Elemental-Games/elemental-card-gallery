@@ -11,8 +11,11 @@ const Header = () => {
   const navItems = [
     { title: 'Home', path: '/' },
     { title: 'Kinbrold', path: '/kinbrold' },
-    { title: 'Cards', path: '/cards' },
+    { title: 'Card Gallery', path: '/card-gallery' },
+    { title: 'Deck Builder', path: '/deck-builder' },
     { title: 'Gameplay', path: '/gameplay' },
+    { title: 'Rules', path: '/rules' },
+    { title: 'Learn to Play', path: '/learn' },
     { title: 'About Us', path: '/about' },
     { title: 'Join Now', path: '/join' },
   ];

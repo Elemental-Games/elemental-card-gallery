@@ -1,27 +1,32 @@
 {
   "cards": [
     {
-      "cardNumber": 1,
       "id": "cloud-sprinter",
       "name": "Cloud Sprinter",
       "element": "Air",
       "type": "Creature",
-      "rune": NaN,
-      "tier": NaN,
       "rarity": "C",
-      "strength": 75.0,
-      "agility": 75.0,
-      "abilityName": NaN,
-      "ability": NaN,
-      "specialAbilityName": NaN,
-      "specialAbility": NaN,
-      "specialAbilityCost": NaN,
-      "essenceCost": 0.0,
-      "essenceGeneration": 1.0,
+      "strength": 75,
+      "agility": 75,
+      "essenceCost": 0,
+      "essenceGeneration": 1,
       "quote": "\"Across the celestial canvas, I race with the winds, leaving clouds in my wake.\"",
-      "synergies": "[{\"card\":{\"id\":\"4\",\"name\":\"Wind Rider\"},\"rating\":\"S\",\"color\":\"text-green-500\"},{\"card\":{\"id\":\"7\",\"name\":\"Cloud Warden\"},\"rating\":\"B\",\"color\":\"text-yellow-500\"}]",
-      "counters": "[{\"card\":{\"id\":\"25\",\"name\":\"Swiftreaver\"},\"rating\":\"S\",\"color\":\"text-green-500\"},{\"card\":{\"id\":\"26\",\"name\":\"Earth Dweller\"},\"rating\":\"B\",\"color\":\"text-yellow-500\"}]",
-      "news": "[{\"title\":\"Air Structure Deck\",\"date\":\"2024-09-27\",\"description\":\"Check out our latest video showcasing the Air Structure Deck in action!\",\"link\":\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"}]"
+      "synergies": [
+        {"card":{"id":"4","name":"Wind Rider"},"rating":"S","color":"text-green-500"},
+        {"card":{"id":"7","name":"Cloud Warden"},"rating":"B","color":"text-yellow-500"}
+      ],
+      "counters": [
+        {"card":{"id":"25","name":"Swiftreaver"},"rating":"S","color":"text-green-500"},
+        {"card":{"id":"26","name":"Earth Dweller"},"rating":"B","color":"text-yellow-500"}
+      ],
+      "news": [
+        {
+          "title": "Air Structure Deck",
+          "date": "2024-09-27",
+          "description": "Check out our latest video showcasing the Air Structure Deck in action!",
+          "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+      ]
     },
     {
       "cardNumber": 2,

@@ -1,51 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 
 const ImageHero = () => {
-  const [showVideo, setShowVideo] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowVideo(false);
-    }, 5000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
-    <div className="relative h-screen">
-      <AnimatePresence>
-        {showVideo && (
-          <motion.div
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 1 }}
-            className="absolute inset-0"
-          >
-            <video
-              autoPlay
-              loop
-              muted
-              className="w-full h-full object-cover"
-            >
-              <source src="/leaves-background.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <div 
-        className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center"
-        style={{
-          backgroundImage: 'url("/storage/Background.jpg")',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat'
-        }}
+    <div className="relative h-screen overflow-hidden">
+      <video
+        autoPlay
+        loop
+        muted
+        className="absolute z-0 w-full h-full object-cover"
       >
-        <div className="text-center z-10 px-4">
+        <source src="/background_video.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
+      <div className="absolute inset-0 bg-black bg-opacity-50 z-10 flex flex-col items-center justify-center">
+        <div className="text-center px-4">
           <h1 className="text-6xl font-bold text-white mb-4 shadow-text">
             Welcome to Elemental Masters
           </h1>

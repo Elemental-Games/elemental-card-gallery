@@ -13,23 +13,26 @@ const AboutUsPage = () => {
     >
       <h1 className="text-4xl font-bold mb-6">About Us</h1>
       
-      <div className="flex flex-col md:flex-row items-start mb-4">
+      <div className="flex flex-col md:flex-row items-start mb-2">
         <div className="md:w-2/3 md:pr-8">
           <h2 className="text-2xl font-semibold mb-4">Our Story</h2>
           <p className="mb-4">
             Elemental Games was founded in 2022 by Mark Diorio, a visionary game developer with a passion for elemental themes and strategic gameplay. With a background in Electrical and Computer Engineering, Mark brings a unique blend of technical expertise and creative game design to the world of Kinbrold.
           </p>
         </div>
-        <div className="md:w-1/3 mt-4 md:mt-0">
+        <div className="md:w-1/3 mt-4 md:mt-0 relative group">
           <img 
             src="/me.jpeg" 
             alt="Mark Diorio" 
-            className="rounded-full border-4 border-primary mx-auto md:ml-auto object-cover w-48 h-48"
+            className="rounded-full border-4 border-primary mx-auto md:ml-auto object-cover w-48 h-48 transition-transform duration-300 ease-in-out transform group-hover:scale-110"
           />
+          <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+            <span className="text-white text-sm">Click to enlarge</span>
+          </div>
         </div>
       </div>
 
-      <section className="mb-8">
+      <section className="mb-6">
         <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
         <p>
           At Elemental Games, we're on a quest to revolutionize the gaming industry by creating immersive experiences centered around the four primordial elements: Air, Water, Earth, and Fire. Our journey begins with Elemental Masters, a Trading Card Game that serves as the cornerstone of our expanding universe.

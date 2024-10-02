@@ -1,7 +1,7 @@
-```json
 {
   "cards": [
     {
+      "cardNumber": "001",
       "id": "cloud-sprinter",
       "name": "Cloud Sprinter",
       "element": "Air",
@@ -30,6 +30,7 @@
       ]
     },
     {
+      "cardNumber": "002",
       "id": "breeze-imp",
       "name": "Breeze Imp",
       "element": "Air",
@@ -39,12 +40,10 @@
       "agility": 70,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Born of zephyrs and mischief, I ride the gentle currents.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Born of zephyrs and mischief, I ride the gentle currents.\""
     },
     {
+      "cardNumber": "003",
       "id": "gust-griffin",
       "name": "Gust Griffin",
       "element": "Air",
@@ -54,12 +53,10 @@
       "agility": 65,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With wings of wind, I soar through the tempest, untamed and fierce.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With wings of wind, I soar through the tempest, untamed and fierce.\""
     },
     {
+      "cardNumber": "004",
       "id": "wind-rider",
       "name": "Wind Rider",
       "element": "Air",
@@ -69,12 +66,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"In harmony with the breezes, we embrace freedom, swift and untethered.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"In harmony with the breezes, we embrace freedom, swift and untethered.\""
     },
     {
+      "cardNumber": "005",
       "id": "flying-dwarf",
       "name": "Flying Dwarf",
       "element": "Air",
@@ -84,12 +79,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Defying gravity's grasp, I take to the skies, a dwarf untethered.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Defying gravity's grasp, I take to the skies, a dwarf untethered.\""
     },
     {
+      "cardNumber": "006",
       "id": "stormreaver",
       "name": "Stormreaver",
       "element": "Air",
@@ -99,12 +92,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With thunderous might, I command the storm, a force to be reckoned with.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With thunderous might, I command the storm, a force to be reckoned with.\""
     },
     {
+      "cardNumber": "007",
       "id": "cloud-warden",
       "name": "Cloud Warden",
       "element": "Air",
@@ -114,12 +105,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Amidst the billowing mists, I stand vigilant, protecting the secrets of the skies.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Amidst the billowing mists, I stand vigilant, protecting the secrets of the skies.\""
     },
     {
+      "cardNumber": "008",
       "id": "aqua-dart",
       "name": "Aqua Dart",
       "element": "Water",
@@ -129,12 +118,10 @@
       "agility": 70,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Swift as the flowing stream, I pierce through defenses, leaving no trace behind.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Swift as the flowing stream, I pierce through defenses, leaving no trace behind.\""
     },
     {
+      "cardNumber": "009",
       "id": "tide-chaser",
       "name": "Tide Chaser",
       "element": "Water",
@@ -144,12 +131,10 @@
       "agility": 65,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With the fury of crashing waves, I strike, a torrential force of nature.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With the fury of crashing waves, I strike, a torrential force of nature.\""
     },
     {
+      "cardNumber": "010",
       "id": "riptide-revenant",
       "name": "Riptide Revenant",
       "element": "Water",
@@ -159,12 +144,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Ravaging through the currents, I am the embodiment of fluidity and speed.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Ravaging through the currents, I am the embodiment of fluidity and speed.\""
     },
     {
+      "cardNumber": "011",
       "id": "misty-mutt",
       "name": "Misty Mutt",
       "element": "Water",
@@ -174,12 +157,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Roaming the misty waters, I bring peace to those in need.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Roaming the misty waters, I bring peace to those in need.\""
     },
     {
+      "cardNumber": "012",
       "id": "lagoon-lurker",
       "name": "Lagoon Lurker",
       "element": "Water",
@@ -189,12 +170,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Unleashing the chaotic fury of the whirlpool, I engulf all who dare to challenge me.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Unleashing the chaotic fury of the whirlpool, I engulf all who dare to challenge me.\""
     },
     {
+      "cardNumber": "013",
       "id": "vortex-mauler",
       "name": "Vortex Mauler",
       "element": "Water",
@@ -204,12 +183,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"In the heart of the tempest, I become the swirling chaos, tearing apart my foes.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"In the heart of the tempest, I become the swirling chaos, tearing apart my foes.\""
     },
     {
+      "cardNumber": "014",
       "id": "wave-guarder",
       "name": "Wave Guarder",
       "element": "Water",
@@ -219,12 +196,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Ever watchful over the ocean's depths, I protect the serenity within its tumultuous nature.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Ever watchful over the ocean's depths, I protect the serenity within its tumultuous nature.\""
     },
     {
+      "cardNumber": "015",
       "id": "ember-flicker",
       "name": "Ember Flicker",
       "element": "Fire",
@@ -234,12 +209,10 @@
       "agility": 65,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"From the flickering embers, I rise, a spark of untamed fire.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"From the flickering embers, I rise, a spark of untamed fire.\""
     },
     {
+      "cardNumber": "016",
       "id": "inferno-serpent",
       "name": "Inferno Serpent",
       "element": "Fire",
@@ -249,12 +222,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With flame-like fangs, I burn, scorching the opposition in my wake.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With flame-like fangs, I burn, scorching the opposition in my wake.\""
     },
     {
+      "cardNumber": "017",
       "id": "swiftfire-wyvern",
       "name": "Swiftfire Wyvern",
       "element": "Fire",
@@ -264,12 +235,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Like a blazing comet, I streak across the heavens, leaving trails of fire behind.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Like a blazing comet, I streak across the heavens, leaving trails of fire behind.\""
     },
     {
+      "cardNumber": "018",
       "id": "sizzle-snout",
       "name": "Sizzle Snout",
       "element": "Fire",
@@ -279,12 +248,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Forged in the heart of inferno, my snout burns all that stands in my way.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Forged in the heart of inferno, my snout burns all that stands in my way.\""
     },
     {
+      "cardNumber": "019",
       "id": "firestorm-brute",
       "name": "Firestorm Brute",
       "element": "Fire",
@@ -294,12 +261,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Unleashing the fury of a raging inferno, I consume all in my path.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Unleashing the fury of a raging inferno, I consume all in my path.\""
     },
     {
+      "cardNumber": "020",
       "id": "flame-ravager",
       "name": "Flame Ravager",
       "element": "Fire",
@@ -309,12 +274,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Through scorching flames, I unleash devastation, leaving a trail of destruction behind.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Through scorching flames, I unleash devastation, leaving a trail of destruction behind.\""
     },
     {
+      "cardNumber": "021",
       "id": "flame-guardian",
       "name": "Flame Guardian",
       "element": "Fire",
@@ -324,12 +287,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"A shield of fire, I stand firm, warding off all who dare to approach.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"A shield of fire, I stand firm, warding off all who dare to approach.\""
     },
     {
+      "cardNumber": "022",
       "id": "terra-sprinter",
       "name": "Terra Sprinter",
       "element": "Earth",
@@ -339,12 +300,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With earth beneath my feet, I sprint through the land, unstoppable and swift.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With earth beneath my feet, I sprint through the land, unstoppable and swift.\""
     },
     {
+      "cardNumber": "023",
       "id": "sandy-scuttler",
       "name": "Sandy Scuttler",
       "element": "Earth",
@@ -354,12 +313,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Within the shifting sands, I navigate effortlessly, striking with precision.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Within the shifting sands, I navigate effortlessly, striking with precision.\""
     },
     {
+      "cardNumber": "024",
       "id": "swiftreaver",
       "name": "Swiftreaver",
       "element": "Earth",
@@ -369,12 +326,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Like the rolling sands, I burrow beneath my foes, leaving no time to react.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Like the rolling sands, I burrow beneath my foes, leaving no time to react.\""
     },
     {
+      "cardNumber": "025",
       "id": "earth-dweller",
       "name": "Earth Dweller",
       "element": "Earth",
@@ -384,12 +339,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"A master of earth, I engage in a dance of strength and agility, toppling my adversaries.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"A master of earth, I engage in a dance of strength and agility, toppling my adversaries.\""
     },
     {
+      "cardNumber": "026",
       "id": "geo-monkey",
       "name": "Geo Monkey",
       "element": "Earth",
@@ -399,12 +352,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"With unstoppable force, I shatter the mountains, reducing them to rubble.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With unstoppable force, I shatter the mountains, reducing them to rubble.\""
     },
     {
+      "cardNumber": "027",
       "id": "mountain-crusher",
       "name": "Mountain Crusher",
       "element": "Earth",
@@ -414,12 +365,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"Unyielding and immovable, I am the epitome of strength.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Unyielding and immovable, I am the epitome of strength.\""
     },
     {
+      "cardNumber": "028",
       "id": "stone-behemoth",
       "name": "Stone Behemoth",
       "element": "Earth",
@@ -429,12 +378,10 @@
       "agility": 30,
       "essenceCost": 0,
       "essenceGeneration": 1,
-      "quote": "\"An unbreakable fortress, I withstand all assaults, offering steadfast protection.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"An unbreakable fortress, I withstand all assaults, offering steadfast protection.\""
     },
     {
+      "cardNumber": "029",
       "id": "wind-sprite",
       "name": "Wind Sprite",
       "element": "Air",
@@ -444,12 +391,10 @@
       "agility": 65,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "030",
       "id": "aerofeet",
       "name": "Aerofeet",
       "element": "Air",
@@ -459,12 +404,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "031",
       "id": "skyborne-slicer",
       "name": "Skyborne Slicer",
       "element": "Air",
@@ -474,12 +417,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "032",
       "id": "aero-elf",
       "name": "Aero Elf",
       "element": "Air",
@@ -489,12 +430,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "033",
       "id": "storm-ghost",
       "name": "Storm Ghost",
       "element": "Air",
@@ -504,12 +443,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "034",
       "id": "wind-troll",
       "name": "Wind Troll",
       "element": "Air",
@@ -519,12 +456,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "035",
       "id": "cyclone-sentinel",
       "name": "Cyclone Sentinel",
       "element": "Air",
@@ -534,12 +469,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": null
     },
     {
+      "cardNumber": "036",
       "id": "river-sprite",
       "name": "River Sprite",
       "element": "Water",
@@ -549,12 +482,10 @@
       "agility": 60,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card inflicts battle damage to a creature, generate 1 Water Essence.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card inflicts battle damage to a creature, generate 1 Water Essence."
     },
     {
+      "cardNumber": "037",
       "id": "aqua-shade",
       "name": "Aqua Shade",
       "element": "Water",
@@ -564,12 +495,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card is summoned, this creature cannot be attacked or targeted by abilities until the beginning of your next turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is summoned, this creature cannot be attacked or targeted by abilities until the beginning of your next turn."
     },
     {
+      "cardNumber": "038",
       "id": "sea-serpent",
       "name": "Sea Serpent",
       "element": "Water",
@@ -579,12 +508,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card destroys another creature by battle, steal 1 essence from your opponent.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card destroys another creature by battle, steal 1 essence from your opponent."
     },
     {
+      "cardNumber": "039",
       "id": "naiad-elf",
       "name": "Naiad Elf",
       "element": "Water",
@@ -594,12 +521,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card is destroyed by battle, summon 1 Water creature that consumes 0 essence from your deck (excluding “Naiad Elf”).",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is destroyed by battle, summon 1 Water creature that consumes 0 essence from your deck (excluding “Naiad Elf”)."
     },
     {
+      "cardNumber": "040",
       "id": "deepseer",
       "name": "Deepseer",
       "element": "Water",
@@ -609,12 +534,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "Once per turn, you may look at the bottom 2 cards of your deck. Send 1 card to the graveyard and put the other card on top of your deck.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, you may look at the bottom 2 cards of your deck. Send 1 card to the graveyard and put the other card on top of your deck."
     },
     {
+      "cardNumber": "041",
       "id": "oceanus",
       "name": "Oceanus",
       "element": "Water",
@@ -624,12 +547,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "This creature gains 45 Strength when attacking blocking creatures.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "This creature gains 45 Strength when attacking blocking creatures."
     },
     {
+      "cardNumber": "042",
       "id": "aquarion",
       "name": "Aquarion",
       "element": "Water",
@@ -639,12 +560,10 @@
       "agility": 30,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When another creature blocks for this card, the blocking creature gains 20 Strength until the end of the turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When another creature blocks for this card, the blocking creature gains 20 Strength until the end of the turn."
     },
     {
+      "cardNumber": "043",
       "id": "cinder-sprite",
       "name": "Cinder Sprite",
       "element": "Fire",
@@ -654,12 +573,10 @@
       "agility": 55,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card inflicts battle damage to a creature, generate 1 Fire Essence.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card inflicts battle damage to a creature, generate 1 Fire Essence."
     },
     {
+      "cardNumber": "044",
       "id": "embermander",
       "name": "Embermander",
       "element": "Fire",
@@ -669,12 +586,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "Once per turn, you can switch the position of 1 creature on the field.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, you can switch the position of 1 creature on the field."
     },
     {
+      "cardNumber": "045",
       "id": "solar-phoenix",
       "name": "Solar Phoenix",
       "element": "Fire",
@@ -684,12 +599,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card is destroyed by battle, summon 1 Fire creature that consumes 0 essence from your deck (excluding “Solar Phoenix”).",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is destroyed by battle, summon 1 Fire creature that consumes 0 essence from your deck (excluding “Solar Phoenix”)."
     },
     {
+      "cardNumber": "046",
       "id": "ardor-elf",
       "name": "Ardor Elf",
       "element": "Fire",
@@ -699,12 +612,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card destroys another creature by battle, it deals direct damage to your opponent equal to the destroyed creature's strength.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card destroys another creature by battle, it deals direct damage to your opponent equal to the destroyed creature's strength."
     },
     {
+      "cardNumber": "047",
       "id": "emberwing",
       "name": "Emberwing",
       "element": "Fire",
@@ -714,12 +625,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "Once per turn, deal 25 damage to any creature on the field.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, deal 25 damage to any creature on the field."
     },
     {
+      "cardNumber": "048",
       "id": "inferno-beast",
       "name": "Inferno Beast",
       "element": "Fire",
@@ -729,12 +638,10 @@
       "agility": 30,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card is destroyed by battle, your opponent consumes 1 Essence of your choice.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is destroyed by battle, your opponent consumes 1 Essence of your choice."
     },
     {
+      "cardNumber": "049",
       "id": "flamekeeper",
       "name": "Flamekeeper",
       "element": "Fire",
@@ -744,12 +651,10 @@
       "agility": 25,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this card attacks a blocking creature, gain 25 Strength until end of the turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card attacks a blocking creature, gain 25 Strength until end of the turn."
     },
     {
+      "cardNumber": "050",
       "id": "ivy-gila",
       "name": "Ivy Gila",
       "element": "Earth",
@@ -759,12 +664,10 @@
       "agility": 50,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "This creature's attack cannot be blocked.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "This creature's attack cannot be blocked."
     },
     {
+      "cardNumber": "051",
       "id": "nimblefoot",
       "name": "Nimblefoot",
       "element": "Earth",
@@ -774,12 +677,10 @@
       "agility": 45,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this creature blocks for another creature, gain 1 Earth Essence.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this creature blocks for another creature, gain 1 Earth Essence."
     },
     {
+      "cardNumber": "052",
       "id": "terragon",
       "name": "Terragon",
       "element": "Earth",
@@ -789,12 +690,10 @@
       "agility": 40,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "Once per turn, switch the position of an opponent's creature.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, switch the position of an opponent's creature."
     },
     {
+      "cardNumber": "053",
       "id": "verdant-elf",
       "name": "Verdant Elf",
       "element": "Earth",
@@ -804,12 +703,10 @@
       "agility": 35,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When blocking for another creature, gain 15 Strength.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When blocking for another creature, gain 15 Strength."
     },
     {
+      "cardNumber": "054",
       "id": "boulder-brute",
       "name": "Boulder Brute",
       "element": "Earth",
@@ -819,12 +716,10 @@
       "agility": 30,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "This creature deals an extra 55 damage when attacking shields.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "This creature deals an extra 55 damage when attacking shields."
     },
     {
+      "cardNumber": "055",
       "id": "mountain-giant",
       "name": "Mountain Giant",
       "element": "Earth",
@@ -834,12 +729,10 @@
       "agility": 25,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "Once per turn, you may gain 65 Strength until the end of the turn, but this card does not regain its action next turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, you may gain 65 Strength until the end of the turn, but this card does not regain its action next turn."
     },
     {
+      "cardNumber": "056",
       "id": "terra-warden",
       "name": "Terra Warden",
       "element": "Earth",
@@ -849,12 +742,10 @@
       "agility": 20,
       "essenceCost": 0,
       "essenceGeneration": 2,
-      "quote": "When this creature is destroyed, gain 1 Earth essence for every Earth creature on the field.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this creature is destroyed, gain 1 Earth essence for every Earth creature on the field."
     },
     {
+      "cardNumber": "057",
       "id": "cyclonos",
       "name": "Cyclonos",
       "element": "Air",
@@ -864,12 +755,10 @@
       "agility": 115,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "\"Unleashed from the heart of the tempest, I take flight.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Unleashed from the heart of the tempest, I take flight.\""
     },
     {
+      "cardNumber": "058",
       "id": "avis",
       "name": "Avis",
       "element": "Air",
@@ -879,12 +768,10 @@
       "agility": 105,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"With wings of freedom, I soar through the skies, swift and untethered, leaving a trail of wonder in my wake.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With wings of freedom, I soar through the skies, swift and untethered, leaving a trail of wonder in my wake.\""
     },
     {
+      "cardNumber": "059",
       "id": "vayute",
       "name": "Vayute",
       "element": "Air",
@@ -894,12 +781,10 @@
       "agility": 95,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"I bring both tranquility and force, a gentle caress or a mighty tempest, guided by the winds.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"I bring both tranquility and force, a gentle caress or a mighty tempest, guided by the winds.\""
     },
     {
+      "cardNumber": "060",
       "id": "zephos",
       "name": "Zephos",
       "element": "Air",
@@ -909,12 +794,10 @@
       "agility": 85,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"The azure skies, a symbol of serenity and calm, yet harboring the potential for turbulent power.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"The azure skies, a symbol of serenity and calm, yet harboring the potential for turbulent power.\""
     },
     {
+      "cardNumber": "061",
       "id": "hydran",
       "name": "Hydran",
       "element": "Water",
@@ -924,12 +807,10 @@
       "agility": 100,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"From the depths of the waters, I emerge, a creature of fluid grace, harnessing the currents to wield both tranquility and fury.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"From the depths of the waters, I emerge, a creature of fluid grace, harnessing the currents to wield both tranquility and fury.\""
     },
     {
+      "cardNumber": "062",
       "id": "typhos",
       "name": "Typhos",
       "element": "Water",
@@ -939,12 +820,10 @@
       "agility": 90,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "\"With stormy might, I command the tempest, a force of nature that can bring both destruction and renewal.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With stormy might, I command the tempest, a force of nature that can bring both destruction and renewal.\""
     },
     {
+      "cardNumber": "063",
       "id": "vapora",
       "name": "Vapora",
       "element": "Water",
@@ -954,12 +833,10 @@
       "agility": 80,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"Misty tendrils wrap around me, giving shape to the ephemeral, as I become an ethereal embodiment of air and water.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Misty tendrils wrap around me, giving shape to the ephemeral, as I become an ethereal embodiment of air and water.\""
     },
     {
+      "cardNumber": "064",
       "id": "glacis",
       "name": "Glacis",
       "element": "Water",
@@ -969,12 +846,10 @@
       "agility": 70,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"Through icy breath and frozen touch, I create a realm of frost and chill, a majestic presence that commands respect.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Through icy breath and frozen touch, I create a realm of frost and chill, a majestic presence that commands respect.\""
     },
     {
+      "cardNumber": "065",
       "id": "sunny",
       "name": "Sunny",
       "element": "Fire",
@@ -984,12 +859,10 @@
       "agility": 85,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"Within the swirling vortex, I am the eye of the storm, an enigma of power and calm, ready to unleash my turbulent might.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Within the swirling vortex, I am the eye of the storm, an enigma of power and calm, ready to unleash my turbulent might.\""
     },
     {
+      "cardNumber": "066",
       "id": "kindro",
       "name": "Kindro",
       "element": "Fire",
@@ -999,12 +872,10 @@
       "agility": 75,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "“I carry the whispering embers, bringing harmony and balance to Kinbrold.”",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "“I carry the whispering embers, bringing harmony and balance to Kinbrold.”"
     },
     {
+      "cardNumber": "067",
       "id": "nova",
       "name": "Nova",
       "element": "Fire",
@@ -1014,12 +885,10 @@
       "agility": 65,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "\"With radiant brilliance, I illuminate the skies, a celestial phenomenon that captivates and inspires awe.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With radiant brilliance, I illuminate the skies, a celestial phenomenon that captivates and inspires awe.\""
     },
     {
+      "cardNumber": "068",
       "id": "vorax",
       "name": "Vorax",
       "element": "Fire",
@@ -1029,12 +898,10 @@
       "agility": 55,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"A stout protector, fiery and unyielding, embodying the strength of the land.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"A stout protector, fiery and unyielding, embodying the strength of the land.\""
     },
     {
+      "cardNumber": "069",
       "id": "oris",
       "name": "Oris",
       "element": "Earth",
@@ -1044,12 +911,10 @@
       "agility": 70,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"In the golden light of dawn, I awaken, a harbinger of new beginnings, bringing warmth and vitality to all that surround me.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"In the golden light of dawn, I awaken, a harbinger of new beginnings, bringing warmth and vitality to all that surround me.\""
     },
     {
+      "cardNumber": "070",
       "id": "quarris",
       "name": "Quarris",
       "element": "Earth",
@@ -1059,12 +924,10 @@
       "agility": 60,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"Through the shifting sands, I navigate with grace and precision, a desert dweller with the power to shape the land.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Through the shifting sands, I navigate with grace and precision, a desert dweller with the power to shape the land.\""
     },
     {
+      "cardNumber": "071",
       "id": "roc",
       "name": "Roc",
       "element": "Earth",
@@ -1074,12 +937,10 @@
       "agility": 50,
       "essenceCost": 3,
       "essenceGeneration": 0,
-      "quote": "\"With wings spanning the horizon, I am the embodiment of power and majesty, soaring through the heavens with unwavering strength.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"With wings spanning the horizon, I am the embodiment of power and majesty, soaring through the heavens with unwavering strength.\""
     },
     {
+      "cardNumber": "072",
       "id": "geodar",
       "name": "Geodar",
       "element": "Earth",
@@ -1089,12 +950,10 @@
       "agility": 40,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "\"Rooted deep within the earth, I am a guardian of stone and stability, unyielding and resolute in the face of adversity.\"",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "\"Rooted deep within the earth, I am a guardian of stone and stability, unyielding and resolute in the face of adversity.\""
     },
     {
+      "cardNumber": "073",
       "id": "nimbus",
       "name": "Nimbus | The Air Titan",
       "element": "Air",
@@ -1104,12 +963,10 @@
       "agility": 65,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "When this creature is summoned, choose 1 creature, rune, or counter card on the opponent's side of the field and destroy it.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this creature is summoned, choose 1 creature, rune, or counter card on the opponent's side of the field and destroy it."
     },
     {
+      "cardNumber": "074",
       "id": "lazu",
       "name": "Lazu | The Air Tempest",
       "element": "Air",
@@ -1119,12 +976,10 @@
       "agility": 85,
       "essenceCost": 4,
       "essenceGeneration": 0,
-      "quote": "While this card is in play, gain 1 Air essence for every rune card used.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "While this card is in play, gain 1 Air essence for every rune card used."
     },
     {
+      "cardNumber": "075",
       "id": "aeris",
       "name": "Aeris | The Air Slyph",
       "element": "Air",
@@ -1134,12 +989,10 @@
       "agility": 95,
       "essenceCost": 5,
       "essenceGeneration": 1,
-      "quote": "When this card is destroyed by battle, you can bring one Air creature from your graveyard into your hand (excluding “Aero Elf”).",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is destroyed by battle, you can bring one Air creature from your graveyard into your hand (excluding “Aero Elf”)."
     },
     {
+      "cardNumber": "076",
       "id": "torrent",
       "name": "Torrent | The Water Titan",
       "element": "Water",
@@ -1149,12 +1002,10 @@
       "agility": 60,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "When attacking, this creature gains Double Strike (Double Strike allows a creature to attack the same target twice in one battle).",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When attacking, this creature gains Double Strike (Double Strike allows a creature to attack the same target twice in one battle)."
     },
     {
+      "cardNumber": "077",
       "id": "azura",
       "name": "Azura | The Water Tempest",
       "element": "Water",
@@ -1164,12 +1015,10 @@
       "agility": 80,
       "essenceCost": 4,
       "essenceGeneration": 0,
-      "quote": "When this creature is summoned, draw 2 cards.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this creature is summoned, draw 2 cards."
     },
     {
+      "cardNumber": "078",
       "id": "undine",
       "name": "Undine | The Water Oracle",
       "element": "Water",
@@ -1179,12 +1028,10 @@
       "agility": 70,
       "essenceCost": 5,
       "essenceGeneration": 1,
-      "quote": "While this card is on the field, at the beginning of your turn, look at the top 3 cards of your deck. You may discard 1, then place the remaining on top of your deck in any order.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "While this card is on the field, at the beginning of your turn, look at the top 3 cards of your deck. You may discard 1, then place the remaining on top of your deck in any order."
     },
     {
+      "cardNumber": "079",
       "id": "ignus",
       "name": "Ignus | The Fire Titan",
       "element": "Fire",
@@ -1194,12 +1041,10 @@
       "agility": 55,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "When this card declares an attack on another creature, this card gains 30 Strength until the end of the turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card declares an attack on another creature, this card gains 30 Strength until the end of the turn."
     },
     {
+      "cardNumber": "080",
       "id": "sigmus",
       "name": "Sigmus | The Fire Tempest",
       "element": "Fire",
@@ -1209,12 +1054,10 @@
       "agility": 75,
       "essenceCost": 4,
       "essenceGeneration": 0,
-      "quote": "When this card is summoned, deal 25 damage to all creatures your opponent controls.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "When this card is summoned, deal 25 damage to all creatures your opponent controls."
     },
     {
+      "cardNumber": "081",
       "id": "viktor",
       "name": "Viktor | The Fire Demon",
       "element": "Fire",
@@ -1224,12 +1067,10 @@
       "agility": 65,
       "essenceCost": 5,
       "essenceGeneration": 1,
-      "quote": "Once per turn, you can destroy one of your own creatures to increase this card's Strength and Agility each by 50 until the end of the turn.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, you can destroy one of your own creatures to increase this card's Strength and Agility each by 50 until the end of the turn."
     },
     {
+      "cardNumber": "082",
       "id": "terra",
       "name": "Terra | The Earth Titan",
       "element": "Earth",
@@ -1239,12 +1080,10 @@
       "agility": 50,
       "essenceCost": 4,
       "essenceGeneration": 1,
-      "quote": "Once per turn, you can switch the position of 1 creature on the field.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "Once per turn, you can switch the position of 1 creature on the field."
     },
     {
+      "cardNumber": "083",
       "id": "oryssa",
       "name": "Oryssa | The Earth Tempest",
       "element": "Earth",
@@ -1254,12 +1093,10 @@
       "agility": 70,
       "essenceCost": 4,
       "essenceGeneration": 0,
-      "quote": "While this card is on the field, your shields gain 50 Health. When this card is destroyed, attach it to a shield. The attached shield gains 50 Health.",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "While this card is on the field, your shields gain 50 Health. When this card is destroyed, attach it to a shield. The attached shield gains 50 Health."
     },
     {
+      "cardNumber": "084",
       "id": "leo",
       "name": "Leo | The Earth Sovereign",
       "element": "Earth",
@@ -1269,825 +1106,377 @@
       "agility": 40,
       "essenceCost": 5,
       "essenceGeneration": 1,
-      "quote": "While this card is on the field, gain 1 Earth Essence for every Earth creature that is destroyed. When this creature is destroyed, special summon one Earth creature from the graveyard (cannot be this card).",
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "quote": "While this card is on the field, gain 1 Earth Essence for every Earth creature that is destroyed. When this creature is destroyed, special summon one Earth creature from the graveyard (cannot be this card)."
     },
     {
+      "cardNumber": "085",
       "id": "ethereal-vitality",
       "name": "Ethereal Vitality",
       "element": null,
       "type": "Rune",
       "rune": "Instant",
-      "tier": null,
       "rarity": "R",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Immediately grant 100 Health to a selected shield until the end of the turn or boost a creature's Strength and Agility each by 30 until the end of the turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Immediately grant 100 Health to a selected shield until the end of the turn or boost a creature's Strength and Agility each by 30 until the end of the turn."
     },
     {
+      "cardNumber": "086",
       "id": "intrusion-seal",
       "name": "Intrusion Seal",
       "element": null,
       "type": "Rune",
       "rune": "Instant",
-      "tier": null,
       "rarity": "R",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Destroy a Rune or Counter card that your opponent controls or Negate a Rune or Counter card that your opponent activates.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Destroy a Rune or Counter card that your opponent controls or Negate a Rune or Counter card that your opponent activates."
     },
     {
+      "cardNumber": "087",
       "id": "direct-assault",
       "name": "Direct Assault",
       "element": null,
       "type": "Rune",
       "rune": "Instant",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Deal 50 damage to a selected target (creature or shield).",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Deal 50 damage to a selected target (creature or shield)."
     },
     {
+      "cardNumber": "088",
       "id": "stasis-field",
       "name": "Stasis Field",
       "element": null,
       "type": "Rune",
       "rune": "Instant",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Change the position of any creature on the field.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Change the position of any creature on the field."
     },
     {
+      "cardNumber": "089",
       "id": "flaming-resolve",
       "name": "Flaming Resolve",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Generate 3 Fire Essence.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Generate 3 Fire Essence."
     },
     {
+      "cardNumber": "090",
       "id": "waves-endurance",
       "name": "Wave's Endurance",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Generate 3 Water Essence.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Generate 3 Water Essence."
     },
     {
+      "cardNumber": "091",
       "id": "unbreakable-force",
       "name": "Unbreakable Force",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Generate 3 Earth Essence.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Generate 3 Earth Essence."
     },
     {
+      "cardNumber": "092",
       "id": "gales-veil",
       "name": "Gale's Veil",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Generate 3 Air Essence.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Generate 3 Air Essence."
     },
     {
+      "cardNumber": "093",
       "id": "lifebound-armour",
       "name": "Lifebound Armour",
       "element": null,
       "type": "Rune",
       "rune": "Equipment",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Equip this card to a creature. If the equipped creature would be destroyed by any means, instead send this card to the graveyard and the creature remains on the field at full strength.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Equip this card to a creature. If the equipped creature would be destroyed by any means, instead send this card to the graveyard and the creature remains on the field at full strength."
     },
     {
+      "cardNumber": "094",
       "id": "binding-coils",
       "name": "Binding Coils",
       "element": null,
       "type": "Rune",
       "rune": "Equipment",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Equip this card to a creature. The equipped creature cannot block or change positions.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Equip this card to a creature. The equipped creature cannot block or change positions."
     },
     {
+      "cardNumber": "095",
       "id": "heavy-chains",
       "name": "Heavy Chains",
       "element": null,
       "type": "Rune",
       "rune": "Equipment",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Equip this card to a creature. The equipped creature loses 30 Strength and 30 Agility.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Equip this card to a creature. The equipped creature loses 30 Strength and 30 Agility."
     },
     {
+      "cardNumber": "096",
       "id": "essence-amplifier",
       "name": "Essence Amplifier",
       "element": null,
       "type": "Rune",
       "rune": "Equipment",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Equip this card to a creature. The equipped creature generates double their normal essence amount each turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Equip this card to a creature. The equipped creature generates double their normal essence amount each turn."
     },
     {
+      "cardNumber": "097",
       "id": "elemental-barrage",
       "name": "Elemental Barrage",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Choose 1 Element. All creatures on the field of that element gain 20 Strength until the end of the turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Choose 1 Element. All creatures on the field of that element gain 20 Strength until the end of the turn."
     },
     {
+      "cardNumber": "098",
       "id": "essence-leak",
       "name": "Essence Leak",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Deplete any amount of one elemental essence. For the amount of essence consumed, your opponent must also consume the same amount of an element of their choosing.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Deplete any amount of one elemental essence. For the amount of essence consumed, your opponent must also consume the same amount of an element of their choosing."
     },
     {
+      "cardNumber": "099",
       "id": "elemental-surge",
       "name": "Elemental Surge",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Draw 1 card. If the drawn card is not a creature card you may reveal it to draw 1 more card.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Draw 1 card. If the drawn card is not a creature card you may reveal it to draw 1 more card."
     },
     {
+      "cardNumber": "100",
       "id": "quick-spurt",
       "name": "Quick Spurt",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "All your creatures gain 20 Agility until the end of the turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "All your creatures gain 20 Agility until the end of the turn."
     },
     {
+      "cardNumber": "101",
       "id": "cleanse-and-adapt",
       "name": "Cleanse and Adapt",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Select 1 creature card and perform the following effects: remove any equipment cards, reset the creature's battle points to normal, and you may change the creature's position.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Select 1 creature card and perform the following effects: remove any equipment cards, reset the creature's battle points to normal, and you may change the creature's position."
     },
     {
+      "cardNumber": "102",
       "id": "draconic-adaptability",
       "name": "Draconic Adaptability",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Allows any Dragon creature to be summoned for 5 total elemental essence of their respective elements.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Allows any Dragon creature to be summoned for 5 total elemental essence of their respective elements."
     },
     {
+      "cardNumber": "103",
       "id": "essence-exchange",
       "name": "Essence Exchange",
       "element": null,
       "type": "Rune",
       "rune": "Normal",
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "Exchange any amount of one elemental essence for an equal amount of a different elemental essence.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "Exchange any amount of one elemental essence for an equal amount of a different elemental essence."
     },
     {
+      "cardNumber": "104",
       "id": "counter-pulse",
       "name": "Counter Pulse",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent summons a creature without spending essence: Destroy the summoned creature.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent summons a creature without spending essence: Destroy the summoned creature."
     },
     {
+      "cardNumber": "105",
       "id": "essence-leech",
       "name": "Essence Leech",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent generates essence: Your opponent consumes all of the essence generated.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent generates essence: Your opponent consumes all of the essence generated."
     },
     {
+      "cardNumber": "106",
       "id": "denial-decimation",
       "name": "Denial Decimation",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent uses a card's enhanced effect: Negate the enhanced effect. If you can consume the same amount of essence (using any 1 element) that was consumed to initiate the enhanced effect, destroy that card.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent uses a card's enhanced effect: Negate the enhanced effect. If you can consume the same amount of essence (using any 1 element) that was consumed to initiate the enhanced effect, destroy that card."
     },
     {
+      "cardNumber": "107",
       "id": "redirecting-gust",
       "name": "Redirecting Gust",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent's creature declares an attack: Change the target of an opponent's attack to another creature on their side of the field (this effect is unblockable).",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent's creature declares an attack: Change the target of an opponent's attack to another creature on their side of the field (this effect is unblockable)."
     },
     {
+      "cardNumber": "108",
       "id": "unbreakable",
       "name": "Unbreakable",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent's creature declares an attack: Prevent all damage to your shields for one turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent's creature declares an attack: Prevent all damage to your shields for one turn."
     },
     {
+      "cardNumber": "109",
       "id": "reflective-barrier",
       "name": "Reflective Barrier",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent's creature declares an attack: Reflect the damage from the target of the attack to the attacking creature (this effect is unblockable).",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent's creature declares an attack: Reflect the damage from the target of the attack to the attacking creature (this effect is unblockable)."
     },
     {
+      "cardNumber": "110",
       "id": "whirlwind-retreat",
       "name": "Whirlwind Retreat",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent declares an attack: Send the attacking creature from the field back your opponent's hand, then your opponent generates 3 essence of the attacking creature's element (excludes Dragons).",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent declares an attack: Send the attacking creature from the field back your opponent's hand, then your opponent generates 3 essence of the attacking creature's element (excludes Dragons)."
     },
     {
+      "cardNumber": "111",
       "id": "chaos-hand",
       "name": "Chaos Hand",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent draws a card: Force your opponent to discard 2 cards from their hand to the graveyard.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent draws a card: Force your opponent to discard 2 cards from their hand to the graveyard."
     },
     {
+      "cardNumber": "112",
       "id": "oblivion-rift",
       "name": "Oblivion Rift",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent summons a creature: Destroy all creatures on the field. Each player receives essence corresponding to the element and quantity generated per turn by each of their destroyed creatures.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent summons a creature: Destroy all creatures on the field. Each player receives essence corresponding to the element and quantity generated per turn by each of their destroyed creatures."
     },
     {
+      "cardNumber": "113",
       "id": "time-freeze",
       "name": "Time Freeze",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "After your opponent generates essence: Prevent the opponent from summoning creatures or playing counter and rune cards for one turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "After your opponent generates essence: Prevent the opponent from summoning creatures or playing counter and rune cards for one turn."
     },
     {
+      "cardNumber": "114",
       "id": "quietening-wind",
       "name": "Quietening Wind",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent generates essence: Prevent the opponent from activating creature or rune card effects until the beginning of their next turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent generates essence: Prevent the opponent from activating creature or rune card effects until the beginning of their next turn."
     },
     {
+      "cardNumber": "115",
       "id": "revival-rain",
       "name": "Revival Rain",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "C",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When a creature you control is destroyed: Summon a creature of the same element (excluding the destroyed creature) from your graveyard to the field in the tapped position.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When a creature you control is destroyed: Summon a creature of the same element (excluding the destroyed creature) from your graveyard to the field in the tapped position."
     },
     {
+      "cardNumber": "116",
       "id": "power-surge",
       "name": "Power Surge",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent declares a blocking creature: Choose 1 creature on your side of the field to gain +20/+30 until the end of the turn.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent declares a blocking creature: Choose 1 creature on your side of the field to gain +20/+30 until the end of the turn."
     },
     {
+      "cardNumber": "117",
       "id": "essence-bloom",
       "name": "Essence Bloom",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "After your opponent generates essence: Generate the same amount of essence in any combination using the elements of your choice.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "After your opponent generates essence: Generate the same amount of essence in any combination using the elements of your choice."
     },
     {
+      "cardNumber": "118",
       "id": "elemental-reaction",
       "name": "Elemental Reaction",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent generates essence: Destroy 1 creature on their side of the field with the same element as the generated essence (1 creature is to be destroyed even if multiple elements were generated).",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent generates essence: Destroy 1 creature on their side of the field with the same element as the generated essence (1 creature is to be destroyed even if multiple elements were generated)."
     },
     {
+      "cardNumber": "119",
       "id": "armour-degradation",
       "name": "Armour Degradation",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent declares a blocking creature: The blocking creature has its strength reduced by -50.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When your opponent declares a blocking creature: The blocking creature has its strength reduced by -50."
     },
     {
+      "cardNumber": "120",
       "id": "rapid-recovery",
       "name": "Rapid Recovery",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "U",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When a creature you control would take fatal damage: That creature endures the damage and its strength is fully restored.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
+      "ability": "When a creature you control would take fatal damage: That creature endures the damage and its strength is fully restored."
     },
     {
+      "cardNumber": "121",
       "id": "vortex-shift",
       "name": "Vortex Shift",
       "element": null,
       "type": "Counter",
       "rune": null,
-      "tier": null,
       "rarity": "R",
-      "strength": null,
-      "agility": null,
-      "abilityName": null,
-      "ability": "When your opponent declares an attack: Change the position of any creature on the field.",
-      "specialAbilityName": null,
-      "specialAbility": null,
-      "specialAbilityCost": null,
-      "essenceCost": null,
-      "essenceGeneration": null,
-      "quote": null,
-      "synergies": [],
-      "counters": [],
-      "news": []
-    },
-    {
-      "id": "agilitys-valor",
-     
+      "ability": "When your opponent declares an attack: Change the position of any creature on the field."
+    }
+  ]
+}

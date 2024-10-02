@@ -20,14 +20,13 @@ const AboutUsPage = () => {
             Elemental Games was founded in 2022 by Mark Diorio, a visionary game developer with a passion for elemental themes and strategic gameplay. With a background in Electrical and Computer Engineering, Mark brings a unique blend of technical expertise and creative game design to the world of Kinbrold.
           </p>
         </div>
-        <div className="md:w-1/3 mt-4 md:mt-0 relative group">
-          <img 
-            src="/me.jpeg" 
-            alt="Mark Diorio" 
-            className="rounded-full border-4 border-primary mx-auto md:ml-auto object-cover w-48 h-48 transition-transform duration-300 ease-in-out transform group-hover:scale-110"
-          />
-          <div className="absolute inset-0 bg-black bg-opacity-50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span className="text-white text-sm">Click to enlarge</span>
+        <div className="md:w-1/3 mt-4 md:mt-0">
+          <div className="relative group w-48 h-48 mx-auto md:ml-auto">
+            <img 
+              src="/me.jpeg" 
+              alt="Mark Diorio" 
+              className="rounded-full border-4 border-primary object-cover w-full h-full transition-transform duration-300 ease-in-out transform group-hover:scale-110"
+            />
           </div>
         </div>
       </div>

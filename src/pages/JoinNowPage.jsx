@@ -23,7 +23,7 @@ const JoinNowPage = () => {
       <h1 className="text-4xl font-bold mb-2 text-center">Become an Elemental Master</h1>
       <p className="text-xl mb-8 text-center">Join now to help unleash the power of the elements</p>
 
-      <div className="bg-primary text-primary-foreground p-4 rounded-lg mb-8 text-center">
+      <div className="bg-primary text-primary-foreground p-4 rounded-lg mb-8 text-center max-w-md mx-auto">
         <h2 className="text-2xl font-semibold mb-2">Countdown to Launch</h2>
         <p className="text-3xl font-bold font-heading">{calculateDaysUntil()} days</p>
         <p>Mark your calendars for November 1st, 2024!</p>
@@ -49,11 +49,16 @@ const JoinNowPage = () => {
 
       <section className="mb-8">
         <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
-        <div className="flex justify-center space-x-4">
-          <img src="/cards/deepseer.png" alt="Deepseer" className="w-64 h-auto object-contain" />
-          <img src="/Card_Back.png" alt="Card Back" className="w-64 h-auto object-contain" />
+        <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+          <div className="text-center">
+            <img src="/cards/deepseer.png" alt="Deepseer" className="w-64 h-auto object-contain mx-auto" />
+            <p className="mt-2 italic">Front of an ability card</p>
+          </div>
+          <div className="text-center">
+            <img src="/Card_Back.png" alt="Card Back" className="w-64 h-auto object-contain mx-auto" />
+            <p className="mt-2 italic">Card back of our game</p>
+          </div>
         </div>
-        <p className="text-center mt-4 italic">A glimpse into the world of Kinbrold</p>
       </section>
 
       <section className="mb-8">

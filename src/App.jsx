@@ -14,6 +14,11 @@ import { AuthProvider } from "./hooks/useAuth";
 import CardListPage from "./pages/CardListPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import RulesPage from "./pages/RulesPage";
+import ScartoPage from "./pages/ScartoPage";
+import TsunarethPage from "./pages/TsunarethPage";
+import ZalosPage from "./pages/ZalosPage";
+import GrivossPage from "./pages/GrivossPage";
+import EvermerePage from "./pages/EvermerePage";
 
 const queryClient = new QueryClient();
 
@@ -38,6 +43,11 @@ const App = () => (
                   <Route path="/cards/card-list" element={<CardListPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/gameplay/rules" element={<RulesPage />} />
+                  <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                  <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                  <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                  <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                  <Route path="/kinbrold/evermere" element={<EvermerePage />} />
                 </Routes>
               </main>
               <Footer />

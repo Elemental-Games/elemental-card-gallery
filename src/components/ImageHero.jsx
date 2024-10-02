@@ -6,8 +6,8 @@ const ImageHero = () => {
   return (
     <div className="relative h-screen overflow-hidden">
       <img
-        src="/background_gif2.gif"
-        alt="Background GIF"
+        src="/storage/Background.jpg"
+        alt="Background Image"
         className="absolute z-0 w-full h-full object-cover"
       />
       
@@ -30,7 +30,10 @@ const ImageHero = () => {
       </div>
       <style jsx>{`
         .shadow-text {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+          text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.9);
+        }
+        .shadow-lg {
+          box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
         }
       `}</style>
     </div>

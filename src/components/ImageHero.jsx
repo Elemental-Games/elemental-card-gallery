@@ -9,12 +9,12 @@ const ImageHero = () => {
         <img
           src="/Background.jpg"
           alt="Background Image"
-          className="absolute w-full h-full object-cover md:object-center mobile-pan-zoom"
+          className="absolute w-full h-full object-cover object-center"
         />
       </div>
       
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center">
-        <div className="text-center px-4">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4">
+        <div className="text-center">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-4 shadow-text">
             Welcome to Elemental Masters
           </h1>
@@ -36,25 +36,6 @@ const ImageHero = () => {
         }
         .shadow-lg {
           box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-        }
-        @media (max-width: 768px) {
-          .mobile-pan-zoom {
-            animation: panZoomBackground 20s ease-in-out infinite;
-          }
-          @keyframes panZoomBackground {
-            0%, 100% {
-              transform: scale(1) translateX(0);
-            }
-            25% {
-              transform: scale(1.1) translateX(-10%);
-            }
-            50% {
-              transform: scale(1) translateX(-5%);
-            }
-            75% {
-              transform: scale(1.1) translateX(-15%);
-            }
-          }
         }
       `}</style>
     </div>

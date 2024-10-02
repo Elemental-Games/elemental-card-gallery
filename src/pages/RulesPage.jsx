@@ -19,15 +19,15 @@ const RulesPage = () => {
         <Download className="mr-2 h-4 w-4" /> Download Rulebook PDF
       </Button>
 
-      <Tabs defaultValue="quickstart">
-        <TabsList className="mb-4">
-          <TabsTrigger value="quickstart">Quick Start</TabsTrigger>
-          <TabsTrigger value="fullrules">Full Rules</TabsTrigger>
-          <TabsTrigger value="deckbuilding">Deck Building</TabsTrigger>
-          <TabsTrigger value="cardtypes">Card Types</TabsTrigger>
-          <TabsTrigger value="gameplay">Gameplay</TabsTrigger>
-          <TabsTrigger value="combat">Combat</TabsTrigger>
-          <TabsTrigger value="faq">FAQ</TabsTrigger>
+      <Tabs defaultValue="quickstart" className="w-full">
+        <TabsList className="mb-4 flex flex-wrap justify-start">
+          <TabsTrigger value="quickstart" className="mb-2 mr-2">Quick Start</TabsTrigger>
+          <TabsTrigger value="fullrules" className="mb-2 mr-2">Full Rules</TabsTrigger>
+          <TabsTrigger value="deckbuilding" className="mb-2 mr-2">Deck Building</TabsTrigger>
+          <TabsTrigger value="cardtypes" className="mb-2 mr-2">Card Types</TabsTrigger>
+          <TabsTrigger value="gameplay" className="mb-2 mr-2">Gameplay</TabsTrigger>
+          <TabsTrigger value="combat" className="mb-2 mr-2">Combat</TabsTrigger>
+          <TabsTrigger value="faq" className="mb-2 mr-2">FAQ</TabsTrigger>
         </TabsList>
 
         <TabsContent value="quickstart">

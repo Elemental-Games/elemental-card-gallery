@@ -20,10 +20,10 @@ const DeckBuilderPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/data/cards.json')
+    fetch('/storage/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
-        setAllCards(data);
+        setAllCards(data.cards);
         setIsLoading(false);
       })
       .catch(err => {

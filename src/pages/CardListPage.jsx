@@ -18,10 +18,10 @@ const CardListPage = () => {
   });
 
   useEffect(() => {
-    fetch('/storage/cards.json')
+    fetch('/storage/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
-        setCards(data);
+        setCards(data.cards);
         setIsLoading(false);
       })
       .catch(err => {

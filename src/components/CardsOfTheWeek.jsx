@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +15,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
     }
   };
 
-  const cardLink = `/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}`;
+  const cardLink = `/cards/${card.id}`;
 
   return (
     <div 
@@ -63,14 +63,19 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
 };
 
 const CardsOfTheWeek = () => {
-  const cards = [
-    { id: 1, name: 'Deepseer', image: '/storage/images/cards/deepseer.png' },
-    { id: 2, name: 'Kindro', image: '/storage/images/cards/kindro.png' },
-    { id: 3, name: 'Cloud Sprinter', image: '/storage/images/cards/cloud-sprinter.png' },
-    { id: 4, name: 'Terra the Earth Titan', image: '/storage/images/cards/terra-the-earth-titan.png' },
-  ];
+  const [cards, setCards] = useState([]);
+  const [flippedCards, setFlippedCards] = useState([]);
 
-  const [flippedCards, setFlippedCards] = useState(new Array(cards.length).fill(false));
+  useEffect(() => {
+    fetch('/storage/data/ElementalMastersCards.json')
+      .then(response => response.json())
+      .then(data => {
+        const selectedCards = data.cards.slice(0, 4);
+        setCards(selectedCards);
+        setFlippedCards(new Array(selectedCards.length).fill(false));
+      })
+      .catch(error => console.error('Error fetching cards:', error));
+  }, []);
 
   return (
     <div className="py-16 bg-gray-900 border-4 border-yellow-500">

@@ -109,17 +109,19 @@ const LandingPage = () => {
             {elements.map((element) => (
               <div 
                 key={element.name} 
-                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor} cursor-pointer`}
+                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor} cursor-pointer flex flex-col justify-between`}
                 onClick={() => handleElementClick(element.name)}
               >
-                <img 
-                  src={`/storage/icons/${element.name}.png`}
-                  alt={`${element.name} Icon`}
-                  style={{ width: '100px', height: '110px', marginLeft: '85px', marginRight: '8px', marginBottom: '-20px' }}
-                />
-                <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
-                <p className="mb-4">{element.description}</p>
-                <Button variant="outline">Explore {element.name} Cards</Button>
+                <div>
+                  <img 
+                    src={`/storage/icons/${element.name}.png`}
+                    alt={`${element.name} Icon`}
+                    className="w-24 h-24 mx-auto mb-4"
+                  />
+                  <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
+                  <p className="mb-4">{element.description}</p>
+                </div>
+                <Button variant="outline" className="mt-auto">Explore {element.name} Cards</Button>
               </div>
             ))}
           </div>

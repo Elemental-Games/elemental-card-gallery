@@ -22,7 +22,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src="/Games_Logo.jpg"
+            src="/Games_Logo.png"
             alt="Elemental Games Logo" 
             style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
           />

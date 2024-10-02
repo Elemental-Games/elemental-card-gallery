@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, X } from 'lucide-react';
+import { X, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,9 +10,9 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
               <li><Link to="/" className="hover:text-accent transition-colors">Home</Link></li>
-              <li><Link to="/kinbrold" className="hover:text-accent transition-colors">Kinbrold</Link></li>
-              <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
               <li><Link to="/gameplay" className="hover:text-accent transition-colors">Gameplay</Link></li>
+              <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
+              <li><Link to="/kinbrold" className="hover:text-accent transition-colors">Kinbrold</Link></li>
               <li><Link to="/about" className="hover:text-accent transition-colors">About Us</Link></li>
               <li><Link to="/join" className="hover:text-accent transition-colors">Join Now</Link></li>
             </ul>
@@ -34,14 +34,11 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <Facebook />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <Instagram />
-              </a>
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                 <X />
+              </a>
+              <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                <MessageCircle />
               </a>
             </div>
           </div>

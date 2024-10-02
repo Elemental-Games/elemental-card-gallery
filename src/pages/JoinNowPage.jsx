@@ -83,12 +83,16 @@ const JoinNowPage = () => {
       </section>
 
       <section className="mb-8 flex justify-center space-x-4">
-        <Button variant="outline" size="lg" className="flex items-center">
-          <Twitter className="mr-2 h-4 w-4" /> Follow us on X
-        </Button>
-        <Button variant="outline" size="lg" className="flex items-center">
-          <MessageCircle className="mr-2 h-4 w-4" /> Join our Discord
-        </Button>
+        <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" size="lg" className="flex items-center">
+            <Twitter className="mr-2 h-4 w-4" /> Follow us on X
+          </Button>
+        </a>
+        <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer">
+          <Button variant="outline" size="lg" className="flex items-center">
+            <MessageCircle className="mr-2 h-4 w-4" /> Join our Discord
+          </Button>
+        </a>
       </section>
 
       <section className="mb-8">

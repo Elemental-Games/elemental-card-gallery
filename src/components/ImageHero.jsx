@@ -37,7 +37,7 @@ const ImageHero = () => {
         )}
       </AnimatePresence>
       <div 
-        className="absolute inset-0 bg-black bg-opacity-70 flex flex-col items-center justify-center"
+        className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center"
         style={{
           backgroundImage: 'url("/storage/Background.jpg")',
           backgroundSize: 'cover',
@@ -46,10 +46,10 @@ const ImageHero = () => {
         }}
       >
         <div className="text-center z-10 px-4">
-          <h1 className="text-6xl font-bold text-white mb-4 shadow-text outline-text">
+          <h1 className="text-6xl font-bold text-white mb-4 shadow-text">
             Welcome to Elemental Masters
           </h1>
-          <p className="text-2xl text-white mb-6 shadow-text outline-text">
+          <p className="text-2xl text-white mb-6 shadow-text">
             Unleash the power of the elements
           </p>
           <Link to="/join">
@@ -63,11 +63,7 @@ const ImageHero = () => {
       </div>
       <style jsx>{`
         .shadow-text {
-          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-        }
-        .outline-text {
-          -webkit-text-stroke: 1px black;
-          text-stroke: 1px black;
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
         }
       `}</style>
     </div>

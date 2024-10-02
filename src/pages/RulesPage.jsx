@@ -3,19 +3,9 @@ import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Download, FileText } from 'lucide-react';
+import { Download } from 'lucide-react';
 
 const RulesPage = () => {
-  const [battleScenario, setBattleScenario] = useState({
-    playerCards: ['Fire Elemental', 'Water Sprite'],
-    opponentCards: ['Earth Golem', 'Air Wisp'],
-    currentTurn: 'player',
-  });
-
-  const handlePlayCard = (card) => {
-    alert(`You played ${card}! In a real game, this would affect the battle state.`);
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -49,7 +39,7 @@ const RulesPage = () => {
             <li>On your turn, draw a card and generate essence from your creatures.</li>
             <li>Play creatures, runes, and counters using essence.</li>
             <li>Attack opponent's creatures or shields during the battle phase.</li>
-            <li>Reduce opponent's life points to 0 or play "Ancient Sigil" to win!</li>
+            <li>Reduce opponent's health points to 0 or play "Ancient Sigil" to win!</li>
           </ol>
         </TabsContent>
 
@@ -85,7 +75,7 @@ const RulesPage = () => {
               <AccordionContent>
                 <p>There are two ways to win:</p>
                 <ul className="list-disc list-inside space-y-2">
-                  <li>Reduce your opponent's life points to 0 (starting at 500).</li>
+                  <li>Reduce your opponent's health points to 0 (starting at 500).</li>
                   <li>Collect all 4 ancient elemental cards and play the "Ancient Sigil" rune.</li>
                 </ul>
               </AccordionContent>
@@ -110,7 +100,7 @@ const RulesPage = () => {
             <li>Dragons: Special creatures of 6 combinational elements (Frost, Sand, Lava, Poison, Crystal, Lightning).</li>
             <li>Runes: Support cards similar to spell cards in other TCGs.</li>
             <li>Counters: Reactive cards that can be played during your opponent's turn.</li>
-            <li>Shields: Defensive cards that protect your life points and provide powerful effects when broken.</li>
+            <li>Shields: Defensive cards that protect your health points and provide powerful effects when broken.</li>
           </ul>
         </TabsContent>
 
@@ -125,6 +115,7 @@ const RulesPage = () => {
                   <li>Essence can be generated at any time via card effects and runes.</li>
                   <li>There is no limit to how much essence you can store.</li>
                   <li>Use essence to play cards and activate abilities.</li>
+                  <li>Essence is treated as an in-game currency.</li>
                 </ul>
               </AccordionContent>
             </AccordionItem>
@@ -180,14 +171,6 @@ const RulesPage = () => {
           </Accordion>
         </TabsContent>
       </Tabs>
-
-      <section className="mt-8">
-        <h2 className="text-2xl font-semibold mb-4">Gameplay Modes</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Casual: No restrictions on card quantities in deck building.</li>
-          <li>Competitive: Follow the card restriction guidelines in the rulebook.</li>
-        </ul>
-      </section>
     </motion.div>
   );
 };

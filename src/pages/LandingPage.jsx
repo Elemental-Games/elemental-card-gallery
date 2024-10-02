@@ -86,13 +86,13 @@ const LandingPage = () => {
 
       <div className="container mx-auto px-4 py-16">
         <section className="mb-16">
-          <h2 className="text-4xl font-bold mb-8 flex items-center">
+          <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap">
             <img 
               src="/storage/Elemental Masters - 1MB.png" 
               alt="Elemental Games Logo" 
-              style={{ width: '200px', height: '125px', marginRight: '8px', marginBottom: '-20px' }}
+              className="w-40 h-auto mr-4 mb-4 sm:mb-0"
             />
-            Master the Elements
+            <span className="flex-1">Master the Elements</span>
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {elements.map((element) => (
@@ -121,11 +121,11 @@ const LandingPage = () => {
         </div>
 
         <section className="mb-32">
-          <h2 className="text-4xl font-bold mb-8 flex items-center">
+          <h2 className="text-4xl font-bold mb-8 flex items-center justify-center">
             <ElementIcon element="earth" className="mr-2" />
             Explore More
           </h2>
-          <div className="flex flex-wrap gap-8">
+          <div className="flex flex-wrap justify-center gap-8">
             {exploreItems.map((item, index) => (
               <Link to={item.link} key={index}>
                 <ExploreItem title={item.title} emoji={item.emoji} />

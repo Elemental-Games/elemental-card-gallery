@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
-const CardGallery = ({ cards, onCardSelect }) => {
+const CardGallery = ({ onCardSelect }) => {
+  const [cards, setCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
+
+  useEffect(() => {
+    fetch('/src/data/ElementalMastersCards.json')
+      .then(response => response.json())
+      .then(data => setCards(data.cards))
+      .catch(error => console.error('Error fetching cards:', error));
+  }, []);
 
   const filteredCards = cards.filter(card => 
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -57,7 +65,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {displayedCards.map((card) => (
           <Card key={card.id} className="p-2 cursor-pointer" onClick={() => onCardSelect(card)}>
-            <img src={card.image} alt={card.name} className="w-full h-auto" />
+            <img src={`/cards/${card.id}.png`} alt={card.name} className="w-full h-auto" />
             <p className="text-center mt-2">{card.name}</p>
           </Card>
         ))}

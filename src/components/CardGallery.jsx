@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
 const Card = ({ card }) => {
   return (
-    <Link to={`/cards/${card.name.toLowerCase().replace(/\s+/g, '-')}`}>
+    <Link to={`/cards/${card.id}`}>
       <motion.div
         className="w-full pb-[140%] rounded-lg overflow-hidden shadow-lg relative cursor-pointer"
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={`/cards/${card.image}`} 
+          src={`/cards/${card.id}.png`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -23,11 +23,18 @@ const Card = ({ card }) => {
   );
 };
 
-const CardGallery = ({ cards }) => {
-  console.log('Cards in CardGallery:', cards); // Add this line for debugging
+const CardGallery = () => {
+  const [cards, setCards] = useState([]);
 
-  if (!cards || cards.length === 0) {
-    return <div>No cards available.</div>;
+  useEffect(() => {
+    fetch('/src/data/ElementalMastersCards.json')
+      .then(response => response.json())
+      .then(data => setCards(data.cards))
+      .catch(error => console.error('Error fetching cards:', error));
+  }, []);
+
+  if (cards.length === 0) {
+    return <div>Loading cards...</div>;
   }
 
   return (

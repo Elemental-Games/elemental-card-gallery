@@ -75,17 +75,6 @@ const LandingPage = () => {
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
       
-      {/* Join Now Button */}
-      <div className="text-center mt-8">
-        <Link to="/join">
-          <Button 
-            className="bg-purple-800 text-yellow-300 border-2 border-yellow-300 px-6 py-3 text-xl font-bold rounded-lg transition-all duration-300 hover:bg-purple-600 hover:scale-110 hover:text-yellow-200 hover:border-yellow-200"
-          >
-            Join Now
-          </Button>
-        </Link>
-      </div>
-
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">
         <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
@@ -136,7 +125,7 @@ const LandingPage = () => {
             <ElementIcon element="earth" className="mr-2" />
             Explore More
           </h2>
-          <div className="flex flex-wrap justify-center gap-8">
+          <div className="flex flex-wrap gap-8">
             {exploreItems.map((item, index) => (
               <Link to={item.link} key={index}>
                 <ExploreItem title={item.title} emoji={item.emoji} />

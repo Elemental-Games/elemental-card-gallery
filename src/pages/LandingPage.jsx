@@ -88,7 +88,7 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center">
             <img 
-              src="/images/Elemental Masters - 1MB.png" 
+              src="/storage/Elemental Masters - 1MB.png" 
               alt="Elemental Games Logo" 
               style={{ width: '200px', height: '125px', marginRight: '8px', marginBottom: '-20px' }}
             />
@@ -103,7 +103,7 @@ const LandingPage = () => {
               >
                 <div>
                   <img 
-                    src={`/images/icons/${element.name}.png`}
+                    src={`/storage/icons/${element.name}.png`}
                     alt={`${element.name} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
@@ -136,7 +136,7 @@ const LandingPage = () => {
       </div>
       {showLightBox && (
         <LightBox
-          cardImage="/images/cards/deepseer.png"
+          cardImage="/storage/images/cards/deepseer.png"
           onClose={() => setShowLightBox(false)}
         />
       )}

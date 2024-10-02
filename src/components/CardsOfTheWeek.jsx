@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -14,8 +14,6 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
       });
     }
   };
-
-  const cardLink = `/cards/${card.id}`;
 
   return (
     <div 
@@ -46,8 +44,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             className="w-full h-full object-cover"
           />
         </motion.div>
-        <Link 
-          to={cardLink}
+        <div 
           className="absolute inset-0 w-full h-full backface-hidden" 
           style={{ transform: 'rotateY(180deg)' }}
         >
@@ -56,27 +53,20 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
             alt={card.name}
             className="w-full h-full object-cover"
           />
-        </Link>
+        </div>
       </motion.div>
     </div>
   );
 };
 
 const CardsOfTheWeek = () => {
-  const [cards, setCards] = useState([]);
-  const [flippedCards, setFlippedCards] = useState([]);
-
-  useEffect(() => {
-    fetch('/storage/data/ElementalMastersCards.json')
-      .then(response => response.json())
-      .then(data => {
-        const cardNames = ['deepseer', 'cloud-sprinter', 'kindro', 'terra'];
-        const selectedCards = data.cards.filter(card => cardNames.includes(card.id));
-        setCards(selectedCards);
-        setFlippedCards(new Array(selectedCards.length).fill(false));
-      })
-      .catch(error => console.error('Error fetching cards:', error));
-  }, []);
+  const cards = [
+    { id: 'deepseer', name: 'Deepseer', image: 'deepseer.png' },
+    { id: 'terra', name: 'Terra', image: 'terra.png' },
+    { id: 'cloud-sprinter', name: 'Cloud Sprinter', image: 'cloud-sprinter.png' },
+    { id: 'kindro', name: 'Kindro', image: 'kindro.png' }
+  ];
+  const [flippedCards, setFlippedCards] = useState(new Array(cards.length).fill(false));
 
   return (
     <div className="py-16 bg-gray-900 border-4 border-yellow-500">

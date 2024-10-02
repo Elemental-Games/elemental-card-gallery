@@ -13,13 +13,7 @@ const KinbroldPage = () => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
 
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      <img 
-        src="/kinbrold_map.jpg" 
-        alt="Map of Kinbrold" 
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      
+    <div className="relative w-full h-screen overflow-hidden bg-cover bg-center" style={{ backgroundImage: "url('/kinbrold_map.jpg')" }}>
       {regions.map((region) => (
         <motion.div
           key={region.name}

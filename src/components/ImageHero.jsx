@@ -39,20 +39,20 @@ const ImageHero = () => {
         }
         @media (max-width: 768px) {
           .mobile-pan-zoom {
-            animation: panZoomBackground 30s ease-in-out infinite;
+            animation: panZoomBackground 20s ease-in-out infinite;
           }
           @keyframes panZoomBackground {
             0%, 100% {
               transform: scale(1) translateX(0);
             }
             25% {
-              transform: scale(1.1) translateX(-5%);
+              transform: scale(1.1) translateX(-10%);
             }
             50% {
-              transform: scale(1) translateX(0);
+              transform: scale(1) translateX(-5%);
             }
             75% {
-              transform: scale(1.1) translateX(5%);
+              transform: scale(1.1) translateX(-15%);
             }
           }
         }

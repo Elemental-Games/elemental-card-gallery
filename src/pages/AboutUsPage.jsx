@@ -67,12 +67,16 @@ const AboutUsPage = () => {
         </p>
         <div className="mt-6 mb-4">
           <Link to="/join">
-            <Button size="lg" variant="primary">
+            <Button 
+              size="lg" 
+              variant="outline" 
+              className="text-lg px-6 py-3 border-2 border-accent hover:bg-accent hover:text-accent-foreground transition-colors duration-300"
+            >
               Join Now
             </Button>
           </Link>
         </div>
-        <p className="text-2xl font-bold mt-4">
+        <p className="text-xl font-bold mt-4">
           Together, let's forge the future of gaming, one element at a time.
         </p>
       </section>

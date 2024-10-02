@@ -13,13 +13,15 @@ const CardsOfTheWeek = () => {
     <div className="py-16 bg-gray-900 border-4 border-yellow-500">
       <div className="container mx-auto px-4">
         <h2 className="text-4xl font-bold mb-8 text-center text-white">Cards of the Week</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {cards.map((card) => (
-            <CardDisplay 
-              key={card.id} 
-              card={card} 
-              variant="cardsOfWeek"
-            />
+            <div key={card.id} className="aspect-[2/3] relative overflow-hidden">
+              <CardDisplay 
+                card={card} 
+                variant="cardsOfWeek"
+                className="absolute inset-0 w-full h-full"
+              />
+            </div>
           ))}
         </div>
       </div>

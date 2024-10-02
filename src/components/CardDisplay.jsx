@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
-const CardDisplay = ({ card, variant = 'default' }) => {
+const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const containerClasses = {
     default: "w-[150%] aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
-    cardsOfWeek: "w-[150%] pb-[225%] perspective-1000 cursor-pointer relative",
+    cardsOfWeek: "w-full h-full perspective-1000 cursor-pointer relative",
     artworkShowcase: "w-[168px] h-auto object-contain mx-auto"
   };
 
@@ -42,7 +42,7 @@ const CardDisplay = ({ card, variant = 'default' }) => {
   if (variant === 'cardsOfWeek') {
     return (
       <div 
-        className={containerClasses[variant]}
+        className={`${containerClasses[variant]} ${className}`}
         onClick={handleClick}
       >
         <motion.div

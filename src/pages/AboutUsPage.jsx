@@ -1,5 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { Button } from '@/components/ui/button';
 
 const AboutUsPage = () => {
   return (
@@ -63,7 +65,14 @@ const AboutUsPage = () => {
         <p>
           Whether you're a seasoned TCG veteran or new to the world of elemental mastery, we invite you to join us on this exciting journey. Elemental Games is more than a company—it's a community of players, creators, and dreamers united by our love for strategic gameplay and rich, immersive worlds.
         </p>
-        <p className="mt-4 font-semibold">
+        <div className="mt-6 mb-4">
+          <Link to="/join">
+            <Button size="lg" variant="primary">
+              Join Now
+            </Button>
+          </Link>
+        </div>
+        <p className="text-3xl font-bold mt-4">
           Together, let's forge the future of gaming, one element at a time.
         </p>
       </section>

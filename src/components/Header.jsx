@@ -21,16 +21,13 @@ const Header = () => {
     <header className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4 px-6">
       <div className="container mx-auto flex justify-between items-center">
         <div className="flex items-center">
-          <img 
-            src="/storage/Games_Logo.png"
-            alt="Elemental Games Logo" 
-            style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
-          />
-          <img 
-            src="/storage/Masters_Logo.png"
-            alt="Elemental Masters Logo" 
-            style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
-          />
+          <Link to="/">
+            <img 
+              src="/storage/Games_Logo.png"
+              alt="Elemental Games Logo" 
+              style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
+            />
+          </Link>
           <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
         </div>
         <nav className="hidden md:flex space-x-4">

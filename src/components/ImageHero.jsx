@@ -36,7 +36,15 @@ const ImageHero = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center">
+      <div 
+        className="absolute inset-0 bg-black bg-opacity-50 flex flex-col items-center justify-center"
+        style={{
+          backgroundImage: 'url("/storage/Background.jpg")',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat'
+        }}
+      >
         <div className="text-center">
           <h1 className="text-6xl font-bold text-white mb-4">
             Welcome to Elemental Masters

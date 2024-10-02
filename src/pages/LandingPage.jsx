@@ -75,21 +75,10 @@ const LandingPage = () => {
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
       
-      {/* Join Now Button */}
-      <div className="text-center mt-12 mb-16">
-        <Link to="/join">
-          <Button 
-            className="bg-purple-800 text-yellow-300 border-4 border-yellow-300 px-12 py-6 text-3xl font-bold rounded-2xl transition-all duration-300 hover:bg-purple-600 hover:scale-110 hover:text-yellow-200 hover:border-yellow-200"
-          >
-            Join Now
-          </Button>
-        </Link>
-      </div>
-
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">
-        <h2 className="text-4xl font-bold mb-8 text-center">Game Overview</h2>
-        <p className="mb-6 text-lg text-center">
+        <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
+        <p className="mb-6 text-lg">
           Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
         </p>
         <div className="flex justify-center">

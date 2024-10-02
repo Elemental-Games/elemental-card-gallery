@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Twitter, Discord } from 'lucide-react';
+import { Twitter, MessageCircle } from 'lucide-react';
 
 const JoinNowPage = () => {
   const calculateDaysUntil = () => {
@@ -91,7 +91,7 @@ const JoinNowPage = () => {
           <Twitter className="mr-2 h-4 w-4" /> Follow us on X
         </Button>
         <Button variant="outline" size="lg" className="flex items-center">
-          <Discord className="mr-2 h-4 w-4" /> Join our Discord
+          <MessageCircle className="mr-2 h-4 w-4" /> Join our Discord
         </Button>
       </section>
 

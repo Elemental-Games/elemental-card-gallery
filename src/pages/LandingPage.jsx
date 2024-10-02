@@ -81,9 +81,7 @@ const LandingPage = () => {
         <p className="mb-6 text-lg">
           Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
         </p>
-        <div className="flex justify-center">
-          <KeyFeatures />
-        </div>
+        <KeyFeatures />
       </section>
 
       <div className="container mx-auto px-4 py-16">

@@ -18,8 +18,8 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        sans: ['Quattrocento', 'serif'],
-        heading: ['Cinzel', 'serif'],
+        sans: ['Bembo', 'serif'],
+        heading: ['Bembo', 'serif'],
       },
       colors: {
         border: "hsl(var(--border))",

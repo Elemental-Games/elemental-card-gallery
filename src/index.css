@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Quattrocento:wght@400;700&display=swap');
+@import url('https://fonts.cdnfonts.com/css/bembo');
 
 @tailwind base;
 @tailwind components;
@@ -74,10 +74,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Quattrocento', serif;
+    font-family: 'Bembo', serif;
   }
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'Cinzel', serif;
+    font-family: 'Bembo', serif;
+    font-weight: 700;
   }
 }
 

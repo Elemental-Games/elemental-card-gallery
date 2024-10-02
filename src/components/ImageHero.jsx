@@ -40,14 +40,14 @@ const ImageHero = () => {
         @media (max-width: 768px) {
           .mobile-pan {
             width: 200%;
-            animation: panBackground 30s linear infinite;
+            animation: panBackground 5s linear infinite;
           }
           @keyframes panBackground {
-            from {
+            0%, 100% {
               transform: translateX(0);
             }
-            to {
-              transform: translateX(-50%);
+            50% {
+              transform: translateX(-25%);
             }
           }
         }

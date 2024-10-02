@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 const ImageHero = () => {
   return (
     <div className="relative h-screen overflow-hidden">
-      <div className="absolute inset-0 w-[200%] h-full animate-pan-background md:animate-none">
+      <div className="absolute inset-0 w-[200%] h-full animate-pan-background md:w-full md:animate-none">
         <img
           src="/storage/Background.jpg"
           alt="Background Image"

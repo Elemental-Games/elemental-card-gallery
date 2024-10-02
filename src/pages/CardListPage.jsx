@@ -12,7 +12,7 @@ const CardGallery = ({ cards }) => {
       {cards.map((card) => (
         <Link key={card.id} to={`/cards/${card.id}`} className="block">
           <div className="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src={`/cards/${card.image}`} alt={card.name} className="w-full h-48 object-cover" />
+            <img src={`/cards/${card.image}`} alt={card.name} className="w-[150%] h-auto object-contain mx-auto" />
             <div className="p-4">
               <h3 className="text-lg font-semibold">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
@@ -70,7 +70,7 @@ const CardListPage = () => {
       {isLoading ? (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {[...Array(20)].map((_, index) => (
-            <Skeleton key={index} className="w-full h-64" />
+            <Skeleton key={index} className="w-[150%] h-64" />
           ))}
         </div>
       ) : error ? (

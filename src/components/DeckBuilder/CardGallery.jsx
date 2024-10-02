@@ -89,7 +89,7 @@ const CardGallery = ({ onCardSelect }) => {
             <img 
               src={`/cards/${card.id}.png`} 
               alt={card.name} 
-              className="w-full h-auto"
+              className="w-[150%] h-auto object-contain mx-auto"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = '/placeholder.svg';

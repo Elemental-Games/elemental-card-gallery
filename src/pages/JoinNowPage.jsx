@@ -37,6 +37,20 @@ const JoinNowPage = () => {
       </Card>
 
       <section className="mb-8">
+        <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
+        <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
+          <div className="text-center">
+            <img src="/cards/deepseer.png" alt="Deepseer" className="w-[150%] h-auto object-contain mx-auto" />
+            <p className="mt-2 italic">Front of an ability card</p>
+          </div>
+          <div className="text-center">
+            <img src="/Card_Back.png" alt="Card Back" className="w-[150%] h-auto object-contain mx-auto" />
+            <p className="mt-2 italic">Card back of our game</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="mb-8">
         <h2 className="text-3xl font-semibold mb-4">Discover Elemental Masters</h2>
         <ul className="list-disc list-inside space-y-2">
           <li>Interactive card technology (QR codes)</li>
@@ -45,20 +59,6 @@ const JoinNowPage = () => {
           <li>Unique battle mechanics (strength and agility stats)</li>
           <li>Quick 20-minute games, easy to learn, challenging to master</li>
         </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
-        <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-          <div className="text-center">
-            <img src="/cards/deepseer.png" alt="Deepseer" className="w-64 h-auto object-contain mx-auto" />
-            <p className="mt-2 italic">Front of an ability card</p>
-          </div>
-          <div className="text-center">
-            <img src="/Card_Back.png" alt="Card Back" className="w-64 h-auto object-contain mx-auto" />
-            <p className="mt-2 italic">Card back of our game</p>
-          </div>
-        </div>
       </section>
 
       <section className="mb-8">

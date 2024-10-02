@@ -6,9 +6,9 @@ const CardDisplay = ({ card, variant = 'default' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const containerClasses = {
-    default: "w-[175%] aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
-    cardsOfWeek: "w-[175%] pb-[245%] perspective-1000 cursor-pointer relative",
-    artworkShowcase: "w-[112px] h-auto object-contain mx-auto"
+    default: "w-[150%] aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
+    cardsOfWeek: "w-[150%] pb-[225%] perspective-1000 cursor-pointer relative",
+    artworkShowcase: "w-[168px] h-auto object-contain mx-auto"
   };
 
   const imageClasses = {

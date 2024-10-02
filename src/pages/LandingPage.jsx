@@ -118,7 +118,7 @@ const LandingPage = () => {
                     alt={`${element.name} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
+                  <h3 className="text-2xl font-semibold mb-2 text-center">{element.name}</h3>
                   <p className="mb-4">{element.description}</p>
                 </div>
                 <Button variant="outline" className="mt-auto">Explore {element.name} Cards</Button>

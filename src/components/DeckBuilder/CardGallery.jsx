@@ -3,6 +3,8 @@ import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const CardGallery = ({ onCardSelect }) => {
   const [cards, setCards] = useState([]);
@@ -10,13 +12,22 @@ const CardGallery = ({ onCardSelect }) => {
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
+  const [error, setError] = useState(null);
   const cardsPerPage = 8;
 
   useEffect(() => {
     fetch('/src/data/ElementalMastersCards.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => setCards(data.cards))
-      .catch(error => console.error('Error fetching cards:', error));
+      .catch(error => {
+        console.error('Error fetching cards:', error);
+        setError('Error loading cards. Please try again later.');
+      });
   }, []);
 
   const filteredCards = cards.filter(card => 
@@ -27,6 +38,16 @@ const CardGallery = ({ onCardSelect }) => {
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+
+  if (error) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
+  }
 
   return (
     <div className="mt-4">
@@ -65,7 +86,15 @@ const CardGallery = ({ onCardSelect }) => {
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {displayedCards.map((card) => (
           <Card key={card.id} className="p-2 cursor-pointer" onClick={() => onCardSelect(card)}>
-            <img src={`/cards/${card.id}.png`} alt={card.name} className="w-full h-auto" />
+            <img 
+              src={`/cards/${card.id}.png`} 
+              alt={card.name} 
+              className="w-full h-auto"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/placeholder.svg';
+              }}
+            />
             <p className="text-center mt-2">{card.name}</p>
           </Card>
         ))}

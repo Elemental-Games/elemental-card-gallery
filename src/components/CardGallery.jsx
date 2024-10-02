@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const Card = ({ card }) => {
   return (
@@ -13,6 +15,10 @@ const Card = ({ card }) => {
           src={`/cards/${card.id}.png`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src = '/placeholder.svg';
+          }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
           <h3 className="text-sm font-semibold">{card.name}</h3>
@@ -25,13 +31,32 @@ const Card = ({ card }) => {
 
 const CardGallery = () => {
   const [cards, setCards] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     fetch('/src/data/ElementalMastersCards.json')
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
       .then(data => setCards(data.cards))
-      .catch(error => console.error('Error fetching cards:', error));
+      .catch(error => {
+        console.error('Error fetching cards:', error);
+        setError('Error loading cards. Please try again later.');
+      });
   }, []);
+
+  if (error) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
+  }
 
   if (cards.length === 0) {
     return <div>Loading cards...</div>;

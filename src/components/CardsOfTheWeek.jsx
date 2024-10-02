@@ -52,7 +52,7 @@ const Card = ({ card, index, flippedCards, setFlippedCards }) => {
           style={{ transform: 'rotateY(180deg)' }}
         >
           <img
-            src={`/storage/images/cards/${card.image}`}
+            src={`/storage/cards/${card.image}`}
             alt={card.name}
             className="w-full h-full object-cover"
           />

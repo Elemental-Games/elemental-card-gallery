@@ -6,9 +6,9 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
 
   const containerClasses = {
-    default: "w-[150%] aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
+    default: "w-full aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
     cardsOfWeek: "w-full h-full perspective-1000 cursor-pointer relative",
-    artworkShowcase: "w-[168px] h-auto object-contain mx-auto"
+    artworkShowcase: "w-full h-auto object-contain mx-auto"
   };
 
   const imageClasses = {
@@ -28,7 +28,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
       <img 
         src={`/cards/${card.image}`} 
         alt={card.name} 
-        className={imageClasses[variant]}
+        className={`${imageClasses[variant]} ${className}`}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
@@ -78,7 +78,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
 
   if (variant === 'artworkShowcase') {
     return (
-      <div className={containerClasses[variant]}>
+      <div className={`${containerClasses[variant]} ${className}`}>
         {cardContent}
       </div>
     );

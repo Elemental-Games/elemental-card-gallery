@@ -8,7 +8,6 @@ import LightBox from '../components/LightBox';
 import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
-import CardDisplay from '../components/CardDisplay';
 
 const LandingPage = () => {
   const [showLightBox, setShowLightBox] = useState(false);
@@ -72,11 +71,6 @@ const LandingPage = () => {
     );
   }
 
-  const showcaseCards = [
-    { id: 'deepseer', name: 'Deepseer', image: 'deepseer.png' },
-    { id: 'card-back', name: 'Card Back', image: 'Card_Back.png' },
-  ];
-
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
@@ -94,8 +88,8 @@ const LandingPage = () => {
         <section className="mb-16">
           <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap">
             <img 
-              src="/Games_Logo.png" 
-              alt="Elemental Games Logo" 
+              src="/Masters_Logo.png" 
+              alt="Elemental Masters Logo" 
               className="w-40 h-auto mr-4 mb-4 sm:mb-0"
             />
             <span className="flex-1">Master the Elements</span>
@@ -136,20 +130,6 @@ const LandingPage = () => {
               <Link to={item.link} key={index}>
                 <ExploreItem title={item.title} emoji={item.emoji} />
               </Link>
-            ))}
-          </div>
-        </section>
-
-        <section className="mb-32">
-          <h2 className="text-3xl font-bold mb-8 text-center">Artwork Showcase</h2>
-          <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-            {showcaseCards.map((card) => (
-              <div key={card.id} className="text-center">
-                <CardDisplay card={card} variant="artworkShowcase" />
-                <p className="mt-2 italic">
-                  {card.id === 'deepseer' ? 'Front of an ability card' : 'Card back of our game'}
-                </p>
-              </div>
             ))}
           </div>
         </section>

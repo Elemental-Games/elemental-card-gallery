@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Twitter, MessageCircle } from 'lucide-react';
+import CardDisplay from '../components/CardDisplay';
 
 const JoinNowPage = () => {
   const calculateDaysUntil = () => {
@@ -39,12 +40,20 @@ const JoinNowPage = () => {
       <section className="mb-8">
         <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
         <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-          <div className="text-center">
-            <img src="/cards/deepseer.png" alt="Deepseer" className="w-[150%] h-auto object-contain mx-auto" />
+          <div className="text-center w-full md:w-1/2 lg:w-1/3">
+            <CardDisplay 
+              card={{ id: 'deepseer', name: 'Deepseer', image: 'deepseer.png' }}
+              variant="artworkShowcase"
+              className="w-full h-auto object-contain mx-auto"
+            />
             <p className="mt-2 italic">Front of an ability card</p>
           </div>
-          <div className="text-center">
-            <img src="/Card_Back.png" alt="Card Back" className="w-[150%] h-auto object-contain mx-auto" />
+          <div className="text-center w-full md:w-1/2 lg:w-1/3">
+            <CardDisplay 
+              card={{ id: 'card-back', name: 'Card Back', image: 'Card_Back.png' }}
+              variant="artworkShowcase"
+              className="w-full h-auto object-contain mx-auto"
+            />
             <p className="mt-2 italic">Card back of our game</p>
           </div>
         </div>

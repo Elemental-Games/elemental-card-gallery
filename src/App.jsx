@@ -43,7 +43,7 @@ const App = () => (
                   ))}
                   <Route path="/cards/card-list" element={<CardListPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
-                  <Route path="/rules" element={<RulesPage />} />
+                  <Route path="/gameplay/rules" element={<RulesPage />} />
                   <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
                   <Route path="/kinbrold/scarto" element={<ScartoPage />} />
                   <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />

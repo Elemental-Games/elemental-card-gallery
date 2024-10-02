@@ -1,13 +1,16 @@
 import express from 'express';
 import cors from 'cors';
-import { fetchCardsFromS3 } from './src/utils/awsUtils.js';
+import fs from 'fs/promises';
+import path from 'path';
 
 const app = express();
 app.use(cors());
 
 app.get('/api/cards', async (req, res) => {
   try {
-    const cards = await fetchCardsFromS3();
+    const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
+    const data = await fs.readFile(filePath, 'utf8');
+    const cards = JSON.parse(data);
     res.json(cards);
   } catch (error) {
     console.error("Error fetching cards:", error);
@@ -15,5 +18,5 @@ app.get('/api/cards', async (req, res) => {
   }
 });
 
-const PORT = import.meta.env.VITE_PORT || 3001;
+const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

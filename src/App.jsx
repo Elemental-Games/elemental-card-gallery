@@ -10,6 +10,11 @@ import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 
+// Import the components for the sub-pages
+import CardListPage from "./pages/CardListPage";
+import DeckBuilderPage from "./pages/DeckBuilderPage";
+import RulesPage from "./pages/RulesPage";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -24,12 +29,15 @@ const App = () => (
               <main className="flex-grow">
                 <Routes>
                   {navItems.map((item) => (
-                    <Route 
-                      key={item.to} 
-                      path={item.to} 
-                      element={item.page} 
-                    />
+                    <Route key={item.to} path={item.to} element={item.page}>
+                      {item.subItems && item.subItems.map((subItem) => (
+                        <Route key={subItem.to} path={subItem.to} element={subItem.page} />
+                      ))}
+                    </Route>
                   ))}
+                  <Route path="/cards/card-list" element={<CardListPage />} />
+                  <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
+                  <Route path="/gameplay/rules" element={<RulesPage />} />
                 </Routes>
               </main>
               <Footer />

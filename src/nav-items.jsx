@@ -23,13 +23,13 @@ export const navItems = [
     subItems: [
       {
         title: "Card Gallery",
-        to: "card-list",
+        to: "/cards/card-list",
         icon: <LayoutGridIcon className="h-4 w-4" />,
         page: <CardListPage />,
       },
       {
         title: "Deck Builder",
-        to: "deck-builder",
+        to: "/cards/deck-builder",
         icon: <LayersIcon className="h-4 w-4" />,
         page: <DeckBuilderPage />,
       },
@@ -43,23 +43,17 @@ export const navItems = [
     subItems: [
       {
         title: "Learn to Play",
-        to: "learn",
+        to: "/gameplay/learn",
         icon: <GraduationCapIcon className="h-4 w-4" />,
         page: <LearnToPlayPage />,
       },
       {
         title: "Rules",
-        to: "rules",
+        to: "/gameplay/rules",
         icon: <BookOpenIcon className="h-4 w-4" />,
         page: <RulesPage />,
       },
     ],
-  },
-  {
-    title: "Rules",
-    to: "/rules",
-    icon: <BookOpenIcon className="h-4 w-4" />,
-    page: <RulesPage />,
   },
   {
     title: "Kinbrold",

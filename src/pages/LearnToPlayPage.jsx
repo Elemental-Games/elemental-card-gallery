@@ -19,17 +19,25 @@ const LearnToPlayPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-4">
             <h3 className="text-xl font-semibold mb-2">Basics of Elemental Masters</h3>
-            <video controls autoPlay className="w-full">
-              <source src="/videos/basics-tutorial.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Basics of Elemental Masters"
+                className="w-full h-full"
+                allowFullScreen
+              ></iframe>
+            </div>
           </Card>
           <Card className="p-4">
             <h3 className="text-xl font-semibold mb-2">Advanced Strategies</h3>
-            <video controls autoPlay className="w-full">
-              <source src="/videos/advanced-strategies.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <div className="aspect-w-16 aspect-h-9">
+              <iframe 
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                title="Advanced Strategies"
+                className="w-full h-full"
+                allowFullScreen
+              ></iframe>
+            </div>
           </Card>
         </div>
       </section>

@@ -10,11 +10,8 @@ import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
-import { AnimatePresence } from "framer-motion";
-import FadeTransition from "./components/FadeTransition";
-import ElementalTransition from "./components/ElementalTransition";
 
-// Import the kingdom pages
+// Import the new kingdom pages
 import ZalosPage from "./pages/ZalosPage";
 import ScartoPage from "./pages/ScartoPage";
 import GrivossPage from "./pages/GrivossPage";
@@ -33,70 +30,38 @@ const ScrollToTop = () => {
   return null;
 }
 
-const App = () => {
-  const location = useLocation();
-
-  const isKingdomPage = (path) => {
-    return ['/zalos', '/scarto', '/grivoss', '/tsunareth', '/evermere'].includes(path);
-  };
-
-  const getPageComponent = (item) => {
-    if (isKingdomPage(item.to)) {
-      switch (item.to) {
-        case '/zalos':
-          return <ElementalTransition element="Air"><ZalosPage /></ElementalTransition>;
-        case '/scarto':
-          return <ElementalTransition element="Fire"><ScartoPage /></ElementalTransition>;
-        case '/grivoss':
-          return <ElementalTransition element="Earth"><GrivossPage /></ElementalTransition>;
-        case '/tsunareth':
-          return <ElementalTransition element="Water"><TsunarethPage /></ElementalTransition>;
-        case '/evermere':
-          return <ElementalTransition element="Neutral"><EvermerePage /></ElementalTransition>;
-        default:
-          return item.page;
-      }
-    }
-    return <FadeTransition>{item.page}</FadeTransition>;
-  };
-
-  return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-        <TooltipProvider>
-          <AuthProvider>
-            <Toaster />
+const App = () => (
+  <QueryClientProvider client={queryClient}>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <TooltipProvider>
+        <AuthProvider>
+          <Toaster />
+          <BrowserRouter>
+            <ScrollToTop />
             <div className="flex flex-col min-h-screen bg-background text-foreground">
               <Header />
               <main className="flex-grow">
-                <AnimatePresence mode="wait">
-                  <Routes location={location} key={location.pathname}>
-                    {navItems.map((item) => (
-                      <Route
-                        key={item.to}
-                        path={item.to}
-                        element={getPageComponent(item)}
-                      />
-                    ))}
-                  </Routes>
-                </AnimatePresence>
+                <Routes>
+                  {navItems.map((item) => (
+                    <Route key={item.to} path={item.to} element={item.page} />
+                  ))}
+                  {/* Add new routes for kingdom pages */}
+                  <Route path="/zalos" element={<ZalosPage />} />
+                  <Route path="/scarto" element={<ScartoPage />} />
+                  <Route path="/grivoss" element={<GrivossPage />} />
+                  <Route path="/tsunareth" element={<TsunarethPage />} />
+                  <Route path="/evermere" element={<EvermerePage />} />
+                </Routes>
               </main>
               <Footer />
               <ThemeToggle />
               <CookieConsent />
             </div>
-          </AuthProvider>
-        </TooltipProvider>
-      </ThemeProvider>
-    </QueryClientProvider>
-  );
-};
-
-const AppWrapper = () => (
-  <BrowserRouter>
-    <ScrollToTop />
-    <App />
-  </BrowserRouter>
+          </BrowserRouter>
+        </AuthProvider>
+      </TooltipProvider>
+    </ThemeProvider>
+  </QueryClientProvider>
 );
 
-export default AppWrapper;
+export default App;

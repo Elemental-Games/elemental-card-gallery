@@ -1,15 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 const EarthAnimation = () => {
-  const [transitionComplete, setTransitionComplete] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setTransitionComplete(true);
-    }, 1500);
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -20,28 +11,30 @@ const EarthAnimation = () => {
       </defs>
       <rect width="100%" height="100%" fill="#4CAF50" />
       <g filter="url(#crackleFilter)">
-        {[...Array(50)].map((_, i) => (
-          <path
+        {[...Array(20)].map((_, i) => (
+          <rect
             key={i}
-            d={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
+            x={`${i * 5}%`}
+            y="100%"
+            width="5%"
+            height="0%"
             fill="#2E7D32"
-            opacity="0"
           >
+            <animate
+              attributeName="height"
+              values="0%;20%"
+              dur={`${16 + Math.random() * 8}s`}
+              begin={`${i * 0.5}s`}
+              repeatCount="indefinite"
+            />
             <animate
               attributeName="opacity"
               values="0;1;0"
-              dur={transitionComplete ? "16s" : "8s"}
-              begin={`${i * 0.2}s`}
+              dur={`${16 + Math.random() * 8}s`}
+              begin={`${i * 0.5}s`}
               repeatCount="indefinite"
             />
-            <animate
-              attributeName="d"
-              values={`M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100};M${Math.random() * 100},${Math.random() * 100} Q${Math.random() * 100},${Math.random() * 100} ${Math.random() * 100},${Math.random() * 100}`}
-              dur={transitionComplete ? "16s" : "8s"}
-              begin={`${i * 0.2}s`}
-              repeatCount="indefinite"
-            />
-          </path>
+          </rect>
         ))}
       </g>
     </svg>

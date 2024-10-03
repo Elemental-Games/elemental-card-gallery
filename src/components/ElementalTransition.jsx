@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import FireAnimation from './animations/FireAnimation';
 import WaterAnimation from './animations/WaterAnimation';
 import AirAnimation from './animations/AirAnimation';
@@ -9,7 +9,7 @@ const ElementalTransition = ({ element, children }) => {
   const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
-    const timer = setTimeout(() => setShowContent(true), 500);
+    const timer = setTimeout(() => setShowContent(true), 100);
     return () => clearTimeout(timer);
   }, []);
 
@@ -31,18 +31,14 @@ const ElementalTransition = ({ element, children }) => {
   return (
     <div className="relative min-h-screen">
       {getTransitionEffect()}
-      <AnimatePresence>
-        {showContent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1 }}
-            className="relative z-10"
-          >
-            {children}
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: showContent ? 1 : 0 }}
+        transition={{ duration: 1 }}
+        className="relative z-10"
+      >
+        {children}
+      </motion.div>
     </div>
   );
 };

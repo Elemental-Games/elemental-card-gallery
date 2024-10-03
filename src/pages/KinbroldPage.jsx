@@ -81,7 +81,7 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full min-h-screen bg-gray-900 overflow-hidden flex flex-col">
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden flex flex-col">
       <div className="flex-grow relative">
         <TransformWrapper
           ref={transformComponentRef}

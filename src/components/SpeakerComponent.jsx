@@ -2,11 +2,11 @@ import React from 'react';
 
 const SpeakerComponent = ({ image }) => {
   return (
-    <div className="absolute bottom-0 left-0">
+    <div className="absolute bottom-0 left-0 z-10">
       <img 
         src={image} 
         alt="Speaker" 
-        className="h-[65vh] w-auto object-contain"
+        className="h-[40vh] w-auto object-contain"
       />
     </div>
   );

@@ -9,8 +9,6 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
-// import { motion, AnimatePresence } from 'framer-motion';
-// import ElementalIcon from '../components/ElementalIcon';
 
 const KinbroldPage = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('iris1');
@@ -35,7 +33,7 @@ const KinbroldPage = () => {
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
-      const { zoomToElement, setTransform } = transformComponentRef.current;
+      const { setTransform } = transformComponentRef.current;
       switch (region) {
         case 'frozen_ridge':
           setTransform(-200, -100, 2.5, 1000);
@@ -55,8 +53,11 @@ const KinbroldPage = () => {
         case 'arid_sands':
           setTransform(-200, -300, 2.5, 1000);
           break;
+        case 'grivoss':
+          setTransform(-400, -300, 2.5, 1000); // Updated Grivoss location
+          break;
         default:
-          zoomToElement(region, 2.5, 1000);
+          setTransform(-300, -300, 2, 1000); // Default zoom for other regions
       }
     }
   };
@@ -135,7 +136,6 @@ const KinbroldPage = () => {
               </div>
               <TransformComponent>
                 <MapComponent 
-                  // highlight={highlightedRegion} 
                   onRegionClick={handleRegionClick}
                   showInteractivity={allowManualControl}
                 />

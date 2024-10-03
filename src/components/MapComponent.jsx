@@ -7,14 +7,14 @@ const regions = [
   { id: 'scarto', name: 'Scarto', path: 'M800,50 L950,50 L900,200 L750,150 Z', color: 'red' },
   { id: 'shroud-peak', name: 'Shroud Peak', path: 'M700,200 L800,250 L750,350 L650,300 Z', color: 'purple' },
   { id: 'gleaming-grotto', name: 'Gleaming Grotto', path: 'M850,700 L900,750 L875,800 L825,775 Z', color: 'cyan' },
-  { id: 'grivoss', name: 'Grivoss', path: 'M50,550 L200,600 L150,750 L50,700 Z', color: 'orange' },
+  { id: 'grivoss', name: 'Grivoss', path: 'M200,300 L350,350 L300,450 L150,400 Z', color: 'orange' }, // Updated Grivoss location
   { id: 'arid-sands', name: 'Arid Sands', path: 'M200,800 L400,850 L350,950 L200,900 Z', color: 'yellow' },
   { id: 'evermere', name: 'Evermere', path: 'M300,300 L700,300 L600,500 L400,500 Z', color: 'green' },
   { id: 'tsunareth', name: 'Tsunareth', path: 'M550,700 L750,750 L700,850 L500,800 Z', color: 'lightblue' },
   { id: 'noxwood', name: 'Noxwood', path: 'M800,800 L950,850 L900,950 L750,900 Z', color: 'darkgreen' },
 ];
 
-const MapComponent = ({ highlight, onRegionClick, showInteractivity }) => {
+const MapComponent = ({ onRegionClick, showInteractivity }) => {
   const navigate = useNavigate();
   const [hoveredRegion, setHoveredRegion] = useState(null);
 
@@ -36,13 +36,6 @@ const MapComponent = ({ highlight, onRegionClick, showInteractivity }) => {
         className="w-full h-full object-cover"
         id="map"
       />
-      {highlight && (
-        <img 
-          src={`/${highlight}_highlight.png`} 
-          alt={`${highlight} highlight`} 
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      )}
       <svg
         className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 1000 1000"

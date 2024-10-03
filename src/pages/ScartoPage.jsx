@@ -5,12 +5,11 @@ import ElementalIcon from '../components/ElementalIcon';
 const ScartoPage = () => {
   return (
     <ElementalTransition element="Fire">
-      <div className="min-h-screen bg-red-900 text-white p-8">
+      <div className="min-h-screen bg-red-900 text-white p-8 overflow-y-auto">
         <h1 className="text-4xl font-bold mb-8">Welcome to Scarto</h1>
         <p className="text-xl mb-4">The volcanic landscapes of the Fire Kingdom</p>
         <div className="flex items-center mb-8">
           <ElementalIcon element="Fire" className="w-16 h-16 mr-4" />
-          <ElementalIcon element="Fire_Elementalist" className="w-16 h-16" />
         </div>
         <div className="mb-8">
           <img src="/cards/osao.png" alt="Osao" className="w-64 h-auto mb-4" />

@@ -5,12 +5,11 @@ import ElementalIcon from '../components/ElementalIcon';
 const TsunarethPage = () => {
   return (
     <ElementalTransition element="Water">
-      <div className="min-h-screen bg-blue-900 text-white p-8">
+      <div className="min-h-screen bg-blue-900 text-white p-8 overflow-y-auto">
         <h1 className="text-4xl font-bold mb-8">Welcome to Tsunareth</h1>
         <p className="text-xl mb-4">The vast underwater realm of the Water Kingdom</p>
         <div className="flex items-center mb-8">
           <ElementalIcon element="Water" className="w-16 h-16 mr-4" />
-          <ElementalIcon element="Water_Elementalist" className="w-16 h-16" />
         </div>
         <div className="mb-8">
           <img src="/cards/mek.png" alt="Mek" className="w-64 h-auto mb-4" />

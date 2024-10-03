@@ -1,21 +1,15 @@
 import React from 'react';
 
-const DragonComponent = ({ image, position }) => {
+const DragonComponent = ({ image }) => {
   return (
-    <div 
-      className="absolute"
-      style={{
-        left: `${position.x}px`,
-        top: `${position.y}px`,
-        transform: 'translate(-50%, -50%)',
-        transition: 'all 0.5s ease-in-out'
-      }}
-    >
-      <img 
-        src={image} 
-        alt="Dragon" 
-        className="h-48 w-auto object-contain"
-      />
+    <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full max-w-2xl max-h-2xl">
+      <div className="relative w-full h-full">
+        <img 
+          src={image} 
+          alt="Dragon" 
+          className="w-full h-full object-contain"
+        />
+      </div>
     </div>
   );
 };

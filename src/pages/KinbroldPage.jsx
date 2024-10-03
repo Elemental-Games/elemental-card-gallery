@@ -30,31 +30,6 @@ const KinbroldPage = () => {
     }
   }, [tourStep, showTour]);
 
-  useEffect(() => {
-    const fitMapToScreen = () => {
-      if (mapContainerRef.current && transformComponentRef.current) {
-        const { clientWidth, clientHeight } = mapContainerRef.current;
-        const mapAspectRatio = 1000 / 1000; // Assuming the map is 1000x1000
-        const containerAspectRatio = clientWidth / clientHeight;
-
-        let scale;
-        if (containerAspectRatio > mapAspectRatio) {
-          // Container is wider than the map
-          scale = clientHeight / 1000;
-        } else {
-          // Container is taller than the map
-          scale = clientWidth / 1000;
-        }
-
-        transformComponentRef.current.setTransform(0, 0, scale * 0.9); // 90% of the calculated scale for a slight margin
-      }
-    };
-
-    fitMapToScreen();
-    window.addEventListener('resize', fitMapToScreen);
-    return () => window.removeEventListener('resize', fitMapToScreen);
-  }, []);
-
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
@@ -104,13 +79,6 @@ const KinbroldPage = () => {
       setShowDragonDialog(true);
     } else {
       window.location.href = `https://elementalgames.gg/${region}`;
-    }
-  };
-
-  const resetMap = () => {
-    if (transformComponentRef.current) {
-      const { resetTransform } = transformComponentRef.current;
-      resetTransform(1000);
     }
   };
 

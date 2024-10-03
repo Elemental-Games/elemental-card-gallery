@@ -7,6 +7,7 @@ import ElementalIcon from '../components/ElementalIcon';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const KinbroldPage = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('elly1');
@@ -70,12 +71,24 @@ const KinbroldPage = () => {
             onSkip={skipTour}
             isLastStep={tourStep === tourScript.length - 1}
           />
-          {highlightedRegion && !displayedDragon && highlightedRegion !== 'evermere' && (
-            <ElementalIcon 
-              element={highlightedRegion} 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 drop-shadow-lg"
-            />
-          )}
+          <AnimatePresence>
+            {highlightedRegion && highlightedRegion !== 'evermere' && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.3 }}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              >
+                <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-4 shadow-lg">
+                  <ElementalIcon 
+                    element={highlightedRegion} 
+                    className="w-24 h-24 object-contain drop-shadow-lg"
+                  />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </>
       )}
       <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>

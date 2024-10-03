@@ -11,6 +11,13 @@ import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 
+// Import the new kingdom pages
+import ZalosPage from "./pages/ZalosPage";
+import ScartoPage from "./pages/ScartoPage";
+import GrivossPage from "./pages/GrivossPage";
+import TsunarethPage from "./pages/TsunarethPage";
+import EvermerePage from "./pages/EvermerePage";
+
 const queryClient = new QueryClient();
 
 const ScrollToTop = () => {
@@ -38,6 +45,12 @@ const App = () => (
                   {navItems.map((item) => (
                     <Route key={item.to} path={item.to} element={item.page} />
                   ))}
+                  {/* Add new routes for kingdom pages */}
+                  <Route path="/zalos" element={<ZalosPage />} />
+                  <Route path="/scarto" element={<ScartoPage />} />
+                  <Route path="/grivoss" element={<GrivossPage />} />
+                  <Route path="/tsunareth" element={<TsunarethPage />} />
+                  <Route path="/evermere" element={<EvermerePage />} />
                 </Routes>
               </main>
               <Footer />

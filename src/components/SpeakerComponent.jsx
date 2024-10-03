@@ -6,7 +6,7 @@ const SpeakerComponent = ({ image }) => {
       <img 
         src={image} 
         alt="Speaker" 
-        className="w-full h-auto object-contain md:h-[59.4vh] md:w-auto" // Reduced from 66vh to 59.4vh (10% smaller)
+        className="w-full h-auto object-contain md:h-[66vh] md:w-auto"
       />
     </div>
   );

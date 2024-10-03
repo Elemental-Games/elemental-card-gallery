@@ -5,7 +5,6 @@ import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
 
@@ -19,7 +18,6 @@ const KinbroldPage = () => {
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
-  const mapContainerRef = useRef(null);
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
@@ -83,33 +81,22 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden" ref={mapContainerRef}>
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
         initialPositionX={0}
         initialPositionY={0}
-        minScale={0.1}
-        maxScale={5}
+        minScale={0.5}
+        maxScale={3}
         disabled={!allowManualControl}
       >
-        {({ zoomIn, zoomOut, resetTransform }) => (
-          <>
-            <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
-              <MapComponent 
-                onRegionClick={handleRegionClick}
-                showInteractivity={allowManualControl}
-              />
-            </TransformComponent>
-            {allowManualControl && (
-              <div className="absolute bottom-4 right-4 flex space-x-2">
-                <Button onClick={() => zoomIn()}>Zoom In</Button>
-                <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => resetTransform()}>Reset</Button>
-              </div>
-            )}
-          </>
-        )}
+        <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
+          <MapComponent 
+            onRegionClick={handleRegionClick}
+            showInteractivity={allowManualControl}
+          />
+        </TransformComponent>
       </TransformWrapper>
       {showTour && (
         <>

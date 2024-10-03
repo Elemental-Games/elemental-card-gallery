@@ -3,7 +3,6 @@ import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
-import ElementalIcon from '../components/ElementalIcon';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
@@ -54,6 +53,10 @@ const KinbroldPage = () => {
     }
   };
 
+  const isDragonLand = (region) => {
+    return Object.keys(dragonInfo).some(key => dragonInfo[key].name.toLowerCase().includes(region));
+  };
+
   return (
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <MapComponent 
@@ -72,7 +75,7 @@ const KinbroldPage = () => {
             isLastStep={tourStep === tourScript.length - 1}
           />
           <AnimatePresence>
-            {highlightedRegion && highlightedRegion !== 'evermere' && (
+            {highlightedRegion && highlightedRegion !== 'evermere' && !isDragonLand(highlightedRegion) && (
               <motion.div
                 initial={{ scale: 0, opacity: 0 }}
                 animate={{ scale: 1, opacity: 1 }}
@@ -81,8 +84,9 @@ const KinbroldPage = () => {
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
               >
                 <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-4 pb-2 shadow-lg flex items-center justify-center">
-                  <ElementalIcon 
-                    element={highlightedRegion} 
+                  <img 
+                    src={`/icons/${highlightedRegion.charAt(0).toUpperCase() + highlightedRegion.slice(1)}.png`}
+                    alt={`${highlightedRegion} icon`}
                     className="w-16 h-16 object-contain drop-shadow-lg"
                   />
                 </div>

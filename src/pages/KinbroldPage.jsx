@@ -9,12 +9,12 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
-import { motion, AnimatePresence } from 'framer-motion';
-import ElementalIcon from '../components/ElementalIcon';
+// import { motion, AnimatePresence } from 'framer-motion';
+// import ElementalIcon from '../components/ElementalIcon';
 
 const KinbroldPage = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('iris1');
-  const [highlightedRegion, setHighlightedRegion] = useState(null);
+  // const [highlightedRegion, setHighlightedRegion] = useState(null);
   const [displayedDragon, setDisplayedDragon] = useState(null);
   const [dialogueText, setDialogueText] = useState(tourScript[0].dialogue);
   const [tourStep, setTourStep] = useState(0);
@@ -66,7 +66,7 @@ const KinbroldPage = () => {
       const nextStep = tourStep + 1;
       setTourStep(nextStep);
       setCurrentSpeaker(tourScript[nextStep].speaker);
-      setHighlightedRegion(tourScript[nextStep].region);
+      // setHighlightedRegion(tourScript[nextStep].region);
       setDisplayedDragon(tourScript[nextStep].dragon);
       setDialogueText(tourScript[nextStep].dialogue);
 
@@ -135,7 +135,7 @@ const KinbroldPage = () => {
               </div>
               <TransformComponent>
                 <MapComponent 
-                  highlight={highlightedRegion} 
+                  // highlight={highlightedRegion} 
                   onRegionClick={handleRegionClick}
                   showInteractivity={allowManualControl}
                 />
@@ -153,24 +153,7 @@ const KinbroldPage = () => {
               onSkip={skipTour}
               isLastStep={tourStep === tourScript.length - 1}
             />
-            <AnimatePresence>
-              {highlightedRegion && !isDragonLand(highlightedRegion) && isMainKingdom(highlightedRegion) && highlightedRegion !== 'evermere' && (
-                <motion.div
-                  initial={{ scale: 0, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  exit={{ scale: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
-                >
-                  <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-4 pb-2 shadow-lg flex items-center justify-center">
-                    <ElementalIcon 
-                      element={highlightedRegion}
-                      className="w-16 h-16 object-contain drop-shadow-lg"
-                    />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+            {/* Commented out AnimatePresence and motion.div for highlighting */}
           </>
         )}
       </div>

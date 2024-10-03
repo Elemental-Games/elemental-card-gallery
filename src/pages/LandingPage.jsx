@@ -79,7 +79,7 @@ const LandingPage = () => {
       <ImageHero />
       
       {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-16 flex items-start justify-between">
+      <section className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-start justify-between">
         <div className="flex-grow mr-8">
           <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
           <p className="mb-6 text-lg">
@@ -87,7 +87,7 @@ const LandingPage = () => {
           </p>
           <KeyFeatures />
         </div>
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 md:ml-8">
           <img 
             src="/Masters_Logo.png" 
             alt="Masters Logo" 
@@ -119,8 +119,7 @@ const LandingPage = () => {
                     alt={`${kingdom.element} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name},</h3>
-                  <p className="text-sm font-bold mb-2">the {kingdom.element} Kingdom</p>
+                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name}, <span className="text-sm font-bold">the {kingdom.element} Kingdom</span></h3>
                   <p className="mb-4">{kingdom.description}</p>
                 </div>
                 <Link to={`/${kingdom.name.toLowerCase()}`}>

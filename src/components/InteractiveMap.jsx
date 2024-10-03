@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 
 const regions = [
   { id: 'zalos', name: 'Zalos', info: 'A region of ice and frost in the northwest.' },
@@ -15,15 +16,18 @@ const regions = [
   { id: 'noxwood', name: 'Noxwood', info: 'A dark, mysterious forest in the south.' },
 ];
 
-const CharacterDialog = ({ isOpen, onClose }) => (
-  <Dialog open={isOpen} onOpenChange={onClose}>
-    <DialogContent>
-      <DialogHeader>
-        <DialogTitle>Welcome to the World of Elemental Masters!</DialogTitle>
-      </DialogHeader>
-      <p>Greetings, traveler! I am Aether, your guide to this magical realm. Before you lies a world of diverse elements and landscapes. From the icy peaks of Zalos to the fiery Mount Surya, from the lush Evermere to the mysterious Noxwood, each region holds its own secrets and powers. Click on the regions to learn more about them. Your journey to become an Elemental Master begins now!</p>
-    </DialogContent>
-  </Dialog>
+const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
+  <div className={`fixed bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
+    <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm">
+      <img src="/balon1.jpeg" alt="Balon" className="w-16 h-16 rounded-full mb-2" />
+      <p className="mb-4">{dialogText[currentStep]}</p>
+      {currentStep < dialogText.length - 1 ? (
+        <Button onClick={onNext}>Next</Button>
+      ) : (
+        <Button onClick={onClose}>Close</Button>
+      )}
+    </div>
+  </div>
 );
 
 const InteractiveMap = () => {
@@ -33,6 +37,16 @@ const InteractiveMap = () => {
   const mapRef = useRef(null);
   const canvasRef = useRef(null);
   const [scale, setScale] = useState(1);
+  const [currentStep, setCurrentStep] = useState(0);
+
+  const dialogText = [
+    "Welcome to the World of Elemental Masters!",
+    "I am Balon, your guide to this magical realm.",
+    "Before you lies a world of diverse elements and landscapes.",
+    "From the icy peaks of Zalos to the fiery Mount Surya, from the lush Evermere to the mysterious Noxwood, each region holds its own secrets and powers.",
+    "Click on the regions to learn more about them.",
+    "Your journey to become an Elemental Master begins now!"
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => setShowCharacter(true), 1000);
@@ -67,15 +81,8 @@ const InteractiveMap = () => {
       const g = data[i + 1];
       const b = data[i + 2];
       
-      // Check if the pixel is black (border)
-      if (r === 0 && g === 0 && b === 0) {
-        // Make it the same gray color as the background
-        data[i] = 128;
-        data[i + 1] = 128;
-        data[i + 2] = 128;
-      }
-      // Check if the pixel is white (outside the circles)
-      else if (r === 255 && g === 255 && b === 255) {
+      // Check if the pixel is black (border) or white (outside the circles)
+      if ((r === 0 && g === 0 && b === 0) || (r === 255 && g === 255 && b === 255)) {
         // Make it the same gray color as the background
         data[i] = 128;
         data[i + 1] = 128;
@@ -127,6 +134,10 @@ const InteractiveMap = () => {
     setShowBreakdown(!showBreakdown);
   };
 
+  const handleNextStep = () => {
+    setCurrentStep(prevStep => prevStep + 1);
+  };
+
   return (
     <div className="relative w-full" ref={mapRef}>
       <img 
@@ -155,7 +166,13 @@ const InteractiveMap = () => {
           <p>{selectedRegion?.info}</p>
         </DialogContent>
       </Dialog>
-      <CharacterDialog isOpen={showCharacter} onClose={() => setShowCharacter(false)} />
+      <CharacterDialog 
+        isOpen={showCharacter} 
+        onClose={() => setShowCharacter(false)}
+        onNext={handleNextStep}
+        dialogText={dialogText}
+        currentStep={currentStep}
+      />
     </div>
   );
 };

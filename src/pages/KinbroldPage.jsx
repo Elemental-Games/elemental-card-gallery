@@ -71,8 +71,8 @@ const KinbroldPage = () => {
       />
       {showTour && (
         <>
-          <SpeakerComponent image={currentSpeaker} />
-          {displayedDragon && <DragonComponent image={displayedDragon} />}
+          <SpeakerComponent image={`/tour/${currentSpeaker}`} />
+          {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}`} />}
           <DialogueBox 
             text={dialogueText} 
             onContinue={advanceTour}

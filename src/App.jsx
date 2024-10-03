@@ -12,6 +12,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import { AnimatePresence } from "framer-motion";
 import FadeTransition from "./components/FadeTransition";
+import ElementalTransition from "./components/ElementalTransition";
 
 // Import the kingdom pages
 import ZalosPage from "./pages/ZalosPage";
@@ -39,6 +40,26 @@ const App = () => {
     return ['/zalos', '/scarto', '/grivoss', '/tsunareth', '/evermere'].includes(path);
   };
 
+  const getPageComponent = (item) => {
+    if (isKingdomPage(item.to)) {
+      switch (item.to) {
+        case '/zalos':
+          return <ElementalTransition element="Air"><ZalosPage /></ElementalTransition>;
+        case '/scarto':
+          return <ElementalTransition element="Fire"><ScartoPage /></ElementalTransition>;
+        case '/grivoss':
+          return <ElementalTransition element="Earth"><GrivossPage /></ElementalTransition>;
+        case '/tsunareth':
+          return <ElementalTransition element="Water"><TsunarethPage /></ElementalTransition>;
+        case '/evermere':
+          return <ElementalTransition element="Neutral"><EvermerePage /></ElementalTransition>;
+        default:
+          return item.page;
+      }
+    }
+    return <FadeTransition>{item.page}</FadeTransition>;
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -54,20 +75,9 @@ const App = () => {
                       <Route
                         key={item.to}
                         path={item.to}
-                        element={
-                          isKingdomPage(item.to) ? (
-                            item.page
-                          ) : (
-                            <FadeTransition>{item.page}</FadeTransition>
-                          )
-                        }
+                        element={getPageComponent(item)}
                       />
                     ))}
-                    <Route path="/zalos" element={<ZalosPage />} />
-                    <Route path="/scarto" element={<ScartoPage />} />
-                    <Route path="/grivoss" element={<GrivossPage />} />
-                    <Route path="/tsunareth" element={<TsunarethPage />} />
-                    <Route path="/evermere" element={<EvermerePage />} />
                   </Routes>
                 </AnimatePresence>
               </main>

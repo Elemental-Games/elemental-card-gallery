@@ -35,8 +35,29 @@ const KinbroldPage = () => {
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
-      const { zoomToElement } = transformComponentRef.current;
-      zoomToElement(region, 2, 1000); // Increased zoom level and added smooth transition
+      const { zoomToElement, setTransform } = transformComponentRef.current;
+      switch (region) {
+        case 'frozen_ridge':
+          setTransform(-200, -100, 2.5, 1000);
+          break;
+        case 'shroud_peak':
+          setTransform(-400, -200, 2.5, 1000);
+          break;
+        case 'mount_surya':
+          setTransform(-600, -200, 2.5, 1000);
+          break;
+        case 'gleaming_grotto':
+          setTransform(-600, -400, 2.5, 1000);
+          break;
+        case 'noxwood':
+          setTransform(-200, -400, 2.5, 1000);
+          break;
+        case 'arid_sands':
+          setTransform(-200, -300, 2.5, 1000);
+          break;
+        default:
+          zoomToElement(region, 2.5, 1000);
+      }
     }
   };
 
@@ -49,7 +70,6 @@ const KinbroldPage = () => {
       setDisplayedDragon(tourScript[nextStep].dragon);
       setDialogueText(tourScript[nextStep].dialogue);
 
-      // Zoom out before moving to the next region
       if (transformComponentRef.current) {
         const { resetTransform } = transformComponentRef.current;
         resetTransform(1000);
@@ -134,7 +154,7 @@ const KinbroldPage = () => {
               isLastStep={tourStep === tourScript.length - 1}
             />
             <AnimatePresence>
-              {highlightedRegion && !isDragonLand(highlightedRegion) && isMainKingdom(highlightedRegion) && (
+              {highlightedRegion && !isDragonLand(highlightedRegion) && isMainKingdom(highlightedRegion) && highlightedRegion !== 'evermere' && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}

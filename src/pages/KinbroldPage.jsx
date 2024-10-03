@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -63,7 +65,7 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+    <div className="relative w-full min-h-screen bg-gray-900 overflow-hidden">
       <MapComponent 
         highlight={highlightedRegion} 
         onRegionClick={handleRegionClick}
@@ -118,6 +120,37 @@ const KinbroldPage = () => {
           <p>{selectedDragon?.description}</p>
         </DialogContent>
       </Dialog>
+
+      {/* New section for kingdom buttons */}
+      <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4">
+        <div className="container mx-auto flex justify-center space-x-4">
+          <Link to="/zalos">
+            <Button variant="outline" className="bg-blue-500 hover:bg-blue-600 text-white">
+              Zalos
+            </Button>
+          </Link>
+          <Link to="/scarto">
+            <Button variant="outline" className="bg-red-500 hover:bg-red-600 text-white">
+              Scarto
+            </Button>
+          </Link>
+          <Link to="/grivoss">
+            <Button variant="outline" className="bg-green-500 hover:bg-green-600 text-white">
+              Grivoss
+            </Button>
+          </Link>
+          <Link to="/tsunareth">
+            <Button variant="outline" className="bg-cyan-500 hover:bg-cyan-600 text-white">
+              Tsunareth
+            </Button>
+          </Link>
+          <Link to="/evermere">
+            <Button variant="outline" className="bg-purple-500 hover:bg-purple-600 text-white">
+              Evermere
+            </Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 };

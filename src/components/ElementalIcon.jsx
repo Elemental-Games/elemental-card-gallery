@@ -34,13 +34,17 @@ const ElementalIcon = ({ element, className }) => {
       case 'arid_sands':
         return '/icons/Sand.png';
       default:
-        return '/icons/Rune.png';
+        return '';
     }
   };
 
+  const iconPath = getIconPath(element);
+  
+  if (!iconPath) return null;
+
   return (
     <img 
-      src={getIconPath(element)} 
+      src={iconPath} 
       alt={`${element} icon`} 
       className={`${className} object-contain`}
     />

@@ -5,12 +5,11 @@ import ElementalIcon from '../components/ElementalIcon';
 const ZalosPage = () => {
   return (
     <ElementalTransition element="Air">
-      <div className="min-h-screen bg-sky-900 text-white p-8">
+      <div className="min-h-screen bg-sky-900 text-white p-8 overflow-y-auto">
         <h1 className="text-4xl font-bold mb-8">Welcome to Zalos</h1>
         <p className="text-xl mb-4">The floating islands of the Air Kingdom</p>
         <div className="flex items-center mb-8">
           <ElementalIcon element="Air" className="w-16 h-16 mr-4" />
-          <ElementalIcon element="Air_Elementalist" className="w-16 h-16" />
         </div>
         <div className="mb-8">
           <img src="/cards/galea.png" alt="Galea" className="w-64 h-auto mb-4" />

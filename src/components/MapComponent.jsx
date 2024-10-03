@@ -34,6 +34,7 @@ const MapComponent = ({ highlight, onRegionClick, showInteractivity }) => {
         src="/IMG_3978.jpeg" 
         alt="Kinbrold Map" 
         className="w-full h-full object-cover"
+        id="map"
       />
       {highlight && (
         <img 
@@ -50,6 +51,7 @@ const MapComponent = ({ highlight, onRegionClick, showInteractivity }) => {
         {regions.map((region) => (
           <path
             key={region.id}
+            id={region.id}
             d={region.path}
             fill={region.color}
             fillOpacity={hoveredRegion === region.id ? 0.3 : 0}

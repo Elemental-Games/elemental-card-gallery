@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
 import MapComponent from '../components/MapComponent';
@@ -21,6 +21,27 @@ const KinbroldPage = () => {
   const [showTour, setShowTour] = useState(true);
   const [showDragonDialog, setShowDragonDialog] = useState(false);
   const [selectedDragon, setSelectedDragon] = useState(null);
+  const [allowManualControl, setAllowManualControl] = useState(false);
+  const transformComponentRef = useRef(null);
+
+  useEffect(() => {
+    if (showTour && tourStep < tourScript.length) {
+      const currentRegion = tourScript[tourStep].region;
+      if (currentRegion && transformComponentRef.current) {
+        zoomToRegion(currentRegion);
+      }
+    }
+  }, [tourStep, showTour]);
+
+  const zoomToRegion = (region) => {
+    if (transformComponentRef.current) {
+      const { zoomToElement } = transformComponentRef.current;
+      zoomToElement(region);
+      setTimeout(() => {
+        zoomToElement('map', 1, 1000); // Zoom out after 1 second
+      }, 2000);
+    }
+  };
 
   const advanceTour = () => {
     if (tourStep < tourScript.length - 1) {
@@ -44,9 +65,11 @@ const KinbroldPage = () => {
     setCurrentSpeaker(null);
     setHighlightedRegion(null);
     setDisplayedDragon(null);
+    setAllowManualControl(true);
   };
 
   const handleRegionClick = (region) => {
+    if (!allowManualControl) return;
     const dragon = Object.keys(dragonInfo).find(key => dragonInfo[key].name.toLowerCase().includes(region));
     if (dragon) {
       setSelectedDragon(dragonInfo[dragon]);
@@ -69,24 +92,26 @@ const KinbroldPage = () => {
     <div className="relative w-full min-h-screen bg-gray-900 overflow-hidden flex flex-col">
       <div className="flex-grow relative">
         <TransformWrapper
+          ref={transformComponentRef}
           initialScale={1}
           initialPositionX={0}
           initialPositionY={0}
           minScale={0.5}
           maxScale={3}
+          disabled={!allowManualControl}
         >
           {({ zoomIn, zoomOut, resetTransform }) => (
             <>
               <div className="absolute top-4 left-4 z-10 space-x-2">
-                <Button onClick={() => zoomIn()}>Zoom In</Button>
-                <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => resetTransform()}>Reset</Button>
+                <Button onClick={() => zoomIn()} disabled={!allowManualControl}>Zoom In</Button>
+                <Button onClick={() => zoomOut()} disabled={!allowManualControl}>Zoom Out</Button>
+                <Button onClick={() => resetTransform()} disabled={!allowManualControl}>Reset</Button>
               </div>
               <TransformComponent>
                 <MapComponent 
                   highlight={highlightedRegion} 
                   onRegionClick={handleRegionClick}
-                  showInteractivity={!showTour}
+                  showInteractivity={allowManualControl}
                 />
               </TransformComponent>
             </>

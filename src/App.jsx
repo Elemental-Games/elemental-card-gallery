@@ -10,8 +10,10 @@ import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
+import { AnimatePresence } from "framer-motion";
+import FadeTransition from "./components/FadeTransition";
 
-// Import the new kingdom pages
+// Import the kingdom pages
 import ZalosPage from "./pages/ZalosPage";
 import ScartoPage from "./pages/ScartoPage";
 import GrivossPage from "./pages/GrivossPage";
@@ -30,38 +32,61 @@ const ScrollToTop = () => {
   return null;
 }
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      <TooltipProvider>
-        <AuthProvider>
-          <Toaster />
-          <BrowserRouter>
-            <ScrollToTop />
+const App = () => {
+  const location = useLocation();
+
+  const isKingdomPage = (path) => {
+    return ['/zalos', '/scarto', '/grivoss', '/tsunareth', '/evermere'].includes(path);
+  };
+
+  return (
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <TooltipProvider>
+          <AuthProvider>
+            <Toaster />
             <div className="flex flex-col min-h-screen bg-background text-foreground">
               <Header />
               <main className="flex-grow">
-                <Routes>
-                  {navItems.map((item) => (
-                    <Route key={item.to} path={item.to} element={item.page} />
-                  ))}
-                  {/* Add new routes for kingdom pages */}
-                  <Route path="/zalos" element={<ZalosPage />} />
-                  <Route path="/scarto" element={<ScartoPage />} />
-                  <Route path="/grivoss" element={<GrivossPage />} />
-                  <Route path="/tsunareth" element={<TsunarethPage />} />
-                  <Route path="/evermere" element={<EvermerePage />} />
-                </Routes>
+                <AnimatePresence mode="wait">
+                  <Routes location={location} key={location.pathname}>
+                    {navItems.map((item) => (
+                      <Route
+                        key={item.to}
+                        path={item.to}
+                        element={
+                          isKingdomPage(item.to) ? (
+                            item.page
+                          ) : (
+                            <FadeTransition>{item.page}</FadeTransition>
+                          )
+                        }
+                      />
+                    ))}
+                    <Route path="/zalos" element={<ZalosPage />} />
+                    <Route path="/scarto" element={<ScartoPage />} />
+                    <Route path="/grivoss" element={<GrivossPage />} />
+                    <Route path="/tsunareth" element={<TsunarethPage />} />
+                    <Route path="/evermere" element={<EvermerePage />} />
+                  </Routes>
+                </AnimatePresence>
               </main>
               <Footer />
               <ThemeToggle />
               <CookieConsent />
             </div>
-          </BrowserRouter>
-        </AuthProvider>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+          </AuthProvider>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  );
+};
+
+const AppWrapper = () => (
+  <BrowserRouter>
+    <ScrollToTop />
+    <App />
+  </BrowserRouter>
 );
 
-export default App;
+export default AppWrapper;

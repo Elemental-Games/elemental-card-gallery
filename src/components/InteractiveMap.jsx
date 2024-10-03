@@ -73,7 +73,7 @@ const InteractiveMap = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <img src="/kinbrold_map.jpg" alt="Elemental Masters World Map" className="w-full h-full object-cover" />
+      <img src="/IMG_3978.jpeg" alt="Elemental Masters World Map" className="w-full h-full object-cover" />
       <canvas
         ref={canvasRef}
         onClick={handleMapClick}

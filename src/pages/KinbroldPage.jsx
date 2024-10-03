@@ -36,10 +36,7 @@ const KinbroldPage = () => {
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
-      zoomToElement(region);
-      setTimeout(() => {
-        zoomToElement('map', 1, 1000); // Zoom out after 1 second
-      }, 2000);
+      zoomToElement(region, 2, 1000); // Increased zoom level and added smooth transition
     }
   };
 
@@ -51,6 +48,15 @@ const KinbroldPage = () => {
       setHighlightedRegion(tourScript[nextStep].region);
       setDisplayedDragon(tourScript[nextStep].dragon);
       setDialogueText(tourScript[nextStep].dialogue);
+
+      // Zoom out before moving to the next region
+      if (transformComponentRef.current) {
+        const { resetTransform } = transformComponentRef.current;
+        resetTransform(1000);
+        setTimeout(() => {
+          zoomToRegion(tourScript[nextStep].region);
+        }, 1000);
+      }
     } else {
       endTour();
     }
@@ -128,7 +134,7 @@ const KinbroldPage = () => {
               isLastStep={tourStep === tourScript.length - 1}
             />
             <AnimatePresence>
-              {highlightedRegion && !isDragonLand(highlightedRegion) && (
+              {highlightedRegion && !isDragonLand(highlightedRegion) && isMainKingdom(highlightedRegion) && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}
@@ -137,18 +143,10 @@ const KinbroldPage = () => {
                   className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
                 >
                   <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-4 pb-2 shadow-lg flex items-center justify-center">
-                    {isMainKingdom(highlightedRegion) ? (
-                      <ElementalIcon 
-                        element={highlightedRegion}
-                        className="w-16 h-16 object-contain drop-shadow-lg"
-                      />
-                    ) : (
-                      <img 
-                        src={`/icons/${highlightedRegion.charAt(0).toUpperCase() + highlightedRegion.slice(1)}.png`}
-                        alt={`${highlightedRegion} icon`}
-                        className="w-16 h-16 object-contain drop-shadow-lg"
-                      />
-                    )}
+                    <ElementalIcon 
+                      element={highlightedRegion}
+                      className="w-16 h-16 object-contain drop-shadow-lg"
+                    />
                   </div>
                 </motion.div>
               )}

@@ -1,13 +1,26 @@
 import React from 'react';
 import ElementalTransition from '../components/ElementalTransition';
+import ElementalIcon from '../components/ElementalIcon';
 
 const ScartoPage = () => {
   return (
     <ElementalTransition element="Fire">
       <div className="min-h-screen bg-red-900 text-white p-8">
         <h1 className="text-4xl font-bold mb-8">Welcome to Scarto</h1>
-        <p className="text-xl">The volcanic landscapes of the Fire Kingdom</p>
-        {/* Add more content about Scarto here */}
+        <p className="text-xl mb-4">The volcanic landscapes of the Fire Kingdom</p>
+        <div className="flex items-center mb-8">
+          <ElementalIcon element="Fire" className="w-16 h-16 mr-4" />
+          <ElementalIcon element="Fire_Elementalist" className="w-16 h-16" />
+        </div>
+        <div className="mb-8">
+          <img src="/cards/osao.png" alt="Osao" className="w-64 h-auto mb-4" />
+          <p className="text-lg">Osao, the Fire Elementalist, guardian of Scarto</p>
+        </div>
+        <div>
+          <h2 className="text-2xl font-semibold mb-4">Kingdom Lore</h2>
+          <p>Scarto is a land of intense heat and passion, where the very ground pulses with the heartbeat of volcanoes. Its people are known for their fiery temperaments and unwavering determination.</p>
+          <p className="mt-4">The kingdom is home to master blacksmiths and artisans who harness the power of lava to create wonders. Scarto's military might is unmatched, with warriors as fierce and unpredictable as the flames they command.</p>
+        </div>
       </div>
     </ElementalTransition>
   );

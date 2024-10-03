@@ -50,7 +50,7 @@ const JoinNowPage = () => {
           </div>
           <div className="text-center w-full md:w-1/2 lg:w-1/3">
             <CardDisplay 
-              card={{ id: 'card-back', name: 'Card Back', image: 'Card_Back.png' }}
+              card={{ id: 'card-back', name: 'Card Back', image: '/Card_Back.png' }}
               variant="artworkShowcase"
               className="w-full h-auto object-contain mx-auto"
             />
@@ -71,7 +71,7 @@ const JoinNowPage = () => {
       </section>
 
       <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Our Journey Together</h2>
+        <h2 className="text-3xl font-semibold mb-4">Kickstarter Goals</h2>
         <ul className="space-y-4">
           <li className="flex items-center">
             <span className="bg-primary text-primary-foreground px-2 py-1 rounded-full mr-2">$50,000</span>

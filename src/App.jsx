@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -9,8 +9,19 @@ import { navItems } from "./nav-items";
 import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
+import { useEffect } from "react";
 
 const queryClient = new QueryClient();
+
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -19,6 +30,7 @@ const App = () => (
         <AuthProvider>
           <Toaster />
           <BrowserRouter>
+            <ScrollToTop />
             <div className="flex flex-col min-h-screen bg-background text-foreground">
               <Header />
               <main className="flex-grow">

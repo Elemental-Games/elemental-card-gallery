@@ -128,7 +128,7 @@ const KinbroldPage = () => {
               isLastStep={tourStep === tourScript.length - 1}
             />
             <AnimatePresence>
-              {highlightedRegion && highlightedRegion !== 'evermere' && !isDragonLand(highlightedRegion) && (
+              {highlightedRegion && !isDragonLand(highlightedRegion) && (
                 <motion.div
                   initial={{ scale: 0, opacity: 0 }}
                   animate={{ scale: 1, opacity: 1 }}

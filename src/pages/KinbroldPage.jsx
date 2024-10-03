@@ -19,6 +19,7 @@ const KinbroldPage = () => {
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
+  const mapContainerRef = useRef(null);
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
@@ -28,6 +29,31 @@ const KinbroldPage = () => {
       }
     }
   }, [tourStep, showTour]);
+
+  useEffect(() => {
+    const fitMapToScreen = () => {
+      if (mapContainerRef.current && transformComponentRef.current) {
+        const { clientWidth, clientHeight } = mapContainerRef.current;
+        const mapAspectRatio = 1000 / 1000; // Assuming the map is 1000x1000
+        const containerAspectRatio = clientWidth / clientHeight;
+
+        let scale;
+        if (containerAspectRatio > mapAspectRatio) {
+          // Container is wider than the map
+          scale = clientHeight / 1000;
+        } else {
+          // Container is taller than the map
+          scale = clientWidth / 1000;
+        }
+
+        transformComponentRef.current.setTransform(0, 0, scale * 0.9); // 90% of the calculated scale for a slight margin
+      }
+    };
+
+    fitMapToScreen();
+    window.addEventListener('resize', fitMapToScreen);
+    return () => window.removeEventListener('resize', fitMapToScreen);
+  }, []);
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
@@ -89,14 +115,14 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden" ref={mapContainerRef}>
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
         initialPositionX={0}
         initialPositionY={0}
-        minScale={0.5}
-        maxScale={3}
+        minScale={0.1}
+        maxScale={5}
         disabled={!allowManualControl}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (

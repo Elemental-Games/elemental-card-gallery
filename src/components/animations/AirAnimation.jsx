@@ -2,7 +2,7 @@ import React from 'react';
 
 const AirAnimation = () => {
   return (
-    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full h-full absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
         <linearGradient id="airGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#87CEEB" stopOpacity="0.8">
@@ -16,7 +16,7 @@ const AirAnimation = () => {
       <rect width="100%" height="100%" fill="url(#airGradient)" />
       <g>
         {[...Array(50)].map((_, i) => (
-          <circle key={i} r="1" fill="#FFFFFF">
+          <circle key={i} r="1%" fill="#FFFFFF">
             <animate
               attributeName="cx"
               values={`${Math.random() * 100}%;${Math.random() * 100}%`}

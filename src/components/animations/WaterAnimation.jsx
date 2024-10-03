@@ -2,7 +2,7 @@ import React from 'react';
 
 const WaterAnimation = () => {
   return (
-    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full h-full absolute top-0 left-0" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
       <defs>
         <radialGradient id="rippleGradient" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
           <stop offset="0%" stopColor="#0077be" stopOpacity="0.8">

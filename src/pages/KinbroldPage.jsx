@@ -145,10 +145,20 @@ const KinbroldPage = () => {
       <DialogueBox text={dialogueText} />
       <div className="absolute bottom-4 right-4 space-x-4">
         {tourStep < tourScript.length - 1 && (
-          <Button onClick={advanceTour}>Continue</Button>
+          <Button 
+            onClick={advanceTour}
+            className="bg-purple-900 text-purple-200 hover:bg-purple-800"
+          >
+            Continue
+          </Button>
         )}
         {tourStep === 0 && (
-          <Button onClick={skipTour}>Skip Tour</Button>
+          <Button 
+            onClick={skipTour}
+            className="bg-purple-900 text-purple-200 hover:bg-purple-800"
+          >
+            Skip Tour
+          </Button>
         )}
       </div>
     </div>

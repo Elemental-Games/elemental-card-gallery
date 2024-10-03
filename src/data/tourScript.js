@@ -3,13 +3,13 @@ export const tourScript = [
     speaker: 'iris1',
     region: null,
     dragon: null,
-    dialogue: "Welcome to the world of Kinbrold! Let me take you on a tour of our elemental world.",
+    dialogue: "Welcome to the world of Kinbrold! My name is Iris, and I'll be your guide on this magical tour of our elemental realm.",
   },
   {
     speaker: 'iris1',
     region: 'evermere',
     dragon: null,
-    dialogue: "This is Evermere, where all non-elemental humans reside and the core of the card crafters live. Many Elemental Masters have come from Evermere, embarking on journeys to collect essence and key items to craft the most refined decks.",
+    dialogue: "Let's start with Evermere, where all non-elemental humans reside and the core of the card crafters live. Many Elemental Masters have come from Evermere, embarking on journeys to collect essence and key items to craft the most refined decks.",
   },
   {
     speaker: 'iris1',

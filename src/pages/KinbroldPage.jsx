@@ -13,7 +13,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import ElementalIcon from '../components/ElementalIcon';
 
 const KinbroldPage = () => {
-  const [currentSpeaker, setCurrentSpeaker] = useState('elly1');
+  const [currentSpeaker, setCurrentSpeaker] = useState('iris1');
   const [highlightedRegion, setHighlightedRegion] = useState(null);
   const [displayedDragon, setDisplayedDragon] = useState(null);
   const [dialogueText, setDialogueText] = useState(tourScript[0].dialogue);
@@ -94,7 +94,7 @@ const KinbroldPage = () => {
         </TransformWrapper>
         {showTour && (
           <>
-            <SpeakerComponent image={`/tour/${currentSpeaker}`} />
+            <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
             {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}`} />}
             <DialogueBox 
               text={dialogueText} 

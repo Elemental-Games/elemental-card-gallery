@@ -3,6 +3,7 @@ import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
+import ElementalIcon from '../components/ElementalIcon';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
@@ -53,7 +54,7 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900">
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <MapComponent 
         highlight={highlightedRegion} 
         onRegionClick={handleRegionClick}
@@ -69,6 +70,12 @@ const KinbroldPage = () => {
             onSkip={skipTour}
             isLastStep={tourStep === tourScript.length - 1}
           />
+          {highlightedRegion && !displayedDragon && (
+            <ElementalIcon 
+              element={highlightedRegion} 
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24"
+            />
+          )}
         </>
       )}
       <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
@@ -76,7 +83,13 @@ const KinbroldPage = () => {
           <DialogHeader>
             <DialogTitle>{selectedDragon?.name}</DialogTitle>
           </DialogHeader>
-          <img src={selectedDragon?.image} alt={selectedDragon?.name} className="w-full h-64 object-cover" />
+          <div className="relative">
+            <img src={selectedDragon?.image} alt={selectedDragon?.name} className="w-full h-64 object-cover" />
+            <ElementalIcon 
+              element={selectedDragon?.element} 
+              className="absolute top-2 right-2 w-8 h-8"
+            />
+          </div>
           <p>{selectedDragon?.description}</p>
         </DialogContent>
       </Dialog>

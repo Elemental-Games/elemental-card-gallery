@@ -15,7 +15,7 @@ const MapComponent = ({ highlight, onRegionClick, showInteractivity }) => {
   };
 
   return (
-    <div className="absolute inset-0">
+    <div className="absolute inset-0 w-full h-full">
       <img 
         src="/IMG_3978.jpeg" 
         alt="Kinbrold Map" 

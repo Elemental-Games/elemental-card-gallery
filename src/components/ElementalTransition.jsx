@@ -30,7 +30,9 @@ const ElementalTransition = ({ element, children }) => {
 
   return (
     <div className="relative min-h-screen">
-      {getTransitionEffect()}
+      <div className="absolute inset-0 z-0">
+        {getTransitionEffect()}
+      </div>
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: showContent ? 1 : 0 }}

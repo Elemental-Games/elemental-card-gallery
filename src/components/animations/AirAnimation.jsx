@@ -2,7 +2,7 @@ import React from 'react';
 
 const AirAnimation = () => {
   return (
-    <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="airGradient" x1="0%" y1="0%" x2="100%" y2="100%">
           <stop offset="0%" stopColor="#87CEEB" stopOpacity="0.8">

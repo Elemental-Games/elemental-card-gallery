@@ -2,7 +2,7 @@ import React from 'react';
 
 const EarthAnimation = () => {
   return (
-    <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg">
+    <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <filter id="crackleFilter">
           <feTurbulence type="fractalNoise" baseFrequency="0.01" numOctaves="3" result="noise" />

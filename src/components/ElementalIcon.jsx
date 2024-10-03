@@ -42,7 +42,7 @@ const ElementalIcon = ({ element, className }) => {
     <img 
       src={getIconPath(element)} 
       alt={`${element} icon`} 
-      className={className}
+      className={`${className} object-contain`}
     />
   );
 };

@@ -70,10 +70,10 @@ const KinbroldPage = () => {
             onSkip={skipTour}
             isLastStep={tourStep === tourScript.length - 1}
           />
-          {highlightedRegion && !displayedDragon && (
+          {highlightedRegion && !displayedDragon && highlightedRegion !== 'evermere' && (
             <ElementalIcon 
               element={highlightedRegion} 
-              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24"
+              className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-24 h-24 drop-shadow-lg"
             />
           )}
         </>
@@ -85,10 +85,6 @@ const KinbroldPage = () => {
           </DialogHeader>
           <div className="relative">
             <img src={selectedDragon?.image} alt={selectedDragon?.name} className="w-full h-64 object-cover" />
-            <ElementalIcon 
-              element={selectedDragon?.element} 
-              className="absolute top-2 right-2 w-8 h-8"
-            />
           </div>
           <p>{selectedDragon?.description}</p>
         </DialogContent>

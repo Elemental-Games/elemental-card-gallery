@@ -12,25 +12,36 @@ const AirAnimation = () => (
         </stop>
       </linearGradient>
     </defs>
-    <path d="M0,0 Q50,0 100,100 T200,100" fill="url(#airGradient)">
-      <animate
-        attributeName="d"
-        values="
-          M0,0 Q50,0 100,100 T200,100;
-          M0,100 Q50,50 100,0 T200,50;
-          M0,50 Q50,100 100,50 T200,0;
-          M0,0 Q50,0 100,100 T200,100
-        "
-        dur="10s"
-        repeatCount="indefinite"
-      />
-      <animate
-        attributeName="opacity"
-        values="0;1"
-        dur="3s"
-        fill="freeze"
-      />
-    </path>
+    <rect width="100%" height="100%" fill="url(#airGradient)">
+      <animate attributeName="opacity" values="0;1" dur="3s" fill="freeze" />
+    </rect>
+    <g>
+      {[...Array(200)].map((_, i) => (
+        <circle key={i} r="1" fill="#FFFFFF">
+          <animate
+            attributeName="cx"
+            values={`-5%;${100 + Math.random() * 10}%`}
+            dur={`${8 + Math.random() * 8}s`}
+            repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
+          />
+          <animate
+            attributeName="cy"
+            values={`${Math.random() * 100}%;${Math.random() * 100}%`}
+            dur={`${8 + Math.random() * 8}s`}
+            repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
+          />
+          <animate
+            attributeName="opacity"
+            values="0;1;0"
+            dur={`${8 + Math.random() * 8}s`}
+            repeatCount="indefinite"
+            begin={`${i * 0.05}s`}
+          />
+        </circle>
+      ))}
+    </g>
   </svg>
 );
 

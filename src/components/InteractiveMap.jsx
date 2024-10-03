@@ -30,7 +30,9 @@ const InteractiveMap = () => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [showCharacter, setShowCharacter] = useState(false);
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const mapRef = useRef(null);
   const canvasRef = useRef(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowCharacter(true), 1000);
@@ -38,22 +40,40 @@ const InteractiveMap = () => {
   }, []);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext('2d');
-    const img = new Image();
-    img.src = '/breakdown.jpg';
-    img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
-      ctx.drawImage(img, 0, 0, img.width, img.height);
+    const handleResize = () => {
+      if (mapRef.current) {
+        const containerWidth = mapRef.current.offsetWidth;
+        const imageWidth = 3024; // Original width of IMG_3978.jpeg
+        setScale(containerWidth / imageWidth);
+      }
     };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  useEffect(() => {
+    if (showBreakdown && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.src = '/breakdown.jpg';
+      img.onload = () => {
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      };
+    }
+  }, [showBreakdown, scale]);
+
   const handleMapClick = (event) => {
+    if (!showBreakdown || !canvasRef.current) return;
+
     const canvas = canvasRef.current;
     const rect = canvas.getBoundingClientRect();
-    const x = event.clientX - rect.left;
-    const y = event.clientY - rect.top;
+    const x = (event.clientX - rect.left) / scale;
+    const y = (event.clientY - rect.top) / scale;
     const ctx = canvas.getContext('2d');
     const pixel = ctx.getImageData(x, y, 1, 1).data;
     const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
@@ -72,12 +92,18 @@ const InteractiveMap = () => {
   };
 
   return (
-    <div className="relative w-full h-screen">
-      <img src="/IMG_3978.jpeg" alt="Elemental Masters World Map" className="w-full h-full object-cover" />
+    <div className="relative w-full" ref={mapRef}>
+      <img 
+        src="/IMG_3978.jpeg" 
+        alt="Elemental Masters World Map" 
+        className="w-full h-auto"
+        style={{ maxWidth: '3024px', maxHeight: '4032px' }}
+      />
       <canvas
         ref={canvasRef}
         onClick={handleMapClick}
         className={`absolute top-0 left-0 w-full h-full ${showBreakdown ? 'opacity-50' : 'opacity-0'} cursor-pointer`}
+        style={{ maxWidth: '3024px', maxHeight: '4032px' }}
       />
       <button 
         className="absolute top-4 right-4 bg-white bg-opacity-50 hover:bg-opacity-75 text-black px-4 py-2 rounded"

@@ -6,14 +6,17 @@ const ZalosPage = () => {
   return (
     <ElementalTransition element="Air">
       <div className="min-h-screen bg-sky-900 text-white p-8 overflow-y-auto">
-        <h1 className="text-4xl font-bold mb-8">Welcome to Zalos</h1>
-        <p className="text-xl mb-4">The floating islands of the Air Kingdom</p>
         <div className="flex items-center mb-8">
-          <ElementalIcon element="Air" className="w-16 h-16 mr-4" />
+          <h1 className="text-4xl font-bold mr-4">Welcome to Zalos</h1>
+          <ElementalIcon element="Air" className="w-12 h-12" />
         </div>
+        <p className="text-xl mb-4">The floating islands of the Air Kingdom</p>
         <div className="mb-8">
           <img src="/cards/galea.png" alt="Galea" className="w-64 h-auto mb-4" />
-          <p className="text-lg">Galea, the Air Elementalist, sovereign of Zalos</p>
+          <p className="text-lg">
+            <span className="text-2xl font-semibold">Zalos,</span>
+            <span className="text-lg"> the Air Kingdom</span>
+          </p>
         </div>
         <div>
           <h2 className="text-2xl font-semibold mb-4">Kingdom Lore</h2>

@@ -1,34 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 const regions = [
-  { id: 'zalos', name: 'Zalos', info: 'A region of ice and frost in the northwest.', coords: { top: '5%', left: '5%', width: '20%', height: '20%' } },
-  { id: 'frozen-ridge', name: 'Frozen Ridge', info: 'A vast icy mountain range.', coords: { top: '5%', left: '25%', width: '30%', height: '20%' } },
-  { id: 'mount-surya', name: 'Mount Surya', info: 'An active volcano, possibly representing fire element.', coords: { top: '10%', left: '70%', width: '20%', height: '20%' } },
-  { id: 'scarto', name: 'Scarto', info: 'A mysterious region in the northeast.', coords: { top: '5%', left: '85%', width: '15%', height: '15%' } },
-  { id: 'shroud-peak', name: 'Shroud Peak', info: 'A misty, enigmatic mountain area.', coords: { top: '25%', left: '55%', width: '20%', height: '20%' } },
-  { id: 'gleaming-grotto', name: 'Gleaming Grotto', info: 'A magical, crystal-filled cave system.', coords: { top: '40%', left: '80%', width: '15%', height: '15%' } },
-  { id: 'crivoss', name: 'Crivoss', info: 'A desert region in the southwest.', coords: { top: '60%', left: '5%', width: '25%', height: '25%' } },
-  { id: 'arid-sands', name: 'Arid Sands', info: 'An expansive desert area.', coords: { top: '75%', left: '15%', width: '30%', height: '20%' } },
-  { id: 'evermere', name: 'Evermere', info: 'The central, lush green heart of the world.', coords: { top: '40%', left: '30%', width: '40%', height: '30%' } },
-  { id: 'tsunareth', name: 'Tsunareth', info: 'A coastal region with dramatic cliffs and waterfalls.', coords: { top: '65%', left: '45%', width: '30%', height: '30%' } },
-  { id: 'noxwood', name: 'Noxwood', info: 'A dark, mysterious forest in the south.', coords: { top: '80%', left: '40%', width: '25%', height: '20%' } },
+  { id: 'zalos', name: 'Zalos', info: 'A region of ice and frost in the northwest.' },
+  { id: 'frozen-ridge', name: 'Frozen Ridge', info: 'A vast icy mountain range.' },
+  { id: 'mount-surya', name: 'Mount Surya', info: 'An active volcano, possibly representing fire element.' },
+  { id: 'scarto', name: 'Scarto', info: 'A mysterious region in the northeast.' },
+  { id: 'shroud-peak', name: 'Shroud Peak', info: 'A misty, enigmatic mountain area.' },
+  { id: 'gleaming-grotto', name: 'Gleaming Grotto', info: 'A magical, crystal-filled cave system.' },
+  { id: 'crivoss', name: 'Crivoss', info: 'A desert region in the southwest.' },
+  { id: 'arid-sands', name: 'Arid Sands', info: 'An expansive desert area.' },
+  { id: 'evermere', name: 'Evermere', info: 'The central, lush green heart of the world.' },
+  { id: 'tsunareth', name: 'Tsunareth', info: 'A coastal region with dramatic cliffs and waterfalls.' },
+  { id: 'noxwood', name: 'Noxwood', info: 'A dark, mysterious forest in the south.' },
 ];
-
-const MapRegion = ({ region, onClick }) => (
-  <div 
-    className="absolute cursor-pointer hover:opacity-75 transition-opacity border-2 border-white rounded-md bg-black bg-opacity-20"
-    style={{
-      top: region.coords.top,
-      left: region.coords.left,
-      width: region.coords.width,
-      height: region.coords.height,
-    }}
-    onClick={() => onClick(region)}
-  >
-    <span className="text-white text-xs font-bold">{region.name}</span>
-  </div>
-);
 
 const CharacterDialog = ({ isOpen, onClose }) => (
   <Dialog open={isOpen} onOpenChange={onClose}>
@@ -45,14 +30,41 @@ const InteractiveMap = () => {
   const [selectedRegion, setSelectedRegion] = useState(null);
   const [showCharacter, setShowCharacter] = useState(false);
   const [showBreakdown, setShowBreakdown] = useState(false);
+  const canvasRef = useRef(null);
 
   useEffect(() => {
     const timer = setTimeout(() => setShowCharacter(true), 1000);
     return () => clearTimeout(timer);
   }, []);
 
-  const handleRegionClick = (region) => {
-    setSelectedRegion(region);
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    const img = new Image();
+    img.src = '/breakdown.jpg';
+    img.onload = () => {
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+    };
+  }, []);
+
+  const handleMapClick = (event) => {
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const ctx = canvas.getContext('2d');
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+    
+    // Here you would map the color to a region
+    // This is a placeholder logic, you'll need to implement the actual color-to-region mapping
+    const clickedRegion = regions.find((region, index) => index === pixel[0] % regions.length);
+    
+    if (clickedRegion) {
+      setSelectedRegion(clickedRegion);
+    }
   };
 
   const toggleBreakdown = () => {
@@ -61,17 +73,12 @@ const InteractiveMap = () => {
 
   return (
     <div className="relative w-full h-screen">
-      <img src="/background.jpeg" alt="Elemental Masters World Map" className="w-full h-full object-cover" />
-      {showBreakdown && (
-        <img 
-          src="/breakdown.png" 
-          alt="Region Breakdown" 
-          className="absolute top-0 left-0 w-full h-full object-cover opacity-50"
-        />
-      )}
-      {regions.map(region => (
-        <MapRegion key={region.id} region={region} onClick={handleRegionClick} />
-      ))}
+      <img src="/kinbrold_map.jpg" alt="Elemental Masters World Map" className="w-full h-full object-cover" />
+      <canvas
+        ref={canvasRef}
+        onClick={handleMapClick}
+        className={`absolute top-0 left-0 w-full h-full ${showBreakdown ? 'opacity-50' : 'opacity-0'} cursor-pointer`}
+      />
       <button 
         className="absolute top-4 right-4 bg-white bg-opacity-50 hover:bg-opacity-75 text-black px-4 py-2 rounded"
         onClick={toggleBreakdown}

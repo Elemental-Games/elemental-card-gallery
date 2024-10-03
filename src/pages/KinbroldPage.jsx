@@ -81,37 +81,35 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden flex flex-col">
-      <div className="flex-grow relative">
-        <TransformWrapper
-          ref={transformComponentRef}
-          initialScale={1}
-          initialPositionX={0}
-          initialPositionY={0}
-          minScale={0.5}
-          maxScale={3}
-          disabled={!allowManualControl}
-        >
-          <TransformComponent>
-            <MapComponent 
-              onRegionClick={handleRegionClick}
-              showInteractivity={allowManualControl}
-            />
-          </TransformComponent>
-        </TransformWrapper>
-        {showTour && (
-          <>
-            <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
-            {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}`} />}
-            <DialogueBox 
-              text={dialogueText} 
-              onContinue={advanceTour}
-              onSkip={skipTour}
-              isLastStep={tourStep === tourScript.length - 1}
-            />
-          </>
-        )}
-      </div>
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
+      <TransformWrapper
+        ref={transformComponentRef}
+        initialScale={1}
+        initialPositionX={0}
+        initialPositionY={0}
+        minScale={0.5}
+        maxScale={3}
+        disabled={!allowManualControl}
+      >
+        <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
+          <MapComponent 
+            onRegionClick={handleRegionClick}
+            showInteractivity={allowManualControl}
+          />
+        </TransformComponent>
+      </TransformWrapper>
+      {showTour && (
+        <>
+          <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
+          {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}`} />}
+          <DialogueBox 
+            text={dialogueText} 
+            onContinue={advanceTour}
+            onSkip={skipTour}
+            isLastStep={tourStep === tourScript.length - 1}
+          />
+        </>
+      )}
       <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
         <DialogContent>
           <DialogHeader>

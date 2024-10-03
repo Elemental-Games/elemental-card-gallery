@@ -17,15 +17,20 @@ const regions = [
 ];
 
 const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
-  <div className={`fixed bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
-    <div className="bg-white rounded-lg shadow-lg p-4 max-w-sm">
-      <img src="/balon1.jpeg" alt="Balon" className="w-16 h-16 rounded-full mb-2" />
-      <p className="mb-4">{dialogText[currentStep]}</p>
-      {currentStep < dialogText.length - 1 ? (
-        <Button onClick={onNext}>Next</Button>
-      ) : (
-        <Button onClick={onClose}>Close</Button>
-      )}
+  <div className={`absolute bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
+    <div className="relative">
+      <img src="/balon1.jpeg" alt="Balon" className="w-32 h-32 rounded-full" />
+      <div className="absolute top-0 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
+        <div className="relative">
+          <p className="mb-4">{dialogText[currentStep]}</p>
+          {currentStep < dialogText.length - 1 ? (
+            <Button onClick={onNext} className="mt-2">Next</Button>
+          ) : (
+            <p className="mt-2 text-sm text-gray-500">Click to continue</p>
+          )}
+          <div className="absolute bottom-1/2 left-0 transform -translate-x-full rotate-45 w-4 h-4 bg-white"></div>
+        </div>
+      </div>
     </div>
   </div>
 );
@@ -135,7 +140,11 @@ const InteractiveMap = () => {
   };
 
   const handleNextStep = () => {
-    setCurrentStep(prevStep => prevStep + 1);
+    if (currentStep < dialogText.length - 1) {
+      setCurrentStep(prevStep => prevStep + 1);
+    } else {
+      setShowCharacter(false);
+    }
   };
 
   return (

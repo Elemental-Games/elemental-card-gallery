@@ -79,20 +79,22 @@ const LandingPage = () => {
       <ImageHero />
       
       {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-16 flex flex-col md:flex-row items-start justify-between">
-        <div className="flex-grow mr-8">
-          <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
-          <p className="mb-6 text-lg">
-            Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
-          </p>
-          <KeyFeatures />
-        </div>
-        <div className="flex-shrink-0 md:ml-8">
-          <img 
-            src="/Masters_Logo.png" 
-            alt="Masters Logo" 
-            className="w-40 h-auto"
-          />
+      <section className="container mx-auto px-4 py-16">
+        <div className="flex items-start justify-between">
+          <div className="flex-grow mr-8">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-4xl font-bold">Game Overview</h2>
+              <img 
+                src="/Masters_Logo.png" 
+                alt="Masters Logo" 
+                className="w-40 h-auto"
+              />
+            </div>
+            <p className="mb-6 text-lg">
+              Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
+            </p>
+            <KeyFeatures />
+          </div>
         </div>
       </section>
 

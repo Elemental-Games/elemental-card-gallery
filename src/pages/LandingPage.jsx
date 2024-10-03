@@ -21,30 +21,34 @@ const LandingPage = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const elements = [
+  const kingdoms = [
     { 
-      name: 'Air', 
+      name: 'Zalos', 
+      element: 'Air',
       color: 'bg-gray-300', 
       hoverColor: 'hover:bg-gray-400',
-      description: 'Just like the wind, Air creatures are the fastest and ever-changing.'
+      description: 'The Air Kingdom, where creatures are the fastest and ever-changing.'
     },
     { 
-      name: 'Water', 
+      name: 'Tsunareth', 
+      element: 'Water',
       color: 'bg-blue-300', 
       hoverColor: 'hover:bg-blue-400',
-      description: 'Water creatures focus on their card milling features with a tendency to be faster than most elements.'
+      description: 'The Water Kingdom, focusing on card milling features and swift actions.'
     },
     { 
-      name: 'Fire', 
+      name: 'Scarto', 
+      element: 'Fire',
       color: 'bg-red-300', 
       hoverColor: 'hover:bg-red-400',
-      description: 'These creatures are built for damage and steadily taking down your opponent over time.'
+      description: 'The Fire Kingdom, built for damage and steadily taking down opponents.'
     },
     { 
-      name: 'Earth', 
+      name: 'Grivoss', 
+      element: 'Earth',
       color: 'bg-green-300', 
       hoverColor: 'hover:bg-green-400',
-      description: 'All Earth creatures stand strong and resilient by providing a bolstering defense.'
+      description: 'The Earth Kingdom, standing strong with resilient and defensive creatures.'
     }
   ];
 
@@ -76,49 +80,54 @@ const LandingPage = () => {
       <ImageHero />
       
       {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-16">
-        <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
-        <p className="mb-6 text-lg">
-          Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
-        </p>
-        <KeyFeatures />
+      <section className="container mx-auto px-4 py-16 flex items-start">
+        <img 
+          src="/Masters_Logo.png" 
+          alt="Masters Logo" 
+          className="w-40 h-auto mr-8"
+        />
+        <div>
+          <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
+          <p className="mb-6 text-lg">
+            Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
+          </p>
+          <KeyFeatures />
+        </div>
       </section>
 
       <div className="container mx-auto px-4 py-16">
+        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-8 mb-32">
+          <CardsOfTheWeek />
+        </div>
+
         <section className="mb-16">
-          <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap">
-            <img 
-              src="/Masters_Logo.png" 
-              alt="Elemental Masters Logo" 
-              className="w-40 h-auto mr-4 mb-4 sm:mb-0"
-            />
-            <span className="flex-1">Master the Elements</span>
-          </h2>
+          <Link to="/kinbrold">
+            <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
+              Explore the World of Kinbrold
+            </h2>
+          </Link>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {elements.map((element) => (
+            {kingdoms.map((kingdom) => (
               <div 
-                key={element.name} 
-                className={`${element.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${element.hoverColor} cursor-pointer flex flex-col justify-between`}
-                onClick={() => handleElementClick(element.name)}
+                key={kingdom.name} 
+                className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} cursor-pointer flex flex-col justify-between`}
               >
                 <div>
                   <img 
-                    src={`/icons/${element.name}.png`}
-                    alt={`${element.name} Icon`}
+                    src={`/icons/${kingdom.element}.png`}
+                    alt={`${kingdom.element} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-semibold mb-2">{element.name}</h3>
-                  <p className="mb-4">{element.description}</p>
+                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name}, the {kingdom.element} Kingdom</h3>
+                  <p className="mb-4">{kingdom.description}</p>
                 </div>
-                <Button variant="outline" className="mt-auto">Explore {element.name} Cards</Button>
+                <Link to={`/${kingdom.name.toLowerCase()}`}>
+                  <Button variant="outline" className="mt-auto w-full">Explore {kingdom.name}</Button>
+                </Link>
               </div>
             ))}
           </div>
         </section>
-
-        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-8 mb-32">
-          <CardsOfTheWeek />
-        </div>
 
         <section className="mb-32">
           <h2 className="text-4xl font-bold mb-8 flex items-center justify-center">

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ElementIcon } from '../components/ElementIcon';
 import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import LightBox from '../components/LightBox';
@@ -84,7 +83,7 @@ const LandingPage = () => {
         <img 
           src="/Masters_Logo.png" 
           alt="Masters Logo" 
-          className="w-40 h-auto mr-8"
+          className="w-40 h-auto mr-8 flex-shrink-0"
         />
         <div>
           <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
@@ -118,7 +117,8 @@ const LandingPage = () => {
                     alt={`${kingdom.element} Icon`}
                     className="w-24 h-24 mx-auto mb-4"
                   />
-                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name}, the {kingdom.element} Kingdom</h3>
+                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name}</h3>
+                  <p className="text-sm mb-2">The {kingdom.element} Kingdom</p>
                   <p className="mb-4">{kingdom.description}</p>
                 </div>
                 <Link to={`/${kingdom.name.toLowerCase()}`}>
@@ -131,7 +131,6 @@ const LandingPage = () => {
 
         <section className="mb-32">
           <h2 className="text-4xl font-bold mb-8 flex items-center justify-center">
-            <ElementIcon element="earth" className="mr-2" />
             Explore More
           </h2>
           <div className="flex flex-wrap justify-center gap-8">

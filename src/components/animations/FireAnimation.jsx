@@ -26,7 +26,7 @@ const FireAnimation = () => {
             />
             <animate
               attributeName="cy"
-              values={`${100 + Math.random() * 10}%;${90 + Math.random() * 10}%`}
+              values={`120%;70%`}
               dur={`${8 + Math.random() * 8}s`}
               repeatCount="indefinite"
               begin={`${i * 0.2}s`}

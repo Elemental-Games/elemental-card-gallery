@@ -19,8 +19,8 @@ const WaterAnimation = () => {
           <path key={i} d="" fill="none" stroke="url(#rippleGradient)" strokeWidth="2">
             <animate
               attributeName="d"
-              values={`M0,${100 + i * 10} Q${25 + Math.random() * 50},${95 + i * 10} ${50 + Math.random() * 50},${100 + i * 10} T100,${100 + i * 10};
-                       M0,${100 + i * 10} Q${25 + Math.random() * 50},${105 + i * 10} ${50 + Math.random() * 50},${100 + i * 10} T100,${100 + i * 10}`}
+              values={`M0,${100 + i * 10} Q50,${50 + i * 5} 100,${100 + i * 10};
+                       M0,${100 + i * 10} Q50,${150 + i * 5} 100,${100 + i * 10}`}
               dur="12s"
               repeatCount="indefinite"
               begin={`${i * 1}s`}

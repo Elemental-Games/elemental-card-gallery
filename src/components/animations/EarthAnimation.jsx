@@ -37,6 +37,29 @@ const EarthAnimation = () => {
           </rect>
         ))}
       </g>
+      <g>
+        {[...Array(10)].map((_, row) => (
+          [...Array(20)].map((_, col) => (
+            <rect
+              key={`${row}-${col}`}
+              x={`${col * 5}%`}
+              y={`${100 - (row + 1) * 10}%`}
+              width="5%"
+              height="10%"
+              fill="#8B4513"
+              opacity="0"
+            >
+              <animate
+                attributeName="opacity"
+                values="0;1"
+                dur="0.5s"
+                begin={`${row * 1 + col * 0.05}s`}
+                fill="freeze"
+              />
+            </rect>
+          ))
+        ))}
+      </g>
     </svg>
   );
 };

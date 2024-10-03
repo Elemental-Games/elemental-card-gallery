@@ -26,7 +26,7 @@ const AirAnimation = () => {
             />
             <animate
               attributeName="cy"
-              values={`100%;-10%`}
+              values={`120%;-20%`}
               dur={`${16 + Math.random() * 16}s`}
               repeatCount="indefinite"
               begin={`${i * 0.2}s`}

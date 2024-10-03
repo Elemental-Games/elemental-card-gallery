@@ -78,12 +78,12 @@ const KinbroldPage = () => {
                 animate={{ scale: 1, opacity: 1 }}
                 exit={{ scale: 0, opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
               >
-                <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-2 shadow-lg">
+                <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-1 shadow-lg flex items-center justify-center">
                   <ElementalIcon 
                     element={highlightedRegion} 
-                    className="w-16 h-16 object-contain drop-shadow-lg"
+                    className="w-12 h-12 object-contain drop-shadow-lg"
                   />
                 </div>
               </motion.div>

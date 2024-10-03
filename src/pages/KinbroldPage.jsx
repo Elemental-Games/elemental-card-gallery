@@ -122,7 +122,7 @@ const KinbroldPage = () => {
       </Dialog>
 
       {/* New section for kingdom buttons */}
-      <div className="absolute bottom-0 left-0 right-0 bg-gray-800 bg-opacity-75 p-4">
+      <div className="bg-gray-800 bg-opacity-75 p-4 mt-4">
         <div className="container mx-auto flex justify-center space-x-4">
           <Link to="/zalos">
             <Button variant="outline" className="bg-blue-500 hover:bg-blue-600 text-white">

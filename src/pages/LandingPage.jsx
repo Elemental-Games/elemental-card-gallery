@@ -80,11 +80,13 @@ const LandingPage = () => {
       
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16 flex items-start">
-        <img 
-          src="/Masters_Logo.png" 
-          alt="Masters Logo" 
-          className="w-40 h-auto mr-8 flex-shrink-0"
-        />
+        <div className="flex-shrink-0 mr-8">
+          <img 
+            src="/Masters_Logo.png" 
+            alt="Masters Logo" 
+            className="w-40 h-auto"
+          />
+        </div>
         <div>
           <h2 className="text-4xl font-bold mb-8">Game Overview</h2>
           <p className="mb-6 text-lg">
@@ -118,7 +120,7 @@ const LandingPage = () => {
                     className="w-24 h-24 mx-auto mb-4"
                   />
                   <h3 className="text-2xl font-semibold mb-2">{kingdom.name}</h3>
-                  <p className="text-sm mb-2">The {kingdom.element} Kingdom</p>
+                  <p className="text-sm font-bold mb-2">The {kingdom.element} Kingdom</p>
                   <p className="mb-4">{kingdom.description}</p>
                 </div>
                 <Link to={`/${kingdom.name.toLowerCase()}`}>

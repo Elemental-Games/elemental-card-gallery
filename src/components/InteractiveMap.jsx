@@ -19,7 +19,7 @@ const regions = [
 const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
   <div className={`absolute bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
     <div className="relative">
-      <img src="/balon1.jpeg" alt="Balon" className="w-32 h-32 rounded-full" />
+      <img src="/balon1.jpeg" alt="Balon" className="w-32 h-auto" style={{ maxWidth: '20%' }} />
       <div className="absolute top-0 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
         <div className="relative">
           <p className="mb-4">{dialogText[currentStep]}</p>

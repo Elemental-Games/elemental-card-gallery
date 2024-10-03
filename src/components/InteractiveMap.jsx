@@ -19,8 +19,13 @@ const regions = [
 const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
   <div className={`absolute bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
     <div className="relative">
-      <img src="/balon1.jpeg" alt="Balon" className="w-32 h-auto" style={{ maxWidth: '20%' }} />
-      <div className="absolute top-0 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
+      <img 
+        src="/balon1.jpeg" 
+        alt="Balon" 
+        className="w-auto h-[65vh] max-h-[65%]" 
+        style={{ maxWidth: '50%', objectFit: 'contain' }}
+      />
+      <div className="absolute top-1/4 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
         <div className="relative">
           <p className="mb-4">{dialogText[currentStep]}</p>
           {currentStep < dialogText.length - 1 ? (
@@ -28,7 +33,7 @@ const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) =
           ) : (
             <p className="mt-2 text-sm text-gray-500">Click to continue</p>
           )}
-          <div className="absolute bottom-1/2 left-0 transform -translate-x-full rotate-45 w-4 h-4 bg-white"></div>
+          <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 rotate-45 w-4 h-4 bg-white"></div>
         </div>
       </div>
     </div>

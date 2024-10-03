@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
@@ -20,6 +21,7 @@ const KinbroldPage = () => {
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
   const mapContainerRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
@@ -78,7 +80,23 @@ const KinbroldPage = () => {
       setSelectedDragon(dragonInfo[dragon]);
       setShowDragonDialog(true);
     } else {
-      window.location.href = `https://elementalgames.gg/${region}`;
+      switch (region) {
+        case 'zalos':
+          navigate('/zalos');
+          break;
+        case 'scarto':
+          navigate('/scarto');
+          break;
+        case 'grivoss':
+          navigate('/grivoss');
+          break;
+        case 'tsunareth':
+          navigate('/tsunareth');
+          break;
+        default:
+          // Handle other regions or do nothing
+          break;
+      }
     }
   };
 

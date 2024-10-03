@@ -16,7 +16,6 @@ import ZalosPage from "./pages/ZalosPage";
 import ScartoPage from "./pages/ScartoPage";
 import GrivossPage from "./pages/GrivossPage";
 import TsunarethPage from "./pages/TsunarethPage";
-import EvermerePage from "./pages/EvermerePage";
 
 const queryClient = new QueryClient();
 
@@ -50,7 +49,6 @@ const App = () => (
                   <Route path="/scarto" element={<ScartoPage />} />
                   <Route path="/grivoss" element={<GrivossPage />} />
                   <Route path="/tsunareth" element={<TsunarethPage />} />
-                  <Route path="/evermere" element={<EvermerePage />} />
                 </Routes>
               </main>
               <Footer />

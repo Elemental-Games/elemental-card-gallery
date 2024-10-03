@@ -3,7 +3,6 @@ import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
-import { Button } from '@/components/ui/button';
 
 const tourScript = [
   {
@@ -138,29 +137,16 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-100">
+    <div className="relative w-full h-screen bg-gray-900">
       <MapComponent highlight={highlightedRegion} />
       <SpeakerComponent image={currentSpeaker} />
       {displayedDragon && <DragonComponent image={displayedDragon} />}
-      <DialogueBox text={dialogueText} />
-      <div className="absolute bottom-4 right-4 space-x-4">
-        {tourStep < tourScript.length - 1 && (
-          <Button 
-            onClick={advanceTour}
-            className="bg-purple-900 text-purple-200 hover:bg-purple-800"
-          >
-            Continue
-          </Button>
-        )}
-        {tourStep === 0 && (
-          <Button 
-            onClick={skipTour}
-            className="bg-purple-900 text-purple-200 hover:bg-purple-800"
-          >
-            Skip Tour
-          </Button>
-        )}
-      </div>
+      <DialogueBox 
+        text={dialogueText} 
+        onContinue={advanceTour}
+        onSkip={skipTour}
+        isLastStep={tourStep === tourScript.length - 1}
+      />
     </div>
   );
 };

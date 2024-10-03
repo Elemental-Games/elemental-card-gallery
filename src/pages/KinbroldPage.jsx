@@ -3,6 +3,7 @@ import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 const tourScript = [
   {
@@ -109,12 +110,48 @@ const tourScript = [
   },
 ];
 
+const dragonInfo = {
+  frost_dragon1: {
+    name: "Eldritch | The Frost Dragon",
+    description: "A majestic dragon of ice and frost, dwelling in the Frozen Ridge.",
+    image: "/dragons/frost_dragon.png"
+  },
+  lightning_dragon1: {
+    name: "Veton | The Lightning Dragon",
+    description: "A powerful dragon of storms and lightning, residing atop Shroud Peak.",
+    image: "/dragons/lightning_dragon.png"
+  },
+  lava_dragon1: {
+    name: "Zoryn | The Lava Dragon",
+    description: "A fierce dragon of molten rock and fire, making its home in Mount Surya.",
+    image: "/dragons/lava_dragon.png"
+  },
+  crystal_dragon1: {
+    name: "Diamoria | The Crystal Dragon",
+    description: "A mystical dragon of shimmering crystals, hidden within the Gleaming Grotto.",
+    image: "/dragons/crystal_dragon.png"
+  },
+  poison_dragon1: {
+    name: "Noxilus | The Poison Dragon",
+    description: "A cunning dragon of toxins and venom, lurking in the shadows of Noxwood.",
+    image: "/dragons/poison_dragon.png"
+  },
+  sand_dragon1: {
+    name: "Aridus | The Sand Dragon",
+    description: "An ancient dragon of shifting sands, roaming the vast Arid Sands.",
+    image: "/dragons/sand_dragon.png"
+  }
+};
+
 const KinbroldPage = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('elly1');
   const [highlightedRegion, setHighlightedRegion] = useState(null);
   const [displayedDragon, setDisplayedDragon] = useState(null);
   const [dialogueText, setDialogueText] = useState(tourScript[0].dialogue);
   const [tourStep, setTourStep] = useState(0);
+  const [showTour, setShowTour] = useState(true);
+  const [showDragonDialog, setShowDragonDialog] = useState(false);
+  const [selectedDragon, setSelectedDragon] = useState(null);
 
   const advanceTour = () => {
     if (tourStep < tourScript.length - 1) {
@@ -128,25 +165,45 @@ const KinbroldPage = () => {
   };
 
   const skipTour = () => {
-    setTourStep(tourScript.length - 1);
-    const lastStep = tourScript[tourScript.length - 1];
-    setCurrentSpeaker(lastStep.speaker);
-    setHighlightedRegion(lastStep.region);
-    setDisplayedDragon(lastStep.dragon);
-    setDialogueText(lastStep.dialogue);
+    setShowTour(false);
+  };
+
+  const handleRegionClick = (region) => {
+    const dragon = Object.keys(dragonInfo).find(key => dragonInfo[key].name.toLowerCase().includes(region));
+    if (dragon) {
+      setSelectedDragon(dragonInfo[dragon]);
+      setShowDragonDialog(true);
+    }
   };
 
   return (
     <div className="relative w-full h-screen bg-gray-900">
-      <MapComponent highlight={highlightedRegion} />
-      <SpeakerComponent image={currentSpeaker} />
-      {displayedDragon && <DragonComponent image={displayedDragon} />}
-      <DialogueBox 
-        text={dialogueText} 
-        onContinue={advanceTour}
-        onSkip={skipTour}
-        isLastStep={tourStep === tourScript.length - 1}
+      <MapComponent 
+        highlight={highlightedRegion} 
+        onRegionClick={handleRegionClick}
+        showInteractivity={!showTour}
       />
+      {showTour && (
+        <>
+          <SpeakerComponent image={currentSpeaker} />
+          {displayedDragon && <DragonComponent image={displayedDragon} />}
+          <DialogueBox 
+            text={dialogueText} 
+            onContinue={advanceTour}
+            onSkip={skipTour}
+            isLastStep={tourStep === tourScript.length - 1}
+          />
+        </>
+      )}
+      <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedDragon?.name}</DialogTitle>
+          </DialogHeader>
+          <img src={selectedDragon?.image} alt={selectedDragon?.name} className="w-full h-64 object-cover" />
+          <p>{selectedDragon?.description}</p>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

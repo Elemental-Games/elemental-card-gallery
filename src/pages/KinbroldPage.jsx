@@ -5,6 +5,7 @@ import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
 
@@ -80,6 +81,13 @@ const KinbroldPage = () => {
     }
   };
 
+  const resetMap = () => {
+    if (transformComponentRef.current) {
+      const { resetTransform } = transformComponentRef.current;
+      resetTransform(1000);
+    }
+  };
+
   return (
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
@@ -91,12 +99,23 @@ const KinbroldPage = () => {
         maxScale={3}
         disabled={!allowManualControl}
       >
-        <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
-          <MapComponent 
-            onRegionClick={handleRegionClick}
-            showInteractivity={allowManualControl}
-          />
-        </TransformComponent>
+        {({ zoomIn, zoomOut, resetTransform }) => (
+          <>
+            <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
+              <MapComponent 
+                onRegionClick={handleRegionClick}
+                showInteractivity={allowManualControl}
+              />
+            </TransformComponent>
+            {allowManualControl && (
+              <div className="absolute bottom-4 right-4 flex space-x-2">
+                <Button onClick={() => zoomIn()}>Zoom In</Button>
+                <Button onClick={() => zoomOut()}>Zoom Out</Button>
+                <Button onClick={() => resetTransform()}>Reset</Button>
+              </div>
+            )}
+          </>
+        )}
       </TransformWrapper>
       {showTour && (
         <>

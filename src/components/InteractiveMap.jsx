@@ -53,6 +53,41 @@ const InteractiveMap = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  const processBreakdownImage = (img) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
+
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      
+      // Check if the pixel is black (border)
+      if (r === 0 && g === 0 && b === 0) {
+        // Make it the same gray color as the background
+        data[i] = 128;
+        data[i + 1] = 128;
+        data[i + 2] = 128;
+      }
+      // Check if the pixel is white (outside the circles)
+      else if (r === 255 && g === 255 && b === 255) {
+        // Make it the same gray color as the background
+        data[i] = 128;
+        data[i + 1] = 128;
+        data[i + 2] = 128;
+      }
+      // All other colors remain unchanged
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  };
+
   useEffect(() => {
     if (showBreakdown && canvasRef.current) {
       const canvas = canvasRef.current;
@@ -62,7 +97,8 @@ const InteractiveMap = () => {
       img.onload = () => {
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        const processedCanvas = processBreakdownImage(img);
+        ctx.drawImage(processedCanvas, 0, 0, canvas.width, canvas.height);
       };
     }
   }, [showBreakdown, scale]);

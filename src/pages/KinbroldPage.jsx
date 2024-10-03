@@ -7,6 +7,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
 import { motion, AnimatePresence } from 'framer-motion';
+import ElementalIcon from '../components/ElementalIcon';
 
 const KinbroldPage = () => {
   const [currentSpeaker, setCurrentSpeaker] = useState('elly1');
@@ -57,6 +58,10 @@ const KinbroldPage = () => {
     return Object.keys(dragonInfo).some(key => dragonInfo[key].name.toLowerCase().includes(region));
   };
 
+  const isMainKingdom = (region) => {
+    return ['zalos', 'scarto', 'grivoss', 'tsunareth'].includes(region);
+  };
+
   return (
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <MapComponent 
@@ -84,11 +89,18 @@ const KinbroldPage = () => {
                 className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-50"
               >
                 <div className="bg-purple-900 border-4 border-yellow-400 rounded-lg p-4 pb-2 shadow-lg flex items-center justify-center">
-                  <img 
-                    src={`/icons/${highlightedRegion.charAt(0).toUpperCase() + highlightedRegion.slice(1)}.png`}
-                    alt={`${highlightedRegion} icon`}
-                    className="w-16 h-16 object-contain drop-shadow-lg"
-                  />
+                  {isMainKingdom(highlightedRegion) ? (
+                    <ElementalIcon 
+                      element={highlightedRegion}
+                      className="w-16 h-16 object-contain drop-shadow-lg"
+                    />
+                  ) : (
+                    <img 
+                      src={`/icons/${highlightedRegion.charAt(0).toUpperCase() + highlightedRegion.slice(1)}.png`}
+                      alt={`${highlightedRegion} icon`}
+                      className="w-16 h-16 object-contain drop-shadow-lg"
+                    />
+                  )}
                 </div>
               </motion.div>
             )}

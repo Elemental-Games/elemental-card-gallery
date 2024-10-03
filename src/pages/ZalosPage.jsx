@@ -8,7 +8,7 @@ const ZalosPage = () => {
       <div className="min-h-screen bg-sky-900 text-white p-8 overflow-y-auto">
         <div className="flex items-center mb-8">
           <h1 className="text-4xl font-bold mr-4">Welcome to Zalos</h1>
-          <ElementalIcon element="Air" className="w-12 h-12" />
+          <ElementalIcon element="Air" className="w-24 h-24" />
         </div>
         <p className="text-xl mb-4">The floating islands of the Air Kingdom</p>
         <div className="mb-8">

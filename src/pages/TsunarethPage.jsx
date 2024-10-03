@@ -8,7 +8,7 @@ const TsunarethPage = () => {
       <div className="min-h-screen bg-blue-900 text-white p-8 overflow-y-auto">
         <div className="flex items-center mb-8">
           <h1 className="text-4xl font-bold mr-4">Welcome to Tsunareth</h1>
-          <ElementalIcon element="Water" className="w-12 h-12" />
+          <ElementalIcon element="Water" className="w-24 h-24" />
         </div>
         <p className="text-xl mb-4">The vast underwater realm of the Water Kingdom</p>
         <div className="mb-8">

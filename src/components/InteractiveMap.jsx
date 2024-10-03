@@ -17,15 +17,15 @@ const regions = [
 ];
 
 const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
-  <div className={`absolute bottom-4 left-4 z-50 ${isOpen ? 'block' : 'hidden'}`}>
+  <div className={`absolute bottom-0 left-0 z-50 ${isOpen ? 'block' : 'hidden'}`}>
     <div className="relative">
       <img 
         src="/balon1.jpeg" 
         alt="Balon" 
-        className="w-auto h-[65vh] max-h-[65%]" 
+        className="w-auto h-[65vh]" 
         style={{ maxWidth: '50%', objectFit: 'contain' }}
       />
-      <div className="absolute top-1/4 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
+      <div className="absolute top-0 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
         <div className="relative">
           <p className="mb-4">{dialogText[currentStep]}</p>
           {currentStep < dialogText.length - 1 ? (
@@ -33,7 +33,6 @@ const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) =
           ) : (
             <p className="mt-2 text-sm text-gray-500">Click to continue</p>
           )}
-          <div className="absolute top-1/2 left-0 transform -translate-x-full -translate-y-1/2 rotate-45 w-4 h-4 bg-white"></div>
         </div>
       </div>
     </div>
@@ -153,18 +152,16 @@ const InteractiveMap = () => {
   };
 
   return (
-    <div className="relative w-full" ref={mapRef}>
+    <div className="relative w-full h-screen" ref={mapRef}>
       <img 
         src="/IMG_3978.jpeg" 
         alt="Elemental Masters World Map" 
-        className="w-full h-auto"
-        style={{ maxWidth: '3024px', maxHeight: '4032px' }}
+        className="w-full h-full object-cover"
       />
       <canvas
         ref={canvasRef}
         onClick={handleMapClick}
         className={`absolute top-0 left-0 w-full h-full ${showBreakdown ? 'opacity-50' : 'opacity-0'} cursor-pointer`}
-        style={{ maxWidth: '3024px', maxHeight: '4032px' }}
       />
       <button 
         className="absolute top-4 right-4 bg-white bg-opacity-50 hover:bg-opacity-75 text-black px-4 py-2 rounded"

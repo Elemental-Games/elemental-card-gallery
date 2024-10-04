@@ -129,10 +129,11 @@ const KinbroldPage = () => {
           </>
         )}
       </TransformWrapper>
+      
       {showTour && (
         <>
           <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
-          {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}`} />}
+          {displayedDragon && <DragonComponent image={displayedDragon} />}
           <DialogueBox 
             text={dialogueText} 
             onContinue={advanceTour}
@@ -147,7 +148,7 @@ const KinbroldPage = () => {
             <DialogTitle>{selectedDragon?.name}</DialogTitle>
           </DialogHeader>
           <div className="relative">
-            <img src={selectedDragon?.image} alt={selectedDragon?.name} className="w-full h-64 object-cover" />
+            <DragonComponent image={selectedDragon?.image} />
           </div>
           <p>{selectedDragon?.description}</p>
         </DialogContent>

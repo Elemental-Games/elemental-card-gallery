@@ -30,7 +30,7 @@ const KinbroldPage = () => {
         zoomToRegion(currentRegion);
       }
       setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon);
+      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon].image : null);
       setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
@@ -136,7 +136,7 @@ const KinbroldPage = () => {
       {showTour && (
         <>
           <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
-          {displayedDragon && <DragonComponent image={`/tour/${displayedDragon}.jpeg`} />}
+          {displayedDragon && <DragonComponent image={displayedDragon} />}
           <DialogueBox 
             text={dialogueText} 
             onContinue={advanceTour}

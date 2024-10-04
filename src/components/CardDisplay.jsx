@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 
 const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const containerClasses = {
     default: "w-full aspect-[2/3] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
@@ -23,12 +24,17 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
     }
   };
 
+  const handleImageError = () => {
+    setImageError(true);
+  };
+
   const cardContent = (
     <>
       <img 
-        src={`/cards/${card.image}`} 
+        src={imageError ? '/placeholder.svg' : `/cards/${card.image}`}
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
+        onError={handleImageError}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">

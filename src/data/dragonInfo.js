@@ -2,7 +2,7 @@ export const dragonInfo = {
   frost_dragon1: {
     name: "Eldritch | The Frost Dragon",
     description: "A majestic dragon of ice and frost, dwelling in the Frozen Ridge.",
-    image: "/tour/Frost_Dragon1.jpeg"
+    image: "/tour/Frost_Dragon.jpeg"
   },
   lightning_dragon1: {
     name: "Veton | The Lightning Dragon",

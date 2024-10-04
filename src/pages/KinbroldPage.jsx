@@ -29,6 +29,9 @@ const KinbroldPage = () => {
       if (currentRegion && transformComponentRef.current) {
         zoomToRegion(currentRegion);
       }
+      setCurrentSpeaker(tourScript[tourStep].speaker);
+      setDisplayedDragon(tourScript[tourStep].dragon);
+      setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
 
@@ -148,7 +151,7 @@ const KinbroldPage = () => {
             <DialogTitle>{selectedDragon?.name}</DialogTitle>
           </DialogHeader>
           <div className="relative">
-            <DragonComponent image={selectedDragon?.image} />
+            {selectedDragon && <DragonComponent image={selectedDragon.image} />}
           </div>
           <p>{selectedDragon?.description}</p>
         </DialogContent>

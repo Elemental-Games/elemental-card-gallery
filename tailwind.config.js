@@ -56,6 +56,9 @@ module.exports = {
           foreground: "hsl(var(--card-foreground))",
         },
         darkPurple: "hsl(270, 50%, 10%)",
+        purple: {
+          800: '#4B0082', // This is a deep purple color
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

@@ -30,7 +30,7 @@ const KinbroldPage = () => {
         zoomToRegion(currentRegion);
       }
       setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon);
+      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon].image : null);
       setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
@@ -150,7 +150,7 @@ const KinbroldPage = () => {
           <DialogHeader>
             <DialogTitle>{selectedDragon?.name}</DialogTitle>
           </DialogHeader>
-          <div className="relative w-64 h-64 mx-auto">
+          <div className="relative w-full h-64">
             {selectedDragon && <DragonComponent image={selectedDragon.image} />}
           </div>
           <p>{selectedDragon?.description}</p>

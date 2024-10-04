@@ -12,7 +12,7 @@ const GrivossPage = () => {
         </div>
         <p className="text-xl mb-4">The lush forests and mountains of the Earth Kingdom</p>
         <div className="mb-8">
-          <img src="/cards/balon.png" alt="Balon" className="w-64 h-auto mb-4" />
+          <img src="/cards/balon.jpeg" alt="Balon" className="w-64 h-auto mb-4" />
           <p className="text-lg">
             <span className="text-2xl font-semibold">Grivoss,</span>
             <span className="text-lg"> the Earth Kingdom</span>

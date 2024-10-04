@@ -12,7 +12,7 @@ const ZalosPage = () => {
         </div>
         <p className="text-xl mb-4">The floating islands of the Air Kingdom</p>
         <div className="mb-8">
-          <img src="/cards/galea.png" alt="Galea" className="w-64 h-auto mb-4" />
+          <img src="/cards/galea.jpeg" alt="Galea" className="w-64 h-auto mb-4" />
           <p className="text-lg">
             <span className="text-2xl font-semibold">Zalos,</span>
             <span className="text-lg"> the Air Kingdom</span>

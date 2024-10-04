@@ -12,7 +12,7 @@ const ScartoPage = () => {
         </div>
         <p className="text-xl mb-4">The volcanic landscapes of the Fire Kingdom</p>
         <div className="mb-8">
-          <img src="/cards/osao.png" alt="Osao" className="w-64 h-auto mb-4" />
+          <img src="/cards/osao.jpeg" alt="Osao" className="w-64 h-auto mb-4" />
           <p className="text-lg">
             <span className="text-2xl font-semibold">Scarto,</span>
             <span className="text-lg"> the Fire Kingdom</span>

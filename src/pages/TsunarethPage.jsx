@@ -12,7 +12,7 @@ const TsunarethPage = () => {
         </div>
         <p className="text-xl mb-4">The vast underwater realm of the Water Kingdom</p>
         <div className="mb-8">
-          <img src="/cards/mek.png" alt="Mek" className="w-64 h-auto mb-4" />
+          <img src="/cards/mek.jpeg" alt="Mek" className="w-64 h-auto mb-4" />
           <p className="text-lg">
             <span className="text-2xl font-semibold">Tsunareth,</span>
             <span className="text-lg"> the Water Kingdom</span>

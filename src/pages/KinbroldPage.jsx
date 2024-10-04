@@ -150,7 +150,7 @@ const KinbroldPage = () => {
           <DialogHeader>
             <DialogTitle>{selectedDragon?.name}</DialogTitle>
           </DialogHeader>
-          <div className="relative">
+          <div className="relative w-64 h-64 mx-auto">
             {selectedDragon && <DragonComponent image={selectedDragon.image} />}
           </div>
           <p>{selectedDragon?.description}</p>

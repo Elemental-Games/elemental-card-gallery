@@ -18,11 +18,11 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    evermere: { x: -1500, y: -1000, scale: 2 },
-    zalos: { x: -750, y: -500, scale: 2 },
-    scarto: { x: -2250, y: -500, scale: 2 },
-    tsunareth: { x: -1500, y: -1500, scale: 2 },
-    grivoss: { x: -750, y: -1000, scale: 2 },
+    evermere: { x: -1500, y: -1000, scale: 2, color: 'purple' },
+    zalos: { x: -750, y: -500, scale: 2, color: 'cyan' },
+    scarto: { x: -2250, y: -500, scale: 2, color: 'red' },
+    tsunareth: { x: -1500, y: -1500, scale: 2, color: 'blue' },
+    grivoss: { x: -750, y: -1000, scale: 2, color: 'lime' },
     frozen_ridge: { x: -1000, y: -750, scale: 2 },
     shroud_peak: { x: -2000, y: -750, scale: 2 },
     mount_surya: { x: -2000, y: -1250, scale: 2 },
@@ -79,20 +79,14 @@ const KinbroldPage = () => {
         initialPositionY={0}
         disabled={!allowManualControl}
       >
-        {({ zoomIn, zoomOut, resetTransform }) => (
-          <>
-            <TransformComponent>
-              <MapComponent showInteractivity={allowManualControl} />
-            </TransformComponent>
-            {allowManualControl && (
-              <div className="absolute bottom-4 right-4 space-x-2">
-                <Button onClick={() => zoomIn()}>Zoom In</Button>
-                <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => resetTransform()}>Reset</Button>
-              </div>
-            )}
-          </>
-        )}
+        <TransformComponent>
+          <MapComponent showInteractivity={allowManualControl} />
+          <img 
+            src="/tour/zooms.png" 
+            alt="Region Circles" 
+            className="absolute top-0 left-0 w-full h-full pointer-events-none"
+          />
+        </TransformComponent>
       </TransformWrapper>
 
       {showTour && (
@@ -112,6 +106,14 @@ const KinbroldPage = () => {
             isLastStep={tourStep === tourScript.length - 1}
           />
         </>
+      )}
+
+      {allowManualControl && (
+        <div className="absolute bottom-4 right-4 space-x-2">
+          <Button onClick={() => transformComponentRef.current?.zoomIn()}>Zoom In</Button>
+          <Button onClick={() => transformComponentRef.current?.zoomOut()}>Zoom Out</Button>
+          <Button onClick={() => transformComponentRef.current?.resetTransform()}>Reset</Button>
+        </div>
       )}
     </div>
   );

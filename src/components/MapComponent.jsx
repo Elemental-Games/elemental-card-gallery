@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/ui/alert';
 
@@ -12,10 +12,26 @@ const regions = [
 
 const MapComponent = ({ showInteractivity }) => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
+  const [isPanning, setIsPanning] = useState(false);
   const navigate = useNavigate();
 
-  const handleRegionClick = (region) => {
+  useEffect(() => {
+    const handleMouseMove = () => setIsPanning(true);
+    const handleMouseUp = () => setIsPanning(false);
+
     if (showInteractivity) {
+      window.addEventListener('mousemove', handleMouseMove);
+      window.addEventListener('mouseup', handleMouseUp);
+    }
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+      window.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, [showInteractivity]);
+
+  const handleRegionClick = (region) => {
+    if (showInteractivity && !isPanning) {
       navigate(region.route);
     }
   };
@@ -44,7 +60,7 @@ const MapComponent = ({ showInteractivity }) => {
           onMouseLeave={() => showInteractivity && setHoveredRegion(null)}
         />
       ))}
-      {hoveredRegion && showInteractivity && (
+      {hoveredRegion && showInteractivity && !isPanning && (
         <Alert className="absolute top-4 left-4 bg-white bg-opacity-75">
           {hoveredRegion}
         </Alert>

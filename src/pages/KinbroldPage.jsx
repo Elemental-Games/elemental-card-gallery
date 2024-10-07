@@ -41,9 +41,13 @@ const KinbroldPage = () => {
 
   const zoomToLocation = (location) => {
     if (transformComponentRef.current && zoomLocations[location]) {
-      const { setTransform } = transformComponentRef.current;
+      const { zoomToElement } = transformComponentRef.current;
       const { x, y, scale } = zoomLocations[location];
-      setTransform(x, y, scale, 1000, 'easeOut');
+      zoomToElement('map', scale, 1000, 'easeOut');
+      setTimeout(() => {
+        const { setTransform } = transformComponentRef.current;
+        setTransform(x, y, scale, 1000, 'easeOut');
+      }, 100);
     }
   };
 

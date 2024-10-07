@@ -44,7 +44,6 @@ const KinbroldPage = () => {
   }, [tourStep, showTour]);
 
   useEffect(() => {
-    // Center the map on Evermere on load
     if (transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
       zoomToElement('map');
@@ -55,7 +54,7 @@ const KinbroldPage = () => {
     if (transformComponentRef.current && zoomLocations[region]) {
       const { setTransform } = transformComponentRef.current;
       const { x, y, scale } = zoomLocations[region];
-      setTransform(x, y, scale, 1000); // Added duration of 1000ms for smooth transition
+      setTransform(x, y, scale, 1000);
     }
   };
 

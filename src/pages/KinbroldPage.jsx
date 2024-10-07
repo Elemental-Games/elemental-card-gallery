@@ -113,14 +113,18 @@ const KinbroldPage = () => {
         minScale={0.1}
         maxScale={5}
         disabled={!allowManualControl}
+        limitToBounds={false}
+        centerOnInit={true}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
-              <MapComponent 
-                onRegionClick={handleRegionClick}
-                showInteractivity={allowManualControl}
-              />
+              <div className="w-full h-full" style={{ minHeight: '100%', minWidth: '100%' }}>
+                <MapComponent 
+                  onRegionClick={handleRegionClick}
+                  showInteractivity={allowManualControl}
+                />
+              </div>
             </TransformComponent>
             {allowManualControl && (
               <div className="absolute bottom-4 right-4 flex space-x-2">

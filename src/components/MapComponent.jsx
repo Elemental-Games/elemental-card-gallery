@@ -28,7 +28,7 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
-        className="w-full h-full object-cover"
+        className="w-full h-full object-contain"
         id="map"
       />
       <svg

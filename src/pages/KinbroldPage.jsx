@@ -19,21 +19,10 @@ const KinbroldPage = () => {
   const [showDragonDialog, setShowDragonDialog] = useState(false);
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
+
   const transformComponentRef = useRef(null);
   const mapContainerRef = useRef(null);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (showTour && tourStep < tourScript.length) {
-      const currentRegion = tourScript[tourStep].region;
-      if (currentRegion && transformComponentRef.current) {
-        zoomToRegion(currentRegion);
-      }
-      setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon].image : null);
-      setDialogueText(tourScript[tourStep].dialogue);
-    }
-  }, [tourStep, showTour]);
 
   useEffect(() => {
     const setInitialZoom = () => {

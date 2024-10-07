@@ -28,13 +28,13 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
-        className="w-full h-full object-contain"
+        className="w-full h-auto object-cover"
         id="map"
       />
       <svg
         className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 1000 1000"
-        preserveAspectRatio="xMidYMid meet"
+        preserveAspectRatio="xMidYMid slice"
         style={{ pointerEvents: 'none' }}
       >
         {regions.map((region) => (

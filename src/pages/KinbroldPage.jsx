@@ -1,11 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
-import { useNavigate } from 'react-router-dom';
 import MapComponent from '../components/MapComponent';
 import SpeakerComponent from '../components/SpeakerComponent';
 import DragonComponent from '../components/DragonComponent';
 import DialogueBox from '../components/DialogueBox';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { tourScript } from '../data/tourScript';
 import { dragonInfo } from '../data/dragonInfo';
@@ -16,11 +14,8 @@ const KinbroldPage = () => {
   const [dialogueText, setDialogueText] = useState(tourScript[0].dialogue);
   const [tourStep, setTourStep] = useState(0);
   const [showTour, setShowTour] = useState(true);
-  const [showDragonDialog, setShowDragonDialog] = useState(false);
-  const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
@@ -71,20 +66,6 @@ const KinbroldPage = () => {
     setAllowManualControl(true);
   };
 
-  const handleRegionClick = (region) => {
-    if (!allowManualControl) return;
-    const dragon = Object.keys(dragonInfo).find(key => dragonInfo[key].name.toLowerCase().includes(region));
-    if (dragon) {
-      setSelectedDragon(dragonInfo[dragon]);
-      setShowDragonDialog(true);
-    } else {
-      const regionPages = { zalos: '/zalos', scarto: '/scarto', grivoss: '/grivoss', tsunareth: '/tsunareth' };
-      if (regionPages[region]) {
-        navigate(regionPages[region]);
-      }
-    }
-  };
-
   return (
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
@@ -102,10 +83,7 @@ const KinbroldPage = () => {
               wrapperClass="!w-full !h-full" 
               contentClass="!w-full !h-auto"
             >
-              <MapComponent 
-                onRegionClick={handleRegionClick}
-                showInteractivity={allowManualControl}
-              />
+              <MapComponent showInteractivity={allowManualControl} />
             </TransformComponent>
             {allowManualControl && (
               <div className="absolute bottom-4 right-4 flex space-x-2">
@@ -130,17 +108,6 @@ const KinbroldPage = () => {
           />
         </>
       )}
-      <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>{selectedDragon?.name}</DialogTitle>
-          </DialogHeader>
-          <div className="relative w-full h-64">
-            {selectedDragon && <DragonComponent image={selectedDragon.image} />}
-          </div>
-          <p>{selectedDragon?.description}</p>
-        </DialogContent>
-      </Dialog>
     </div>
   );
 };

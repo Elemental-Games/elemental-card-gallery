@@ -17,19 +17,22 @@ const KinbroldPage = () => {
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
 
+  const mapWidth = 2000;
+  const mapHeight = 2000;
+
   const zoomLocations = {
     start: { scale: 1, x: 0, y: 0 },
-    evermere: { scale: 2, x: -500, y: -500 },
-    zalos: { scale: 2, x: -200, y: -200 },
-    tsunareth: { scale: 2, x: -800, y: -800 },
-    scarto: { scale: 2, x: -800, y: -200 },
-    grivoss: { scale: 2, x: -200, y: -800 },
-    frozen_ridge: { scale: 3, x: -300, y: -100 },
-    shroud_peak: { scale: 3, x: -900, y: -100 },
-    mount_surya: { scale: 3, x: -900, y: -300 },
-    gleaming_grotto: { scale: 3, x: -500, y: -700 },
-    noxwood: { scale: 3, x: -700, y: -900 },
-    arid_sands: { scale: 3, x: -100, y: -900 },
+    evermere: { scale: 2, x: 500, y: 500 },
+    zalos: { scale: 2, x: 200, y: 200 },
+    tsunareth: { scale: 2, x: 800, y: 800 },
+    scarto: { scale: 2, x: 800, y: 200 },
+    grivoss: { scale: 2, x: 200, y: 800 },
+    frozen_ridge: { scale: 3, x: 300, y: 100 },
+    shroud_peak: { scale: 3, x: 900, y: 100 },
+    mount_surya: { scale: 3, x: 900, y: 300 },
+    gleaming_grotto: { scale: 3, x: 500, y: 700 },
+    noxwood: { scale: 3, x: 700, y: 900 },
+    arid_sands: { scale: 3, x: 100, y: 900 },
   };
 
   useEffect(() => {
@@ -39,17 +42,20 @@ const KinbroldPage = () => {
       setDisplayedDragon(currentScript.dragon ? dragonInfo[currentScript.dragon] : null);
       setDialogueText(currentScript.dialogue);
 
-      if (currentScript.zoom || currentScript.region) {
-        zoomToLocation(currentScript.zoom || currentScript.region);
+      if (currentScript.zoom) {
+        zoomToLocation(currentScript.zoom);
       }
     }
   }, [tourStep, showTour]);
 
   const zoomToLocation = (location) => {
     if (transformComponentRef.current && zoomLocations[location]) {
-      const { setTransform } = transformComponentRef.current;
+      const { zoomToElement } = transformComponentRef.current;
       const { scale, x, y } = zoomLocations[location];
-      setTransform(x, y, scale, 1000, 'easeOut');
+      zoomToElement('map', scale, 1000, 'easeOut');
+      setTimeout(() => {
+        transformComponentRef.current.setTransform(x, y, scale);
+      }, 100);
     }
   };
 
@@ -87,7 +93,7 @@ const KinbroldPage = () => {
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-              <MapComponent showInteractivity={allowManualControl} />
+              <MapComponent showInteractivity={allowManualControl} width={mapWidth} height={mapHeight} />
             </TransformComponent>
             {allowManualControl && (
               <div className="absolute bottom-4 right-4 space-x-2">

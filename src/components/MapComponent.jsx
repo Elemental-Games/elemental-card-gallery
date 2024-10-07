@@ -10,7 +10,7 @@ const regions = [
   { name: 'Zalos', image: '/path/zalos_path.png', route: '/zalos' },
 ];
 
-const MapComponent = ({ showInteractivity }) => {
+const MapComponent = ({ showInteractivity, width, height }) => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [isPanning, setIsPanning] = useState(false);
   const navigate = useNavigate();
@@ -55,11 +55,11 @@ const MapComponent = ({ showInteractivity }) => {
   };
 
   return (
-    <div className="relative w-full h-full" ref={mapRef}>
+    <div className="relative" ref={mapRef} style={{ width: `${width}px`, height: `${height}px` }}>
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
-        className="w-full h-full object-contain"
+        className="w-full h-full object-cover"
         id="map"
       />
       <img 

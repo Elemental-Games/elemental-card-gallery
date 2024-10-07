@@ -93,4 +93,3 @@ export const tourScript = [
     dialogue: "Iris: Click on any region to learn more and begin your Elemental journey!",
   },
 ];
-];

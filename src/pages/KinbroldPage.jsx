@@ -18,12 +18,18 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    start: { x: -500, y: -500, scale: 2 },
-    evermere: { x: -500, y: -500, scale: 2 },
-    zalos: { x: -200, y: -200, scale: 2 },
-    tsunareth: { x: -800, y: -800, scale: 2 },
-    scarto: { x: -800, y: -200, scale: 2 },
-    grivoss: { x: -200, y: -800, scale: 2 },
+    start: { scale: 1, x: 0, y: 0 },
+    evermere: { scale: 2, x: -500, y: -500 },
+    zalos: { scale: 2, x: -200, y: -200 },
+    tsunareth: { scale: 2, x: -800, y: -800 },
+    scarto: { scale: 2, x: -800, y: -200 },
+    grivoss: { scale: 2, x: -200, y: -800 },
+    frozen_ridge: { scale: 3, x: -300, y: -100 },
+    shroud_peak: { scale: 3, x: -900, y: -100 },
+    mount_surya: { scale: 3, x: -900, y: -300 },
+    gleaming_grotto: { scale: 3, x: -500, y: -700 },
+    noxwood: { scale: 3, x: -700, y: -900 },
+    arid_sands: { scale: 3, x: -100, y: -900 },
   };
 
   useEffect(() => {
@@ -33,21 +39,17 @@ const KinbroldPage = () => {
       setDisplayedDragon(currentScript.dragon ? dragonInfo[currentScript.dragon] : null);
       setDialogueText(currentScript.dialogue);
 
-      if (currentScript.zoom) {
-        zoomToLocation(currentScript.zoom);
+      if (currentScript.zoom || currentScript.region) {
+        zoomToLocation(currentScript.zoom || currentScript.region);
       }
     }
   }, [tourStep, showTour]);
 
   const zoomToLocation = (location) => {
     if (transformComponentRef.current && zoomLocations[location]) {
-      const { zoomToElement } = transformComponentRef.current;
-      const { x, y, scale } = zoomLocations[location];
-      zoomToElement('map', scale, 1000, 'easeOut');
-      setTimeout(() => {
-        const { setTransform } = transformComponentRef.current;
-        setTransform(x, y, scale, 1000, 'easeOut');
-      }, 100);
+      const { setTransform } = transformComponentRef.current;
+      const { scale, x, y } = zoomLocations[location];
+      setTransform(x, y, scale, 1000, 'easeOut');
     }
   };
 

@@ -17,6 +17,7 @@ export const tourScript = [
   {
     speaker: 'galea1',
     dialogue: "Galea: We of the Air Kingdom pride ourselves on our speed and agility. Our winds carry the whispers of ancient knowledge.",
+    zoom: 'zalos',
   },
   {
     speaker: 'iris1',
@@ -26,6 +27,7 @@ export const tourScript = [
   {
     speaker: 'mek1',
     dialogue: "Mek: The Water Kingdom flows with healing energies. Our adaptability is our strength, ever-changing like the tides.",
+    zoom: 'tsunareth',
   },
   {
     speaker: 'iris1',
@@ -35,6 +37,7 @@ export const tourScript = [
   {
     speaker: 'osao1',
     dialogue: "Osao: The Fire Kingdom burns with passion and strength. Our flames forge the mightiest of warriors and the most powerful of spells.",
+    zoom: 'scarto',
   },
   {
     speaker: 'iris1',
@@ -44,6 +47,7 @@ export const tourScript = [
   {
     speaker: 'balon1',
     dialogue: "Balon: The Earth Kingdom stands firm in its defense of the land. Our resolve is unshakeable, our foundations strong.",
+    zoom: 'grivoss',
   },
   {
     speaker: 'iris1',
@@ -91,5 +95,6 @@ export const tourScript = [
     region: null,
     dragon: null,
     dialogue: "Iris: Click on any region to learn more and begin your Elemental journey!",
+    zoom: 'start',
   },
 ];

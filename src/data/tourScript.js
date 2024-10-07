@@ -2,56 +2,53 @@ export const tourScript = [
   {
     speaker: 'iris1',
     dialogue: "Iris: Welcome to the world of Kinbrold! My name is Iris, and I'll be your guide on this magical tour of our elemental realm.",
-    region: null,
+    zoom: 'start',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Let's start with Evermere, where all non-elemental humans reside and the core of the card crafters live.",
-    region: 'evermere',
+    zoom: 'evermere',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Next, we have Zalos, the Air Kingdom.",
-    region: 'zalos',
+    zoom: 'zalos',
   },
   {
     speaker: 'galea1',
     dialogue: "Galea: We of the Air Kingdom pride ourselves on our speed and agility. Our winds carry the whispers of ancient knowledge.",
-    region: 'zalos',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Here we have Tsunareth, the Water Kingdom.",
-    region: 'tsunareth',
+    zoom: 'tsunareth',
   },
   {
     speaker: 'mek1',
     dialogue: "Mek: The Water Kingdom flows with healing energies. Our adaptability is our strength, ever-changing like the tides.",
-    region: 'tsunareth',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Now, behold Scarto, the Fire Kingdom.",
-    region: 'scarto',
+    zoom: 'scarto',
   },
   {
     speaker: 'osao1',
     dialogue: "Osao: The Fire Kingdom burns with passion and strength. Our flames forge the mightiest of warriors and the most powerful of spells.",
-    region: 'scarto',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Lastly, we have Grivoss, the Earth Kingdom.",
-    region: 'grivoss',
+    zoom: 'grivoss',
   },
   {
     speaker: 'balon1',
     dialogue: "Balon: The Earth Kingdom stands firm in its defense of the land. Our resolve is unshakeable, our foundations strong.",
-    region: 'grivoss',
   },
   {
     speaker: 'iris1',
     dialogue: "Iris: Now, we're going to dive into the 6 combinational element regions that connect our 5 Kingdoms.",
+    zoom: 'start',
   },
   {
     speaker: 'iris1',
@@ -95,4 +92,5 @@ export const tourScript = [
     dragon: null,
     dialogue: "Iris: Click on any region to learn more and begin your Elemental journey!",
   },
+];
 ];

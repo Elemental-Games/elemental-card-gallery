@@ -18,40 +18,32 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
+    start: { x: -500, y: -500, scale: 1 },
     evermere: { x: -500, y: -500, scale: 2 },
     zalos: { x: -50, y: -50, scale: 2 },
-    scarto: { x: -950, y: -50, scale: 2 },
     tsunareth: { x: -950, y: -950, scale: 2 },
+    scarto: { x: -950, y: -50, scale: 2 },
     grivoss: { x: -50, y: -450, scale: 2 },
-    frozen_ridge: { x: -100, y: -250, scale: 2 },
-    shroud_peak: { x: -900, y: -250, scale: 2 },
-    mount_surya: { x: -900, y: -750, scale: 2 },
-    gleaming_grotto: { x: -750, y: -750, scale: 2 },
-    noxwood: { x: -250, y: -750, scale: 2 },
-    arid_sands: { x: -500, y: -750, scale: 2 },
   };
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
-      const currentRegion = tourScript[tourStep].region;
-      if (currentRegion && zoomLocations[currentRegion]) {
-        zoomToRegion(currentRegion);
+      const currentScript = tourScript[tourStep];
+      setCurrentSpeaker(currentScript.speaker);
+      setDisplayedDragon(currentScript.dragon ? dragonInfo[currentScript.dragon] : null);
+      setDialogueText(currentScript.dialogue);
+
+      if (currentScript.zoom) {
+        zoomToLocation(currentScript.zoom);
       }
-      setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon] : null);
-      setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
 
-  const zoomToRegion = (region) => {
-    if (transformComponentRef.current && zoomLocations[region]) {
-      const { zoomToElement } = transformComponentRef.current;
-      const { x, y, scale } = zoomLocations[region];
-      zoomToElement('map', scale, 1000, 'easeOut');
-      setTimeout(() => {
-        const { setTransform } = transformComponentRef.current;
-        setTransform(x, y, scale, 1000);
-      }, 1000);
+  const zoomToLocation = (location) => {
+    if (transformComponentRef.current && zoomLocations[location]) {
+      const { setTransform } = transformComponentRef.current;
+      const { x, y, scale } = zoomLocations[location];
+      setTransform(x, y, scale, 1000, 'easeOut');
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/ui/alert';
 
@@ -14,6 +14,7 @@ const MapComponent = ({ showInteractivity }) => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
   const [isPanning, setIsPanning] = useState(false);
   const navigate = useNavigate();
+  const mapRef = useRef(null);
 
   useEffect(() => {
     const handleMouseMove = () => setIsPanning(true);
@@ -30,14 +31,31 @@ const MapComponent = ({ showInteractivity }) => {
     };
   }, [showInteractivity]);
 
-  const handleRegionClick = (region) => {
+  const handleRegionClick = (event, region) => {
     if (showInteractivity && !isPanning) {
-      navigate(region.route);
+      const canvas = document.createElement('canvas');
+      const ctx = canvas.getContext('2d');
+      const img = event.target;
+      
+      canvas.width = img.width;
+      canvas.height = img.height;
+      ctx.drawImage(img, 0, 0, img.width, img.height);
+      
+      const rect = mapRef.current.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+      
+      const pixel = ctx.getImageData(x, y, 1, 1).data;
+      
+      // Check if the clicked pixel is not transparent
+      if (pixel[3] !== 0) {
+        navigate(region.route);
+      }
     }
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full h-full" ref={mapRef}>
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
@@ -55,7 +73,7 @@ const MapComponent = ({ showInteractivity }) => {
             opacity: hoveredRegion === region.name ? 0.7 : 0,
             pointerEvents: showInteractivity ? 'auto' : 'none',
           }}
-          onClick={() => handleRegionClick(region)}
+          onClick={(e) => handleRegionClick(e, region)}
           onMouseEnter={() => showInteractivity && setHoveredRegion(region.name)}
           onMouseLeave={() => showInteractivity && setHoveredRegion(null)}
         />

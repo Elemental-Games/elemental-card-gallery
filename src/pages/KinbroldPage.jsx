@@ -24,36 +24,32 @@ const KinbroldPage = () => {
         zoomToRegion(currentRegion);
       }
       setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon].image : null);
+      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon] : null);
       setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
+
+  useEffect(() => {
+    // Center the map on load
+    if (transformComponentRef.current) {
+      const { centerView } = transformComponentRef.current;
+      centerView(1, 0);
+    }
+  }, []);
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
       const element = document.getElementById(region);
       if (element) {
-        zoomToElement(element, 2.5, 1000);
+        zoomToElement(element, 2, 1000);
       }
     }
   };
 
   const advanceTour = () => {
     if (tourStep < tourScript.length - 1) {
-      const nextStep = tourStep + 1;
-      setTourStep(nextStep);
-      setCurrentSpeaker(tourScript[nextStep].speaker);
-      setDisplayedDragon(tourScript[nextStep].dragon);
-      setDialogueText(tourScript[nextStep].dialogue);
-
-      if (transformComponentRef.current) {
-        const { resetTransform } = transformComponentRef.current;
-        resetTransform(1000);
-        setTimeout(() => {
-          zoomToRegion(tourScript[nextStep].region);
-        }, 1000);
-      }
+      setTourStep(prevStep => prevStep + 1);
     } else {
       endTour();
     }
@@ -64,6 +60,10 @@ const KinbroldPage = () => {
     setCurrentSpeaker(null);
     setDisplayedDragon(null);
     setAllowManualControl(true);
+    if (transformComponentRef.current) {
+      const { resetTransform } = transformComponentRef.current;
+      resetTransform(1000);
+    }
   };
 
   return (
@@ -74,7 +74,7 @@ const KinbroldPage = () => {
         minScale={1}
         maxScale={5}
         disabled={!allowManualControl}
-        limitToBounds={true}
+        limitToBounds={false}
         centerOnInit={true}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
@@ -99,7 +99,13 @@ const KinbroldPage = () => {
       {showTour && (
         <>
           <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
-          {displayedDragon && <DragonComponent image={displayedDragon} />}
+          {displayedDragon && (
+            <DragonComponent 
+              image={displayedDragon.image}
+              name={displayedDragon.name}
+              description={displayedDragon.description}
+            />
+          )}
           <DialogueBox 
             text={dialogueText} 
             onContinue={advanceTour}

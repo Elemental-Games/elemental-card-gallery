@@ -108,10 +108,9 @@ const KinbroldPage = () => {
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
-        initialPositionX={0}
-        initialPositionY={0}
-        minScale={0.1}
+        minScale={0.5}
         maxScale={5}
+        limitToBounds={false}
         disabled={!allowManualControl}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
@@ -123,7 +122,7 @@ const KinbroldPage = () => {
               />
             </TransformComponent>
             {allowManualControl && (
-              <div className="absolute bottom-4 right-4 flex space-x-2">
+              <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
                 <Button onClick={() => zoomIn()}>Zoom In</Button>
                 <Button onClick={() => zoomOut()}>Zoom Out</Button>
                 <Button onClick={() => resetTransform()}>Reset</Button>

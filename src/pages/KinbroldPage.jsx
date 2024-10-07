@@ -20,7 +20,6 @@ const KinbroldPage = () => {
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
-  const mapContainerRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -65,10 +64,6 @@ const KinbroldPage = () => {
     }
   };
 
-  const skipTour = () => {
-    endTour();
-  };
-
   const endTour = () => {
     setShowTour(false);
     setCurrentSpeaker(null);
@@ -83,40 +78,23 @@ const KinbroldPage = () => {
       setSelectedDragon(dragonInfo[dragon]);
       setShowDragonDialog(true);
     } else {
-      switch (region) {
-        case 'zalos':
-          navigate('/zalos');
-          break;
-        case 'scarto':
-          navigate('/scarto');
-          break;
-        case 'grivoss':
-          navigate('/grivoss');
-          break;
-        case 'tsunareth':
-          navigate('/tsunareth');
-          break;
-        default:
-          // Handle other regions or do nothing
-          break;
+      const regionPages = { zalos: '/zalos', scarto: '/scarto', grivoss: '/grivoss', tsunareth: '/tsunareth' };
+      if (regionPages[region]) {
+        navigate(regionPages[region]);
       }
     }
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden" ref={mapContainerRef}>
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
         minScale={1}
         maxScale={5}
         disabled={!allowManualControl}
-        limitToBounds={false}
+        limitToBounds={true}
         centerOnInit={true}
-        panning={{
-          velocityDisabled: true,
-          lockAxisX: true,
-        }}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
@@ -147,7 +125,7 @@ const KinbroldPage = () => {
           <DialogueBox 
             text={dialogueText} 
             onContinue={advanceTour}
-            onSkip={skipTour}
+            onSkip={endTour}
             isLastStep={tourStep === tourScript.length - 1}
           />
         </>

@@ -18,18 +18,18 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    start: { scale: 1, x: '50%', y: '50%' },
-    evermere: { scale: 2, x: '50%', y: '50%' },
-    zalos: { scale: 2, x: '25%', y: '25%' },
-    tsunareth: { scale: 2, x: '75%', y: '75%' },
-    scarto: { scale: 2, x: '75%', y: '25%' },
-    grivoss: { scale: 2, x: '25%', y: '75%' },
-    frozen_ridge: { scale: 3, x: '15%', y: '15%' },
-    shroud_peak: { scale: 3, x: '85%', y: '15%' },
-    mount_surya: { scale: 3, x: '85%', y: '35%' },
-    gleaming_grotto: { scale: 3, x: '50%', y: '65%' },
-    noxwood: { scale: 3, x: '65%', y: '85%' },
-    arid_sands: { scale: 3, x: '15%', y: '85%' },
+    start: { scale: 1, x: 0, y: 0 },
+    evermere: { scale: 2, x: -1000, y: -1000 },
+    zalos: { scale: 2, x: -500, y: -500 },
+    tsunareth: { scale: 2, x: -1500, y: -1500 },
+    scarto: { scale: 2, x: -1500, y: -500 },
+    grivoss: { scale: 2, x: -500, y: -1500 },
+    frozen_ridge: { scale: 3, x: -300, y: -300 },
+    shroud_peak: { scale: 3, x: -1700, y: -300 },
+    mount_surya: { scale: 3, x: -1700, y: -700 },
+    gleaming_grotto: { scale: 3, x: -1000, y: -1300 },
+    noxwood: { scale: 3, x: -1300, y: -1700 },
+    arid_sands: { scale: 3, x: -300, y: -1700 },
   };
 
   useEffect(() => {
@@ -48,14 +48,11 @@ const KinbroldPage = () => {
   const zoomToLocation = (location) => {
     if (transformComponentRef.current && zoomLocations[location]) {
       const { scale, x, y } = zoomLocations[location];
-      const { zoomToElement, centerOnElement } = transformComponentRef.current;
+      const { zoomToElement, setTransform } = transformComponentRef.current;
 
       zoomToElement('map', scale, 1000, 'easeOut');
       setTimeout(() => {
-        centerOnElement('map', scale, 0, 'easeOut', {
-          x: x,
-          y: y,
-        });
+        setTransform(x, y, scale);
       }, 100);
     }
   };

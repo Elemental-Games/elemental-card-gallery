@@ -11,16 +11,12 @@ const regions = [
 ];
 
 const MapComponent = ({ showInteractivity }) => {
-  const [selectedRegion, setSelectedRegion] = useState(null);
+  const [hoveredRegion, setHoveredRegion] = useState(null);
   const navigate = useNavigate();
 
   const handleRegionClick = (region) => {
     if (showInteractivity) {
-      setSelectedRegion(region.name);
-      console.log(`Clicked on ${region.name}`);
-      setTimeout(() => {
-        navigate(region.route);
-      }, 1000); // Navigate after 1 second
+      navigate(region.route);
     }
   };
 
@@ -37,20 +33,20 @@ const MapComponent = ({ showInteractivity }) => {
           key={region.name}
           src={region.image}
           alt={region.name}
-          className="absolute top-0 left-0 w-full h-full cursor-pointer"
+          className="absolute top-0 left-0 w-full h-full cursor-pointer transition-opacity duration-300"
           style={{
-            mixBlendMode: 'darken', // This makes the magenta background transparent
-            opacity: showInteractivity ? 0.5 : 0, // Only show hover effect if interactive
-            transition: 'opacity 0.3s ease',
+            mixBlendMode: 'darken',
+            opacity: hoveredRegion === region.name ? 0.7 : 0,
+            pointerEvents: showInteractivity ? 'auto' : 'none',
           }}
           onClick={() => handleRegionClick(region)}
-          onMouseEnter={() => showInteractivity && setSelectedRegion(region.name)}
-          onMouseLeave={() => showInteractivity && setSelectedRegion(null)}
+          onMouseEnter={() => showInteractivity && setHoveredRegion(region.name)}
+          onMouseLeave={() => showInteractivity && setHoveredRegion(null)}
         />
       ))}
-      {selectedRegion && showInteractivity && (
+      {hoveredRegion && showInteractivity && (
         <Alert className="absolute top-4 left-4 bg-white bg-opacity-75">
-          You selected: {selectedRegion}
+          {hoveredRegion}
         </Alert>
       )}
     </div>

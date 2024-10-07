@@ -18,28 +18,55 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
+    start: { x: -1500, y: -1000, scale: 1 },
     evermere: { x: -1500, y: -1000, scale: 2 },
     zalos: { x: -750, y: -500, scale: 2 },
-    scarto: { x: -2250, y: -500, scale: 2 },
     tsunareth: { x: -1500, y: -1500, scale: 2 },
+    scarto: { x: -2250, y: -500, scale: 2 },
     grivoss: { x: -750, y: -1000, scale: 2 },
-    frozen_ridge: { x: -1000, y: -750, scale: 2 },
-    shroud_peak: { x: -2000, y: -750, scale: 2 },
-    mount_surya: { x: -2000, y: -1250, scale: 2 },
-    gleaming_grotto: { x: -1250, y: -1250, scale: 2 },
-    noxwood: { x: -1750, y: -1500, scale: 2 },
-    arid_sands: { x: -500, y: -1250, scale: 2 },
   };
 
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
-      const currentRegion = tourScript[tourStep].region;
-      if (currentRegion && transformComponentRef.current) {
-        zoomToRegion(currentRegion);
+      const currentScript = tourScript[tourStep];
+      setCurrentSpeaker(currentScript.speaker);
+      setDisplayedDragon(currentScript.dragon ? dragonInfo[currentScript.dragon] : null);
+      setDialogueText(currentScript.dialogue);
+
+      if (transformComponentRef.current) {
+        const { setTransform } = transformComponentRef.current;
+        let zoomLocation;
+
+        switch (tourStep) {
+          case 0:
+            zoomLocation = zoomLocations.start;
+            break;
+          case 1:
+            zoomLocation = zoomLocations.evermere;
+            break;
+          case 2:
+            zoomLocation = zoomLocations.zalos;
+            break;
+          case 4:
+            zoomLocation = zoomLocations.tsunareth;
+            break;
+          case 6:
+            zoomLocation = zoomLocations.scarto;
+            break;
+          case 8:
+            zoomLocation = zoomLocations.grivoss;
+            break;
+          case 10:
+            zoomLocation = zoomLocations.start;
+            break;
+          default:
+            return;
+        }
+
+        if (zoomLocation) {
+          setTransform(zoomLocation.x, zoomLocation.y, zoomLocation.scale, 1000);
+        }
       }
-      setCurrentSpeaker(tourScript[tourStep].speaker);
-      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon] : null);
-      setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
 

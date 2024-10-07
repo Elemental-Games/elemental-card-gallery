@@ -1,68 +1,46 @@
 export const tourScript = [
   {
     speaker: 'iris1',
-    region: null,
-    dragon: null,
     dialogue: "Iris: Welcome to the world of Kinbrold! My name is Iris, and I'll be your guide on this magical tour of our elemental realm.",
   },
   {
     speaker: 'iris1',
-    region: 'evermere',
-    dragon: null,
     dialogue: "Iris: Let's start with Evermere, where all non-elemental humans reside and the core of the card crafters live. Many Elemental Masters have come from Evermere, embarking on journeys to collect essence and key items to craft the most refined decks.",
   },
   {
     speaker: 'iris1',
-    region: 'zalos',
-    dragon: null,
     dialogue: "Iris: Next, we have Zalos, the Air Kingdom.",
   },
   {
     speaker: 'galea1',
-    region: 'zalos',
-    dragon: null,
     dialogue: "Galea: We of the Air Kingdom pride ourselves on our speed and agility. Our winds carry the whispers of ancient knowledge.",
   },
   {
     speaker: 'iris1',
-    region: 'tsunareth',
-    dragon: null,
     dialogue: "Iris: Here we have Tsunareth, the Water Kingdom.",
   },
   {
     speaker: 'mek1',
-    region: 'tsunareth',
-    dragon: null,
     dialogue: "Mek: The Water Kingdom flows with healing energies. Our adaptability is our strength, ever-changing like the tides.",
   },
   {
     speaker: 'iris1',
-    region: 'scarto',
-    dragon: null,
     dialogue: "Iris: Now, behold Scarto, the Fire Kingdom.",
   },
   {
     speaker: 'osao1',
-    region: 'scarto',
-    dragon: null,
     dialogue: "Osao: The Fire Kingdom burns with passion and strength. Our flames forge the mightiest of warriors and the most powerful of spells.",
   },
   {
     speaker: 'iris1',
-    region: 'grivoss',
-    dragon: null,
     dialogue: "Iris: Lastly, we have Grivoss, the Earth Kingdom.",
   },
   {
     speaker: 'balon1',
-    region: 'grivoss',
-    dragon: null,
     dialogue: "Balon: The Earth Kingdom stands firm in its defense of the land. Our resolve is unshakeable, our foundations strong.",
   },
   {
     speaker: 'iris1',
-    region: null,
-    dragon: null,
     dialogue: "Iris: Now, we're going to dive into the 6 combinational element regions that connect our 5 Kingdoms.",
   },
   {

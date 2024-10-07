@@ -43,10 +43,9 @@ const KinbroldPage = () => {
         const containerHeight = mapContainerRef.current.offsetHeight;
         const imageWidth = 1000; // Assuming the original image width is 1000px
         const imageHeight = 1000; // Assuming the original image height is 1000px
-        const scaleX = containerWidth / imageWidth;
-        const scaleY = containerHeight / imageHeight;
-        const scale = Math.max(scaleX, scaleY); // Changed to Math.max to ensure full coverage
-        setTransform(0, 0, scale);
+        const scale = containerWidth / imageWidth;
+        const yOffset = (containerHeight - imageHeight * scale) / 2;
+        setTransform(0, yOffset, scale);
       }
     };
 
@@ -125,16 +124,17 @@ const KinbroldPage = () => {
 
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden bg-purple-950" // Changed to bg-purple-950 for a darker purple
+      className="relative w-full h-screen overflow-hidden bg-purple-950"
       ref={mapContainerRef}
     >
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
-        minScale={1} // Changed to 1 to prevent zooming out beyond the initial fit
+        minScale={1}
         maxScale={5}
-        limitToBounds={false} // Changed to false to allow panning beyond bounds
+        limitToBounds={false}
         disabled={!allowManualControl}
+        panning={{velocityDisabled: true}}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
@@ -150,7 +150,16 @@ const KinbroldPage = () => {
               <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
                 <Button onClick={() => zoomIn()}>Zoom In</Button>
                 <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => resetTransform()}>Reset</Button>
+                <Button onClick={() => {
+                  const containerWidth = mapContainerRef.current.offsetWidth;
+                  const containerHeight = mapContainerRef.current.offsetHeight;
+                  const imageWidth = 1000;
+                  const imageHeight = 1000;
+                  const scale = containerWidth / imageWidth;
+                  const yOffset = (containerHeight - imageHeight * scale) / 2;
+                  resetTransform();
+                  setTimeout(() => transformComponentRef.current.setTransform(0, yOffset, scale), 50);
+                }}>Reset</Button>
               </div>
             )}
           </>

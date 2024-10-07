@@ -33,7 +33,7 @@ const KinbroldPage = () => {
       }
       setCurrentSpeaker(tourScript[tourStep].speaker);
       setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon] : null);
-      setDialogueText(tourScript[tourScript].dialogue);
+      setDialogueText(tourScript[tourStep].dialogue);
     }
   }, [tourStep, showTour]);
 

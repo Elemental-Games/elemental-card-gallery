@@ -35,6 +35,22 @@ const KinbroldPage = () => {
     }
   }, [tourStep, showTour]);
 
+  useEffect(() => {
+    const setInitialZoom = () => {
+      if (transformComponentRef.current && mapContainerRef.current) {
+        const { setTransform } = transformComponentRef.current;
+        const containerWidth = mapContainerRef.current.offsetWidth;
+        const imageWidth = 1000; // Assuming the original image width is 1000px
+        const scale = containerWidth / imageWidth;
+        setTransform(0, 0, scale);
+      }
+    };
+
+    setInitialZoom();
+    window.addEventListener('resize', setInitialZoom);
+    return () => window.removeEventListener('resize', setInitialZoom);
+  }, []);
+
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
       const { zoomToElement } = transformComponentRef.current;
@@ -105,8 +121,7 @@ const KinbroldPage = () => {
 
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden bg-cover bg-center" 
-      style={{ backgroundImage: 'url("/kinbrold_map.jpg")' }}
+      className="relative w-full h-screen overflow-hidden bg-purple-900"
       ref={mapContainerRef}
     >
       <TransformWrapper

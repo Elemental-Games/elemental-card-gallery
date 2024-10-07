@@ -34,6 +34,7 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
       <svg
         className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 1000 1000"
+        preserveAspectRatio="xMidYMid meet"
         style={{ pointerEvents: 'none' }}
       >
         {regions.map((region) => (

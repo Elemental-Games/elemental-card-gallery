@@ -18,11 +18,11 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    evermere: { x: 0.5, y: 0.5, scale: 2 },
-    zalos: { x: 0.25, y: 0.25, scale: 2 },
-    scarto: { x: 0.75, y: 0.25, scale: 2 },
-    tsunareth: { x: 0.5, y: 0.75, scale: 2 },
-    grivoss: { x: 0.25, y: 0.5, scale: 2 },
+    evermere: { x: -1500, y: -1000, scale: 2 },
+    zalos: { x: -750, y: -500, scale: 2 },
+    scarto: { x: -2250, y: -500, scale: 2 },
+    tsunareth: { x: -1500, y: -1500, scale: 2 },
+    grivoss: { x: -750, y: -1000, scale: 2 },
   };
 
   useEffect(() => {
@@ -33,23 +33,23 @@ const KinbroldPage = () => {
       }
       setCurrentSpeaker(tourScript[tourStep].speaker);
       setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon] : null);
-      setDialogueText(tourScript[tourStep].dialogue);
+      setDialogueText(tourScript[tourScript].dialogue);
     }
   }, [tourStep, showTour]);
 
   useEffect(() => {
-    // Center the map on load
+    // Center the map on Evermere on load
     if (transformComponentRef.current) {
-      const { centerView } = transformComponentRef.current;
-      centerView(1, 0);
+      const { setTransform } = transformComponentRef.current;
+      setTransform(-1500, -1000, 2);
     }
   }, []);
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current && zoomLocations[region]) {
-      const { zoomToElement, setTransform } = transformComponentRef.current;
+      const { setTransform } = transformComponentRef.current;
       const { x, y, scale } = zoomLocations[region];
-      setTransform(x * -100 + '%', y * -100 + '%', scale);
+      setTransform(x, y, scale);
     }
   };
 
@@ -68,7 +68,7 @@ const KinbroldPage = () => {
     setAllowManualControl(true);
     if (transformComponentRef.current) {
       const { resetTransform } = transformComponentRef.current;
-      resetTransform(1000);
+      resetTransform();
     }
   };
 
@@ -76,12 +76,13 @@ const KinbroldPage = () => {
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
         ref={transformComponentRef}
-        initialScale={1}
+        initialScale={2}
         minScale={1}
         maxScale={5}
+        initialPositionX={-1500}
+        initialPositionY={-1000}
         disabled={!allowManualControl}
         limitToBounds={false}
-        centerOnInit={true}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>

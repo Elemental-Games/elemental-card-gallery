@@ -45,7 +45,7 @@ const KinbroldPage = () => {
         const imageHeight = 1000; // Assuming the original image height is 1000px
         const scaleX = containerWidth / imageWidth;
         const scaleY = containerHeight / imageHeight;
-        const scale = Math.min(scaleX, scaleY);
+        const scale = Math.max(scaleX, scaleY); // Changed to Math.max to ensure full coverage
         setTransform(0, 0, scale);
       }
     };
@@ -125,15 +125,15 @@ const KinbroldPage = () => {
 
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden bg-purple-950"
+      className="relative w-full h-screen overflow-hidden bg-purple-950" // Changed to bg-purple-950 for a darker purple
       ref={mapContainerRef}
     >
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
-        minScale={0.5}
+        minScale={1} // Changed to 1 to prevent zooming out beyond the initial fit
         maxScale={5}
-        limitToBounds={true}
+        limitToBounds={false} // Changed to false to allow panning beyond bounds
         disabled={!allowManualControl}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (

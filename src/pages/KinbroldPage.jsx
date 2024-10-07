@@ -23,6 +23,12 @@ const KinbroldPage = () => {
     scarto: { x: -2250, y: -500, scale: 2 },
     tsunareth: { x: -1500, y: -1500, scale: 2 },
     grivoss: { x: -750, y: -1000, scale: 2 },
+    frozen_ridge: { x: -1000, y: -750, scale: 2 },
+    shroud_peak: { x: -2000, y: -750, scale: 2 },
+    mount_surya: { x: -2000, y: -1250, scale: 2 },
+    gleaming_grotto: { x: -1250, y: -1250, scale: 2 },
+    noxwood: { x: -1750, y: -1500, scale: 2 },
+    arid_sands: { x: -500, y: -1250, scale: 2 },
   };
 
   useEffect(() => {
@@ -40,8 +46,8 @@ const KinbroldPage = () => {
   useEffect(() => {
     // Center the map on Evermere on load
     if (transformComponentRef.current) {
-      const { setTransform } = transformComponentRef.current;
-      setTransform(-1500, -1000, 2);
+      const { zoomToElement } = transformComponentRef.current;
+      zoomToElement('map');
     }
   }, []);
 
@@ -49,7 +55,7 @@ const KinbroldPage = () => {
     if (transformComponentRef.current && zoomLocations[region]) {
       const { setTransform } = transformComponentRef.current;
       const { x, y, scale } = zoomLocations[region];
-      setTransform(x, y, scale);
+      setTransform(x, y, scale, 1000); // Added duration of 1000ms for smooth transition
     }
   };
 
@@ -76,11 +82,11 @@ const KinbroldPage = () => {
     <div className="relative w-full h-screen bg-gray-900 overflow-hidden">
       <TransformWrapper
         ref={transformComponentRef}
-        initialScale={2}
-        minScale={1}
-        maxScale={5}
-        initialPositionX={-1500}
-        initialPositionY={-1000}
+        initialScale={1}
+        minScale={0.5}
+        maxScale={3}
+        initialPositionX={0}
+        initialPositionY={0}
         disabled={!allowManualControl}
         limitToBounds={false}
       >

@@ -18,12 +18,12 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    start: { x: -500, y: -500, scale: 1 },
+    start: { x: -500, y: -500, scale: 2 },
     evermere: { x: -500, y: -500, scale: 2 },
-    zalos: { x: -50, y: -50, scale: 2 },
-    tsunareth: { x: -950, y: -950, scale: 2 },
-    scarto: { x: -950, y: -50, scale: 2 },
-    grivoss: { x: -50, y: -450, scale: 2 },
+    zalos: { x: -200, y: -200, scale: 2 },
+    tsunareth: { x: -800, y: -800, scale: 2 },
+    scarto: { x: -800, y: -200, scale: 2 },
+    grivoss: { x: -200, y: -800, scale: 2 },
   };
 
   useEffect(() => {

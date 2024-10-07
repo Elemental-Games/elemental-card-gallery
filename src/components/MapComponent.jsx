@@ -21,27 +21,29 @@ const MapComponent = ({ showInteractivity }) => {
 
   return (
     <div className="relative w-full h-full">
-      <img 
-        src="/kinbrold_map.jpg" 
-        alt="Kinbrold Map" 
-        className="w-full h-full object-cover"
-        id="map"
-      />
-      <svg viewBox="0 0 2000 2000" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
-        {regions.map((region) => (
-          <path
-            key={region.name}
-            d={region.path}
-            fill={hoveredRegion === region.name ? region.fill : 'transparent'}
-            stroke={hoveredRegion === region.name ? 'white' : 'transparent'}
-            strokeWidth="2"
-            style={{ cursor: showInteractivity ? 'pointer' : 'default' }}
-            onClick={() => handleRegionClick(region.route)}
-            onMouseEnter={() => setHoveredRegion(region.name)}
-            onMouseLeave={() => setHoveredRegion(null)}
-          />
-        ))}
-      </svg>
+      <div className="absolute inset-0">
+        <img 
+          src="/kinbrold_map.jpg" 
+          alt="Kinbrold Map" 
+          className="w-full h-full object-cover"
+          id="map"
+        />
+        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 2000 2000" preserveAspectRatio="xMidYMid slice">
+          {regions.map((region) => (
+            <path
+              key={region.name}
+              d={region.path}
+              fill={hoveredRegion === region.name ? region.fill : 'transparent'}
+              stroke={hoveredRegion === region.name ? 'white' : 'transparent'}
+              strokeWidth="2"
+              style={{ cursor: showInteractivity ? 'pointer' : 'default' }}
+              onClick={() => handleRegionClick(region.route)}
+              onMouseEnter={() => setHoveredRegion(region.name)}
+              onMouseLeave={() => setHoveredRegion(null)}
+            />
+          ))}
+        </svg>
+      </div>
     </div>
   );
 };

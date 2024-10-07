@@ -40,8 +40,12 @@ const KinbroldPage = () => {
       if (transformComponentRef.current && mapContainerRef.current) {
         const { setTransform } = transformComponentRef.current;
         const containerWidth = mapContainerRef.current.offsetWidth;
+        const containerHeight = mapContainerRef.current.offsetHeight;
         const imageWidth = 1000; // Assuming the original image width is 1000px
-        const scale = containerWidth / imageWidth;
+        const imageHeight = 1000; // Assuming the original image height is 1000px
+        const scaleX = containerWidth / imageWidth;
+        const scaleY = containerHeight / imageHeight;
+        const scale = Math.min(scaleX, scaleY);
         setTransform(0, 0, scale);
       }
     };
@@ -121,7 +125,7 @@ const KinbroldPage = () => {
 
   return (
     <div 
-      className="relative w-full h-screen overflow-hidden bg-purple-900"
+      className="relative w-full h-screen overflow-hidden bg-purple-950"
       ref={mapContainerRef}
     >
       <TransformWrapper
@@ -129,16 +133,18 @@ const KinbroldPage = () => {
         initialScale={1}
         minScale={0.5}
         maxScale={5}
-        limitToBounds={false}
+        limitToBounds={true}
         disabled={!allowManualControl}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
-              <MapComponent 
-                onRegionClick={handleRegionClick}
-                showInteractivity={allowManualControl}
-              />
+              <div className="w-full h-full flex items-center justify-center">
+                <MapComponent 
+                  onRegionClick={handleRegionClick}
+                  showInteractivity={allowManualControl}
+                />
+              </div>
             </TransformComponent>
             {allowManualControl && (
               <div className="absolute bottom-4 right-4 flex space-x-2 z-10">

@@ -18,11 +18,11 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    evermere: { x: -1500, y: -1000, scale: 2, color: 'purple' },
-    zalos: { x: -750, y: -500, scale: 2, color: 'cyan' },
-    scarto: { x: -2250, y: -500, scale: 2, color: 'red' },
-    tsunareth: { x: -1500, y: -1500, scale: 2, color: 'blue' },
-    grivoss: { x: -750, y: -1000, scale: 2, color: 'lime' },
+    evermere: { x: 500, y: 500, scale: 2, color: 'purple' },
+    zalos: { x: 50, y: 50, scale: 2, color: 'cyan' },
+    scarto: { x: 950, y: 50, scale: 2, color: 'red' },
+    tsunareth: { x: 950, y: 950, scale: 2, color: 'blue' },
+    grivoss: { x: 50, y: 450, scale: 2, color: 'lime' },
     frozen_ridge: { x: -1000, y: -750, scale: 2 },
     shroud_peak: { x: -2000, y: -750, scale: 2 },
     mount_surya: { x: -2000, y: -1250, scale: 2 },
@@ -47,7 +47,7 @@ const KinbroldPage = () => {
     if (transformComponentRef.current && zoomLocations[region]) {
       const { setTransform } = transformComponentRef.current;
       const { x, y, scale } = zoomLocations[region];
-      setTransform(x, y, scale, 1000);
+      setTransform(-x, -y, scale, 1000);
     }
   };
 
@@ -77,16 +77,32 @@ const KinbroldPage = () => {
         initialScale={1}
         initialPositionX={0}
         initialPositionY={0}
+        minScale={0.5}
+        maxScale={4}
+        limitToBounds={false}
         disabled={!allowManualControl}
       >
-        <TransformComponent>
-          <MapComponent showInteractivity={allowManualControl} />
-          <img 
-            src="/tour/zooms.png" 
-            alt="Region Circles" 
-            className="absolute top-0 left-0 w-full h-full pointer-events-none"
-          />
-        </TransformComponent>
+        {({ zoomIn, zoomOut, resetTransform }) => (
+          <>
+            <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
+              <div style={{ position: 'relative', width: '2000px', height: '2000px' }}>
+                <MapComponent showInteractivity={allowManualControl} />
+                <img 
+                  src="/tour/zooms.png" 
+                  alt="Region Circles" 
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
+                />
+              </div>
+            </TransformComponent>
+            {allowManualControl && (
+              <div className="absolute bottom-4 right-4 space-x-2">
+                <Button onClick={() => zoomIn()}>Zoom In</Button>
+                <Button onClick={() => zoomOut()}>Zoom Out</Button>
+                <Button onClick={() => resetTransform()}>Reset</Button>
+              </div>
+            )}
+          </>
+        )}
       </TransformWrapper>
 
       {showTour && (
@@ -106,14 +122,6 @@ const KinbroldPage = () => {
             isLastStep={tourStep === tourScript.length - 1}
           />
         </>
-      )}
-
-      {allowManualControl && (
-        <div className="absolute bottom-4 right-4 space-x-2">
-          <Button onClick={() => transformComponentRef.current?.zoomIn()}>Zoom In</Button>
-          <Button onClick={() => transformComponentRef.current?.zoomOut()}>Zoom Out</Button>
-          <Button onClick={() => transformComponentRef.current?.resetTransform()}>Reset</Button>
-        </div>
       )}
     </div>
   );

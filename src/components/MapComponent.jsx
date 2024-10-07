@@ -24,11 +24,11 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
   };
 
   return (
-    <div className="relative w-full h-full">
+    <div className="relative w-full" style={{ height: 'auto', paddingBottom: '100%' }}>
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
-        className="w-full h-full object-cover"
+        className="absolute top-0 left-0 w-full h-auto object-cover"
         id="map"
       />
       <svg

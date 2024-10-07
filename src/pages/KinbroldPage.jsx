@@ -111,12 +111,19 @@ const KinbroldPage = () => {
         minScale={1}
         maxScale={5}
         disabled={!allowManualControl}
-        limitToBounds={true}
+        limitToBounds={false}
         centerOnInit={true}
+        panning={{
+          velocityDisabled: true,
+          lockAxisX: true,
+        }}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
-            <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
+            <TransformComponent 
+              wrapperClass="!w-full !h-full" 
+              contentClass="!w-full !h-auto"
+            >
               <MapComponent 
                 onRegionClick={handleRegionClick}
                 showInteractivity={allowManualControl}

@@ -1,130 +1,47 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const regions = [
-  { name: 'evermere', path: '/path/evermere_path.png', route: '/evermere' },
-  { name: 'scarto', path: '/path/scarto_path.png', route: '/scarto' },
-  { name: 'tsunareth', path: '/path/tsunareth_path.png', route: '/tsunareth' },
-  { name: 'grivoss', path: '/path/grivoss_path.png', route: '/grivoss' },
-  { name: 'zalos', path: '/path/zalos_path.png', route: '/zalos' }
+  { name: 'evermere', path: "M177,21 C177,21 220,26 249,41 C278,56 294,84 294,84 C294,84 304,115 299,144 C294,173 276,194 276,194 C276,194 247,216 216,224 C185,232 155,229 155,229 C155,229 125,221 102,200 C79,179 65,150 65,150 C65,150 57,118 62,90 C67,62 84,40 84,40 C84,40 109,22 138,17 C167,12 177,21 177,21 Z", route: '/evermere', fill: "rgba(128, 0, 128, 0.3)" },
+  { name: 'grivoss', path: "M0,0 L230,0 C230,0 220,30 210,50 C200,70 180,90 180,90 C180,90 150,110 120,120 C90,130 60,130 60,130 L0,130 L0,0 Z", route: '/grivoss', fill: "rgba(0, 255, 0, 0.3)" },
+  { name: 'scarto', path: "M710,0 C710,0 750,10 770,30 C790,50 800,80 800,80 L800,0 L710,0 Z", route: '/scarto', fill: "rgba(255, 192, 203, 0.3)" },
+  { name: 'tsunareth', path: "M450,450 C450,450 500,440 540,450 C580,460 610,490 610,490 C610,490 630,520 630,550 C630,580 610,610 610,610 L450,610 L450,450 Z", route: '/tsunareth', fill: "rgba(0, 0, 255, 0.3)" },
+  { name: 'zalos', path: "M0,450 C0,450 40,460 70,480 C100,500 120,530 120,530 L120,600 L0,600 L0,450 Z", route: '/zalos', fill: "rgba(192, 192, 192, 0.3)" }
 ];
 
 const MapComponent = ({ showInteractivity }) => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
-  const [isPanning, setIsPanning] = useState(false);
-  const [regionBounds, setRegionBounds] = useState({});
   const navigate = useNavigate();
-  const mapRef = useRef(null);
 
-  useEffect(() => {
-    const loadRegionBounds = async () => {
-      const bounds = {};
-      for (const region of regions) {
-        bounds[region.name] = await getImageBounds(region.path);
-      }
-      setRegionBounds(bounds);
-    };
-    loadRegionBounds();
-  }, []);
-
-  const getImageBounds = (imagePath) => {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.onload = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = img.width;
-        canvas.height = img.height;
-        const ctx = canvas.getContext('2d');
-        ctx.drawImage(img, 0, 0);
-        const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        const bounds = getBoundsFromImageData(imageData);
-        resolve(bounds);
-      };
-      img.src = imagePath;
-    });
-  };
-
-  const getBoundsFromImageData = (imageData) => {
-    let minX = imageData.width, minY = imageData.height, maxX = 0, maxY = 0;
-    const data = imageData.data;
-    for (let y = 0; y < imageData.height; y++) {
-      for (let x = 0; x < imageData.width; x++) {
-        const alpha = data[(y * imageData.width + x) * 4 + 3];
-        if (alpha > 0) {
-          minX = Math.min(minX, x);
-          minY = Math.min(minY, y);
-          maxX = Math.max(maxX, x);
-          maxY = Math.max(maxY, y);
-        }
-      }
+  const handleRegionClick = (route) => {
+    if (showInteractivity) {
+      navigate(route);
     }
-    return { minX, minY, maxX, maxY };
-  };
-
-  const handleRegionClick = (region, event) => {
-    if (showInteractivity && !isPanning) {
-      const bounds = regionBounds[region.name];
-      if (bounds) {
-        const rect = mapRef.current.getBoundingClientRect();
-        const scaleX = rect.width / 2000; // Assuming the original image is 2000x2000
-        const scaleY = rect.height / 2000;
-        const x = (event.clientX - rect.left) / scaleX;
-        const y = (event.clientY - rect.top) / scaleY;
-        if (x >= bounds.minX && x <= bounds.maxX && y >= bounds.minY && y <= bounds.maxY) {
-          navigate(region.route);
-        }
-      }
-    }
-  };
-
-  const handleMouseDown = () => {
-    setIsPanning(false);
-  };
-
-  const handleMouseMove = () => {
-    setIsPanning(true);
-  };
-
-  const handleMouseUp = () => {
-    setTimeout(() => setIsPanning(false), 10);
   };
 
   return (
-    <div 
-      className="relative w-full h-full"
-      ref={mapRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-    >
+    <div className="relative w-full h-full">
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
         className="w-full h-full object-cover"
         id="map"
       />
-      {regions.map((region) => (
-        <div
-          key={region.name}
-          className="absolute top-0 left-0 w-full h-full"
-          style={{ pointerEvents: 'auto', cursor: 'pointer' }}
-          onMouseEnter={() => setHoveredRegion(region.name)}
-          onMouseLeave={() => setHoveredRegion(null)}
-          onClick={(e) => handleRegionClick(region, e)}
-        >
-          <img
-            src={region.path}
-            alt={region.name}
-            className="w-full h-full object-contain"
-            style={{
-              opacity: hoveredRegion === region.name ? 1 : 0,
-              transition: 'opacity 0.3s ease-in-out',
-              pointerEvents: 'none',
-            }}
+      <svg viewBox="0 0 800 600" style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%' }}>
+        {regions.map((region) => (
+          <path
+            key={region.name}
+            d={region.path}
+            fill={hoveredRegion === region.name ? region.fill : 'transparent'}
+            stroke={hoveredRegion === region.name ? 'white' : 'transparent'}
+            strokeWidth="2"
+            style={{ cursor: showInteractivity ? 'pointer' : 'default' }}
+            onClick={() => handleRegionClick(region.route)}
+            onMouseEnter={() => setHoveredRegion(region.name)}
+            onMouseLeave={() => setHoveredRegion(null)}
           />
-        </div>
-      ))}
+        ))}
+      </svg>
     </div>
   );
 };

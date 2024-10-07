@@ -22,6 +22,26 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
   const navigate = useNavigate();
 
+  const resetToCenter = () => {
+    if (transformComponentRef.current) {
+      const { resetTransform } = transformComponentRef.current;
+      resetTransform(1000);
+      setTimeout(() => {
+        const mapElement = document.getElementById('map');
+        if (mapElement) {
+          const { zoomToElement } = transformComponentRef.current;
+          zoomToElement(mapElement, 1, 1000, 'center');
+        }
+      }, 100);
+    }
+  };
+
+  useEffect(() => {
+    if (transformComponentRef.current) {
+      resetToCenter();
+    }
+  }, []);
+
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
       const currentRegion = tourScript[tourStep].region;
@@ -96,7 +116,7 @@ const KinbroldPage = () => {
         limitToBounds={true}
         centerOnInit={true}
       >
-        {({ zoomIn, zoomOut, resetTransform }) => (
+        {({ zoomIn, zoomOut }) => (
           <>
             <TransformComponent 
               wrapperClass="!w-full !h-full" 
@@ -111,7 +131,7 @@ const KinbroldPage = () => {
               <div className="absolute bottom-4 right-4 flex space-x-2">
                 <Button onClick={() => zoomIn()}>Zoom In</Button>
                 <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => resetTransform()}>Reset</Button>
+                <Button onClick={resetToCenter}>Reset</Button>
               </div>
             )}
           </>

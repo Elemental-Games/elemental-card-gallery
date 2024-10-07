@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const regions = [
@@ -11,16 +11,37 @@ const regions = [
 
 const MapComponent = ({ showInteractivity }) => {
   const [hoveredRegion, setHoveredRegion] = useState(null);
+  const [isPanning, setIsPanning] = useState(false);
   const navigate = useNavigate();
+  const mapRef = useRef(null);
 
-  const handleRegionClick = (route) => {
-    if (showInteractivity) {
+  const handleRegionClick = (route, event) => {
+    if (showInteractivity && !isPanning) {
       navigate(route);
     }
   };
 
+  const handleMouseDown = () => {
+    setIsPanning(false);
+  };
+
+  const handleMouseMove = () => {
+    setIsPanning(true);
+  };
+
+  const handleMouseUp = () => {
+    setTimeout(() => setIsPanning(false), 10);
+  };
+
   return (
-    <div className="relative w-full h-full">
+    <div 
+      className="relative w-full h-full"
+      ref={mapRef}
+      onMouseDown={handleMouseDown}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+    >
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
@@ -34,7 +55,7 @@ const MapComponent = ({ showInteractivity }) => {
           style={{ pointerEvents: 'auto', cursor: 'pointer' }}
           onMouseEnter={() => setHoveredRegion(region.name)}
           onMouseLeave={() => setHoveredRegion(null)}
-          onClick={() => handleRegionClick(region.route)}
+          onClick={(e) => handleRegionClick(region.route, e)}
         >
           <img
             src={region.path}
@@ -43,6 +64,7 @@ const MapComponent = ({ showInteractivity }) => {
             style={{
               opacity: hoveredRegion === region.name ? 1 : 0,
               transition: 'opacity 0.3s ease-in-out',
+              pointerEvents: 'none',
             }}
           />
         </div>

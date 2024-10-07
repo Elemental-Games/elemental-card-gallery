@@ -85,14 +85,7 @@ const KinbroldPage = () => {
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <TransformComponent wrapperStyle={{ width: '100%', height: '100%' }}>
-              <div style={{ position: 'relative', width: '2000px', height: '2000px' }}>
-                <MapComponent showInteractivity={allowManualControl} />
-                <img 
-                  src="/tour/zooms.png" 
-                  alt="Region Circles" 
-                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', pointerEvents: 'none' }}
-                />
-              </div>
+              <MapComponent showInteractivity={allowManualControl} />
             </TransformComponent>
             {allowManualControl && (
               <div className="absolute bottom-4 right-4 space-x-2">

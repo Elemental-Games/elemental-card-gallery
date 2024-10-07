@@ -104,7 +104,11 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div className="relative w-full h-screen bg-gray-900 overflow-hidden" ref={mapContainerRef}>
+    <div 
+      className="relative w-full h-screen overflow-hidden bg-cover bg-center" 
+      style={{ backgroundImage: 'url("/kinbrold_map.jpg")' }}
+      ref={mapContainerRef}
+    >
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
@@ -144,6 +148,7 @@ const KinbroldPage = () => {
           />
         </>
       )}
+      
       <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
         <DialogContent>
           <DialogHeader>

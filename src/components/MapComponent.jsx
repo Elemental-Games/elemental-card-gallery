@@ -26,7 +26,7 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
   return (
     <div className="relative w-full h-full">
       <img 
-        src="/IMG_3978.jpeg" 
+        src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
         className="w-full h-full object-contain"
         id="map"

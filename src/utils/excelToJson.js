@@ -7,7 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function convertExcelToJson() {
-  const excelFilePath = path.join(__dirname, '..', '..', 'storage', 'ElementalMastersCards.xlsx');
+  const excelFilePath = path.join(__dirname, '..', '..', '', 'ElementalMastersCards.xlsx');
   const jsonOutputPath = path.join(__dirname, '..', '..', 'storage', 'cards.json');
 
   // Read the Excel file

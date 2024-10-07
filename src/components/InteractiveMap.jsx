@@ -1,37 +1,38 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { tourScript } from '../data/tourScript';
-import { dragonInfo } from '../data/dragonInfo';
-import DragonComponent from './DragonComponent';
 
 const regions = [
-  { id: 'zalos', name: 'Zalos', info: 'The Air Kingdom, known for its floating islands and wind-swept spires.' },
-  { id: 'scarto', name: 'Scarto', info: 'The Fire Kingdom, a land of volcanoes and intense heat.' },
-  { id: 'grivoss', name: 'Grivoss', info: 'The Earth Kingdom, with towering mountains and dense forests.' },
-  { id: 'tsunareth', name: 'Tsunareth', info: 'The Water Kingdom, a realm of vast oceans and underwater cities.' },
-  { id: 'evermere', name: 'Evermere', info: 'The central region, home to non-elemental humans and card crafters.' },
-  { id: 'frozen-ridge', name: 'Frozen Ridge', info: 'A vast icy mountain range, home to the Frost Dragon.' },
-  { id: 'mount-surya', name: 'Mount Surya', info: 'An active volcano, domain of the Lava Dragon.' },
-  { id: 'shroud-peak', name: 'Shroud Peak', info: 'A misty, enigmatic mountain area where the Lightning Dragon resides.' },
-  { id: 'gleaming-grotto', name: 'Gleaming Grotto', info: 'A magical, crystal-filled cave system, lair of the Crystal Dragon.' },
-  { id: 'arid-sands', name: 'Arid Sands', info: 'An expansive desert area, territory of the Sand Dragon.' },
-  { id: 'noxwood', name: 'Noxwood', info: 'A dark, mysterious forest, home to the Poison Dragon.' },
+  { id: 'zalos', name: 'Zalos', info: 'A region of ice and frost in the northwest.' },
+  { id: 'frozen-ridge', name: 'Frozen Ridge', info: 'A vast icy mountain range.' },
+  { id: 'mount-surya', name: 'Mount Surya', info: 'An active volcano, possibly representing fire element.' },
+  { id: 'scarto', name: 'Scarto', info: 'A mysterious region in the northeast.' },
+  { id: 'shroud-peak', name: 'Shroud Peak', info: 'A misty, enigmatic mountain area.' },
+  { id: 'gleaming-grotto', name: 'Gleaming Grotto', info: 'A magical, crystal-filled cave system.' },
+  { id: 'crivoss', name: 'Crivoss', info: 'A desert region in the southwest.' },
+  { id: 'arid-sands', name: 'Arid Sands', info: 'An expansive desert area.' },
+  { id: 'evermere', name: 'Evermere', info: 'The central, lush green heart of the world.' },
+  { id: 'tsunareth', name: 'Tsunareth', info: 'A coastal region with dramatic cliffs and waterfalls.' },
+  { id: 'noxwood', name: 'Noxwood', info: 'A dark, mysterious forest in the south.' },
 ];
 
-const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep, speaker }) => (
+const CharacterDialog = ({ isOpen, onClose, onNext, dialogText, currentStep }) => (
   <div className={`absolute bottom-0 left-0 z-50 ${isOpen ? 'block' : 'hidden'}`}>
     <div className="relative">
       <img 
-        src={`/tour/${speaker}.png`}
-        alt={speaker}
+        src="/balon1.jpeg" 
+        alt="Balon" 
         className="w-auto h-[65vh]" 
         style={{ maxWidth: '50%', objectFit: 'contain' }}
       />
       <div className="absolute top-0 left-full ml-4 bg-white rounded-lg shadow-lg p-4 max-w-sm">
         <div className="relative">
-          <p className="mb-4">{dialogText}</p>
-          <Button onClick={onNext} className="mt-2">Next</Button>
+          <p className="mb-4">{dialogText[currentStep]}</p>
+          {currentStep < dialogText.length - 1 ? (
+            <Button onClick={onNext} className="mt-2">Next</Button>
+          ) : (
+            <p className="mt-2 text-sm text-gray-500">Click to continue</p>
+          )}
         </div>
       </div>
     </div>
@@ -46,8 +47,15 @@ const InteractiveMap = () => {
   const canvasRef = useRef(null);
   const [scale, setScale] = useState(1);
   const [currentStep, setCurrentStep] = useState(0);
-  const [zoomRegion, setZoomRegion] = useState(null);
-  const [showDragon, setShowDragon] = useState(null);
+
+  const dialogText = [
+    "Welcome to the World of Elemental Masters!",
+    "I am Balon, your guide to this magical realm.",
+    "Before you lies a world of diverse elements and landscapes.",
+    "From the icy peaks of Zalos to the fiery Mount Surya, from the lush Evermere to the mysterious Noxwood, each region holds its own secrets and powers.",
+    "Click on the regions to learn more about them.",
+    "Your journey to become an Elemental Master begins now!"
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => setShowCharacter(true), 1000);
@@ -68,29 +76,79 @@ const InteractiveMap = () => {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  useEffect(() => {
-    const currentRegion = tourScript[currentStep].region;
-    setZoomRegion(currentRegion);
-    
-    const dragonKey = tourScript[currentStep].dragon;
-    setShowDragon(dragonKey ? dragonInfo[dragonKey] : null);
-  }, [currentStep]);
+  const processBreakdownImage = (img) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(img, 0, 0);
+    const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    const data = imageData.data;
 
-  const handleNextStep = () => {
-    if (currentStep < tourScript.length - 1) {
-      setCurrentStep(prevStep => prevStep + 1);
-    } else {
-      setShowCharacter(false);
-      setZoomRegion(null);
-      setShowDragon(null);
+    for (let i = 0; i < data.length; i += 4) {
+      const r = data[i];
+      const g = data[i + 1];
+      const b = data[i + 2];
+      
+      // Check if the pixel is black (border) or white (outside the circles)
+      if ((r === 0 && g === 0 && b === 0) || (r === 255 && g === 255 && b === 255)) {
+        // Make it the same gray color as the background
+        data[i] = 128;
+        data[i + 1] = 128;
+        data[i + 2] = 128;
+      }
+      // All other colors remain unchanged
+    }
+
+    ctx.putImageData(imageData, 0, 0);
+    return canvas;
+  };
+
+  useEffect(() => {
+    if (showBreakdown && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const ctx = canvas.getContext('2d');
+      const img = new Image();
+      img.src = '/breakdown.jpg';
+      img.onload = () => {
+        canvas.width = img.width * scale;
+        canvas.height = img.height * scale;
+        const processedCanvas = processBreakdownImage(img);
+        ctx.drawImage(processedCanvas, 0, 0, canvas.width, canvas.height);
+      };
+    }
+  }, [showBreakdown, scale]);
+
+  const handleMapClick = (event) => {
+    if (!showBreakdown || !canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const rect = canvas.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / scale;
+    const y = (event.clientY - rect.top) / scale;
+    const ctx = canvas.getContext('2d');
+    const pixel = ctx.getImageData(x, y, 1, 1).data;
+    const color = `rgb(${pixel[0]}, ${pixel[1]}, ${pixel[2]})`;
+    
+    // Here you would map the color to a region
+    // This is a placeholder logic, you'll need to implement the actual color-to-region mapping
+    const clickedRegion = regions.find((region, index) => index === pixel[0] % regions.length);
+    
+    if (clickedRegion) {
+      setSelectedRegion(clickedRegion);
     }
   };
 
-  const getRegionStyle = (regionId) => {
-    if (zoomRegion === regionId) {
-      return { transform: 'scale(1.5)', transition: 'transform 0.5s' };
+  const toggleBreakdown = () => {
+    setShowBreakdown(!showBreakdown);
+  };
+
+  const handleNextStep = () => {
+    if (currentStep < dialogText.length - 1) {
+      setCurrentStep(prevStep => prevStep + 1);
+    } else {
+      setShowCharacter(false);
     }
-    return {};
   };
 
   return (
@@ -100,26 +158,32 @@ const InteractiveMap = () => {
         alt="Elemental Masters World Map" 
         className="w-full h-full object-cover"
       />
-      {regions.map((region) => (
-        <div
-          key={region.id}
-          className={`absolute ${region.id}`}
-          style={getRegionStyle(region.id)}
-        >
-          {/* Add region-specific styling here */}
-        </div>
-      ))}
+      <canvas
+        ref={canvasRef}
+        onClick={handleMapClick}
+        className={`absolute top-0 left-0 w-full h-full ${showBreakdown ? 'opacity-50' : 'opacity-0'} cursor-pointer`}
+      />
+      <button 
+        className="absolute top-4 right-4 bg-white bg-opacity-50 hover:bg-opacity-75 text-black px-4 py-2 rounded"
+        onClick={toggleBreakdown}
+      >
+        {showBreakdown ? 'Hide Regions' : 'Show Regions'}
+      </button>
+      <Dialog open={!!selectedRegion} onOpenChange={() => setSelectedRegion(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{selectedRegion?.name}</DialogTitle>
+          </DialogHeader>
+          <p>{selectedRegion?.info}</p>
+        </DialogContent>
+      </Dialog>
       <CharacterDialog 
         isOpen={showCharacter} 
         onClose={() => setShowCharacter(false)}
         onNext={handleNextStep}
-        dialogText={tourScript[currentStep].dialogue}
+        dialogText={dialogText}
         currentStep={currentStep}
-        speaker={tourScript[currentStep].speaker}
       />
-      {showDragon && (
-        <DragonComponent image={showDragon.image} />
-      )}
     </div>
   );
 };

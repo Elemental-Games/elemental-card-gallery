@@ -17,6 +17,14 @@ const KinbroldPage = () => {
   const [allowManualControl, setAllowManualControl] = useState(false);
   const transformComponentRef = useRef(null);
 
+  const zoomLocations = {
+    evermere: { x: 0.5, y: 0.5, scale: 2 },
+    zalos: { x: 0.25, y: 0.25, scale: 2 },
+    scarto: { x: 0.75, y: 0.25, scale: 2 },
+    tsunareth: { x: 0.5, y: 0.75, scale: 2 },
+    grivoss: { x: 0.25, y: 0.5, scale: 2 },
+  };
+
   useEffect(() => {
     if (showTour && tourStep < tourScript.length) {
       const currentRegion = tourScript[tourStep].region;
@@ -38,12 +46,10 @@ const KinbroldPage = () => {
   }, []);
 
   const zoomToRegion = (region) => {
-    if (transformComponentRef.current) {
-      const { zoomToElement } = transformComponentRef.current;
-      const element = document.getElementById(region);
-      if (element) {
-        zoomToElement(element, 2, 1000);
-      }
+    if (transformComponentRef.current && zoomLocations[region]) {
+      const { zoomToElement, setTransform } = transformComponentRef.current;
+      const { x, y, scale } = zoomLocations[region];
+      setTransform(x * -100 + '%', y * -100 + '%', scale);
     }
   };
 

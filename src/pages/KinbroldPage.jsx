@@ -18,17 +18,17 @@ const KinbroldPage = () => {
   const transformComponentRef = useRef(null);
 
   const zoomLocations = {
-    evermere: { x: 500, y: 500, scale: 2, color: 'purple' },
-    zalos: { x: 50, y: 50, scale: 2, color: 'cyan' },
-    scarto: { x: 950, y: 50, scale: 2, color: 'red' },
-    tsunareth: { x: 950, y: 950, scale: 2, color: 'blue' },
-    grivoss: { x: 50, y: 450, scale: 2, color: 'lime' },
-    frozen_ridge: { x: -1000, y: -750, scale: 2 },
-    shroud_peak: { x: -2000, y: -750, scale: 2 },
-    mount_surya: { x: -2000, y: -1250, scale: 2 },
-    gleaming_grotto: { x: -1250, y: -1250, scale: 2 },
-    noxwood: { x: -1750, y: -1500, scale: 2 },
-    arid_sands: { x: -500, y: -1250, scale: 2 },
+    evermere: { x: 500, y: 500, scale: 2 },
+    zalos: { x: 50, y: 50, scale: 2 },
+    scarto: { x: 950, y: 50, scale: 2 },
+    tsunareth: { x: 950, y: 950, scale: 2 },
+    grivoss: { x: 50, y: 450, scale: 2 },
+    frozen_ridge: { x: 100, y: 250, scale: 2 },
+    shroud_peak: { x: 900, y: 250, scale: 2 },
+    mount_surya: { x: 900, y: 750, scale: 2 },
+    gleaming_grotto: { x: 750, y: 750, scale: 2 },
+    noxwood: { x: 250, y: 750, scale: 2 },
+    arid_sands: { x: 500, y: 750, scale: 2 },
   };
 
   useEffect(() => {

@@ -23,6 +23,15 @@ const MapComponent = ({ showInteractivity }) => {
     return () => window.removeEventListener('resize', updateMapDimensions);
   }, []);
 
+  useEffect(() => {
+    // Center the map on load
+    if (mapRef.current) {
+      const { offsetWidth, offsetHeight } = mapRef.current;
+      mapRef.current.scrollLeft = (mapRef.current.scrollWidth - offsetWidth) / 2;
+      mapRef.current.scrollTop = (mapRef.current.scrollHeight - offsetHeight) / 2;
+    }
+  }, []);
+
   const handleMouseDown = () => {
     setIsDragging(false);
   };
@@ -37,7 +46,6 @@ const MapComponent = ({ showInteractivity }) => {
       const x = event.clientX - rect.left;
       const y = event.clientY - rect.top;
       
-      // Check if the click is within the Evermere region
       if (isPointInEvermere(x, y)) {
         navigate('/evermere');
       }
@@ -59,7 +67,6 @@ const MapComponent = ({ showInteractivity }) => {
   };
 
   const isPointInEvermere = (x, y) => {
-    // These values are approximate and may need adjustment
     const evermereCenter = { x: mapDimensions.width * 0.5, y: mapDimensions.height * 0.5 };
     const evermereRadius = Math.min(mapDimensions.width, mapDimensions.height) * 0.15;
 
@@ -73,7 +80,7 @@ const MapComponent = ({ showInteractivity }) => {
   return (
     <div 
       ref={mapRef}
-      className="relative w-full h-full"
+      className="relative w-full h-full overflow-auto"
       style={{ cursor: showInteractivity ? 'pointer' : 'default' }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
@@ -84,7 +91,7 @@ const MapComponent = ({ showInteractivity }) => {
       <img 
         src="/kinbrold_map.jpg" 
         alt="Kinbrold Map" 
-        className="w-full h-full object-cover"
+        className="w-full h-auto"
         id="map"
       />
       <img

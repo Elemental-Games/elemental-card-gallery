@@ -3,16 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 const regions = [
   { id: 'evermere', name: 'Evermere', path: '/path/evermere_path.png' },
-  { id: 'zalos', name: 'Zalos', path: '/path/zalos_path.png' },
-  { id: 'frozen_ridge', name: 'Frozen Ridge', path: '/path/frozen_ridge_path.png' },
-  { id: 'scarto', name: 'Scarto', path: '/path/scarto_path.png' },
-  { id: 'shroud_peak', name: 'Shroud Peak', path: '/path/shroud_peak_path.png' },
-  { id: 'mount_surya', name: 'Mount Surya', path: '/path/mount_surya_path.png' },
-  { id: 'gleaming_grotto', name: 'Gleaming Grotto', path: '/path/gleaming_grotto_path.png' },
-  { id: 'grivoss', name: 'Grivoss', path: '/path/grivoss_path.png' },
-  { id: 'arid_sands', name: 'Arid Sands', path: '/path/arid_sands_path.png' },
-  { id: 'tsunareth', name: 'Tsunareth', path: '/path/tsunareth_path.png' },
-  { id: 'noxwood', name: 'Noxwood', path: '/path/noxwood_path.png' },
 ];
 
 const MapComponent = ({ showInteractivity }) => {

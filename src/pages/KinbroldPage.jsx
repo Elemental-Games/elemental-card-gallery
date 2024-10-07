@@ -19,29 +19,21 @@ const KinbroldPage = () => {
   const [showDragonDialog, setShowDragonDialog] = useState(false);
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [allowManualControl, setAllowManualControl] = useState(false);
-
   const transformComponentRef = useRef(null);
   const mapContainerRef = useRef(null);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const setInitialZoom = () => {
-      if (transformComponentRef.current && mapContainerRef.current) {
-        const { setTransform } = transformComponentRef.current;
-        const containerWidth = mapContainerRef.current.offsetWidth;
-        const containerHeight = mapContainerRef.current.offsetHeight;
-        const imageWidth = 1000; // Assuming the original image width is 1000px
-        const imageHeight = 1000; // Assuming the original image height is 1000px
-        const scale = containerWidth / imageWidth;
-        const yOffset = (containerHeight - imageHeight * scale) / 2;
-        setTransform(0, yOffset, scale);
+    if (showTour && tourStep < tourScript.length) {
+      const currentRegion = tourScript[tourStep].region;
+      if (currentRegion && transformComponentRef.current) {
+        zoomToRegion(currentRegion);
       }
-    };
-
-    setInitialZoom();
-    window.addEventListener('resize', setInitialZoom);
-    return () => window.removeEventListener('resize', setInitialZoom);
-  }, []);
+      setCurrentSpeaker(tourScript[tourStep].speaker);
+      setDisplayedDragon(tourScript[tourStep].dragon ? dragonInfo[tourScript[tourStep].dragon].image : null);
+      setDialogueText(tourScript[tourStep].dialogue);
+    }
+  }, [tourStep, showTour]);
 
   const zoomToRegion = (region) => {
     if (transformComponentRef.current) {
@@ -112,43 +104,29 @@ const KinbroldPage = () => {
   };
 
   return (
-    <div 
-      className="relative w-full h-screen overflow-hidden bg-purple-950"
-      ref={mapContainerRef}
-    >
+    <div className="relative w-full h-screen bg-gray-900 overflow-hidden" ref={mapContainerRef}>
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
-        minScale={1}
+        initialPositionX={0}
+        initialPositionY={0}
+        minScale={0.1}
         maxScale={5}
-        limitToBounds={false}
         disabled={!allowManualControl}
-        panning={{velocityDisabled: true}}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
             <TransformComponent wrapperClass="!w-full !h-full" contentClass="!w-full !h-full">
-              <div className="w-full h-full flex items-center justify-center">
-                <MapComponent 
-                  onRegionClick={handleRegionClick}
-                  showInteractivity={allowManualControl}
-                />
-              </div>
+              <MapComponent 
+                onRegionClick={handleRegionClick}
+                showInteractivity={allowManualControl}
+              />
             </TransformComponent>
             {allowManualControl && (
-              <div className="absolute bottom-4 right-4 flex space-x-2 z-10">
+              <div className="absolute bottom-4 right-4 flex space-x-2">
                 <Button onClick={() => zoomIn()}>Zoom In</Button>
                 <Button onClick={() => zoomOut()}>Zoom Out</Button>
-                <Button onClick={() => {
-                  const containerWidth = mapContainerRef.current.offsetWidth;
-                  const containerHeight = mapContainerRef.current.offsetHeight;
-                  const imageWidth = 1000;
-                  const imageHeight = 1000;
-                  const scale = containerWidth / imageWidth;
-                  const yOffset = (containerHeight - imageHeight * scale) / 2;
-                  resetTransform();
-                  setTimeout(() => transformComponentRef.current.setTransform(0, yOffset, scale), 50);
-                }}>Reset</Button>
+                <Button onClick={() => resetTransform()}>Reset</Button>
               </div>
             )}
           </>
@@ -167,7 +145,6 @@ const KinbroldPage = () => {
           />
         </>
       )}
-      
       <Dialog open={showDragonDialog} onOpenChange={() => setShowDragonDialog(false)}>
         <DialogContent>
           <DialogHeader>

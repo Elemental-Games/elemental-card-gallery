@@ -26,15 +26,14 @@ const MapComponent = ({ onRegionClick, showInteractivity }) => {
   return (
     <div className="relative w-full h-full">
       <img 
-        src="/kinbrold_map.jpg" 
+        src="/IMG_3978.jpeg" 
         alt="Kinbrold Map" 
-        className="w-full h-auto object-cover"
+        className="w-full h-full object-cover"
         id="map"
       />
       <svg
         className="absolute top-0 left-0 w-full h-full"
         viewBox="0 0 1000 1000"
-        preserveAspectRatio="xMidYMid slice"
         style={{ pointerEvents: 'none' }}
       >
         {regions.map((region) => (

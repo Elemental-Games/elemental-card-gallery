@@ -7,8 +7,8 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 function convertExcelToJson() {
-  const excelFilePath = path.join(__dirname, '..', '..', '', 'ElementalMastersCards.xlsx');
-  const jsonOutputPath = path.join(__dirname, '..', '..', 'storage', 'cards.json');
+  const excelFilePath = path.join(__dirname, '..', '..', 'storage', 'ElementalMastersCards.xlsx');
+  const jsonOutputPath = path.join(__dirname, '..', 'data', 'ElementalMastersCards.json');
 
   // Read the Excel file
   const workbook = XLSX.readFile(excelFilePath);
@@ -57,9 +57,6 @@ function convertExcelToJson() {
     } else {
       card.trigger = null;
     }
-
-    // Set image path using the card's id
-    card.image = `/storage/images/cards/${card.id}.png`;
 
     return card;
   });

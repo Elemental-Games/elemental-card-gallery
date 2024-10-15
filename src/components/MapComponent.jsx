@@ -65,7 +65,7 @@ const MapComponent = ({ showInteractivity, width, height }) => {
       <img 
         src="/tour/zooms.png" 
         alt="Region Circles" 
-        className="absolute top-0 left-0 w-full h-full pointer-events-none"
+        className="absolute top-0 left-0 w-full h-full pointer-events-none opacity-0"
       />
       {regions.map((region) => (
         <img

@@ -34,15 +34,43 @@ function convertExcelToJson() {
       }
     });
 
-    // Ensure image path is correct
-    card.image = `/storage/images/cards/${card.image}`;
+    // Convert numeric values
+    ['cardNumber', 'strength', 'agility', 'specialAbilityCost', 'essenceCost', 'essenceGeneration', 'tier'].forEach(field => {
+      if (card[field] !== undefined) {
+        card[field] = Number(card[field]);
+      }
+    });
+
+    // Handle NaN values and empty cells
+    Object.keys(card).forEach(key => {
+      if (typeof card[key] === 'number' && isNaN(card[key])) {
+        card[key] = null;
+      }
+      if (card[key] === undefined || card[key] === '') {
+        card[key] = null;
+      }
+    });
+
+    // Handle the trigger field
+    if (card.type === 'Counter' && card.trigger) {
+      card.trigger = card.trigger.trim();
+    } else {
+      card.trigger = null;
+    }
+
+    // Set image path using the card's id
+    card.image = `/storage/images/cards/${card.id}.png`;
 
     return card;
   });
 
   // Write to JSON file
-  fs.writeFileSync(jsonOutputPath, JSON.stringify(processedData, null, 2));
+  const jsonContent = JSON.stringify({ cards: processedData }, null, 2);
+  fs.writeFileSync(jsonOutputPath, jsonContent);
   console.log('Conversion complete. JSON file created:', jsonOutputPath);
+
+  // Log the number of cards processed
+  console.log(`Processed ${processedData.length} cards.`);
 }
 
 // Run the conversion

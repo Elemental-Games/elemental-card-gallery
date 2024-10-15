@@ -58,6 +58,9 @@ function convertExcelToJson() {
       card.trigger = null;
     }
 
+    // Set image path using the card's id
+    card.image = `/storage/images/cards/${card.id}.png`;
+
     return card;
   });
 

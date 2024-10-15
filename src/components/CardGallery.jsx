@@ -12,7 +12,7 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={`/cards/${card.id}.png`} 
+          src={card.image} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
@@ -34,7 +34,7 @@ const CardGallery = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/src/data/ElementalMastersCards.json')
+    fetch('/storage/cards.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

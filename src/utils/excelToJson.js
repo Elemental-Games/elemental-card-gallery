@@ -8,7 +8,7 @@ const __dirname = path.dirname(__filename);
 
 function convertExcelToJson() {
   const excelFilePath = path.join(__dirname, '..', '..', 'storage', 'ElementalMastersCards.xlsx');
-  const jsonOutputPath = path.join(__dirname, '..', '..', 'storage', 'cards.json');
+  const jsonOutputPath = path.join(__dirname, '..', 'data', 'ElementalMastersCards.json');
 
   // Read the Excel file
   const workbook = XLSX.readFile(excelFilePath);
@@ -34,15 +34,30 @@ function convertExcelToJson() {
       }
     });
 
-    // Ensure image path is correct
-    card.image = `/storage/images/cards/${card.image}`;
+    // Convert numeric values
+    ['cardNumber', 'strength', 'agility', 'specialAbilityCost', 'essenceCost', 'essenceGeneration', 'tier'].forEach(field => {
+      if (card[field] !== undefined) {
+        card[field] = Number(card[field]);
+      }
+    });
+
+    // Handle NaN values
+    Object.keys(card).forEach(key => {
+      if (typeof card[key] === 'number' && isNaN(card[key])) {
+        card[key] = null;
+      }
+    });
 
     return card;
   });
 
   // Write to JSON file
-  fs.writeFileSync(jsonOutputPath, JSON.stringify(processedData, null, 2));
+  const jsonContent = JSON.stringify({ cards: processedData }, null, 2);
+  fs.writeFileSync(jsonOutputPath, jsonContent);
   console.log('Conversion complete. JSON file created:', jsonOutputPath);
+
+  // Log the number of cards processed
+  console.log(`Processed ${processedData.length} cards.`);
 }
 
 // Run the conversion

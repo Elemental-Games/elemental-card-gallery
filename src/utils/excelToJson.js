@@ -48,6 +48,13 @@ function convertExcelToJson() {
       }
     });
 
+    // Handle the new trigger field
+    if (card.type === 'Counter' && card.trigger) {
+      card.trigger = card.trigger.trim();
+    } else {
+      card.trigger = null;
+    }
+
     return card;
   });
 

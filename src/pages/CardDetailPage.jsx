@@ -1,52 +1,70 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { ElementIcon } from '../components/ElementIcon';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const CardDetailPage = () => {
-  const { cardName } = useParams();
   const [card, setCard] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
-    fetch('/storage/data/ElementalMastersCards.json')
+    fetch('/src/data/ElementalMastersCards.json')
       .then(response => response.json())
       .then(data => {
-        const foundCard = data.cards.find(c => c.name.toLowerCase() === cardName.replace(/-/g, ' '));
+        const foundCard = data.cards.find(c => c.id === id);
         if (foundCard) {
           setCard(foundCard);
         } else {
           setError('Card not found');
         }
-        setIsLoading(false);
+        setLoading(false);
       })
       .catch(err => {
-        setError(err.message);
-        setIsLoading(false);
+        setError('Error loading card data');
+        setLoading(false);
       });
-  }, [cardName]);
+  }, [id]);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
-  if (!card) return <div>Card not found</div>;
+  if (loading) return <div>Loading...</div>;
+  if (error) return <Alert variant="destructive"><AlertCircle className="h-4 w-4" /><AlertTitle>Error</AlertTitle><AlertDescription>{error}</AlertDescription></Alert>;
+  if (!card) return <Alert variant="destructive"><AlertCircle className="h-4 w-4" /><AlertTitle>Error</AlertTitle><AlertDescription>Card not found</AlertDescription></Alert>;
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="flex flex-col md:flex-row gap-8">
-        <div className="w-full md:w-1/2">
-          <img 
-            src={`/storage/images/cards/${card.image}`} 
-            alt={card.name} 
-            className="w-full h-auto rounded-lg shadow-lg"
-          />
+      <h1 className="text-3xl font-bold mb-4">{card.name}</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <img src={`/cards/${card.id}.png`} alt={card.name} className="w-full h-auto rounded-lg shadow-lg" />
         </div>
-        <div className="w-full md:w-1/2">
-          <h1 className="text-4xl font-bold mb-4">{card.name}</h1>
-          <p className="text-xl mb-2 flex items-center">
-            <ElementIcon element={card.element} className="mr-2" />
-            {card.element} | {card.type} | {card.rarity}
-          </p>
-          <p className="text-lg mb-4">{card.description}</p>
+        <div>
+          <p><strong>Element:</strong> {card.element}</p>
+          <p><strong>Type:</strong> {card.type}</p>
+          <p><strong>Rarity:</strong> {card.rarity}</p>
+          {card.strength && <p><strong>Strength:</strong> {card.strength}</p>}
+          {card.agility && <p><strong>Agility:</strong> {card.agility}</p>}
+          {card.abilityName && (
+            <div>
+              <p><strong>Ability:</strong> {card.abilityName}</p>
+              <p>{card.ability}</p>
+            </div>
+          )}
+          {card.specialAbilityName && (
+            <div>
+              <p><strong>Special Ability:</strong> {card.specialAbilityName}</p>
+              <p>{card.specialAbility}</p>
+              {card.specialAbilityCost && <p><strong>Cost:</strong> {card.specialAbilityCost}</p>}
+            </div>
+          )}
+          {card.essenceCost && <p><strong>Essence Cost:</strong> {card.essenceCost}</p>}
+          {card.essenceGeneration && <p><strong>Essence Generation:</strong> {card.essenceGeneration}</p>}
+          {card.type === 'Counter' && card.trigger && (
+            <div>
+              <p><strong>Trigger:</strong> {card.trigger}</p>
+            </div>
+          )}
+          {card.quote && <p className="italic mt-4">"{card.quote}"</p>}
         </div>
       </div>
     </div>

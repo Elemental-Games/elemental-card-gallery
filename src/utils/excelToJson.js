@@ -52,7 +52,7 @@ function convertExcelToJson() {
     });
 
     // Set image path using card id
-    card.image = `/storage/images/cards/${card.id}.png`;
+    card.image = `/images/cards/${card.id}.png`;
 
     // Handle the trigger field
     if (card.type === 'Counter' && card.trigger) {

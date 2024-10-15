@@ -41,14 +41,17 @@ function convertExcelToJson() {
       }
     });
 
-    // Handle NaN values
+    // Handle NaN values and empty cells
     Object.keys(card).forEach(key => {
       if (typeof card[key] === 'number' && isNaN(card[key])) {
         card[key] = null;
       }
+      if (card[key] === undefined || card[key] === '') {
+        card[key] = null;
+      }
     });
 
-    // Handle the new trigger field
+    // Handle the trigger field
     if (card.type === 'Counter' && card.trigger) {
       card.trigger = card.trigger.trim();
     } else {

@@ -10,7 +10,7 @@ const CardDetailPage = () => {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch('/src/data/ElementalMastersCards.json')
+    fetch('/data/cards.json')
       .then(response => response.json())
       .then(data => {
         const foundCard = data.cards.find(c => c.id === id);

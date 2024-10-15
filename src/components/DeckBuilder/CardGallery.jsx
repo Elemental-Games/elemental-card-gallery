@@ -16,7 +16,7 @@ const CardGallery = ({ onCardSelect }) => {
   const cardsPerPage = 8;
 
   useEffect(() => {
-    fetch('/storage/cards.json')
+    fetch('/data/cards.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');

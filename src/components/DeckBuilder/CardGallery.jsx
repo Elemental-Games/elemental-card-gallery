@@ -16,14 +16,14 @@ const CardGallery = ({ onCardSelect }) => {
   const cardsPerPage = 8;
 
   useEffect(() => {
-    fetch('/src/data/ElementalMastersCards.json')
+    fetch('/storage/cards.json')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
         return response.json();
       })
-      .then(data => setCards(data.cards))
+      .then(data => setCards(data))
       .catch(error => {
         console.error('Error fetching cards:', error);
         setError('Error loading cards. Please try again later.');
@@ -87,9 +87,9 @@ const CardGallery = ({ onCardSelect }) => {
         {displayedCards.map((card) => (
           <Card key={card.id} className="p-2 cursor-pointer" onClick={() => onCardSelect(card)}>
             <img 
-              src={`/cards/${card.id}.png`} 
+              src={card.image} 
               alt={card.name} 
-              className="w-[150%] h-auto object-contain mx-auto"
+              className="w-full h-auto object-contain mx-auto"
               onError={(e) => {
                 e.target.onerror = null;
                 e.target.src = '/placeholder.svg';

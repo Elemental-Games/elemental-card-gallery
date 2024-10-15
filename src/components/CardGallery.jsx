@@ -41,7 +41,7 @@ const CardGallery = () => {
         }
         return response.json();
       })
-      .then(data => setCards(data.cards))
+      .then(data => setCards(data))
       .catch(error => {
         console.error('Error fetching cards:', error);
         setError('Error loading cards. Please try again later.');

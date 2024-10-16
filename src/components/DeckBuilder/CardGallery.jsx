@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
   const [type, setType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
+  const navigate = useNavigate();
 
   const filteredCards = cards.filter(card => 
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -20,6 +21,13 @@ const CardGallery = ({ cards, onCardSelect }) => {
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+
+  const handleCardClick = (card) => {
+    navigate(`/cards/${card.id}`);
+    if (onCardSelect) {
+      onCardSelect(card);
+    }
+  };
 
   return (
     <div className="mt-4">
@@ -57,20 +65,22 @@ const CardGallery = ({ cards, onCardSelect }) => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {displayedCards.map((card) => (
-          <Link key={card.id} to={`/cards/${card.id}`}>
-            <Card className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200" onClick={() => onCardSelect(card)}>
-              <img 
-                src={card.image} 
-                alt={card.name} 
-                className="w-full h-auto object-contain mx-auto"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = '/placeholder.svg';
-                }}
-              />
-              <p className="text-center mt-2">{card.name}</p>
-            </Card>
-          </Link>
+          <Card 
+            key={card.id} 
+            className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200" 
+            onClick={() => handleCardClick(card)}
+          >
+            <img 
+              src={card.image} 
+              alt={card.name} 
+              className="w-full h-auto object-contain mx-auto"
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = '/placeholder.svg';
+              }}
+            />
+            <p className="text-center mt-2">{card.name}</p>
+          </Card>
         ))}
       </div>
       <div className="mt-4 flex justify-center space-x-2">

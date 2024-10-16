@@ -12,6 +12,7 @@ import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
+import DeckBuilderPage from "./pages/DeckBuilderPage";
 
 const queryClient = new QueryClient();
 
@@ -40,7 +41,8 @@ const App = () => (
                   {navItems.map((item) => (
                     <Route key={item.to} path={item.to} element={item.page} />
                   ))}
-                  <Route path="/card-gallery" element={<CardGalleryPage />} />
+                  <Route path="/cards/gallery" element={<CardGalleryPage />} />
+                  <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/cards/:id" element={<CardDetailPage />} />
                 </Routes>
               </main>

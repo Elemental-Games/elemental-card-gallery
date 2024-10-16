@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 
 const CardGalleryPage = () => {
@@ -14,7 +13,7 @@ const CardGalleryPage = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch('/data/cards.json');
+        const response = await fetch('/data/ElementalMastersCards.json');
         const data = await response.json();
         setCards(data.cards);
         setFilteredCards(data.cards);
@@ -66,7 +65,8 @@ const CardGalleryPage = () => {
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Spell">Spell</SelectItem>
+            <SelectItem value="Rune">Rune</SelectItem>
+            <SelectItem value="Counter">Counter</SelectItem>
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
@@ -76,7 +76,7 @@ const CardGalleryPage = () => {
         {filteredCards.map((card) => (
           <Card key={card.id} className="p-4">
             <img 
-              src={card.image} 
+              src={`/storage/images/cards/${card.id}.png`}
               alt={card.name} 
               className="w-full h-48 object-contain mb-2"
               onError={(e) => {

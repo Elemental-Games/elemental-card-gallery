@@ -10,8 +10,11 @@ const Header = () => {
 
   const navItems = [
     { title: 'Home', path: '/' },
+    { title: 'Gameplay', path: '/gameplay' },
     { title: 'Cards', path: '/cards' },
-    { title: 'Deck Builder', path: '/deck-builder' },
+    { title: 'Kinbrold', path: '/kinbrold' },
+    { title: 'About Us', path: '/about' },
+    { title: 'Join Now', path: '/join' },
   ];
 
   return (
@@ -22,19 +25,20 @@ const Header = () => {
             <img 
               src="/Games_Logo.png"
               alt="Elemental Games Logo" 
-              className="w-16 h-16 mr-2"
+              style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
             />
           </Link>
-          <Link to="/" className="text-2xl font-bold">Elemental Masters</Link>
+          <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
         </div>
         <nav className="hidden md:flex space-x-4">
           {navItems.map((item) => (
             <Link
               key={item.path}
               to={item.path}
-              className="hover:text-accent transition-colors"
+              className="hover:text-accent transition-colors relative group"
             >
               {item.title}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </nav>

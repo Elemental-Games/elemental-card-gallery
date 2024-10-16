@@ -14,6 +14,7 @@ const CardGalleryPage = () => {
   const [type, setType] = useState('all');
   const [idSort, setIdSort] = useState(null);
   const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
+  const [rarity, setRarity] = useState('all');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -38,7 +39,9 @@ const CardGalleryPage = () => {
        (element === 'Combinational' ? 
         ['Frost', 'Lava', 'Sand', 'Crystal', 'Poison', 'Lightning'].includes(card.element) : 
         card.element === element)) &&
-      (type === 'all' || card.type === type)
+      (type === 'all' || card.type === type) &&
+      (rarity === 'all' || card.rarity === rarity) &&
+      (strengthAgilitySort ? card.type === 'Creature' : true)
     );
 
     filtered.sort((a, b) => {
@@ -57,10 +60,13 @@ const CardGalleryPage = () => {
     });
 
     setFilteredCards(filtered);
-  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort]);
+  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
 
   const handleSelectChange = (setter) => (value) => {
     setter(value);
+    if (setter === setStrengthAgilitySort && value) {
+      setType('Creature');
+    }
   };
 
   const resetFilters = () => {
@@ -69,6 +75,7 @@ const CardGalleryPage = () => {
     setType('all');
     setIdSort(null);
     setStrengthAgilitySort(null);
+    setRarity('all');
   };
 
   return (
@@ -126,6 +133,19 @@ const CardGalleryPage = () => {
             <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
             <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
             <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={rarity} onValueChange={handleSelectChange(setRarity)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Rarity" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="all">All Rarities</SelectItem>
+            <SelectItem value="C">Common</SelectItem>
+            <SelectItem value="U">Uncommon</SelectItem>
+            <SelectItem value="R">Rare</SelectItem>
+            <SelectItem value="E">Epic</SelectItem>
+            <SelectItem value="L">Legendary</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>

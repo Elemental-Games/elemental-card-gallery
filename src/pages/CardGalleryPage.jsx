@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
@@ -9,6 +11,7 @@ const CardGalleryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -65,8 +68,7 @@ const CardGalleryPage = () => {
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Rune">Rune</SelectItem>
-            <SelectItem value="Counter">Counter</SelectItem>
+            <SelectItem value="Spell">Spell</SelectItem>
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
@@ -74,19 +76,25 @@ const CardGalleryPage = () => {
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {filteredCards.map((card) => (
-          <Card key={card.id} className="p-4">
-            <img 
-              src={card.image || '/placeholder.svg'}
-              alt={card.name} 
-              className="w-full h-48 object-contain mb-2"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/placeholder.svg';
-              }}
-            />
-            <h3 className="font-semibold text-lg">{card.name}</h3>
-            <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
-          </Card>
+          <motion.div
+            key={card.id}
+            whileHover={{ scale: 1.05 }}
+            onClick={() => navigate(`/cards/${card.id}`)}
+          >
+            <Card className="p-4 cursor-pointer">
+              <img 
+                src={card.image || '/placeholder.svg'}
+                alt={card.name} 
+                className="w-full h-48 object-contain mb-2"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/placeholder.svg';
+                }}
+              />
+              <h3 className="font-semibold text-lg">{card.name}</h3>
+              <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
+            </Card>
+          </motion.div>
         ))}
       </div>
     </div>

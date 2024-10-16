@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Plus, Minus } from 'lucide-react';
 
 const CardGallery = ({ cards, onCardSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -11,7 +11,6 @@ const CardGallery = ({ cards, onCardSelect }) => {
   const [type, setType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
-  const navigate = useNavigate();
 
   const filteredCards = cards.filter(card => 
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -23,7 +22,6 @@ const CardGallery = ({ cards, onCardSelect }) => {
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
   const handleCardClick = (card) => {
-    navigate(`/cards/${card.id}`);
     if (onCardSelect) {
       onCardSelect(card);
     }
@@ -80,6 +78,15 @@ const CardGallery = ({ cards, onCardSelect }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
+            <div className="flex justify-center items-center mt-2">
+              <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); onCardSelect(card, -1); }}>
+                <Minus className="h-4 w-4" />
+              </Button>
+              <span className="mx-2">{card.quantity || 0}</span>
+              <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); onCardSelect(card, 1); }}>
+                <Plus className="h-4 w-4" />
+              </Button>
+            </div>
           </Card>
         ))}
       </div>

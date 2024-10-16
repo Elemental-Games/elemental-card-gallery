@@ -11,12 +11,8 @@ import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
-
-// Import the new kingdom pages
-import ZalosPage from "./pages/ZalosPage";
-import ScartoPage from "./pages/ScartoPage";
-import GrivossPage from "./pages/GrivossPage";
-import TsunarethPage from "./pages/TsunarethPage";
+import CardDetailPage from "./pages/CardDetailPage";
+import DeckBuilderPage from "./pages/DeckBuilderPage";
 
 const queryClient = new QueryClient();
 
@@ -45,12 +41,9 @@ const App = () => (
                   {navItems.map((item) => (
                     <Route key={item.to} path={item.to} element={item.page} />
                   ))}
-                  <Route path="/card-gallery" element={<CardGalleryPage />} />
-                  {/* Add new routes for kingdom pages */}
-                  <Route path="/zalos" element={<ZalosPage />} />
-                  <Route path="/scarto" element={<ScartoPage />} />
-                  <Route path="/grivoss" element={<GrivossPage />} />
-                  <Route path="/tsunareth" element={<TsunarethPage />} />
+                  <Route path="/cards/gallery" element={<CardGalleryPage />} />
+                  <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
+                  <Route path="/cards/:id" element={<CardDetailPage />} />
                 </Routes>
               </main>
               <Footer />

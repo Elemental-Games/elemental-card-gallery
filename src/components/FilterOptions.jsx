@@ -1,4 +1,6 @@
 import React from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -7,48 +9,153 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const FilterOptions = ({ cards, onFilterChange }) => {
-  const elements = [...new Set(cards.map(card => card.element))];
-  const types = [...new Set(cards.map(card => card.type))];
-  const rarities = [...new Set(cards.map(card => card.rarity))];
+const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm, currentType }) => {
+  const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
+
+  const types = ['All Types', ...new Set(cards.map(card => card.type))];
+  
+  const rarities = ['All Rarities', ...new Set(cards.map(card => {
+    if (card.rarity === 'C') return 'Common';
+    if (card.rarity === 'U') return 'Uncommon';
+    if (card.rarity.trim() === 'R') return 'Rare';
+    if (card.rarity === 'E') return 'Epic';
+    if (card.rarity === 'L') return 'Legendary';
+    return card.rarity;
+  }))];
+
+  const [selectedElement, setSelectedElement] = React.useState('');
+  const [selectedType, setSelectedType] = React.useState('All Types');
+  const [selectedRarity, setSelectedRarity] = React.useState('All Rarities');
+  const [selectedIdSort, setSelectedIdSort] = React.useState('');
+  const [selectedStrengthAgilitySort, setSelectedStrengthAgilitySort] = React.useState('');
+
+  const handleReset = () => {
+    setSearchTerm('');
+    setSelectedElement('');
+    setSelectedType('All Types');
+    setSelectedRarity('All Rarities');
+    setSelectedIdSort('');
+    setSelectedStrengthAgilitySort('');
+    onFilterChange('element', '');
+    onFilterChange('type', 'all');
+    onFilterChange('rarity', 'all');
+    onFilterChange('idSort', null);
+    onFilterChange('strengthAgilitySort', null);
+    onResetFilters();
+  };
+
+  const handleElementChange = (value) => {
+    setSelectedElement(value);
+    onFilterChange('element', value === 'All Elements' ? '' : value.toLowerCase());
+  };
+
+  const handleTypeChange = (value) => {
+    setSelectedType(value);
+    onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
+    if (value !== 'Creature' && value !== 'All Types') {
+      setSelectedElement('');
+      setSelectedStrengthAgilitySort('');
+      onFilterChange('element', '');
+      onFilterChange('strengthAgilitySort', null);
+    }
+  };
+
+  const handleRarityChange = (value) => {
+    setSelectedRarity(value);
+    onFilterChange('rarity', value === 'All Rarities' ? 'all' : value.toLowerCase());
+  };
+
+  const handleIdSortChange = (value) => {
+    setSelectedIdSort(value);
+    onFilterChange('idSort', value);
+  };
+
+  const handleStrengthAgilitySortChange = (value) => {
+    setSelectedStrengthAgilitySort(value);
+    setSelectedType('Creature');
+    onFilterChange('strengthAgilitySort', value);
+    onFilterChange('type', 'creature');
+  };
+
+  const preventPropagation = (e) => {
+    e.stopPropagation();
+  };
+
+  const isElementDisabled = currentType.toLowerCase() !== 'creature' && currentType !== 'all';
 
   return (
-    <div className="flex space-x-4">
-      <Select onValueChange={(value) => onFilterChange('element', value)}>
+    <div className="flex flex-wrap gap-4 mb-4" onClick={preventPropagation}>
+      <Input
+        type="text"
+        placeholder="Search cards..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="flex-grow"
+      />
+      <Select 
+        value={selectedElement} 
+        onValueChange={handleElementChange}
+        disabled={isElementDisabled}
+      >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Element" />
+          <SelectValue placeholder="Select Element" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Elements</SelectItem>
           {elements.map((element) => (
             <SelectItem key={element} value={element}>{element}</SelectItem>
           ))}
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => onFilterChange('type', value)}>
+      <Select value={selectedType} onValueChange={handleTypeChange}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Type" />
+          <SelectValue placeholder="All Types" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Types</SelectItem>
           {types.map((type) => (
             <SelectItem key={type} value={type}>{type}</SelectItem>
           ))}
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => onFilterChange('rarity', value)}>
+      <Select value={selectedRarity} onValueChange={handleRarityChange}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Rarity" />
+          <SelectValue placeholder="All Rarities" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Rarities</SelectItem>
           {rarities.map((rarity) => (
             <SelectItem key={rarity} value={rarity}>{rarity}</SelectItem>
           ))}
         </SelectContent>
       </Select>
+
+      <Select value={selectedIdSort} onValueChange={handleIdSortChange}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="ID" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="asc">Lowest to Highest</SelectItem>
+          <SelectItem value="desc">Highest to Lowest</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <Select 
+        value={selectedStrengthAgilitySort}
+        onValueChange={handleStrengthAgilitySortChange}
+        disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Strength/Agility" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
+          <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
+          <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
+          <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <Button onClick={handleReset}>Reset Filters</Button>
     </div>
   );
 };

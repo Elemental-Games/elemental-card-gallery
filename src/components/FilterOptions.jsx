@@ -10,11 +10,7 @@ import {
 } from "@/components/ui/select";
 
 const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm }) => {
-  const elements = ['All Elements', ...new Set(cards.map(card => 
-    ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) 
-      ? 'Combinational' 
-      : card.element
-  ))].filter(Boolean);
+  const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
 
   const types = ['All Types', ...new Set(cards.map(card => card.type))];
   

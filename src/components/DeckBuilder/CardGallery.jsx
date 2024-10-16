@@ -29,7 +29,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
        (rarity === 'rare' && card.rarity.trim() === 'R') ||
        (rarity === 'epic' && card.rarity === 'E') ||
        (rarity === 'legendary' && card.rarity === 'L')) &&
-      (strengthAgilitySort ? card.type === 'Creature' : true)
+      (strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true)
     );
 
     filtered.sort((a, b) => {

@@ -27,6 +27,16 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     return card.rarity;
   }))];
 
+  const handleReset = () => {
+    setSearchTerm('');
+    onFilterChange('element', 'all');
+    onFilterChange('type', 'all');
+    onFilterChange('rarity', 'all');
+    onFilterChange('idSort', null);
+    onFilterChange('strengthAgilitySort', null);
+    onResetFilters();
+  };
+
   return (
     <div className="flex flex-wrap gap-4 mb-4">
       <Input
@@ -96,7 +106,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Button onClick={onResetFilters}>Reset Filters</Button>
+      <Button onClick={handleReset}>Reset Filters</Button>
     </div>
   );
 };

@@ -1,24 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import ImageHero from '../components/ImageHero';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
-import LightBox from '../components/LightBox';
 import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
 
 const LandingPage = () => {
-  const [showLightBox, setShowLightBox] = useState(false);
-  const [transitionElement, setTransitionElement] = useState(null);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLightBox(true);
-    }, 3000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const [transitionElement, setTransitionElement] = React.useState(null);
 
   const kingdoms = [
     { 
@@ -145,11 +135,7 @@ const LandingPage = () => {
           </div>
         </section>
       </div>
-      {showLightBox && (
-        <LightBox
-          onClose={() => setShowLightBox(false)}
-        />
-      )}
+      {/* LightBox component has been removed */}
     </div>
   );
 };

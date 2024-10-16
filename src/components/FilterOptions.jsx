@@ -16,7 +16,12 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
-    onFilterChange(filterType, value);
+    if (filterType === 'element' || filterType === 'strengthAgilitySort') {
+      onFilterChange('type', 'Creature');
+      onFilterChange(filterType, value);
+    } else {
+      onFilterChange(filterType, value);
+    }
   };
 
   return (

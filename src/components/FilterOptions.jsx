@@ -10,7 +10,11 @@ import {
 } from "@/components/ui/select";
 
 const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm }) => {
-  const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
+  const elements = ['All Elements', ...new Set(cards.map(card => 
+    ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) 
+      ? 'Combinational' 
+      : card.element
+  ))].filter(Boolean);
 
   const types = ['All Types', ...new Set(cards.map(card => card.type))];
   
@@ -46,21 +50,17 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleElementChange = (value) => {
     setSelectedElement(value);
-    onFilterChange('element', value === 'All Elements' ? 'all' : value.toLowerCase());
+    onFilterChange('element', value.toLowerCase() === 'all elements' ? 'all' : value.toLowerCase());
   };
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
-    onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
-    if (value !== 'Creature' && value !== 'All Types') {
-      setSelectedStrengthAgilitySort('');
-      onFilterChange('strengthAgilitySort', null);
-    }
+    onFilterChange('type', value.toLowerCase() === 'all types' ? 'all' : value.toLowerCase());
   };
 
   const handleRarityChange = (value) => {
     setSelectedRarity(value);
-    onFilterChange('rarity', value === 'All Rarities' ? 'all' : value.toLowerCase());
+    onFilterChange('rarity', value.toLowerCase() === 'all rarities' ? 'all' : value.toLowerCase());
   };
 
   const handleIdSortChange = (value) => {
@@ -75,12 +75,8 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     onFilterChange('type', 'creature');
   };
 
-  const preventPropagation = (e) => {
-    e.stopPropagation();
-  };
-
   return (
-    <div className="flex flex-wrap gap-4 mb-4" onClick={preventPropagation}>
+    <div className="flex flex-wrap gap-4 mb-4">
       <Input
         type="text"
         placeholder="Search cards..."
@@ -134,7 +130,6 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       <Select 
         value={selectedStrengthAgilitySort}
         onValueChange={handleStrengthAgilitySortChange}
-        disabled={selectedType !== 'Creature' && selectedType !== 'All Types'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />

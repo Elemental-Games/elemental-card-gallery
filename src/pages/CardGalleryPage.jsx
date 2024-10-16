@@ -49,11 +49,6 @@ const CardGalleryPage = () => {
           (rarity === 'legendary' && card.rarity === 'L');
         const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
 
-        // Special handling for Shield, Rune, and Counter types
-        if (type === 'Shield' || type === 'Rune' || type === 'Counter') {
-          return card.type === type;
-        }
-
         console.log('Matches:', { nameMatch, elementMatch, typeMatch, rarityMatch, strengthAgilityMatch });
         return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
       });
@@ -86,14 +81,9 @@ const CardGalleryPage = () => {
     switch (filterType) {
       case 'element':
         setElement(value === 'All Elements' ? '' : value);
-        setType('Creature');  // Set type to Creature when an element is selected
         break;
       case 'type':
         setType(value === 'All Types' ? 'all' : value);
-        if (value !== 'Creature') {
-          setElement('');  // Clear element filter if type is not Creature
-          setStrengthAgilitySort(null);  // Clear strength/agility sort if type is not Creature
-        }
         break;
       case 'rarity':
         setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
@@ -103,7 +93,6 @@ const CardGalleryPage = () => {
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('Creature');  // Set type to Creature when strength/agility sort is selected
         break;
       default:
         break;

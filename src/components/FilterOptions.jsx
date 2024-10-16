@@ -16,12 +16,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
-    if (filterType === 'element' || filterType === 'strengthAgilitySort') {
-      onFilterChange('type', 'Creature');
-      onFilterChange(filterType, value);
-    } else {
-      onFilterChange(filterType, value);
-    }
+    onFilterChange(filterType, value);
   };
 
   return (
@@ -33,10 +28,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         onChange={(e) => setSearchTerm(e.target.value)}
         className="flex-grow"
       />
-      <Select 
-        onValueChange={(value) => handleChange('element', value)}
-        disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
-      >
+      <Select onValueChange={(value) => handleChange('element', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Element" />
         </SelectTrigger>
@@ -79,10 +71,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select 
-        onValueChange={(value) => handleChange('strengthAgilitySort', value)}
-        disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
-      >
+      <Select onValueChange={(value) => handleChange('strengthAgilitySort', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />
         </SelectTrigger>

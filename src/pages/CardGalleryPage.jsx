@@ -12,7 +12,7 @@ const CardGalleryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [idSort, setIdSort] = useState('asc');
+  const [idSort, setIdSort] = useState(null);
   const [strengthSort, setStrengthSort] = useState(null);
   const [agilitySort, setAgilitySort] = useState(null);
   const navigate = useNavigate();
@@ -43,6 +43,9 @@ const CardGalleryPage = () => {
     );
 
     filtered.sort((a, b) => {
+      if (idSort) {
+        return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+      }
       if (strengthSort) {
         return strengthSort === 'asc' 
           ? ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber)
@@ -53,7 +56,7 @@ const CardGalleryPage = () => {
           ? ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber)
           : ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
       }
-      return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+      return a.cardNumber - b.cardNumber;
     });
 
     setFilteredCards(filtered);
@@ -67,18 +70,12 @@ const CardGalleryPage = () => {
     setSearchTerm('');
     setElement('all');
     setType('all');
-    setIdSort('asc');
+    setIdSort(null);
     setStrengthSort(null);
     setAgilitySort(null);
   };
 
   const showCreatureStats = strengthSort || agilitySort;
-
-  const handleSortChange = (sortType, order) => {
-    setIdSort(sortType === 'id' ? order : null);
-    setStrengthSort(sortType === 'strength' ? order : null);
-    setAgilitySort(sortType === 'agility' ? order : null);
-  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -117,7 +114,7 @@ const CardGalleryPage = () => {
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={idSort} onValueChange={(value) => handleSortChange('id', value)}>
+        <Select value={idSort} onValueChange={handleSelectChange(setIdSort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="ID" />
           </SelectTrigger>
@@ -126,7 +123,7 @@ const CardGalleryPage = () => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthSort} onValueChange={(value) => handleSortChange('strength', value)}>
+        <Select value={strengthSort} onValueChange={handleSelectChange(setStrengthSort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Strength" />
           </SelectTrigger>
@@ -135,7 +132,7 @@ const CardGalleryPage = () => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={agilitySort} onValueChange={(value) => handleSortChange('agility', value)}>
+        <Select value={agilitySort} onValueChange={handleSelectChange(setAgilitySort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Agility" />
           </SelectTrigger>

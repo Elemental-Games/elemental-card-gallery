@@ -9,7 +9,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [idSort, setIdSort] = useState('asc');
+  const [idSort, setIdSort] = useState(null);
   const [strengthSort, setStrengthSort] = useState(null);
   const [agilitySort, setAgilitySort] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,6 +20,9 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     (element === 'all' || card.element === element) &&
     (type === 'all' || card.type === type)
   ).sort((a, b) => {
+    if (idSort) {
+      return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+    }
     if (strengthSort) {
       return strengthSort === 'asc' 
         ? ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber)
@@ -30,7 +33,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         ? ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber)
         : ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
     }
-    return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+    return a.cardNumber - b.cardNumber;
   });
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
@@ -54,15 +57,18 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
 
   const showCreatureStats = strengthSort || agilitySort;
 
-  const handleSortChange = (sortType, order) => {
-    setIdSort(sortType === 'id' ? order : null);
-    setStrengthSort(sortType === 'strength' ? order : null);
-    setAgilitySort(sortType === 'agility' ? order : null);
+  const resetFilters = () => {
+    setSearchTerm('');
+    setElement('all');
+    setType('all');
+    setIdSort(null);
+    setStrengthSort(null);
+    setAgilitySort(null);
   };
 
   return (
     <div className="mt-4">
-      <div className="mb-4 flex space-x-4">
+      <div className="mb-4 flex flex-wrap gap-4">
         <Input
           type="text"
           placeholder="Search cards..."
@@ -94,7 +100,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={idSort} onValueChange={(value) => handleSortChange('id', value)}>
+        <Select value={idSort} onValueChange={handleSelectChange(setIdSort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="ID" />
           </SelectTrigger>
@@ -103,7 +109,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthSort} onValueChange={(value) => handleSortChange('strength', value)}>
+        <Select value={strengthSort} onValueChange={handleSelectChange(setStrengthSort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Strength" />
           </SelectTrigger>
@@ -112,7 +118,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={agilitySort} onValueChange={(value) => handleSortChange('agility', value)}>
+        <Select value={agilitySort} onValueChange={handleSelectChange(setAgilitySort)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Agility" />
           </SelectTrigger>
@@ -121,6 +127,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
+        <Button onClick={resetFilters}>Reset Filters</Button>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {displayedCards.map((card) => (

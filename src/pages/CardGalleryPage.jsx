@@ -86,14 +86,12 @@ const CardGalleryPage = () => {
     switch (filterType) {
       case 'element':
         setElement(value === 'All Elements' ? '' : value);
-        setType('Creature');  // Set type to Creature when an element is selected
+        if (value !== 'All Elements') {
+          setType('Creature');
+        }
         break;
       case 'type':
         setType(value === 'All Types' ? 'all' : value);
-        if (value !== 'Creature') {
-          setElement('');  // Clear element filter if type is not Creature
-          setStrengthAgilitySort(null);  // Clear strength/agility sort if type is not Creature
-        }
         break;
       case 'rarity':
         setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
@@ -103,7 +101,7 @@ const CardGalleryPage = () => {
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('Creature');  // Set type to Creature when strength/agility sort is selected
+        setType('Creature');
         break;
       default:
         break;

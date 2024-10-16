@@ -21,19 +21,20 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
   const [selectedStrengthAgilitySort, setSelectedStrengthAgilitySort] = useState('');
 
   useEffect(() => {
-    if (currentType !== 'all' && currentType !== 'Creature') {
-      setSelectedElement('All Elements');
-      setSelectedStrengthAgilitySort('');
+    if (selectedElement !== 'All Elements' || selectedStrengthAgilitySort !== '') {
+      setSelectedType('Creature');
     }
-  }, [currentType]);
+  }, [selectedElement, selectedStrengthAgilitySort]);
 
   const handleChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
         setSelectedElement(value);
-        setSelectedType('Creature');
-        onFilterChange('type', 'Creature');
+        if (value !== 'All Elements') {
+          setSelectedType('Creature');
+          onFilterChange('type', 'Creature');
+        }
         onFilterChange(filterType, value === 'All Elements' ? '' : value);
         break;
       case 'type':
@@ -81,7 +82,6 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       <Select 
         value={selectedElement}
         onValueChange={(value) => handleChange('element', value)}
-        disabled={currentType !== 'Creature' && currentType !== 'all'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Element" />
@@ -129,7 +129,6 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       <Select 
         value={selectedStrengthAgilitySort}
         onValueChange={(value) => handleChange('strengthAgilitySort', value)}
-        disabled={currentType !== 'Creature' && currentType !== 'all'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />

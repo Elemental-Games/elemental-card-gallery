@@ -67,25 +67,30 @@ const CardGallery = () => {
     loadCards();
   }, []);
 
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>{error}</AlertDescription>
-      </Alert>
-    );
-  }
-
-  if (cards.length === 0) {
-    return <div>Loading cards...</div>;
-  }
-
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-      {cards.map((card) => (
-        <Card key={card.id} card={card} />
-      ))}
+    <div>
+      <div className="bg-blue-100 p-4 mb-4 rounded-lg">
+        <h2 className="text-xl font-bold mb-2">Test Section</h2>
+        <p>This is a test paragraph to ensure the CardGallery component is rendering correctly.</p>
+        <p>Number of cards loaded: {cards.length}</p>
+        <p>Error status: {error ? 'Error occurred' : 'No errors'}</p>
+      </div>
+
+      {error ? (
+        <Alert variant="destructive">
+          <AlertCircle className="h-4 w-4" />
+          <AlertTitle>Error</AlertTitle>
+          <AlertDescription>{error}</AlertDescription>
+        </Alert>
+      ) : cards.length === 0 ? (
+        <div>Loading cards...</div>
+      ) : (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {cards.map((card) => (
+            <Card key={card.id} card={card} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

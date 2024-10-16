@@ -31,21 +31,23 @@ const CardGalleryPage = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = cards.filter(card => 
-      card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (element === 'all' || 
-       (element === 'combinational' ? 
-        ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) : 
-        card.element.toLowerCase() === element)) &&
-      (type === 'all' || card.type.toLowerCase() === type) &&
-      (rarity === 'all' || 
-       (rarity === 'common' && card.rarity === 'C') ||
-       (rarity === 'uncommon' && card.rarity === 'U') ||
-       (rarity === 'rare' && card.rarity.trim() === 'R') ||
-       (rarity === 'epic' && card.rarity === 'E') ||
-       (rarity === 'legendary' && card.rarity === 'L')) &&
-      (strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true)
-    );
+    const filtered = cards.filter(card => {
+      const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const elementMatch = element === 'all' ? true :
+        element === 'combinational' ?
+          ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
+          card.element.toLowerCase() === element.toLowerCase();
+      const typeMatch = type === 'all' || card.type.toLowerCase() === type.toLowerCase();
+      const rarityMatch = rarity === 'all' ||
+        (rarity === 'common' && card.rarity === 'C') ||
+        (rarity === 'uncommon' && card.rarity === 'U') ||
+        (rarity === 'rare' && card.rarity.trim() === 'R') ||
+        (rarity === 'epic' && card.rarity === 'E') ||
+        (rarity === 'legendary' && card.rarity === 'L');
+      const strengthAgilityMatch = strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true;
+
+      return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
+    });
 
     filtered.sort((a, b) => {
       if (idSort) {

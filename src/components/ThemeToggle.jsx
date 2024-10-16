@@ -1,19 +1,19 @@
 import React from 'react';
-import { useTheme } from 'next-themes';
-import { Sun, Moon } from 'lucide-react';
+// import { useTheme } from 'next-themes';
+// import { Sun, Moon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const ThemeToggle = () => {
-  const { theme, setTheme } = useTheme();
+  // const { theme, setTheme } = useTheme();
 
   return (
     <Button
       variant="outline"
       size="icon"
       className="fixed bottom-4 right-4 rounded-full bg-primary text-primary-foreground"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      // onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
     >
-      {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
+      {/* {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />} */}
     </Button>
   );
 };

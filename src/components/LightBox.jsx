@@ -5,7 +5,7 @@ const LightBox = ({ onClose }) => {
   const [card, setCard] = useState(null);
 
   useEffect(() => {
-    fetch('/src/data/ElementalMastersCards.json')
+    fetch('/data/cards.json')
       .then(response => response.json())
       .then(data => {
         const randomCard = data.cards[Math.floor(Math.random() * data.cards.length)];
@@ -32,9 +32,9 @@ const LightBox = ({ onClose }) => {
           className="bg-white p-4 rounded-lg shadow-lg max-w-md w-full"
           onClick={(e) => e.stopPropagation()}
         >
-          <img src={`/cards/${card.image}`} alt={card.name} className="w-full h-auto mb-4" />
+          <img src={card.image} alt={card.name} className="w-full h-auto mb-4" />
           <h2 className="text-2xl font-bold mb-2">{card.name}</h2>
-          <p className="text-gray-600 mb-4">{card.description}</p>
+          <p className="text-gray-600 mb-4">{card.ability || card.quote}</p>
           <button
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
             onClick={onClose}

@@ -34,11 +34,16 @@ const CardGalleryPage = () => {
     let filtered = cards.filter(card => 
       card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (element === 'all' || 
-       (element === 'Combinational' ? 
-        ['Frost', 'Lava', 'Sand', 'Crystal', 'Poison', 'Lightning'].includes(card.element) : 
-        card.element === element)) &&
-      (type === 'all' || card.type === type) &&
-      (rarity === 'all' || card.rarity === rarity) &&
+       (element === 'combinational' ? 
+        ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) : 
+        card.element.toLowerCase() === element)) &&
+      (type === 'all' || card.type.toLowerCase() === type) &&
+      (rarity === 'all' || 
+       (rarity === 'common' && card.rarity === 'C') ||
+       (rarity === 'uncommon' && card.rarity === 'U') ||
+       (rarity === 'rare' && card.rarity.trim() === 'R') ||
+       (rarity === 'epic' && card.rarity === 'E') ||
+       (rarity === 'legendary' && card.rarity === 'L')) &&
       (strengthAgilitySort ? card.type === 'Creature' : true)
     );
 
@@ -67,7 +72,7 @@ const CardGalleryPage = () => {
         break;
       case 'type':
         setType(value);
-        if (['Rune', 'Counter', 'Shield'].includes(value)) {
+        if (['rune', 'counter', 'shield'].includes(value)) {
           setStrengthAgilitySort(null);
         }
         break;
@@ -79,7 +84,7 @@ const CardGalleryPage = () => {
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        if (value) setType('Creature');
+        setType('creature');
         break;
       default:
         break;
@@ -125,7 +130,16 @@ const CardGalleryPage = () => {
                 }}
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
-              <p className="text-sm text-gray-600">{card.element} | {card.type} | {card.rarity}</p>
+              <p className="text-sm text-gray-600">
+                {card.element} | {card.type} | {
+                  card.rarity === 'C' ? 'Common' :
+                  card.rarity === 'U' ? 'Uncommon' :
+                  card.rarity.trim() === 'R' ? 'Rare' :
+                  card.rarity === 'E' ? 'Epic' :
+                  card.rarity === 'L' ? 'Legendary' :
+                  card.rarity
+                }
+              </p>
               {strengthAgilitySort && card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}

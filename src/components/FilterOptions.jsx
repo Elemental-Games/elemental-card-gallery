@@ -10,9 +10,22 @@ import {
 } from "@/components/ui/select";
 
 const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm }) => {
-  const elements = [...new Set(cards.map(card => card.element))];
-  const types = [...new Set(cards.map(card => card.type))];
-  const rarities = [...new Set(cards.map(card => card.rarity))];
+  const elements = ['All', ...new Set(cards.map(card => 
+    ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) 
+      ? 'Combinational' 
+      : card.element
+  ))].filter(Boolean);
+
+  const types = ['All', ...new Set(cards.map(card => card.type))];
+  
+  const rarities = ['All', ...new Set(cards.map(card => {
+    if (card.rarity === 'C') return 'Common';
+    if (card.rarity === 'U') return 'Uncommon';
+    if (card.rarity.trim() === 'R') return 'Rare';
+    if (card.rarity === 'E') return 'Epic';
+    if (card.rarity === 'L') return 'Legendary';
+    return card.rarity;
+  }))];
 
   return (
     <div className="flex flex-wrap gap-4 mb-4">
@@ -25,36 +38,33 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       />
       <Select onValueChange={(value) => onFilterChange('element', value)}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Element" />
+          <SelectValue placeholder="All Elements" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Elements</SelectItem>
           {elements.map((element) => (
-            <SelectItem key={element} value={element}>{element}</SelectItem>
+            <SelectItem key={element} value={element.toLowerCase()}>{element}</SelectItem>
           ))}
         </SelectContent>
       </Select>
 
       <Select onValueChange={(value) => onFilterChange('type', value)}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Type" />
+          <SelectValue placeholder="All Types" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Types</SelectItem>
           {types.map((type) => (
-            <SelectItem key={type} value={type}>{type}</SelectItem>
+            <SelectItem key={type} value={type.toLowerCase()}>{type}</SelectItem>
           ))}
         </SelectContent>
       </Select>
 
       <Select onValueChange={(value) => onFilterChange('rarity', value)}>
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="Rarity" />
+          <SelectValue placeholder="All Rarities" />
         </SelectTrigger>
         <SelectContent>
-          <SelectItem value="all">All Rarities</SelectItem>
           {rarities.map((rarity) => (
-            <SelectItem key={rarity} value={rarity}>{rarity}</SelectItem>
+            <SelectItem key={rarity} value={rarity.toLowerCase()}>{rarity}</SelectItem>
           ))}
         </SelectContent>
       </Select>
@@ -70,7 +80,10 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       </Select>
 
       <Select 
-        onValueChange={(value) => onFilterChange('strengthAgilitySort', value)}
+        onValueChange={(value) => {
+          onFilterChange('strengthAgilitySort', value);
+          onFilterChange('type', 'creature');
+        }}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />

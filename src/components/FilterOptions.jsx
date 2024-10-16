@@ -75,8 +75,12 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     onFilterChange('type', 'creature');
   };
 
+  const preventPropagation = (e) => {
+    e.stopPropagation();
+  };
+
   return (
-    <div className="flex flex-wrap gap-4 mb-4">
+    <div className="flex flex-wrap gap-4 mb-4" onClick={preventPropagation}>
       <Input
         type="text"
         placeholder="Search cards..."

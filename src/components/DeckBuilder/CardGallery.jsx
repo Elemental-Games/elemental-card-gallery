@@ -4,6 +4,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Minus } from 'lucide-react';
+import FilterOptions from '../FilterOptions';
 
 const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -45,10 +46,22 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     }
   };
 
-  const handleSelectChange = (setter) => (value) => {
-    setter(value);
-    if (setter === setStrengthAgilitySort && value) {
-      setType('Creature');
+  const handleFilterChange = (filterType, value) => {
+    switch (filterType) {
+      case 'element':
+        setElement(value);
+        break;
+      case 'type':
+        setType(value);
+        if (['Rune', 'Counter', 'Shield'].includes(value)) {
+          setStrengthAgilitySort(null);
+        }
+        break;
+      case 'rarity':
+        setRarity(value);
+        break;
+      default:
+        break;
     }
   };
 
@@ -77,31 +90,8 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-grow"
         />
-        <Select value={element} onValueChange={handleSelectChange(setElement)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Element" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Elements</SelectItem>
-            <SelectItem value="Fire">Fire</SelectItem>
-            <SelectItem value="Water">Water</SelectItem>
-            <SelectItem value="Earth">Earth</SelectItem>
-            <SelectItem value="Air">Air</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={type} onValueChange={handleSelectChange(setType)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Rune">Rune</SelectItem>
-            <SelectItem value="Counter">Counter</SelectItem>
-            <SelectItem value="Shield">Shield</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={idSort} onValueChange={handleSelectChange(setIdSort)}>
+        <FilterOptions cards={cards} onFilterChange={handleFilterChange} />
+        <Select value={idSort} onValueChange={(value) => setIdSort(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="ID" />
           </SelectTrigger>
@@ -110,7 +100,14 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthAgilitySort} onValueChange={handleSelectChange(setStrengthAgilitySort)}>
+        <Select 
+          value={strengthAgilitySort} 
+          onValueChange={(value) => {
+            setStrengthAgilitySort(value);
+            if (value) setType('Creature');
+          }}
+          disabled={['Rune', 'Counter', 'Shield'].includes(type)}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Strength/Agility" />
           </SelectTrigger>
@@ -119,19 +116,6 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
             <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
             <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={rarity} onValueChange={handleSelectChange(setRarity)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Rarity" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Rarities</SelectItem>
-            <SelectItem value="C">Common</SelectItem>
-            <SelectItem value="U">Uncommon</SelectItem>
-            <SelectItem value="R">Rare</SelectItem>
-            <SelectItem value="E">Epic</SelectItem>
-            <SelectItem value="L">Legendary</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>
@@ -152,6 +136,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
+            <p className="text-center text-sm text-gray-600">{card.element} | {card.type} | {card.rarity}</p>
             {strengthAgilitySort && card.type === 'Creature' && (
               <p className="text-center text-sm">
                 STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}

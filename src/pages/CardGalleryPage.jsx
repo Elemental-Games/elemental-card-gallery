@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import FilterOptions from '../components/FilterOptions';
 
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
@@ -62,10 +63,22 @@ const CardGalleryPage = () => {
     setFilteredCards(filtered);
   }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
 
-  const handleSelectChange = (setter) => (value) => {
-    setter(value);
-    if (setter === setStrengthAgilitySort && value) {
-      setType('Creature');
+  const handleFilterChange = (filterType, value) => {
+    switch (filterType) {
+      case 'element':
+        setElement(value);
+        break;
+      case 'type':
+        setType(value);
+        if (['Rune', 'Counter', 'Shield'].includes(value)) {
+          setStrengthAgilitySort(null);
+        }
+        break;
+      case 'rarity':
+        setRarity(value);
+        break;
+      default:
+        break;
     }
   };
 
@@ -90,32 +103,8 @@ const CardGalleryPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-grow"
         />
-        <Select value={element} onValueChange={handleSelectChange(setElement)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Element" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Elements</SelectItem>
-            <SelectItem value="Fire">Fire</SelectItem>
-            <SelectItem value="Water">Water</SelectItem>
-            <SelectItem value="Earth">Earth</SelectItem>
-            <SelectItem value="Air">Air</SelectItem>
-            <SelectItem value="Combinational">Combinational</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={type} onValueChange={handleSelectChange(setType)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Type" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Types</SelectItem>
-            <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Rune">Rune</SelectItem>
-            <SelectItem value="Counter">Counter</SelectItem>
-            <SelectItem value="Shield">Shield</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={idSort} onValueChange={handleSelectChange(setIdSort)}>
+        <FilterOptions cards={cards} onFilterChange={handleFilterChange} />
+        <Select value={idSort} onValueChange={(value) => setIdSort(value)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="ID" />
           </SelectTrigger>
@@ -124,7 +113,14 @@ const CardGalleryPage = () => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthAgilitySort} onValueChange={handleSelectChange(setStrengthAgilitySort)}>
+        <Select 
+          value={strengthAgilitySort} 
+          onValueChange={(value) => {
+            setStrengthAgilitySort(value);
+            if (value) setType('Creature');
+          }}
+          disabled={['Rune', 'Counter', 'Shield'].includes(type)}
+        >
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Strength/Agility" />
           </SelectTrigger>
@@ -133,19 +129,6 @@ const CardGalleryPage = () => {
             <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
             <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
             <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={rarity} onValueChange={handleSelectChange(setRarity)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Rarity" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="all">All Rarities</SelectItem>
-            <SelectItem value="C">Common</SelectItem>
-            <SelectItem value="U">Uncommon</SelectItem>
-            <SelectItem value="R">Rare</SelectItem>
-            <SelectItem value="E">Epic</SelectItem>
-            <SelectItem value="L">Legendary</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>
@@ -169,7 +152,7 @@ const CardGalleryPage = () => {
                 }}
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
-              <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
+              <p className="text-sm text-gray-600">{card.element} | {card.type} | {card.rarity}</p>
               {strengthAgilitySort && card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}

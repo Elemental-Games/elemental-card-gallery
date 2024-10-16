@@ -24,16 +24,6 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     }
   };
 
-  const handleReset = () => {
-    setSearchTerm('');
-    onFilterChange('element', 'All Elements');
-    onFilterChange('type', 'All Types');
-    onFilterChange('rarity', 'All Rarities');
-    onFilterChange('idSort', null);
-    onFilterChange('strengthAgilitySort', null);
-    onResetFilters();
-  };
-
   return (
     <div className="flex flex-wrap gap-4 mb-4">
       <Input
@@ -57,10 +47,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select 
-        value={currentType === 'Creature' ? 'Creature' : 'All Types'} 
-        onValueChange={(value) => handleChange('type', value)}
-      >
+      <Select onValueChange={(value) => handleChange('type', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
@@ -107,7 +94,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Button onClick={handleReset}>Reset Filters</Button>
+      <Button onClick={onResetFilters}>Reset Filters</Button>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('idDesc');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
@@ -18,10 +18,15 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     (element === 'all' || card.element === element) &&
     (type === 'all' || card.type === type)
   ).sort((a, b) => {
-    if (sortOrder === 'asc') {
-      return a.cardNumber - b.cardNumber;
-    } else {
-      return b.cardNumber - a.cardNumber;
+    switch (sortOrder) {
+      case 'idDesc':
+        return b.cardNumber - a.cardNumber;
+      case 'strengthDesc':
+        return (b.strength || 0) - (a.strength || 0);
+      case 'agilityDesc':
+        return (b.agility || 0) - (a.agility || 0);
+      default:
+        return 0;
     }
   });
 
@@ -80,11 +85,12 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         </Select>
         <Select value={sortOrder} onValueChange={handleSelectChange(setSortOrder)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort Order" />
+            <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
+            <SelectItem value="idDesc">ID Number (Highest to Lowest)</SelectItem>
+            <SelectItem value="strengthDesc">Strength (Highest to Lowest)</SelectItem>
+            <SelectItem value="agilityDesc">Agility (Highest to Lowest)</SelectItem>
           </SelectContent>
         </Select>
       </div>

@@ -4,6 +4,20 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FilterOptions from '../components/FilterOptions';
 
+/**
+ * CardGalleryPage Component
+ * 
+ * This component displays a gallery of cards with filtering and sorting options.
+ * It fetches card data, allows users to filter by various criteria (element, type, rarity),
+ * sort cards, and navigate to individual card details.
+ * 
+ * Key features:
+ * - Displays a grid of cards with images and basic information
+ * - Provides filter options for refining the displayed cards
+ * - Implements sorting functionality for card ID and creature attributes
+ * - Uses framer-motion for smooth animations on card hover
+ * - Responsive design for various screen sizes
+ */
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);

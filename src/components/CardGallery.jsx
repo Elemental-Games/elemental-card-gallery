@@ -34,24 +34,37 @@ const CardGallery = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/data/cards.json')
-      .then(response => {
+    const loadCards = async () => {
+      try {
+        // Fetch card data from JSON file
+        const response = await fetch('/data/cards.json');
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error('Failed to fetch card data');
         }
-        return response.json();
-      })
-      .then(data => {
-        if (Array.isArray(data.cards)) {
-          setCards(data.cards);
-        } else {
-          throw new Error('Invalid data format');
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching cards:', error);
+        const data = await response.json();
+
+        // Load all image files from the public/images/cards/ directory
+        const imageContext = require.context('/public/images/cards', false, /\.(png|jpe?g|svg)$/);
+        const imageFiles = imageContext.keys().map(imageContext);
+
+        // Match images with card data
+        const matchedCards = data.cards.map(card => {
+          const imageName = card.id + '.png'; // Assuming image names match card IDs
+          const matchedImage = imageFiles.find(img => img.includes(imageName));
+          return {
+            ...card,
+            image: matchedImage || '/placeholder.svg' // Use placeholder if no match found
+          };
+        });
+
+        setCards(matchedCards);
+      } catch (error) {
+        console.error('Error loading cards:', error);
         setError('Error loading cards. Please try again later.');
-      });
+      }
+    };
+
+    loadCards();
   }, []);
 
   if (error) {

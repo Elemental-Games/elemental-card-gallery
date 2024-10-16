@@ -11,6 +11,7 @@ const CardGalleryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
+  const [sortOrder, setSortOrder] = useState('asc');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,13 +30,23 @@ const CardGalleryPage = () => {
   }, []);
 
   useEffect(() => {
-    const filtered = cards.filter(card => 
+    let filtered = cards.filter(card => 
       card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (element === 'all' || card.element === element) &&
       (type === 'all' || card.type === type)
     );
+
+    // Sort the filtered cards
+    filtered.sort((a, b) => {
+      if (sortOrder === 'asc') {
+        return a.cardNumber - b.cardNumber;
+      } else {
+        return b.cardNumber - a.cardNumber;
+      }
+    });
+
     setFilteredCards(filtered);
-  }, [searchTerm, element, type, cards]);
+  }, [searchTerm, element, type, cards, sortOrder]);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -68,8 +79,18 @@ const CardGalleryPage = () => {
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Spell">Spell</SelectItem>
+            <SelectItem value="Rune">Rune</SelectItem>
+            <SelectItem value="Counter">Counter</SelectItem>
             <SelectItem value="Shield">Shield</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={sortOrder} onValueChange={setSortOrder}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Sort Order" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="asc">Lowest to Highest</SelectItem>
+            <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -93,6 +114,7 @@ const CardGalleryPage = () => {
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
+              <p className="text-sm text-gray-600">Card Number: {card.cardNumber}</p>
             </Card>
           </motion.div>
         ))}

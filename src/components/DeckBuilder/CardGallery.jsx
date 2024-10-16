@@ -9,6 +9,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
+  const [sortOrder, setSortOrder] = useState('asc');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
@@ -16,7 +17,13 @@ const CardGallery = ({ cards, onCardSelect }) => {
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
     (element === 'all' || card.element === element) &&
     (type === 'all' || card.type === type)
-  );
+  ).sort((a, b) => {
+    if (sortOrder === 'asc') {
+      return a.cardNumber - b.cardNumber;
+    } else {
+      return b.cardNumber - a.cardNumber;
+    }
+  });
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
@@ -56,8 +63,18 @@ const CardGallery = ({ cards, onCardSelect }) => {
           <SelectContent>
             <SelectItem value="all">All Types</SelectItem>
             <SelectItem value="Creature">Creature</SelectItem>
-            <SelectItem value="Spell">Spell</SelectItem>
+            <SelectItem value="Rune">Rune</SelectItem>
+            <SelectItem value="Counter">Counter</SelectItem>
             <SelectItem value="Shield">Shield</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={sortOrder} onValueChange={setSortOrder}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Sort Order" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="asc">Lowest to Highest</SelectItem>
+            <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -78,6 +95,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
+            <p className="text-center text-sm text-gray-600">Card Number: {card.cardNumber}</p>
             <div className="flex justify-center items-center mt-2">
               <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); onCardSelect(card, -1); }}>
                 <Minus className="h-4 w-4" />

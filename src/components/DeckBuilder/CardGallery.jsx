@@ -14,32 +14,23 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [rarity, setRarity] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
-  const cardsPerPage = 8;
+  const cardsPerPage = 20;
 
   useEffect(() => {
     try {
-      console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
       const filtered = cards.filter(card => {
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = type.toLowerCase() === 'creature' || type === 'all' ? (
-          element === '' ? true :
-            element === 'combinational' ?
-              ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
-              card.element.toLowerCase() === element.toLowerCase()
-        ) : true;
-        const typeMatch = type === 'all' || card.type.toLowerCase() === type.toLowerCase();
+        const elementMatch = element === '' || card.element === element;
+        const typeMatch = type === 'all' || card.type === type;
         const rarityMatch = rarity === 'all' ||
           (rarity === 'common' && card.rarity === 'C') ||
           (rarity === 'uncommon' && card.rarity === 'U') ||
           (rarity === 'rare' && card.rarity.trim() === 'R') ||
           (rarity === 'epic' && card.rarity === 'E') ||
           (rarity === 'legendary' && card.rarity === 'L');
-        const strengthAgilityMatch = strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true;
 
-        return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
+        return nameMatch && elementMatch && typeMatch && rarityMatch;
       });
-
-      console.log('Filtered cards:', filtered);
 
       filtered.sort((a, b) => {
         if (idSort) {
@@ -65,27 +56,21 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
 
   const handleFilterChange = (filterType, value) => {
-    console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value);
+        setElement(value === 'All Elements' ? '' : value);
         break;
       case 'type':
-        setType(value);
-        if (value.toLowerCase() !== 'creature' && value !== 'all') {
-          setElement('');
-          setStrengthAgilitySort(null);
-        }
+        setType(value === 'All Types' ? 'all' : value);
         break;
       case 'rarity':
-        setRarity(value);
+        setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
         break;
       case 'idSort':
         setIdSort(value);
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('creature');
         break;
       default:
         break;
@@ -113,6 +98,10 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
+  const indexOfLastCard = currentPage * cardsPerPage;
+  const indexOfFirstCard = indexOfLastCard - cardsPerPage;
+  const currentCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard);
+
   if (error) {
     return <div className="text-red-500">{error}</div>;
   }
@@ -128,8 +117,8 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         currentType={type}
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {filteredCards.map((card) => (
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {currentCards.map((card) => (
           <Card 
             key={card.id} 
             className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
@@ -154,7 +143,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
                 card.rarity
               }
             </p>
-            {strengthAgilitySort && card.type === 'Creature' && (
+            {card.type === 'Creature' && (
               <p className="text-center text-sm">
                 STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
               </p>

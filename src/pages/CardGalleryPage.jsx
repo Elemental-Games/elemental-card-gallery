@@ -61,8 +61,8 @@ const CardGalleryPage = () => {
         }
         if (strengthAgilitySort) {
           const [attribute, order] = strengthAgilitySort.split('-');
-          const aValue = a[attribute] || 0;
-          const bValue = b[attribute] || 0;
+          const aValue = Number(a[attribute]) || 0;
+          const bValue = Number(b[attribute]) || 0;
           return order === 'asc' 
             ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
             : (bValue - aValue) || (b.cardNumber - a.cardNumber);
@@ -71,6 +71,7 @@ const CardGalleryPage = () => {
       });
 
       setFilteredCards(filtered);
+      setError(null);
     } catch (error) {
       console.error('Error filtering cards:', error);
       setError('An error occurred while filtering cards. Please try again.');

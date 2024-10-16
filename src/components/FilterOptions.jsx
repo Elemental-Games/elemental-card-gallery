@@ -9,7 +9,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm }) => {
+const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm, currentType }) => {
   const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
 
   const types = ['All Types', ...new Set(cards.map(card => card.type))];
@@ -53,7 +53,9 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     setSelectedType(value);
     onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
     if (value !== 'Creature' && value !== 'All Types') {
+      setSelectedElement('All Elements');
       setSelectedStrengthAgilitySort('');
+      onFilterChange('element', 'all');
       onFilterChange('strengthAgilitySort', null);
     }
   };
@@ -79,6 +81,8 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     e.stopPropagation();
   };
 
+  const isElementDisabled = currentType.toLowerCase() !== 'creature' && currentType !== 'all';
+
   return (
     <div className="flex flex-wrap gap-4 mb-4" onClick={preventPropagation}>
       <Input
@@ -88,7 +92,11 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         onChange={(e) => setSearchTerm(e.target.value)}
         className="flex-grow"
       />
-      <Select value={selectedElement} onValueChange={handleElementChange}>
+      <Select 
+        value={selectedElement} 
+        onValueChange={handleElementChange}
+        disabled={isElementDisabled}
+      >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Elements" />
         </SelectTrigger>
@@ -134,7 +142,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       <Select 
         value={selectedStrengthAgilitySort}
         onValueChange={handleStrengthAgilitySortChange}
-        disabled={selectedType !== 'Creature' && selectedType !== 'All Types'}
+        disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />

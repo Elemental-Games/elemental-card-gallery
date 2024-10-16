@@ -37,10 +37,12 @@ const CardGalleryPage = () => {
       console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
       const filtered = cards.filter(card => {
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = element === 'all' ? true :
-          element === 'combinational' ?
-            ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
-            card.element.toLowerCase() === element.toLowerCase();
+        const elementMatch = type.toLowerCase() === 'creature' ? (
+          element === 'all' ? true :
+            element === 'combinational' ?
+              ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
+              card.element.toLowerCase() === element.toLowerCase()
+        ) : true;
         const typeMatch = type === 'all' || card.type.toLowerCase() === type.toLowerCase();
         const rarityMatch = rarity === 'all' ||
           (rarity === 'common' && card.rarity === 'C') ||
@@ -86,7 +88,8 @@ const CardGalleryPage = () => {
         break;
       case 'type':
         setType(value);
-        if (['rune', 'counter', 'shield'].includes(value)) {
+        if (value.toLowerCase() !== 'creature' && value !== 'all') {
+          setElement('all');
           setStrengthAgilitySort(null);
         }
         break;
@@ -128,6 +131,7 @@ const CardGalleryPage = () => {
         onResetFilters={resetFilters}
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
+        currentType={type}
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

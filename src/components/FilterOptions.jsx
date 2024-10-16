@@ -23,7 +23,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
     return card.rarity;
   }))];
 
-  const [selectedElement, setSelectedElement] = React.useState('All Elements');
+  const [selectedElement, setSelectedElement] = React.useState('');
   const [selectedType, setSelectedType] = React.useState('All Types');
   const [selectedRarity, setSelectedRarity] = React.useState('All Rarities');
   const [selectedIdSort, setSelectedIdSort] = React.useState('');
@@ -31,12 +31,12 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleReset = () => {
     setSearchTerm('');
-    setSelectedElement('All Elements');
+    setSelectedElement('');
     setSelectedType('All Types');
     setSelectedRarity('All Rarities');
     setSelectedIdSort('');
     setSelectedStrengthAgilitySort('');
-    onFilterChange('element', 'all');
+    onFilterChange('element', '');
     onFilterChange('type', 'all');
     onFilterChange('rarity', 'all');
     onFilterChange('idSort', null);
@@ -46,16 +46,16 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleElementChange = (value) => {
     setSelectedElement(value);
-    onFilterChange('element', value === 'All Elements' ? 'all' : value.toLowerCase());
+    onFilterChange('element', value === 'All Elements' ? '' : value.toLowerCase());
   };
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
     onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
     if (value !== 'Creature' && value !== 'All Types') {
-      setSelectedElement('All Elements');
+      setSelectedElement('');
       setSelectedStrengthAgilitySort('');
-      onFilterChange('element', 'all');
+      onFilterChange('element', '');
       onFilterChange('strengthAgilitySort', null);
     }
   };
@@ -98,7 +98,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         disabled={isElementDisabled}
       >
         <SelectTrigger className="w-[180px]">
-          <SelectValue placeholder="All Elements" />
+          <SelectValue placeholder="Select Element" />
         </SelectTrigger>
         <SelectContent>
           {elements.map((element) => (

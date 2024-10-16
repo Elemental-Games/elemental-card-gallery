@@ -8,7 +8,7 @@ const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [element, setElement] = useState('all');
+  const [element, setElement] = useState('');
   const [type, setType] = useState('all');
   const [idSort, setIdSort] = useState(null);
   const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
@@ -37,8 +37,8 @@ const CardGalleryPage = () => {
       console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
       const filtered = cards.filter(card => {
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = type.toLowerCase() === 'creature' ? (
-          element === 'all' ? true :
+        const elementMatch = type.toLowerCase() === 'creature' || type === 'all' ? (
+          element === '' ? true :
             element === 'combinational' ?
               ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
               card.element.toLowerCase() === element.toLowerCase()
@@ -84,12 +84,12 @@ const CardGalleryPage = () => {
     console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value.toLowerCase());
+        setElement(value);
         break;
       case 'type':
         setType(value);
         if (value.toLowerCase() !== 'creature' && value !== 'all') {
-          setElement('all');
+          setElement('');
           setStrengthAgilitySort(null);
         }
         break;
@@ -110,7 +110,7 @@ const CardGalleryPage = () => {
 
   const resetFilters = () => {
     setSearchTerm('');
-    setElement('all');
+    setElement('');
     setType('all');
     setIdSort(null);
     setStrengthAgilitySort(null);

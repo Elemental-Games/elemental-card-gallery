@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -56,18 +57,20 @@ const CardGallery = ({ cards, onCardSelect }) => {
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
         {displayedCards.map((card) => (
-          <Card key={card.id} className="p-2 cursor-pointer" onClick={() => onCardSelect(card)}>
-            <img 
-              src={card.image} 
-              alt={card.name} 
-              className="w-full h-auto object-contain mx-auto"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = '/placeholder.svg';
-              }}
-            />
-            <p className="text-center mt-2">{card.name}</p>
-          </Card>
+          <Link key={card.id} to={`/cards/${card.id}`}>
+            <Card className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200" onClick={() => onCardSelect(card)}>
+              <img 
+                src={card.image} 
+                alt={card.name} 
+                className="w-full h-auto object-contain mx-auto"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = '/placeholder.svg';
+                }}
+              />
+              <p className="text-center mt-2">{card.name}</p>
+            </Card>
+          </Link>
         ))}
       </div>
       <div className="mt-4 flex justify-center space-x-2">

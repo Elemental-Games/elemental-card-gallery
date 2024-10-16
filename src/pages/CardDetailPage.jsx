@@ -36,7 +36,7 @@ const CardDetailPage = () => {
       <h1 className="text-3xl font-bold mb-4">{card.name}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div>
-          <img src={`/cards/${card.id}.png`} alt={card.name} className="w-full h-auto rounded-lg shadow-lg" />
+          <img src={card.image} alt={card.name} className="w-full h-auto rounded-lg shadow-lg" />
         </div>
         <div>
           <p><strong>Element:</strong> {card.element}</p>
@@ -59,11 +59,6 @@ const CardDetailPage = () => {
           )}
           {card.essenceCost && <p><strong>Essence Cost:</strong> {card.essenceCost}</p>}
           {card.essenceGeneration && <p><strong>Essence Generation:</strong> {card.essenceGeneration}</p>}
-          {card.type === 'Counter' && card.trigger && (
-            <div>
-              <p><strong>Trigger:</strong> {card.trigger}</p>
-            </div>
-          )}
           {card.quote && <p className="italic mt-4">"{card.quote}"</p>}
         </div>
       </div>

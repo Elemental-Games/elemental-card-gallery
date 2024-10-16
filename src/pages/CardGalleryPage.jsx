@@ -13,7 +13,7 @@ const CardGalleryPage = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        const response = await fetch('/data/ElementalMastersCards.json');
+        const response = await fetch('/data/cards.json');
         const data = await response.json();
         setCards(data.cards);
         setFilteredCards(data.cards);
@@ -76,7 +76,7 @@ const CardGalleryPage = () => {
         {filteredCards.map((card) => (
           <Card key={card.id} className="p-4">
             <img 
-              src={`/storage/images/cards/${card.id}.png`}
+              src={card.image || '/placeholder.svg'}
               alt={card.name} 
               className="w-full h-48 object-contain mb-2"
               onError={(e) => {

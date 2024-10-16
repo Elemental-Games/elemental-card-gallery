@@ -22,11 +22,11 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
       case 'idDesc':
         return b.cardNumber - a.cardNumber;
       case 'strengthDesc':
-        return (b.strength || 0) - (a.strength || 0);
+        return ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
       case 'agilityDesc':
-        return (b.agility || 0) - (a.agility || 0);
+        return ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
       default:
-        return 0;
+        return b.cardNumber - a.cardNumber;
     }
   });
 
@@ -48,6 +48,8 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     const sideDeckCard = deck.sideDeck.find(c => c.id === cardId);
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
+
+  const showCreatureStats = sortOrder === 'strengthDesc' || sortOrder === 'agilityDesc';
 
   return (
     <div className="mt-4">
@@ -88,9 +90,9 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="idDesc">ID Number (Highest to Lowest)</SelectItem>
-            <SelectItem value="strengthDesc">Strength (Highest to Lowest)</SelectItem>
-            <SelectItem value="agilityDesc">Agility (Highest to Lowest)</SelectItem>
+            <SelectItem value="idDesc">ID Number</SelectItem>
+            <SelectItem value="strengthDesc">Strength</SelectItem>
+            <SelectItem value="agilityDesc">Agility</SelectItem>
           </SelectContent>
         </Select>
       </div>
@@ -110,6 +112,11 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
+            {showCreatureStats && card.type === 'Creature' && (
+              <p className="text-center text-sm">
+                STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
+              </p>
+            )}
             <div className="flex justify-center items-center mt-2">
               <Button size="sm" variant="outline" onClick={() => handleCardClick(card, -1)}>
                 <Minus className="h-4 w-4" />

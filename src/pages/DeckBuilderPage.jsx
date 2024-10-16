@@ -20,16 +20,22 @@ const DeckBuilderPage = () => {
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    fetch('/src/data/ElementalMastersCards.json')
-      .then(response => response.json())
-      .then(data => {
+    const fetchCards = async () => {
+      try {
+        const response = await fetch('/data/cards.json');
+        if (!response.ok) {
+          throw new Error('Failed to fetch card data');
+        }
+        const data = await response.json();
         setAllCards(data.cards);
         setIsLoading(false);
-      })
-      .catch(err => {
+      } catch (err) {
         setError(err.message);
         setIsLoading(false);
-      });
+      }
+    };
+
+    fetchCards();
   }, []);
 
   const handleSaveDeck = async () => {

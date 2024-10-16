@@ -1,34 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
 
-const CardGallery = ({ onCardSelect }) => {
-  const [cards, setCards] = useState([]);
+const CardGallery = ({ cards, onCardSelect }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
   const [currentPage, setCurrentPage] = useState(1);
-  const [error, setError] = useState(null);
   const cardsPerPage = 8;
-
-  useEffect(() => {
-    fetch('/data/cards.json')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then(data => setCards(data))
-      .catch(error => {
-        console.error('Error fetching cards:', error);
-        setError('Error loading cards. Please try again later.');
-      });
-  }, []);
 
   const filteredCards = cards.filter(card => 
     card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
@@ -38,16 +19,6 @@ const CardGallery = ({ onCardSelect }) => {
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
-
-  if (error) {
-    return (
-      <Alert variant="destructive">
-        <AlertCircle className="h-4 w-4" />
-        <AlertTitle>Error</AlertTitle>
-        <AlertDescription>{error}</AlertDescription>
-      </Alert>
-    );
-  }
 
   return (
     <div className="mt-4">

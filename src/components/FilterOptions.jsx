@@ -50,17 +50,21 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleElementChange = (value) => {
     setSelectedElement(value);
-    onFilterChange('element', value.toLowerCase() === 'all elements' ? 'all' : value.toLowerCase());
+    onFilterChange('element', value === 'All Elements' ? 'all' : value.toLowerCase());
   };
 
   const handleTypeChange = (value) => {
     setSelectedType(value);
-    onFilterChange('type', value.toLowerCase() === 'all types' ? 'all' : value.toLowerCase());
+    onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
+    if (value !== 'Creature' && value !== 'All Types') {
+      setSelectedStrengthAgilitySort('');
+      onFilterChange('strengthAgilitySort', null);
+    }
   };
 
   const handleRarityChange = (value) => {
     setSelectedRarity(value);
-    onFilterChange('rarity', value.toLowerCase() === 'all rarities' ? 'all' : value.toLowerCase());
+    onFilterChange('rarity', value === 'All Rarities' ? 'all' : value.toLowerCase());
   };
 
   const handleIdSortChange = (value) => {
@@ -130,6 +134,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       <Select 
         value={selectedStrengthAgilitySort}
         onValueChange={handleStrengthAgilitySortChange}
+        disabled={selectedType !== 'Creature' && selectedType !== 'All Types'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Strength/Agility" />

@@ -31,13 +31,13 @@ const CardGalleryPage = () => {
   }, []);
 
   useEffect(() => {
-    let filtered = cards.filter(card => 
+    const filtered = cards.filter(card => 
       card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
       (element === 'all' || 
        (element === 'combinational' ? 
         ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) : 
-        card.element.toLowerCase() === element)) &&
-      (type === 'all' || card.type.toLowerCase() === type) &&
+        card.element.toLowerCase() === element.toLowerCase())) &&
+      (type === 'all' || card.type.toLowerCase() === type.toLowerCase()) &&
       (rarity === 'all' || 
        (rarity === 'common' && card.rarity === 'C') ||
        (rarity === 'uncommon' && card.rarity === 'U') ||

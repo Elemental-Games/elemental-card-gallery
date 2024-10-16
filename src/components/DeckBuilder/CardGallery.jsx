@@ -9,7 +9,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [sortOrder, setSortOrder] = useState('idDesc');
+  const [sortOrder, setSortOrder] = useState('idAsc');
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
@@ -19,14 +19,20 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     (type === 'all' || card.type === type)
   ).sort((a, b) => {
     switch (sortOrder) {
+      case 'idAsc':
+        return a.cardNumber - b.cardNumber;
       case 'idDesc':
         return b.cardNumber - a.cardNumber;
+      case 'strengthAsc':
+        return ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber);
       case 'strengthDesc':
         return ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
+      case 'agilityAsc':
+        return ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber);
       case 'agilityDesc':
         return ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
       default:
-        return b.cardNumber - a.cardNumber;
+        return a.cardNumber - b.cardNumber;
     }
   });
 
@@ -49,7 +55,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
-  const showCreatureStats = sortOrder === 'strengthDesc' || sortOrder === 'agilityDesc';
+  const showCreatureStats = sortOrder.includes('strength') || sortOrder.includes('agility');
 
   return (
     <div className="mt-4">
@@ -90,9 +96,12 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="idDesc">ID Number</SelectItem>
-            <SelectItem value="strengthDesc">Strength</SelectItem>
-            <SelectItem value="agilityDesc">Agility</SelectItem>
+            <SelectItem value="idAsc">Card ID (Lowest to Highest)</SelectItem>
+            <SelectItem value="idDesc">Card ID (Highest to Lowest)</SelectItem>
+            <SelectItem value="strengthAsc">Strength (Lowest to Highest)</SelectItem>
+            <SelectItem value="strengthDesc">Strength (Highest to Lowest)</SelectItem>
+            <SelectItem value="agilityAsc">Agility (Lowest to Highest)</SelectItem>
+            <SelectItem value="agilityDesc">Agility (Highest to Lowest)</SelectItem>
           </SelectContent>
         </Select>
       </div>

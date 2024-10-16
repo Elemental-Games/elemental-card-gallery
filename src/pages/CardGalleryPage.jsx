@@ -12,7 +12,7 @@ const CardGalleryPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [sortOrder, setSortOrder] = useState('asc');
+  const [sortOrder, setSortOrder] = useState('idAsc');
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -41,10 +41,21 @@ const CardGalleryPage = () => {
     );
 
     filtered.sort((a, b) => {
-      if (sortOrder === 'asc') {
-        return a.cardNumber - b.cardNumber;
-      } else {
-        return b.cardNumber - a.cardNumber;
+      switch (sortOrder) {
+        case 'idAsc':
+          return a.cardNumber - b.cardNumber;
+        case 'idDesc':
+          return b.cardNumber - a.cardNumber;
+        case 'strengthAsc':
+          return ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber);
+        case 'strengthDesc':
+          return ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
+        case 'agilityAsc':
+          return ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber);
+        case 'agilityDesc':
+          return ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
+        default:
+          return a.cardNumber - b.cardNumber;
       }
     });
 
@@ -59,8 +70,10 @@ const CardGalleryPage = () => {
     setSearchTerm('');
     setElement('all');
     setType('all');
-    setSortOrder('asc');
+    setSortOrder('idAsc');
   };
+
+  const showCreatureStats = sortOrder.includes('strength') || sortOrder.includes('agility');
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -101,11 +114,15 @@ const CardGalleryPage = () => {
         </Select>
         <Select value={sortOrder} onValueChange={handleSelectChange(setSortOrder)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort Order" />
+            <SelectValue placeholder="Sort By" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
+            <SelectItem value="idAsc">Card ID (Lowest to Highest)</SelectItem>
+            <SelectItem value="idDesc">Card ID (Highest to Lowest)</SelectItem>
+            <SelectItem value="strengthAsc">Strength (Lowest to Highest)</SelectItem>
+            <SelectItem value="strengthDesc">Strength (Highest to Lowest)</SelectItem>
+            <SelectItem value="agilityAsc">Agility (Lowest to Highest)</SelectItem>
+            <SelectItem value="agilityDesc">Agility (Highest to Lowest)</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>
@@ -130,6 +147,11 @@ const CardGalleryPage = () => {
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
+              {showCreatureStats && card.type === 'Creature' && (
+                <p className="text-sm text-gray-600">
+                  STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
+                </p>
+              )}
             </Card>
           </motion.div>
         ))}

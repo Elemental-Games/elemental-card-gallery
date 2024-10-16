@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,14 +14,52 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
   const types = ['All Types', ...new Set(cards.map(card => card.type))];
   const rarities = ['All Rarities', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
 
+  const [selectedElement, setSelectedElement] = useState('All Elements');
+  const [selectedType, setSelectedType] = useState('All Types');
+  const [selectedRarity, setSelectedRarity] = useState('All Rarities');
+  const [selectedIdSort, setSelectedIdSort] = useState('');
+  const [selectedStrengthAgilitySort, setSelectedStrengthAgilitySort] = useState('');
+
   const handleChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
-    if (filterType === 'element' || filterType === 'strengthAgilitySort') {
-      onFilterChange('type', 'Creature');
-      onFilterChange(filterType, value);
-    } else {
-      onFilterChange(filterType, value);
+    switch (filterType) {
+      case 'element':
+        setSelectedElement(value);
+        if (value !== 'All Elements') {
+          setSelectedType('Creature');
+          onFilterChange('type', 'Creature');
+        }
+        break;
+      case 'type':
+        setSelectedType(value);
+        if (value !== 'Creature' && value !== 'All Types') {
+          setSelectedElement('All Elements');
+          setSelectedStrengthAgilitySort('');
+        }
+        break;
+      case 'rarity':
+        setSelectedRarity(value);
+        break;
+      case 'idSort':
+        setSelectedIdSort(value);
+        break;
+      case 'strengthAgilitySort':
+        setSelectedStrengthAgilitySort(value);
+        setSelectedType('Creature');
+        onFilterChange('type', 'Creature');
+        break;
     }
+    onFilterChange(filterType, value);
+  };
+
+  const handleReset = () => {
+    setSearchTerm('');
+    setSelectedElement('All Elements');
+    setSelectedType('All Types');
+    setSelectedRarity('All Rarities');
+    setSelectedIdSort('');
+    setSelectedStrengthAgilitySort('');
+    onResetFilters();
   };
 
   return (
@@ -34,6 +72,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         className="flex-grow"
       />
       <Select 
+        value={selectedElement}
         onValueChange={(value) => handleChange('element', value)}
         disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
       >
@@ -46,8 +85,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
           ))}
         </SelectContent>
       </Select>
-
-      <Select onValueChange={(value) => handleChange('type', value)}>
+      <Select value={selectedType} onValueChange={(value) => handleChange('type', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
@@ -57,8 +95,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
           ))}
         </SelectContent>
       </Select>
-
-      <Select onValueChange={(value) => handleChange('rarity', value)}>
+      <Select value={selectedRarity} onValueChange={(value) => handleChange('rarity', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Rarities" />
         </SelectTrigger>
@@ -68,18 +105,18 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
           ))}
         </SelectContent>
       </Select>
-
-      <Select onValueChange={(value) => handleChange('idSort', value)}>
+      <Select value={selectedIdSort} onValueChange={(value) => handleChange('idSort', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="ID" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="">Sort by ID</SelectItem>
           <SelectItem value="asc">Lowest to Highest</SelectItem>
           <SelectItem value="desc">Highest to Lowest</SelectItem>
         </SelectContent>
       </Select>
-
       <Select 
+        value={selectedStrengthAgilitySort}
         onValueChange={(value) => handleChange('strengthAgilitySort', value)}
         disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
       >
@@ -87,14 +124,14 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
           <SelectValue placeholder="Strength/Agility" />
         </SelectTrigger>
         <SelectContent>
+          <SelectItem value="">Sort by Strength/Agility</SelectItem>
           <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
           <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
           <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
           <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
         </SelectContent>
       </Select>
-
-      <Button onClick={onResetFilters}>Reset Filters</Button>
+      <Button onClick={handleReset}>Reset Filters</Button>
     </div>
   );
 };

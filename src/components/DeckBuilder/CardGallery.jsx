@@ -12,34 +12,25 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [idSort, setIdSort] = useState(null);
   const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
   const [rarity, setRarity] = useState('all');
-  const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
-  const cardsPerPage = 8;
 
   useEffect(() => {
     try {
       console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
       const filtered = cards.filter(card => {
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = type.toLowerCase() === 'creature' || type === 'all' ? (
-          element === '' ? true :
-            element === 'combinational' ?
-              ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
-              card.element.toLowerCase() === element.toLowerCase()
-        ) : true;
-        const typeMatch = type === 'all' || card.type.toLowerCase() === type.toLowerCase();
-        const rarityMatch = rarity === 'all' ||
-          (rarity === 'common' && card.rarity === 'C') ||
-          (rarity === 'uncommon' && card.rarity === 'U') ||
-          (rarity === 'rare' && card.rarity.trim() === 'R') ||
-          (rarity === 'epic' && card.rarity === 'E') ||
-          (rarity === 'legendary' && card.rarity === 'L');
-        const strengthAgilityMatch = strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true;
+        const elementMatch = element === '' || element === 'All Elements' || (card.element && card.element === element);
+        const typeMatch = type === 'all' || type === 'All Types' || card.type === type;
+        const rarityMatch = rarity === 'all' || rarity === 'All Rarities' ||
+          (rarity === 'Common' && card.rarity === 'C') ||
+          (rarity === 'Uncommon' && card.rarity === 'U') ||
+          (rarity === 'Rare' && card.rarity.trim() === 'R') ||
+          (rarity === 'Epic' && card.rarity === 'E') ||
+          (rarity === 'Legendary' && card.rarity === 'L');
+        const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
 
         return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
       });
-
-      console.log('Filtered cards:', filtered);
 
       filtered.sort((a, b) => {
         if (idSort) {
@@ -68,24 +59,27 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value);
+        setElement(value === 'All Elements' ? '' : value);
+        if (value !== 'All Elements') {
+          setType('Creature');
+        }
         break;
       case 'type':
-        setType(value);
-        if (value.toLowerCase() !== 'creature' && value !== 'all') {
+        setType(value === 'All Types' ? 'all' : value);
+        if (value !== 'Creature' && value !== 'All Types') {
           setElement('');
           setStrengthAgilitySort(null);
         }
         break;
       case 'rarity':
-        setRarity(value);
+        setRarity(value === 'All Rarities' ? 'all' : value);
         break;
       case 'idSort':
         setIdSort(value);
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('creature');
+        setType('Creature');
         break;
       default:
         break;
@@ -99,6 +93,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     setIdSort(null);
     setStrengthAgilitySort(null);
     setRarity('all');
+    setFilteredCards(cards);  // Reset to show all cards
   };
 
   const handleCardClick = (card, amount) => {
@@ -154,7 +149,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
                 card.rarity
               }
             </p>
-            {strengthAgilitySort && card.type === 'Creature' && (
+            {card.type === 'Creature' && (
               <p className="text-center text-sm">
                 STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
               </p>
@@ -170,16 +165,6 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             </div>
           </Card>
         ))}
-      </div>
-      
-      <div className="mt-4 flex justify-center space-x-2">
-        <Button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
-          Previous
-        </Button>
-        <span className="self-center">{currentPage} / {Math.ceil(filteredCards.length / cardsPerPage)}</span>
-        <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredCards.length / cardsPerPage)))} disabled={currentPage === Math.ceil(filteredCards.length / cardsPerPage)}>
-          Next
-        </Button>
       </div>
     </div>
   );

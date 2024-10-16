@@ -36,26 +36,24 @@ const CardGalleryPage = () => {
     try {
       console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
       const filtered = cards.filter(card => {
+        console.log('Filtering card:', card.name, 'Type:', card.type, 'Element:', card.element);
+
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = type.toLowerCase() === 'creature' || type === 'all' ? (
-          element === '' ? true :
-            element === 'combinational' ?
-              ['Frost', 'Lightning', 'Lava', 'Crystal', 'Sand', 'Poison'].includes(card.element) :
-              card.element.toLowerCase() === element.toLowerCase()
-        ) : true;
-        const typeMatch = type === 'all' || card.type.toLowerCase() === type.toLowerCase();
+        const elementMatch = element === '' || (card.element && card.element === element);
+        const typeMatch = type === 'all' || card.type === type;
         const rarityMatch = rarity === 'all' ||
           (rarity === 'common' && card.rarity === 'C') ||
           (rarity === 'uncommon' && card.rarity === 'U') ||
           (rarity === 'rare' && card.rarity.trim() === 'R') ||
           (rarity === 'epic' && card.rarity === 'E') ||
           (rarity === 'legendary' && card.rarity === 'L');
-        const strengthAgilityMatch = strengthAgilitySort ? card.type.toLowerCase() === 'creature' : true;
+        const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
 
+        console.log('Matches:', { nameMatch, elementMatch, typeMatch, rarityMatch, strengthAgilityMatch });
         return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
       });
 
-      console.log('Filtered cards:', filtered);
+      console.log('Filtered cards:', filtered.map(card => ({ name: card.name, type: card.type, element: card.element })));
 
       filtered.sort((a, b) => {
         if (idSort) {
@@ -84,24 +82,19 @@ const CardGalleryPage = () => {
     console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value);
+        setElement(value === 'All Elements' ? '' : value);
         break;
       case 'type':
-        setType(value);
-        if (value.toLowerCase() !== 'creature' && value !== 'all') {
-          setElement('');
-          setStrengthAgilitySort(null);
-        }
+        setType(value === 'All Types' ? 'all' : value);
         break;
       case 'rarity':
-        setRarity(value);
+        setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
         break;
       case 'idSort':
         setIdSort(value);
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('creature');
         break;
       default:
         break;

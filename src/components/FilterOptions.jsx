@@ -45,19 +45,15 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
   };
 
   const handleElementChange = (value) => {
+    console.log('Element selected:', value);
     setSelectedElement(value);
-    onFilterChange('element', value === 'All Elements' ? '' : value.toLowerCase());
+    onFilterChange('element', value === 'All Elements' ? '' : value);
   };
 
   const handleTypeChange = (value) => {
+    console.log('Type selected:', value);
     setSelectedType(value);
-    onFilterChange('type', value === 'All Types' ? 'all' : value.toLowerCase());
-    if (value !== 'Creature' && value !== 'All Types') {
-      setSelectedElement('');
-      setSelectedStrengthAgilitySort('');
-      onFilterChange('element', '');
-      onFilterChange('strengthAgilitySort', null);
-    }
+    onFilterChange('type', value === 'All Types' ? 'all' : value);
   };
 
   const handleRarityChange = (value) => {
@@ -96,8 +92,9 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         value={selectedElement} 
         onValueChange={handleElementChange}
         disabled={isElementDisabled}
+        onOpenChange={preventPropagation}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px]" onClick={preventPropagation}>
           <SelectValue placeholder="Select Element" />
         </SelectTrigger>
         <SelectContent>
@@ -107,8 +104,8 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select value={selectedType} onValueChange={handleTypeChange}>
-        <SelectTrigger className="w-[180px]">
+      <Select value={selectedType} onValueChange={handleTypeChange} onOpenChange={preventPropagation}>
+        <SelectTrigger className="w-[180px]" onClick={preventPropagation}>
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
         <SelectContent>
@@ -118,8 +115,8 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select value={selectedRarity} onValueChange={handleRarityChange}>
-        <SelectTrigger className="w-[180px]">
+      <Select value={selectedRarity} onValueChange={handleRarityChange} onOpenChange={preventPropagation}>
+        <SelectTrigger className="w-[180px]" onClick={preventPropagation}>
           <SelectValue placeholder="All Rarities" />
         </SelectTrigger>
         <SelectContent>
@@ -129,8 +126,8 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select value={selectedIdSort} onValueChange={handleIdSortChange}>
-        <SelectTrigger className="w-[180px]">
+      <Select value={selectedIdSort} onValueChange={handleIdSortChange} onOpenChange={preventPropagation}>
+        <SelectTrigger className="w-[180px]" onClick={preventPropagation}>
           <SelectValue placeholder="ID" />
         </SelectTrigger>
         <SelectContent>
@@ -143,8 +140,9 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         value={selectedStrengthAgilitySort}
         onValueChange={handleStrengthAgilitySortChange}
         disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
+        onOpenChange={preventPropagation}
       >
-        <SelectTrigger className="w-[180px]">
+        <SelectTrigger className="w-[180px]" onClick={preventPropagation}>
           <SelectValue placeholder="Strength/Agility" />
         </SelectTrigger>
         <SelectContent>

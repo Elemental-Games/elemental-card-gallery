@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Minus } from 'lucide-react';
 
-const CardGallery = ({ cards, onCardSelect }) => {
+const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
@@ -28,14 +28,20 @@ const CardGallery = ({ cards, onCardSelect }) => {
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
   const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
 
-  const handleCardClick = (card) => {
+  const handleCardClick = (card, amount) => {
     if (onCardSelect) {
-      onCardSelect(card);
+      onCardSelect(card, amount);
     }
   };
 
   const handleSelectChange = (setter) => (value) => {
     setter(value);
+  };
+
+  const getCardCount = (cardId) => {
+    const mainDeckCard = deck.mainDeck.find(c => c.id === cardId);
+    const sideDeckCard = deck.sideDeck.find(c => c.id === cardId);
+    return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
   return (
@@ -86,8 +92,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
         {displayedCards.map((card) => (
           <Card 
             key={card.id} 
-            className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200" 
-            onClick={() => handleCardClick(card)}
+            className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
           >
             <img 
               src={card.image} 
@@ -99,13 +104,12 @@ const CardGallery = ({ cards, onCardSelect }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
-            <p className="text-center text-sm text-gray-600">Card Number: {card.cardNumber}</p>
             <div className="flex justify-center items-center mt-2">
-              <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); onCardSelect(card, -1); }}>
+              <Button size="sm" variant="outline" onClick={() => handleCardClick(card, -1)}>
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="mx-2">{card.quantity || 0}</span>
-              <Button size="sm" variant="outline" onClick={(e) => { e.stopPropagation(); onCardSelect(card, 1); }}>
+              <span className="mx-2">{getCardCount(card.id)}</span>
+              <Button size="sm" variant="outline" onClick={() => handleCardClick(card, 1)}>
                 <Plus className="h-4 w-4" />
               </Button>
             </div>

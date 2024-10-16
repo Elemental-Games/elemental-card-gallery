@@ -71,6 +71,30 @@ const DeckBuilderPage = () => {
     return count < 3;
   };
 
+  const handleCardSelect = (card, amount) => {
+    const updateDeck = (deck, setDeck) => {
+      const index = deck.findIndex(c => c.id === card.id);
+      if (index === -1 && amount > 0) {
+        setDeck([...deck, { ...card, quantity: 1 }]);
+      } else if (index !== -1) {
+        const newDeck = [...deck];
+        const newQuantity = Math.min(Math.max((newDeck[index].quantity || 0) + amount, 0), 3);
+        if (newQuantity === 0) {
+          newDeck.splice(index, 1);
+        } else {
+          newDeck[index] = { ...newDeck[index], quantity: newQuantity };
+        }
+        setDeck(newDeck);
+      }
+    };
+
+    if (card.type === 'Shield') {
+      updateDeck(sideDeck, setSideDeck);
+    } else {
+      updateDeck(mainDeck, setMainDeck);
+    }
+  };
+
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
 
@@ -119,13 +143,8 @@ const DeckBuilderPage = () => {
               {showCardList && (
                 <CardGallery
                   cards={allCards}
-                  onCardSelect={(card) => {
-                    if (card.type === 'Shield') {
-                      setSideDeck([...sideDeck, { ...card, quantity: 1 }]);
-                    } else {
-                      setMainDeck([...mainDeck, { ...card, quantity: 1 }]);
-                    }
-                  }}
+                  onCardSelect={handleCardSelect}
+                  deck={{ mainDeck, sideDeck }}
                 />
               )}
             </div>

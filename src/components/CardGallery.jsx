@@ -12,7 +12,7 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={card.image} 
+          src={`/cards/${card.id}.png`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
@@ -41,7 +41,13 @@ const CardGallery = () => {
         }
         return response.json();
       })
-      .then(data => setCards(data))
+      .then(data => {
+        if (Array.isArray(data.cards)) {
+          setCards(data.cards);
+        } else {
+          throw new Error('Invalid data format');
+        }
+      })
       .catch(error => {
         console.error('Error fetching cards:', error);
         setError('Error loading cards. Please try again later.');

@@ -117,6 +117,7 @@ const CardGalleryPage = () => {
     setIdSort(null);
     setStrengthAgilitySort(null);
     setRarity('all');
+    setFilteredCards(cards);  // Reset to show all cards
   };
 
   if (error) {

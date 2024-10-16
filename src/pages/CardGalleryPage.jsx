@@ -13,8 +13,7 @@ const CardGalleryPage = () => {
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
   const [idSort, setIdSort] = useState(null);
-  const [strengthSort, setStrengthSort] = useState(null);
-  const [agilitySort, setAgilitySort] = useState(null);
+  const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -46,21 +45,19 @@ const CardGalleryPage = () => {
       if (idSort) {
         return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
       }
-      if (strengthSort) {
-        return strengthSort === 'asc' 
-          ? ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber)
-          : ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
-      }
-      if (agilitySort) {
-        return agilitySort === 'asc'
-          ? ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber)
-          : ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
+      if (strengthAgilitySort) {
+        const [attribute, order] = strengthAgilitySort.split('-');
+        const aValue = a[attribute] || 0;
+        const bValue = b[attribute] || 0;
+        return order === 'asc' 
+          ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
+          : (bValue - aValue) || (b.cardNumber - a.cardNumber);
       }
       return a.cardNumber - b.cardNumber;
     });
 
     setFilteredCards(filtered);
-  }, [searchTerm, element, type, cards, idSort, strengthSort, agilitySort]);
+  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort]);
 
   const handleSelectChange = (setter) => (value) => {
     setter(value);
@@ -71,11 +68,8 @@ const CardGalleryPage = () => {
     setElement('all');
     setType('all');
     setIdSort(null);
-    setStrengthSort(null);
-    setAgilitySort(null);
+    setStrengthAgilitySort(null);
   };
-
-  const showCreatureStats = strengthSort || agilitySort;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -123,22 +117,15 @@ const CardGalleryPage = () => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthSort} onValueChange={handleSelectChange(setStrengthSort)}>
+        <Select value={strengthAgilitySort} onValueChange={handleSelectChange(setStrengthAgilitySort)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Strength" />
+            <SelectValue placeholder="Strength/Agility" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={agilitySort} onValueChange={handleSelectChange(setAgilitySort)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Agility" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
+            <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
+            <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
+            <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
+            <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>
@@ -163,7 +150,7 @@ const CardGalleryPage = () => {
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
-              {showCreatureStats && card.type === 'Creature' && (
+              {strengthAgilitySort && card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
                 </p>

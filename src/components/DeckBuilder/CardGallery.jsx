@@ -10,8 +10,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
   const [idSort, setIdSort] = useState(null);
-  const [strengthSort, setStrengthSort] = useState(null);
-  const [agilitySort, setAgilitySort] = useState(null);
+  const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
@@ -23,15 +22,13 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     if (idSort) {
       return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
     }
-    if (strengthSort) {
-      return strengthSort === 'asc' 
-        ? ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber)
-        : ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
-    }
-    if (agilitySort) {
-      return agilitySort === 'asc'
-        ? ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber)
-        : ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
+    if (strengthAgilitySort) {
+      const [attribute, order] = strengthAgilitySort.split('-');
+      const aValue = a[attribute] || 0;
+      const bValue = b[attribute] || 0;
+      return order === 'asc' 
+        ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
+        : (bValue - aValue) || (b.cardNumber - a.cardNumber);
     }
     return a.cardNumber - b.cardNumber;
   });
@@ -55,15 +52,12 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
-  const showCreatureStats = strengthSort || agilitySort;
-
   const resetFilters = () => {
     setSearchTerm('');
     setElement('all');
     setType('all');
     setIdSort(null);
-    setStrengthSort(null);
-    setAgilitySort(null);
+    setStrengthAgilitySort(null);
   };
 
   return (
@@ -109,22 +103,15 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={strengthSort} onValueChange={handleSelectChange(setStrengthSort)}>
+        <Select value={strengthAgilitySort} onValueChange={handleSelectChange(setStrengthAgilitySort)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Strength" />
+            <SelectValue placeholder="Strength/Agility" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select value={agilitySort} onValueChange={handleSelectChange(setAgilitySort)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Agility" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
+            <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
+            <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
+            <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
+            <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
           </SelectContent>
         </Select>
         <Button onClick={resetFilters}>Reset Filters</Button>
@@ -145,7 +132,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
               }}
             />
             <p className="text-center mt-2">{card.name}</p>
-            {showCreatureStats && card.type === 'Creature' && (
+            {strengthAgilitySort && card.type === 'Creature' && (
               <p className="text-center text-sm">
                 STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
               </p>

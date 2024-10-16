@@ -34,6 +34,10 @@ const CardGallery = ({ cards, onCardSelect }) => {
     }
   };
 
+  const handleSelectChange = (setter) => (value) => {
+    setter(value);
+  };
+
   return (
     <div className="mt-4">
       <div className="mb-4 flex space-x-4">
@@ -44,7 +48,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-grow"
         />
-        <Select value={element} onValueChange={setElement}>
+        <Select value={element} onValueChange={handleSelectChange(setElement)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Element" />
           </SelectTrigger>
@@ -56,7 +60,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
             <SelectItem value="Air">Air</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={type} onValueChange={setType}>
+        <Select value={type} onValueChange={handleSelectChange(setType)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
@@ -68,7 +72,7 @@ const CardGallery = ({ cards, onCardSelect }) => {
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={sortOrder} onValueChange={setSortOrder}>
+        <Select value={sortOrder} onValueChange={handleSelectChange(setSortOrder)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Sort Order" />
           </SelectTrigger>

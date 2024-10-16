@@ -36,7 +36,6 @@ const CardGalleryPage = () => {
       (type === 'all' || card.type === type)
     );
 
-    // Sort the filtered cards
     filtered.sort((a, b) => {
       if (sortOrder === 'asc') {
         return a.cardNumber - b.cardNumber;
@@ -47,6 +46,10 @@ const CardGalleryPage = () => {
 
     setFilteredCards(filtered);
   }, [searchTerm, element, type, cards, sortOrder]);
+
+  const handleSelectChange = (setter) => (value) => {
+    setter(value);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -60,7 +63,7 @@ const CardGalleryPage = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="flex-grow"
         />
-        <Select value={element} onValueChange={setElement}>
+        <Select value={element} onValueChange={handleSelectChange(setElement)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Element" />
           </SelectTrigger>
@@ -72,7 +75,7 @@ const CardGalleryPage = () => {
             <SelectItem value="Air">Air</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={type} onValueChange={setType}>
+        <Select value={type} onValueChange={handleSelectChange(setType)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Type" />
           </SelectTrigger>
@@ -84,7 +87,7 @@ const CardGalleryPage = () => {
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={sortOrder} onValueChange={setSortOrder}>
+        <Select value={sortOrder} onValueChange={handleSelectChange(setSortOrder)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Sort Order" />
           </SelectTrigger>

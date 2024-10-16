@@ -1,4 +1,6 @@
 import React from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -7,13 +9,20 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const FilterOptions = ({ cards, onFilterChange }) => {
+const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm }) => {
   const elements = [...new Set(cards.map(card => card.element))];
   const types = [...new Set(cards.map(card => card.type))];
   const rarities = [...new Set(cards.map(card => card.rarity))];
 
   return (
-    <div className="flex space-x-4">
+    <div className="flex flex-wrap gap-4 mb-4">
+      <Input
+        type="text"
+        placeholder="Search cards..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="flex-grow"
+      />
       <Select onValueChange={(value) => onFilterChange('element', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Element" />
@@ -49,6 +58,32 @@ const FilterOptions = ({ cards, onFilterChange }) => {
           ))}
         </SelectContent>
       </Select>
+
+      <Select onValueChange={(value) => onFilterChange('idSort', value)}>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="ID" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="asc">Lowest to Highest</SelectItem>
+          <SelectItem value="desc">Highest to Lowest</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <Select 
+        onValueChange={(value) => onFilterChange('strengthAgilitySort', value)}
+      >
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Strength/Agility" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
+          <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
+          <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
+          <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
+        </SelectContent>
+      </Select>
+
+      <Button onClick={onResetFilters}>Reset Filters</Button>
     </div>
   );
 };

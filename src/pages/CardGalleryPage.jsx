@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FilterOptions from '../components/FilterOptions';
@@ -77,6 +74,13 @@ const CardGalleryPage = () => {
       case 'rarity':
         setRarity(value);
         break;
+      case 'idSort':
+        setIdSort(value);
+        break;
+      case 'strengthAgilitySort':
+        setStrengthAgilitySort(value);
+        if (value) setType('Creature');
+        break;
       default:
         break;
     }
@@ -95,44 +99,13 @@ const CardGalleryPage = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Card Gallery</h1>
       
-      <div className="mb-4 flex flex-wrap gap-4">
-        <Input
-          type="text"
-          placeholder="Search cards..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow"
-        />
-        <FilterOptions cards={cards} onFilterChange={handleFilterChange} />
-        <Select value={idSort} onValueChange={(value) => setIdSort(value)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="ID" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select 
-          value={strengthAgilitySort} 
-          onValueChange={(value) => {
-            setStrengthAgilitySort(value);
-            if (value) setType('Creature');
-          }}
-          disabled={['Rune', 'Counter', 'Shield'].includes(type)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Strength/Agility" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
-            <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
-            <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
-            <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
-          </SelectContent>
-        </Select>
-        <Button onClick={resetFilters}>Reset Filters</Button>
-      </div>
+      <FilterOptions 
+        cards={cards}
+        onFilterChange={handleFilterChange}
+        onResetFilters={resetFilters}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {filteredCards.map((card) => (

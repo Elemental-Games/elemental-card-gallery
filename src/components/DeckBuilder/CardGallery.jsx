@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Plus, Minus } from 'lucide-react';
 import FilterOptions from '../FilterOptions';
 
 const CardGallery = ({ cards, onCardSelect, deck }) => {
+  const [filteredCards, setFilteredCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
@@ -16,35 +15,35 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
-  const filteredCards = cards.filter(card => 
-    card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-    (element === 'all' || card.element === element) &&
-    (type === 'all' || card.type === type) &&
-    (rarity === 'all' || card.rarity === rarity) &&
-    (strengthAgilitySort ? card.type === 'Creature' : true)
-  ).sort((a, b) => {
-    if (idSort) {
-      return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
-    }
-    if (strengthAgilitySort) {
-      const [attribute, order] = strengthAgilitySort.split('-');
-      const aValue = a[attribute] || 0;
-      const bValue = b[attribute] || 0;
-      return order === 'asc' 
-        ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
-        : (bValue - aValue) || (b.cardNumber - a.cardNumber);
-    }
-    return a.cardNumber - b.cardNumber;
-  });
+  useEffect(() => {
+    const filtered = cards.filter(card => 
+      card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
+      (element === 'all' || 
+       (element === 'Combinational' ? 
+        ['Frost', 'Lava', 'Sand', 'Crystal', 'Poison', 'Lightning'].includes(card.element) : 
+        card.element === element)) &&
+      (type === 'all' || card.type === type) &&
+      (rarity === 'all' || card.rarity === rarity) &&
+      (strengthAgilitySort ? card.type === 'Creature' : true)
+    );
 
-  const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
-  const displayedCards = filteredCards.slice((currentPage - 1) * cardsPerPage, currentPage * cardsPerPage);
+    filtered.sort((a, b) => {
+      if (idSort) {
+        return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+      }
+      if (strengthAgilitySort) {
+        const [attribute, order] = strengthAgilitySort.split('-');
+        const aValue = a[attribute] || 0;
+        const bValue = b[attribute] || 0;
+        return order === 'asc' 
+          ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
+          : (bValue - aValue) || (b.cardNumber - a.cardNumber);
+      }
+      return a.cardNumber - b.cardNumber;
+    });
 
-  const handleCardClick = (card, amount) => {
-    if (onCardSelect) {
-      onCardSelect(card, amount);
-    }
-  };
+    setFilteredCards(filtered);
+  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
 
   const handleFilterChange = (filterType, value) => {
     switch (filterType) {
@@ -60,15 +59,16 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
       case 'rarity':
         setRarity(value);
         break;
+      case 'idSort':
+        setIdSort(value);
+        break;
+      case 'strengthAgilitySort':
+        setStrengthAgilitySort(value);
+        if (value) setType('Creature');
+        break;
       default:
         break;
     }
-  };
-
-  const getCardCount = (cardId) => {
-    const mainDeckCard = deck.mainDeck.find(c => c.id === cardId);
-    const sideDeckCard = deck.sideDeck.find(c => c.id === cardId);
-    return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
   const resetFilters = () => {
@@ -80,48 +80,30 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     setRarity('all');
   };
 
+  const handleCardClick = (card, amount) => {
+    if (onCardSelect) {
+      onCardSelect(card, amount);
+    }
+  };
+
+  const getCardCount = (cardId) => {
+    const mainDeckCard = deck.mainDeck.find(c => c.id === cardId);
+    const sideDeckCard = deck.sideDeck.find(c => c.id === cardId);
+    return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
+  };
+
   return (
     <div className="mt-4">
-      <div className="mb-4 flex flex-wrap gap-4">
-        <Input
-          type="text"
-          placeholder="Search cards..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="flex-grow"
-        />
-        <FilterOptions cards={cards} onFilterChange={handleFilterChange} />
-        <Select value={idSort} onValueChange={(value) => setIdSort(value)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="ID" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="asc">Lowest to Highest</SelectItem>
-            <SelectItem value="desc">Highest to Lowest</SelectItem>
-          </SelectContent>
-        </Select>
-        <Select 
-          value={strengthAgilitySort} 
-          onValueChange={(value) => {
-            setStrengthAgilitySort(value);
-            if (value) setType('Creature');
-          }}
-          disabled={['Rune', 'Counter', 'Shield'].includes(type)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Strength/Agility" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
-            <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
-            <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
-            <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
-          </SelectContent>
-        </Select>
-        <Button onClick={resetFilters}>Reset Filters</Button>
-      </div>
+      <FilterOptions 
+        cards={cards}
+        onFilterChange={handleFilterChange}
+        onResetFilters={resetFilters}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+      />
+
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {displayedCards.map((card) => (
+        {filteredCards.map((card) => (
           <Card 
             key={card.id} 
             className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
@@ -158,8 +140,8 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         <Button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
           Previous
         </Button>
-        <span className="self-center">{currentPage} / {pageCount}</span>
-        <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, pageCount))} disabled={currentPage === pageCount}>
+        <span className="self-center">{currentPage} / {Math.ceil(filteredCards.length / cardsPerPage)}</span>
+        <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredCards.length / cardsPerPage)))} disabled={currentPage === Math.ceil(filteredCards.length / cardsPerPage)}>
           Next
         </Button>
       </div>

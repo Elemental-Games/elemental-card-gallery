@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
@@ -32,7 +33,10 @@ const CardGalleryPage = () => {
   useEffect(() => {
     let filtered = cards.filter(card => 
       card.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (element === 'all' || card.element === element) &&
+      (element === 'all' || 
+       (element === 'Combinational' ? 
+        ['Frost', 'Lava', 'Sand', 'Crystal', 'Poison', 'Lightning'].includes(card.element) : 
+        card.element === element)) &&
       (type === 'all' || card.type === type)
     );
 
@@ -51,11 +55,18 @@ const CardGalleryPage = () => {
     setter(value);
   };
 
+  const resetFilters = () => {
+    setSearchTerm('');
+    setElement('all');
+    setType('all');
+    setSortOrder('asc');
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Card Gallery</h1>
       
-      <div className="mb-4 flex space-x-4">
+      <div className="mb-4 flex flex-wrap gap-4">
         <Input
           type="text"
           placeholder="Search cards..."
@@ -73,6 +84,7 @@ const CardGalleryPage = () => {
             <SelectItem value="Water">Water</SelectItem>
             <SelectItem value="Earth">Earth</SelectItem>
             <SelectItem value="Air">Air</SelectItem>
+            <SelectItem value="Combinational">Combinational</SelectItem>
           </SelectContent>
         </Select>
         <Select value={type} onValueChange={handleSelectChange(setType)}>
@@ -96,6 +108,7 @@ const CardGalleryPage = () => {
             <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
+        <Button onClick={resetFilters}>Reset Filters</Button>
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -117,7 +130,6 @@ const CardGalleryPage = () => {
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>
               <p className="text-sm text-gray-600">{card.element} | {card.type}</p>
-              <p className="text-sm text-gray-600">Card Number: {card.cardNumber}</p>
             </Card>
           </motion.div>
         ))}

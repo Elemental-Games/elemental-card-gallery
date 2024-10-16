@@ -70,7 +70,7 @@ const CardGalleryPage = () => {
   const handleFilterChange = (filterType, value) => {
     switch (filterType) {
       case 'element':
-        setElement(value);
+        setElement(value.toLowerCase());
         break;
       case 'type':
         setType(value);

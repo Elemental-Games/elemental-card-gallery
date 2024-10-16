@@ -33,68 +33,77 @@ const CardGalleryPage = () => {
   }, []);
 
   useEffect(() => {
-    console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
-    const filtered = cards.filter(card => {
-      console.log('Filtering card:', card.name, 'Type:', card.type, 'Element:', card.element);
+    try {
+      console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort });
+      const filtered = cards.filter(card => {
+        console.log('Filtering card:', card.name, 'Type:', card.type, 'Element:', card.element);
 
-      const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-      const elementMatch = element === '' || (card.element && card.element === element);
-      const typeMatch = type === 'all' || card.type === type;
-      const rarityMatch = rarity === 'all' ||
-        (rarity === 'common' && card.rarity === 'C') ||
-        (rarity === 'uncommon' && card.rarity === 'U') ||
-        (rarity === 'rare' && card.rarity.trim() === 'R') ||
-        (rarity === 'epic' && card.rarity === 'E') ||
-        (rarity === 'legendary' && card.rarity === 'L');
-      const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
+        const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+        const elementMatch = element === '' || (card.element && card.element === element);
+        const typeMatch = type === 'all' || card.type === type;
+        const rarityMatch = rarity === 'all' ||
+          (rarity === 'common' && card.rarity === 'C') ||
+          (rarity === 'uncommon' && card.rarity === 'U') ||
+          (rarity === 'rare' && card.rarity.trim() === 'R') ||
+          (rarity === 'epic' && card.rarity === 'E') ||
+          (rarity === 'legendary' && card.rarity === 'L');
+        const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
 
-      // Special handling for Shield, Rune, and Counter types
-      if (type === 'Shield' || type === 'Rune' || type === 'Counter') {
-        return card.type === type;
-      }
+        // Special handling for Shield, Rune, and Counter types
+        if (type === 'Shield' || type === 'Rune' || type === 'Counter') {
+          return card.type === type;
+        }
 
-      console.log('Matches:', { nameMatch, elementMatch, typeMatch, rarityMatch, strengthAgilityMatch });
-      return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
-    });
+        console.log('Matches:', { nameMatch, elementMatch, typeMatch, rarityMatch, strengthAgilityMatch });
+        return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch;
+      });
 
-    filtered.sort((a, b) => {
-      if (idSort) {
-        return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
-      }
-      if (strengthAgilitySort) {
-        const [attribute, order] = strengthAgilitySort.split('-');
-        const aValue = Number(a[attribute]) || 0;
-        const bValue = Number(b[attribute]) || 0;
-        return order === 'asc' 
-          ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
-          : (bValue - aValue) || (b.cardNumber - a.cardNumber);
-      }
-      return a.cardNumber - b.cardNumber;
-    });
+      filtered.sort((a, b) => {
+        if (idSort) {
+          return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
+        }
+        if (strengthAgilitySort) {
+          const [attribute, order] = strengthAgilitySort.split('-');
+          const aValue = Number(a[attribute]) || 0;
+          const bValue = Number(b[attribute]) || 0;
+          return order === 'asc' 
+            ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
+            : (bValue - aValue) || (b.cardNumber - a.cardNumber);
+        }
+        return a.cardNumber - b.cardNumber;
+      });
 
-    setFilteredCards(filtered);
-    setError(null);
+      setFilteredCards(filtered);
+      setError(null);
+    } catch (error) {
+      console.error('Error filtering cards:', error);
+      setError('An error occurred while filtering cards. Please try again.');
+    }
   }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
 
   const handleFilterChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value);
-        setType('Creature');
+        setElement(value === 'All Elements' ? '' : value);
+        setType('Creature');  // Set type to Creature when an element is selected
         break;
       case 'type':
-        setType(value);
+        setType(value === 'All Types' ? 'all' : value);
+        if (value !== 'Creature') {
+          setElement('');  // Clear element filter if type is not Creature
+          setStrengthAgilitySort(null);  // Clear strength/agility sort if type is not Creature
+        }
         break;
       case 'rarity':
-        setRarity(value);
+        setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
         break;
       case 'idSort':
         setIdSort(value);
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('Creature');
+        setType('Creature');  // Set type to Creature when strength/agility sort is selected
         break;
       default:
         break;
@@ -108,7 +117,6 @@ const CardGalleryPage = () => {
     setIdSort(null);
     setStrengthAgilitySort(null);
     setRarity('all');
-    setFilteredCards(cards);
   };
 
   if (error) {

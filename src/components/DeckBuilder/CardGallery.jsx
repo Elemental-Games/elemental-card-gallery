@@ -9,7 +9,9 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('all');
   const [type, setType] = useState('all');
-  const [sortOrder, setSortOrder] = useState('idAsc');
+  const [idSort, setIdSort] = useState('asc');
+  const [strengthSort, setStrengthSort] = useState(null);
+  const [agilitySort, setAgilitySort] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 8;
 
@@ -18,22 +20,17 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     (element === 'all' || card.element === element) &&
     (type === 'all' || card.type === type)
   ).sort((a, b) => {
-    switch (sortOrder) {
-      case 'idAsc':
-        return a.cardNumber - b.cardNumber;
-      case 'idDesc':
-        return b.cardNumber - a.cardNumber;
-      case 'strengthAsc':
-        return ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber);
-      case 'strengthDesc':
-        return ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
-      case 'agilityAsc':
-        return ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber);
-      case 'agilityDesc':
-        return ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
-      default:
-        return a.cardNumber - b.cardNumber;
+    if (strengthSort) {
+      return strengthSort === 'asc' 
+        ? ((a.strength || 0) - (b.strength || 0)) || (a.cardNumber - b.cardNumber)
+        : ((b.strength || 0) - (a.strength || 0)) || (b.cardNumber - a.cardNumber);
     }
+    if (agilitySort) {
+      return agilitySort === 'asc'
+        ? ((a.agility || 0) - (b.agility || 0)) || (a.cardNumber - b.cardNumber)
+        : ((b.agility || 0) - (a.agility || 0)) || (b.cardNumber - a.cardNumber);
+    }
+    return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
   });
 
   const pageCount = Math.ceil(filteredCards.length / cardsPerPage);
@@ -55,7 +52,13 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
-  const showCreatureStats = sortOrder.includes('strength') || sortOrder.includes('agility');
+  const showCreatureStats = strengthSort || agilitySort;
+
+  const handleSortChange = (sortType, order) => {
+    setIdSort(sortType === 'id' ? order : null);
+    setStrengthSort(sortType === 'strength' ? order : null);
+    setAgilitySort(sortType === 'agility' ? order : null);
+  };
 
   return (
     <div className="mt-4">
@@ -91,17 +94,31 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             <SelectItem value="Shield">Shield</SelectItem>
           </SelectContent>
         </Select>
-        <Select value={sortOrder} onValueChange={handleSelectChange(setSortOrder)}>
+        <Select value={idSort} onValueChange={(value) => handleSortChange('id', value)}>
           <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Sort By" />
+            <SelectValue placeholder="ID" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="idAsc">Card ID (Lowest to Highest)</SelectItem>
-            <SelectItem value="idDesc">Card ID (Highest to Lowest)</SelectItem>
-            <SelectItem value="strengthAsc">Strength (Lowest to Highest)</SelectItem>
-            <SelectItem value="strengthDesc">Strength (Highest to Lowest)</SelectItem>
-            <SelectItem value="agilityAsc">Agility (Lowest to Highest)</SelectItem>
-            <SelectItem value="agilityDesc">Agility (Highest to Lowest)</SelectItem>
+            <SelectItem value="asc">Lowest to Highest</SelectItem>
+            <SelectItem value="desc">Highest to Lowest</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={strengthSort} onValueChange={(value) => handleSortChange('strength', value)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Strength" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="asc">Lowest to Highest</SelectItem>
+            <SelectItem value="desc">Highest to Lowest</SelectItem>
+          </SelectContent>
+        </Select>
+        <Select value={agilitySort} onValueChange={(value) => handleSortChange('agility', value)}>
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Agility" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="asc">Lowest to Highest</SelectItem>
+            <SelectItem value="desc">Highest to Lowest</SelectItem>
           </SelectContent>
         </Select>
       </div>

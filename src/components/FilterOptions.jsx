@@ -17,7 +17,12 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleChange = (filterType, value) => {
     console.log(`Changing filter: ${filterType} to ${value}`);
-    onFilterChange(filterType, value);
+    if (filterType === 'tier') {
+      const tierValue = value === 'Tier I' ? 1 : value === 'Tier II' ? 2 : value === 'Tier III' ? 3 : null;
+      onFilterChange(filterType, tierValue);
+    } else {
+      onFilterChange(filterType, value);
+    }
   };
 
   const showStrengthAgilitySort = currentType.toLowerCase() === 'creature' || currentType === 'all';

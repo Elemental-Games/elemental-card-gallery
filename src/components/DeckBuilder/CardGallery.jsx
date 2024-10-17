@@ -12,6 +12,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   const [idSort, setIdSort] = useState(null);
   const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
   const [rarity, setRarity] = useState('all');
+  const [tier, setTier] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [error, setError] = useState(null);
   const cardsPerPage = 20;
@@ -28,8 +29,9 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
           (rarity === 'rare' && card.rarity.trim() === 'R') ||
           (rarity === 'epic' && card.rarity === 'E') ||
           (rarity === 'legendary' && card.rarity === 'L');
+        const tierMatch = tier === null || card.tier === tier;
 
-        return nameMatch && elementMatch && typeMatch && rarityMatch;
+        return nameMatch && elementMatch && typeMatch && rarityMatch && tierMatch;
       });
 
       filtered.sort((a, b) => {
@@ -53,7 +55,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
       console.error('Error filtering cards:', error);
       setError('An error occurred while filtering cards. Please try again.');
     }
-  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity]);
+  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity, tier]);
 
   const handleFilterChange = (filterType, value) => {
     switch (filterType) {
@@ -72,6 +74,9 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
         break;
+      case 'tier':
+        setTier(value);
+        break;
       default:
         break;
     }
@@ -84,6 +89,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     setIdSort(null);
     setStrengthAgilitySort(null);
     setRarity('all');
+    setTier(null);
   };
 
   const handleCardClick = (card, amount) => {

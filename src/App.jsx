@@ -13,10 +13,6 @@ import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
-import GameplayPage from "./pages/GameplayPage";
-import RulesPage from "./pages/RulesPage";
-import LearnToPlayPage from "./pages/LearnToPlayPage";
-import BattleSimulatorPage from "./pages/BattleSimulatorPage";
 
 const queryClient = new QueryClient();
 
@@ -48,10 +44,6 @@ const App = () => (
                   <Route path="/cards/gallery" element={<CardGalleryPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/cards/:id" element={<CardDetailPage />} />
-                  <Route path="/gameplay" element={<GameplayPage />} />
-                  <Route path="/gameplay/rules" element={<RulesPage />} />
-                  <Route path="/gameplay/learn-to-play" element={<LearnToPlayPage />} />
-                  <Route path="/gameplay/battle-simulator" element={<BattleSimulatorPage />} />
                 </Routes>
               </main>
               <Footer />

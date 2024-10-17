@@ -1924,8 +1924,8 @@
     },
     {
       "cardNumber": 106,
-      "id": "essence-leech",
-      "name": "Essence Leech",
+      "id": "equilibrium",
+      "name": "Equilibrium",
       "type": "Counter",
       "rarity": "C",
       "ability": "Your opponent depletes all of the essence generated.",
@@ -1933,7 +1933,7 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/essence-leech.png"
+      "image": "/images/cards/equilibrium.png"
     },
     {
       "cardNumber": 107,

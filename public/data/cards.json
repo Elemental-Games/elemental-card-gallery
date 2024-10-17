@@ -1757,7 +1757,7 @@
     },
     {
       "cardNumber": 94,
-      "id": "statis-field",
+      "id": "stasis-field",
       "name": "Stasis Field",
       "type": "Rune",
       "rune": "Instant",
@@ -1766,7 +1766,7 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/statis-field.png",
+      "image": "/images/cards/stasis-field.png",
       "trigger": null
     },
     {

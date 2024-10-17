@@ -1367,7 +1367,7 @@
     },
     {
       "cardNumber": 73,
-      "id": "nimbus-the-air-titan",
+      "id": "nimbus",
       "name": "Nimbus | The Air Titan",
       "element": "Air",
       "type": "Creature",
@@ -1384,12 +1384,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/nimbus-the-air-titan.png",
+      "image": "/images/cards/nimbus.png",
       "trigger": null
     },
     {
       "cardNumber": 74,
-      "id": "lazu-the-air-tempest",
+      "id": "lazu",
       "name": "Lazu | The Air Tempest",
       "element": "Air",
       "type": "Creature",
@@ -1406,12 +1406,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/lazu-the-air-tempest.png",
+      "image": "/images/cards/lazu.png",
       "trigger": null
     },
     {
       "cardNumber": 75,
-      "id": "aeris-the-air-slyph",
+      "id": "aeris",
       "name": "Aeris | The Air Slyph",
       "element": "Air",
       "type": "Creature",
@@ -1428,12 +1428,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/aeris-the-air-slyph.png",
+      "image": "/images/cards/aeris.png",
       "trigger": null
     },
     {
       "cardNumber": 76,
-      "id": "torrent-the-water-titan",
+      "id": "torrent",
       "name": "Torrent | The Water Titan",
       "element": "Water",
       "type": "Creature",
@@ -1450,12 +1450,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/torrent-the-water-titan.png",
+      "image": "/images/cards/torrent.png",
       "trigger": null
     },
     {
       "cardNumber": 77,
-      "id": "azura-the-water-tempest",
+      "id": "azura",
       "name": "Azura | The Water Tempest",
       "element": "Water",
       "type": "Creature",
@@ -1472,12 +1472,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/azura-the-water-tempest.png",
+      "image": "/images/cards/azura.png",
       "trigger": null
     },
     {
       "cardNumber": 78,
-      "id": "undine-the-water-oracle",
+      "id": "undine",
       "name": "Undine | The Water Oracle",
       "element": "Water",
       "type": "Creature",
@@ -1494,12 +1494,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/undine-the-water-oracle.png",
+      "image": "/images/cards/undine.png",
       "trigger": null
     },
     {
       "cardNumber": 79,
-      "id": "ignus-the-fire-titan",
+      "id": "ignus",
       "name": "Ignus | The Fire Titan",
       "element": "Fire",
       "type": "Creature",
@@ -1516,12 +1516,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/ignus-the-fire-titan.png",
+      "image": "/images/cards/ignus.png",
       "trigger": null
     },
     {
       "cardNumber": 80,
-      "id": "sigmus-the-fire-tempest",
+      "id": "sigmus",
       "name": "Sigmus | The Fire Tempest",
       "element": "Fire",
       "type": "Creature",
@@ -1538,12 +1538,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/sigmus-the-fire-tempest.png",
+      "image": "/images/cards/sigmus.png",
       "trigger": null
     },
     {
       "cardNumber": 81,
-      "id": "viktor-the-fire-demon",
+      "id": "viktor",
       "name": "Viktor | The Fire Demon",
       "element": "Fire",
       "type": "Creature",
@@ -1560,12 +1560,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/viktor-the-fire-demon.png",
+      "image": "/images/cards/viktor.png",
       "trigger": null
     },
     {
       "cardNumber": 82,
-      "id": "terra-the-earth-titan",
+      "id": "terra",
       "name": "Terra | The Earth Titan",
       "element": "Earth",
       "type": "Creature",
@@ -1582,12 +1582,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/terra-the-earth-titan.png",
+      "image": "/images/cards/terra.png",
       "trigger": null
     },
     {
       "cardNumber": 83,
-      "id": "oryssa-the-earth-tempest",
+      "id": "oryssa",
       "name": "Oryssa | The Earth Tempest",
       "element": "Earth",
       "type": "Creature",
@@ -1604,12 +1604,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/oryssa-the-earth-tempest.png",
+      "image": "/images/cards/oryssa.png",
       "trigger": null
     },
     {
       "cardNumber": 84,
-      "id": "leo-the-earth-sovereign",
+      "id": "leo",
       "name": "Leo | The Earth Sovereign",
       "element": "Earth",
       "type": "Creature",
@@ -1626,7 +1626,7 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/leo-the-earth-sovereign.png",
+      "image": "/images/cards/leo.png",
       "trigger": null
     },
     {

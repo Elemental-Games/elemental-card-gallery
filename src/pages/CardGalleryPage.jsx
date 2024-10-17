@@ -4,20 +4,6 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FilterOptions from '../components/FilterOptions';
 
-/**
- * CardGalleryPage Component
- * 
- * This component displays a gallery of cards with filtering and sorting options.
- * It fetches card data, allows users to filter by various criteria (element, type, rarity),
- * sort cards, and navigate to individual card details.
- * 
- * Key features:
- * - Displays a grid of cards with images and basic information
- * - Provides filter options for refining the displayed cards
- * - Implements sorting functionality for card ID and creature attributes
- * - Uses framer-motion for smooth animations on card hover
- * - Responsive design for various screen sizes
- */
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
@@ -51,8 +37,6 @@ const CardGalleryPage = () => {
     try {
       console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort, tier });
       const filtered = cards.filter(card => {
-        console.log('Filtering card:', card.name, 'Type:', card.type, 'Element:', card.element);
-
         const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
         const elementMatch = element === '' || (card.element && card.element === element);
         const typeMatch = type === 'all' || card.type === type;
@@ -65,12 +49,6 @@ const CardGalleryPage = () => {
         const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
         const tierMatch = tier === null || card.tier === tier;
 
-        // Special handling for Shield, Rune, and Counter types
-        if (type === 'Shield' || type === 'Rune' || type === 'Counter') {
-          return card.type === type;
-        }
-
-        console.log('Matches:', { nameMatch, elementMatch, typeMatch, rarityMatch, strengthAgilityMatch, tierMatch });
         return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch && tierMatch;
       });
 
@@ -102,14 +80,9 @@ const CardGalleryPage = () => {
     switch (filterType) {
       case 'element':
         setElement(value === 'All Elements' ? '' : value);
-        setType('Creature');  // Set type to Creature when an element is selected
         break;
       case 'type':
         setType(value === 'All Types' ? 'all' : value);
-        if (value !== 'Creature') {
-          setElement('');  // Clear element filter if type is not Creature
-          setStrengthAgilitySort(null);  // Clear strength/agility sort if type is not Creature
-        }
         break;
       case 'rarity':
         setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
@@ -119,7 +92,6 @@ const CardGalleryPage = () => {
         break;
       case 'strengthAgilitySort':
         setStrengthAgilitySort(value);
-        setType('Creature');  // Set type to Creature when strength/agility sort is selected
         break;
       case 'tier':
         setTier(value);
@@ -184,9 +156,14 @@ const CardGalleryPage = () => {
                   card.rarity
                 }
               </p>
-              {strengthAgilitySort && card.type === 'Creature' && (
+              {card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
+                </p>
+              )}
+              {card.tier && (
+                <p className="text-sm text-gray-600">
+                  Tier: {card.tier}
                 </p>
               )}
             </Card>

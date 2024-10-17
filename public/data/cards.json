@@ -2711,7 +2711,7 @@
     },
     {
       "cardNumber": 160,
-      "id": "eldritch-the-frost-dragon",
+      "id": "eldritch",
       "name": "Eldritch | The Frost Dragon",
       "element": "Frost",
       "type": "Creature",
@@ -2728,12 +2728,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/eldritch-the-frost-dragon.png",
+      "image": "/images/cards/eldritch.png",
       "trigger": null
     },
     {
       "cardNumber": 161,
-      "id": "veton-the-lightning-dragon",
+      "id": "veton",
       "name": "Veton | The Lightning Dragon",
       "element": "Lightning",
       "type": "Creature",
@@ -2750,12 +2750,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/veton-the-lightning-dragon.png",
+      "image": "/images/cards/veton.png",
       "trigger": null
     },
     {
       "cardNumber": 162,
-      "id": "diamoria-the-crystal-dragon",
+      "id": "diamoria",
       "name": "Diamoria | The Crystal Dragon",
       "element": "Crystal",
       "type": "Creature",
@@ -2772,12 +2772,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/diamoria-the-crystal-dragon.png",
+      "image": "/images/cards/diamoria.png",
       "trigger": null
     },
     {
       "cardNumber": 163,
-      "id": "zoryn-the-lava-dragon",
+      "id": "zoryn",
       "name": "Zoryn | The Lava Dragon",
       "element": "Lava",
       "type": "Creature",
@@ -2794,12 +2794,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/zoryn-the-lava-dragon.png",
+      "image": "/images/cards/zoryn.png",
       "trigger": null
     },
     {
       "cardNumber": 164,
-      "id": "noxilus-the-poison-dragon",
+      "id": "noxilus",
       "name": "Noxilus | The Poison Dragon",
       "element": "Poison",
       "type": "Creature",
@@ -2816,12 +2816,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/noxilus-the-poison-dragon.png",
+      "image": "/images/cards/noxilus.png",
       "trigger": null
     },
     {
       "cardNumber": 165,
-      "id": "aridus-the-sand-dragon",
+      "id": "aridus",
       "name": "Aridus | The Sand Dragon",
       "element": "Sand",
       "type": "Creature",
@@ -2838,12 +2838,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/aridus-the-sand-dragon.png",
+      "image": "/images/cards/aridus.png",
       "trigger": null
     },
     {
       "cardNumber": 166,
-      "id": "galea-the-air-elementalist",
+      "id": "galea",
       "name": "Galea | The Air Elementalist",
       "element": "Air",
       "type": "Creature",
@@ -2860,12 +2860,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/galea-the-air-elementalist.png",
+      "image": "/images/cards/galea.png",
       "trigger": null
     },
     {
       "cardNumber": 167,
-      "id": "mek-the-water-elementalist",
+      "id": "mek",
       "name": "Mek | The Water Elementalist",
       "element": "Water",
       "type": "Creature",
@@ -2882,12 +2882,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/mek-the-water-elementalist.png",
+      "image": "/images/cards/mek.png",
       "trigger": null
     },
     {
       "cardNumber": 168,
-      "id": "osao-the-fire-elementalist",
+      "id": "osao",
       "name": "Osao | The Fire Elementalist",
       "element": "Fire",
       "type": "Creature",
@@ -2904,12 +2904,12 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/osao-the-fire-elementalist.png",
+      "image": "/images/cards/osao.png",
       "trigger": null
     },
     {
       "cardNumber": 169,
-      "id": "balon-the-earth-elementalist",
+      "id": "balon",
       "name": "Balon | The Earth Elementalist",
       "element": "Earth",
       "type": "Creature",
@@ -2926,7 +2926,7 @@
       "synergies": [],
       "counters": [],
       "news": [],
-      "image": "/images/cards/balon-the-earth-elementalist.png",
+      "image": "/images/cards/balon.png",
       "trigger": null
     }
   ]

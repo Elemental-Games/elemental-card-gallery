@@ -47,7 +47,7 @@ const CardGalleryPage = () => {
           (rarity === 'epic' && card.rarity === 'E') ||
           (rarity === 'legendary' && card.rarity === 'L');
         const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
-        const tierMatch = type === 'Shield' ? (tier === null || card.tier === tier) : true;
+        const tierMatch = tier === null || card.tier === tier;
 
         return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch && tierMatch;
       });
@@ -83,9 +83,6 @@ const CardGalleryPage = () => {
         break;
       case 'type':
         setType(value === 'All Types' ? 'all' : value);
-        if (value !== 'Shield') {
-          setTier(null);
-        }
         break;
       case 'rarity':
         setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
@@ -97,7 +94,7 @@ const CardGalleryPage = () => {
         setStrengthAgilitySort(value);
         break;
       case 'tier':
-        setTier(value === 'All Tiers' ? null : parseInt(value.split(' ')[1]));
+        setTier(value);
         break;
       default:
         break;
@@ -129,7 +126,6 @@ const CardGalleryPage = () => {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentType={type}
-        showTierFilter={type === 'Shield'}
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -165,7 +161,7 @@ const CardGalleryPage = () => {
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
                 </p>
               )}
-              {card.type === 'Shield' && card.tier && (
+              {card.tier && (
                 <p className="text-sm text-gray-600">
                   Tier: {card.tier}
                 </p>

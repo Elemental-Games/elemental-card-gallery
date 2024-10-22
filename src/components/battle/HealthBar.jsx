@@ -9,8 +9,8 @@ const HealthBar = ({ health, maxHealth, label }) => {
   };
 
   return (
-    <div className="w-full mb-4">
-      <div className="flex justify-between mb-1">
+    <div className="w-full mb-4 px-2">
+      <div className="flex justify-between mb-1 tracking-wide">
         <span className="text-sm font-semibold">{label}</span>
         <span className="text-sm">{health}/{maxHealth}</span>
       </div>

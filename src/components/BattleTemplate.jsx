@@ -73,13 +73,15 @@ const BattleTemplate = ({
         </div>
 
         {/* Attacker Section */}
-        <div className="relative">
+        <div className="relative flex flex-col items-center">
           <h3 className="text-xl font-semibold mb-4">Attacker</h3>
-          <HealthBar 
-            health={attacker.health} 
-            maxHealth={attacker.maxHealth} 
-            label={`${attacker.name}'s Health`} 
-          />
+          <div className="w-48">
+            <HealthBar 
+              health={attacker.health} 
+              maxHealth={attacker.maxHealth} 
+              label={`${attacker.name}'s Health`} 
+            />
+          </div>
           <motion.div
             animate={getCardPosition(attacker, 0, 'attacker')}
             transition={{ duration: 0.5 }}
@@ -98,7 +100,7 @@ const BattleTemplate = ({
         {/* Defenders Section */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Defenders</h3>
-          <div className="flex gap-4 justify-center">
+          <div className="flex gap-8 justify-center">
             {defenders.map((defender, index) => (
               <motion.div
                 key={defender.id}
@@ -112,7 +114,7 @@ const BattleTemplate = ({
                 whileHover={{ scale: 1.05 }}
                 onClick={() => handleDefenderClick(defender)}
               >
-                <div className="mb-2">
+                <div className="w-48">
                   <HealthBar 
                     health={defender.health} 
                     maxHealth={defender.maxHealth} 

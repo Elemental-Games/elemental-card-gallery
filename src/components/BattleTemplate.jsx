@@ -24,6 +24,7 @@ const BattleTemplate = ({
   isAttacking,
   isDestroying,
   playerHealth = 500,
+  opponentHealth = 500, // New prop for opponent's health
 }) => {
   const getCardPosition = (card, index, role) => {
     switch (role) {
@@ -131,6 +132,15 @@ const BattleTemplate = ({
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Opponent Health Section */}
+        <div className="text-center mt-4">
+          <HealthBar 
+            health={opponentHealth} 
+            maxHealth={500} 
+            label="Opponent Health" 
+          />
         </div>
 
         <BattleLog logs={battleLog} />

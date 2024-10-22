@@ -9,6 +9,8 @@ const BattleSimulation = () => {
   const [attacker, setAttacker] = useState(null);
   const [defenders, setDefenders] = useState([]);
   const [error, setError] = useState(null);
+  const [playerHealth, setPlayerHealth] = useState(500);
+  const [opponentHealth, setOpponentHealth] = useState(500);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -101,6 +103,8 @@ const BattleSimulation = () => {
       onStartBattle={startBattle}
       onEndTurn={endTurn}
       onResetBattle={resetBattle}
+      playerHealth={playerHealth}
+      opponentHealth={opponentHealth}
     />
   );
 };

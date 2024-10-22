@@ -1,3 +1,4 @@
+import React from 'react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
@@ -13,6 +14,7 @@ import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
+import BattleSimulationPage from "./pages/BattleSimulationPage";
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,7 @@ const App = () => (
                   <Route path="/cards/gallery" element={<CardGalleryPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/cards/:id" element={<CardDetailPage />} />
+                  <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
                 </Routes>
               </main>
               <Footer />

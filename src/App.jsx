@@ -30,6 +30,31 @@ const ScrollToTop = () => {
   return null;
 }
 
+const renderRoutes = (items) => {
+  return items.map((item) => {
+    const routes = [
+      <Route key={item.to} path={item.to} element={item.page} />
+    ];
+
+    if (item.subPages) {
+      item.subPages.forEach((subPage) => {
+        routes.push(
+          <Route key={subPage.to} path={subPage.to} element={subPage.page} />
+        );
+        if (subPage.subPages) {
+          subPage.subPages.forEach((subSubPage) => {
+            routes.push(
+              <Route key={subSubPage.to} path={subSubPage.to} element={subSubPage.page} />
+            );
+          });
+        }
+      });
+    }
+
+    return routes;
+  }).flat();
+};
+
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
@@ -42,14 +67,12 @@ const App = () => (
               <Header />
               <main className="flex-grow">
                 <Routes>
-                  {navItems.map((item) => (
-                    <Route key={item.to} path={item.to} element={item.page} />
-                  ))}
+                  {renderRoutes(navItems)}
                   <Route path="/cards/gallery" element={<CardGalleryPage />} />
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/cards/:id" element={<CardDetailPage />} />
                   <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
-                  <Route path="/gameplay/rules" element={<RulesPage />} />
+                  <Route path="/gameplay/rules/*" element={<RulesPage />} />
                   <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
                 </Routes>
               </main>

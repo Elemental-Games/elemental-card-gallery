@@ -14,17 +14,15 @@ const BattleSimulation = () => {
     const fetchCardData = async () => {
       try {
         const response = await fetch('/data/cards.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch card data');
-        }
-        const cardData = await response.json();
+        if (!response.ok) throw new Error('Failed to fetch card data');
         
+        const cardData = await response.json();
         const glacis = cardData.cards.find(card => card.id === 'glacis');
         const flameRavager = cardData.cards.find(card => card.id === 'flame-ravager');
         const cloudSprinter = cardData.cards.find(card => card.id === 'cloud-sprinter');
 
         if (!glacis || !flameRavager || !cloudSprinter) {
-          throw new Error('One or more required cards not found');
+          throw new Error('Required cards not found');
         }
 
         setAttacker({
@@ -52,27 +50,19 @@ const BattleSimulation = () => {
       } catch (error) {
         console.error('Error fetching card data:', error);
         setError(error.message);
-        toast.error('Failed to load card data. Please try again later.');
+        toast.error('Failed to load card data');
       }
     };
 
     fetchCardData();
   }, []);
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
-
-  if (!attacker || defenders.length === 0) {
-    return <div>Loading battle simulation...</div>;
-  }
-
   const addToLog = (message) => {
     setBattleLog(prevLog => [...prevLog, `Turn ${turn}: ${message}`]);
   };
 
   const handleAction = () => {
-    // Action handling logic
+    if (battleState !== 'inProgress') return;
     addToLog("Action performed");
   };
 
@@ -90,9 +80,16 @@ const BattleSimulation = () => {
     setBattleState('ready');
     setBattleLog([]);
     setTurn(1);
-    // Reset other state as needed
-    addToLog("Battle reset");
+    toast.success('Battle reset');
   };
+
+  if (error) {
+    return <div className="text-red-500 p-4">{error}</div>;
+  }
+
+  if (!attacker || defenders.length === 0) {
+    return <div className="p-4">Loading battle simulation...</div>;
+  }
 
   return (
     <BattleTemplate

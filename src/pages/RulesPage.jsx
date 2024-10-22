@@ -22,19 +22,6 @@ const RulesPage = () => {
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error: {error.message}</div>;
 
-  // Add new rules to the existing rulesData
-  const updatedRulesData = {
-    ...rulesData,
-    gameplay: [
-      ...rulesData.gameplay,
-      "You can have a maximum of 5 creatures on the field at one time.",
-      "You can only normal summon once per turn, regardless of the creature's essence cost.",
-      "For creatures that cost essence to summon, you may tribute one creature on your side of the field (send to the graveyard) and receive the essence it generates per turn in return for tributing it. This essence can be used to fund the tribute summon, but it's not required.",
-      "A maximum of 5 rune/counter cards can be placed at one time.",
-      "You can have a maximum of 7 cards in hand, unless explicitly stated otherwise by a card effect."
-    ]
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -59,13 +46,13 @@ const RulesPage = () => {
           <TabsTrigger value="faq" className="mb-2 mr-2">FAQ</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="quickstart"><QuickStart data={updatedRulesData.quickStart} /></TabsContent>
-        <TabsContent value="fullrules"><FullRules data={updatedRulesData.fullRules} /></TabsContent>
-        <TabsContent value="deckbuilding"><DeckBuilding data={updatedRulesData.deckBuilding} /></TabsContent>
-        <TabsContent value="cardtypes"><CardTypes data={updatedRulesData.cardTypes} /></TabsContent>
-        <TabsContent value="gameplay"><Gameplay data={updatedRulesData.gameplay} /></TabsContent>
-        <TabsContent value="combat"><Combat data={updatedRulesData.combat} /></TabsContent>
-        <TabsContent value="faq"><FAQ data={updatedRulesData.faq} /></TabsContent>
+        <TabsContent value="quickstart"><QuickStart data={rulesData.quickStart} /></TabsContent>
+        <TabsContent value="fullrules"><FullRules data={rulesData.fullRules} /></TabsContent>
+        <TabsContent value="deckbuilding"><DeckBuilding data={rulesData.deckBuilding} /></TabsContent>
+        <TabsContent value="cardtypes"><CardTypes data={rulesData.cardTypes} /></TabsContent>
+        <TabsContent value="gameplay"><Gameplay data={rulesData.gameplay} /></TabsContent>
+        <TabsContent value="combat"><Combat data={rulesData.combat} /></TabsContent>
+        <TabsContent value="faq"><FAQ data={rulesData.faq} /></TabsContent>
       </Tabs>
     </motion.div>
   );

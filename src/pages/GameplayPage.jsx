@@ -18,6 +18,9 @@ const GameplayPage = () => {
         <Button onClick={() => window.open('/rulebook.pdf', '_blank')}>
           <Download className="mr-2 h-4 w-4" /> Download Rulebook PDF
         </Button>
+        <Link to="/gameplay/battle-simulation">
+          <Button>Try Battle Simulation</Button>
+        </Link>
         <Link to="/learn-to-play">
           <Button>Learn More</Button>
         </Link>
@@ -47,11 +50,6 @@ const GameplayPage = () => {
         <li>Casual: No restrictions on card usage.</li>
         <li>Competitive: Follow card restriction guidelines in the rulebook.</li>
       </ul>
-      <div className="mt-8">
-        <Link to="/gameplay/battle-simulation">
-          <Button>Try Battle Simulation</Button>
-        </Link>
-      </div>
     </div>
   );
 };

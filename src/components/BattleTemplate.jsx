@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
 import RippleEffect from './animations/RippleEffect';
 import DestroyEffect from './animations/DestroyEffect';
 
@@ -57,13 +58,8 @@ const BattleTemplate = ({
 
   return (
     <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
-      <div className="mb-4">
-        <h2 className="text-2xl font-bold">Battle Simulation</h2>
-        <p>State: {battleState}</p>
-        <p>Player Health: {playerHealth}</p>
-      </div>
-      
-      <div className="flex justify-between mb-4 min-h-[400px] relative">
+      <div className="flex flex-col gap-8">
+        {/* Attacker Section */}
         <div className="relative">
           <h3 className="text-xl font-semibold mb-4">Attacker</h3>
           <motion.div
@@ -80,9 +76,10 @@ const BattleTemplate = ({
           </motion.div>
         </div>
 
+        {/* Defenders Section */}
         <div>
           <h3 className="text-xl font-semibold mb-4">Defenders</h3>
-          <div className="flex gap-4">
+          <div className="flex gap-4 justify-center">
             {defenders.map((defender, index) => (
               <motion.div
                 key={defender.id}
@@ -91,7 +88,11 @@ const BattleTemplate = ({
                 className={`relative ${
                   selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
                 }`}
-                onClick={() => battleState === 'choosing_target' && onSelectTarget(defender)}
+                onClick={() => {
+                  if (battleState === 'choosing_target') {
+                    onSelectTarget(defender);
+                  }
+                }}
               >
                 <DestroyEffect isDestroying={isDestroying && selectedTarget?.id === defender.id}>
                   <img 
@@ -104,24 +105,66 @@ const BattleTemplate = ({
             ))}
           </div>
         </div>
+
+        {/* Player Health Section */}
+        <div className="text-center">
+          <h3 className="text-xl font-semibold mb-2">Opponent's Health</h3>
+          <div className="text-2xl font-bold text-green-500">{playerHealth}</div>
+        </div>
+
+        {/* Battle Log */}
+        <div className="mb-4">
+          <h3 className="text-xl font-semibold">Battle Log</h3>
+          <ul className="list-disc list-inside">
+            {battleLog.map((log, index) => (
+              <li key={index}>{log}</li>
+            ))}
+          </ul>
+        </div>
       </div>
-      
-      <div className="mb-4">
-        <h3 className="text-xl font-semibold">Battle Log</h3>
-        <ul className="list-disc list-inside">
-          {battleLog.map((log, index) => (
-            <li key={index}>{log}</li>
-          ))}
-        </ul>
-      </div>
-      
-      <div className="flex space-x-2">
-        <Button onClick={onStartBattle} disabled={battleState !== 'ready'}>
-          Start Battle
-        </Button>
-        <Button onClick={onAction} disabled={battleState !== 'inProgress'}>
-          {battleState === 'choosing_target' ? 'Choose Target' : 'Perform Action'}
-        </Button>
+
+      {/* Action Buttons */}
+      <div className="flex space-x-2 mt-4">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button disabled={battleState !== 'ready'}>
+              Start Battle
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Battle Start</AlertDialogTitle>
+              <AlertDialogDescription>
+                Target a creature by clicking on one of the defenders.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={onStartBattle}>Begin</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button disabled={battleState !== 'inProgress'}>
+              {battleState === 'choosing_target' ? 'Confirm Target' : 'Perform Action'}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Confirm Action</AlertDialogTitle>
+              <AlertDialogDescription>
+                Are you sure you want to attack {selectedTarget?.name}?
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction onClick={onAction}>Confirm</AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+
         <Button onClick={onEndTurn} disabled={battleState !== 'inProgress'}>
           End Turn
         </Button>

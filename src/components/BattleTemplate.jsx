@@ -66,11 +66,12 @@ const BattleTemplate = ({
             animate={getCardPosition(attacker, 0, 'attacker')}
             transition={{ duration: 0.5 }}
             className="relative"
+            whileHover={{ scale: 1.05 }}
           >
             <img 
               src={attacker.image} 
               alt={attacker.name} 
-              className="w-48 rounded-lg"
+              className="w-48 rounded-lg transition-transform duration-300"
             />
             <RippleEffect isActive={isAttacking && selectedTarget} />
           </motion.div>
@@ -85,9 +86,10 @@ const BattleTemplate = ({
                 key={defender.id}
                 animate={getCardPosition(defender, index, 'defender')}
                 transition={{ duration: 0.5 }}
-                className={`relative ${
+                className={`relative cursor-pointer ${
                   selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
                 }`}
+                whileHover={{ scale: 1.05 }}
                 onClick={() => {
                   if (battleState === 'choosing_target') {
                     onSelectTarget(defender);
@@ -98,7 +100,7 @@ const BattleTemplate = ({
                   <img 
                     src={defender.image} 
                     alt={defender.name} 
-                    className="w-48 rounded-lg cursor-pointer"
+                    className="w-48 rounded-lg transition-transform duration-300"
                   />
                 </DestroyEffect>
               </motion.div>
@@ -145,25 +147,27 @@ const BattleTemplate = ({
           </AlertDialogContent>
         </AlertDialog>
 
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button disabled={battleState !== 'inProgress'}>
-              {battleState === 'choosing_target' ? 'Confirm Target' : 'Perform Action'}
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Confirm Action</AlertDialogTitle>
-              <AlertDialogDescription>
-                Are you sure you want to attack {selectedTarget?.name}?
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onAction}>Confirm</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+        {selectedTarget && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button>
+                Confirm Target
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm Target</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to attack {selectedTarget.name}?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={onAction}>Confirm</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
 
         <Button onClick={onEndTurn} disabled={battleState !== 'inProgress'}>
           End Turn

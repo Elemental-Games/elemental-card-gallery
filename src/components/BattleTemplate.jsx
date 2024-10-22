@@ -20,8 +20,30 @@ const BattleTemplate = ({
   isDodging,
   isAttacking,
   isDestroying,
-  playerHealth,
+  playerHealth = 500, // Default value added
 }) => {
+  const getHealthColor = (health, maxHealth = 500) => {
+    const percentage = (health / maxHealth) * 100;
+    if (percentage > 66) return 'bg-gradient-to-r from-green-500 to-green-400';
+    if (percentage > 33) return 'bg-gradient-to-r from-yellow-500 to-yellow-400';
+    return 'bg-gradient-to-r from-red-500 to-red-400';
+  };
+
+  const HealthBar = ({ health, maxHealth, label }) => (
+    <div className="w-full mb-4">
+      <div className="flex justify-between mb-1">
+        <span className="text-sm font-semibold">{label}</span>
+        <span className="text-sm">{health}/{maxHealth}</span>
+      </div>
+      <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+        <div
+          className={`h-full ${getHealthColor(health, maxHealth)} transition-all duration-300`}
+          style={{ width: `${(health / maxHealth) * 100}%` }}
+        />
+      </div>
+    </div>
+  );
+
   const getCardPosition = (card, index, role) => {
     switch (role) {
       case 'attacker':
@@ -32,25 +54,12 @@ const BattleTemplate = ({
         };
       case 'defender':
         if (isBlocking && index === 1) {
-          return {
-            x: -50,
-            y: -30,
-            rotate: 0,
-            zIndex: 10,
-          };
+          return { x: -50, y: -30, rotate: 0, zIndex: 10 };
         }
         if (isDodging && card.id === selectedTarget?.id) {
-          return {
-            x: 100,
-            y: -50,
-            rotate: 45,
-          };
+          return { x: 100, y: -50, rotate: 45 };
         }
-        return {
-          x: 0,
-          y: 0,
-          rotate: 0,
-        };
+        return { x: 0, y: 0, rotate: 0 };
       default:
         return { x: 0, y: 0, rotate: 0 };
     }
@@ -59,9 +68,23 @@ const BattleTemplate = ({
   return (
     <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
       <div className="flex flex-col gap-8">
+        {/* Player Health Section - Moved to top */}
+        <div className="text-center">
+          <HealthBar 
+            health={playerHealth} 
+            maxHealth={500} 
+            label="Player Health" 
+          />
+        </div>
+
         {/* Attacker Section */}
         <div className="relative">
           <h3 className="text-xl font-semibold mb-4">Attacker</h3>
+          <HealthBar 
+            health={attacker.health} 
+            maxHealth={attacker.maxHealth} 
+            label={`${attacker.name}'s Health`} 
+          />
           <motion.div
             animate={getCardPosition(attacker, 0, 'attacker')}
             transition={{ duration: 0.5 }}
@@ -91,11 +114,18 @@ const BattleTemplate = ({
                 }`}
                 whileHover={{ scale: 1.05 }}
                 onClick={() => {
-                  if (battleState === 'choosing_target') {
-                    onSelectTarget(defender);
+                  if (battleState === 'inProgress' || battleState === 'choosing_target') {
+                    onSelectTarget?.(defender);
                   }
                 }}
               >
+                <div className="mb-2">
+                  <HealthBar 
+                    health={defender.health} 
+                    maxHealth={defender.maxHealth} 
+                    label={`${defender.name}'s Health`} 
+                  />
+                </div>
                 <DestroyEffect isDestroying={isDestroying && selectedTarget?.id === defender.id}>
                   <img 
                     src={defender.image} 
@@ -108,28 +138,28 @@ const BattleTemplate = ({
           </div>
         </div>
 
-        {/* Player Health Section */}
-        <div className="text-center">
-          <h3 className="text-xl font-semibold mb-2">Opponent's Health</h3>
-          <div className="text-2xl font-bold text-green-500">{playerHealth}</div>
-        </div>
-
         {/* Battle Log */}
         <div className="mb-4">
           <h3 className="text-xl font-semibold">Battle Log</h3>
-          <ul className="list-disc list-inside">
-            {battleLog.map((log, index) => (
-              <li key={index}>{log}</li>
-            ))}
-          </ul>
+          <div className="max-h-40 overflow-y-auto">
+            <ul className="list-disc list-inside">
+              {battleLog.map((log, index) => (
+                <li key={index} className="text-sm">{log}</li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex space-x-2 mt-4">
+      <div className="flex flex-wrap gap-2 mt-4">
         <AlertDialog>
           <AlertDialogTrigger asChild>
-            <Button disabled={battleState !== 'ready'}>
+            <Button 
+              variant="secondary" 
+              disabled={battleState !== 'ready'}
+              className="w-full sm:w-auto"
+            >
               Start Battle
             </Button>
           </AlertDialogTrigger>
@@ -150,7 +180,10 @@ const BattleTemplate = ({
         {selectedTarget && (
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button>
+              <Button 
+                variant="destructive"
+                className="w-full sm:w-auto"
+              >
                 Confirm Target
               </Button>
             </AlertDialogTrigger>
@@ -169,10 +202,20 @@ const BattleTemplate = ({
           </AlertDialog>
         )}
 
-        <Button onClick={onEndTurn} disabled={battleState !== 'inProgress'}>
+        <Button 
+          onClick={onEndTurn} 
+          disabled={battleState !== 'inProgress'}
+          className="w-full sm:w-auto"
+        >
           End Turn
         </Button>
-        <Button onClick={onResetBattle}>Reset Battle</Button>
+        <Button 
+          onClick={onResetBattle}
+          variant="outline"
+          className="w-full sm:w-auto"
+        >
+          Reset Battle
+        </Button>
       </div>
     </div>
   );

@@ -47,9 +47,11 @@ const GameplayPage = () => {
         <li>Casual: No restrictions on card usage.</li>
         <li>Competitive: Follow card restriction guidelines in the rulebook.</li>
       </ul>
-      <Link to="/gameplay/battle-simulation">
-        <Button>Try Battle Simulation</Button>
-      </Link>
+      <div className="mt-8">
+        <Link to="/gameplay/battle-simulation">
+          <Button>Try Battle Simulation</Button>
+        </Link>
+      </div>
     </div>
   );
 };

@@ -58,11 +58,11 @@ const CardsOfTheWeek = () => {
         <h2 className="text-4xl font-bold mb-8 text-center text-white">Cards of the Week</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {cards.map((card) => (
-            <div key={card.id} className="aspect-[1500/2100] relative overflow-hidden">
+            <div key={card.id} className="aspect-[1500/2100] relative">
               <CardDisplay 
                 card={card} 
                 variant="cardsOfWeek"
-                className="absolute inset-0 w-full h-full"
+                className="absolute inset-0 w-full h-full object-contain"
               />
             </div>
           ))}

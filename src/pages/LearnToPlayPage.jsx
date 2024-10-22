@@ -1,8 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 
 const LearnToPlayPage = () => {
   return (
@@ -12,67 +9,35 @@ const LearnToPlayPage = () => {
       exit={{ opacity: 0 }}
       className="container mx-auto px-4 py-8"
     >
-      <h1 className="text-4xl font-bold mb-6">Learn to Play</h1>
-      
+      <h1 className="text-4xl font-bold mb-6">Learn to Play Elemental Masters</h1>
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Tutorial Videos</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <Card className="p-4">
-            <h3 className="text-xl font-semibold mb-2">Basics of Elemental Masters</h3>
-            <div className="aspect-w-16 aspect-h-9">
-              <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="Basics of Elemental Masters"
-                className="w-full h-full"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </Card>
-          <Card className="p-4">
-            <h3 className="text-xl font-semibold mb-2">Advanced Strategies</h3>
-            <div className="aspect-w-16 aspect-h-9">
-              <iframe 
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="Advanced Strategies"
-                className="w-full h-full"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </Card>
-        </div>
+        <h2 className="text-2xl font-semibold mb-4">Getting Started</h2>
+        <p>Welcome to Elemental Masters! This guide will help you understand the basics of the game and get you started on your journey to becoming an Elemental Master.</p>
+        <p>Elemental Masters is an exciting 2-player trading card game where you harness the power of the elements to defeat your opponents. An average game lasts 20-25 minutes.</p>
+        <p>To begin, you'll need to build a deck of 40 cards, combining different elements and strategies. Each player starts with 3 shields (1 of each tier) and draws 5 cards.</p>
+        <p>During your turn, you will generate essence from your creatures, which you can use to play cards and activate abilities. You can attack your opponent's creatures or shields, aiming to reduce their health points to zero to win!</p>
+        <p>For a complete understanding of the game mechanics, turn structure, combat system, and special features, please refer to the full rulebook.</p>
       </section>
-      
       <section className="mb-8">
-        <h2 className="text-2xl font-semibold mb-4">Strategy Articles</h2>
-        <ul className="space-y-2">
-          <li>
-            <Link to="/articles/beginners-guide" className="text-blue-500 hover:underline">
-              Beginner's Guide to Elemental Masters
-            </Link>
-          </li>
-          <li>
-            <Link to="/articles/deck-building-101" className="text-blue-500 hover:underline">
-              Deck Building 101: Crafting Your First Deck
-            </Link>
-          </li>
-          <li>
-            <Link to="/articles/advanced-combos" className="text-blue-500 hover:underline">
-              Advanced Combos and Synergies
-            </Link>
-          </li>
+        <h2 className="text-2xl font-semibold mb-4">Basic Rules</h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li>Build a deck of 40 cards, combining different elements and strategies.</li>
+          <li>Start with 3 shields (1 of each tier) and draw 5 cards.</li>
+          <li>Generate and use essence as a resource to play cards and activate abilities.</li>
+          <li>Take turns playing creatures, runes, and counters, and engaging in combat.</li>
+          <li>Destroy your opponent's shields and deplete their health points to zero to win!</li>
+          <li>Alternatively, win by collecting all 4 ancient elemental cards and playing the "Ancient Sigil" rune.</li>
         </ul>
       </section>
-      
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Quick Links</h2>
-        <div className="flex space-x-4">
-          <Link to="/gameplay/rules">
-            <Button variant="outline">Rules</Button>
-          </Link>
-          <Link to="/gameplay/rules#glossary">
-            <Button variant="outline">Glossary of Terms</Button>
-          </Link>
-        </div>
+      <section className="mb-8">
+        <h2 className="text-2xl font-semibold mb-4">Key Game Elements</h2>
+        <ul className="list-disc list-inside space-y-2">
+          <li><strong>Creatures:</strong> Main battling units from 4 elements (Air, Water, Fire, Earth) and 6 combinational elements for Dragons.</li>
+          <li><strong>Runes:</strong> Types include Normal, Equipments, and Instants. Have a variety of effects that can support your strategy or disrupt your opponent's. Can be activated the turn you place them.</li>
+          <li><strong>Counters:</strong> Can be activated during either player's turn, often in response to specific actions. Provide surprise elements and ways to counter your opponent's moves. Must be Set face-down for one turn before they can be activated.</li>
+          <li><strong>Shields:</strong> Your last line of defense, providing a choice between powerful effects when broken.</li>
+          <li><strong>Essence:</strong> Resource generated by creatures, used to play cards and activate abilities. Treated as an in-game currency.</li>
+        </ul>
       </section>
     </motion.div>
   );

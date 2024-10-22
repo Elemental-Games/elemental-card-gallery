@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useQuery } from '@tanstack/react-query';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Download } from 'lucide-react';
-import { fetchRulesData } from '../utils/api';
 import QuickStart from '../components/RulesComponents/QuickStart';
 import FullRules from '../components/RulesComponents/FullRules';
 import DeckBuilding from '../components/RulesComponents/DeckBuilding';
@@ -12,16 +10,9 @@ import CardTypes from '../components/RulesComponents/CardTypes';
 import Gameplay from '../components/RulesComponents/Gameplay';
 import Combat from '../components/RulesComponents/Combat';
 import FAQ from '../components/RulesComponents/FAQ';
+import { rulesData } from '../data/rulesData';
 
 const RulesPage = () => {
-  const { data: rulesData, isLoading, error } = useQuery({
-    queryKey: ['rulesData'],
-    queryFn: fetchRulesData,
-  });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
-
   return (
     <motion.div
       initial={{ opacity: 0 }}

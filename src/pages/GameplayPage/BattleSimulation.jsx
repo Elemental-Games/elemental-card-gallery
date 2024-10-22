@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { toast } from 'sonner';
+import BattleTemplate from './BattleTemplate'; // Assuming you have a BattleTemplate component
 
-// Page
 const BattleSimulation = () => {
   const [battleState, setBattleState] = useState('ready');
   const [battleLog, setBattleLog] = useState([]);
   const [turn, setTurn] = useState(1);
   const [attacker, setAttacker] = useState(null);
   const [defenders, setDefenders] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -51,12 +52,21 @@ const BattleSimulation = () => {
         ]);
       } catch (error) {
         console.error('Error fetching card data:', error);
+        setError(error.message);
         toast.error('Failed to load card data. Please try again later.');
       }
     };
 
     fetchCardData();
   }, []);
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (!attacker || defenders.length === 0) {
+    return <div>Loading battle simulation...</div>;
+  }
 
   const addToLog = (message) => {
     setBattleLog(prevLog => [...prevLog, `Turn ${turn}: ${message}`]);
@@ -81,10 +91,6 @@ const BattleSimulation = () => {
   const resetBattle = () => {
     // Reset battle logic
   };
-
-  if (!attacker || defenders.length === 0) {
-    return <div>Loading battle simulation...</div>;
-  }
 
   return (
     <BattleTemplate

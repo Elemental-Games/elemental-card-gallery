@@ -39,8 +39,8 @@ const JoinNowPage = () => {
 
       <section className="mb-8">
         <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
-        <div className="flex flex-col md:flex-row justify-center space-y-4 md:space-y-0 md:space-x-4">
-          <div className="text-center w-full md:w-1/2 lg:w-1/3">
+        <div className="flex justify-center space-x-4">
+          <div className="text-center w-1/3">
             <CardDisplay 
               card={{ id: 'deepseer', name: 'Deepseer', image: 'deepseer.png' }}
               variant="artworkShowcase"
@@ -48,7 +48,7 @@ const JoinNowPage = () => {
             />
             <p className="mt-2 italic">Front of an ability card</p>
           </div>
-          <div className="text-center w-full md:w-1/2 lg:w-1/3">
+          <div className="text-center w-1/3">
             <CardDisplay 
               card={{ id: 'card-back', name: 'Card Back', image: '/Card_Back.png' }}
               variant="artworkShowcase"

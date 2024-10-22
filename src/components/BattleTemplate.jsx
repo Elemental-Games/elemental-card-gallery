@@ -20,7 +20,7 @@ const BattleTemplate = ({
   isDodging,
   isAttacking,
   isDestroying,
-  playerHealth = 500,
+  playerHealth,
 }) => {
   const getCardPosition = (card, index, role) => {
     switch (role) {
@@ -60,9 +60,8 @@ const BattleTemplate = ({
     <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
       <div className="flex flex-col gap-8">
         {/* Attacker Section */}
-        <div className="relative flex flex-col items-center">
+        <div className="relative">
           <h3 className="text-xl font-semibold mb-4">Attacker</h3>
-          <div className="text-2xl font-bold text-green-500 mb-2">HP: 500</div>
           <motion.div
             animate={getCardPosition(attacker, 0, 'attacker')}
             transition={{ duration: 0.5 }}
@@ -79,7 +78,7 @@ const BattleTemplate = ({
         </div>
 
         {/* Defenders Section */}
-        <div className="flex flex-col items-center">
+        <div>
           <h3 className="text-xl font-semibold mb-4">Defenders</h3>
           <div className="flex gap-4 justify-center">
             {defenders.map((defender, index) => (
@@ -116,18 +115,18 @@ const BattleTemplate = ({
         </div>
 
         {/* Battle Log */}
-        <div className="mb-4 text-center">
+        <div className="mb-4">
           <h3 className="text-xl font-semibold">Battle Log</h3>
-          <ul className="list-none">
+          <ul className="list-disc list-inside">
             {battleLog.map((log, index) => (
-              <li key={index} className="mt-1">{log}</li>
+              <li key={index}>{log}</li>
             ))}
           </ul>
         </div>
       </div>
 
       {/* Action Buttons */}
-      <div className="flex justify-center space-x-2 mt-4">
+      <div className="flex space-x-2 mt-4">
         <AlertDialog>
           <AlertDialogTrigger asChild>
             <Button disabled={battleState !== 'ready'}>

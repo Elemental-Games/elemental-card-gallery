@@ -2,8 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { toast } from "sonner";
 import RippleEffect from './animations/RippleEffect';
 import DestroyEffect from './animations/DestroyEffect';
+import HealthBar from './battle/HealthBar';
+import BattleLog from './battle/BattleLog';
 
 const BattleTemplate = ({
   attacker,
@@ -20,30 +23,8 @@ const BattleTemplate = ({
   isDodging,
   isAttacking,
   isDestroying,
-  playerHealth = 500, // Default value added
+  playerHealth = 500,
 }) => {
-  const getHealthColor = (health, maxHealth = 500) => {
-    const percentage = (health / maxHealth) * 100;
-    if (percentage > 66) return 'bg-gradient-to-r from-green-500 to-green-400';
-    if (percentage > 33) return 'bg-gradient-to-r from-yellow-500 to-yellow-400';
-    return 'bg-gradient-to-r from-red-500 to-red-400';
-  };
-
-  const HealthBar = ({ health, maxHealth, label }) => (
-    <div className="w-full mb-4">
-      <div className="flex justify-between mb-1">
-        <span className="text-sm font-semibold">{label}</span>
-        <span className="text-sm">{health}/{maxHealth}</span>
-      </div>
-      <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
-        <div
-          className={`h-full ${getHealthColor(health, maxHealth)} transition-all duration-300`}
-          style={{ width: `${(health / maxHealth) * 100}%` }}
-        />
-      </div>
-    </div>
-  );
-
   const getCardPosition = (card, index, role) => {
     switch (role) {
       case 'attacker':
@@ -65,10 +46,24 @@ const BattleTemplate = ({
     }
   };
 
+  const handleStartBattle = () => {
+    onStartBattle();
+    toast.info("Select a defender to attack by clicking on their card!", {
+      duration: 4000,
+    });
+  };
+
+  const handleDefenderClick = (defender) => {
+    if (battleState === 'inProgress' || battleState === 'choosing_target') {
+      onSelectTarget?.(defender);
+      toast.success(`Selected ${defender.name} as target!`);
+    }
+  };
+
   return (
     <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
       <div className="flex flex-col gap-8">
-        {/* Player Health Section - Moved to top */}
+        {/* Player Health Section */}
         <div className="text-center">
           <HealthBar 
             health={playerHealth} 
@@ -109,15 +104,13 @@ const BattleTemplate = ({
                 key={defender.id}
                 animate={getCardPosition(defender, index, 'defender')}
                 transition={{ duration: 0.5 }}
-                className={`relative cursor-pointer ${
+                className={`relative cursor-pointer transition-all duration-300 ${
+                  battleState === 'inProgress' ? 'hover:ring-4 hover:ring-blue-500' : ''
+                } ${
                   selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
                 }`}
                 whileHover={{ scale: 1.05 }}
-                onClick={() => {
-                  if (battleState === 'inProgress' || battleState === 'choosing_target') {
-                    onSelectTarget?.(defender);
-                  }
-                }}
+                onClick={() => handleDefenderClick(defender)}
               >
                 <div className="mb-2">
                   <HealthBar 
@@ -138,17 +131,7 @@ const BattleTemplate = ({
           </div>
         </div>
 
-        {/* Battle Log */}
-        <div className="mb-4">
-          <h3 className="text-xl font-semibold">Battle Log</h3>
-          <div className="max-h-40 overflow-y-auto">
-            <ul className="list-disc list-inside">
-              {battleLog.map((log, index) => (
-                <li key={index} className="text-sm">{log}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <BattleLog logs={battleLog} />
       </div>
 
       {/* Action Buttons */}
@@ -172,7 +155,7 @@ const BattleTemplate = ({
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onStartBattle}>Begin</AlertDialogAction>
+              <AlertDialogAction onClick={handleStartBattle}>Begin</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>

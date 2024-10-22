@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
 import { toast } from 'sonner';
-import BattleTemplate from './BattleTemplate'; // Assuming you have a BattleTemplate component
+import BattleTemplate from '../../components/BattleTemplate';
 
 const BattleSimulation = () => {
   const [battleState, setBattleState] = useState('ready');
@@ -74,22 +73,25 @@ const BattleSimulation = () => {
 
   const handleAction = () => {
     // Action handling logic
-  };
-
-  const resolveBattle = () => {
-    // Battle resolution logic
+    addToLog("Action performed");
   };
 
   const startBattle = () => {
-    // Start battle logic
+    setBattleState('inProgress');
+    addToLog("Battle started");
   };
 
   const endTurn = () => {
-    // End turn logic
+    setTurn(prevTurn => prevTurn + 1);
+    addToLog("Turn ended");
   };
 
   const resetBattle = () => {
-    // Reset battle logic
+    setBattleState('ready');
+    setBattleLog([]);
+    setTurn(1);
+    // Reset other state as needed
+    addToLog("Battle reset");
   };
 
   return (

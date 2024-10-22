@@ -15,6 +15,8 @@ import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import BattleSimulationPage from "./pages/BattleSimulationPage";
+import RulesPage from "./pages/RulesPage";
+import LearnToPlayPage from "./pages/LearnToPlayPage";
 
 const queryClient = new QueryClient();
 
@@ -47,6 +49,8 @@ const App = () => (
                   <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                   <Route path="/cards/:id" element={<CardDetailPage />} />
                   <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
+                  <Route path="/gameplay/rules" element={<RulesPage />} />
+                  <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
                 </Routes>
               </main>
               <Footer />

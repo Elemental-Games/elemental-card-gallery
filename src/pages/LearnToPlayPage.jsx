@@ -22,7 +22,10 @@ const LearnToPlayPage = () => {
             className="w-full h-full"
           ></iframe>
         </div>
-        <p>Elemental Masters is an exciting 2-player trading card game where you harness the power of the elements to defeat your opponents. An average game lasts 20-25 minutes.</p>
+        <p className="mb-4">Elemental Masters is an exciting 2-player trading card game where you harness the power of the elements to defeat your opponents. An average game lasts 20-25 minutes.</p>
+        <p className="mb-4">To begin, you'll need to build a deck of 40 cards, combining different elements and strategies. Each player starts with 3 shields (1 of each tier) and draws 5 cards.</p>
+        <p className="mb-4">During your turn, you will generate essence from your creatures, which you can use to play cards and activate abilities. You can attack your opponent's creatures or shields, aiming to reduce their health points to zero to win!</p>
+        <p>For a complete understanding of the game mechanics, turn structure, combat system, and special features, please refer to the full rulebook.</p>
       </section>
       <section className="mb-8">
         <h2 className="text-2xl font-semibold mb-4">Basic Rules</h2>

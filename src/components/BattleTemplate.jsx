@@ -31,6 +31,14 @@ const BattleTemplate = ({
   const [cardRotated, setCardRotated] = React.useState(false);
   const [cloudSprinterPosition, setCloudSprinterPosition] = React.useState(0);
 
+  React.useEffect(() => {
+    if (selectedTarget) {
+      setShowTargetOverlay(true);
+    } else {
+      setShowTargetOverlay(false);
+    }
+  }, [selectedTarget]);
+
   const handleTargetConfirm = async () => {
     if (!selectedTarget) return;
     
@@ -41,6 +49,7 @@ const BattleTemplate = ({
       // Show dodge opportunity
       setShowTargetOverlay(true);
     } else {
+      setShowTargetOverlay(false);
       await processAttack();
     }
   };
@@ -86,7 +95,6 @@ const BattleTemplate = ({
       toast.success('Cloud Sprinter successfully dodged the attack!');
       onAction();
     } else {
-      // Process normal attack on Cloud Sprinter
       await processAttack();
     }
   };

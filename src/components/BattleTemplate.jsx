@@ -19,8 +19,9 @@ const BattleTemplate = ({
   onResetBattle,
   selectedTarget,
   onSelectTarget,
-  playerHealth = 500,
-  opponentHealth = 500,
+  playerHealth,
+  opponentHealth,
+  setOpponentHealth,
 }) => {
   const [isAttacking, setIsAttacking] = React.useState(false);
   const [isDestroying, setIsDestroying] = React.useState(false);
@@ -32,7 +33,10 @@ const BattleTemplate = ({
   const [cardRotated, setCardRotated] = React.useState(false);
 
   React.useEffect(() => {
-    if (selectedTarget) {
+    if (selectedTarget?.id === 'cloud-sprinter') {
+      setShowDodgePrompt(true);
+      setShowTargetOverlay(false);
+    } else if (selectedTarget) {
       setShowTargetOverlay(true);
       setShowDodgePrompt(false);
     } else {
@@ -48,8 +52,6 @@ const BattleTemplate = ({
     
     if (selectedTarget.id === 'flame-ravager') {
       setShowAgilityWarning(true);
-    } else if (selectedTarget.id === 'cloud-sprinter') {
-      setShowDodgePrompt(true);
     } else {
       await processAttack();
     }
@@ -63,6 +65,7 @@ const BattleTemplate = ({
   const handleBlockingDecision = async (willBlock) => {
     if (!attacker || !selectedTarget) return;
     setShowBlockPrompt(false);
+    setShowTargetOverlay(false);
 
     if (willBlock) {
       // Cloud Sprinter deals damage
@@ -76,6 +79,15 @@ const BattleTemplate = ({
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsAttacking(false);
+      
+      // Update Cloud Sprinter's health
+      const updatedDefenders = defenders.map(def => 
+        def.id === 'cloud-sprinter' 
+          ? { ...def, health: 0 }
+          : def
+      );
+      setDefenders(updatedDefenders);
+      
       setIsDestroying(true);
       await new Promise(resolve => setTimeout(resolve, 1000));
       setIsDestroying(false);
@@ -90,6 +102,7 @@ const BattleTemplate = ({
     setShowDodgePrompt(false);
     if (willDodge) {
       toast.success('Cloud Sprinter successfully dodged the attack!');
+      setOpponentHealth(prev => Math.max(0, prev - 155)); // Reduce opponent health by 155
       onAction();
     } else {
       await processAttack();
@@ -120,6 +133,9 @@ const BattleTemplate = ({
     setShowTargetOverlay(false);
     setShowDodgePrompt(false);
     setCardRotated(false);
+    if (attacker) {
+      attacker.health = attacker.maxHealth; // Reset Glacis's health
+    }
     onResetBattle();
   };
 

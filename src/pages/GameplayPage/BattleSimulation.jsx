@@ -13,6 +13,7 @@ const BattleSimulation = () => {
   const [opponentHealth, setOpponentHealth] = useState(500);
   const [selectedTarget, setSelectedTarget] = useState(null);
   const [showDodgePrompt, setShowDodgePrompt] = useState(false);
+  const [showBlockPrompt, setShowBlockPrompt] = useState(false);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -94,6 +95,7 @@ const BattleSimulation = () => {
       toast.success('Cloud Sprinter successfully dodged the attack!', {
         duration: 3000,
       });
+      setOpponentHealth(prev => Math.max(0, prev - 155)); // Reduce opponent health by 155
       addToLog('Cloud Sprinter dodged the attack');
     } else {
       processAttack();
@@ -146,6 +148,7 @@ const BattleSimulation = () => {
     setBattleLog([]);
     setTurn(1);
     setSelectedTarget(null);
+    setOpponentHealth(500); // Reset opponent health
     toast.success('Battle reset');
   };
 

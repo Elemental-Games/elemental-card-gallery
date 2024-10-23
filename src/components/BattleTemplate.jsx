@@ -2,11 +2,11 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { toast } from "sonner";
 import RippleEffect from './animations/RippleEffect';
 import DestroyEffect from './animations/DestroyEffect';
 import HealthBar from './battle/HealthBar';
 import BattleLog from './battle/BattleLog';
-import CardOverlay from './battle/CardOverlay';
 
 const BattleTemplate = ({
   attacker,
@@ -19,10 +19,12 @@ const BattleTemplate = ({
   onResetBattle,
   selectedTarget,
   onSelectTarget,
-  onDodgeDecision,
-  showDodgePrompt,
-  playerHealth,
-  opponentHealth,
+  isBlocking,
+  isDodging,
+  isAttacking,
+  isDestroying,
+  playerHealth = 500,
+  opponentHealth = 500, // New prop for opponent's health
 }) => {
   const getCardPosition = (card, index, role) => {
     switch (role) {
@@ -45,9 +47,17 @@ const BattleTemplate = ({
     }
   };
 
+  const handleStartBattle = () => {
+    onStartBattle();
+    toast.info("Select a defender to attack by clicking on their card!", {
+      duration: 4000,
+    });
+  };
+
   const handleDefenderClick = (defender) => {
     if (battleState === 'inProgress' || battleState === 'choosing_target') {
       onSelectTarget?.(defender);
+      toast.success(`Selected ${defender.name} as target!`);
     }
   };
 
@@ -97,7 +107,11 @@ const BattleTemplate = ({
                 key={defender.id}
                 animate={getCardPosition(defender, index, 'defender')}
                 transition={{ duration: 0.5 }}
-                className="relative cursor-pointer"
+                className={`relative cursor-pointer transition-all duration-300 ${
+                  battleState === 'inProgress' ? 'hover:ring-4 hover:ring-blue-500' : ''
+                } ${
+                  selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
+                }`}
                 whileHover={{ scale: 1.05 }}
                 onClick={() => handleDefenderClick(defender)}
               >
@@ -108,27 +122,12 @@ const BattleTemplate = ({
                     label={`${defender.name}'s Health`} 
                   />
                 </div>
-                <DestroyEffect isDestroying={false}>
-                  <div className="relative">
-                    <img 
-                      src={defender.image} 
-                      alt={defender.name} 
-                      className="w-48 rounded-lg transition-transform duration-300"
-                    />
-                    {selectedTarget?.id === defender.id && !showDodgePrompt && (
-                      <CardOverlay 
-                        onConfirm={() => onAction(defender)}
-                        onCancel={() => onSelectTarget(null)}
-                      />
-                    )}
-                    {showDodgePrompt && selectedTarget?.id === defender.id && defender.id === 'cloud-sprinter' && (
-                      <CardOverlay 
-                        isDodgePrompt
-                        onConfirm={() => onDodgeDecision(true)}
-                        onCancel={() => onDodgeDecision(false)}
-                      />
-                    )}
-                  </div>
+                <DestroyEffect isDestroying={isDestroying && selectedTarget?.id === defender.id}>
+                  <img 
+                    src={defender.image} 
+                    alt={defender.name} 
+                    className="w-48 rounded-lg transition-transform duration-300"
+                  />
                 </DestroyEffect>
               </motion.div>
             ))}
@@ -168,10 +167,35 @@ const BattleTemplate = ({
             </AlertDialogHeader>
             <AlertDialogFooter>
               <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={onStartBattle}>Begin</AlertDialogAction>
+              <AlertDialogAction onClick={handleStartBattle}>Begin</AlertDialogAction>
             </AlertDialogFooter>
           </AlertDialogContent>
         </AlertDialog>
+
+        {selectedTarget && (
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <Button 
+                variant="destructive"
+                className="w-full sm:w-auto"
+              >
+                Confirm Target
+              </Button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Confirm Target</AlertDialogTitle>
+                <AlertDialogDescription>
+                  Are you sure you want to attack {selectedTarget.name}?
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={onAction}>Confirm</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+        )}
 
         <Button 
           onClick={onEndTurn} 

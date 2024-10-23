@@ -23,11 +23,6 @@ const DefendersSection = ({
         {defenders.map((defender) => (
           <motion.div
             key={defender.id}
-            animate={{
-              x: selectedTarget?.id === defender.id ? -50 : 0,
-              y: selectedTarget?.id === defender.id ? -30 : 0,
-              transition: { duration: 0.3 }
-            }}
             className={`relative cursor-pointer transition-all duration-300 ${
               battleState === 'inProgress' ? 'hover:ring-4 hover:ring-blue-500' : ''
             } ${
@@ -52,9 +47,11 @@ const DefendersSection = ({
                 />
                 {selectedTarget?.id === defender.id && (
                   <CardOverlay
-                    onConfirm={defender.id === 'cloud-sprinter' ? onDodgeConfirm : onTargetConfirm}
-                    onCancel={defender.id === 'cloud-sprinter' ? onDodgeCancel : onTargetCancel}
-                    isDodgePrompt={defender.id === 'cloud-sprinter' && showDodgePrompt}
+                    onConfirm={onTargetConfirm}
+                    onCancel={onTargetCancel}
+                    isBlockPrompt={defender.id === 'cloud-sprinter' && showDodgePrompt}
+                    blockText="Block for Flame Ravager"
+                    cancelText="Don't Block"
                   />
                 )}
               </div>

@@ -6,7 +6,6 @@ import HealthBar from './battle/HealthBar';
 import BattleLog from './battle/BattleLog';
 import AttackerSection from './battle/AttackerSection';
 import DefendersSection from './battle/DefendersSection';
-import BlockingPrompt from './battle/BlockingPrompt';
 
 const BattleTemplate = ({
   attacker,
@@ -26,7 +25,6 @@ const BattleTemplate = ({
 }) => {
   const [isAttacking, setIsAttacking] = React.useState(false);
   const [isDestroying, setIsDestroying] = React.useState(false);
-  const [showBlockPrompt, setShowBlockPrompt] = React.useState(false);
   const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
 
   const handleTargetConfirm = async () => {
@@ -38,20 +36,21 @@ const BattleTemplate = ({
   };
 
   const handleBlockingDecision = async (willBlock) => {
-    setShowBlockPrompt(false);
     if (willBlock) {
       // Cloud Sprinter blocks and counter-attacks
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       attacker.health -= 75; // Cloud Sprinter's damage
       setIsAttacking(false);
-      await processAttack();
+      // Cloud Sprinter gets destroyed
+      await processAttack(true);
     } else {
+      // Flame Ravager takes the hit
       await processAttack();
     }
   };
 
-  const processAttack = async () => {
+  const processAttack = async (isBlocker = false) => {
     setIsAttacking(true);
     await new Promise(resolve => setTimeout(resolve, 500));
     setIsAttacking(false);
@@ -63,14 +62,14 @@ const BattleTemplate = ({
 
   const handleStartBattle = () => {
     onStartBattle();
-    toast.info("Select a defender to attack by clicking on their card!", {
+    toast.info("Select a defender to attack by clicking on one of the defenders.", {
       duration: 4000,
     });
   };
 
   const handleAgilityWarningClose = () => {
     setShowAgilityWarning(false);
-    setShowBlockPrompt(true);
+    setShowDodgePrompt(true);
   };
 
   return (
@@ -92,11 +91,11 @@ const BattleTemplate = ({
           onSelectTarget={onSelectTarget}
           battleState={battleState}
           isDestroying={isDestroying}
-          onTargetConfirm={handleTargetConfirm}
+          onTargetConfirm={handleBlockingDecision}
           onTargetCancel={() => onSelectTarget(null)}
           showDodgePrompt={showDodgePrompt}
-          onDodgeConfirm={() => onDodgeDecision(true)}
-          onDodgeCancel={() => onDodgeDecision(false)}
+          onDodgeConfirm={() => handleBlockingDecision(true)}
+          onDodgeCancel={() => handleBlockingDecision(false)}
         />
 
         <div className="text-center mt-4">
@@ -119,12 +118,6 @@ const BattleTemplate = ({
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-
-      <BlockingPrompt 
-        isOpen={showBlockPrompt}
-        onBlock={() => handleBlockingDecision(true)}
-        onDecline={() => handleBlockingDecision(false)}
-      />
 
       <div className="flex flex-wrap gap-2 mt-4">
         <AlertDialog>

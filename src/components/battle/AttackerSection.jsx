@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import RippleEffect from '../animations/RippleEffect';
 import HealthBar from './HealthBar';
 
-const AttackerSection = ({ attacker, isAttacking, selectedTarget }) => {
+const AttackerSection = ({ attacker, isAttacking, selectedTarget, isRotated }) => {
   return (
     <div className="relative flex flex-col items-center">
       <h3 className="text-xl font-semibold mb-4">Attacker</h3>
@@ -18,6 +18,7 @@ const AttackerSection = ({ attacker, isAttacking, selectedTarget }) => {
         animate={{
           y: isAttacking ? 200 : 0,
           scale: isAttacking ? 1.2 : 1,
+          rotate: isRotated ? 90 : 0,
           transition: { duration: 0.5 }
         }}
         className="relative"

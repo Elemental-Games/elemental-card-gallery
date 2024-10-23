@@ -1,11 +1,12 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from "sonner";
 import HealthBar from './battle/HealthBar';
 import BattleLog from './battle/BattleLog';
 import AttackerSection from './battle/AttackerSection';
 import DefendersSection from './battle/DefendersSection';
+import AirAnimation from './animations/AirAnimation';
 
 const BattleTemplate = ({
   attacker,
@@ -20,12 +21,14 @@ const BattleTemplate = ({
   onSelectTarget,
   onDodgeDecision,
   showDodgePrompt,
-  playerHealth = 500,
-  opponentHealth = 500,
+  playerHealth,
+  opponentHealth,
 }) => {
   const [isAttacking, setIsAttacking] = React.useState(false);
   const [isDestroying, setIsDestroying] = React.useState(false);
+  const [showAirAnimation, setShowAirAnimation] = React.useState(false);
   const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
+  const [cardRotated, setCardRotated] = React.useState(false);
 
   const handleTargetConfirm = async () => {
     if (selectedTarget.id === 'flame-ravager') {
@@ -38,25 +41,58 @@ const BattleTemplate = ({
   const handleBlockingDecision = async (willBlock) => {
     if (willBlock) {
       // Cloud Sprinter blocks and counter-attacks
+      setShowAirAnimation(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      attacker.health -= 75;
+      setShowAirAnimation(false);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      // Cloud Sprinter returns to position
+      await new Promise(resolve => setTimeout(resolve, 300));
+      // Then Glacis attacks
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
-      attacker.health -= 75; // Cloud Sprinter's damage
       setIsAttacking(false);
-      // Cloud Sprinter gets destroyed
-      await processAttack(true);
+      setIsDestroying(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsDestroying(false);
+      setCardRotated(true);
+      onAction();
     } else {
-      // Flame Ravager takes the hit
       await processAttack();
     }
   };
 
-  const processAttack = async (isBlocker = false) => {
+  const handleDodgeDecision = async (willDodge) => {
+    if (willDodge) {
+      setIsAttacking(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsAttacking(false);
+      setCardRotated(true);
+      onAction('dodge');
+      toast.success('Cloud Sprinter successfully dodged!');
+    } else {
+      // Same as blocking sequence
+      setShowAirAnimation(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      attacker.health -= 75;
+      setShowAirAnimation(false);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsAttacking(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      setIsAttacking(false);
+      setIsDestroying(true);
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      setIsDestroying(false);
+      setCardRotated(true);
+      onAction('no-dodge');
+    }
+  };
+
+  const processAttack = async () => {
     setIsAttacking(true);
     await new Promise(resolve => setTimeout(resolve, 500));
     setIsAttacking(false);
-    setIsDestroying(true);
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsDestroying(false);
+    setCardRotated(true);
     onAction();
   };
 
@@ -83,7 +119,10 @@ const BattleTemplate = ({
           attacker={attacker}
           isAttacking={isAttacking}
           selectedTarget={selectedTarget}
+          isRotated={cardRotated}
         />
+
+        {showAirAnimation && <AirAnimation />}
 
         <DefendersSection 
           defenders={defenders}
@@ -91,11 +130,11 @@ const BattleTemplate = ({
           onSelectTarget={onSelectTarget}
           battleState={battleState}
           isDestroying={isDestroying}
-          onTargetConfirm={handleBlockingDecision}
+          onTargetConfirm={handleTargetConfirm}
           onTargetCancel={() => onSelectTarget(null)}
           showDodgePrompt={showDodgePrompt}
-          onDodgeConfirm={() => handleBlockingDecision(true)}
-          onDodgeCancel={() => handleBlockingDecision(false)}
+          onDodgeConfirm={() => handleDodgeDecision(true)}
+          onDodgeCancel={() => handleDodgeDecision(false)}
         />
 
         <div className="text-center mt-4">

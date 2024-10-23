@@ -29,6 +29,10 @@ const DefendersSection = ({
               selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
             }`}
             whileHover={{ scale: 1.05 }}
+            animate={{
+              x: defender.id === 'cloud-sprinter' && showDodgePrompt ? 100 : 0,
+              y: 0
+            }}
             onClick={() => battleState === 'inProgress' && onSelectTarget(defender)}
           >
             <div className="w-48">
@@ -47,11 +51,10 @@ const DefendersSection = ({
                 />
                 {selectedTarget?.id === defender.id && (
                   <CardOverlay
-                    onConfirm={onTargetConfirm}
-                    onCancel={onTargetCancel}
-                    isBlockPrompt={defender.id === 'cloud-sprinter' && showDodgePrompt}
-                    blockText="Block for Flame Ravager"
-                    cancelText="Don't Block"
+                    onConfirm={defender.id === 'cloud-sprinter' && showDodgePrompt ? onDodgeConfirm : onTargetConfirm}
+                    onCancel={defender.id === 'cloud-sprinter' && showDodgePrompt ? onDodgeCancel : onTargetCancel}
+                    isBlockPrompt={defender.id === 'cloud-sprinter' && !showDodgePrompt}
+                    isDodgePrompt={defender.id === 'cloud-sprinter' && showDodgePrompt}
                   />
                 )}
               </div>

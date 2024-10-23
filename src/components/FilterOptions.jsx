@@ -13,12 +13,11 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
   const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
   const types = ['All Types', 'Creature', 'Rune', 'Counter', 'Shield'];
   const rarities = ['All Rarities', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
-  const tiers = ['All Tiers', 'Tier I', 'Tier II', 'Tier III'];
 
   const handleTypeChange = (value) => {
-    onFilterChange('type', value);
+    const normalizedValue = value === 'All Types' ? 'all' : value;
+    onFilterChange('type', normalizedValue);
     
-    // Reset element and lock element selection if type is not Creature
     if (value !== 'Creature' && value !== 'All Types') {
       onFilterChange('element', 'All Elements');
     }
@@ -26,13 +25,10 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
 
   const handleElementChange = (value) => {
     onFilterChange('element', value);
-    // Force type to Creature when element is selected
     if (value !== 'All Elements') {
       onFilterChange('type', 'Creature');
     }
   };
-
-  const isElementDisabled = currentType !== 'Creature' && currentType !== 'all';
 
   return (
     <div className="flex flex-wrap gap-4 mb-4">
@@ -46,7 +42,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
       
       <Select 
         onValueChange={handleElementChange}
-        disabled={isElementDisabled}
+        disabled={currentType !== 'Creature' && currentType !== 'all'}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Element" />
@@ -69,7 +65,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => onFilterChange('rarity', value)}>
+      <Select onValueChange={(value) => onFilterChange('rarity', value.toLowerCase())}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Rarities" />
         </SelectTrigger>

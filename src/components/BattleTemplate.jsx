@@ -19,7 +19,6 @@ const BattleTemplate = ({
   onResetBattle,
   selectedTarget,
   onSelectTarget,
-  onDodgeDecision,
   showDodgePrompt,
   playerHealth = 500,
   opponentHealth = 500,
@@ -28,6 +27,7 @@ const BattleTemplate = ({
   const [isDestroying, setIsDestroying] = React.useState(false);
   const [showAirAnimation, setShowAirAnimation] = React.useState(false);
   const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
+  const [showBlockPrompt, setShowBlockPrompt] = React.useState(false);
   const [cardRotated, setCardRotated] = React.useState(false);
 
   const handleTargetConfirm = async () => {
@@ -40,16 +40,24 @@ const BattleTemplate = ({
     await processAttack();
   };
 
+  const handleAgilityWarningClose = () => {
+    setShowAgilityWarning(false);
+    setShowBlockPrompt(true);
+  };
+
   const handleBlockingDecision = async (willBlock) => {
     if (!attacker || !selectedTarget) return;
+    setShowBlockPrompt(false);
 
     if (willBlock) {
+      // Cloud Sprinter deals damage
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       if (attacker.health) attacker.health -= 75;
       setShowAirAnimation(false);
       await new Promise(resolve => setTimeout(resolve, 500));
-      await new Promise(resolve => setTimeout(resolve, 300));
+      
+      // Glacis attacks and destroys Cloud Sprinter
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsAttacking(false);
@@ -60,33 +68,6 @@ const BattleTemplate = ({
       onAction();
     } else {
       await processAttack();
-    }
-  };
-
-  const handleDodgeDecision = async (willDodge) => {
-    if (!attacker || !selectedTarget) return;
-
-    if (willDodge) {
-      setIsAttacking(true);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setIsAttacking(false);
-      setCardRotated(true);
-      onAction('dodge');
-      toast.success('Cloud Sprinter successfully dodged!');
-    } else {
-      setShowAirAnimation(true);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      if (attacker.health) attacker.health -= 75;
-      setShowAirAnimation(false);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setIsAttacking(true);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setIsAttacking(false);
-      setIsDestroying(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsDestroying(false);
-      setCardRotated(true);
-      onAction('no-dodge');
     }
   };
 
@@ -103,11 +84,6 @@ const BattleTemplate = ({
     toast.info("Select a defender to attack by clicking on one of the defenders.", {
       duration: 4000,
     });
-  };
-
-  const handleAgilityWarningClose = () => {
-    setShowAgilityWarning(false);
-    setShowDodgePrompt(true);
   };
 
   return (
@@ -134,9 +110,9 @@ const BattleTemplate = ({
           isDestroying={isDestroying}
           onTargetConfirm={handleTargetConfirm}
           onTargetCancel={() => onSelectTarget(null)}
-          showDodgePrompt={showDodgePrompt}
-          onDodgeConfirm={() => handleDodgeDecision(true)}
-          onDodgeCancel={() => handleDodgeDecision(false)}
+          showBlockPrompt={showBlockPrompt}
+          onBlockConfirm={() => handleBlockingDecision(true)}
+          onBlockCancel={() => handleBlockingDecision(false)}
         />
 
         <div className="text-center mt-4">
@@ -151,7 +127,7 @@ const BattleTemplate = ({
           <AlertDialogHeader>
             <AlertDialogTitle>Blocking Opportunity</AlertDialogTitle>
             <AlertDialogDescription>
-              Once the target has been declared, any creatures with a higher agility may block for the target instead.
+              Cloud Sprinter can block for Flame Ravager. If it blocks, it will deal 75 damage to Glacis before being destroyed.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

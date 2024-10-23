@@ -12,9 +12,9 @@ const DefendersSection = ({
   isDestroying,
   onTargetConfirm,
   onTargetCancel,
-  showDodgePrompt,
-  onDodgeConfirm,
-  onDodgeCancel
+  showBlockPrompt,
+  onBlockConfirm,
+  onBlockCancel
 }) => {
   return (
     <div>
@@ -30,7 +30,7 @@ const DefendersSection = ({
             }`}
             whileHover={{ scale: 1.05 }}
             animate={{
-              x: defender.id === 'cloud-sprinter' && showDodgePrompt ? 100 : 0,
+              x: defender.id === 'cloud-sprinter' && showBlockPrompt ? 100 : 0,
               y: 0
             }}
             onClick={() => battleState === 'inProgress' && onSelectTarget(defender)}
@@ -49,12 +49,11 @@ const DefendersSection = ({
                   alt={defender.name} 
                   className="w-48 rounded-lg transition-transform duration-300"
                 />
-                {selectedTarget?.id === defender.id && (
+                {(selectedTarget?.id === defender.id || (defender.id === 'cloud-sprinter' && showBlockPrompt)) && (
                   <CardOverlay
-                    onConfirm={defender.id === 'cloud-sprinter' && showDodgePrompt ? onDodgeConfirm : onTargetConfirm}
-                    onCancel={defender.id === 'cloud-sprinter' && showDodgePrompt ? onDodgeCancel : onTargetCancel}
-                    isBlockPrompt={defender.id === 'cloud-sprinter' && !showDodgePrompt}
-                    isDodgePrompt={defender.id === 'cloud-sprinter' && showDodgePrompt}
+                    onConfirm={defender.id === 'cloud-sprinter' ? onBlockConfirm : onTargetConfirm}
+                    onCancel={defender.id === 'cloud-sprinter' ? onBlockCancel : onTargetCancel}
+                    isBlockPrompt={defender.id === 'cloud-sprinter' && showBlockPrompt}
                   />
                 )}
               </div>

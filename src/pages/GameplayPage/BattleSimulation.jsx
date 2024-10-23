@@ -12,6 +12,7 @@ const BattleSimulation = () => {
   const [playerHealth, setPlayerHealth] = useState(500);
   const [opponentHealth, setOpponentHealth] = useState(500);
   const [selectedTarget, setSelectedTarget] = useState(null);
+  const [showDodgePrompt, setShowDodgePrompt] = useState(false);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -72,34 +73,53 @@ const BattleSimulation = () => {
     if (battleState !== 'inProgress') return;
     
     setSelectedTarget(defender);
-    toast.info(`Confirm your attack on ${defender.name}?`, {
-      duration: 3000,
-    });
     addToLog(`Selected ${defender.name} as target`);
   };
 
-  const handleAttackConfirmation = () => {
+  const handleTargetConfirmation = () => {
     if (!selectedTarget) return;
 
+    if (selectedTarget.id === 'cloud-sprinter') {
+      setShowDodgePrompt(true);
+      return;
+    }
+
+    processAttack();
+  };
+
+  const handleDodgeDecision = (willDodge) => {
+    setShowDodgePrompt(false);
+    
+    if (willDodge) {
+      toast.success('Cloud Sprinter successfully dodged the attack!', {
+        duration: 3000,
+      });
+      addToLog('Cloud Sprinter dodged the attack');
+    } else {
+      processAttack();
+    }
+  };
+
+  const processAttack = () => {
     addToLog(`Glacis attacks ${selectedTarget.name}`);
 
     if (selectedTarget.id === 'flame-ravager') {
-      // Flame Ravager specific logic
-      const damage = Math.floor(attacker.strength * 1.2); // 20% bonus damage
-      setSelectedTarget(prev => ({
-        ...prev,
-        health: Math.max(0, prev.health - damage)
-      }));
+      const damage = Math.floor(attacker.strength * 1.2);
+      setDefenders(prev => prev.map(def => 
+        def.id === selectedTarget.id 
+          ? { ...def, health: Math.max(0, def.health - damage) }
+          : def
+      ));
       toast.success(`Flame Ravager takes ${damage} damage!`, {
         duration: 3000,
       });
     } else if (selectedTarget.id === 'cloud-sprinter') {
-      // Cloud Sprinter specific logic
-      const damage = Math.floor(attacker.strength * 0.8); // 20% reduced damage
-      setSelectedTarget(prev => ({
-        ...prev,
-        health: Math.max(0, prev.health - damage)
-      }));
+      const damage = Math.floor(attacker.strength * 0.8);
+      setDefenders(prev => prev.map(def => 
+        def.id === selectedTarget.id 
+          ? { ...def, health: Math.max(0, def.health - damage) }
+          : def
+      ));
       toast.success(`Cloud Sprinter takes ${damage} damage!`, {
         duration: 3000,
       });
@@ -147,12 +167,14 @@ const BattleSimulation = () => {
       defenders={defenders}
       battleState={battleState}
       battleLog={battleLog}
-      onAction={handleAttackConfirmation}
+      onAction={handleTargetConfirmation}
       onStartBattle={startBattle}
       onEndTurn={endTurn}
       onResetBattle={resetBattle}
       selectedTarget={selectedTarget}
       onSelectTarget={handleTargetSelection}
+      onDodgeDecision={handleDodgeDecision}
+      showDodgePrompt={showDodgePrompt}
       playerHealth={playerHealth}
       opponentHealth={opponentHealth}
     />

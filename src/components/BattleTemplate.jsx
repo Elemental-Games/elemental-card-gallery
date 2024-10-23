@@ -21,8 +21,8 @@ const BattleTemplate = ({
   onSelectTarget,
   onDodgeDecision,
   showDodgePrompt,
-  playerHealth,
-  opponentHealth,
+  playerHealth = 500,
+  opponentHealth = 500,
 }) => {
   const [isAttacking, setIsAttacking] = React.useState(false);
   const [isDestroying, setIsDestroying] = React.useState(false);
@@ -31,6 +31,8 @@ const BattleTemplate = ({
   const [cardRotated, setCardRotated] = React.useState(false);
 
   const handleTargetConfirm = async () => {
+    if (!selectedTarget) return;
+    
     if (selectedTarget.id === 'flame-ravager') {
       setShowAgilityWarning(true);
       return;
@@ -39,16 +41,15 @@ const BattleTemplate = ({
   };
 
   const handleBlockingDecision = async (willBlock) => {
+    if (!attacker || !selectedTarget) return;
+
     if (willBlock) {
-      // Cloud Sprinter blocks and counter-attacks
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
-      attacker.health -= 75;
+      if (attacker.health) attacker.health -= 75;
       setShowAirAnimation(false);
       await new Promise(resolve => setTimeout(resolve, 500));
-      // Cloud Sprinter returns to position
       await new Promise(resolve => setTimeout(resolve, 300));
-      // Then Glacis attacks
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsAttacking(false);
@@ -63,6 +64,8 @@ const BattleTemplate = ({
   };
 
   const handleDodgeDecision = async (willDodge) => {
+    if (!attacker || !selectedTarget) return;
+
     if (willDodge) {
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -71,10 +74,9 @@ const BattleTemplate = ({
       onAction('dodge');
       toast.success('Cloud Sprinter successfully dodged!');
     } else {
-      // Same as blocking sequence
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
-      attacker.health -= 75;
+      if (attacker.health) attacker.health -= 75;
       setShowAirAnimation(false);
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsAttacking(true);
@@ -122,7 +124,7 @@ const BattleTemplate = ({
           isRotated={cardRotated}
         />
 
-        {showAirAnimation && <AirAnimation />}
+        {showAirAnimation && <AirAnimation isActive={true} />}
 
         <DefendersSection 
           defenders={defenders}
@@ -159,30 +161,14 @@ const BattleTemplate = ({
       </AlertDialog>
 
       <div className="flex flex-wrap gap-2 mt-4">
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button 
-              variant="secondary" 
-              disabled={battleState !== 'ready'}
-              className="w-full sm:w-auto"
-            >
-              Start Battle
-            </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Battle Start</AlertDialogTitle>
-              <AlertDialogDescription>
-                Target a creature by clicking on one of the defenders.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction onClick={handleStartBattle}>Begin</AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-
+        <Button 
+          variant="secondary" 
+          disabled={battleState !== 'ready'}
+          onClick={handleStartBattle}
+          className="w-full sm:w-auto"
+        >
+          Start Battle
+        </Button>
         <Button 
           onClick={onEndTurn} 
           disabled={battleState !== 'inProgress'}

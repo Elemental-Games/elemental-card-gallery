@@ -28,28 +28,29 @@ const BattleTemplate = ({
   const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
   const [showBlockPrompt, setShowBlockPrompt] = React.useState(false);
   const [showTargetOverlay, setShowTargetOverlay] = React.useState(false);
+  const [showDodgePrompt, setShowDodgePrompt] = React.useState(false);
   const [cardRotated, setCardRotated] = React.useState(false);
-  const [cloudSprinterPosition, setCloudSprinterPosition] = React.useState(0);
 
   React.useEffect(() => {
     if (selectedTarget) {
       setShowTargetOverlay(true);
+      setShowDodgePrompt(false);
     } else {
       setShowTargetOverlay(false);
+      setShowDodgePrompt(false);
     }
   }, [selectedTarget]);
 
   const handleTargetConfirm = async () => {
     if (!selectedTarget) return;
     
+    setShowTargetOverlay(false);
+    
     if (selectedTarget.id === 'flame-ravager') {
       setShowAgilityWarning(true);
-      setShowTargetOverlay(false);
     } else if (selectedTarget.id === 'cloud-sprinter') {
-      // Show dodge opportunity
-      setShowTargetOverlay(true);
+      setShowDodgePrompt(true);
     } else {
-      setShowTargetOverlay(false);
       await processAttack();
     }
   };
@@ -64,10 +65,6 @@ const BattleTemplate = ({
     setShowBlockPrompt(false);
 
     if (willBlock) {
-      // Move Cloud Sprinter to block position
-      setCloudSprinterPosition(100);
-      await new Promise(resolve => setTimeout(resolve, 500));
-      
       // Cloud Sprinter deals damage
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -90,7 +87,7 @@ const BattleTemplate = ({
   };
 
   const handleDodgeDecision = async (willDodge) => {
-    setShowTargetOverlay(false);
+    setShowDodgePrompt(false);
     if (willDodge) {
       toast.success('Cloud Sprinter successfully dodged the attack!');
       onAction();
@@ -121,8 +118,8 @@ const BattleTemplate = ({
     setShowAgilityWarning(false);
     setShowBlockPrompt(false);
     setShowTargetOverlay(false);
+    setShowDodgePrompt(false);
     setCardRotated(false);
-    setCloudSprinterPosition(0);
     onResetBattle();
   };
 

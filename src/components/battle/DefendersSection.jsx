@@ -16,9 +16,9 @@ const DefendersSection = ({
   onBlockConfirm,
   onBlockCancel,
   showTargetOverlay,
+  showDodgePrompt,
   onDodgeConfirm,
-  onDodgeCancel,
-  cloudSprinterPosition
+  onDodgeCancel
 }) => {
   return (
     <div>
@@ -33,10 +33,6 @@ const DefendersSection = ({
               selectedTarget?.id === defender.id ? 'ring-2 ring-blue-500' : ''
             }`}
             whileHover={{ scale: 1.05 }}
-            animate={{
-              x: defender.id === 'cloud-sprinter' ? cloudSprinterPosition : 0,
-              y: 0
-            }}
             onClick={() => battleState === 'inProgress' && onSelectTarget(defender)}
           >
             <div className="w-48">
@@ -53,26 +49,29 @@ const DefendersSection = ({
                   alt={defender.name} 
                   className="w-48 rounded-lg transition-transform duration-300"
                 />
-                {((selectedTarget?.id === defender.id && showTargetOverlay) || 
-                  (defender.id === 'cloud-sprinter' && showBlockPrompt)) && (
-                  <CardOverlay
-                    onConfirm={
-                      defender.id === 'cloud-sprinter' && showBlockPrompt 
-                        ? onBlockConfirm 
-                        : defender.id === 'cloud-sprinter' 
-                        ? onDodgeConfirm 
-                        : onTargetConfirm
-                    }
-                    onCancel={
-                      defender.id === 'cloud-sprinter' && showBlockPrompt 
-                        ? onBlockCancel 
-                        : defender.id === 'cloud-sprinter' 
-                        ? onDodgeCancel 
-                        : onTargetCancel
-                    }
-                    isBlockPrompt={defender.id === 'cloud-sprinter' && showBlockPrompt}
-                    isDodgePrompt={defender.id === 'cloud-sprinter' && !showBlockPrompt && selectedTarget?.id === 'cloud-sprinter'}
-                  />
+                {selectedTarget?.id === defender.id && (
+                  <>
+                    {showTargetOverlay && !showDodgePrompt && !showBlockPrompt && (
+                      <CardOverlay
+                        onConfirm={onTargetConfirm}
+                        onCancel={onTargetCancel}
+                      />
+                    )}
+                    {showDodgePrompt && (
+                      <CardOverlay
+                        onConfirm={onDodgeConfirm}
+                        onCancel={onDodgeCancel}
+                        isDodgePrompt={true}
+                      />
+                    )}
+                    {showBlockPrompt && defender.id === 'cloud-sprinter' && (
+                      <CardOverlay
+                        onConfirm={onBlockConfirm}
+                        onCancel={onBlockCancel}
+                        isBlockPrompt={true}
+                      />
+                    )}
+                  </>
                 )}
               </div>
             </DestroyEffect>

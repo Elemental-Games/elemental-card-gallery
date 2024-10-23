@@ -14,7 +14,11 @@ const DefendersSection = ({
   onTargetCancel,
   showBlockPrompt,
   onBlockConfirm,
-  onBlockCancel
+  onBlockCancel,
+  showTargetOverlay,
+  onDodgeConfirm,
+  onDodgeCancel,
+  cloudSprinterPosition
 }) => {
   return (
     <div>
@@ -30,7 +34,7 @@ const DefendersSection = ({
             }`}
             whileHover={{ scale: 1.05 }}
             animate={{
-              x: defender.id === 'cloud-sprinter' && showBlockPrompt ? 100 : 0,
+              x: defender.id === 'cloud-sprinter' ? cloudSprinterPosition : 0,
               y: 0
             }}
             onClick={() => battleState === 'inProgress' && onSelectTarget(defender)}
@@ -49,11 +53,25 @@ const DefendersSection = ({
                   alt={defender.name} 
                   className="w-48 rounded-lg transition-transform duration-300"
                 />
-                {(selectedTarget?.id === defender.id || (defender.id === 'cloud-sprinter' && showBlockPrompt)) && (
+                {((selectedTarget?.id === defender.id && showTargetOverlay) || 
+                  (defender.id === 'cloud-sprinter' && showBlockPrompt)) && (
                   <CardOverlay
-                    onConfirm={defender.id === 'cloud-sprinter' ? onBlockConfirm : onTargetConfirm}
-                    onCancel={defender.id === 'cloud-sprinter' ? onBlockCancel : onTargetCancel}
+                    onConfirm={
+                      defender.id === 'cloud-sprinter' && showBlockPrompt 
+                        ? onBlockConfirm 
+                        : defender.id === 'cloud-sprinter' 
+                        ? onDodgeConfirm 
+                        : onTargetConfirm
+                    }
+                    onCancel={
+                      defender.id === 'cloud-sprinter' && showBlockPrompt 
+                        ? onBlockCancel 
+                        : defender.id === 'cloud-sprinter' 
+                        ? onDodgeCancel 
+                        : onTargetCancel
+                    }
                     isBlockPrompt={defender.id === 'cloud-sprinter' && showBlockPrompt}
+                    isDodgePrompt={defender.id === 'cloud-sprinter' && !showBlockPrompt && selectedTarget?.id === 'cloud-sprinter'}
                   />
                 )}
               </div>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
-import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
+import { AlertDialog, AlertDialogAction, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from '@/components/ui/alert-dialog';
 import { toast } from "sonner";
 import HealthBar from './battle/HealthBar';
 import BattleLog from './battle/BattleLog';
@@ -19,7 +19,6 @@ const BattleTemplate = ({
   onResetBattle,
   selectedTarget,
   onSelectTarget,
-  showDodgePrompt,
   playerHealth = 500,
   opponentHealth = 500,
 }) => {
@@ -28,16 +27,22 @@ const BattleTemplate = ({
   const [showAirAnimation, setShowAirAnimation] = React.useState(false);
   const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
   const [showBlockPrompt, setShowBlockPrompt] = React.useState(false);
+  const [showTargetOverlay, setShowTargetOverlay] = React.useState(false);
   const [cardRotated, setCardRotated] = React.useState(false);
+  const [cloudSprinterPosition, setCloudSprinterPosition] = React.useState(0);
 
   const handleTargetConfirm = async () => {
     if (!selectedTarget) return;
     
     if (selectedTarget.id === 'flame-ravager') {
       setShowAgilityWarning(true);
-      return;
+      setShowTargetOverlay(false);
+    } else if (selectedTarget.id === 'cloud-sprinter') {
+      // Show dodge opportunity
+      setShowTargetOverlay(true);
+    } else {
+      await processAttack();
     }
-    await processAttack();
   };
 
   const handleAgilityWarningClose = () => {
@@ -50,6 +55,10 @@ const BattleTemplate = ({
     setShowBlockPrompt(false);
 
     if (willBlock) {
+      // Move Cloud Sprinter to block position
+      setCloudSprinterPosition(100);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      
       // Cloud Sprinter deals damage
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
@@ -71,6 +80,17 @@ const BattleTemplate = ({
     }
   };
 
+  const handleDodgeDecision = async (willDodge) => {
+    setShowTargetOverlay(false);
+    if (willDodge) {
+      toast.success('Cloud Sprinter successfully dodged the attack!');
+      onAction();
+    } else {
+      // Process normal attack on Cloud Sprinter
+      await processAttack();
+    }
+  };
+
   const processAttack = async () => {
     setIsAttacking(true);
     await new Promise(resolve => setTimeout(resolve, 500));
@@ -84,6 +104,18 @@ const BattleTemplate = ({
     toast.info("Select a defender to attack by clicking on one of the defenders.", {
       duration: 4000,
     });
+  };
+
+  const handleReset = () => {
+    setIsAttacking(false);
+    setIsDestroying(false);
+    setShowAirAnimation(false);
+    setShowAgilityWarning(false);
+    setShowBlockPrompt(false);
+    setShowTargetOverlay(false);
+    setCardRotated(false);
+    setCloudSprinterPosition(0);
+    onResetBattle();
   };
 
   return (
@@ -113,6 +145,10 @@ const BattleTemplate = ({
           showBlockPrompt={showBlockPrompt}
           onBlockConfirm={() => handleBlockingDecision(true)}
           onBlockCancel={() => handleBlockingDecision(false)}
+          showTargetOverlay={showTargetOverlay}
+          onDodgeConfirm={() => handleDodgeDecision(true)}
+          onDodgeCancel={() => handleDodgeDecision(false)}
+          cloudSprinterPosition={cloudSprinterPosition}
         />
 
         <div className="text-center mt-4">
@@ -153,7 +189,7 @@ const BattleTemplate = ({
           End Turn
         </Button>
         <Button 
-          onClick={onResetBattle}
+          onClick={handleReset}
           variant="outline"
           className="w-full sm:w-auto"
         >

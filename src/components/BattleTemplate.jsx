@@ -123,6 +123,10 @@ const BattleTemplate = ({
     onResetBattle();
   };
 
+  if (!attacker || !defenders.length) {
+    return <div className="p-4 text-center">Loading battle simulation...</div>;
+  }
+
   return (
     <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
       <div className="flex flex-col gap-8">
@@ -151,9 +155,9 @@ const BattleTemplate = ({
           onBlockConfirm={() => handleBlockingDecision(true)}
           onBlockCancel={() => handleBlockingDecision(false)}
           showTargetOverlay={showTargetOverlay}
+          showDodgePrompt={showDodgePrompt}
           onDodgeConfirm={() => handleDodgeDecision(true)}
           onDodgeCancel={() => handleDodgeDecision(false)}
-          cloudSprinterPosition={cloudSprinterPosition}
         />
 
         <div className="text-center mt-4">

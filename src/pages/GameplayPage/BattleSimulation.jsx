@@ -11,6 +11,7 @@ const BattleSimulation = () => {
   const [error, setError] = useState(null);
   const [playerHealth, setPlayerHealth] = useState(500);
   const [opponentHealth, setOpponentHealth] = useState(500);
+  const [selectedTarget, setSelectedTarget] = useState(null);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -49,6 +50,10 @@ const BattleSimulation = () => {
             exhausted: false
           }
         ]);
+
+        toast.info("Welcome to the Battle Simulation! Click 'Start Battle' to begin.", {
+          duration: 5000,
+        });
       } catch (error) {
         console.error('Error fetching card data:', error);
         setError(error.message);
@@ -63,25 +68,68 @@ const BattleSimulation = () => {
     setBattleLog(prevLog => [...prevLog, `Turn ${turn}: ${message}`]);
   };
 
-  const handleAction = () => {
+  const handleTargetSelection = (defender) => {
     if (battleState !== 'inProgress') return;
-    addToLog("Action performed");
+    
+    setSelectedTarget(defender);
+    toast.info(`Confirm your attack on ${defender.name}?`, {
+      duration: 3000,
+    });
+    addToLog(`Selected ${defender.name} as target`);
+  };
+
+  const handleAttackConfirmation = () => {
+    if (!selectedTarget) return;
+
+    addToLog(`Glacis attacks ${selectedTarget.name}`);
+
+    if (selectedTarget.id === 'flame-ravager') {
+      // Flame Ravager specific logic
+      const damage = Math.floor(attacker.strength * 1.2); // 20% bonus damage
+      setSelectedTarget(prev => ({
+        ...prev,
+        health: Math.max(0, prev.health - damage)
+      }));
+      toast.success(`Flame Ravager takes ${damage} damage!`, {
+        duration: 3000,
+      });
+    } else if (selectedTarget.id === 'cloud-sprinter') {
+      // Cloud Sprinter specific logic
+      const damage = Math.floor(attacker.strength * 0.8); // 20% reduced damage
+      setSelectedTarget(prev => ({
+        ...prev,
+        health: Math.max(0, prev.health - damage)
+      }));
+      toast.success(`Cloud Sprinter takes ${damage} damage!`, {
+        duration: 3000,
+      });
+    }
+
+    setSelectedTarget(null);
+    setBattleState('post_attack');
   };
 
   const startBattle = () => {
     setBattleState('inProgress');
+    toast.info("Select a defender to attack by clicking on their card!", {
+      duration: 4000,
+    });
     addToLog("Battle started");
   };
 
   const endTurn = () => {
     setTurn(prevTurn => prevTurn + 1);
     addToLog("Turn ended");
+    toast.info("Turn ended", {
+      duration: 2000,
+    });
   };
 
   const resetBattle = () => {
     setBattleState('ready');
     setBattleLog([]);
     setTurn(1);
+    setSelectedTarget(null);
     toast.success('Battle reset');
   };
 
@@ -99,10 +147,12 @@ const BattleSimulation = () => {
       defenders={defenders}
       battleState={battleState}
       battleLog={battleLog}
-      onAction={handleAction}
+      onAction={handleAttackConfirmation}
       onStartBattle={startBattle}
       onEndTurn={endTurn}
       onResetBattle={resetBattle}
+      selectedTarget={selectedTarget}
+      onSelectTarget={handleTargetSelection}
       playerHealth={playerHealth}
       opponentHealth={opponentHealth}
     />

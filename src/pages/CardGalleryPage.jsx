@@ -8,13 +8,10 @@ const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [element, setElement] = useState('');
+  const [element, setElement] = useState('All Elements');
   const [type, setType] = useState('all');
   const [idSort, setIdSort] = useState(null);
-  const [strengthAgilitySort, setStrengthAgilitySort] = useState(null);
   const [rarity, setRarity] = useState('all');
-  const [tier, setTier] = useState(null);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +23,6 @@ const CardGalleryPage = () => {
         setFilteredCards(data.cards);
       } catch (error) {
         console.error('Error fetching cards:', error);
-        setError('Failed to load cards. Please try again later.');
       }
     };
 
@@ -34,70 +30,42 @@ const CardGalleryPage = () => {
   }, []);
 
   useEffect(() => {
-    try {
-      console.log('Filtering cards with:', { searchTerm, element, type, rarity, idSort, strengthAgilitySort, tier });
-      const filtered = cards.filter(card => {
-        const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
-        const elementMatch = element === '' || (card.element && card.element === element);
-        const typeMatch = type === 'all' || card.type === type;
-        const rarityMatch = rarity === 'all' ||
-          (rarity === 'common' && card.rarity === 'C') ||
-          (rarity === 'uncommon' && card.rarity === 'U') ||
-          (rarity === 'rare' && card.rarity.trim() === 'R') ||
-          (rarity === 'epic' && card.rarity === 'E') ||
-          (rarity === 'legendary' && card.rarity === 'L');
-        const strengthAgilityMatch = strengthAgilitySort ? card.type === 'Creature' : true;
-        const tierMatch = type === 'Shield' ? (tier === null || card.tier === tier) : true;
+    const filtered = cards.filter(card => {
+      const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const elementMatch = element === 'All Elements' || card.element === element;
+      const typeMatch = type === 'all' || card.type === type;
+      const rarityMatch = rarity === 'all' ||
+        (rarity === 'common' && card.rarity === 'C') ||
+        (rarity === 'uncommon' && card.rarity === 'U') ||
+        (rarity === 'rare' && card.rarity.trim() === 'R') ||
+        (rarity === 'epic' && card.rarity === 'E') ||
+        (rarity === 'legendary' && card.rarity === 'L');
 
-        return nameMatch && elementMatch && typeMatch && rarityMatch && strengthAgilityMatch && tierMatch;
-      });
+      return nameMatch && elementMatch && typeMatch && rarityMatch;
+    });
 
+    if (idSort) {
       filtered.sort((a, b) => {
-        if (idSort) {
-          return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
-        }
-        if (strengthAgilitySort) {
-          const [attribute, order] = strengthAgilitySort.split('-');
-          const aValue = Number(a[attribute]) || 0;
-          const bValue = Number(b[attribute]) || 0;
-          return order === 'asc' 
-            ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
-            : (bValue - aValue) || (b.cardNumber - a.cardNumber);
-        }
-        return a.cardNumber - b.cardNumber;
+        return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
       });
-
-      setFilteredCards(filtered);
-      setError(null);
-    } catch (error) {
-      console.error('Error filtering cards:', error);
-      setError('An error occurred while filtering cards. Please try again.');
     }
-  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity, tier]);
+
+    setFilteredCards(filtered);
+  }, [searchTerm, element, type, cards, idSort, rarity]);
 
   const handleFilterChange = (filterType, value) => {
-    console.log(`Changing filter: ${filterType} to ${value}`);
     switch (filterType) {
       case 'element':
-        setElement(value === 'All Elements' ? '' : value);
+        setElement(value);
         break;
       case 'type':
-        setType(value === 'All Types' ? 'all' : value);
-        if (value !== 'Shield') {
-          setTier(null);
-        }
+        setType(value.toLowerCase());
         break;
       case 'rarity':
-        setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
+        setRarity(value.toLowerCase());
         break;
       case 'idSort':
         setIdSort(value);
-        break;
-      case 'strengthAgilitySort':
-        setStrengthAgilitySort(value);
-        break;
-      case 'tier':
-        setTier(value === 'All Tiers' ? null : parseInt(value.split(' ')[1]));
         break;
       default:
         break;
@@ -106,17 +74,11 @@ const CardGalleryPage = () => {
 
   const resetFilters = () => {
     setSearchTerm('');
-    setElement('');
+    setElement('All Elements');
     setType('all');
     setIdSort(null);
-    setStrengthAgilitySort(null);
     setRarity('all');
-    setTier(null);
   };
-
-  if (error) {
-    return <div className="text-red-500">{error}</div>;
-  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -129,7 +91,6 @@ const CardGalleryPage = () => {
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}
         currentType={type}
-        showTierFilter={type === 'Shield'}
       />
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
@@ -163,11 +124,6 @@ const CardGalleryPage = () => {
               {card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
                   STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
-                </p>
-              )}
-              {card.type === 'Shield' && card.tier && (
-                <p className="text-sm text-gray-600">
-                  Tier: {card.tier}
                 </p>
               )}
             </Card>

@@ -11,22 +11,28 @@ import {
 
 const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setSearchTerm, currentType }) => {
   const elements = ['All Elements', 'Air', 'Water', 'Earth', 'Fire', 'Combinational'];
-  const types = ['All Types', ...new Set(cards.map(card => card.type))];
+  const types = ['All Types', 'Creature', 'Rune', 'Counter', 'Shield'];
   const rarities = ['All Rarities', 'Common', 'Uncommon', 'Rare', 'Epic', 'Legendary'];
   const tiers = ['All Tiers', 'Tier I', 'Tier II', 'Tier III'];
 
-  const handleChange = (filterType, value) => {
-    console.log(`Changing filter: ${filterType} to ${value}`);
-    if (filterType === 'tier') {
-      const tierValue = value === 'Tier I' ? 1 : value === 'Tier II' ? 2 : value === 'Tier III' ? 3 : null;
-      onFilterChange(filterType, tierValue);
-    } else {
-      onFilterChange(filterType, value);
+  const handleTypeChange = (value) => {
+    onFilterChange('type', value);
+    
+    // Reset element and lock element selection if type is not Creature
+    if (value !== 'Creature' && value !== 'All Types') {
+      onFilterChange('element', 'All Elements');
     }
   };
 
-  const showStrengthAgilitySort = currentType.toLowerCase() === 'creature' || currentType === 'all';
-  const showTierFilter = currentType.toLowerCase() === 'shield';
+  const handleElementChange = (value) => {
+    onFilterChange('element', value);
+    // Force type to Creature when element is selected
+    if (value !== 'All Elements') {
+      onFilterChange('type', 'Creature');
+    }
+  };
+
+  const isElementDisabled = currentType !== 'Creature' && currentType !== 'all';
 
   return (
     <div className="flex flex-wrap gap-4 mb-4">
@@ -37,9 +43,10 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         onChange={(e) => setSearchTerm(e.target.value)}
         className="flex-grow"
       />
+      
       <Select 
-        onValueChange={(value) => handleChange('element', value)}
-        disabled={currentType.toLowerCase() !== 'creature' && currentType !== 'all'}
+        onValueChange={handleElementChange}
+        disabled={isElementDisabled}
       >
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Select Element" />
@@ -51,7 +58,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => handleChange('type', value)}>
+      <Select onValueChange={handleTypeChange}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Types" />
         </SelectTrigger>
@@ -62,7 +69,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => handleChange('rarity', value)}>
+      <Select onValueChange={(value) => onFilterChange('rarity', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="All Rarities" />
         </SelectTrigger>
@@ -73,7 +80,7 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      <Select onValueChange={(value) => handleChange('idSort', value)}>
+      <Select onValueChange={(value) => onFilterChange('idSort', value)}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="ID" />
         </SelectTrigger>
@@ -83,36 +90,13 @@ const FilterOptions = ({ cards, onFilterChange, onResetFilters, searchTerm, setS
         </SelectContent>
       </Select>
 
-      {showStrengthAgilitySort && (
-        <Select 
-          onValueChange={(value) => handleChange('strengthAgilitySort', value)}
-        >
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="Strength/Agility" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="strength-asc">Strength (Lowest to Highest)</SelectItem>
-            <SelectItem value="strength-desc">Strength (Highest to Lowest)</SelectItem>
-            <SelectItem value="agility-asc">Agility (Lowest to Highest)</SelectItem>
-            <SelectItem value="agility-desc">Agility (Highest to Lowest)</SelectItem>
-          </SelectContent>
-        </Select>
-      )}
-
-      {showTierFilter && (
-        <Select onValueChange={(value) => handleChange('tier', value)}>
-          <SelectTrigger className="w-[180px]">
-            <SelectValue placeholder="All Tiers" />
-          </SelectTrigger>
-          <SelectContent>
-            {tiers.map((tier) => (
-              <SelectItem key={tier} value={tier}>{tier}</SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      )}
-
-      <Button onClick={onResetFilters}>Reset Filters</Button>
+      <Button 
+        onClick={onResetFilters}
+        variant="outline"
+        className="hover:bg-gray-100"
+      >
+        Reset Filters
+      </Button>
     </div>
   );
 };

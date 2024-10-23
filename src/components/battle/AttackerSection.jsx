@@ -16,9 +16,8 @@ const AttackerSection = ({ attacker, isAttacking, selectedTarget }) => {
       </div>
       <motion.div
         animate={{
-          x: isAttacking ? 300 : 0,
-          y: 0,
-          rotate: isAttacking ? 15 : 0,
+          y: isAttacking ? 200 : 0,
+          scale: isAttacking ? 1.2 : 1,
           transition: { duration: 0.5 }
         }}
         className="relative"

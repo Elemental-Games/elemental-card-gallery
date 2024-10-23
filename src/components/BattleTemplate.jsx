@@ -6,6 +6,7 @@ import HealthBar from './battle/HealthBar';
 import BattleLog from './battle/BattleLog';
 import AttackerSection from './battle/AttackerSection';
 import DefendersSection from './battle/DefendersSection';
+import BlockingPrompt from './battle/BlockingPrompt';
 
 const BattleTemplate = ({
   attacker,
@@ -25,13 +26,37 @@ const BattleTemplate = ({
 }) => {
   const [isAttacking, setIsAttacking] = React.useState(false);
   const [isDestroying, setIsDestroying] = React.useState(false);
+  const [showBlockPrompt, setShowBlockPrompt] = React.useState(false);
+  const [showAgilityWarning, setShowAgilityWarning] = React.useState(false);
 
   const handleTargetConfirm = async () => {
+    if (selectedTarget.id === 'flame-ravager') {
+      setShowAgilityWarning(true);
+      return;
+    }
+    await processAttack();
+  };
+
+  const handleBlockingDecision = async (willBlock) => {
+    setShowBlockPrompt(false);
+    if (willBlock) {
+      // Cloud Sprinter blocks and counter-attacks
+      setIsAttacking(true);
+      await new Promise(resolve => setTimeout(resolve, 500));
+      attacker.health -= 75; // Cloud Sprinter's damage
+      setIsAttacking(false);
+      await processAttack();
+    } else {
+      await processAttack();
+    }
+  };
+
+  const processAttack = async () => {
     setIsAttacking(true);
-    await new Promise(resolve => setTimeout(resolve, 500)); // Attack animation
+    await new Promise(resolve => setTimeout(resolve, 500));
     setIsAttacking(false);
     setIsDestroying(true);
-    await new Promise(resolve => setTimeout(resolve, 1000)); // Destroy animation
+    await new Promise(resolve => setTimeout(resolve, 1000));
     setIsDestroying(false);
     onAction();
   };
@@ -41,6 +66,11 @@ const BattleTemplate = ({
     toast.info("Select a defender to attack by clicking on their card!", {
       duration: 4000,
     });
+  };
+
+  const handleAgilityWarningClose = () => {
+    setShowAgilityWarning(false);
+    setShowBlockPrompt(true);
   };
 
   return (
@@ -75,6 +105,26 @@ const BattleTemplate = ({
 
         <BattleLog logs={battleLog} />
       </div>
+
+      <AlertDialog open={showAgilityWarning} onOpenChange={setShowAgilityWarning}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Blocking Opportunity</AlertDialogTitle>
+            <AlertDialogDescription>
+              Once the target has been declared, any creatures with a higher agility may block for the target instead.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogAction onClick={handleAgilityWarningClose}>Continue</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      <BlockingPrompt 
+        isOpen={showBlockPrompt}
+        onBlock={() => handleBlockingDecision(true)}
+        onDecline={() => handleBlockingDecision(false)}
+      />
 
       <div className="flex flex-wrap gap-2 mt-4">
         <AlertDialog>

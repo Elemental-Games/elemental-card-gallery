@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { toast } from 'sonner';
 import BattleTemplate from '../../components/BattleTemplate';
+import { useHealth } from '../../hooks/useHealth';
+import { useBattleState } from '../../hooks/useBattleState';
+import { usePrompts } from '../../hooks/usePrompts';
+import { handleDodge, handleBlock } from '../../utils/battleActions';
 
 const BattleSimulation = () => {
-  const [battleState, setBattleState] = useState('ready');
-  const [battleLog, setBattleLog] = useState([]);
-  const [turn, setTurn] = useState(1);
-  const [attacker, setAttacker] = useState(null);
-  const [defenders, setDefenders] = useState([]);
-  const [error, setError] = useState(null);
-  const [playerHealth, setPlayerHealth] = useState(500);
-  const [opponentHealth, setOpponentHealth] = useState(500);
-  const [selectedTarget, setSelectedTarget] = useState(null);
-  const [showDodgePrompt, setShowDodgePrompt] = useState(false);
-  const [showBlockPrompt, setShowBlockPrompt] = useState(false);
+  const { health: playerHealth, reduceHealth: reducePlayerHealth, resetHealth: resetPlayerHealth } = useHealth(500);
+  const { health: opponentHealth, reduceHealth: reduceOpponentHealth, resetHealth: resetOpponentHealth } = useHealth(500);
+  const { battleState, setBattleState, turn, selectedTarget, setSelectedTarget, battleLog, addToLog, resetBattle } = useBattleState();
+  const { showDodgePrompt, showBlockPrompt, ...prompts } = usePrompts(selectedTarget);
+
+  const [attacker, setAttacker] = React.useState(null);
+  const [defenders, setDefenders] = React.useState([]);
 
   useEffect(() => {
     const fetchCardData = async () => {
@@ -35,7 +35,6 @@ const BattleSimulation = () => {
           maxHealth: glacis.strength,
           health: glacis.strength,
           exhausted: false,
-          target: null
         });
 
         setDefenders([
@@ -58,7 +57,6 @@ const BattleSimulation = () => {
         });
       } catch (error) {
         console.error('Error fetching card data:', error);
-        setError(error.message);
         toast.error('Failed to load card data');
       }
     };
@@ -66,99 +64,17 @@ const BattleSimulation = () => {
     fetchCardData();
   }, []);
 
-  const addToLog = (message) => {
-    setBattleLog(prevLog => [...prevLog, `Turn ${turn}: ${message}`]);
-  };
-
-  const handleTargetSelection = (defender) => {
-    if (battleState !== 'inProgress') return;
-    
-    setSelectedTarget(defender);
-    addToLog(`Selected ${defender.name} as target`);
-  };
-
-  const handleTargetConfirmation = () => {
-    if (!selectedTarget) return;
-
-    if (selectedTarget.id === 'cloud-sprinter') {
-      setShowDodgePrompt(true);
-      return;
+  const handleReset = () => {
+    resetBattle();
+    resetPlayerHealth();
+    resetOpponentHealth();
+    if (attacker) {
+      setAttacker(prev => ({ ...prev, health: prev.maxHealth }));
     }
-
-    processAttack();
-  };
-
-  const handleDodgeDecision = (willDodge) => {
-    setShowDodgePrompt(false);
-    
-    if (willDodge) {
-      toast.success('Cloud Sprinter successfully dodged the attack!', {
-        duration: 3000,
-      });
-      setOpponentHealth(prev => Math.max(0, prev - 155)); // Reduce opponent health by 155
-      addToLog('Cloud Sprinter dodged the attack');
-    } else {
-      processAttack();
-    }
-  };
-
-  const processAttack = () => {
-    addToLog(`Glacis attacks ${selectedTarget.name}`);
-    const baseDamage = 155; // Glacis's base damage
-
-    if (selectedTarget.id === 'flame-ravager') {
-      setDefenders(prev => prev.map(def => 
-        def.id === selectedTarget.id 
-          ? { ...def, health: Math.max(0, def.health - baseDamage) }
-          : def
-      ));
-      toast.success(`Flame Ravager takes ${baseDamage} damage!`, {
-        duration: 3000,
-      });
-    } else if (selectedTarget.id === 'cloud-sprinter') {
-      setDefenders(prev => prev.map(def => 
-        def.id === selectedTarget.id 
-          ? { ...def, health: Math.max(0, def.health - baseDamage) }
-          : def
-      ));
-      toast.success(`Cloud Sprinter takes ${baseDamage} damage!`, {
-        duration: 3000,
-      });
-    }
-
-    setSelectedTarget(null);
-    setBattleState('post_attack');
-  };
-
-  const startBattle = () => {
-    setBattleState('inProgress');
-    addToLog("Battle started");
-  };
-
-  const endTurn = () => {
-    setTurn(prevTurn => prevTurn + 1);
-    addToLog("Turn ended");
-    toast.info("Turn ended", {
-      duration: 2000,
-    });
-  };
-
-  const resetBattle = () => {
-    setBattleState('ready');
-    setBattleLog([]);
-    setTurn(1);
-    setSelectedTarget(null);
-    setOpponentHealth(500); // Reset opponent health
+    setDefenders(prev => prev.map(def => ({ ...def, health: def.maxHealth })));
+    prompts.resetPrompts();
     toast.success('Battle reset');
   };
-
-  if (error) {
-    return <div className="text-red-500 p-4">{error}</div>;
-  }
-
-  if (!attacker || defenders.length === 0) {
-    return <div className="p-4">Loading battle simulation...</div>;
-  }
 
   return (
     <BattleTemplate
@@ -166,16 +82,18 @@ const BattleSimulation = () => {
       defenders={defenders}
       battleState={battleState}
       battleLog={battleLog}
-      onAction={handleTargetConfirmation}
-      onStartBattle={startBattle}
-      onEndTurn={endTurn}
-      onResetBattle={resetBattle}
+      onAction={handleDodge}
+      onStartBattle={() => setBattleState('inProgress')}
+      onEndTurn={() => setTurn(prev => prev + 1)}
+      onResetBattle={handleReset}
       selectedTarget={selectedTarget}
-      onSelectTarget={handleTargetSelection}
-      onDodgeDecision={handleDodgeDecision}
-      showDodgePrompt={showDodgePrompt}
+      onSelectTarget={setSelectedTarget}
       playerHealth={playerHealth}
       opponentHealth={opponentHealth}
+      setOpponentHealth={reduceOpponentHealth}
+      showDodgePrompt={showDodgePrompt}
+      showBlockPrompt={showBlockPrompt}
+      {...prompts}
     />
   );
 };

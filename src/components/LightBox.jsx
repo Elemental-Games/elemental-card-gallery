@@ -12,7 +12,7 @@ const LightBox = () => {
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 5000); // Back to original 5 second delay
+      }, 5000);
       
       return () => clearTimeout(timer);
     }
@@ -24,8 +24,8 @@ const LightBox = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative bg-white">
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative bg-white dark:bg-gray-800">
         <DialogClose asChild>
           <button
             className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
@@ -38,7 +38,7 @@ const LightBox = () => {
         
         <DialogHeader>
           <DialogTitle className="text-xl sm:text-2xl font-bold mb-4 text-center pt-4">
-            Updated with Elemental Games
+            Stay Updated with Elemental Games
           </DialogTitle>
         </DialogHeader>
 

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { X } from 'lucide-react';
 import EmailSignup from './EmailSignup';
@@ -8,11 +7,15 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // Check if user has seen popup before
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    
+    // Only show if they haven't seen it
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 3000);
+      }, 1000); // Reduced to 1 second for testing
+      
       return () => clearTimeout(timer);
     }
   }, []);
@@ -23,17 +26,24 @@ const LightBox = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[700px] p-6 relative">
-        <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-          <X className="h-6 w-6" />
-          <span className="sr-only">Close</span>
+        <DialogClose asChild>
+          <button
+            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+            onClick={handleClose}
+          >
+            <X className="h-6 w-6" />
+            <span className="sr-only">Close</span>
+          </button>
         </DialogClose>
+        
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold mb-4 text-center">
             Updated with Elemental Games
           </DialogTitle>
         </DialogHeader>
+
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Left Column - Card Image */}
           <div className="flex items-center justify-center h-full">

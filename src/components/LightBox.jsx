@@ -14,7 +14,7 @@ const LightBox = () => {
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 1000); // Reduced to 1 second for testing
+      }, 1000);
       
       return () => clearTimeout(timer);
     }
@@ -27,34 +27,32 @@ const LightBox = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[700px] p-6 relative">
+      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative bg-white">
         <DialogClose asChild>
           <button
-            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+            className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
             onClick={handleClose}
           >
-            <X className="h-6 w-6" />
+            <X className="h-8 w-8" />
             <span className="sr-only">Close</span>
           </button>
         </DialogClose>
         
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold mb-4 text-center">
+          <DialogTitle className="text-xl sm:text-2xl font-bold mb-4 text-center pt-4">
             Updated with Elemental Games
           </DialogTitle>
         </DialogHeader>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-          {/* Left Column - Card Image */}
-          <div className="flex items-center justify-center h-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="flex items-center justify-center">
             <img 
               src="/images/cards/nimbus.png" 
               alt="Nimbus Card" 
-              className="w-full h-auto object-contain max-h-[400px] rounded-lg shadow-lg"
+              className="w-full h-auto object-contain max-h-[300px] sm:max-h-[400px] rounded-lg shadow-lg"
             />
           </div>
 
-          {/* Right Column - Subscription Form */}
           <div className="flex flex-col justify-center space-y-4">
             <h3 className="text-lg font-semibold">
               Stay Up to Date with Elemental Masters
@@ -62,7 +60,7 @@ const LightBox = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Be notified when we launch our Kickstarter and get exclusive updates about everything Elemental Masters!
             </p>
-            <EmailSignup onClose={handleClose} buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
+            <EmailSignup onClose={handleClose} />
           </div>
         </div>
       </DialogContent>

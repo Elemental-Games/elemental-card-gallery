@@ -41,7 +41,7 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="w-full"
+        className="w-full border-2 border-yellow-500"
       />
       <Button 
         type="submit" 

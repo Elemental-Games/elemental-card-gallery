@@ -26,9 +26,9 @@ const JoinNowPage = () => {
       <p className="text-xl mb-4 text-center">Join now to help unleash the power of the elements</p>
 
       <div className="max-w-md mx-auto mb-8">
-        <Card className="p-6">
+        <Card className="p-6 border-2 border-yellow-500">
           <h3 className="text-xl font-semibold mb-4">Sign up for Updates</h3>
-          <EmailSignup buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
+          <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
         </Card>
       </div>
 
@@ -172,9 +172,9 @@ const JoinNowPage = () => {
       </section>
 
       <div className="text-center">
-        <Card className="p-6 max-w-md mx-auto">
+        <Card className="p-6 max-w-md mx-auto border-2 border-yellow-500">
           <h3 className="text-xl font-semibold mb-4">Stay Updated</h3>
-          <EmailSignup buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
+          <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
         </Card>
       </div>
     </motion.div>

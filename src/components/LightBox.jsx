@@ -23,18 +23,32 @@ const LightBox = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-[700px]">
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold mb-4">
-            Stay Updated with Elemental Masters
+          <DialogTitle className="text-2xl font-bold mb-4 text-center">
+            Updated with Elemental Games
           </DialogTitle>
         </DialogHeader>
-        <div className="p-4">
-          <p className="mb-4">
-            Subscribe to our newsletter to receive updates about game releases,
-            special offers, and exclusive content!
-          </p>
-          <EmailSignup onClose={handleClose} />
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4">
+          {/* Left Column - Card Image */}
+          <div className="flex items-center justify-center">
+            <img 
+              src="/images/cards/ancient-winds.png" 
+              alt="Air Titan Card" 
+              className="w-full max-w-[250px] rounded-lg shadow-lg"
+            />
+          </div>
+
+          {/* Right Column - Subscription Form */}
+          <div className="flex flex-col justify-center space-y-4">
+            <h3 className="text-lg font-semibold">
+              Stay Up to Date with Elemental Masters
+            </h3>
+            <p className="text-sm text-muted-foreground mb-4">
+              Be notified when we launch our Kickstarter and get exclusive updates about everything Elemental Masters!
+            </p>
+            <EmailSignup onClose={handleClose} />
+          </div>
         </div>
       </DialogContent>
     </Dialog>

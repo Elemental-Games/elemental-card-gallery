@@ -12,7 +12,7 @@ const LightBox = () => {
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 5000);
+      }, 2500); // Changed to 2.5 seconds
       
       return () => clearTimeout(timer);
     }

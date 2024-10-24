@@ -20,13 +20,17 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         toast.success("Successfully subscribed to the newsletter!");
+        setEmail('');
         if (onClose) onClose();
       } else {
-        throw new Error('Failed to subscribe');
+        throw new Error(data.message || 'Failed to subscribe');
       }
     } catch (error) {
+      console.error('Subscription error:', error);
       toast.error("Failed to subscribe. Please try again later.");
     } finally {
       setIsLoading(false);

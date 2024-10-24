@@ -7,22 +7,21 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if user has seen popup before
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     
     if (!hasSeenPopup) {
-      console.log('Setting timer for lightbox...'); // Debug log
+      console.log('Setting timer for lightbox...');
       const timer = setTimeout(() => {
-        console.log('Timer completed, showing lightbox...'); // Debug log
+        console.log('Timer completed, showing lightbox...');
         setIsOpen(true);
       }, 2500);
       
       return () => {
-        console.log('Cleaning up timer...'); // Debug log
+        console.log('Cleaning up timer...');
         clearTimeout(timer);
       };
     } else {
-      console.log('User has already seen popup'); // Debug log
+      console.log('User has already seen popup');
     }
   }, []);
 
@@ -53,7 +52,7 @@ const LightBox = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div className="flex items-center justify-center">
             <img 
-              src="/images/cards/nimbus.png" 
+              src="/public/images/cards/nimbus.png" 
               alt="Nimbus Card" 
               className="w-full h-auto object-contain max-h-[300px] sm:max-h-[400px] rounded-lg shadow-lg"
             />

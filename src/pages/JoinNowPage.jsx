@@ -52,9 +52,8 @@ const JoinNowPage = () => {
 
       <section className="mb-8">
         <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="text-center w-1/3">
+        <div className="flex justify-center gap-8">
+          <div className="text-center w-2/5">
             <CardDisplay 
               card={{ id: 'torrent', name: 'Torrent', image: 'torrent.png' }}
               variant="artworkShowcase"
@@ -62,7 +61,7 @@ const JoinNowPage = () => {
             />
             <p className="mt-2 italic">Front of an ability card</p>
           </div>
-          <div className="text-center w-1/3">
+          <div className="text-center w-2/5">
             <img 
               src="/Card_Back.png"
               alt="Card Back" 

@@ -7,14 +7,22 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // Check if user has seen popup before
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     
     if (!hasSeenPopup) {
+      console.log('Setting timer for lightbox...'); // Debug log
       const timer = setTimeout(() => {
+        console.log('Timer completed, showing lightbox...'); // Debug log
         setIsOpen(true);
       }, 2500);
       
-      return () => clearTimeout(timer);
+      return () => {
+        console.log('Cleaning up timer...'); // Debug log
+        clearTimeout(timer);
+      };
+    } else {
+      console.log('User has already seen popup'); // Debug log
     }
   }, []);
 

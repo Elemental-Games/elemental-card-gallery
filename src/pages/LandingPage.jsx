@@ -137,7 +137,6 @@ const LandingPage = () => {
           </div>
         </section>
       </div>
-      {/* LightBox component has been removed */}
     </div>
   );
 };

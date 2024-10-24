@@ -1,18 +1,18 @@
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
+
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     const { email } = req.body;
     
     // Generate unsubscribe token
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
     // Send welcome email
     await resend.emails.send({
@@ -60,6 +60,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ message: 'Successfully subscribed' });
   } catch (error) {
+    console.error('Subscription error:', error);
     return res.status(500).json({ message: 'Error subscribing', error: error.message });
   }
 }

@@ -12,7 +12,7 @@ const LightBox = () => {
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 2500); // Changed to 2.5 seconds
+      }, 2500);
       
       return () => clearTimeout(timer);
     }
@@ -24,7 +24,7 @@ const LightBox = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative bg-white dark:bg-gray-800">
         <DialogClose asChild>
           <button

@@ -56,7 +56,7 @@ const JoinNowPage = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div className="text-center w-1/3">
             <CardDisplay 
-              card={{ id: 'deepseer', name: 'Deepseer', image: 'deepseer.png' }}
+              card={{ id: 'torrent', name: 'Torrent', image: 'torrent.png' }}
               variant="artworkShowcase"
               className="w-full h-auto object-contain mx-auto"
             />
@@ -68,10 +68,9 @@ const JoinNowPage = () => {
               alt="Card Back" 
               className="w-full h-auto object-contain mx-auto"
             />
-            <p className="mt-2 italic">Card back of our game</p>
+            <p className="mt-2 italic">Back of an Elemental Master card</p>
           </div>
         </div>
-
       </section>
 
       <section className="mb-8">
@@ -189,4 +188,3 @@ const JoinNowPage = () => {
 };
 
 export default JoinNowPage;
-

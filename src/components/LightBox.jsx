@@ -1,49 +1,43 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import EmailSignup from './EmailSignup';
 
-const LightBox = ({ onClose }) => {
-  const [card, setCard] = useState(null);
+const LightBox = () => {
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    fetch('/data/cards.json')
-      .then(response => response.json())
-      .then(data => {
-        const randomCard = data.cards[Math.floor(Math.random() * data.cards.length)];
-        setCard(randomCard);
-      })
-      .catch(error => console.error('Error fetching card:', error));
+    const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
-  if (!card) return null;
+  const handleClose = () => {
+    setIsOpen(false);
+    localStorage.setItem('hasSeenPopup', 'true');
+  };
 
   return (
-    <AnimatePresence>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50"
-        onClick={onClose}
-      >
-        <motion.div
-          initial={{ scale: 0.5, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          exit={{ scale: 0.5, opacity: 0 }}
-          className="bg-white p-4 rounded-lg shadow-lg max-w-md w-full"
-          onClick={(e) => e.stopPropagation()}
-        >
-          <img src={card.image} alt={card.name} className="w-full h-auto mb-4" />
-          <h2 className="text-2xl font-bold mb-2">{card.name}</h2>
-          <p className="text-gray-600 mb-4">{card.ability || card.quote}</p>
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            onClick={onClose}
-          >
-            Close
-          </button>
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="text-2xl font-bold mb-4">
+            Stay Updated with Elemental Masters
+          </DialogTitle>
+        </DialogHeader>
+        <div className="p-4">
+          <p className="mb-4">
+            Subscribe to our newsletter to receive updates about game releases,
+            special offers, and exclusive content!
+          </p>
+          <EmailSignup onClose={handleClose} />
+        </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

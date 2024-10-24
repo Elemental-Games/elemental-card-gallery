@@ -6,6 +6,7 @@ import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
+import LightBox from '../components/LightBox';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = React.useState(null);
@@ -67,6 +68,7 @@ const LandingPage = () => {
   return (
     <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
       <ImageHero />
+      <LightBox />
       
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">

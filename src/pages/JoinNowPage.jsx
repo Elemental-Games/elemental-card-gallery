@@ -5,6 +5,7 @@ import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Twitter, MessageCircle } from 'lucide-react';
 import CardDisplay from '../components/CardDisplay';
+import EmailSignup from '../components/EmailSignup';
 
 const JoinNowPage = () => {
   const calculateDaysUntil = () => {
@@ -22,7 +23,14 @@ const JoinNowPage = () => {
       className="container mx-auto px-4 py-8"
     >
       <h1 className="text-4xl font-bold mb-2 text-center">Become an Elemental Master</h1>
-      <p className="text-xl mb-8 text-center">Join now to help unleash the power of the elements</p>
+      <p className="text-xl mb-4 text-center">Join now to help unleash the power of the elements</p>
+
+      <div className="max-w-md mx-auto mb-8">
+        <Card className="p-6">
+          <h3 className="text-xl font-semibold mb-4">Sign up for Updates</h3>
+          <EmailSignup />
+        </Card>
+      </div>
 
       <div className="bg-primary text-primary-foreground p-4 rounded-lg mb-8 text-center max-w-md mx-auto">
         <h2 className="text-2xl font-semibold mb-2">Countdown to Launch</h2>
@@ -164,7 +172,10 @@ const JoinNowPage = () => {
       </section>
 
       <div className="text-center">
-        <Button size="lg" className="text-lg px-8 py-4">Check Back Soon to Sign-Up</Button>
+        <Card className="p-6 max-w-md mx-auto">
+          <h3 className="text-xl font-semibold mb-4">Stay Updated</h3>
+          <EmailSignup />
+        </Card>
       </div>
     </motion.div>
   );

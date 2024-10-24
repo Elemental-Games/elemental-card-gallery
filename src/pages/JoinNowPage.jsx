@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -8,11 +8,17 @@ import CardDisplay from '../components/CardDisplay';
 import EmailSignup from '../components/EmailSignup';
 
 const JoinNowPage = () => {
+  const signUpRef = useRef(null);
+
   const calculateDaysUntil = () => {
     const today = new Date();
     const targetDate = new Date('2024-11-01');
     const timeDiff = targetDate.getTime() - today.getTime();
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
+  };
+
+  const scrollToSignUp = () => {
+    signUpRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   };
 
   return (
@@ -22,10 +28,7 @@ const JoinNowPage = () => {
       exit={{ opacity: 0 }}
       className="container mx-auto px-4 py-8"
     >
-      <h1 className="text-4xl font-bold mb-2 text-center">Become an Elemental Master</h1>
-      <p className="text-xl mb-4 text-center">Join now to help unleash the power of the elements</p>
-
-      <div className="max-w-md mx-auto mb-8">
+      <div ref={signUpRef} className="max-w-md mx-auto mb-8">
         <Card className="p-6 border-2 border-yellow-500">
           <h3 className="text-xl font-semibold mb-4 text-purple-300">Sign up for Updates</h3>
           <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
@@ -42,7 +45,9 @@ const JoinNowPage = () => {
         <h2 className="text-2xl font-semibold mb-4">Early Bird Special</h2>
         <p className="mb-4">The first 169 backers of $50 or more will receive an autographed card of their choice (in addition to the usual $50 Kickstarter reward). This will be first come, first serve, and there will only be 1 autographed version of each card. A live list of cards left to be autographed will be on the website at time of purchase.</p>
         <p className="mb-4">So, be ready to grab your 1/1 Autographed card on November 1st!</p>
-        <Button size="lg" className="w-full">Check Back Soon to Sign-Up</Button>
+        <Button size="lg" className="w-full" onClick={scrollToSignUp}>
+          Sign Up Now!
+        </Button>
       </Card>
 
       <section className="mb-8">

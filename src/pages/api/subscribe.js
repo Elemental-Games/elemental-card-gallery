@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
     // Send welcome email
     await resend.emails.send({
-      from: 'Elemental Masters <updates@elementalmasters.com>',
+      from: 'Elemental Games <contact@elementalgames.gg>',
       to: email,
       subject: 'Welcome to Elemental Masters',
       html: `

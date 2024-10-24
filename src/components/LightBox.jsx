@@ -7,14 +7,12 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if user has seen popup before
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     
-    // Only show if they haven't seen it
     if (!hasSeenPopup) {
       const timer = setTimeout(() => {
         setIsOpen(true);
-      }, 1000);
+      }, 5000); // Back to original 5 second delay
       
       return () => clearTimeout(timer);
     }

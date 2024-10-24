@@ -8,7 +8,7 @@ app.use(cors());
 
 app.get('/api/cards', async (req, res) => {
   try {
-    const filePath = path.join(process.cwd(), 'src', 'data', 'ElementalMastersCards.json');
+    const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
     const data = await fs.readFile(filePath, 'utf8');
     const cards = JSON.parse(data);
     res.json(cards);

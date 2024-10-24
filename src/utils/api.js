@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the original JSON file
-const filePath = path.join(__dirname, '..', 'data', 'ElementalMastersCards.json');
+// Read the JSON file from the public directory
+const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
 const rawData = fs.readFileSync(filePath);
 const cards = JSON.parse(rawData).cards;
 
@@ -27,14 +27,12 @@ function processCard(card) {
 const processedCards = cards.map(processCard);
 
 // Write the processed data back to a new JSON file
-const outputPath = path.join(__dirname, '..', 'data', 'ProcessedElementalMastersCards.json');
+const outputPath = path.join(process.cwd(), 'public', 'data', 'processed-cards.json');
 fs.writeFileSync(outputPath, JSON.stringify({ cards: processedCards }, null, 2));
 
-console.log('Cards have been processed and saved to ProcessedElementalMastersCards.json');
+console.log('Cards have been processed and saved to processed-cards.json');
 
 export const fetchRulesData = async () => {
-  // In a real application, this would be an API call
-  // For now, we'll return mock data
   return {
     quickStart: [
       "Build a deck of 40 cards.",

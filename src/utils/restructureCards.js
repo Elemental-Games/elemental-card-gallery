@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-// Read the original JSON file
-const filePath = path.join(__dirname, '..', 'data', 'ElementalMastersCards.json');
+// Read the original JSON file from public directory
+const filePath = path.join(__dirname, '..', '..', 'public', 'data', 'cards.json');
 const rawData = fs.readFileSync(filePath);
 const cards = JSON.parse(rawData).cards;
 
@@ -37,8 +37,8 @@ function processCard(card) {
 // Process all cards
 const processedCards = cards.map(processCard);
 
-// Write the processed data back to a new JSON file
-const outputPath = path.join(__dirname, '..', 'data', 'ProcessedElementalMastersCards.json');
+// Write the processed data back to a new JSON file in public directory
+const outputPath = path.join(__dirname, '..', '..', 'public', 'data', 'processed-cards.json');
 fs.writeFileSync(outputPath, JSON.stringify({ cards: processedCards }, null, 2));
 
-console.log('Cards have been processed and saved to ProcessedElementalMastersCards.json');
+console.log('Cards have been processed and saved to processed-cards.json');

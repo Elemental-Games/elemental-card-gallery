@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 
-const EmailSignup = ({ onClose }) => {
+const EmailSignup = ({ onClose, buttonClassName }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -43,7 +43,11 @@ const EmailSignup = ({ onClose }) => {
         required
         className="w-full"
       />
-      <Button type="submit" className="w-full" disabled={isLoading}>
+      <Button 
+        type="submit" 
+        className={`w-full ${buttonClassName}`} 
+        disabled={isLoading}
+      >
         {isLoading ? "Subscribing..." : "Subscribe"}
       </Button>
     </form>

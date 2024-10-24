@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { X } from 'lucide-react';
 import EmailSignup from './EmailSignup';
 
 const LightBox = () => {
@@ -23,19 +24,23 @@ const LightBox = () => {
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[700px]">
+      <DialogContent className="sm:max-w-[700px] p-6 relative">
+        <DialogClose className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
+          <X className="h-6 w-6" />
+          <span className="sr-only">Close</span>
+        </DialogClose>
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold mb-4 text-center">
             Updated with Elemental Games
           </DialogTitle>
         </DialogHeader>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 p-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
           {/* Left Column - Card Image */}
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-center h-full">
             <img 
-              src="/images/cards/ancient-winds.png" 
-              alt="Air Titan Card" 
-              className="w-full max-w-[250px] rounded-lg shadow-lg"
+              src="/images/cards/nimbus.png" 
+              alt="Nimbus Card" 
+              className="w-full h-auto object-contain max-h-[400px] rounded-lg shadow-lg"
             />
           </div>
 
@@ -47,7 +52,7 @@ const LightBox = () => {
             <p className="text-sm text-muted-foreground mb-4">
               Be notified when we launch our Kickstarter and get exclusive updates about everything Elemental Masters!
             </p>
-            <EmailSignup onClose={handleClose} />
+            <EmailSignup onClose={handleClose} buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
           </div>
         </div>
       </DialogContent>

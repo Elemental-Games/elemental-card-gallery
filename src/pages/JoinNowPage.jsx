@@ -28,7 +28,7 @@ const JoinNowPage = () => {
       <div className="max-w-md mx-auto mb-8">
         <Card className="p-6">
           <h3 className="text-xl font-semibold mb-4">Sign up for Updates</h3>
-          <EmailSignup />
+          <EmailSignup buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
         </Card>
       </div>
 
@@ -174,7 +174,7 @@ const JoinNowPage = () => {
       <div className="text-center">
         <Card className="p-6 max-w-md mx-auto">
           <h3 className="text-xl font-semibold mb-4">Stay Updated</h3>
-          <EmailSignup />
+          <EmailSignup buttonClassName="bg-yellow-500 hover:bg-yellow-600" />
         </Card>
       </div>
     </motion.div>

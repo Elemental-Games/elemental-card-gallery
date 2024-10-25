@@ -3,9 +3,23 @@ import cors from 'cors';
 import fs from 'fs/promises';
 import path from 'path';
 import { Resend } from 'resend';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Initialize Resend with API key
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
+
+if (!RESEND_API_KEY) {
+  console.error('ERROR: RESEND_API_KEY is not set in environment variables');
+  process.exit(1);
+}
+
+const resend = new Resend(RESEND_API_KEY);
 
 app.use(cors());
 app.use(express.json());
@@ -18,13 +32,11 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
     
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set in environment variables');
-      return res.status(500).json({ message: 'Email service configuration error' });
-    }
+    console.log('Attempting to send email to:', email);
+    console.log('Using SITE_URL:', SITE_URL);
     
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
     const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
@@ -70,21 +82,41 @@ app.post('/api/subscribe', async (req, res) => {
     });
 
     console.log('Email sent successfully:', emailResponse);
-    return res.status(200).json({ message: 'Successfully subscribed', emailResponse });
+    return res.status(200).json({ 
+      message: 'Successfully subscribed', 
+      emailResponse,
+      debug: {
+        siteUrl: SITE_URL,
+        unsubscribeUrl,
+        emailSent: true
+      }
+    });
 
   } catch (error) {
     console.error('Detailed subscription error:', {
       message: error.message,
       stack: error.stack,
-      details: error.details
+      details: error.details,
+      resendApiKeyExists: !!RESEND_API_KEY,
+      siteUrlExists: !!SITE_URL
     });
+    
     return res.status(500).json({ 
       message: 'Error subscribing', 
       error: error.message,
-      details: error.details 
+      details: error.details,
+      debug: {
+        siteUrl: SITE_URL,
+        resendApiKeyExists: !!RESEND_API_KEY
+      }
     });
   }
 });
 
 const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log('Environment check:');
+  console.log('- RESEND_API_KEY exists:', !!RESEND_API_KEY);
+  console.log('- SITE_URL:', SITE_URL);
+});

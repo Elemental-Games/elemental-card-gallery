@@ -1,16 +1,26 @@
 import { Resend } from 'resend';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
+
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!process.env.RESEND_API_KEY) {
+  if (!RESEND_API_KEY) {
     console.error('RESEND_API_KEY is not set in environment variables');
-    return res.status(500).json({ message: 'Email service configuration error' });
+    return res.status(500).json({ 
+      message: 'Email service configuration error',
+      debug: { resendApiKeyExists: false }
+    });
   }
 
-  const resend = new Resend(process.env.RESEND_API_KEY);
+  const resend = new Resend(RESEND_API_KEY);
 
   try {
     const { email } = req.body;
@@ -19,8 +29,11 @@ export default async function handler(req, res) {
       return res.status(400).json({ message: 'Email is required' });
     }
 
+    console.log('Attempting to send email to:', email);
+    console.log('Using SITE_URL:', SITE_URL);
+
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
     const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
@@ -66,18 +79,33 @@ export default async function handler(req, res) {
     });
 
     console.log('Email sent successfully:', emailResponse);
-    return res.status(200).json({ message: 'Successfully subscribed', emailResponse });
+    return res.status(200).json({ 
+      message: 'Successfully subscribed', 
+      emailResponse,
+      debug: {
+        siteUrl: SITE_URL,
+        unsubscribeUrl,
+        emailSent: true
+      }
+    });
 
   } catch (error) {
     console.error('Detailed subscription error:', {
       message: error.message,
       stack: error.stack,
-      details: error.details
+      details: error.details,
+      resendApiKeyExists: !!RESEND_API_KEY,
+      siteUrlExists: !!SITE_URL
     });
+    
     return res.status(500).json({ 
       message: 'Error subscribing', 
       error: error.message,
-      details: error.details 
+      details: error.details,
+      debug: {
+        siteUrl: SITE_URL,
+        resendApiKeyExists: !!RESEND_API_KEY
+      }
     });
   }
 }

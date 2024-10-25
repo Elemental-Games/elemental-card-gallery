@@ -30,12 +30,17 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
     
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set in environment variables');
+      return res.status(500).json({ message: 'Email service configuration error' });
+    }
+    
     // Generate unsubscribe token
     const unsubscribeToken = Buffer.from(email).toString('base64');
     const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
     // Send welcome email
-    await resend.emails.send({
+    const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
       to: email,
       subject: 'Welcome to the World of Elemental Masters!',
@@ -78,10 +83,19 @@ app.post('/api/subscribe', async (req, res) => {
       `,
     });
 
-    return res.status(200).json({ message: 'Successfully subscribed' });
+    console.log('Email sent successfully:', emailResponse);
+    return res.status(200).json({ message: 'Successfully subscribed', emailResponse });
   } catch (error) {
-    console.error('Subscription error:', error);
-    return res.status(500).json({ message: 'Error subscribing', error: error.message });
+    console.error('Detailed subscription error:', {
+      message: error.message,
+      stack: error.stack,
+      details: error.details // Resend specific error details
+    });
+    return res.status(500).json({ 
+      message: 'Error subscribing', 
+      error: error.message,
+      details: error.details 
+    });
   }
 });
 

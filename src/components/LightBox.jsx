@@ -52,7 +52,7 @@ const LightBox = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div className="flex items-center justify-center">
             <img 
-              src="/public/images/cards/nimbus.png" 
+              src="/images/cards/nimbus.png" 
               alt="Nimbus Card" 
               className="w-full h-auto object-contain max-h-[300px] sm:max-h-[400px] rounded-lg shadow-lg"
             />

@@ -5,22 +5,10 @@ import path from 'path';
 import { Resend } from 'resend';
 
 const app = express();
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 
 app.use(cors());
 app.use(express.json());
-
-app.get('/api/cards', async (req, res) => {
-  try {
-    const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
-    const data = await fs.readFile(filePath, 'utf8');
-    const cards = JSON.parse(data);
-    res.json(cards);
-  } catch (error) {
-    console.error("Error fetching cards:", error);
-    res.status(500).json({ error: "Error fetching cards" });
-  }
-});
 
 app.post('/api/subscribe', async (req, res) => {
   if (!req.body.email) {
@@ -30,16 +18,14 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
     
-    if (!process.env.RESEND_API_KEY) {
-      console.error('RESEND_API_KEY is not set in environment variables');
+    if (!process.env.VITE_RESEND_API_KEY) {
+      console.error('VITE_RESEND_API_KEY is not set in environment variables');
       return res.status(500).json({ message: 'Email service configuration error' });
     }
     
-    // Generate unsubscribe token
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.VITE_SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
-    // Send welcome email
     const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
       to: email,
@@ -89,7 +75,7 @@ app.post('/api/subscribe', async (req, res) => {
     console.error('Detailed subscription error:', {
       message: error.message,
       stack: error.stack,
-      details: error.details // Resend specific error details
+      details: error.details
     });
     return res.status(500).json({ 
       message: 'Error subscribing', 

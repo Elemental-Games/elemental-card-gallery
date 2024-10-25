@@ -16,7 +16,7 @@ export default async function handler(req, res) {
 
     // Send welcome email
     await resend.emails.send({
-      from: 'contact@elementalgames.gg',
+      from: 'Elemental Masters <onboarding@resend.dev>',
       to: email,
       subject: 'Welcome to the World of Elemental Masters!',
       html: `

@@ -5,12 +5,12 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  if (!process.env.VITE_RESEND_API_KEY) {
-    console.error('VITE_RESEND_API_KEY is not set in environment variables');
+  if (!process.env.RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set in environment variables');
     return res.status(500).json({ message: 'Email service configuration error' });
   }
 
-  const resend = new Resend(process.env.VITE_RESEND_API_KEY);
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   try {
     const { email } = req.body;
@@ -20,9 +20,8 @@ export default async function handler(req, res) {
     }
 
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.VITE_SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
-    // Send welcome email
     const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
       to: email,

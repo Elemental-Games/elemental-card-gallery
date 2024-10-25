@@ -5,7 +5,7 @@ import path from 'path';
 import { Resend } from 'resend';
 
 const app = express();
-const resend = new Resend(process.env.VITE_RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 app.use(cors());
 app.use(express.json());
@@ -18,13 +18,13 @@ app.post('/api/subscribe', async (req, res) => {
   try {
     const { email } = req.body;
     
-    if (!process.env.VITE_RESEND_API_KEY) {
-      console.error('VITE_RESEND_API_KEY is not set in environment variables');
+    if (!process.env.RESEND_API_KEY) {
+      console.error('RESEND_API_KEY is not set in environment variables');
       return res.status(500).json({ message: 'Email service configuration error' });
     }
     
     const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${process.env.VITE_SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
+    const unsubscribeUrl = `${process.env.SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
     const emailResponse = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
@@ -71,6 +71,7 @@ app.post('/api/subscribe', async (req, res) => {
 
     console.log('Email sent successfully:', emailResponse);
     return res.status(200).json({ message: 'Successfully subscribed', emailResponse });
+
   } catch (error) {
     console.error('Detailed subscription error:', {
       message: error.message,

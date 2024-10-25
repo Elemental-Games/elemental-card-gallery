@@ -36,7 +36,7 @@ app.post('/api/subscribe', async (req, res) => {
 
     // Send welcome email
     await resend.emails.send({
-      from: 'newsletter@elementalmasters.com',
+      from: 'newsletter@elementalgames.gg',
       to: email,
       subject: 'Welcome to the World of Elemental Masters!',
       html: `

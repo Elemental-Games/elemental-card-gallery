@@ -12,7 +12,12 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/subscribe', {
+      // Use the full URL in production, fallback to relative path in development
+      const apiUrl = process.env.NODE_ENV === 'production' 
+        ? `${process.env.VITE_API_URL}/api/subscribe`
+        : '/api/subscribe';
+
+      const response = await fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -24,6 +29,9 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
         const errorData = await response.json();
         throw new Error(errorData.message || 'Failed to subscribe');
       }
+
+      const data = await response.json();
+      console.log('Subscription response:', data); // For debugging
 
       toast.success("Successfully subscribed to the newsletter!");
       setEmail('');

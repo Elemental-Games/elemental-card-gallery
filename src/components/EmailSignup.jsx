@@ -14,7 +14,7 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
     try {
       // Use the full URL in production, fallback to relative path in development
       const apiUrl = process.env.NODE_ENV === 'production' 
-        ? `${process.env.VITE_API_URL}/api/subscribe`
+        ? `${process.env.NEXT_PUBLIC_API_URL}/api/subscribe`
         : '/api/subscribe';
 
       const response = await fetch(apiUrl, {

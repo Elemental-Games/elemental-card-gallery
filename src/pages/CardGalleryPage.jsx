@@ -17,6 +17,7 @@ const CardGalleryPage = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
+        // Updated path to fetch from the correct location
         const response = await fetch('/data/cards.json');
         const data = await response.json();
         setCards(data.cards);

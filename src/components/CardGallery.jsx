@@ -36,28 +36,13 @@ const CardGallery = () => {
   useEffect(() => {
     const loadCards = async () => {
       try {
-        // Fetch card data from JSON file
+        // Updated path to fetch from the correct location
         const response = await fetch('/data/cards.json');
         if (!response.ok) {
           throw new Error('Failed to fetch card data');
         }
         const data = await response.json();
-
-        // Load all image files from the public/images/cards/ directory
-        const imageContext = require.context('/public/images/cards', false, /\.(png|jpe?g|svg)$/);
-        const imageFiles = imageContext.keys().map(imageContext);
-
-        // Match images with card data
-        const matchedCards = data.cards.map(card => {
-          const imageName = card.id + '.png'; // Assuming image names match card IDs
-          const matchedImage = imageFiles.find(img => img.includes(imageName));
-          return {
-            ...card,
-            image: matchedImage || '/placeholder.svg' // Use placeholder if no match found
-          };
-        });
-
-        setCards(matchedCards);
+        setCards(data.cards);
       } catch (error) {
         console.error('Error loading cards:', error);
         setError('Error loading cards. Please try again later.');

@@ -1,28 +1,21 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ],
   "buildCommand": "npm run build",
+  "framework": "vite",
+  "installCommand": "npm install",
   "outputDirectory": "dist",
-  "framework": "vite"
-
-  {
-    "version": 2,
-    "functions": {
-      "api/send-welcome-email/*.js": {
-        "memory": 1024,
-        "maxDuration": 10
-      }
-    },
-    "routes": [
-      {
-        "src": "/api/send-welcome-email",
-        "dest": "/api/send-welcome-email/index.js"
-      }
-    ]
-  }
-
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "functions": {
+    "api/send-welcome-email.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "routes": [
+    { 
+      "source": "/api/send-welcome-email", 
+      "destination": "/api/send-welcome-email.js" 
+    }
+  ]
 }

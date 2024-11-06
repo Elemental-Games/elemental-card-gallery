@@ -1,4 +1,4 @@
-// api/send-welcome-email/index.js
+// api/send-welcome-email.js
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
@@ -47,6 +47,12 @@ export default async function handler(req, res) {
             <a href="https://discord.gg/qXNWh4dMve" style="margin: 0 10px;">Discord</a>
             <a href="https://x.com/elemental_tcg" style="margin: 0 10px;">X (Twitter)</a>
           </div>
+          
+          <p style="font-size: 12px; color: #666; text-align: center; margin-top: 40px;">
+            You received this email because you subscribed to Elemental Masters updates.
+            <br>
+            To unsubscribe, click <a href="https://elementalgames.gg/unsubscribe?email=${email}">here</a>.
+          </p>
         </div>
       `
     });

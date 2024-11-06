@@ -1,7 +1,9 @@
+// src/components/EmailSignup.jsx
 import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
+import { subscribeEmail } from '../lib/supabase';
 
 const EmailSignup = ({ onClose, buttonClassName }) => {
   const [email, setEmail] = useState('');
@@ -12,25 +14,20 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch('/api/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
+      console.log('Submitting email:', email);
+      const result = await subscribeEmail(email);
+      console.log('Subscription result:', result);
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Failed to subscribe');
+      if (result.success) {
+        toast.success(result.message);
+        setEmail('');
+        if (onClose) onClose();
+      } else {
+        toast.error(result.message);
       }
-
-      toast.success("Successfully subscribed to the newsletter!");
-      setEmail('');
-      if (onClose) onClose();
     } catch (error) {
-      console.error('Subscription error:', error);
-      toast.error(error.message || "Failed to subscribe. Please try again later.");
+      console.error('Form submission error:', error);
+      toast.error("Failed to subscribe. Please try again later.");
     } finally {
       setIsLoading(false);
     }

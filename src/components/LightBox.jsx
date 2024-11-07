@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { X } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
-// Mock EmailSignup component for demonstration
 const EmailSignup = ({ onClose }) => (
   <div className="space-y-4">
     <input 
       type="email" 
       placeholder="Enter your email" 
-      className="w-full p-2 border rounded"
+      className="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-700"
     />
-    <button 
+    <Button 
       onClick={onClose}
-      className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+      className="w-full"
+      variant="default"
     >
       Sign Up
-    </button>
+    </Button>
   </div>
 );
 
@@ -23,30 +24,25 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Check if running in browser environment
-    if (typeof window !== 'undefined') {
-      const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 2500);
       
-      if (!hasSeenPopup) {
-        const timer = setTimeout(() => {
-          setIsOpen(true);
-        }, 2500);
-        
-        return () => clearTimeout(timer);
-      }
+      return () => clearTimeout(timer);
     }
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
-    if (typeof window !== 'undefined') {
-      localStorage.setItem('hasSeenPopup', 'true');
-    }
+    localStorage.setItem('hasSeenPopup', 'true');
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative bg-white dark:bg-gray-800">
+      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative">
         <DialogClose className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none">
           <X className="h-8 w-8" />
           <span className="sr-only">Close</span>
@@ -71,7 +67,7 @@ const LightBox = () => {
             <h3 className="text-lg font-semibold">
               Stay Up to Date with Elemental Games
             </h3>
-            <p className="text-gray-500 text-sm mb-4">
+            <p className="text-muted-foreground text-sm mb-4">
               Be notified when we launch our Kickstarter and get exclusive updates about everything Elemental Masters!
             </p>
             <EmailSignup onClose={handleClose} />

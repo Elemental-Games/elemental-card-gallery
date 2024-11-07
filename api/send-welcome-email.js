@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     console.log('Attempting to send email to:', email);
 
-    const { data, error } = await resend.emails.send({
+    const { data, error, unsubscribeToken } = await resend.emails.send({
       from: 'Elemental Games <noreply@elementalgames.gg>',
       to: email,
       subject: 'Welcome to Elemental Masters!',

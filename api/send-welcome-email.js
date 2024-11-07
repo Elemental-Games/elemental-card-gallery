@@ -1,23 +1,21 @@
+// api/send-welcome-email.js
 import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 export default async function handler(req, res) {
-  console.log('API endpoint called with:', req.body);
-
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
-    const { email, unsubscribeToken } = req.body;
+    const { email } = req.body;
 
-    if (!email || unsubscribeToken) {
-      return res.status(400).json({ error: 'Email and unsubscibe token are required' });
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
     }
 
-    console.log('Sending email with Resend to:', email);
-    console.log('Resend API key present:', !!process.env.RESEND_API_KEY);
+    console.log('Attempting to send email to:', email);
 
     const { data, error } = await resend.emails.send({
       from: 'Elemental Games <noreply@elementalgames.gg>',
@@ -93,7 +91,7 @@ export default async function handler(req, res) {
     }
 
     console.log('Email sent successfully:', data);
-    return res.status(200).json({ success: true, data });
+    return res.status(200).json({ success: true });
 
   } catch (error) {
     console.error('Server error:', error);

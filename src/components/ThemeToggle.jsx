@@ -6,14 +6,18 @@ import { Button } from '@/components/ui/button';
 const ThemeToggle = () => {
   const { theme, setTheme } = useTheme();
 
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
+
   return (
     <Button
       variant="outline"
       size="icon"
       className="fixed bottom-4 right-4 rounded-full bg-primary text-primary-foreground"
-      onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
+      onClick={toggleTheme}
     >
-      {theme === 'dark' ? <Sun className="h-[1.2rem] w-[1.2rem]" /> : <Moon className="h-[1.2rem] w-[1.2rem]" />}
+      {theme === 'light' ? <Moon className="h-[1.2rem] w-[1.2rem]" /> : <Sun className="h-[1.2rem] w-[1.2rem]" />}
     </Button>
   );
 };

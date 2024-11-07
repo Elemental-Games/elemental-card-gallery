@@ -41,11 +41,13 @@ const LightBox = () => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
-      <DialogContent className="sm:max-w-[700px] w-[95%] p-4 sm:p-6 relative">
-        <DialogClose className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none">
-          <X className="h-8 w-8" />
-          <span className="sr-only">Close</span>
+    <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
+      <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-[700px] w-[95%] p-4 sm:p-6 bg-background border shadow-lg z-50">
+        <DialogClose asChild>
+          <button className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none">
+            <X className="h-8 w-8" />
+            <span className="sr-only">Close</span>
+          </button>
         </DialogClose>
         
         <DialogHeader>

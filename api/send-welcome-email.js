@@ -31,9 +31,7 @@ export default async function handler(req, res) {
   <h1 style="color: #2d1d52; text-align: center; font-size: 28px; margin-bottom: 24px;">Welcome to Elemental Masters!</h1>
   
   <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-    Thank you for subscribing to our emails, and we're thrilled to have you join our community! You're arriving at the perfect time - we're preparing for our upcoming Kickstarter launch on December 1st, 2024.
-
-    THREE LUCKY SUBSCRIBERS will receive exclusive game mats for subscribing before December 1st!!
+    Thank you for subscribing to our emails, and we're thrilled to have you join our community! You're arriving at the perfect time - we're preparing for our upcoming Kickstarter launch on December 1st, 2024. THREE LUCKY SUBSCRIBERS will receive exclusive game mats for subscribing before December 1st!!
   </p>
 
   <div style="background-color: #6B46C1; padding: 20px; border-radius: 8px; margin: 24px 0;">

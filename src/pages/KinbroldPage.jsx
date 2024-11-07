@@ -19,11 +19,11 @@ const KinbroldPage = () => {
 
   const zoomLocations = {
     start: { scale: 1, x: 0, y: 0 },
-    evermere: { scale: 2, x: -1000, y: -1000 },
-    zalos: { scale: 2, x: -500, y: -500 },
-    tsunareth: { scale: 2, x: -1500, y: -1500 },
-    scarto: { scale: 2, x: -1500, y: -500 },
-    grivoss: { scale: 2, x: -500, y: -1500 },
+    evermere: { scale: 2, x: -800, y: -600 }, // Adjusted higher
+    zalos: { scale: 2, x: -200, y: -200 }, // Top left
+    tsunareth: { scale: 2, x: -800, y: -1200 }, // Bottom middle
+    scarto: { scale: 2, x: -1200, y: -400 }, // Mid/upper right
+    grivoss: { scale: 2, x: -400, y: -800 }, // Mid left
     frozen_ridge: { scale: 3, x: -300, y: -300 },
     shroud_peak: { scale: 3, x: -1700, y: -300 },
     mount_surya: { scale: 3, x: -1700, y: -700 },

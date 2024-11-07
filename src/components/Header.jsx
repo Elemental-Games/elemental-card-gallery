@@ -1,67 +1,91 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
+import { ScrollArea } from '@/components/ui/scroll-area';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Menu } from 'lucide-react';
+import { navItems } from '../nav-items';
 
 const Header = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
-
-  const navItems = [
-    { title: 'Home', path: '/' },
-    { title: 'Gameplay', path: '/gameplay' },
-    { title: 'Cards', path: '/cards' },
-    { title: 'Kinbrold', path: '/kinbrold' },
-    { title: 'About Us', path: '/about' },
-    { title: 'Join Now', path: '/join' },
-  ];
+  const [open, setOpen] = useState(false);
+  const location = useLocation();
 
   return (
-    <header className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-4 px-6">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center">
-          <Link to="/">
-            <img 
-              src="/Games_Logo.png"
-              alt="Elemental Games Logo" 
-              style={{ width: '100px', height: '100px', marginRight: '8px', marginBottom: '-10px' }}
-            />
-          </Link>
-          <Link to="/" className="text-2xl font-bold">Elemental Games</Link>
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center">
+        <div className="md:hidden">
+          <Sheet open={open} onOpenChange={setOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" className="mr-2 px-0 text-base hover:bg-transparent focus-visible:bg-transparent focus-visible:ring-0 focus-visible:ring-offset-0 md:hidden">
+                <Menu className="h-6 w-6" />
+                <span className="sr-only">Toggle Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="pr-0">
+              <div className="flex items-center">
+                <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
+                  <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-8 w-auto" />
+                </Link>
+              </div>
+              <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
+                <div className="flex flex-col space-y-2">
+                  {navItems.map((item) => (
+                    <div key={item.title}>
+                      <Link
+                        to={item.to}
+                        onClick={() => setOpen(false)}
+                        className={cn(
+                          "flex items-center gap-2 text-sm font-medium transition-colors hover:text-primary",
+                          location.pathname === item.to ? "text-primary" : "text-muted-foreground"
+                        )}
+                      >
+                        {item.icon}
+                        {item.title}
+                      </Link>
+                      {item.subPages && (
+                        <div className="ml-4 mt-2 space-y-2">
+                          {item.subPages.map((subPage) => (
+                            <Link
+                              key={subPage.title}
+                              to={subPage.to}
+                              onClick={() => setOpen(false)}
+                              className={cn(
+                                "block text-sm font-medium transition-colors hover:text-primary",
+                                location.pathname === subPage.to ? "text-primary" : "text-muted-foreground"
+                              )}
+                            >
+                              {subPage.title}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ScrollArea>
+            </SheetContent>
+          </Sheet>
         </div>
-        <nav className="hidden md:flex space-x-4">
+        <Link to="/" className="mr-6 flex items-center space-x-2">
+          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-8 w-auto hidden md:block" />
+          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-8 w-auto md:hidden" />
+        </Link>
+        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
           {navItems.map((item) => (
             <Link
-              key={item.path}
-              to={item.path}
-              className="hover:text-accent transition-colors relative group"
+              key={item.title}
+              to={item.to}
+              className={cn(
+                "transition-colors hover:text-primary",
+                location.pathname === item.to ? "text-primary" : "text-muted-foreground"
+              )}
             >
               {item.title}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full"></span>
             </Link>
           ))}
         </nav>
-        <div className="md:hidden">
-          <Button variant="ghost" size="icon" onClick={toggleMenu}>
-            {isMenuOpen ? <X /> : <Menu />}
-          </Button>
-        </div>
       </div>
-      {isMenuOpen && (
-        <div className="md:hidden mt-4">
-          {navItems.map((item) => (
-            <Link
-              key={item.path}
-              to={item.path}
-              className="block py-2 px-4 hover:bg-purple-800"
-              onClick={toggleMenu}
-            >
-              {item.title}
-            </Link>
-          ))}
-        </div>
-      )}
     </header>
   );
 };

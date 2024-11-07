@@ -22,7 +22,7 @@ const Header = () => {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+      <div className="container flex h-20 items-center">
         <div className="md:hidden">
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
@@ -34,7 +34,8 @@ const Header = () => {
             <SheetContent side="left" className="pr-0">
               <div className="flex items-center">
                 <Link to="/" className="flex items-center" onClick={() => setOpen(false)}>
-                  <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-10 w-auto" />
+                  <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-16 w-auto" />
+                  <span className="ml-2 text-2xl font-heading font-bold">Elemental Games</span>
                 </Link>
               </div>
               <ScrollArea className="my-4 h-[calc(100vh-8rem)] pb-10">
@@ -79,21 +80,29 @@ const Header = () => {
                                     {subPage.title}
                                   </Link>
                                   {subPage.subPages && (
-                                    <div className="ml-4 mt-2 space-y-2">
-                                      {subPage.subPages.map((subSubPage) => (
-                                        <Link
-                                          key={subSubPage.title}
-                                          to={subSubPage.to}
-                                          onClick={() => setOpen(false)}
-                                          className={cn(
-                                            "block text-sm font-medium transition-colors hover:text-primary",
-                                            location.pathname === subSubPage.to ? "text-primary" : "text-muted-foreground"
-                                          )}
-                                        >
-                                          {subSubPage.title}
-                                        </Link>
-                                      ))}
-                                    </div>
+                                    <Collapsible>
+                                      <CollapsibleTrigger className="ml-4 mt-2 flex items-center text-sm text-muted-foreground hover:text-primary">
+                                        <ChevronRight className="h-4 w-4" />
+                                        <span>Show more</span>
+                                      </CollapsibleTrigger>
+                                      <CollapsibleContent>
+                                        <div className="ml-4 mt-2 space-y-2">
+                                          {subPage.subPages.map((subSubPage) => (
+                                            <Link
+                                              key={subSubPage.title}
+                                              to={subSubPage.to}
+                                              onClick={() => setOpen(false)}
+                                              className={cn(
+                                                "block text-sm font-medium transition-colors hover:text-primary",
+                                                location.pathname === subSubPage.to ? "text-primary" : "text-muted-foreground"
+                                              )}
+                                            >
+                                              {subSubPage.title}
+                                            </Link>
+                                          ))}
+                                        </div>
+                                      </CollapsibleContent>
+                                    </Collapsible>
                                   )}
                                 </div>
                               ))}
@@ -110,7 +119,8 @@ const Header = () => {
         </div>
         <Link to="/" className="mr-6 flex items-center space-x-2">
           <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-10 w-auto hidden md:block" />
-          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-10 w-auto md:hidden" />
+          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-16 w-auto md:hidden" />
+          <span className="text-2xl font-heading font-bold">Elemental Games</span>
         </Link>
         <nav className="hidden md:flex items-center space-x-6 text-base font-medium">
           {navItems.map((item) => (

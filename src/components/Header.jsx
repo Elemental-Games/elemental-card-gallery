@@ -118,7 +118,7 @@ const Header = () => {
           </Sheet>
         </div>
         <Link to="/" className="mr-6 flex items-center space-x-2">
-          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-10 w-auto hidden md:block" />
+          <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-16 w-auto hidden md:block" />
           <img src="/Games_Logo.png" alt="Elemental Games Logo" className="h-16 w-auto md:hidden" />
           <span className="text-2xl font-heading font-bold">Elemental Games</span>
         </Link>

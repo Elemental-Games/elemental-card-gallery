@@ -3,25 +3,21 @@ export async function sendWelcomeEmail(email) {
   try {
     console.log('Starting email send to:', email);
 
-    // Log the full request
-    const requestBody = { email };
-    console.log('Request body:', requestBody);
-
     const response = await fetch('/api/send-welcome-email', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody)
+      body: JSON.stringify({ email })
     });
 
-    console.log('Response status:', response.status);
+    console.log('Email API response status:', response.status);
 
-    const responseData = await response.json();
-    console.log('Response data:', responseData);
+    const data = await response.json();
+    console.log('Email API response data:', data);
 
     if (!response.ok) {
-      console.error('Email API error:', responseData);
+      console.error('Email API error:', data);
       return false;
     }
 

@@ -7,6 +7,7 @@ import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
 import LightBox from '../components/LightBox';
+import { Book, Cards, Gamepad2, ScrollText, ChevronRight } from 'lucide-react';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = React.useState(null);
@@ -43,10 +44,10 @@ const LandingPage = () => {
   ];
 
   const exploreItems = [
-    { title: 'Kinbrold Lore', emoji: '📚', link: '/kinbrold' },
-    { title: 'Deck Builder', emoji: '🃏', link: '/cards/deck-builder' },
-    { title: 'Gameplay', emoji: '♟️', link: '/gameplay' },
-    { title: 'Card Gallery', emoji: '🐉', link: '/cards' },
+    { title: 'Kinbrold Lore', icon: <Book className="w-8 h-8" />, link: '/kinbrold' },
+    { title: 'Deck Builder', icon: <Cards className="w-8 h-8" />, link: '/cards/deck-builder' },
+    { title: 'Gameplay', icon: <Gamepad2 className="w-8 h-8" />, link: '/gameplay' },
+    { title: 'Card Gallery', icon: <ScrollText className="w-8 h-8" />, link: '/cards' },
   ];
 
   const handleElementClick = (element) => {
@@ -99,6 +100,7 @@ const LandingPage = () => {
           <Link to="/kinbrold">
             <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
               Explore the World of Kinbrold
+              <ChevronRight className="ml-2 w-8 h-8" />
             </h2>
           </Link>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -131,7 +133,7 @@ const LandingPage = () => {
           <div className="flex flex-wrap justify-center gap-8">
             {exploreItems.map((item, index) => (
               <Link to={item.link} key={index}>
-                <ExploreItem title={item.title} emoji={item.emoji} />
+                <ExploreItem title={item.title} icon={item.icon} />
               </Link>
             ))}
           </div>

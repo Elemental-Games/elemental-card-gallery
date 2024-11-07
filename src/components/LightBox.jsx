@@ -8,7 +8,6 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // Automatically reset hasSeenPopup on each page load
     localStorage.removeItem('hasSeenPopup');
     
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');

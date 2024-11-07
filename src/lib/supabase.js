@@ -38,6 +38,7 @@ export async function subscribeEmail(email) {
         email: email.toLowerCase().trim(),
         status: 'active',
         subscribed_at: new Date().toISOString()
+        unsubscribe_token: unsubscribeToken
       }]);
 
     if (insertError) {
@@ -46,7 +47,7 @@ export async function subscribeEmail(email) {
     }
 
     // Send welcome email
-    const emailSent = await sendWelcomeEmail(email);
+    const emailSent = await sendWelcomeEmail(email, unsubscribeToken);
     console.log('Email send attempt result:', emailSent);
 
     return {

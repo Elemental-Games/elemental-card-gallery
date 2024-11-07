@@ -1,14 +1,17 @@
 // api/send-welcome-email.js
 import { Resend } from 'resend';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export default async function handler(req, res) {
+  console.log('API endpoint called with:', req.body);
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
   try {
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    console.log('Resend initialized with API key present:', !!process.env.RESEND_API_KEY);
+
     const { email } = req.body;
 
     if (!email) {
@@ -95,6 +98,9 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Server error:', error);
-    return res.status(500).json({ error: 'Failed to send email' });
+    return res.status(500).json({ 
+      error: 'Failed to send email',
+      details: error.message
+    });
   }
 }

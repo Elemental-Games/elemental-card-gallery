@@ -20,7 +20,7 @@ export default async function handler(req, res) {
 
     console.log('Attempting to send email to:', email);
 
-    const { data, error, unsubscribeToken } = await resend.emails.send({
+    const { data, error } = await resend.emails.send({
       from: 'Elemental Games <noreply@elementalgames.gg>',
       to: email,
       subject: 'Welcome to Elemental Masters!',
@@ -80,7 +80,7 @@ export default async function handler(req, res) {
   <div style="text-align: center; margin-top: 32px; font-size: 12px; color: #888;">
     <p>You received this email because you subscribed to Elemental Masters updates.</p>
     <p style="margin-top: 8px;">
-      <a href="https://elementalgames.gg/unsubscribe?email=${email}&token=${unsubscribeToken}" 
+      <a href="https://elementalgames.gg/unsubscribe?email=${email}
          style="color: #6B46C1; text-decoration: underline;">Unsubscribe</a>
     </p>
   </div>

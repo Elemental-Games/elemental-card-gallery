@@ -31,13 +31,15 @@ export async function subscribeEmail(email) {
       };
     }
 
+    const unsubscribeToken = crypto.randomUUID();
+
     // Insert new subscriber
     const { error: insertError } = await supabase
       .from('subscribers')
       .insert([{
         email: email.toLowerCase().trim(),
         status: 'active',
-        subscribed_at: new Date().toISOString()
+        subscribed_at: new Date().toISOString(),
         unsubscribe_token: unsubscribeToken
       }]);
 

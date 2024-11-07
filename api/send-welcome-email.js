@@ -28,10 +28,12 @@ export default async function handler(req, res) {
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1a1a2e; color: #ffffff; padding: 32px; border-radius: 8px;">
   <img src="https://elementalgames.gg/Games_Logo.png" alt="Elemental Games Logo" style="width: 200px; margin: 20px auto; display: block;">
   
-  <h1 style="color: #6B46C1; text-align: center; font-size: 28px; margin-bottom: 24px;">Welcome to Elemental Masters!</h1>
+  <h1 style="color: #2d1d52; text-align: center; font-size: 28px; margin-bottom: 24px;">Welcome to Elemental Masters!</h1>
   
   <p style="font-size: 16px; line-height: 1.6; margin-bottom: 20px;">
-    We're thrilled to have you join our community! You're arriving at the perfect time - we're preparing for our upcoming Kickstarter launch on December 1st, 2024.
+    Thank you for subscribing to our emails, and we're thrilled to have you join our community! You're arriving at the perfect time - we're preparing for our upcoming Kickstarter launch on December 1st, 2024.
+
+    THREE LUCKY SUBSCRIBERS will receive exclusive game mats for subscribing before December 1st!!
   </p>
 
   <div style="background-color: #6B46C1; padding: 20px; border-radius: 8px; margin: 24px 0;">
@@ -44,7 +46,7 @@ export default async function handler(req, res) {
     </p>
   </div>
 
-  <h2 style="color: #6B46C1; font-size: 22px; margin-bottom: 16px;">What's Next?</h2>
+  <h2 style="color: #2d1d52; font-size: 22px; margin-bottom: 16px;">What's Next?</h2>
   <ul style="list-style: none; padding: 0; margin-bottom: 24px;">
     <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
       ✨ <span style="margin-left: 8px;">Exclusive card previews</span>

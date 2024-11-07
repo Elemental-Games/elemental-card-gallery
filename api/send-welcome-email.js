@@ -46,7 +46,7 @@ export default async function handler(req, res) {
     </p>
   </div>
 
-  <h2 style="color: #6B46C1; font-size: 22px; margin-bottom: 16px;">What's Next?</h2>
+  <h2 style="color: #6B46C1; font-size: 22px; margin-bottom: 16px; text-align: center;">What's Next?</h2>
   <ul style="list-style: none; padding: 0; margin-bottom: 24px;">
     <li style="margin-bottom: 12px; padding-left: 24px; position: relative;">
       ✨ <span style="margin-left: 8px;">Exclusive card previews</span>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { X } from 'lucide-react';
-import { Button } from "@/components/ui/button";
 import EmailSignup from './EmailSignup';
 
 const LightBox = () => {
@@ -34,15 +33,13 @@ const LightBox = () => {
   return (
     <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-[700px] w-[95%] p-4 sm:p-6 bg-background border shadow-lg z-50">
-        <DialogClose asChild>
-          <button 
-            className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none"
-            onClick={handleClose}
-          >
-            <X className="h-8 w-8" />
-            <span className="sr-only">Close</span>
-          </button>
-        </DialogClose>
+        <button 
+          className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none"
+          onClick={handleClose}
+        >
+          <X className="h-8 w-8" />
+          <span className="sr-only">Close</span>
+        </button>
         
         <DialogHeader>
           <DialogTitle className="text-xl sm:text-2xl font-bold mb-4 text-center pt-4">

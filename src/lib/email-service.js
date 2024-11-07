@@ -11,9 +11,13 @@ export async function sendWelcomeEmail(email) {
       body: JSON.stringify({ email })
     });
 
+    console.log('Email API response status:', response.status);
+
+    const data = await response.json();
+    console.log('Email API response data:', data);
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Email API error:', errorData);
+      console.error('Email API error:', data);
       return false;
     }
 

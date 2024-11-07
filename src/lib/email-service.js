@@ -1,5 +1,5 @@
 // src/lib/email-service.js
-export async function sendWelcomeEmail(email) {
+export async function sendWelcomeEmail(email, unsubscribeToken) {
   try {
     console.log('Starting email send to:', email);
 
@@ -8,19 +8,20 @@ export async function sendWelcomeEmail(email) {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ email })
+      body: JSON.stringify({ 
+        email,
+        unsubscribeToken 
+      })
     });
 
-    console.log('Email API response status:', response.status);
-
-    const data = await response.json();
-    console.log('Email API response data:', data);
-
     if (!response.ok) {
-      console.error('Email API error:', data);
+      const errorData = await response.json();
+      console.error('Email API error:', errorData);
       return false;
     }
 
+    const result = await response.json();
+    console.log('Email send result:', result);
     return true;
   } catch (error) {
     console.error('Error in sendWelcomeEmail:', error);

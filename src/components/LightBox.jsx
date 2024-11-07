@@ -8,6 +8,9 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
+    // For testing: uncomment the next line to reset the popup state
+    // localStorage.removeItem('hasSeenPopup');
+    
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     console.log('Initial hasSeenPopup value:', hasSeenPopup);
     

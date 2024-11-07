@@ -8,26 +8,22 @@ const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
-    // For testing: uncomment the next line to reset the popup state
-    // localStorage.removeItem('hasSeenPopup');
+    // Automatically reset hasSeenPopup on each page load
+    localStorage.removeItem('hasSeenPopup');
     
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
     console.log('Initial hasSeenPopup value:', hasSeenPopup);
     
-    if (!hasSeenPopup) {
-      console.log('Setting timeout for popup...');
-      const timer = setTimeout(() => {
-        console.log('Timeout triggered, setting isOpen to true');
-        setIsOpen(true);
-      }, 2500);
-      
-      return () => {
-        console.log('Cleaning up timer');
-        clearTimeout(timer);
-      };
-    } else {
-      console.log('User has already seen popup');
-    }
+    console.log('Setting timeout for popup...');
+    const timer = setTimeout(() => {
+      console.log('Timeout triggered, setting isOpen to true');
+      setIsOpen(true);
+    }, 2500);
+    
+    return () => {
+      console.log('Cleaning up timer');
+      clearTimeout(timer);
+    };
   }, []);
 
   const handleClose = () => {

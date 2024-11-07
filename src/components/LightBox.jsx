@@ -2,40 +2,33 @@ import React, { useState, useEffect } from 'react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogClose } from "@/components/ui/dialog";
 import { X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
-
-const EmailSignup = ({ onClose }) => (
-  <div className="space-y-4">
-    <input 
-      type="email" 
-      placeholder="Enter your email" 
-      className="w-full p-2 border rounded dark:bg-gray-800 dark:border-gray-700"
-    />
-    <Button 
-      onClick={onClose}
-      className="w-full"
-      variant="default"
-    >
-      Sign Up
-    </Button>
-  </div>
-);
+import EmailSignup from './EmailSignup';
 
 const LightBox = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    console.log('Initial hasSeenPopup value:', hasSeenPopup);
     
     if (!hasSeenPopup) {
+      console.log('Setting timeout for popup...');
       const timer = setTimeout(() => {
+        console.log('Timeout triggered, setting isOpen to true');
         setIsOpen(true);
       }, 2500);
       
-      return () => clearTimeout(timer);
+      return () => {
+        console.log('Cleaning up timer');
+        clearTimeout(timer);
+      };
+    } else {
+      console.log('User has already seen popup');
     }
   }, []);
 
   const handleClose = () => {
+    console.log('Closing popup and setting localStorage');
     setIsOpen(false);
     localStorage.setItem('hasSeenPopup', 'true');
   };
@@ -44,7 +37,10 @@ const LightBox = () => {
     <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
       <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-[700px] w-[95%] p-4 sm:p-6 bg-background border shadow-lg z-50">
         <DialogClose asChild>
-          <button className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none">
+          <button 
+            className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none"
+            onClick={handleClose}
+          >
             <X className="h-8 w-8" />
             <span className="sr-only">Close</span>
           </button>

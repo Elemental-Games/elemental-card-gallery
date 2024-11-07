@@ -7,7 +7,7 @@ import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
 import LightBox from '../components/LightBox';
-import { Book, Cards, Gamepad2, ScrollText, ChevronRight } from 'lucide-react';
+import { Book, ScrollText, Gamepad2, Cards, ChevronRight } from 'lucide-react';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = React.useState(null);
@@ -44,10 +44,10 @@ const LandingPage = () => {
   ];
 
   const exploreItems = [
-    { title: 'Kinbrold Lore', icon: <Book className="w-8 h-8" />, link: '/kinbrold' },
-    { title: 'Deck Builder', icon: <Cards className="w-8 h-8" />, link: '/cards/deck-builder' },
-    { title: 'Gameplay', icon: <Gamepad2 className="w-8 h-8" />, link: '/gameplay' },
-    { title: 'Card Gallery', icon: <ScrollText className="w-8 h-8" />, link: '/cards' },
+    { title: 'Kinbrold Lore', icon: <Book size={24} />, link: '/kinbrold' },
+    { title: 'Deck Builder', icon: <Cards size={24} />, link: '/cards/deck-builder' },
+    { title: 'Gameplay', icon: <Gamepad2 size={24} />, link: '/gameplay' },
+    { title: 'Card Gallery', icon: <ScrollText size={24} />, link: '/cards' },
   ];
 
   const handleElementClick = (element) => {

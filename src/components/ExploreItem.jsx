@@ -8,7 +8,9 @@ const ExploreItem = ({ title, icon }) => {
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >
-      <div className="text-accent mb-2">{icon}</div>
+      <div className="text-accent w-8 h-8 mb-2">
+        {icon}
+      </div>
       <h3 className="text-lg font-semibold text-center">{title}</h3>
     </motion.div>
   );

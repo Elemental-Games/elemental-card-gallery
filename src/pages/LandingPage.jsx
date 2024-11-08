@@ -7,7 +7,7 @@ import KeyFeatures from '../components/KeyFeatures';
 import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
 import LightBox from '../components/LightBox';
-import { Book, ScrollText, Gamepad2, Cards, ChevronRight } from 'lucide-react';
+import { Book, ScrollText, Gamepad2, LayoutGrid, ChevronRight } from 'lucide-react';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = React.useState(null);
@@ -45,9 +45,9 @@ const LandingPage = () => {
 
   const exploreItems = [
     { title: 'Kinbrold Lore', icon: <Book size={24} />, link: '/kinbrold' },
-    { title: 'Deck Builder', icon: <Cards size={24} />, link: '/cards/deck-builder' },
+    { title: 'Deck Builder', icon: <LayoutGrid size={24} />, link: '/cards/deck-builder' },
     { title: 'Gameplay', icon: <Gamepad2 size={24} />, link: '/gameplay' },
-    { title: 'Card Gallery', icon: <ScrollText size={24} />, link: '/cards' },
+    { title: 'Card Gallery', icon: <ScrollText size={24} />, link: '/cards/gallery' },
   ];
 
   const handleElementClick = (element) => {
@@ -118,7 +118,7 @@ const LandingPage = () => {
                   <h3 className="text-2xl font-semibold mb-2">{kingdom.name}, <span className="text-sm font-bold">the {kingdom.element} Kingdom</span></h3>
                   <p className="mb-4">{kingdom.description}</p>
                 </div>
-                <Link to={`/${kingdom.name.toLowerCase()}`}>
+                <Link to={`/kinbrold/${kingdom.name.toLowerCase()}`}>
                   <Button variant="outline" className="mt-auto w-full">Explore {kingdom.name}</Button>
                 </Link>
               </div>

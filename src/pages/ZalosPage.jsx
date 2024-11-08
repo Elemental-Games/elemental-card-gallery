@@ -18,7 +18,7 @@ const ZalosPage = () => {
       </section>
 
       {/* Welcome Statement */}
-      <div className="container mx-auto py-4 text-center">
+      <div className="container mx-auto py-8 text-center">
         <h2 className="text-xl text-purple-200">
           <span className="font-bold">Welcome to Zalos,</span> jewel of the skies and home of the Air Elementals. Under the guidance of Galea the Air Elementalist, 
           our kingdom has soared to unprecedented heights – quite literally!

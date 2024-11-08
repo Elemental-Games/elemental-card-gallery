@@ -18,7 +18,7 @@ const ZalosPage = () => {
       </section>
 
       {/* Welcome Statement */}
-      <div className="container mx-auto py-8 text-center">
+      <div className="container mx-auto py-12 text-center">
         <h2 className="text-xl text-purple-200">
           <span className="font-bold">Welcome to Zalos,</span> jewel of the skies and home of the Air Elementals. Under the guidance of Galea the Air Elementalist, 
           our kingdom has soared to unprecedented heights – quite literally!
@@ -32,7 +32,7 @@ const ZalosPage = () => {
           <p className="text-lg">
             When Galea first established our kingdom, she chose the highest peaks of Kinbrold to build our home. 
             Through mastery of air magic, our ancestors learned to lift entire islands into the sky, creating the 
-            floating archipelago we call home today.
+            floating kingdom we call home today.
           </p>
         </Card>
 
@@ -76,7 +76,7 @@ const ZalosPage = () => {
           </Card>
         </div>
 
-        {/* Training and Innovation */}
+        {/* Training the Next Generation */}
         <div className="grid md:grid-cols-2 gap-6">
           <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training the Next Generation</h2>
@@ -85,28 +85,48 @@ const ZalosPage = () => {
               Students learn not just to manipulate air, but to understand its very nature. Only those who grasp 
               that air is not just about power, but about freedom and wisdom, truly master our element.
             </p>
-            <h2 className="text-2xl font-heading mb-4 mt-6 text-yellow-400">Innovation and Progress</h2>
+          </Card>
+          <img 
+            src="/kingdoms/zalos_dojo.png" 
+            alt="Training in Zalos" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Innovation and Progress */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <img 
+            src="/kingdoms/zalos_innovation.png" 
+            alt="Innovation in Zalos" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Innovation and Progress</h2>
             <p className="text-lg">
               Our engineers have developed sophisticated wind turbine systems that power our cities, while our 
               wind tube transportation network offers rapid transit throughout the kingdom. These innovations 
               represent our commitment to harmonizing technology with our elemental powers.
             </p>
           </Card>
-          <img 
-            src="/kingdoms/zalos_zen.png" 
-            alt="Meditation in Zalos" 
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-          />
         </div>
 
         {/* Relations and Notable Locations */}
         <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
-          <h2 className="text-2xl font-heading mb-4 text-yellow-400">Relations with Other Kingdoms</h2>
-          <p className="text-lg mb-6">
-            As masters of air travel, we serve as vital trade links between all kingdoms of Kinbrold. Our proximity 
-            to Evermere's card crafters ensures we stay at the forefront of new card developments, while our natural 
-            affinity for mobility makes us excellent diplomats and messengers.
-          </p>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div>
+              <h2 className="text-2xl font-heading mb-4 text-yellow-400">Relations with Other Kingdoms</h2>
+              <p className="text-lg mb-6">
+                As masters of air travel, we serve as vital trade links between all kingdoms of Kinbrold. Our proximity 
+                to Evermere's card crafters ensures we stay at the forefront of new card developments, while our natural 
+                affinity for mobility makes us excellent diplomats and messengers.
+              </p>
+            </div>
+            <img 
+              src="/kingdoms/zalos_zen.png" 
+              alt="Meditation in Zalos" 
+              className="w-full h-full object-cover rounded-lg shadow-xl"
+            />
+          </div>
 
           <h2 className="text-2xl font-heading mb-4 text-yellow-400">Notable Locations</h2>
           <ul className="list-disc list-inside text-lg space-y-2 mb-6">

@@ -99,7 +99,7 @@ const EvermerePage = () => {
           <img 
             src="/kingdoms/evermere_heart.png" 
             alt="Heart of Trade" 
-            className="w-full h-64 object-cover rounded-lg shadow-xl mb-4"
+            className="w-full h-48 object-cover rounded-lg shadow-xl mb-4"
           />
           <p className="text-lg text-purple-100">
             Our markets never sleep, our crafters never rest, and our doors never close. In Evermere, all are welcome to trade, learn, and grow. Here, the future of Kinbrold is forged one card at a time.
@@ -134,7 +134,7 @@ const EvermerePage = () => {
             <img 
               src="/kingdoms/evermere_wisdom.png" 
               alt="Wisdom of Unity" 
-              className="w-full h-64 object-cover rounded-lg shadow-xl mb-4"
+              className="w-full h-48 object-cover rounded-lg shadow-xl mb-4"
             />
             <blockquote className="text-lg italic">
               "Through understanding comes unity, through unity comes strength. In Evermere, we don't master elements – we master the art of bringing them together."

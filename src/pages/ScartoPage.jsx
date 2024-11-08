@@ -122,11 +122,10 @@ const ScartoPage = () => {
             <img 
               src="/kingdoms/scarto_meditate.png" 
               alt="Meditation in Scarto" 
-              className="w-full h-64 object-cover object-bottom rounded-lg shadow-xl mb-4"
+              className="w-full h-64 object-cover object-center rounded-lg shadow-xl mb-4"
             />
             <blockquote className="text-lg italic">
-              "Like fire itself, we burn with purpose and illuminate the path forward. In Scarto, we don't just master fire – 
-              we embody its transformative power."
+              "Like fire itself, we burn with purpose and illuminate the path forward. In Scarto, we don't just master fire – we embody its transformative power."
             </blockquote>
             <p className="text-right mt-2 font-heading text-yellow-400">- Osao, First Fire Elementalist</p>
           </div>

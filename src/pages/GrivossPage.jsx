@@ -111,8 +111,8 @@ const GrivossPage = () => {
               <li>The Ancient Ruins: Sites of historical study and meditation</li>
               <li>Balon's Grove: The seat of our kingdom's leadership</li>
               <li>The Earth Forge: Where earth-aspected cards are crafted</li>
-              <li>The Forest Markets: Our renowned trading centers spread 
-                  throughout the canopy</li>
+              <li>The Forest Markets: Our renowned trading centers spread
+                throughout the canopy</li>
               <li>The Crystal Caverns: Our sacred meditation spaces</li>
               <li>The Badland Trials: Where earth elementals test their endurance</li>
             </ul>

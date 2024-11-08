@@ -12,7 +12,7 @@ const ScartoPage = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
-          <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Scarto: Forge of Passion</h1>
+          <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Scarto: The Fire Kingdom</h1>
           <p className="text-xl md:text-2xl font-heading text-white italic">Where Fire Forges Destiny</p>
         </div>
       </section>
@@ -122,7 +122,7 @@ const ScartoPage = () => {
             <img 
               src="/kingdoms/scarto_meditate.png" 
               alt="Meditation in Scarto" 
-              className="w-full h-64 object-cover rounded-lg shadow-xl mb-4"
+              className="w-full h-64 object-cover object-bottom rounded-lg shadow-xl mb-4"
             />
             <blockquote className="text-lg italic">
               "Like fire itself, we burn with purpose and illuminate the path forward. In Scarto, we don't just master fire – 

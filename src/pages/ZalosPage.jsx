@@ -17,15 +17,15 @@ const ZalosPage = () => {
         </div>
       </section>
 
-      <div className="container mx-auto py-8 space-y-8">
-        {/* Introduction */}
-        <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
-          <p className="text-lg">
-            Welcome to Zalos, jewel of the skies and home of the Air Elementals. Under the guidance of Galea the Air Elementalist, 
-            our kingdom has soared to unprecedented heights – quite literally!
-          </p>
-        </Card>
+      {/* Welcome Statement */}
+      <div className="container mx-auto py-12 text-center">
+        <h2 className="text-2xl md:text-4xl font-bold text-purple-200 mb-8">
+          Welcome to Zalos, jewel of the skies and home of the Air Elementals. Under the guidance of Galea the Air Elementalist, 
+          our kingdom has soared to unprecedented heights – quite literally!
+        </h2>
+      </div>
 
+      <div className="container mx-auto py-8 space-y-8">
         {/* Noble Heritage */}
         <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
           <h2 className="text-2xl font-heading mb-4 text-yellow-400">Our Noble Heritage</h2>

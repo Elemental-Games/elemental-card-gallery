@@ -17,6 +17,11 @@ import DeckBuilderPage from "./pages/DeckBuilderPage";
 import BattleSimulationPage from "./pages/BattleSimulationPage";
 import RulesPage from "./pages/RulesPage";
 import LearnToPlayPage from "./pages/LearnToPlayPage";
+import EvermerePage from "./pages/EvermerePage";
+import GrivossPage from "./pages/GrivossPage";
+import ScartoPage from "./pages/ScartoPage";
+import TsunarethPage from "./pages/TsunarethPage";
+import ZalosPage from "./pages/ZalosPage";
 
 const queryClient = new QueryClient();
 
@@ -74,6 +79,11 @@ const App = () => (
                   <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
                   <Route path="/gameplay/rules/*" element={<RulesPage />} />
                   <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
+                  <Route path="/kinbrold/evermere" element={<EvermerePage />} />
+                  <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                  <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                  <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                  <Route path="/kinbrold/zalos" element={<ZalosPage />} />
                 </Routes>
               </main>
               <Footer />

@@ -4,7 +4,7 @@ import { dragonInfo } from '../data/dragonInfo';
 
 const KinbroldHistory = () => {
   return (
-    <section className="w-full bg-background/95 backdrop-blur-sm p-8 mt-8">
+    <section className="w-full bg-background/95 backdrop-blur-sm p-8">
       <div className="max-w-7xl mx-auto">
         <h2 className="text-4xl font-heading text-center mb-12">The History of Kinbrold</h2>
         
@@ -22,9 +22,9 @@ const KinbroldHistory = () => {
                 <h4 className="text-xl font-heading mb-3">The Legendary Dragons</h4>
                 <div className="space-y-2">
                   {Object.values(dragonInfo).map((dragon) => (
-                    <div key={dragon.name} className="p-4 rounded-lg border-2 border-yellow-500/50 bg-purple-900/10">
-                      <h5 className="font-heading text-lg text-purple-100">{dragon.name}</h5>
-                      <p className="text-sm text-purple-200">{dragon.description}</p>
+                    <div key={dragon.name} className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30">
+                      <h5 className="font-heading text-lg text-purple-900 dark:text-purple-100">{dragon.name}</h5>
+                      <p className="text-sm text-purple-800 dark:text-purple-200">{dragon.description}</p>
                     </div>
                   ))}
                 </div>
@@ -58,22 +58,17 @@ const KinbroldHistory = () => {
                     Four great Elementalists arose, each mastering their respective elements:
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="p-4 rounded-lg border-2 border-yellow-500/50 bg-purple-900/10">
-                      <h5 className="font-heading text-purple-100">Galea of the Air</h5>
-                      <p className="text-sm text-purple-200">Founding Zalos in the windswept heights</p>
-                    </div>
-                    <div className="p-4 rounded-lg border-2 border-yellow-500/50 bg-purple-900/10">
-                      <h5 className="font-heading text-purple-100">Mek of the Water</h5>
-                      <p className="text-sm text-purple-200">Establishing Tsunareth by the eternal tides</p>
-                    </div>
-                    <div className="p-4 rounded-lg border-2 border-yellow-500/50 bg-purple-900/10">
-                      <h5 className="font-heading text-purple-100">Osao of the Fire</h5>
-                      <p className="text-sm text-purple-200">Raising Scarto from volcanic depths</p>
-                    </div>
-                    <div className="p-4 rounded-lg border-2 border-yellow-500/50 bg-purple-900/10">
-                      <h5 className="font-heading text-purple-100">Balon of the Earth</h5>
-                      <p className="text-sm text-purple-200">Growing Grivoss from the fertile soil</p>
-                    </div>
+                    {[
+                      { name: 'Galea of the Air', description: 'Founding Zalos in the windswept heights' },
+                      { name: 'Mek of the Water', description: 'Establishing Tsunareth by the eternal tides' },
+                      { name: 'Osao of the Fire', description: 'Raising Scarto from volcanic depths' },
+                      { name: 'Balon of the Earth', description: 'Growing Grivoss from the fertile soil' }
+                    ].map((elementalist) => (
+                      <div key={elementalist.name} className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30">
+                        <h5 className="font-heading text-purple-900 dark:text-purple-100">{elementalist.name}</h5>
+                        <p className="text-sm text-purple-800 dark:text-purple-200">{elementalist.description}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
               </div>

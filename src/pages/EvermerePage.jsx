@@ -63,30 +63,47 @@ const EvermerePage = () => {
           </Card>
         </div>
 
-        {/* Training and Innovation */}
+        {/* Training the Next Generation */}
         <div className="grid md:grid-cols-2 gap-6">
           <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training the Next Generation</h2>
             <p className="text-lg">
               The path to becoming a master card crafter requires understanding all elements. Our academy welcomes students regardless of their elemental affinity - or lack thereof. Here, technical skill meets artistic vision as apprentices learn to capture and preserve creature essences.
             </p>
-            <h2 className="text-2xl font-heading mb-4 mt-6 text-yellow-400">Innovation and Progress</h2>
+          </Card>
+          <img 
+            src="/kingdoms/evermere_training.png" 
+            alt="Training in Evermere" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Innovation and Progress */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <img 
+            src="/kingdoms/evermere_innovation.png" 
+            alt="Innovation in Evermere" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Innovation and Progress</h2>
             <p className="text-lg">
               Our researchers continuously push the boundaries of card crafting technology. The Grand Archives house the accumulated knowledge of generations, while our testing grounds allow for safe experimentation with new card designs.
             </p>
           </Card>
-          <div className="space-y-6">
-            <img 
-              src="/kingdoms/evermere_training.png" 
-              alt="Training in Evermere" 
-              className="w-full h-1/2 object-cover rounded-lg shadow-xl"
-            />
-            <img 
-              src="/kingdoms/evermere_innovation.png" 
-              alt="Innovation in Evermere" 
-              className="w-full h-1/2 object-cover rounded-lg shadow-xl"
-            />
-          </div>
+        </div>
+
+        {/* The Heart of Trade */}
+        <div className="mt-8 p-6 bg-purple-800/20 rounded-lg border border-purple-300/50">
+          <h2 className="text-2xl font-heading mb-4 text-yellow-400">The Heart of Trade</h2>
+          <img 
+            src="/kingdoms/evermere_heart.png" 
+            alt="Heart of Trade" 
+            className="w-full h-64 object-cover rounded-lg shadow-xl mb-4"
+          />
+          <p className="text-lg text-purple-100">
+            Our markets never sleep, our crafters never rest, and our doors never close. In Evermere, all are welcome to trade, learn, and grow. Here, the future of Kinbrold is forged one card at a time.
+          </p>
         </div>
 
         {/* Relations and Notable Locations */}
@@ -123,18 +140,6 @@ const EvermerePage = () => {
               "Through understanding comes unity, through unity comes strength. In Evermere, we don't master elements – we master the art of bringing them together."
             </blockquote>
             <p className="text-right mt-2 font-heading text-yellow-400">- First Grand Crafter of Evermere</p>
-          </div>
-
-          <div className="mt-8 p-6 bg-purple-800/20 rounded-lg border border-purple-300/50">
-            <h2 className="text-2xl font-heading mb-4 text-yellow-400">The Heart of Trade</h2>
-            <img 
-              src="/kingdoms/evermere_heart.png" 
-              alt="Heart of Trade" 
-              className="w-full h-64 object-cover rounded-lg shadow-xl mb-4"
-            />
-            <p className="text-lg">
-              Our markets never sleep, our crafters never rest, and our doors never close. In Evermere, all are welcome to trade, learn, and grow. Here, the future of Kinbrold is forged one card at a time.
-            </p>
           </div>
         </Card>
       </div>

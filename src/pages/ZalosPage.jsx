@@ -129,13 +129,20 @@ const ZalosPage = () => {
           </div>
 
           <h2 className="text-2xl font-heading mb-4 text-yellow-400">Notable Locations</h2>
-          <ul className="list-disc list-inside text-lg space-y-2 mb-6">
-            <li>The Floating Academy: Where young air elementals learn their craft</li>
-            <li>Wind Dancer's Plaza: Center of our cultural celebrations</li>
-            <li>Galea's Spire: The seat of our kingdom's leadership</li>
-            <li>The Cloudforge: Where air-aspected cards are crafted</li>
-            <li>Skybridge Network: Our famous transportation system</li>
-          </ul>
+          <div className="grid md:grid-cols-2 gap-6">
+            <ul className="list-disc list-inside text-lg space-y-2 mb-6">
+              <li>The Floating Academy: Where young air elementals learn their craft</li>
+              <li>Wind Dancer's Plaza: Center of our cultural celebrations</li>
+              <li>Galea's Spire: The seat of our kingdom's leadership</li>
+              <li>The Cloudforge: Where air-aspected cards are crafted</li>
+              <li>Skybridge Network: Our famous transportation system</li>
+            </ul>
+            <img 
+              src="/kingdoms/zalos_zen.png" 
+              alt="Meditation in Zalos" 
+              className="w-full h-full object-cover rounded-lg shadow-xl self-end"
+            />
+          </div>
 
           <div className="mt-8 p-6 bg-purple-800/20 rounded-lg border border-purple-300/50">
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Wisdom of the Winds</h2>

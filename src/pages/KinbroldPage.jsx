@@ -61,6 +61,8 @@ const KinbroldPage = () => {
         <KinbroldMap />
       </section>
 
+      <KinbroldHistory />
+
       <section className="w-full bg-background/95 backdrop-blur-sm p-8">
         <h2 className="text-3xl font-bold text-center mb-8">Explore the Kingdoms of Kinbrold</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
@@ -76,8 +78,6 @@ const KinbroldPage = () => {
           ))}
         </div>
       </section>
-
-      <KinbroldHistory />
     </div>
   );
 };

@@ -1,0 +1,3611 @@
+{
+  "cards": [
+    {
+      "cardNumber": 1,
+      "id": "cloud-sprinter",
+      "name": 0,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/cloud-sprinter.png",
+      "webpPath": "/images/cards/webp/cloud-sprinter.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 75
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Across the celestial canvas, I race with the winds, leaving clouds in my wake.",
+      "synergies": [
+        {
+          "card": {
+            "id": "4",
+            "name": "Wind Rider"
+          },
+          "rating": "S",
+          "color": "text-green-500"
+        },
+        {
+          "card": {
+            "id": "7",
+            "name": "Cloud Warden"
+          },
+          "rating": "B",
+          "color": "text-yellow-500"
+        }
+      ],
+      "counters": [
+        {
+          "card": {
+            "id": "25",
+            "name": "Swiftreaver"
+          },
+          "rating": "S",
+          "color": "text-green-500"
+        },
+        {
+          "card": {
+            "id": "26",
+            "name": "Earth Dweller"
+          },
+          "rating": "B",
+          "color": "text-yellow-500"
+        }
+      ],
+      "news": [
+        {
+          "title": "Air Structure Deck",
+          "date": "2024-09-27",
+          "description": "Check out our latest video showcasing the Air Structure Deck in action!",
+          "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+      ]
+    },
+    {
+      "cardNumber": 2,
+      "id": "breeze-imp",
+      "name": 1,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/breeze-imp.png",
+      "webpPath": "/images/cards/webp/breeze-imp.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Born of zephyrs and mischief, I ride the gentle currents."
+    },
+    {
+      "cardNumber": 3,
+      "id": "gust-griffin",
+      "name": 2,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/gust-griffin.png",
+      "webpPath": "/images/cards/webp/gust-griffin.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "With wings of wind, I soar through the tempest, untamed and fierce."
+    },
+    {
+      "cardNumber": 4,
+      "id": "wind-rider",
+      "name": 3,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/wind-rider.png",
+      "webpPath": "/images/cards/webp/wind-rider.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "In harmony with the breezes, we embrace freedom, swift and untethered."
+    },
+    {
+      "cardNumber": 5,
+      "id": "flying-dwarf",
+      "name": 4,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/flying-dwarf.png",
+      "webpPath": "/images/cards/webp/flying-dwarf.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Defying gravity's grasp, I take to the skies, a dwarf untethered."
+    },
+    {
+      "cardNumber": 6,
+      "id": "stormreaver",
+      "name": 5,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/stormreaver.png",
+      "webpPath": "/images/cards/webp/stormreaver.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "With thunderous might, I command the storm, a force to be reckoned with."
+    },
+    {
+      "cardNumber": 7,
+      "id": "cloud-warden",
+      "name": 6,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/cloud-warden.png",
+      "webpPath": "/images/cards/webp/cloud-warden.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Amidst the billowing mists, I stand vigilant, protecting the secrets of the skies."
+    },
+    {
+      "cardNumber": 8,
+      "id": "aqua-dart",
+      "name": 7,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/aqua-dart.png",
+      "webpPath": "/images/cards/webp/aqua-dart.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Swift as the flowing stream, I pierce through defenses, leaving no trace behind."
+    },
+    {
+      "cardNumber": 9,
+      "id": "tide-chaser",
+      "name": 8,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/tide-chaser.png",
+      "webpPath": "/images/cards/webp/tide-chaser.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "With the fury of crashing waves, I strike, a torrential force of nature."
+    },
+    {
+      "cardNumber": 10,
+      "id": "riptide-revenant",
+      "name": 9,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/riptide-revenant.png",
+      "webpPath": "/images/cards/webp/riptide-revenant.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Ravaging through the currents, I am the embodiment of fluidity and speed."
+    },
+    {
+      "cardNumber": 11,
+      "id": "misty-mutt",
+      "name": 10,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/misty-mutt.png",
+      "webpPath": "/images/cards/webp/misty-mutt.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Roaming the misty waters, I bring peace to those in need."
+    },
+    {
+      "cardNumber": 12,
+      "id": "lagoon-lurker",
+      "name": 11,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/lagoon-lurker.png",
+      "webpPath": "/images/cards/webp/lagoon-lurker.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Unleashing the chaotic fury of the whirlpool, I engulf all who dare to challenge me."
+    },
+    {
+      "cardNumber": 13,
+      "id": "vortex-mauler",
+      "name": 12,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/vortex-mauler.png",
+      "webpPath": "/images/cards/webp/vortex-mauler.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "In the heart of the tempest, I become the swirling chaos, tearing apart my foes."
+    },
+    {
+      "cardNumber": 14,
+      "id": "wave-guarder",
+      "name": 13,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/wave-guarder.png",
+      "webpPath": "/images/cards/webp/wave-guarder.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Ever watchful over the ocean's depths, I protect the serenity within its tumultuous nature."
+    },
+    {
+      "cardNumber": 15,
+      "id": "ember-flicker",
+      "name": 14,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/ember-flicker.png",
+      "webpPath": "/images/cards/webp/ember-flicker.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "From the flickering embers, I rise, a spark of untamed fire."
+    },
+    {
+      "cardNumber": 16,
+      "id": "inferno-serpent",
+      "name": 15,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/inferno-serpent.png",
+      "webpPath": "/images/cards/webp/inferno-serpent.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "With flame-like fangs, I burn, scorching the opposition in my wake."
+    },
+    {
+      "cardNumber": 17,
+      "id": "swiftfire-wyvern",
+      "name": 16,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/swiftfire-wyvern.png",
+      "webpPath": "/images/cards/webp/swiftfire-wyvern.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Like a blazing comet, I streak across the heavens, leaving trails of fire behind."
+    },
+    {
+      "cardNumber": 18,
+      "id": "sizzle-snout",
+      "name": 17,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/sizzle-snout.png",
+      "webpPath": "/images/cards/webp/sizzle-snout.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Forged in the heart of inferno, my snout burns all that stands in my way."
+    },
+    {
+      "cardNumber": 19,
+      "id": "firestorm-brute",
+      "name": 18,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/firestorm-brute.png",
+      "webpPath": "/images/cards/webp/firestorm-brute.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Unleashing the fury of a raging inferno, I consume all in my path."
+    },
+    {
+      "cardNumber": 20,
+      "id": "flame-ravager",
+      "name": 19,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/flame-ravager.png",
+      "webpPath": "/images/cards/webp/flame-ravager.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Through scorching flames, I unleash devastation, leaving a trail of destruction behind."
+    },
+    {
+      "cardNumber": 21,
+      "id": "flame-guardian",
+      "name": 20,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/flame-guardian.png",
+      "webpPath": "/images/cards/webp/flame-guardian.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "A shield of fire, I stand firm, warding off all who dare to approach."
+    },
+    {
+      "cardNumber": 22,
+      "id": "terra-sprinter",
+      "name": 21,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/terra-sprinter.png",
+      "webpPath": "/images/cards/webp/terra-sprinter.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "With earth beneath my feet, I sprint through the land, unstoppable and swift."
+    },
+    {
+      "cardNumber": 23,
+      "id": "sandy-scuttler",
+      "name": 22,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/sandy-scuttler.png",
+      "webpPath": "/images/cards/webp/sandy-scuttler.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Within the shifting sands, I navigate effortlessly, striking with precision."
+    },
+    {
+      "cardNumber": 24,
+      "id": "swiftreaver",
+      "name": 23,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/swiftreaver.png",
+      "webpPath": "/images/cards/webp/swiftreaver.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Like the rolling sands, I burrow beneath my foes, leaving no time to react."
+    },
+    {
+      "cardNumber": 25,
+      "id": "earth-dweller",
+      "name": 24,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/earth-dweller.png",
+      "webpPath": "/images/cards/webp/earth-dweller.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "A master of earth, I engage in a dance of strength and agility, toppling my adversaries."
+    },
+    {
+      "cardNumber": 26,
+      "id": "geo-monkey",
+      "name": 25,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/geo-monkey.png",
+      "webpPath": "/images/cards/webp/geo-monkey.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "With unstoppable force, I shatter the mountains, reducing them to rubble."
+    },
+    {
+      "cardNumber": 27,
+      "id": "mountain-crusher",
+      "name": 26,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/mountain-crusher.png",
+      "webpPath": "/images/cards/webp/mountain-crusher.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Unyielding and immovable, I am the epitome of strength."
+    },
+    {
+      "cardNumber": 28,
+      "id": "stone-behemoth",
+      "name": 27,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/stone-behemoth.png",
+      "webpPath": "/images/cards/webp/stone-behemoth.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 120,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "An unbreakable fortress, I withstand all assaults, offering steadfast protection."
+    },
+    {
+      "cardNumber": 29,
+      "id": "wind-sprite",
+      "name": 28,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/wind-sprite.png",
+      "webpPath": "/images/cards/webp/wind-sprite.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 60,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Zephyr Dash",
+        "description": "This creature does not use an action while attacking. This creature can only attack once per turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 30,
+      "id": "aerofeet",
+      "name": 29,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/aerofeet.png",
+      "webpPath": "/images/cards/webp/aerofeet.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "ability": {
+        "name": "Whirlwind Shift",
+        "description": "Once per turn, you can switch the position of 1 creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 31,
+      "id": "skyborne-slicer",
+      "name": 30,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/skyborne-slicer.png",
+      "webpPath": "/images/cards/webp/skyborne-slicer.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Swift Gust",
+        "description": "When this card is summoned, you may choose 1 creature on the field (that costs 0 essence to summon) and return it to the owners hand."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 32,
+      "id": "aero-elf",
+      "name": 31,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/aero-elf.png",
+      "webpPath": "/images/cards/webp/aero-elf.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Aerial Escape",
+        "description": "When this card is destroyed by battle, you can bring one Air creature from your graveyard into your hand (excluding Aero Elf)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 33,
+      "id": "storm-ghost",
+      "name": 32,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/storm-ghost.png",
+      "webpPath": "/images/cards/webp/storm-ghost.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Hurricane Blow",
+        "description": "While attacking, gain 30 Strength."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 34,
+      "id": "wind-troll",
+      "name": 33,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/wind-troll.png",
+      "webpPath": "/images/cards/webp/wind-troll.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Wind Rush",
+        "description": "While attacking, this creature may target your opponent directly (ignoring opposing shields)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 35,
+      "id": "cyclone-sentinel",
+      "name": 34,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/cyclone-sentinel.png",
+      "webpPath": "/images/cards/webp/cyclone-sentinel.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Cyclone Barrier",
+        "description": "Once per turn, when this creature is targeted by an attack or effect, you may change the target to another Air creature you control."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 36,
+      "id": "river-sprite",
+      "name": 35,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/river-sprite.png",
+      "webpPath": "/images/cards/webp/river-sprite.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "ability": {
+        "name": "Essence Well",
+        "description": "When this card inflicts battle damage to a creature, generate 1 Water Essence."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 37,
+      "id": "aqua-shade",
+      "name": 36,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/aqua-shade.png",
+      "webpPath": "/images/cards/webp/aqua-shade.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Shadow Form",
+        "description": "When this card is summoned, this creature is cannot be attacked or targeted by abilities until the beginning of your next turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 38,
+      "id": "sea-serpent",
+      "name": 37,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/sea-serpent.png",
+      "webpPath": "/images/cards/webp/sea-serpent.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Essence Plunder",
+        "description": "When this card destroys another creature by battle, steal 1 essence from your opponent."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 39,
+      "id": "naiad-elf",
+      "name": 38,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/naiad-elf.png",
+      "webpPath": "/images/cards/webp/naiad-elf.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Tidal Resurgence",
+        "description": "When this card is destroyed by battle, summon 1 Water creature that costs 0 essence from your deck (excludingNaiad Elf)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 40,
+      "id": "deepseer",
+      "name": 39,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/deepseer.png",
+      "webpPath": "/images/cards/webp/deepseer.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Ocean's Gift",
+        "description": "Once per turn, you may look at the bottom 2 cards of your deck. Send 1 card to the graveyard and put the other card on top of your deck."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 41,
+      "id": "oceanus",
+      "name": 40,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/oceanus.png",
+      "webpPath": "/images/cards/webp/oceanus.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Sea Strike",
+        "description": "This creature gains 45 Strength when attacking blocking creatures."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 42,
+      "id": "aquarion",
+      "name": 41,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/aquarion.png",
+      "webpPath": "/images/cards/webp/aquarion.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Aquatic Guard",
+        "description": "When another creature blocks for this card, the blocking creature gains 20 Strength until the end of the turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 43,
+      "id": "cinder-sprite",
+      "name": 42,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/cinder-sprite.png",
+      "webpPath": "/images/cards/webp/cinder-sprite.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Spark Touch",
+        "description": "When this card inflicts battle damage to a creature, generate 1 Fire Essence."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 44,
+      "id": "embermander",
+      "name": 43,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/embermander.png",
+      "webpPath": "/images/cards/webp/embermander.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Flame Leap",
+        "description": "Once per turn, you may switch the position of 1 creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 45,
+      "id": "solar-phoenix",
+      "name": 44,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/solar-phoenix.png",
+      "webpPath": "/images/cards/webp/solar-phoenix.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Rebirth Flame",
+        "description": "When this card is destroyed by battle, summon 1 Fire creature that costs 0 essence from your deck (excluding Solar Phoenix)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 46,
+      "id": "ardor-elf",
+      "name": 45,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/ardor-elf.png",
+      "webpPath": "/images/cards/webp/ardor-elf.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Combustion",
+        "description": "When this card destroys another creature by battle, it deals direct damage to your opponent equal to the destroyed creature's strength."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 47,
+      "id": "emberwing",
+      "name": 46,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/emberwing.png",
+      "webpPath": "/images/cards/webp/emberwing.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Fire Breather",
+        "description": "Once per turn, deal 25 damage to any creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 48,
+      "id": "inferno-beast",
+      "name": 47,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/inferno-beast.png",
+      "webpPath": "/images/cards/webp/inferno-beast.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Molten Aura",
+        "description": "When this card is destroyed by battle, your opponent consumes 2 Essence of any element(s)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 49,
+      "id": "flamekeeper",
+      "name": 48,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/flamekeeper.png",
+      "webpPath": "/images/cards/webp/flamekeeper.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "ability": {
+        "name": "Heat Wave",
+        "description": "When this card attacks a blocking creature, gain 25 Agility until end of the turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 50,
+      "id": "ivy-gila",
+      "name": 49,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/ivy-gila.png",
+      "webpPath": "/images/cards/webp/ivy-gila.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Unguardable",
+        "description": "This creature's attacks cannot be blocked."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 51,
+      "id": "nimblefoot",
+      "name": 50,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/nimblefoot.png",
+      "webpPath": "/images/cards/webp/nimblefoot.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Guardian Essence",
+        "description": "When this card blocks for another creature, gain 1 Earth Essence."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 52,
+      "id": "terragon",
+      "name": 51,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/terragon.png",
+      "webpPath": "/images/cards/webp/terragon.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Terrain Shift",
+        "description": "Once per turn, switch the position of an opponent's creature."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 53,
+      "id": "verdant-elf",
+      "name": 52,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/verdant-elf.png",
+      "webpPath": "/images/cards/webp/verdant-elf.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Defensive Surge",
+        "description": "When blocking for another creature, gain 25 Strength."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 54,
+      "id": "boulder-brute",
+      "name": 53,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/boulder-brute.png",
+      "webpPath": "/images/cards/webp/boulder-brute.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Shield Crusher",
+        "description": "This creature deals an extra 55 damage when attacking shields."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 55,
+      "id": "mountain-giant",
+      "name": 54,
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/mountain-giant.png",
+      "webpPath": "/images/cards/webp/mountain-giant.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "ability": {
+        "name": "Temporary Might",
+        "description": "Once per turn, you may gain 65 Strength until the end of the turn, but this card does not regain its action next turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 56,
+      "id": "terra-warden",
+      "name": 55,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/terra-warden.png",
+      "webpPath": "/images/cards/webp/terra-warden.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 20
+      },
+      "ability": {
+        "name": "Return to Kinbrold",
+        "description": "When this creature is destroyed, gain 1 Earth essence for every Earth creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 57,
+      "id": "cyclonos",
+      "name": 56,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/cyclonos.png",
+      "webpPath": "/images/cards/webp/cyclonos.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 110,
+        "agility": 115
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Unleashed from the heart of the tempest, I take flight."
+    },
+    {
+      "cardNumber": 58,
+      "id": "avis",
+      "name": 57,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/avis.png",
+      "webpPath": "/images/cards/webp/avis.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 120,
+        "agility": 105
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "quote": "With wings of freedom, I soar through the skies, swift and untethered, leaving a trail of wonder in my wake."
+    },
+    {
+      "cardNumber": 59,
+      "id": "vayute",
+      "name": 58,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/vayute.png",
+      "webpPath": "/images/cards/webp/vayute.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 130,
+        "agility": 95
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "quote": "I bring both tranquility and force, a gentle caress or a mighty tempest, guided by the winds."
+    },
+    {
+      "cardNumber": 60,
+      "id": "zephos",
+      "name": 59,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/zephos.png",
+      "webpPath": "/images/cards/webp/zephos.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "quote": "The azure skies, a symbol of serenity and calm, yet harboring the potential for turbulent power."
+    },
+    {
+      "cardNumber": 61,
+      "id": "hydran",
+      "name": 60,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/hydran.png",
+      "webpPath": "/images/cards/webp/hydran.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 125,
+        "agility": 100
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      },
+      "quote": "From the depths of the waters, I emerge, a creature of fluid grace, harnessing the currents to wield both tranquility and fury."
+    },
+    {
+      "cardNumber": 62,
+      "id": "typhos",
+      "name": 61,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/typhos.png",
+      "webpPath": "/images/cards/webp/typhos.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 135,
+        "agility": 90
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "With stormy might, I command the tempest, a force of nature that can bring both destruction and renewal."
+    },
+    {
+      "cardNumber": 63,
+      "id": "vapora",
+      "name": 62,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/vapora.png",
+      "webpPath": "/images/cards/webp/vapora.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 145,
+        "agility": 80
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      },
+      "quote": "Misty tendrils wrap around me, giving shape to the ephemeral, as I become an ethereal embodiment of air and water."
+    },
+    {
+      "cardNumber": 64,
+      "id": "glacis",
+      "name": 63,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/glacis.png",
+      "webpPath": "/images/cards/webp/glacis.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 155,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      },
+      "quote": "Through icy breath and frozen touch, I create a realm of frost and chill, a majestic presence that commands respect."
+    },
+    {
+      "cardNumber": 65,
+      "id": "sunny",
+      "name": 64,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/sunny.png",
+      "webpPath": "/images/cards/webp/sunny.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      },
+      "quote": "Within the swirling vortex, I am the eye of the storm, an enigma of power and calm, ready to unleash my turbulent might."
+    },
+    {
+      "cardNumber": 66,
+      "id": "kindro",
+      "name": 65,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/kindro.png",
+      "webpPath": "/images/cards/webp/kindro.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 150,
+        "agility": 75
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      },
+      "quote": "I carry the whispering embers, bringing harmony and balance to Kinbrold."
+    },
+    {
+      "cardNumber": 67,
+      "id": "nova",
+      "name": 66,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/nova.png",
+      "webpPath": "/images/cards/webp/nova.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 160,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "With radiant brilliance, I illuminate the skies, a celestial phenomenon that captivates and inspires awe."
+    },
+    {
+      "cardNumber": 68,
+      "id": "vorax",
+      "name": 67,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/vorax.png",
+      "webpPath": "/images/cards/webp/vorax.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 170,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      },
+      "quote": "A staut protector, fiery and unyielding, embodying the strength of the land."
+    },
+    {
+      "cardNumber": 69,
+      "id": "oris",
+      "name": 68,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/oris.png",
+      "webpPath": "/images/cards/webp/oris.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 155,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "In the golden light of dawn, I awaken, a harbinger of new beginnings, bringing warmth and vitality to all that surround me."
+    },
+    {
+      "cardNumber": 70,
+      "id": "quarris",
+      "name": 69,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/quarris.png",
+      "webpPath": "/images/cards/webp/quarris.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 165,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "Through the shifting sands, I navigate with grace and precision, a desert dweller with the power to shape the land."
+    },
+    {
+      "cardNumber": 71,
+      "id": "roc",
+      "name": 70,
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/roc.png",
+      "webpPath": "/images/cards/webp/roc.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 175,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "With wings spanning the horizon, I am the embodiment of power and majesty, soaring through the heavens with unwavering strength."
+    },
+    {
+      "cardNumber": 72,
+      "id": "geodar",
+      "name": 71,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/geodar.png",
+      "webpPath": "/images/cards/webp/geodar.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 185,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Rooted deep within the earth, I am a guardian of stone and stability, unyielding and resolute in the face of adversity."
+    },
+    {
+      "cardNumber": 73,
+      "id": "nimbus-the-air-titan",
+      "name": 72,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/nimbus-the-air-titan.png",
+      "webpPath": "/images/cards/webp/nimbus-the-air-titan.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Storm Surge",
+        "description": "When this card is summoned, choose 1 creature, rune, or counter card on the opponent's side of the field and destroy it."
+      },
+      "specialAbility": {
+        "name": "Last Breathe",
+        "description": "Destroy 1 card on the opponent's side of the field.",
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 74,
+      "id": "lazu-the-air-tempest",
+      "name": 73,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/lazu-the-air-tempest.png",
+      "webpPath": "/images/cards/webp/lazu-the-air-tempest.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 115,
+        "agility": 85
+      },
+      "ability": {
+        "name": "Aerial Accumulation",
+        "description": "While this card is in play, gain 1 Air essence for every rune card used."
+      },
+      "specialAbility": {
+        "name": "Essence Conversion",
+        "description": "You may convert up to 5 essence from one  element to another.",
+        "cost": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 75,
+      "id": "aeris-the-air-slyph",
+      "name": 74,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/aeris-the-air-slyph.png",
+      "webpPath": "/images/cards/webp/aeris-the-air-slyph.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 95
+      },
+      "ability": {
+        "name": "Galea's Grasp",
+        "description": "Once per turn, you may switch the position of one creature your opponent controls."
+      },
+      "specialAbility": {
+        "name": "Retreating Winds",
+        "description": "Send 1 creature from the field to the owner's hand. The owner generates essence according to the essence required to summon the creature.",
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 76,
+      "id": "torrent-the-water-titan",
+      "name": 75,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/torrent-the-water-titan.png",
+      "webpPath": "/images/cards/webp/torrent-the-water-titan.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 140,
+        "agility": 60
+      },
+      "ability": {
+        "name": "Mek's Fury",
+        "description": "Once per turn while attacking, this creature gains Double Strike (Double Strike allows a creature to attack the same target twice in one battle)."
+      },
+      "specialAbility": {
+        "name": "Shield Crusher",
+        "description": "When attacking a shield, deal an additional 50 damage.",
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 77,
+      "id": "azura-the-water-tempest",
+      "name": 76,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/azura-the-water-tempest.png",
+      "webpPath": "/images/cards/webp/azura-the-water-tempest.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 120,
+        "agility": 80
+      },
+      "ability": {
+        "name": "Wisdom Flow",
+        "description": "When this card is summoned, draw 2 cards."
+      },
+      "specialAbility": {
+        "name": "Beckoning Force",
+        "description": "You may normal summon 1 additional creature this turn.",
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 78,
+      "id": "undine-the-water-oracle",
+      "name": 77,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/undine-the-water-oracle.png",
+      "webpPath": "/images/cards/webp/undine-the-water-oracle.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 130,
+        "agility": 70
+      },
+      "ability": {
+        "name": "Deep Insight",
+        "description": "While this card is on the field, at the beginning of your turn, look at the top 3 cards of your deck. You may discard 1, then place the remaining on top of your deck in any order."
+      },
+      "specialAbility": {
+        "name": "Enhanced Wisdom",
+        "description": "Immediately after using Deep Insight, draw 1 card.",
+        "cost": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 79,
+      "id": "ignus-the-fire-titan",
+      "name": 78,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/ignus-the-fire-titan.png",
+      "webpPath": "/images/cards/webp/ignus-the-fire-titan.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 145,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Inferno Fury",
+        "description": "When this card declares an attack on another creature, this card gains 55 Strength until the end of the turn."
+      },
+      "specialAbility": {
+        "name": "Infernal Rage",
+        "description": "Your opponent chooses 2 cards to discard from their hand.",
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 80,
+      "id": "sigmus-the-fire-tempest",
+      "name": 79,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/sigmus-the-fire-tempest.png",
+      "webpPath": "/images/cards/webp/sigmus-the-fire-tempest.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 125,
+        "agility": 75
+      },
+      "ability": {
+        "name": "Heatwave",
+        "description": "When this card is summoned, deal 25 damage to all creatures and shields your opponent controls."
+      },
+      "specialAbility": {
+        "name": "Solar Flare",
+        "description": "Deal 25 damage to each creature and shield on the field.",
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 81,
+      "id": "viktor-the-fire-demon",
+      "name": 80,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/viktor-the-fire-demon.png",
+      "webpPath": "/images/cards/webp/viktor-the-fire-demon.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Flame Ascendance",
+        "description": "Once per turn, you can destroy one of your own creatures to increase this card's Strength and Agility each by 50 until the end of the turn."
+      },
+      "specialAbility": {
+        "name": "Fiery Rebirth",
+        "description": "Immediately after using Flame Ascendance, return the destroyed creature to the field.",
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 82,
+      "id": "terra-the-earth-titan",
+      "name": 81,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/terra-the-earth-titan.png",
+      "webpPath": "/images/cards/webp/terra-the-earth-titan.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 150,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Ground Quake",
+        "description": "Once per turn, you may switch the position of 1 creature on the field."
+      },
+      "specialAbility": {
+        "name": "Seismic Tremor",
+        "description": "When blocking for another creature, gain 50 Strength until the end of the turn.",
+        "cost": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 83,
+      "id": "oryssa-the-earth-tempest",
+      "name": 82,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/oryssa-the-earth-tempest.png",
+      "webpPath": "/images/cards/webp/oryssa-the-earth-tempest.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 130,
+        "agility": 70
+      },
+      "ability": {
+        "name": "Fortified Bastion",
+        "description": "While this card is on the field, your shields gain 50 Health. When this card is destroyed, attach it to a shield. The attached shield gains 50 Health."
+      },
+      "specialAbility": {
+        "name": "Geo Surge",
+        "description": "Choose 1 creature on the field to gain 50 Strength until the end of the turn.",
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 84,
+      "id": "leo-the-earth-sovereign",
+      "name": 83,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/leo-the-earth-sovereign.png",
+      "webpPath": "/images/cards/webp/leo-the-earth-sovereign.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 160,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Earthly Cycle",
+        "description": "While this card is on the field, gain 1 Earth Essence for every Earth creature that is destroyed. When this creature is destroyed, special summon one Earth creature from the graveyard (cannot be this card)."
+      },
+      "specialAbility": {
+        "name": "Quake Impact",
+        "description": "Change the target of an opposing creature's attack.",
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 85,
+      "id": "essence-exchange",
+      "name": 84,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/essence-exchange.png",
+      "webpPath": "/images/cards/webp/essence-exchange.webp",
+      "runeType": "Normal",
+      "effect": "Exchange any amount of one elemental essence for an equal amount of a different elemental essence."
+    },
+    {
+      "cardNumber": 86,
+      "id": "cleanse-and-adapt",
+      "name": 85,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/cleanse-and-adapt.png",
+      "webpPath": "/images/cards/webp/cleanse-and-adapt.webp",
+      "runeType": "Normal",
+      "effect": "Select 1 creature, then remove any equipment cards, reset the creature's battle points, and restore all actions."
+    },
+    {
+      "cardNumber": 87,
+      "id": "quick-spurt",
+      "name": 86,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/quick-spurt.png",
+      "webpPath": "/images/cards/webp/quick-spurt.webp",
+      "runeType": "Normal",
+      "effect": "Choose 1 effect: All your creatures gain 15 Agility until the end of the turn. Or Choose 1 creature to gain 50 Agility until the end of the turn."
+    },
+    {
+      "cardNumber": 88,
+      "id": "flaming-resolve",
+      "name": 87,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/flaming-resolve.png",
+      "webpPath": "/images/cards/webp/flaming-resolve.webp",
+      "runeType": "Normal",
+      "effect": "Generate 3 Fire Essence."
+    },
+    {
+      "cardNumber": 89,
+      "id": "waves-endurance",
+      "name": 88,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/waves-endurance.png",
+      "webpPath": "/images/cards/webp/waves-endurance.webp",
+      "runeType": "Normal",
+      "effect": "Generate 3 Water Essence."
+    },
+    {
+      "cardNumber": 90,
+      "id": "unbreakable-force",
+      "name": 89,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/unbreakable-force.png",
+      "webpPath": "/images/cards/webp/unbreakable-force.webp",
+      "runeType": "Normal",
+      "effect": "Generate 3 Earth Essence."
+    },
+    {
+      "cardNumber": 91,
+      "id": "gales-veil",
+      "name": 90,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/gales-veil.png",
+      "webpPath": "/images/cards/webp/gales-veil.webp",
+      "runeType": "Normal",
+      "effect": "Generate 3 Air Essence."
+    },
+    {
+      "cardNumber": 92,
+      "id": "scrying-glass",
+      "name": 91,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/scrying-glass.png",
+      "webpPath": "/images/cards/webp/scrying-glass.webp",
+      "runeType": "Normal",
+      "effect": "Look at the top 3 cards of your deck, rearrange them in any order and you may discard 1 card."
+    },
+    {
+      "cardNumber": 93,
+      "id": "heavy-chains",
+      "name": 92,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/heavy-chains.png",
+      "webpPath": "/images/cards/webp/heavy-chains.webp",
+      "runeType": "Equipment",
+      "effect": "Equip this card to a creature. The equipped creature loses 30 Strength and 30 Agility."
+    },
+    {
+      "cardNumber": 94,
+      "id": "statis-field",
+      "name": 93,
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/statis-field.png",
+      "webpPath": "/images/cards/webp/statis-field.webp",
+      "runeType": "Instant",
+      "effect": "Change the position of any creature on the field."
+    },
+    {
+      "cardNumber": 95,
+      "id": "elemental-barrage",
+      "name": 94,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/elemental-barrage.png",
+      "webpPath": "/images/cards/webp/elemental-barrage.webp",
+      "runeType": "Normal",
+      "effect": "Choose 1 Element. All creatures of that element gain 25 Strength until the end of the turn."
+    },
+    {
+      "cardNumber": 96,
+      "id": "essence-leak",
+      "name": 95,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/essence-leak.png",
+      "webpPath": "/images/cards/webp/essence-leak.webp",
+      "runeType": "Normal",
+      "effect": "Deplete any amount of one elemental essence. Your opponent depletes the same amount of the essence of their choice."
+    },
+    {
+      "cardNumber": 97,
+      "id": "elemental-surge",
+      "name": 96,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/elemental-surge.png",
+      "webpPath": "/images/cards/webp/elemental-surge.webp",
+      "runeType": "Normal",
+      "effect": "Draw 1 card. If the drawn card is not a creature card you may reveal it to draw 1 more card."
+    },
+    {
+      "cardNumber": 98,
+      "id": "essence-amplifier",
+      "name": 97,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/essence-amplifier.png",
+      "webpPath": "/images/cards/webp/essence-amplifier.webp",
+      "runeType": "Equipment",
+      "effect": "Equip this card to a creature. The equipped creature generates double their normal essence each turn."
+    },
+    {
+      "cardNumber": 99,
+      "id": "binding-coils",
+      "name": 98,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/binding-coils.png",
+      "webpPath": "/images/cards/webp/binding-coils.webp",
+      "runeType": "Equipment",
+      "effect": "Equip this card to a creature. The equipped creature becomes and remains Exhausted."
+    },
+    {
+      "cardNumber": 100,
+      "id": "intrusion-seal",
+      "name": 99,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/intrusion-seal.png",
+      "webpPath": "/images/cards/webp/intrusion-seal.webp",
+      "runeType": "Instant",
+      "effect": "Choose 1 effect: Destroy a Rune or Counter card that your opponent controls. or Negate a Rune or Counter card that your opponent activates."
+    },
+    {
+      "cardNumber": 101,
+      "id": "direct-assault",
+      "name": 100,
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/direct-assault.png",
+      "webpPath": "/images/cards/webp/direct-assault.webp",
+      "runeType": "Instant",
+      "effect": "Deal 50 damage to a selected target (Creature or Shield)."
+    },
+    {
+      "cardNumber": 102,
+      "id": "draconic-adaptability",
+      "name": 101,
+      "type": "Rune",
+      "rarity": "R",
+      "imagePath": "/images/cards/draconic-adaptability.png",
+      "webpPath": "/images/cards/webp/draconic-adaptability.webp",
+      "runeType": "Normal",
+      "effect": "Until the end of the turn, Dragon creatures can be summoned using any combination of their required essence."
+    },
+    {
+      "cardNumber": 103,
+      "id": "lifebound-armour",
+      "name": 102,
+      "type": "Rune",
+      "rarity": "R",
+      "imagePath": "/images/cards/lifebound-armour.png",
+      "webpPath": "/images/cards/webp/lifebound-armour.webp",
+      "runeType": "Equipment",
+      "effect": "Equip this card to a creature. If the equipped creature would be destroyed, destroy this card instead and restore the creature to full strength."
+    },
+    {
+      "cardNumber": 104,
+      "id": "ethereal-vitality",
+      "name": 103,
+      "type": "Rune",
+      "rarity": "R",
+      "imagePath": "/images/cards/ethereal-vitality.png",
+      "webpPath": "/images/cards/webp/ethereal-vitality.webp",
+      "runeType": "Instant",
+      "effect": "Choose 1 effect: Grant 100 Health to a selected Shield until the end of the turn. or Choose 1 creature to gain 30 Strength and 15 Agility until the end of the turn."
+    },
+    {
+      "cardNumber": 105,
+      "id": "counter-pulse",
+      "name": 104,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/counter-pulse.png",
+      "webpPath": "/images/cards/webp/counter-pulse.webp",
+      "trigger": "When your opponent summons a creature without spending essence: ",
+      "effect": "Destroy the summoned creature."
+    },
+    {
+      "cardNumber": 106,
+      "id": "essence-leech",
+      "name": 105,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/essence-leech.png",
+      "webpPath": "/images/cards/webp/essence-leech.webp",
+      "trigger": "When your opponent generates essence: ",
+      "effect": "Your opponent depletes all of the essence generated."
+    },
+    {
+      "cardNumber": 107,
+      "id": "denial-decimation",
+      "name": 106,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/denial-decimation.png",
+      "webpPath": "/images/cards/webp/denial-decimation.webp",
+      "trigger": "When your opponent uses an enhanced effect: ",
+      "effect": "Negate the enhanced effect. You may pay matching essence cost (using any 1 element) to destroy destroy that card."
+    },
+    {
+      "cardNumber": 108,
+      "id": "redirecting-gust",
+      "name": 107,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/redirecting-gust.png",
+      "webpPath": "/images/cards/webp/redirecting-gust.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Redirect the attack to another one of their creatures (Unblockable)."
+    },
+    {
+      "cardNumber": 109,
+      "id": "armour-degradation",
+      "name": 108,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/armour-degradation.png",
+      "webpPath": "/images/cards/webp/armour-degradation.webp",
+      "trigger": "When your opponent declares a blocking creature: ",
+      "effect": "The blocking creature's Strength is reduced by 50 until the end of the turn."
+    },
+    {
+      "cardNumber": 110,
+      "id": "reflective-barrier",
+      "name": 109,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/reflective-barrier.png",
+      "webpPath": "/images/cards/webp/reflective-barrier.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Reflect the damage from the target of the attack to the attacking creature (Blockable)."
+    },
+    {
+      "cardNumber": 111,
+      "id": "whirlwind-retreat",
+      "name": 110,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/whirlwind-retreat.png",
+      "webpPath": "/images/cards/webp/whirlwind-retreat.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Negate the attack and return the attacker to your opponent's hand. Your opponent generates 3 essence of the creature's element. This card cannot be used on Dragons."
+    },
+    {
+      "cardNumber": 112,
+      "id": "chaos-hand",
+      "name": 111,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/chaos-hand.png",
+      "webpPath": "/images/cards/webp/chaos-hand.webp",
+      "trigger": "When your opponent draws a card: ",
+      "effect": "They discard 2 cards."
+    },
+    {
+      "cardNumber": 113,
+      "id": "agilitys-valor",
+      "name": 112,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/agilitys-valor.png",
+      "webpPath": "/images/cards/webp/agilitys-valor.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Boost 1 creature's agility on the field by 50 until the end of the turn."
+    },
+    {
+      "cardNumber": 114,
+      "id": "time-freeze",
+      "name": 113,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/time-freeze.png",
+      "webpPath": "/images/cards/webp/time-freeze.webp",
+      "trigger": "When your opponent generates essence: ",
+      "effect": "Prevent the opponent from summoning creatures and placing counter and rune cards until the end of the turn."
+    },
+    {
+      "cardNumber": 115,
+      "id": "quietening-wind",
+      "name": 114,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/quietening-wind.png",
+      "webpPath": "/images/cards/webp/quietening-wind.webp",
+      "trigger": "When your opponent draws a card: ",
+      "effect": "Prevent activation of creature and rune effects until the end of the turn."
+    },
+    {
+      "cardNumber": 116,
+      "id": "vortex-shift",
+      "name": 115,
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/vortex-shift.png",
+      "webpPath": "/images/cards/webp/vortex-shift.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Change the position of any creature on the field (Grant or Remove an action)."
+    },
+    {
+      "cardNumber": 117,
+      "id": "power-surge",
+      "name": 116,
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/power-surge.png",
+      "webpPath": "/images/cards/webp/power-surge.webp",
+      "trigger": "When your opponent declares a blocking creature: ",
+      "effect": "Choose 1 creature on your side of the field to gain 20 Strength and 30 Agility until the end of the turn."
+    },
+    {
+      "cardNumber": 118,
+      "id": "essence-bloom",
+      "name": 117,
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/essence-bloom.png",
+      "webpPath": "/images/cards/webp/essence-bloom.webp",
+      "trigger": "When your opponent generates essence: ",
+      "effect": "Generate an equal amount of essence using elements of your choice."
+    },
+    {
+      "cardNumber": 119,
+      "id": "elemental-reaction",
+      "name": 118,
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/elemental-reaction.png",
+      "webpPath": "/images/cards/webp/elemental-reaction.webp",
+      "trigger": "When your opponent generates essence: ",
+      "effect": "Destroy 1 of their creatures that generated essence this turn."
+    },
+    {
+      "cardNumber": 120,
+      "id": "unbreakable",
+      "name": 119,
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/unbreakable.png",
+      "webpPath": "/images/cards/webp/unbreakable.webp",
+      "trigger": "When your opponent declares an attack: ",
+      "effect": "Prevent all damage to your shields for one turn."
+    },
+    {
+      "cardNumber": 121,
+      "id": "rapid-recovery",
+      "name": 120,
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/rapid-recovery.png",
+      "webpPath": "/images/cards/webp/rapid-recovery.webp",
+      "trigger": "When a creature you control would be destroyed by battle: ",
+      "effect": "Prevent it's destruction and restore its Strength and actions fully."
+    },
+    {
+      "cardNumber": 122,
+      "id": "revival-rain",
+      "name": 121,
+      "type": "Counter",
+      "rarity": "R",
+      "imagePath": "/images/cards/revival-rain.png",
+      "webpPath": "/images/cards/webp/revival-rain.webp",
+      "trigger": "When a creature you control is destroyed: ",
+      "effect": "Summon a creature of the same element (excluding the destroyed creature) from your graveyard. This creature enters Exhausted."
+    },
+    {
+      "cardNumber": 123,
+      "id": "echo-of-destruction",
+      "name": 122,
+      "type": "Counter",
+      "rarity": "R",
+      "imagePath": "/images/cards/echo-of-destruction.png",
+      "webpPath": "/images/cards/webp/echo-of-destruction.webp",
+      "trigger": "When your opponent summons a creature: ",
+      "effect": "Destroy all creatures sharing its element. Each player generates essence equal to their destroyed creatures' generation"
+    },
+    {
+      "cardNumber": 124,
+      "id": "oblivion-rift",
+      "name": 123,
+      "type": "Counter",
+      "rarity": "R",
+      "imagePath": "/images/cards/oblivion-rift.png",
+      "webpPath": "/images/cards/webp/oblivion-rift.webp",
+      "trigger": "When your opponent draws a card: ",
+      "effect": "Destroy all cards on the field. Each player discards and draws 3 cards."
+    },
+    {
+      "cardNumber": 125,
+      "id": "guardians-sanctuary",
+      "name": 124,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/guardians-sanctuary.png",
+      "webpPath": "/images/cards/webp/guardians-sanctuary.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 2 cards.",
+      "secondaryEffect": "Choose 1 Element for your opponent to consume up to 4 essence of."
+    },
+    {
+      "cardNumber": 126,
+      "id": "mystic-ward",
+      "name": 125,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/mystic-ward.png",
+      "webpPath": "/images/cards/webp/mystic-ward.webp",
+      "tier": 1,
+      "primaryEffect": "Destroy up to 2 Rune/Counter cards on the field.",
+      "secondaryEffect": "Equip this card to a creature (this card now acts as an Equipment card). The equipped creature loses 40 Strength or 20 Agility (choose 1) while this card remains equipped."
+    },
+    {
+      "cardNumber": 127,
+      "id": "oracles-guard",
+      "name": 126,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/oracles-guard.png",
+      "webpPath": "/images/cards/webp/oracles-guard.webp",
+      "tier": 1,
+      "primaryEffect": "Choose 1 Rune/Counter card from your deck, then bring it to your hand. Destroy 1 Rune/Counter card on the field.",
+      "secondaryEffect": "Choose 1 Element and bring a creature of that element to your hand (excluding Dragons). You may destroy 1 creature on the field of the same element that costs 0 essence to summon."
+    },
+    {
+      "cardNumber": 128,
+      "id": "scholars-protection",
+      "name": 127,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/scholars-protection.png",
+      "webpPath": "/images/cards/webp/scholars-protection.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 3 cards from the deck, discard 1 and put the remaining 2 in your hand.",
+      "secondaryEffect": "Draw 1 card. Your opponent selects 1 card from their hand and sends it to their graveyard. Return 1 card from your graveyard to your hand."
+    },
+    {
+      "cardNumber": 129,
+      "id": "woodland-wall",
+      "name": 128,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/woodland-wall.png",
+      "webpPath": "/images/cards/webp/woodland-wall.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 1 card. Gain 3 Earth Essence.",
+      "secondaryEffect": "Equip this card to a creature (this card now acts as an Equipment card). The equipped creature gains 40 Strength while this card remains equipped."
+    },
+    {
+      "cardNumber": 130,
+      "id": "aqua-ward",
+      "name": 129,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/aqua-ward.png",
+      "webpPath": "/images/cards/webp/aqua-ward.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 1 card. Gain 3 Water Essence.",
+      "secondaryEffect": "Choose to discard any number of cards from your hand, then draw an equal number of cards."
+    },
+    {
+      "cardNumber": 131,
+      "id": "ember-bulwark",
+      "name": 130,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/ember-bulwark.png",
+      "webpPath": "/images/cards/webp/ember-bulwark.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 1 card. Gain 3 Fire Essence.",
+      "secondaryEffect": "Deal 120 damage to a target creature or deal 150 damage to a shield."
+    },
+    {
+      "cardNumber": 132,
+      "id": "gust-screen",
+      "name": 131,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/gust-screen.png",
+      "webpPath": "/images/cards/webp/gust-screen.webp",
+      "tier": 1,
+      "primaryEffect": "Draw 1 card. Gain 3 Air Essence.",
+      "secondaryEffect": "Equip this card to a creature (this card now acts as an Equipment card). The equipped creature gains 20 Agility while this card remains equipped."
+    },
+    {
+      "cardNumber": 133,
+      "id": "frost-veil",
+      "name": 132,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/frost-veil.png",
+      "webpPath": "/images/cards/webp/frost-veil.webp",
+      "tier": 1,
+      "primaryEffect": "Freeze a target creature (that creature can't attack or block) until the end of your next turn.",
+      "secondaryEffect": "Gain 2 Air and 2 Water Essence."
+    },
+    {
+      "cardNumber": 134,
+      "id": "spark-wall",
+      "name": 133,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/spark-wall.png",
+      "webpPath": "/images/cards/webp/spark-wall.webp",
+      "tier": 1,
+      "primaryEffect": "At the beginning of your next turn, deal 40 damage to each creature your opponent controls or choose 1 creature to deal 120 damage to.",
+      "secondaryEffect": "Gain 2 Air and 2 Fire Essence."
+    },
+    {
+      "cardNumber": 135,
+      "id": "lava-guard",
+      "name": 134,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/lava-guard.png",
+      "webpPath": "/images/cards/webp/lava-guard.webp",
+      "tier": 1,
+      "primaryEffect": "During your next turn, any damage you deal to shields is doubled.",
+      "secondaryEffect": "Gain 2 Earth and 2 Fire Essence."
+    },
+    {
+      "cardNumber": 136,
+      "id": "toxic-guard",
+      "name": 135,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/toxic-guard.png",
+      "webpPath": "/images/cards/webp/toxic-guard.webp",
+      "tier": 1,
+      "primaryEffect": "Equip this card to the creature that destroyed it (this card now acts as a rune equipment card). The equipped creature cannot regain its action while this card is attached.",
+      "secondaryEffect": "Gain 2 Fire and 2 Water Essence."
+    },
+    {
+      "cardNumber": 137,
+      "id": "sand-fortress",
+      "name": 136,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/sand-fortress.png",
+      "webpPath": "/images/cards/webp/sand-fortress.webp",
+      "tier": 1,
+      "primaryEffect": "During your next turn, any creature with 60 or more agility can target your opponent directly.",
+      "secondaryEffect": "Gain 2 Air and 2 Earth Essence."
+    },
+    {
+      "cardNumber": 138,
+      "id": "crystal-shield",
+      "name": 137,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/crystal-shield.png",
+      "webpPath": "/images/cards/webp/crystal-shield.webp",
+      "tier": 1,
+      "primaryEffect": "Attach this to a remaining shield. The attached shields gains an additional 150 health.",
+      "secondaryEffect": "Gain 2 Earth and 2 Water Essence."
+    },
+    {
+      "cardNumber": 139,
+      "id": "radiant-buckler",
+      "name": 138,
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/radiant-buckler.png",
+      "webpPath": "/images/cards/webp/radiant-buckler.webp",
+      "tier": 1,
+      "primaryEffect": "Equip this card to a creature (this card now acts as an Equipment card). The equipped creature regains its action at the end of every turn.",
+      "secondaryEffect": "Place this card face-up in your Rune/Counter card area. No Counter cards may be placed while this remains face-up (this card is now treated as a Rune card)."
+    },
+    {
+      "cardNumber": 140,
+      "id": "mythical-barrier",
+      "name": 139,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/mythical-barrier.png",
+      "webpPath": "/images/cards/webp/mythical-barrier.webp",
+      "tier": 2,
+      "primaryEffect": "Draw 3 cards.",
+      "secondaryEffect": "Draw 2 cards & you can now hold a maximum of 8 cards."
+    },
+    {
+      "cardNumber": 141,
+      "id": "shadow-guard",
+      "name": 140,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/shadow-guard.png",
+      "webpPath": "/images/cards/webp/shadow-guard.webp",
+      "tier": 2,
+      "primaryEffect": "Destroy 1 creature your opponent controls.",
+      "secondaryEffect": "Destroy up to 2 Rune/Counter cards on the field."
+    },
+    {
+      "cardNumber": 142,
+      "id": "harmonic-shield",
+      "name": 141,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/harmonic-shield.png",
+      "webpPath": "/images/cards/webp/harmonic-shield.webp",
+      "tier": 2,
+      "primaryEffect": "Discard 1 creature from your hand and destroy all creatures on the field with the element of the discarded creature.",
+      "secondaryEffect": "Discard 1 creature from your hand. Draw a card one at a time until you draw another creature of the same element."
+    },
+    {
+      "cardNumber": 143,
+      "id": "draconic-shield",
+      "name": 142,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/draconic-shield.png",
+      "webpPath": "/images/cards/webp/draconic-shield.webp",
+      "tier": 2,
+      "primaryEffect": "Select 2 elements. Generate 3 essence of each selected element.",
+      "secondaryEffect": "Special Summon 1 \"Dragon\" from your hand or graveyard."
+    },
+    {
+      "cardNumber": 144,
+      "id": "spectral-shield",
+      "name": 143,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/spectral-shield.png",
+      "webpPath": "/images/cards/webp/spectral-shield.webp",
+      "tier": 2,
+      "primaryEffect": "Select 2 cards in your graveyard and return them to your hand.",
+      "secondaryEffect": "Summon 1 creature from your graveyard."
+    },
+    {
+      "cardNumber": 145,
+      "id": "phantom-veil",
+      "name": 144,
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/phantom-veil.png",
+      "webpPath": "/images/cards/webp/phantom-veil.webp",
+      "tier": 2,
+      "primaryEffect": "Draw 2 cards. For each creature card drawn, generate 3 essence corresponding to the creature's element.",
+      "secondaryEffect": "Discard a creature from your hand, then draw 1 card. If the drawn card and discarded creature are of the same element (excluding Dragons), then Special Summon the discarded creature."
+    },
+    {
+      "cardNumber": 146,
+      "id": "whirlwind-barrier",
+      "name": 145,
+      "type": "Shield",
+      "rarity": "R",
+      "imagePath": "/images/cards/whirlwind-barrier.png",
+      "webpPath": "/images/cards/webp/whirlwind-barrier.webp",
+      "tier": 2,
+      "primaryEffect": "Gain 8 Air Essence.",
+      "secondaryEffect": "During your next turn, all Air creatures you control gain Double Strike."
+    },
+    {
+      "cardNumber": 147,
+      "id": "torrent-barrier",
+      "name": 146,
+      "type": "Shield",
+      "rarity": "R",
+      "imagePath": "/images/cards/torrent-barrier.png",
+      "webpPath": "/images/cards/webp/torrent-barrier.webp",
+      "tier": 2,
+      "primaryEffect": "Gain 8 Water Essence.",
+      "secondaryEffect": "Draw 2 cards. Your opponent selects 2 cards from their hand and sends them to their graveyard."
+    },
+    {
+      "cardNumber": 148,
+      "id": "flame-barrier",
+      "name": 147,
+      "type": "Shield",
+      "rarity": "R",
+      "imagePath": "/images/cards/flame-barrier.png",
+      "webpPath": "/images/cards/webp/flame-barrier.webp",
+      "tier": 2,
+      "primaryEffect": "Gain 8 Fire Essence.",
+      "secondaryEffect": "During your next turn, all Fire creatures gain Pierce."
+    },
+    {
+      "cardNumber": 149,
+      "id": "geode-barrier",
+      "name": 148,
+      "type": "Shield",
+      "rarity": "R",
+      "imagePath": "/images/cards/geode-barrier.png",
+      "webpPath": "/images/cards/webp/geode-barrier.webp",
+      "tier": 2,
+      "primaryEffect": "Gain 8 Earth Essence.",
+      "secondaryEffect": "At the end of your next turn, all Earth creatures you control gain their action back if it was used."
+    },
+    {
+      "cardNumber": 150,
+      "id": "phoenix-shield",
+      "name": 149,
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/phoenix-shield.png",
+      "webpPath": "/images/cards/webp/phoenix-shield.webp",
+      "tier": 3,
+      "primaryEffect": "Summon 1 creature from your graveyard & destroy all creatures on the field with a lower strength.",
+      "secondaryEffect": "Summon 1 creature from your graveyard & destroy all creatures on the field with a higher agility."
+    },
+    {
+      "cardNumber": 151,
+      "id": "titans-shield",
+      "name": 150,
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/titans-shield.png",
+      "webpPath": "/images/cards/webp/titans-shield.webp",
+      "tier": 3,
+      "primaryEffect": "Special Summon a \"Titan\" card from your deck. Equip this shield to that Titan (this card now acts as an Equipment card). Your opponent's attacks must be declared on this Titan while this shield remains attached.",
+      "secondaryEffect": "Summon 1 creature from your hand. All of your attacking creatures next turn gain Double Strike."
+    },
+    {
+      "cardNumber": 152,
+      "id": "celestial-fortress",
+      "name": 151,
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/celestial-fortress.png",
+      "webpPath": "/images/cards/webp/celestial-fortress.webp",
+      "tier": 3,
+      "primaryEffect": "Gain 15 elemental essence of any combination of elements.",
+      "secondaryEffect": "Summon any 2 creatures from your hand, field free of cost."
+    },
+    {
+      "cardNumber": 153,
+      "id": "tempest-barrier",
+      "name": 152,
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/tempest-barrier.png",
+      "webpPath": "/images/cards/webp/tempest-barrier.webp",
+      "tier": 3,
+      "primaryEffect": "Destroy all rune and counter cards on the field (including equipments).",
+      "secondaryEffect": "Prevent your opponent from attacking or blocking for the next 2 turns."
+    },
+    {
+      "cardNumber": 154,
+      "id": "elemental-shield",
+      "name": 153,
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/elemental-shield.png",
+      "webpPath": "/images/cards/webp/elemental-shield.webp",
+      "tier": 3,
+      "primaryEffect": "Draw 3 cards. Deplete your opponent's essence pool by up to 12 of any essence combination.",
+      "secondaryEffect": "Summon 1 card from your graveyard (excluding Dragons). Gain 12 essence of the summoned creature's element."
+    },
+    {
+      "cardNumber": 155,
+      "id": "ancient-winds",
+      "name": 154,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/ancient-winds.png",
+      "webpPath": "/images/cards/webp/ancient-winds.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Galea's Inspiration",
+        "description": "While this card is on the field, draw 1 card for every Air creature summoned."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 3,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 156,
+      "id": "ancient-tide",
+      "name": 155,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/ancient-tide.png",
+      "webpPath": "/images/cards/webp/ancient-tide.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Water's Flow",
+        "description": "At the end of each of your turns, discard up to 2 cards from your hand, then draw one card for each discarded card."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 3,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 157,
+      "id": "ancient-roots",
+      "name": 156,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/ancient-roots.png",
+      "webpPath": "/images/cards/webp/ancient-roots.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Kinbrold's Gift",
+        "description": "At the end of each of your  turns, draw 1 card for every Earth creature you control."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 3,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 158,
+      "id": "ancient-ember",
+      "name": 157,
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/ancient-ember.png",
+      "webpPath": "/images/cards/webp/ancient-ember.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Fiery Inspiration",
+        "description": "While this card is on the field, draw 1 card for every creature destroyed by a Fire creature (in battle or by effect)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 159,
+      "id": "ancient-sigil",
+      "name": 158,
+      "type": "Rune",
+      "rarity": "E",
+      "imagePath": "/images/cards/ancient-sigil.png",
+      "webpPath": "/images/cards/webp/ancient-sigil.webp",
+      "runeType": "Normal",
+      "effect": "If you possess Ancient Winds, Ancient Tide, Ancient Roots, and Ancient Ember in your hand or on your field, instantly claim an ultimate victory. Automatically win the game, youve mastered every element!"
+    },
+    {
+      "cardNumber": 160,
+      "id": "eldritch-the-frost-dragon",
+      "name": 159,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/eldritch-the-frost-dragon.png",
+      "webpPath": "/images/cards/webp/eldritch-the-frost-dragon.webp",
+      "element": "Frost",
+      "stats": {
+        "strength": 185,
+        "agility": 110
+      },
+      "ability": {
+        "name": "Frostbite",
+        "description": "When this card is summoned, Freeze all creatures your opponent controls (A frozen creature loses all actions)."
+      },
+      "specialAbility": {
+        "name": "Glacial Roar",
+        "description": "Deal 50 damage to all frozen creatures or creatures that do not have any actions remaining.",
+        "cost": {
+          "amount": 4,
+          "element": "Frost"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Frost"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Frost"
+        }
+      }
+    },
+    {
+      "cardNumber": 161,
+      "id": "veton-the-lightning-dragon",
+      "name": 160,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/veton-the-lightning-dragon.png",
+      "webpPath": "/images/cards/webp/veton-the-lightning-dragon.webp",
+      "element": "Lightning",
+      "stats": {
+        "strength": 190,
+        "agility": 105
+      },
+      "ability": {
+        "name": "Chain Lightning",
+        "description": "When this card declares an attack on a creature, it targets all opposing creatures of the same element as the attacked or blocking creature simultaneously."
+      },
+      "specialAbility": {
+        "name": "Stormy Forecast",
+        "description": "Discard any number of cards from your hand. For every card discarded, your opponent must discard an equal number of cards from their hand.",
+        "cost": {
+          "amount": 4,
+          "element": "Lightning"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Lightning"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Lightning"
+        }
+      }
+    },
+    {
+      "cardNumber": 162,
+      "id": "diamoria-the-crystal-dragon",
+      "name": 161,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/diamoria-the-crystal-dragon.png",
+      "webpPath": "/images/cards/webp/diamoria-the-crystal-dragon.webp",
+      "element": "Crystal",
+      "stats": {
+        "strength": 205,
+        "agility": 90
+      },
+      "ability": {
+        "name": "Shielded Might",
+        "description": "When attacking a shield, gain Double Strike. While this card is on the field, use both effects of any broken shields you control."
+      },
+      "specialAbility": {
+        "name": "Bulwark Bolster",
+        "description": "Gain Double Strike when battling against another creature.",
+        "cost": {
+          "amount": 4,
+          "element": "Crystal"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Crystal"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Crystal"
+        }
+      }
+    },
+    {
+      "cardNumber": 163,
+      "id": "zoryn-the-lava-dragon",
+      "name": 162,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/zoryn-the-lava-dragon.png",
+      "webpPath": "/images/cards/webp/zoryn-the-lava-dragon.webp",
+      "element": "Lava",
+      "stats": {
+        "strength": 210,
+        "agility": 85
+      },
+      "ability": {
+        "name": "Eruption",
+        "description": "When this card is summoned, deal 30 damage to all creatures on the field."
+      },
+      "specialAbility": {
+        "name": "Magma Surge",
+        "description": "Deal 60 damage to all enemy creatures on the field.",
+        "cost": {
+          "amount": 4,
+          "element": "Lava"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Lava"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Lava"
+        }
+      }
+    },
+    {
+      "cardNumber": 164,
+      "id": "noxilus-the-poison-dragon",
+      "name": 163,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/noxilus-the-poison-dragon.png",
+      "webpPath": "/images/cards/webp/noxilus-the-poison-dragon.webp",
+      "element": "Poison",
+      "stats": {
+        "strength": 200,
+        "agility": 95
+      },
+      "ability": {
+        "name": "Toxic Splash",
+        "description": "When this creature destroys an opponent's creature by battle, the opponent must deplete 2 essence of the destroyed creatures element."
+      },
+      "specialAbility": {
+        "name": "Venomous",
+        "description": "In addition to the \"Toxic Splash\" effect, your opponent must discard 2 cards from their hand.",
+        "cost": {
+          "amount": 2,
+          "element": "Poison"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Poison"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Poison"
+        }
+      }
+    },
+    {
+      "cardNumber": 165,
+      "id": "aridus-the-sand-dragon",
+      "name": 164,
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/aridus-the-sand-dragon.png",
+      "webpPath": "/images/cards/webp/aridus-the-sand-dragon.webp",
+      "element": "Sand",
+      "stats": {
+        "strength": 195,
+        "agility": 100
+      },
+      "ability": {
+        "name": "Desert Mirage",
+        "description": "While this card is on the field, negate all Rune/Counter cards. When your opponent attacks, you may discard 1 placed Rune/Counter card to redirect the attack."
+      },
+      "specialAbility": {
+        "name": "Sandstorm",
+        "description": "Draw 2 cards. You may discard any number of Rune/Counter cards. Destroy a creature on the field for each discarded Rune/Counter card.",
+        "cost": {
+          "amount": 4,
+          "element": "Sand"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Sand"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Sand"
+        }
+      }
+    },
+    {
+      "cardNumber": 166,
+      "id": "galea-the-air-elementalist",
+      "name": 165,
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/galea-the-air-elementalist.png",
+      "webpPath": "/images/cards/webp/galea-the-air-elementalist.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 225,
+        "agility": 225
+      },
+      "ability": {
+        "name": "Aerial Displacement",
+        "description": "When this card is normal summoned, send 2 cards from your opponent's side of the field to the graveyard."
+      },
+      "specialAbility": {
+        "name": "Morphing Force",
+        "description": "Redistribute this card's total Strength and Agility (450 total) until the end of the turn.",
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 167,
+      "id": "mek-the-water-elementalist",
+      "name": 166,
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/mek-the-water-elementalist.png",
+      "webpPath": "/images/cards/webp/mek-the-water-elementalist.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 270,
+        "agility": 180
+      },
+      "ability": {
+        "name": "Aqua Affinity",
+        "description": "While this card is on the field, generate 2 Water Essence for every Water creature summoned."
+      },
+      "specialAbility": {
+        "name": "Surging Tides",
+        "description": "Draw one card for every Water creature\non the field.",
+        "cost": {
+          "amount": 5,
+          "element": "Water"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 169,
+      "id": "balon-the-earth-elementalist",
+      "name": 168,
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/balon-the-earth-elementalist.png",
+      "webpPath": "/images/cards/webp/balon-the-earth-elementalist.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 360,
+        "agility": 90
+      },
+      "ability": {
+        "name": "Sink Hole",
+        "description": "When this card is normal summoned, you may add 1 Earth Creature from your deck to your hand.\nOnce per turn, you may discard 1 Earth Creature to destroy 1 card on the field."
+      },
+      "specialAbility": {
+        "name": "Tremor",
+        "description": "Every creature your opponent control loses all actions.",
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      }
+    }
+  ]
+}

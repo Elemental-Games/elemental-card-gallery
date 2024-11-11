@@ -44,7 +44,7 @@ const JoinNowPage = () => {
       <Card className="p-6 mb-8 bg-accent text-accent-foreground">
         <h2 className="text-2xl font-semibold mb-4">Early Bird Special</h2>
         <p className="mb-4">The first 169 backers of $50 or more will receive an autographed card of their choice (in addition to the usual $50 Kickstarter reward). This will be first come, first serve, and there will only be 1 autographed version of each card. A live list of cards left to be autographed will be on the website at time of purchase.</p>
-        <p className="mb-4">So, be ready to grab your 1/1 Autographed card on November 1st!</p>
+        <p className="mb-4">So, be ready to grab your 1/1 Autographed card on December 1st!</p>
         <Button size="lg" className="w-full" onClick={scrollToSignUp}>
           Sign Up Now!
         </Button>

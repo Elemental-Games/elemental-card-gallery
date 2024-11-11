@@ -37,8 +37,6 @@ const LightBox = () => {
           className="absolute right-2 top-2 sm:right-4 sm:top-4 rounded-sm opacity-70 hover:opacity-100 focus:outline-none"
           onClick={handleClose}
         >
-          <X className="h-8 w-8" />
-          <span className="sr-only">Close</span>
         </button>
         
         <DialogHeader>

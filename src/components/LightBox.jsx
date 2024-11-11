@@ -58,10 +58,10 @@ const LightBox = () => {
 
           <div className="flex flex-col justify-center space-y-4">
             <h3 className="text-lg font-semibold">
-              Stay Up to Date with Elemental Games
+              Don't Miss Out on Exclusive Rewards!
             </h3>
             <p className="text-muted-foreground text-sm mb-4">
-              Be notified when we launch our Kickstarter and get exclusive updates about everything Elemental Masters!
+              Sign up now for your chance to win exclusive game content! Every 100th subscriber wins a special prize, and you'll get notified first about our Kickstarter launch and exclusive Elemental Masters updates!
             </p>
             <EmailSignup onClose={handleClose} />
           </div>

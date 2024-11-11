@@ -121,11 +121,6 @@ const ZalosPage = () => {
                 affinity for mobility makes us excellent diplomats and messengers.
               </p>
             </div>
-            <img 
-              src="/kingdoms/zalos_zen.png" 
-              alt="Meditation in Zalos" 
-              className="w-full h-full object-cover rounded-lg shadow-xl"
-            />
           </div>
 
           <h2 className="text-2xl font-heading mb-4 text-yellow-400">Notable Locations</h2>

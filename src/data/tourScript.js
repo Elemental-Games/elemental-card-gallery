@@ -94,6 +94,6 @@ export const tourScript = [
     speaker: 'iris1',
     zoom: 'start',
     dragon: null,
-    dialogue: "Iris: Click on any region to learn more and begin your Elemental journey!",
+    dialogue: "Iris: Explore the Kinbrold map, and Scroll down below to learn more about Kinbrold's history and each Kingdom!",
   },
 ];

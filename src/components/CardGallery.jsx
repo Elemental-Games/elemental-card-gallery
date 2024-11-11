@@ -12,7 +12,7 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={card.image} 
+          src={card.imagePath} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
@@ -22,7 +22,21 @@ const Card = ({ card }) => {
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
           <h3 className="text-sm font-semibold">{card.name}</h3>
-          <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
+          <p className="text-xs">
+            {card.element} | {card.type} | {
+              card.rarity === 'C' ? 'Common' :
+              card.rarity === 'U' ? 'Uncommon' :
+              card.rarity.trim() === 'R' ? 'Rare' :
+              card.rarity === 'E' ? 'Epic' :
+              card.rarity === 'L' ? 'Legendary' :
+              card.rarity
+            }
+          </p>
+          {card.type === 'Creature' && card.stats && (
+            <p className="text-xs">
+              STR: {card.stats.strength} | AGI: {card.stats.agility}
+            </p>
+          )}
         </div>
       </motion.div>
     </Link>
@@ -36,7 +50,6 @@ const CardGallery = () => {
   useEffect(() => {
     const loadCards = async () => {
       try {
-        // Updated path to fetch from the correct location
         const response = await fetch('/data/cards.json');
         if (!response.ok) {
           throw new Error('Failed to fetch card data');
@@ -54,13 +67,6 @@ const CardGallery = () => {
 
   return (
     <div>
-      <div className="bg-blue-100 p-4 mb-4 rounded-lg">
-        <h2 className="text-xl font-bold mb-2">Test Section</h2>
-        <p>This is a test paragraph to ensure the CardGallery component is rendering correctly.</p>
-        <p>Number of cards loaded: {cards.length}</p>
-        <p>Error status: {error ? 'Error occurred' : 'No errors'}</p>
-      </div>
-
       {error ? (
         <Alert variant="destructive">
           <AlertCircle className="h-4 w-4" />

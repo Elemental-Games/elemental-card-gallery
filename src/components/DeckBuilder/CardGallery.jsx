@@ -130,12 +130,12 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
             className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
           >
             <img 
-              src={card.image} 
+              src={`/images/cards/${card.id}.webp`} 
               alt={card.name} 
               className="w-full h-auto object-contain mx-auto"
               onError={(e) => {
                 e.target.onerror = null;
-                e.target.src = '/placeholder.svg';
+                e.target.src = `/images/cards/${card.id}.png`;
               }}
             />
             <p className="text-center mt-2">{card.name}</p>

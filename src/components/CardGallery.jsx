@@ -12,12 +12,12 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={card.imagePath} 
+          src={`/images/cards/${card.id}.webp`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = '/placeholder.svg';
+            e.target.src = `/images/cards/${card.id}.png`;
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">

@@ -26,9 +26,13 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const cardContent = (
     <>
       <img 
-        src={`/images/cards/${card.id}.png`} 
+        src={`/images/cards/${card.id}.webp`} 
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
+        onError={(e) => {
+          e.target.onerror = null;
+          e.target.src = `/images/cards/${card.id}.png`;
+        }}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">

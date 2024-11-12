@@ -22,9 +22,9 @@ const Header = () => {
               <img 
                 src="/Games_Logo.png" 
                 alt="Elemental Masters Logo" 
-                className="h-10 w-10 mr-2"
+                className="h-16 w-16 mr-2"
               />
-              <span className="text-secondary text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
+              <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
                 Elemental Masters
               </span>
             </Link>
@@ -34,7 +34,7 @@ const Header = () => {
               <li key={item.title}>
                 <Link 
                   to={item.to} 
-                  className="text-secondary hover:text-accent transition-colors duration-200 font-sans"
+                  className="text-white hover:text-accent transition-colors duration-200 font-sans"
                 >
                   {item.title}
                 </Link>

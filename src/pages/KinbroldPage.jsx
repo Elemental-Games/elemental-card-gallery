@@ -67,7 +67,7 @@ const KinbroldPage = () => {
         <meta property="og:type" content="article" />
         <link rel="canonical" href="https://elementalgames.gg/kinbrold" />
       </Helmet>
-    <div className="flex flex-col w-full">
+      <div className="flex flex-col w-full">
       <section className="relative w-full h-[100vh] overflow-hidden">
         <KinbroldMap />
       </section>
@@ -89,7 +89,7 @@ const KinbroldPage = () => {
           ))}
         </div>
       </section>
-    </div>
+      </div>
     </>
   );
 };

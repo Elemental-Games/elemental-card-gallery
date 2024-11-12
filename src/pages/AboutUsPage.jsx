@@ -2,9 +2,20 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { Helmet } from 'react-helmet-async';
 
 const AboutUsPage = () => {
   return (
+    <>
+      <Helmet>
+        <title>About Elemental Games - Creators of Elemental Masters TCG</title>
+        <meta name="description" content="Learn about Elemental Games, the visionary team behind Elemental Masters Trading Card Game. Discover our story, mission, and the magical world of Kinbrold." />
+        <meta name="keywords" content="Elemental Games, Elemental Masters, trading card game, TCG, game developer, Kinbrold, Mark Diorio" />
+        <meta property="og:title" content="About Elemental Games - Creators of Elemental Masters TCG" />
+        <meta property="og:description" content="Discover the story behind Elemental Games and our mission to revolutionize the gaming industry through immersive elemental experiences." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://elementalgames.gg/about" />
+      </Helmet>
     <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -83,6 +94,7 @@ const AboutUsPage = () => {
         </p>
       </section>
     </motion.div>
+    </>
   );
 };
 

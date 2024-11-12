@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet-async';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
@@ -99,71 +100,82 @@ const DeckBuilderPage = () => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className="relative">
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
-        <p className="text-xl mb-4">Total cards selected: {totalCards}</p>
-        {showWizard === null && (
-          <div className="fixed inset-0 bg-purple-900 bg-opacity-95 flex items-center justify-center z-50">
-            <div className="bg-purple-800 p-8 rounded-lg max-w-md w-full text-purple-100">
-              <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
-              <p className="mb-4">Would you like to use our deck builder wizard?</p>
-              <div className="flex justify-center space-x-4">
-                <Button onClick={() => handleWizardChoice('yes')} className="bg-purple-500 hover:bg-purple-600">Yes</Button>
-                <Button onClick={() => handleWizardChoice('no')} className="bg-purple-500 hover:bg-purple-600">No</Button>
+    <>
+      <Helmet>
+        <title>Deck Builder - Create Your Elemental Masters TCG Deck</title>
+        <meta name="description" content="Build and customize your Elemental Masters TCG deck. Choose your elements, combine powerful cards, and create winning strategies with our interactive deck builder." />
+        <meta name="keywords" content="Elemental Masters deck builder, TCG deck construction, card game strategy, deck building tool, trading card game decks" />
+        <meta property="og:title" content="Deck Builder - Create Your Elemental Masters TCG Deck" />
+        <meta property="og:description" content="Create powerful decks with our interactive deck builder. Combine elements and cards to craft your perfect strategy." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://elementalgames.gg/cards/deck-builder" />
+      </Helmet>
+      <div className="relative">
+        <div className="container mx-auto px-4 py-8">
+          <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>
+          <p className="text-xl mb-4">Total cards selected: {totalCards}</p>
+          {showWizard === null && (
+            <div className="fixed inset-0 bg-purple-900 bg-opacity-95 flex items-center justify-center z-50">
+              <div className="bg-purple-800 p-8 rounded-lg max-w-md w-full text-purple-100">
+                <h2 className="text-2xl font-bold mb-4">Deck Builder Wizard</h2>
+                <p className="mb-4">Would you like to use our deck builder wizard?</p>
+                <div className="flex justify-center space-x-4">
+                  <Button onClick={() => handleWizardChoice('yes')} className="bg-purple-500 hover:bg-purple-600">Yes</Button>
+                  <Button onClick={() => handleWizardChoice('no')} className="bg-purple-500 hover:bg-purple-600">No</Button>
+                </div>
               </div>
             </div>
-          </div>
-        )}
-        {showWizard && selectedElements.length < 2 && (
-          <ElementSelection onSelect={handleElementSelection} />
-        )}
-        {(!showWizard || (showWizard && selectedElements.length === 2)) && (
-          <>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <DeckEditor 
-                  mainDeck={mainDeck} 
-                  sideDeck={sideDeck} 
-                  setMainDeck={setMainDeck} 
-                  setSideDeck={setSideDeck}
-                  allCards={allCards}
-                  canAddCard={canAddCard}
-                  selectedElements={selectedElements}
+          )}
+          {showWizard && selectedElements.length < 2 && (
+            <ElementSelection onSelect={handleElementSelection} />
+          )}
+          {(!showWizard || (showWizard && selectedElements.length === 2)) && (
+            <>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="md:col-span-2">
+                  <DeckEditor 
+                    mainDeck={mainDeck} 
+                    sideDeck={sideDeck} 
+                    setMainDeck={setMainDeck} 
+                    setSideDeck={setSideDeck}
+                    allCards={allCards}
+                    canAddCard={canAddCard}
+                    selectedElements={selectedElements}
+                  />
+                </div>
+                <div>
+                  <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
+                </div>
+              </div>
+              <div className="mt-8">
+                <Button onClick={() => setShowCardList(!showCardList)}>
+                  {showCardList ? 'Hide Card List' : 'Show Card List'}
+                </Button>
+                {showCardList && (
+                  <CardGallery
+                    cards={allCards}
+                    onCardSelect={handleCardSelect}
+                    deck={{ mainDeck, sideDeck }}
+                  />
+                )}
+              </div>
+              <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
+                <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>
+                <Input
+                  type="text"
+                  placeholder="Deck Name"
+                  value={deckName}
+                  onChange={(e) => setDeckName(e.target.value)}
+                  className="mb-4 bg-purple-800 text-purple-100 placeholder-purple-300"
                 />
+                <Button onClick={handleSaveDeck} className="bg-purple-500 hover:bg-purple-600">Save Deck</Button>
+                <p className="mt-2">Note: Deck saving is temporarily disabled.</p>
               </div>
-              <div>
-                <DeckStats mainDeck={mainDeck} sideDeck={sideDeck} />
-              </div>
-            </div>
-            <div className="mt-8">
-              <Button onClick={() => setShowCardList(!showCardList)}>
-                {showCardList ? 'Hide Card List' : 'Show Card List'}
-              </Button>
-              {showCardList && (
-                <CardGallery
-                  cards={allCards}
-                  onCardSelect={handleCardSelect}
-                  deck={{ mainDeck, sideDeck }}
-                />
-              )}
-            </div>
-            <div className="mt-8 bg-purple-900 p-6 rounded-lg text-purple-100">
-              <h3 className="text-xl font-bold mb-4">Save Your Deck</h3>
-              <Input
-                type="text"
-                placeholder="Deck Name"
-                value={deckName}
-                onChange={(e) => setDeckName(e.target.value)}
-                className="mb-4 bg-purple-800 text-purple-100 placeholder-purple-300"
-              />
-              <Button onClick={handleSaveDeck} className="bg-purple-500 hover:bg-purple-600">Save Deck</Button>
-              <p className="mt-2">Note: Deck saving is temporarily disabled.</p>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,57 +1,42 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { TransformWrapper, TransformComponent } from 'react-zoom-pan-pinch';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import MapComponent from '../components/MapComponent';
-import SpeakerComponent from '../components/SpeakerComponent';
-import DragonComponent from '../components/DragonComponent';
-import DialogueBox from '../components/DialogueBox';
 import { Button } from '@/components/ui/button';
-import { tourScript } from '../data/tourScript';
-import { dragonInfo } from '../data/dragonInfo';
-import { ScrollArea } from "@/components/ui/scroll-area";
 import KinbroldMap from '../components/KinbroldMap';
 import KinbroldHistory from '../components/KinbroldHistory';
 
 const KinbroldPage = () => {
   const navigate = useNavigate();
-  const [currentSpeaker, setCurrentSpeaker] = useState('iris1');
-  const [displayedDragon, setDisplayedDragon] = useState(null);
-  const [dialogueText, setDialogueText] = useState(tourScript[0].dialogue);
-  const [tourStep, setTourStep] = useState(0);
-  const [showTour, setShowTour] = useState(true);
-  const [allowManualControl, setAllowManualControl] = useState(false);
-  const transformComponentRef = useRef(null);
 
   const kingdoms = [
     { 
       name: 'Evermere',
       path: '/kinbrold/evermere',
-      color: 'bg-purple-800 hover:bg-purple-900',
+      hoverClass: 'hover:text-yellow-300',
       description: 'The Central Kingdom'
     },
     { 
       name: 'Grivoss',
       path: '/kinbrold/grivoss',
-      color: 'bg-green-500 hover:bg-green-600',
+      hoverClass: 'hover:text-green-300',
       description: 'The Earth Kingdom'
     },
     { 
       name: 'Scarto',
       path: '/kinbrold/scarto',
-      color: 'bg-red-500 hover:bg-red-600',
+      hoverClass: 'hover:text-red-300',
       description: 'The Fire Kingdom'
     },
     { 
       name: 'Tsunareth',
       path: '/kinbrold/tsunareth',
-      color: 'bg-blue-500 hover:bg-blue-600',
+      hoverClass: 'hover:text-blue-300',
       description: 'The Water Kingdom'
     },
     { 
       name: 'Zalos',
       path: '/kinbrold/zalos',
-      color: 'bg-gray-200 hover:bg-gray-300 text-gray-800',
+      hoverClass: 'hover:text-gray-300',
       description: 'The Air Kingdom'
     }
   ];
@@ -68,27 +53,27 @@ const KinbroldPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/kinbrold" />
       </Helmet>
       <div className="flex flex-col w-full">
-      <section className="relative w-full h-[100vh] overflow-hidden">
-        <KinbroldMap />
-      </section>
+        <section className="relative w-full h-[100vh] overflow-hidden">
+          <KinbroldMap />
+        </section>
 
-      <KinbroldHistory />
+        <KinbroldHistory />
 
-      <section className="w-full bg-background/95 backdrop-blur-sm p-8">
-        <h2 className="text-3xl font-bold text-center mb-8">Explore the Kingdoms of Kinbrold</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
-          {kingdoms.map((kingdom) => (
-            <Button
-              key={kingdom.name}
-              onClick={() => navigate(kingdom.path)}
-              className={`${kingdom.color} w-full h-24 font-bold flex flex-col items-center justify-center transition-colors`}
-            >
-              <span className="text-lg">{kingdom.name}</span>
-              <span className="text-sm opacity-80">{kingdom.description}</span>
-            </Button>
-          ))}
-        </div>
-      </section>
+        <section className="w-full bg-background/95 backdrop-blur-sm p-8">
+          <h2 className="text-3xl font-bold text-center mb-8">Explore the Kingdoms of Kinbrold</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
+            {kingdoms.map((kingdom) => (
+              <Button
+                key={kingdom.name}
+                onClick={() => navigate(kingdom.path)}
+                className={`w-full h-24 font-bold flex flex-col items-center justify-center transition-colors bg-purple-800 hover:bg-purple-900`}
+              >
+                <span className={`text-lg text-white ${kingdom.hoverClass} transition-colors`}>{kingdom.name}</span>
+                <span className={`text-sm text-white ${kingdom.hoverClass} transition-colors opacity-80`}>{kingdom.description}</span>
+              </Button>
+            ))}
+          </div>
+        </section>
       </div>
     </>
   );

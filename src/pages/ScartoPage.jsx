@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import PageTransition from '../components/PageTransition';
 
 const ScartoPage = () => {
   return (
+    <PageTransition type="scarto">
     <div className="min-h-screen bg-gradient-to-b from-red-800/10 to-red-800/30">
       {/* Hero Section */}
       <section className="relative h-[50vh] overflow-hidden">
@@ -132,6 +134,7 @@ const ScartoPage = () => {
         </Card>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

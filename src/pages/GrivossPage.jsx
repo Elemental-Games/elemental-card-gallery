@@ -1,9 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import PageTransition from '../components/PageTransition';
 
 const GrivossPage = () => {
   return (
-    <>
+    <PageTransition type="grivoss">
       <Helmet>
         <title>Grivoss - The Earth Kingdom | Elemental Masters TCG</title>
         <meta name="description" content="Explore Grivoss, the mighty Earth Kingdom of Kinbrold. Discover its mountains, caves, and the powerful earth elementals that call this realm home." />
@@ -29,7 +30,7 @@ const GrivossPage = () => {
           In Grivoss, the Earth Elementals are masters of defense and resilience. They protect their kingdom with unwavering strength, making it a challenging place for intruders.
         </p>
       </div>
-    </>
+    </PageTransition>
   );
 };
 

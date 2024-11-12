@@ -15,15 +15,29 @@ const Header = () => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg" />
       </Helmet>
-      <nav className="bg-gray-800 p-4">
+      <nav className="bg-purple-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-white text-2xl font-bold">
-            <Link to="/">Elemental Masters</Link>
+          <div className="flex items-center">
+            <Link to="/" className="flex items-center">
+              <img 
+                src="/Games_Logo.png" 
+                alt="Elemental Masters Logo" 
+                className="h-10 w-10 mr-2"
+              />
+              <span className="text-accent text-2xl font-bold font-heading">
+                Elemental Masters
+              </span>
+            </Link>
           </div>
-          <ul className="flex space-x-4">
+          <ul className="flex space-x-6">
             {navItems.map((item) => (
-              <li key={item.title} className="text-white hover:text-gray-300 transition-colors">
-                <Link to={item.to}>{item.title}</Link>
+              <li key={item.title}>
+                <Link 
+                  to={item.to} 
+                  className="text-accent hover:text-accent/80 transition-colors duration-200 font-sans"
+                >
+                  {item.title}
+                </Link>
               </li>
             ))}
           </ul>

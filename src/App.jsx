@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
+import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "./components/Header";
@@ -61,40 +62,42 @@ const renderRoutes = (items) => {
 };
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-      <TooltipProvider>
-        <AuthProvider>
-          <Toaster />
-          <BrowserRouter>
-            <ScrollToTop />
-            <div className="flex flex-col min-h-screen bg-background text-foreground">
-              <Header />
-              <main className="flex-grow">
-                <Routes>
-                  {renderRoutes(navItems)}
-                  <Route path="/cards/gallery" element={<CardGalleryPage />} />
-                  <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
-                  <Route path="/cards/:id" element={<CardDetailPage />} />
-                  <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
-                  <Route path="/gameplay/rules/*" element={<RulesPage />} />
-                  <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
-                  <Route path="/kinbrold/evermere" element={<EvermerePage />} />
-                  <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
-                  <Route path="/kinbrold/scarto" element={<ScartoPage />} />
-                  <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
-                  <Route path="/kinbrold/zalos" element={<ZalosPage />} />
-                </Routes>
-              </main>
-              <Footer />
-              <ThemeToggle />
-              <CookieConsent />
-            </div>
-          </BrowserRouter>
-        </AuthProvider>
-      </TooltipProvider>
-    </ThemeProvider>
-  </QueryClientProvider>
+  <HelmetProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+        <TooltipProvider>
+          <AuthProvider>
+            <Toaster />
+            <BrowserRouter>
+              <ScrollToTop />
+              <div className="flex flex-col min-h-screen bg-background text-foreground">
+                <Header />
+                <main className="flex-grow">
+                  <Routes>
+                    {renderRoutes(navItems)}
+                    <Route path="/cards/gallery" element={<CardGalleryPage />} />
+                    <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
+                    <Route path="/cards/:id" element={<CardDetailPage />} />
+                    <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
+                    <Route path="/gameplay/rules/*" element={<RulesPage />} />
+                    <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
+                    <Route path="/kinbrold/evermere" element={<EvermerePage />} />
+                    <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                    <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                    <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                    <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                  </Routes>
+                </main>
+                <Footer />
+                <ThemeToggle />
+                <CookieConsent />
+              </div>
+            </BrowserRouter>
+          </AuthProvider>
+        </TooltipProvider>
+      </ThemeProvider>
+    </QueryClientProvider>
+  </HelmetProvider>
 );
 
 export default App;

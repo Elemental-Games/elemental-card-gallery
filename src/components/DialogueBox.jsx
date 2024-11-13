@@ -1,25 +1,21 @@
 import React from 'react';
-import { Button } from '@/components/ui/button';
+import { X } from 'lucide-react';
 
-const DialogueBox = ({ text, onContinue, onSkip, isLastStep }) => {
+const DialogueBox = ({ isOpen, onClose, children }) => {
+  if (!isOpen) return null;
+
   return (
-    <div className="absolute bottom-4 left-4 right-4 bg-purple-900 bg-opacity-90 p-4 rounded-lg shadow-lg z-20 max-w-[90%] mx-auto">
-      <p className="text-lg text-purple-200 mb-4">{text}</p>
-      <div className="flex justify-end space-x-4">
-        {!isLastStep && (
-          <Button 
-            onClick={onContinue}
-            className="bg-purple-700 text-purple-200 hover:bg-purple-600"
-          >
-            Continue
-          </Button>
-        )}
-        <Button 
-          onClick={onSkip}
-          className="bg-purple-700 text-purple-200 hover:bg-purple-600"
+    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+        <button
+          onClick={onClose}
+          className="absolute right-2 top-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full z-10"
         >
-          {isLastStep ? "Finish" : "Skip Tour"}
-        </Button>
+          <X className="h-6 w-6" />
+        </button>
+        <div className="p-6 pt-12">
+          {children}
+        </div>
       </div>
     </div>
   );

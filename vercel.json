@@ -1,6 +1,34 @@
 {
   "rewrites": [
     {
+      "source": "/",
+      "destination": "/"
+    },
+    {
+      "source": "/landing",
+      "destination": "/"
+    },
+    {
+      "source": "/subscribe/:path*",
+      "destination": "/"
+    },
+    {
+      "source": "/unsubscribe/:path*",
+      "destination": "/"
+    },
+    {
+      "source": "/gameplay/:path*",
+      "destination": "/"
+    },
+    {
+      "source": "/cards/:path*",
+      "destination": "/"
+    },
+    {
+      "source": "/kinbrold/:path*",
+      "destination": "/"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }

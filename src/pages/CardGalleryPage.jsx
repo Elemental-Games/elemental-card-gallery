@@ -81,6 +81,14 @@ const CardGalleryPage = () => {
     setRarity('all');
   };
 
+  const getCardName = (card) => {
+    if (typeof card.name === 'number') {
+      const cardWithName = cards.find(c => c.cardNumber === card.name);
+      return cardWithName ? cardWithName.name : `Card ${card.name}`;
+    }
+    return card.name;
+  };
+
   return (
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-4xl font-bold mb-8">Card Gallery</h1>
@@ -104,14 +112,14 @@ const CardGalleryPage = () => {
             <Card className="p-4 cursor-pointer">
               <img 
                 src={`/images/cards/${card.id}.webp`}
-                alt={card.name} 
+                alt={getCardName(card)} 
                 className="w-full h-48 object-contain mb-2"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = `/images/cards/${card.id}.png`;
                 }}
               />
-              <h3 className="font-semibold text-lg">{card.name}</h3>
+              <h3 className="font-semibold text-lg">{getCardName(card)}</h3>
               <p className="text-sm text-gray-600">
                 {card.element} | {card.type} | {
                   card.rarity === 'C' ? 'Common' :
@@ -122,9 +130,9 @@ const CardGalleryPage = () => {
                   card.rarity
                 }
               </p>
-              {card.type === 'Creature' && (
+              {card.type === 'Creature' && card.stats && (
                 <p className="text-sm text-gray-600">
-                  STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
+                  STR: {card.stats.strength} | AGI: {card.stats.agility}
                 </p>
               )}
             </Card>

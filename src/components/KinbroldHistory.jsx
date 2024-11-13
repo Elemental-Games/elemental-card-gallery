@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { dragonInfo } from '../data/dragonInfo';
 
-const KinbroldHistory = ({ setSelectedDragon }) => {
+const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
   return (
     <section className="w-full bg-background/95 backdrop-blur-sm p-8">
       <div className="max-w-7xl mx-auto">
@@ -64,14 +64,22 @@ const KinbroldHistory = ({ setSelectedDragon }) => {
                   </p>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {[
-                      { name: 'Galea of the Air', description: 'Founding Zalos in the windswept heights' },
-                      { name: 'Mek of the Water', description: 'Establishing Tsunareth by the eternal tides' },
-                      { name: 'Osao of the Fire', description: 'Raising Scarto from volcanic depths' },
-                      { name: 'Balon of the Earth', description: 'Growing Grivoss from the fertile soil' }
+                      { name: 'Galea', description: 'of the Air, founding Zalos in the windswept heights' },
+                      { name: 'Mek', description: 'of the Water, establishing Tsunareth by the eternal tides' },
+                      { name: 'Osao', description: 'of the Fire, raising Scarto from volcanic depths' },
+                      { name: 'Balon', description: 'of the Earth, growing Grivoss from the fertile soil' }
                     ].map((elementalist) => (
-                      <div key={elementalist.name} className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30">
+                      <div 
+                        key={elementalist.name}
+                        onClick={() => setSelectedElementalist({ 
+                          name: elementalist.name, 
+                          image: `/tour/${elementalist.name.toLowerCase()}1.png` 
+                        })}
+                        className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors"
+                      >
                         <h5 className="font-heading text-purple-900 dark:text-purple-100">{elementalist.name}</h5>
                         <p className="text-sm text-purple-800 dark:text-purple-200">{elementalist.description}</p>
+                        <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see the Elementalist</p>
                       </div>
                     ))}
                   </div>

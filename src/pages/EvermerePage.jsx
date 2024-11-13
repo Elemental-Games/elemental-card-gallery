@@ -1,5 +1,4 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
 import { Card } from "@/components/ui/card";
 
 const EvermerePage = () => {
@@ -12,7 +11,7 @@ const EvermerePage = () => {
           alt="Evermere Kingdom" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Evermere: The Central Kingdom</h1>
           <p className="text-xl md:text-2xl font-heading text-white italic">Where All Elements Unite</p>
         </div>
@@ -27,50 +26,7 @@ const EvermerePage = () => {
       </div>
 
       <div className="container mx-auto py-8 space-y-8">
-        {/* The Heart of Evermere */}
-        <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
-          <h2 className="text-2xl font-heading mb-4 text-yellow-400">The Heart of Evermere</h2>
-          <p className="text-lg">
-            At the center of Kinbrold lies Evermere, a testament to the harmony of all elements. 
-            Here, elementalists from every kingdom gather to share knowledge and maintain the delicate balance of power.
-          </p>
-        </Card>
-
-        {/* Innovation and Progress */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
-            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Innovation Hub</h2>
-            <p className="text-lg">
-              Evermere stands as the pinnacle of magical advancement, where scholars and practitioners 
-              work together to push the boundaries of elemental mastery. The kingdom's innovative spirit 
-              drives progress throughout all of Kinbrold.
-            </p>
-          </Card>
-          <img 
-            src="/kingdoms/evermere_innovation.png" 
-            alt="Innovation in Evermere" 
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-          />
-        </div>
-
-        {/* Training and Wisdom */}
-        <div className="grid md:grid-cols-2 gap-6">
-          <img 
-            src="/kingdoms/evermere_training.png" 
-            alt="Training Grounds" 
-            className="w-full h-full object-cover rounded-lg shadow-xl"
-          />
-          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
-            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training Grounds</h2>
-            <p className="text-lg">
-              The training grounds of Evermere are where elementalists perfect their craft, learning to 
-              harness the power of multiple elements in harmony. These sacred spaces have witnessed countless 
-              breakthroughs in elemental mastery.
-            </p>
-          </Card>
-        </div>
-
-        {/* Daily Life and Culture */}
+        {/* Life in Evermere */}
         <div className="grid md:grid-cols-2 gap-6">
           <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Life in Evermere</h2>
@@ -83,6 +39,40 @@ const EvermerePage = () => {
           <img 
             src="/kingdoms/evermere_life.png" 
             alt="Daily Life" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Innovation Hub */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <img 
+            src="/kingdoms/evermere_innovation.png" 
+            alt="Innovation in Evermere" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Innovation Hub</h2>
+            <p className="text-lg">
+              Evermere stands as the pinnacle of magical advancement, where scholars and practitioners 
+              work together to push the boundaries of elemental mastery. The kingdom's innovative spirit 
+              drives progress throughout all of Kinbrold.
+            </p>
+          </Card>
+        </div>
+
+        {/* Training and Wisdom */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training Grounds</h2>
+            <p className="text-lg">
+              The training grounds of Evermere are where elementalists perfect their craft, learning to 
+              harness the power of multiple elements in harmony. These sacred spaces have witnessed countless 
+              breakthroughs in elemental mastery.
+            </p>
+          </Card>
+          <img 
+            src="/kingdoms/evermere_training.png" 
+            alt="Training Grounds" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
         </div>

@@ -29,7 +29,7 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
                     >
                       <h5 className="font-heading text-lg text-purple-900 dark:text-purple-100">{dragon.name}</h5>
                       <p className="text-sm text-purple-800 dark:text-purple-200">{dragon.description}</p>
-                      <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see the dragon</p>
+                      <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see {dragon.name}</p>
                     </div>
                   ))}
                 </div>
@@ -79,7 +79,7 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
                       >
                         <h5 className="font-heading text-purple-900 dark:text-purple-100">{elementalist.name}</h5>
                         <p className="text-sm text-purple-800 dark:text-purple-200">{elementalist.description}</p>
-                        <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see the Elementalist</p>
+                        <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see {elementalist.name}</p>
                       </div>
                     ))}
                   </div>

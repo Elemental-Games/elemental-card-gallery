@@ -13,21 +13,59 @@ const GrivossPage = () => {
         <meta property="og:type" content="article" />
         <link rel="canonical" href="https://elementalgames.gg/kinbrold/grivoss" />
       </Helmet>
-      <div className="container mx-auto p-8">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Grivoss</h1>
-        <p className="mb-4">
-          Grivoss is the Earth Kingdom of Kinbrold, a land of towering mountains and deep caves. It is home to the powerful earth elementals who thrive in this rugged terrain. Journey through Grivoss to discover its rich lore and the elementals that inhabit it.
-        </p>
-        <h2 className="text-2xl font-semibold mt-8">Key Locations</h2>
-        <ul className="list-disc list-inside">
-          <li>The Great Stone Fortress</li>
-          <li>Emerald Caves</li>
-          <li>Geyser Fields</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mt-8">Elemental Masters</h2>
-        <p>
-          In Grivoss, the Earth Elementals are masters of defense and resilience. They protect their kingdom with unwavering strength, making it a challenging place for intruders.
-        </p>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-6">Welcome to Grivoss</h1>
+        
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">The Mountain's Heart</h2>
+          <p className="mb-4">
+            Grivoss, the Earth Kingdom of Kinbrold, stands as a testament to strength and endurance. Its towering 
+            mountains and deep caverns are home to the most powerful earth elementals, who shape the very land 
+            itself with their ancient magic.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Key Locations</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-medium mb-2">The Great Stone Fortress</h3>
+              <p>An impenetrable stronghold carved directly into the mountain face.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">Emerald Caves</h3>
+              <p>A vast network of crystalline caverns that glow with natural earth energy.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">The Training Grounds</h3>
+              <p>Where earth elementalists hone their powers and learn to command the very mountains.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">Geyser Fields</h3>
+              <p>Natural hot springs that provide healing and rejuvenation to the kingdom's inhabitants.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Culture & Traditions</h2>
+          <p className="mb-4">
+            The people of Grivoss value strength, resilience, and tradition above all else. Their architecture 
+            reflects their connection to the earth, with buildings carved directly into the mountainsides. The 
+            kingdom's warriors are known throughout Kinbrold for their unwavering determination and powerful 
+            earth-based abilities.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Earth Elementals</h2>
+          <p>
+            In Grivoss, the Earth Elementals are masters of defense and resilience. They protect their kingdom 
+            with unwavering strength, making it one of the most secure realms in all of Kinbrold. Their connection 
+            to the earth allows them to perform incredible feats of power, from raising mountains to creating 
+            impenetrable barriers of stone.
+          </p>
+        </section>
       </div>
     </>
   );

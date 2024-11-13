@@ -13,19 +13,56 @@ const EvermerePage = () => {
         <meta property="og:type" content="article" />
         <link rel="canonical" href="https://elementalgames.gg/kinbrold/evermere" />
       </Helmet>
-      <div className="container mx-auto px-4 py-16 text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Evermere</h1>
-        <p className="text-lg mb-8">The central kingdom where all elemental forces converge.</p>
-        <img src="/images/evermere.png" alt="Evermere" className="mx-auto mb-8" />
-        <h2 className="text-2xl font-semibold mb-2">History</h2>
-        <p className="mb-4">Evermere is known for its harmonious blend of all elemental powers. It serves as the heart of Kinbrold.</p>
-        <h2 className="text-2xl font-semibold mb-2">Key Landmarks</h2>
-        <ul className="list-disc list-inside mb-4">
-          <li>The Crystal Spire</li>
-          <li>Elemental Confluence</li>
-          <li>The Great Grove</li>
-        </ul>
-        <p>Join us in exploring everything Evermere has to offer!</p>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-6">Welcome to Evermere</h1>
+        
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">The Heart of Kinbrold</h2>
+          <p className="mb-4">
+            Evermere stands as the central kingdom of Kinbrold, where all elemental forces converge in perfect harmony. 
+            As the seat of balance and unity, it serves as a meeting ground for elementalists from all corners of the realm.
+          </p>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Notable Landmarks</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <h3 className="text-xl font-medium mb-2">The Crystal Spire</h3>
+              <p>A towering structure of pure crystal that channels and amplifies elemental energies.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">The Great Grove</h3>
+              <p>A sacred garden where all elements coexist, creating unique hybrid flora.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">Elemental Confluence</h3>
+              <p>The central plaza where the energies of all kingdoms meet and mix.</p>
+            </div>
+            <div>
+              <h3 className="text-xl font-medium mb-2">The Academy</h3>
+              <p>Where young elementalists learn to master their powers and understand the balance of all elements.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-8">
+          <h2 className="text-2xl font-semibold mb-4">Culture & Society</h2>
+          <p className="mb-4">
+            Evermere's society is built on principles of harmony and balance. Its citizens celebrate the unity of elements 
+            through various festivals and ceremonies throughout the year. The kingdom serves as a neutral ground for 
+            diplomatic relations between all other realms.
+          </p>
+        </section>
+
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">Role in Elemental Masters</h2>
+          <p>
+            As the central kingdom, Evermere plays a crucial role in maintaining peace and balance among all elemental 
+            kingdoms. It's here where the most powerful combinations of elemental magic are studied and mastered, 
+            making it a key location in the world of Elemental Masters.
+          </p>
+        </section>
       </div>
     </>
   );

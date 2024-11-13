@@ -112,14 +112,14 @@ const CardGalleryPage = () => {
             <Card className="p-4 cursor-pointer">
               <img 
                 src={`/images/cards/${card.id}.webp`}
-                alt={getCardName(card)} 
+                alt={card.name} 
                 className="w-full h-48 object-contain mb-2"
                 onError={(e) => {
                   e.target.onerror = null;
                   e.target.src = `/images/cards/${card.id}.png`;
                 }}
               />
-              <h3 className="font-semibold text-lg">{getCardName(card)}</h3>
+              <h3 className="font-semibold text-lg">{card.name}</h3>
               <p className="text-sm text-gray-600">
                 {card.element} | {card.type} | {
                   card.rarity === 'C' ? 'Common' :
@@ -130,9 +130,9 @@ const CardGalleryPage = () => {
                   card.rarity
                 }
               </p>
-              {card.type === 'Creature' && card.stats && (
+              {card.type === 'Creature' && (
                 <p className="text-sm text-gray-600">
-                  STR: {card.stats.strength} | AGI: {card.stats.agility}
+                  STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
                 </p>
               )}
             </Card>

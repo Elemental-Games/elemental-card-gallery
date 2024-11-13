@@ -17,7 +17,6 @@ const CardGalleryPage = () => {
   useEffect(() => {
     const fetchCards = async () => {
       try {
-        // Updated path to fetch from the correct location
         const response = await fetch('/data/cards.json');
         const data = await response.json();
         setCards(data.cards);
@@ -32,7 +31,8 @@ const CardGalleryPage = () => {
 
   useEffect(() => {
     const filtered = cards.filter(card => {
-      const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const cardName = String(card.name).toLowerCase();
+      const nameMatch = cardName.includes(searchTerm.toLowerCase());
       const elementMatch = element === 'All Elements' || card.element === element;
       const typeMatch = type === 'all' || card.type === type;
       const rarityMatch = rarity === 'all' ||
@@ -103,12 +103,12 @@ const CardGalleryPage = () => {
           >
             <Card className="p-4 cursor-pointer">
               <img 
-                src={card.image || '/placeholder.svg'}
+                src={`/images/cards/${card.id}.webp`}
                 alt={card.name} 
                 className="w-full h-48 object-contain mb-2"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = '/placeholder.svg';
+                  e.target.src = `/images/cards/${card.id}.png`;
                 }}
               />
               <h3 className="font-semibold text-lg">{card.name}</h3>

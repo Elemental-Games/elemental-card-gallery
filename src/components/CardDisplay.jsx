@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { AlertCircle } from "lucide-react";
+import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   const containerClasses = {
     default: "w-full aspect-[1500/2100] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
@@ -23,16 +26,33 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
     }
   };
 
+  const handleImageError = (e) => {
+    e.target.onerror = null; // Prevent infinite loop
+    if (e.target.src.includes('.webp')) {
+      // Try PNG if WebP fails
+      e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
+    } else {
+      // If both WebP and PNG fail, show placeholder
+      setImageError(true);
+    }
+  };
+
+  if (imageError) {
+    return (
+      <Alert variant="destructive" className="w-full h-full flex items-center justify-center">
+        <AlertCircle className="h-4 w-4" />
+        <AlertDescription>Failed to load card image</AlertDescription>
+      </Alert>
+    );
+  }
+
   const cardContent = (
     <>
       <img 
         src={`${window.location.origin}/images/cards/${card.id}.webp`} 
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
-        onError={(e) => {
-          e.target.onerror = null;
-          e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
-        }}
+        onError={handleImageError}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
@@ -72,6 +92,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
               src={`${window.location.origin}/Card_Back.png`}
               alt="Card Back"
               className="w-full h-full object-cover"
+              onError={handleImageError}
             />
           </motion.div>
           <div 

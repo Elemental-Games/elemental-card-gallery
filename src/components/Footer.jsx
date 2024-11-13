@@ -3,7 +3,7 @@ import { X, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-8">
+    <footer className="bg-purple-800 text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

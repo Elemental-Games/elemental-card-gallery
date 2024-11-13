@@ -15,14 +15,14 @@ const Header = () => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg" />
       </Helmet>
-      <nav className="bg-darkPurple p-4">
+      <nav className="bg-purple-800 p-4">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
               <img 
                 src="/Games_Logo.png" 
                 alt="Elemental Masters Logo" 
-                className="h-16 w-16 mr-2"
+                className="h-20 w-20 mr-2"
               />
               <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
                 Elemental Masters

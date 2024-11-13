@@ -1,8 +1,10 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import PageTransition from '../components/PageTransition';
 
 const ZalosPage = () => {
   return (
+    <PageTransition type="zalos">
     <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
       {/* Hero Section */}
       <section className="relative h-[50vh] overflow-hidden">
@@ -150,6 +152,7 @@ const ZalosPage = () => {
         </Card>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

@@ -1,9 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import PageTransition from '../components/PageTransition';
 
 const EvermerePage = () => {
   return (
-    <>
+    <PageTransition type="evermere">
       <Helmet>
         <title>Evermere - The Central Kingdom | Elemental Masters TCG</title>
         <meta name="description" content="Discover Evermere, the central kingdom of Kinbrold where all elements converge. Learn about its rich history, notable landmarks, and role in the Elemental Masters universe." />
@@ -27,7 +28,7 @@ const EvermerePage = () => {
         </ul>
         <p>Join us in exploring everything Evermere has to offer!</p>
       </div>
-    </>
+    </PageTransition>
   );
 };
 

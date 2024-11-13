@@ -3,7 +3,7 @@ import { X, MessageCircle } from 'lucide-react';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-r from-purple-900 to-indigo-900 text-white py-8">
+    <footer className="bg-gradient-to-r from-purple-900/90 to-indigo-900/90 backdrop-blur-sm text-white py-8">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
@@ -35,10 +35,10 @@ const Footer = () => {
             <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
               <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <X />
+                <X size={24} />
               </a>
               <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
-                <MessageCircle />
+                <MessageCircle size={24} />
               </a>
             </div>
           </div>

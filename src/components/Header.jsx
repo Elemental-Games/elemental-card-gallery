@@ -15,7 +15,7 @@ const Header = () => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg" />
       </Helmet>
-      <nav className="bg-darkPurple p-4">
+      <nav className="bg-darkPurple/90 backdrop-blur-sm p-4 sticky top-0 z-50">
         <div className="container mx-auto flex justify-between items-center">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">

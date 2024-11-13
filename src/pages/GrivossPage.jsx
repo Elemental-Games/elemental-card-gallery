@@ -1,73 +1,116 @@
 import React from 'react';
-import { Helmet } from 'react-helmet-async';
+import { Card } from "@/components/ui/card";
 
 const GrivossPage = () => {
   return (
-    <>
-      <Helmet>
-        <title>Grivoss - The Earth Kingdom | Elemental Masters TCG</title>
-        <meta name="description" content="Explore Grivoss, the mighty Earth Kingdom of Kinbrold. Discover its mountains, caves, and the powerful earth elementals that call this realm home." />
-        <meta name="keywords" content="Grivoss, Earth Kingdom, Elemental Masters, earth elementals, TCG lore, fantasy kingdom" />
-        <meta property="og:title" content="Grivoss - The Earth Kingdom | Elemental Masters TCG" />
-        <meta property="og:description" content="Journey through Grivoss, where earth elementals shape the very mountains. Experience the might of the Earth Kingdom in Elemental Masters." />
-        <meta property="og:type" content="article" />
-        <link rel="canonical" href="https://elementalgames.gg/kinbrold/grivoss" />
-      </Helmet>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6">Welcome to Grivoss</h1>
-        
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">The Mountain's Heart</h2>
-          <p className="mb-4">
-            Grivoss, the Earth Kingdom of Kinbrold, stands as a testament to strength and endurance. Its towering 
-            mountains and deep caverns are home to the most powerful earth elementals, who shape the very land 
-            itself with their ancient magic.
-          </p>
-        </section>
+    <div className="min-h-screen bg-gradient-to-b from-green-800/10 to-green-800/30">
+      {/* Hero Section */}
+      <section className="relative h-[50vh] overflow-hidden">
+        <img 
+          src="https://images.unsplash.com/photo-1472396961693-142e6e269027"
+          alt="Mountains of Grivoss" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+          <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Grivoss: The Earth Kingdom</h1>
+          <p className="text-xl md:text-2xl font-heading text-white italic">Where Stone Meets Spirit</p>
+        </div>
+      </section>
 
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Key Locations</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <h3 className="text-xl font-medium mb-2">The Great Stone Fortress</h3>
-              <p>An impenetrable stronghold carved directly into the mountain face.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium mb-2">Emerald Caves</h3>
-              <p>A vast network of crystalline caverns that glow with natural earth energy.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium mb-2">The Training Grounds</h3>
-              <p>Where earth elementalists hone their powers and learn to command the very mountains.</p>
-            </div>
-            <div>
-              <h3 className="text-xl font-medium mb-2">Geyser Fields</h3>
-              <p>Natural hot springs that provide healing and rejuvenation to the kingdom's inhabitants.</p>
-            </div>
-          </div>
-        </section>
-
-        <section className="mb-8">
-          <h2 className="text-2xl font-semibold mb-4">Culture & Traditions</h2>
-          <p className="mb-4">
-            The people of Grivoss value strength, resilience, and tradition above all else. Their architecture 
-            reflects their connection to the earth, with buildings carved directly into the mountainsides. The 
-            kingdom's warriors are known throughout Kinbrold for their unwavering determination and powerful 
-            earth-based abilities.
-          </p>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-semibold mb-4">Earth Elementals</h2>
-          <p>
-            In Grivoss, the Earth Elementals are masters of defense and resilience. They protect their kingdom 
-            with unwavering strength, making it one of the most secure realms in all of Kinbrold. Their connection 
-            to the earth allows them to perform incredible feats of power, from raising mountains to creating 
-            impenetrable barriers of stone.
-          </p>
-        </section>
+      {/* Welcome Statement */}
+      <div className="container mx-auto py-8 text-center">
+        <h2 className="text-xl text-green-200">
+          <span className="font-bold">Welcome to Grivoss,</span> where the very mountains pulse with ancient power. Under the guidance of Terra the Earth Elementalist, 
+          our kingdom stands as an unshakeable testament to strength and resilience.
+        </h2>
       </div>
-    </>
+
+      <div className="container mx-auto py-8 space-y-8">
+        {/* Mountain Heritage */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="p-6 border border-green-300/50 bg-green-800/10 text-green-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Our Mountain Heritage</h2>
+            <p className="text-lg">
+              When Terra first claimed these peaks, they were considered impenetrable. Through mastery of earth magic 
+              and unwavering determination, we carved our civilization into the very heart of the mountains, creating 
+              a kingdom as enduring as the stone itself.
+            </p>
+          </Card>
+          <img 
+            src="https://images.unsplash.com/photo-1493962853295-0fd70327578a"
+            alt="Mountain Peaks of Grivoss" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Life in the Mountains */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <img 
+            src="https://images.unsplash.com/photo-1438565434616-3ef039228b15"
+            alt="Daily Life in Grivoss" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+          <Card className="p-6 border border-green-300/50 bg-green-800/10 text-green-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Life in the Mountains</h2>
+            <p className="text-lg">
+              Our cities are marvels of engineering, with grand halls carved directly into the mountainsides. The famous 
+              Crystal Caverns provide natural lighting throughout our underground networks, while our terraced gardens 
+              demonstrate our mastery over stone and soil alike.
+            </p>
+          </Card>
+        </div>
+
+        {/* Training and Innovation */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="p-6 border border-green-300/50 bg-green-800/10 text-green-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training the Next Generation</h2>
+            <p className="text-lg">
+              Young earth elementals begin their training in our sacred stone circles, learning to feel the pulse of the 
+              earth beneath their feet. Only those who understand that true strength comes from unwavering patience and 
+              dedication can master our element.
+            </p>
+          </Card>
+          <img 
+            src="https://images.unsplash.com/photo-1485833077593-4278bba3f11f"
+            alt="Training Grounds" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Relations and Notable Locations */}
+        <Card className="p-6 border border-green-300/50 bg-green-800/10 text-green-100">
+          <h2 className="text-2xl font-heading mb-4 text-yellow-400">Relations with Other Kingdoms</h2>
+          <p className="text-lg mb-6">
+            Our mastery of metallurgy and stone-crafting makes us invaluable to all of Kinbrold. Our trade in precious 
+            gems and metals flows as steadily as the underground rivers that sustain our realm.
+          </p>
+
+          <h2 className="text-2xl font-heading mb-4 text-yellow-400">Notable Locations</h2>
+          <div className="grid md:grid-cols-2 gap-6">
+            <ul className="list-disc list-inside text-lg space-y-2">
+              <li>The Stone Academy: Where earth elementals master their craft</li>
+              <li>The Crystal Caverns: Our natural light source</li>
+              <li>Terra's Peak: The seat of our kingdom's leadership</li>
+              <li>The Mountain Forge: Where earth-aspected cards are crafted</li>
+              <li>The Emerald Markets: Our renowned trading district</li>
+            </ul>
+            <img 
+              src="https://images.unsplash.com/photo-1466721591366-2d5fba72006d"
+              alt="Notable Locations" 
+              className="w-full h-full object-cover rounded-lg shadow-xl"
+            />
+          </div>
+
+          <div className="mt-8 p-6 bg-green-800/20 rounded-lg border border-green-300/50">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Wisdom of the Mountains</h2>
+            <blockquote className="text-lg italic">
+              "Like the mountains themselves, we stand unmoved by the storms of time. In Grivoss, we don't just master earth – we become one with its eternal strength."
+            </blockquote>
+            <p className="text-right mt-2 font-heading text-yellow-400">- Terra, First Earth Elementalist</p>
+          </div>
+        </Card>
+      </div>
+    </div>
   );
 };
 

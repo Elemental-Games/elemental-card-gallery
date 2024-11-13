@@ -36,7 +36,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
-          <h3 className="text-sm font-semibold">{card.name}</h3>
+          <h3 className="text-sm font-semibold">{typeof card.name === 'number' ? `Card ${card.name}` : card.name}</h3>
           <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
         </div>
       )}

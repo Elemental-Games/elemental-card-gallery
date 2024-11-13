@@ -1,0 +1,321 @@
+{
+  "cards": [
+    {
+      "cardNumber": 8,
+      "id": "aqua-dart",
+      "name": 7,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Swift as the flowing stream, I pierce through defenses, leaving no trace behind."
+    },
+    {
+      "cardNumber": 9,
+      "id": "tide-chaser",
+      "name": 8,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "With the fury of crashing waves, I strike, a torrential force of nature."
+    },
+    {
+      "cardNumber": 10,
+      "id": "riptide-revenant",
+      "name": 9,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Ravaging through the currents, I am the embodiment of fluidity and speed."
+    },
+    {
+      "cardNumber": 11,
+      "id": "misty-mutt",
+      "name": 10,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Roaming the misty waters, I bring peace to those in need."
+    },
+    {
+      "cardNumber": 12,
+      "id": "lagoon-lurker",
+      "name": 11,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Unleashing the chaotic fury of the whirlpool, I engulf all who dare to challenge me."
+    },
+    {
+      "cardNumber": 13,
+      "id": "vortex-mauler",
+      "name": 12,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "In the heart of the tempest, I become the swirling chaos, tearing apart my foes."
+    },
+    {
+      "cardNumber": 14,
+      "id": "wave-guarder",
+      "name": 13,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "quote": "Ever watchful over the ocean's depths, I protect the serenity within its tumultuous nature."
+    },
+    {
+      "cardNumber": 36,
+      "id": "river-sprite",
+      "name": 35,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "ability": {
+        "name": "Essence Well",
+        "description": "When this card inflicts battle damage to a creature, generate 1 Water Essence."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 37,
+      "id": "aqua-shade",
+      "name": 36,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Shadow Form",
+        "description": "When this card is summoned, this creature is cannot be attacked or targeted by abilities until the beginning of your next turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 38,
+      "id": "sea-serpent",
+      "name": 37,
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Water",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Essence Plunder",
+        "description": "When this card destroys another creature by battle, steal 1 essence from your opponent."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 39,
+      "id": "naiad-elf",
+      "name": 38,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Tidal Resurgence",
+        "description": "When this card is destroyed by battle, summon 1 Water creature that costs 0 essence from your deck (excludingNaiad Elf)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 40,
+      "id": "deepseer",
+      "name": 39,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Ocean's Gift",
+        "description": "Once per turn, you may look at the bottom 2 cards of your deck. Send 1 card to the graveyard and put the other card on top of your deck."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 41,
+      "id": "oceanus",
+      "name": 40,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Sea Strike",
+        "description": "This creature gains 45 Strength when attacking blocking creatures."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      }
+    }
+  ]
+}

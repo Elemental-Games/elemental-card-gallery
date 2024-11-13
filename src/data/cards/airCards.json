@@ -1,0 +1,391 @@
+{
+  "cards": [
+    {
+      "cardNumber": 1,
+      "id": "cloud-sprinter",
+      "name": 0,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 75
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Across the celestial canvas, I race with the winds, leaving clouds in my wake.",
+      "synergies": [
+        {
+          "card": {
+            "id": "4",
+            "name": "Wind Rider"
+          },
+          "rating": "S",
+          "color": "text-green-500"
+        },
+        {
+          "card": {
+            "id": "7",
+            "name": "Cloud Warden"
+          },
+          "rating": "B",
+          "color": "text-yellow-500"
+        }
+      ],
+      "counters": [
+        {
+          "card": {
+            "id": "25",
+            "name": "Swiftreaver"
+          },
+          "rating": "S",
+          "color": "text-green-500"
+        },
+        {
+          "card": {
+            "id": "26",
+            "name": "Earth Dweller"
+          },
+          "rating": "B",
+          "color": "text-yellow-500"
+        }
+      ],
+      "news": [
+        {
+          "title": "Air Structure Deck",
+          "date": "2024-09-27",
+          "description": "Check out our latest video showcasing the Air Structure Deck in action!",
+          "link": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+        }
+      ]
+    },
+    {
+      "cardNumber": 2,
+      "id": "breeze-imp",
+      "name": 1,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Born of zephyrs and mischief, I ride the gentle currents."
+    },
+    {
+      "cardNumber": 3,
+      "id": "gust-griffin",
+      "name": 2,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "With wings of wind, I soar through the tempest, untamed and fierce."
+    },
+    {
+      "cardNumber": 4,
+      "id": "wind-rider",
+      "name": 3,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "In harmony with the breezes, we embrace freedom, swift and untethered."
+    },
+    {
+      "cardNumber": 5,
+      "id": "flying-dwarf",
+      "name": 4,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Defying gravity's grasp, I take to the skies, a dwarf untethered."
+    },
+    {
+      "cardNumber": 6,
+      "id": "stormreaver",
+      "name": 5,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "With thunderous might, I command the storm, a force to be reckoned with."
+    },
+    {
+      "cardNumber": 7,
+      "id": "cloud-warden",
+      "name": 6,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "quote": "Amidst the billowing mists, I stand vigilant, protecting the secrets of the skies."
+    },
+    {
+      "cardNumber": 29,
+      "id": "wind-sprite",
+      "name": 28,
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Air",
+      "stats": {
+        "strength": 60,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Zephyr Dash",
+        "description": "This creature does not use an action while attacking. This creature can only attack once per turn."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 30,
+      "id": "aerofeet",
+      "name": 29,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "ability": {
+        "name": "Whirlwind Shift",
+        "description": "Once per turn, you can switch the position of 1 creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 31,
+      "id": "skyborne-slicer",
+      "name": 30,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "ability": {
+        "name": "Swift Gust",
+        "description": "When this card is summoned, you may choose 1 creature on the field (that costs 0 essence to summon) and return it to the owner's hand."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 32,
+      "id": "aero-elf",
+      "name": 31,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "ability": {
+        "name": "Aerial Escape",
+        "description": "When this card is destroyed by battle, you can bring one Air creature from your graveyard into your hand (excluding Aero Elf)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 33,
+      "id": "storm-ghost",
+      "name": 32,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "ability": {
+        "name": "Hurricane Blow",
+        "description": "While attacking, gain 30 Strength."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 34,
+      "id": "wind-troll",
+      "name": 33,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "ability": {
+        "name": "Wind Rush",
+        "description": "While attacking, this creature may target your opponent directly (ignoring opposing shields)."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 35,
+      "id": "cyclone-sentinel",
+      "name": 34,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Air",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "ability": {
+        "name": "Cyclone Barrier",
+        "description": "Once per turn, when this creature is targeted by an attack or effect, you may change the target to another Air creature you control."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      }
+    }
+  ]
+}

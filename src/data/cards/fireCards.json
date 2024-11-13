@@ -1,0 +1,165 @@
+{
+  "cards": [
+    {
+      "cardNumber": 15,
+      "id": "ember-flicker",
+      "name": 14,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "From the flickering embers, I rise, a spark of untamed fire."
+    },
+    {
+      "cardNumber": 16,
+      "id": "inferno-serpent",
+      "name": 15,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "With flame-like fangs, I burn, scorching the opposition in my wake."
+    },
+    {
+      "cardNumber": 17,
+      "id": "swiftfire-wyvern",
+      "name": 16,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Like a blazing comet, I streak across the heavens, leaving trails of fire behind."
+    },
+    {
+      "cardNumber": 18,
+      "id": "sizzle-snout",
+      "name": 17,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Forged in the heart of inferno, my snout burns all that stands in my way."
+    },
+    {
+      "cardNumber": 19,
+      "id": "firestorm-brute",
+      "name": 18,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Unleashing the fury of a raging inferno, I consume all in my path."
+    },
+    {
+      "cardNumber": 20,
+      "id": "flame-ravager",
+      "name": 19,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "Through scorching flames, I unleash devastation, leaving a trail of destruction behind."
+    },
+    {
+      "cardNumber": 21,
+      "id": "flame-guardian",
+      "name": 20,
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Fire",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "quote": "A shield of fire, I stand firm, warding off all who dare to approach."
+    }
+  ]
+}

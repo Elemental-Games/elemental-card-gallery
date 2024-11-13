@@ -1,0 +1,181 @@
+{
+  "cards": [
+    {
+      "cardNumber": 60,
+      "id": "zephos",
+      "name": 59,
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Air",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "quote": "The azure skies, a symbol of serenity and calm, yet harboring the potential for turbulent power."
+    },
+    {
+      "cardNumber": 77,
+      "id": "azura-the-water-tempest",
+      "name": 76,
+      "type": "Creature",
+      "rarity": "R",
+      "element": "Water",
+      "stats": {
+        "strength": 120,
+        "agility": 80
+      },
+      "ability": {
+        "name": "Wisdom Flow",
+        "description": "When this card is summoned, draw 2 cards."
+      },
+      "specialAbility": {
+        "name": "Beckoning Force",
+        "description": "You may normal summon 1 additional creature this turn.",
+        "cost": {
+          "amount": 3,
+          "element": "Water"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      }
+    },
+    {
+      "cardNumber": 89,
+      "id": "waves-endurance",
+      "name": 88,
+      "type": "Rune",
+      "rarity": "C",
+      "runeType": "Normal",
+      "effect": "Generate 3 Water Essence."
+    },
+    {
+      "cardNumber": 81,
+      "id": "viktor-the-fire-demon",
+      "name": 80,
+      "type": "Creature",
+      "rarity": "E",
+      "element": "Fire",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Flame Ascendance",
+        "description": "Once per turn, you can destroy one of your own creatures to increase this card's Strength and Agility each by 50 until the end of the turn."
+      },
+      "specialAbility": {
+        "name": "Fiery Rebirth",
+        "description": "Immediately after using Flame Ascendance, return the destroyed creature to the field.",
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 73,
+      "id": "nimbus-the-air-titan",
+      "name": 72,
+      "type": "Creature",
+      "rarity": "R",
+      "element": "Air",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
+      "ability": {
+        "name": "Storm Surge",
+        "description": "When this card is summoned, choose 1 creature, rune, or counter card on the opponent's side of the field and destroy it."
+      },
+      "specialAbility": {
+        "name": "Last Breathe",
+        "description": "Destroy 1 card on the opponent's side of the field.",
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      }
+    },
+    {
+      "cardNumber": 90,
+      "id": "essence-amplifier",
+      "name": 97,
+      "type": "Rune",
+      "rarity": "U",
+      "runeType": "Equipment",
+      "effect": "Equip this card to a creature. The equipped creature generates double their normal essence each turn."
+    },
+    {
+      "cardNumber": 79,
+      "id": "sigmus-the-fire-tempest",
+      "name": 79,
+      "type": "Creature",
+      "rarity": "R",
+      "element": "Fire",
+      "stats": {
+        "strength": 125,
+        "agility": 75
+      },
+      "ability": {
+        "name": "Heatwave",
+        "description": "When this card is summoned, deal 25 damage to all creatures and shields your opponent controls."
+      },
+      "specialAbility": {
+        "name": "Solar Flare",
+        "description": "Deal 25 damage to each creature and shield on the field.",
+        "cost": {
+          "amount": 3,
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      }
+    }
+  ]
+}

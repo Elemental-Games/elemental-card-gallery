@@ -1,0 +1,283 @@
+{
+  "cards": [
+    {
+      "cardNumber": 22,
+      "id": "terra-sprinter",
+      "name": "Terra Sprinter",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "With earth beneath my feet, I sprint through the land, unstoppable and swift."
+    },
+    {
+      "cardNumber": 23,
+      "id": "sandy-scuttler",
+      "name": "Sandy Scuttler",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Within the shifting sands, I navigate effortlessly, striking with precision."
+    },
+    {
+      "cardNumber": 24,
+      "id": "swiftreaver",
+      "name": "Swiftreaver",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Like the rolling sands, I burrow beneath my foes, leaving no time to react."
+    },
+    {
+      "cardNumber": 25,
+      "id": "earth-dweller",
+      "name": "Earth Dweller",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "A master of earth, I engage in a dance of strength and agility, toppling my adversaries."
+    },
+    {
+      "cardNumber": 26,
+      "id": "geo-monkey",
+      "name": "Geo Monkey",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "With unstoppable force, I shatter the mountains, reducing them to rubble."
+    },
+    {
+      "cardNumber": 27,
+      "id": "mountain-crusher",
+      "name": "Mountain Crusher",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Unyielding and immovable, I am the epitome of strength."
+    },
+    {
+      "cardNumber": 28,
+      "id": "stone-behemoth",
+      "name": "Stone Behemoth",
+      "type": "Creature",
+      "rarity": "C",
+      "element": "Earth",
+      "stats": {
+        "strength": 120,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "An unbreakable fortress, I withstand all assaults, offering steadfast protection."
+    },
+    {
+      "cardNumber": 56,
+      "id": "terra-warden",
+      "name": "Terra Warden",
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 20
+      },
+      "ability": {
+        "name": "Return to Kinbrold",
+        "description": "When this creature is destroyed, gain 1 Earth essence for every Earth creature on the field."
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      }
+    },
+    {
+      "cardNumber": 57,
+      "id": "cyclonos",
+      "name": "Cyclonos",
+      "type": "Creature",
+      "rarity": "R",
+      "element": "Earth",
+      "stats": {
+        "strength": 110,
+        "agility": 115
+      },
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "quote": "Unleashed from the heart of the tempest, I take flight."
+    },
+    {
+      "cardNumber": 58,
+      "id": "avis",
+      "name": "Avis",
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Earth",
+      "stats": {
+        "strength": 120,
+        "agility": 105
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "With wings of freedom, I soar through the skies, swift and untethered, leaving a trail of wonder in my wake."
+    },
+    {
+      "cardNumber": 59,
+      "id": "vayute",
+      "name": "Vayute",
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Earth",
+      "stats": {
+        "strength": 130,
+        "agility": 95
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "I bring both tranquility and force, a gentle caress or a mighty tempest, guided by the winds."
+    },
+    {
+      "cardNumber": 60,
+      "id": "zephos",
+      "name": "Zephos",
+      "type": "Creature",
+      "rarity": "U",
+      "element": "Earth",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "quote": "The azure skies, a symbol of serenity and calm, yet harboring the potential for turbulent power."
+    }
+  ]
+}

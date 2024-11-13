@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { useToast } from "@/components/ui/use-toast";
 
 const Card = ({ card }) => {
   return (
@@ -21,7 +22,7 @@ const Card = ({ card }) => {
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
-          <h3 className="text-sm font-semibold">{card.name}</h3>
+          <h3 className="text-sm font-semibold">{typeof card.name === 'number' ? `Card ${card.name}` : card.name}</h3>
           <p className="text-xs">
             {card.element} | {card.type} | {
               card.rarity === 'C' ? 'Common' :
@@ -32,9 +33,9 @@ const Card = ({ card }) => {
               card.rarity
             }
           </p>
-          {card.type === 'Creature' && card.stats && (
+          {card.type === 'Creature' && (
             <p className="text-xs">
-              STR: {card.stats.strength} | AGI: {card.stats.agility}
+              STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
             </p>
           )}
         </div>
@@ -46,42 +47,62 @@ const Card = ({ card }) => {
 const CardGallery = () => {
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const { toast } = useToast();
 
   useEffect(() => {
     const loadCards = async () => {
       try {
-        const response = await fetch('/data/cards.json');
-        if (!response.ok) {
-          throw new Error('Failed to fetch card data');
-        }
-        const data = await response.json();
-        setCards(data.cards);
+        const elements = ['air', 'water', 'fire', 'earth', 'special'];
+        const allCards = [];
+
+        await Promise.all(
+          elements.map(async (element) => {
+            const response = await fetch(`/data/cards/${element}Cards.json`);
+            if (!response.ok) {
+              throw new Error(`Failed to fetch ${element} cards`);
+            }
+            const data = await response.json();
+            allCards.push(...data.cards);
+          })
+        );
+
+        setCards(allCards.sort((a, b) => a.cardNumber - b.cardNumber));
+        setLoading(false);
       } catch (error) {
         console.error('Error loading cards:', error);
         setError('Error loading cards. Please try again later.');
+        setLoading(false);
+        toast({
+          variant: "destructive",
+          title: "Error loading cards",
+          description: "Please try again later.",
+        });
       }
     };
 
     loadCards();
-  }, []);
+  }, [toast]);
+
+  if (loading) {
+    return <div className="flex justify-center items-center min-h-[200px]">Loading cards...</div>;
+  }
+
+  if (error) {
+    return (
+      <Alert variant="destructive">
+        <AlertCircle className="h-4 w-4" />
+        <AlertTitle>Error</AlertTitle>
+        <AlertDescription>{error}</AlertDescription>
+      </Alert>
+    );
+  }
 
   return (
-    <div>
-      {error ? (
-        <Alert variant="destructive">
-          <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Error</AlertTitle>
-          <AlertDescription>{error}</AlertDescription>
-        </Alert>
-      ) : cards.length === 0 ? (
-        <div>Loading cards...</div>
-      ) : (
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-          {cards.map((card) => (
-            <Card key={card.id} card={card} />
-          ))}
-        </div>
-      )}
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      {cards.map((card) => (
+        <Card key={card.id} card={card} />
+      ))}
     </div>
   );
 };

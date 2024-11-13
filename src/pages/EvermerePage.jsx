@@ -1,113 +1,121 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Card } from "@/components/ui/card";
 
 const EvermerePage = () => {
   return (
-    <>
-      <Helmet>
-        <title>Evermere - The Central Kingdom | Elemental Masters TCG</title>
-        <meta name="description" content="Discover Evermere, the central kingdom of Kinbrold where all elements converge. Learn about its rich history, notable landmarks, and role in the Elemental Masters universe." />
-        <meta name="keywords" content="Evermere, Elemental Masters kingdom, central kingdom, TCG lore, fantasy world, trading card game" />
-        <meta property="og:title" content="Evermere - The Central Kingdom | Elemental Masters TCG" />
-        <meta property="og:description" content="Explore Evermere, where all elements unite in harmony. Uncover the mysteries of this pivotal kingdom in the Elemental Masters universe." />
-        <meta property="og:type" content="article" />
-        <link rel="canonical" href="https://elementalgames.gg/kinbrold/evermere" />
-      </Helmet>
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div>
-            <h1 className="text-4xl font-bold mb-6">Welcome to Evermere</h1>
-            <p className="text-lg mb-4">
-              Evermere stands as the central kingdom of Kinbrold, where all elemental forces converge in perfect harmony. 
-              As the seat of balance and unity, it serves as a meeting ground for elementalists from all corners of the realm.
+    <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
+      {/* Hero Section */}
+      <section className="relative h-[50vh] overflow-hidden">
+        <img 
+          src="/kingdoms/evermere_art.png" 
+          alt="Evermere Kingdom" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
+          <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Evermere: The Central Kingdom</h1>
+          <p className="text-xl md:text-2xl font-heading text-white italic">Where All Elements Unite</p>
+        </div>
+      </section>
+
+      {/* Welcome Statement */}
+      <div className="container mx-auto py-8 text-center">
+        <h2 className="text-xl text-purple-200">
+          <span className="font-bold">Welcome to Evermere,</span> where all elemental forces converge in perfect harmony. 
+          As the seat of balance and unity, it serves as a meeting ground for elementalists from all corners of the realm.
+        </h2>
+      </div>
+
+      <div className="container mx-auto py-8 space-y-8">
+        {/* The Heart of Evermere */}
+        <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+          <h2 className="text-2xl font-heading mb-4 text-yellow-400">The Heart of Evermere</h2>
+          <p className="text-lg">
+            At the center of Kinbrold lies Evermere, a testament to the harmony of all elements. 
+            Here, elementalists from every kingdom gather to share knowledge and maintain the delicate balance of power.
+          </p>
+        </Card>
+
+        {/* Innovation and Progress */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Innovation Hub</h2>
+            <p className="text-lg">
+              Evermere stands as the pinnacle of magical advancement, where scholars and practitioners 
+              work together to push the boundaries of elemental mastery. The kingdom's innovative spirit 
+              drives progress throughout all of Kinbrold.
             </p>
-          </div>
-          <div className="relative h-[300px] rounded-lg overflow-hidden">
-            <img 
-              src="/kingdoms/evermere_art.png" 
-              alt="Evermere Kingdom"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
+          </Card>
+          <img 
+            src="/kingdoms/evermere_innovation.png" 
+            alt="Innovation in Evermere" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-          <div className="relative h-[250px] rounded-lg overflow-hidden">
-            <img 
-              src="/kingdoms/evermere_heart.png" 
-              alt="The Heart of Evermere"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="text-white text-xl font-bold">The Heart</h3>
-              <p className="text-white/90">Where all elements unite in harmony</p>
-            </div>
-          </div>
-          <div className="relative h-[250px] rounded-lg overflow-hidden">
-            <img 
-              src="/kingdoms/evermere_innovation.png" 
-              alt="Innovation in Evermere"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="text-white text-xl font-bold">Innovation</h3>
-              <p className="text-white/90">Center of magical advancement</p>
-            </div>
-          </div>
-          <div className="relative h-[250px] rounded-lg overflow-hidden">
+        {/* Training and Wisdom */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <img 
+            src="/kingdoms/evermere_training.png" 
+            alt="Training Grounds" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Training Grounds</h2>
+            <p className="text-lg">
+              The training grounds of Evermere are where elementalists perfect their craft, learning to 
+              harness the power of multiple elements in harmony. These sacred spaces have witnessed countless 
+              breakthroughs in elemental mastery.
+            </p>
+          </Card>
+        </div>
+
+        {/* Daily Life and Culture */}
+        <div className="grid md:grid-cols-2 gap-6">
+          <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Life in Evermere</h2>
+            <p className="text-lg">
+              Daily life in Evermere is a vibrant tapestry of different cultures and practices. 
+              The streets buzz with the energy of multiple elements, while citizens from all kingdoms 
+              come together in celebration of their shared heritage.
+            </p>
+          </Card>
+          <img 
+            src="/kingdoms/evermere_life.png" 
+            alt="Daily Life" 
+            className="w-full h-full object-cover rounded-lg shadow-xl"
+          />
+        </div>
+
+        {/* Notable Locations */}
+        <Card className="p-6 border border-purple-300/50 bg-purple-800/10 text-purple-100">
+          <h2 className="text-2xl font-heading mb-4 text-yellow-400">Notable Locations</h2>
+          <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <ul className="list-disc list-inside text-lg space-y-2">
+              <li>The Convergence: Where all elemental energies meet</li>
+              <li>The Grand Library: Repository of elemental knowledge</li>
+              <li>The Unity Plaza: Center of diplomatic relations</li>
+              <li>The Elemental Academy: Where masters train disciples</li>
+              <li>The Harmony Gardens: A place of meditation and peace</li>
+            </ul>
             <img 
               src="/kingdoms/evermere_wisdom.png" 
-              alt="Wisdom of Evermere"
-              className="absolute inset-0 w-full h-full object-cover"
+              alt="Wisdom of Evermere" 
+              className="w-full h-full object-cover rounded-lg shadow-xl"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="text-white text-xl font-bold">Wisdom</h3>
-              <p className="text-white/90">Repository of ancient knowledge</p>
-            </div>
           </div>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          <div className="relative h-[300px] rounded-lg overflow-hidden">
-            <img 
-              src="/kingdoms/evermere_training.png" 
-              alt="Training Grounds"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="text-white text-2xl font-bold">Training Grounds</h3>
-              <p className="text-white/90">Where elementalists master their craft</p>
-            </div>
+          <div className="mt-8 p-6 bg-purple-800/20 rounded-lg border border-purple-300/50">
+            <h2 className="text-2xl font-heading mb-4 text-yellow-400">Words of Unity</h2>
+            <blockquote className="text-lg italic">
+              "In Evermere, we don't just study elements – we learn to weave them together in harmony, 
+              creating something greater than the sum of its parts."
+            </blockquote>
+            <p className="text-right mt-2 font-heading text-yellow-400">- The Council of Elements</p>
           </div>
-          <div className="relative h-[300px] rounded-lg overflow-hidden">
-            <img 
-              src="/kingdoms/evermere_life.png" 
-              alt="Daily Life"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent p-6 flex flex-col justify-end">
-              <h3 className="text-white text-2xl font-bold">Daily Life</h3>
-              <p className="text-white/90">The bustling heart of civilization</p>
-            </div>
-          </div>
-        </div>
-
-        <div className="prose max-w-none">
-          <h2 className="text-3xl font-bold mb-4">The Path to Evermere</h2>
-          <div className="relative h-[400px] rounded-lg overflow-hidden mb-8">
-            <img 
-              src="/path/evermere_path.png" 
-              alt="Path to Evermere"
-              className="absolute inset-0 w-full h-full object-cover"
-            />
-          </div>
-          <p className="text-lg mb-4">
-            The journey to Evermere is one of discovery and wonder. As travelers approach the central kingdom, 
-            they witness the convergence of all elemental energies, creating spectacular displays of natural harmony.
-          </p>
-        </div>
+        </Card>
       </div>
-    </>
+    </div>
   );
 };
 

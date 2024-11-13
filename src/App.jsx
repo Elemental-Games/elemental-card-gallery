@@ -6,15 +6,17 @@ import Footer from './components/Footer';
 
 function App() {
   return (
-    <div className="min-h-screen flex flex-col">
-      <Router>
-        <Routes>
-          <Route path="/" element={<CardGalleryPage />} />
-          <Route path="/cards/:id" element={<CardDetailPage />} />
-        </Routes>
-      </Router>
-      <Footer />
-    </div>
+    <Router>
+      <div className="min-h-screen flex flex-col">
+        <div className="flex-grow">
+          <Routes>
+            <Route path="/" element={<CardGalleryPage />} />
+            <Route path="/cards/:id" element={<CardDetailPage />} />
+          </Routes>
+        </div>
+        <Footer />
+      </div>
+    </Router>
   );
 }
 

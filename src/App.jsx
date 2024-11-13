@@ -68,9 +68,9 @@ const App = () => (
             <SpeedInsights />
             <BrowserRouter>
               <ScrollToTop />
-              <div className="flex flex-col min-h-screen bg-background text-foreground">
+              <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
                 <Header />
-                <main className="flex-grow">
+                <main className="flex-grow w-full">
                   <Routes>
                     <Route path="/" element={<LandingPage />} />
                     {renderRoutes(navItems)}

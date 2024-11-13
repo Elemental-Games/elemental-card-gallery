@@ -30,5 +30,8 @@
         }
       ]
     }
-  ]
+  ],
+  "domains": ["www.elementalgames.gg"],
+  "cleanUrls": true,
+  "trailingSlash": false
 }

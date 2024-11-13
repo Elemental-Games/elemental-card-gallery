@@ -23,6 +23,7 @@ import GrivossPage from "./pages/GrivossPage";
 import ScartoPage from "./pages/ScartoPage";
 import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
+import LandingPage from "./pages/LandingPage";
 
 const queryClient = new QueryClient();
 
@@ -71,6 +72,7 @@ const App = () => (
                 <Header />
                 <main className="flex-grow">
                   <Routes>
+                    <Route path="/" element={<LandingPage />} />
                     {renderRoutes(navItems)}
                     <Route path="/cards/gallery" element={<CardGalleryPage />} />
                     <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />

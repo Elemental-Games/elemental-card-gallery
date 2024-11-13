@@ -27,14 +27,8 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   };
 
   const handleImageError = (e) => {
-    e.target.onerror = null; // Prevent infinite loop
-    if (e.target.src.includes('.webp')) {
-      // Try PNG if WebP fails
-      e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
-    } else {
-      // If both WebP and PNG fail, show placeholder
-      setImageError(true);
-    }
+    e.target.onerror = null;
+    setImageError(true);
   };
 
   if (imageError) {
@@ -49,14 +43,14 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const cardContent = (
     <>
       <img 
-        src={`${window.location.origin}/images/cards/${card.id}.webp`} 
+        src={`/images/cards/${card.id}.webp`}
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
         onError={handleImageError}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
-          <h3 className="text-sm font-semibold">{typeof card.name === 'number' ? `Card ${card.name}` : card.name}</h3>
+          <h3 className="text-sm font-semibold">{card.name}</h3>
           <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
           {card.type === 'Creature' && (
             <p className="text-xs">
@@ -89,7 +83,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
             }}
           >
             <img
-              src={`${window.location.origin}/Card_Back.png`}
+              src="/Card_Back.png"
               alt="Card Back"
               className="w-full h-full object-cover"
               onError={handleImageError}

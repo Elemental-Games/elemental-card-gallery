@@ -88,8 +88,6 @@ const App = () => (
                     <Route path="/kinbrold/zalos" element={<ZalosPage />} />
                   </Routes>
                 </main>
-                <Footer />
-                <ThemeToggle />
                 <CookieConsent />
               </div>
             </BrowserRouter>

@@ -5,8 +5,11 @@ import ThemeToggle from './ThemeToggle';
 
 const Footer = () => {
   return (
-    <footer className="bg-darkPurple/30 backdrop-blur-sm text-white py-8 fixed bottom-0 w-full z-40">
+    <footer className="bg-darkPurple text-white py-8 w-full z-40">
       <div className="container mx-auto px-4">
+        <div className="flex justify-center mb-6">
+          <ThemeToggle />
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
             <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
@@ -45,9 +48,8 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        <div className="mt-8 flex justify-between items-center">
+        <div className="mt-8">
           <p>&copy; 2024 Elemental Games. All rights reserved.</p>
-          <ThemeToggle />
         </div>
       </div>
     </footer>

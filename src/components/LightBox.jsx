@@ -31,11 +31,7 @@ const LightBox = () => {
   };
 
   const shuffleImage = () => {
-    let newIndex;
-    do {
-      newIndex = Math.floor(Math.random() * cardImages.length);
-    } while (newIndex === currentImageIndex);
-    setCurrentImageIndex(newIndex);
+    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % cardImages.length);
   };
 
   return (

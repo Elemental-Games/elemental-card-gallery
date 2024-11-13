@@ -36,7 +36,7 @@ const LightBox = () => {
 
   return (
     <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] sm:max-w-[700px] w-[95%] p-4 sm:p-6 bg-background border shadow-lg z-50">
+      <DialogContent className="fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] w-[95%] max-h-[90vh] overflow-y-auto sm:max-w-[700px] p-4 sm:p-6 bg-background border shadow-lg z-50">
         <DialogHeader>
           <DialogTitle className="text-xl sm:text-2xl font-bold mb-4 text-center pt-4">
             Stay Updated with Elemental Games
@@ -48,7 +48,7 @@ const LightBox = () => {
             <img 
               src={cardImages[currentImageIndex]}
               alt="Featured Card" 
-              className="w-full h-auto object-contain max-h-[300px] sm:max-h-[400px] rounded-lg shadow-lg"
+              className="w-full h-auto object-contain max-h-[250px] sm:max-h-[400px] rounded-lg shadow-lg"
             />
             <Button
               onClick={shuffleImage}

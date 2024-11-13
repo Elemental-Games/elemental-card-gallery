@@ -2,7 +2,7 @@ import React from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { dragonInfo } from '../data/dragonInfo';
 
-const KinbroldHistory = () => {
+const KinbroldHistory = ({ setSelectedDragon }) => {
   return (
     <section className="w-full bg-background/95 backdrop-blur-sm p-8">
       <div className="max-w-7xl mx-auto">
@@ -22,9 +22,14 @@ const KinbroldHistory = () => {
                 <h4 className="text-xl font-heading mb-3">The Legendary Dragons</h4>
                 <div className="space-y-2">
                   {Object.values(dragonInfo).map((dragon) => (
-                    <div key={dragon.name} className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30">
+                    <div 
+                      key={dragon.name} 
+                      className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors"
+                      onClick={() => setSelectedDragon(dragon)}
+                    >
                       <h5 className="font-heading text-lg text-purple-900 dark:text-purple-100">{dragon.name}</h5>
                       <p className="text-sm text-purple-800 dark:text-purple-200">{dragon.description}</p>
+                      <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see the dragon</p>
                     </div>
                   ))}
                 </div>

@@ -4,7 +4,7 @@ import ThemeToggle from './ThemeToggle';
 
 const Footer = () => {
   return (
-    <footer className="bg-darkPurple text-white py-8 w-full z-40 sticky bottom-0">
+    <footer className="bg-darkPurple text-white py-8 w-full mt-auto">
       <div className="container mx-auto px-4">
         <div className="flex justify-center mb-6">
           <ThemeToggle />

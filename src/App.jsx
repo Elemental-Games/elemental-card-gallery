@@ -4,6 +4,7 @@ import { ThemeProvider } from 'next-themes';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { navItems } from "./nav-items";
@@ -63,6 +64,7 @@ const App = () => (
         <TooltipProvider>
           <AuthProvider>
             <Toaster />
+            <SpeedInsights />
             <BrowserRouter>
               <ScrollToTop />
               <div className="flex flex-col min-h-screen bg-background text-foreground">

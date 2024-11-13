@@ -73,32 +73,9 @@ const KinbroldPage = () => {
           <KinbroldMap />
         </section>
 
-        <KinbroldHistory setSelectedDragon={setSelectedDragon} />
+        <KinbroldHistory setSelectedDragon={setSelectedDragon} setSelectedElementalist={setSelectedElementalist} />
 
         <section className="w-full bg-background/95 backdrop-blur-sm p-8">
-          <h2 className="text-3xl font-bold text-center mb-8">The Age of Kingdoms</h2>
-          <div className="max-w-3xl mx-auto mb-12 text-center">
-            <p className="text-lg mb-6">Four great Elementalists arose, each mastering their respective elements:</p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              {[
-                { name: 'Galea', description: 'of the Air, founding Zalos in the windswept heights' },
-                { name: 'Mek', description: 'of the Water, establishing Tsunareth by the eternal tides' },
-                { name: 'Osao', description: 'of the Fire, raising Scarto from volcanic depths' },
-                { name: 'Balon', description: 'of the Earth, growing Grivoss from the fertile soil' }
-              ].map((elementalist) => (
-                <div 
-                  key={elementalist.name}
-                  onClick={() => setSelectedElementalist(elementalists[elementalist.name])}
-                  className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors"
-                >
-                  <h5 className="font-heading text-purple-900 dark:text-purple-100">{elementalist.name}</h5>
-                  <p className="text-sm text-purple-800 dark:text-purple-200">{elementalist.description}</p>
-                  <p className="text-xs text-purple-600 dark:text-purple-300 mt-2 italic">Click to see the Elementalist</p>
-                </div>
-              ))}
-            </div>
-          </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
             {kingdoms.map((kingdom) => (
               <Button

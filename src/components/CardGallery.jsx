@@ -13,12 +13,12 @@ const Card = ({ card }) => {
         whileHover={{ scale: 1.05 }}
       >
         <img 
-          src={`/images/cards/${card.id}.webp`} 
+          src={`${window.location.origin}/images/cards/${card.id}.webp`} 
           alt={card.name} 
           className="absolute inset-0 w-full h-full object-cover"
           onError={(e) => {
             e.target.onerror = null;
-            e.target.src = `/images/cards/${card.id}.png`;
+            e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
           }}
         />
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
@@ -35,7 +35,7 @@ const Card = ({ card }) => {
           </p>
           {card.type === 'Creature' && (
             <p className="text-xs">
-              STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
+              STR: {card.stats?.strength || 'N/A'} | AGI: {card.stats?.agility || 'N/A'}
             </p>
           )}
         </div>
@@ -58,9 +58,9 @@ const CardGallery = () => {
 
         await Promise.all(
           elements.map(async (element) => {
-            const response = await fetch(`/data/cards/${element}Cards.json`);
+            const response = await fetch(`${window.location.origin}/data/cards/${element}Cards.json`);
             if (!response.ok) {
-              throw new Error(`Failed to fetch ${element} cards`);
+              throw new Error(`Failed to fetch ${element} cards (${response.status})`);
             }
             const data = await response.json();
             allCards.push(...data.cards);
@@ -71,12 +71,12 @@ const CardGallery = () => {
         setLoading(false);
       } catch (error) {
         console.error('Error loading cards:', error);
-        setError('Error loading cards. Please try again later.');
+        setError(`Error loading cards: ${error.message}`);
         setLoading(false);
         toast({
           variant: "destructive",
           title: "Error loading cards",
-          description: "Please try again later.",
+          description: `Please try again later. (${error.message})`,
         });
       }
     };

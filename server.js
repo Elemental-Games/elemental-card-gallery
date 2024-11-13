@@ -20,9 +20,16 @@ if (!RESEND_API_KEY) {
 
 const resend = new Resend(RESEND_API_KEY);
 
-app.use(cors());
+// Enable CORS for all routes
+app.use(cors({
+  origin: ['http://localhost:3000', process.env.SITE_URL, 'https://elementalgames.gg'],
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
+
 app.use(express.json());
 
+// Health check endpoint
 app.get('/api/health', (req, res) => {
   console.log('Health check endpoint hit');
   res.status(200).json({ status: 'ok' });

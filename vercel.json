@@ -5,33 +5,29 @@
       "destination": "/api/:path*"
     },
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "source": "/:path*",
+      "destination": "/index.html"
     }
   ],
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "framework": "vite",
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/api/(.*)",
       "headers": [
         {
-          "key": "X-Content-Type-Options",
-          "value": "nosniff"
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
         },
         {
-          "key": "X-Frame-Options",
-          "value": "DENY"
+          "key": "Access-Control-Allow-Methods",
+          "value": "GET, POST, PUT, DELETE, OPTIONS"
         },
         {
-          "key": "X-XSS-Protection",
-          "value": "1; mode=block"
+          "key": "Access-Control-Allow-Headers",
+          "value": "X-Requested-With, Content-Type, Accept"
         }
       ]
     }
   ],
-  "domains": ["www.elementalgames.gg"],
   "cleanUrls": true,
   "trailingSlash": false
 }

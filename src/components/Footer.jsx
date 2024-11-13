@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { MessageCircle } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
 
 const Footer = () => {
@@ -40,9 +39,9 @@ const Footer = () => {
             <div className="flex space-x-4">
               <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                 <img 
-                  src="/square-x-twitter-brands-solid.svg" 
+                  src="/x-twitter-brands-solid.svg" 
                   alt="X (Twitter)" 
-                  className="h-6 w-6 fill-current"
+                  className="h-6 w-6 fill-current text-white hover:text-accent"
                 />
               </a>
               <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">

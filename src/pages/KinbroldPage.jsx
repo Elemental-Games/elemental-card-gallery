@@ -12,31 +12,31 @@ const KinbroldPage = () => {
     { 
       name: 'Evermere',
       path: '/kinbrold/evermere',
-      hoverClass: 'hover:text-yellow-300',
+      className: 'bg-yellow-800 hover:bg-yellow-900',
       description: 'The Central Kingdom'
     },
     { 
       name: 'Grivoss',
       path: '/kinbrold/grivoss',
-      hoverClass: 'hover:text-green-300',
+      className: 'bg-green-800 hover:bg-green-900',
       description: 'The Earth Kingdom'
     },
     { 
       name: 'Scarto',
       path: '/kinbrold/scarto',
-      hoverClass: 'hover:text-red-300',
+      className: 'bg-red-800 hover:bg-red-900',
       description: 'The Fire Kingdom'
     },
     { 
       name: 'Tsunareth',
       path: '/kinbrold/tsunareth',
-      hoverClass: 'hover:text-blue-300',
+      className: 'bg-blue-800 hover:bg-blue-900',
       description: 'The Water Kingdom'
     },
     { 
       name: 'Zalos',
       path: '/kinbrold/zalos',
-      hoverClass: 'hover:text-gray-300',
+      className: 'bg-gray-800 hover:bg-gray-900',
       description: 'The Air Kingdom'
     }
   ];
@@ -66,10 +66,10 @@ const KinbroldPage = () => {
               <Button
                 key={kingdom.name}
                 onClick={() => navigate(kingdom.path)}
-                className={`w-full h-24 font-bold flex flex-col items-center justify-center transition-colors bg-purple-800 hover:bg-purple-900`}
+                className={`w-full h-24 font-bold flex flex-col items-center justify-center transition-colors ${kingdom.className}`}
               >
-                <span className={`text-lg text-white ${kingdom.hoverClass} transition-colors`}>{kingdom.name}</span>
-                <span className={`text-sm text-white ${kingdom.hoverClass} transition-colors opacity-80`}>{kingdom.description}</span>
+                <span className="text-lg text-white transition-colors">{kingdom.name}</span>
+                <span className="text-sm text-white transition-colors opacity-80">{kingdom.description}</span>
               </Button>
             ))}
           </div>

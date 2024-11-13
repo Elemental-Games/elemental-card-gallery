@@ -26,18 +26,23 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const cardContent = (
     <>
       <img 
-        src={`/images/cards/${card.id}.webp`} 
+        src={`${window.location.origin}/images/cards/${card.id}.webp`} 
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = `/images/cards/${card.id}.png`;
+          e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
         }}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
           <h3 className="text-sm font-semibold">{typeof card.name === 'number' ? `Card ${card.name}` : card.name}</h3>
           <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
+          {card.type === 'Creature' && (
+            <p className="text-xs">
+              STR: {card.stats?.strength || 'N/A'} | AGI: {card.stats?.agility || 'N/A'}
+            </p>
+          )}
         </div>
       )}
     </>
@@ -64,7 +69,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
             }}
           >
             <img
-              src="/Card_Back.png"
+              src={`${window.location.origin}/Card_Back.png`}
               alt="Card Back"
               className="w-full h-full object-cover"
             />

@@ -2,7 +2,14 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Download } from 'lucide-react';
+import { Download, ChevronDown } from 'lucide-react';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { rulesData } from '../data/rulesData';
 import QuickStart from '../components/RulesComponents/QuickStart';
 import FullRules from '../components/RulesComponents/FullRules';
@@ -14,6 +21,18 @@ import FAQ from '../components/RulesComponents/FAQ';
 import Elements from '../components/RulesComponents/Elements';
 
 const RulesPage = () => {
+  const [activeTab, setActiveTab] = React.useState("quickstart");
+  const sections = [
+    { value: "quickstart", label: "Quick Start" },
+    { value: "fullrules", label: "Full Rules" },
+    { value: "deckbuilding", label: "Deck Building" },
+    { value: "cardtypes", label: "Card Types" },
+    { value: "gameplay", label: "Gameplay" },
+    { value: "combat", label: "Combat" },
+    { value: "elements", label: "Elements" },
+    { value: "faq", label: "FAQ" },
+  ];
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -27,19 +46,48 @@ const RulesPage = () => {
         <Download className="mr-2 h-4 w-4" /> Download Rulebook PDF
       </Button>
 
-      <Tabs defaultValue="quickstart" className="w-full">
-        <TabsList className="mb-8 flex flex-wrap gap-2 justify-start">
-          <TabsTrigger value="quickstart">Quick Start</TabsTrigger>
-          <TabsTrigger value="fullrules">Full Rules</TabsTrigger>
-          <TabsTrigger value="deckbuilding">Deck Building</TabsTrigger>
-          <TabsTrigger value="cardtypes">Card Types</TabsTrigger>
-          <TabsTrigger value="gameplay">Gameplay</TabsTrigger>
-          <TabsTrigger value="combat">Combat</TabsTrigger>
-          <TabsTrigger value="elements">Elements</TabsTrigger>
-          <TabsTrigger value="faq">FAQ</TabsTrigger>
-        </TabsList>
+      {/* Mobile Dropdown */}
+      <div className="md:hidden w-full mb-8">
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <Button variant="outline" className="w-full justify-between">
+              {sections.find(s => s.value === activeTab)?.label}
+              <ChevronDown className="ml-2 h-4 w-4" />
+            </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-full">
+            <DropdownMenuGroup>
+              {sections.map((section) => (
+                <DropdownMenuItem 
+                  key={section.value}
+                  onClick={() => setActiveTab(section.value)}
+                >
+                  {section.label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
 
-        <div className="mt-6">
+      {/* Desktop Tabs */}
+      <Tabs 
+        defaultValue="quickstart" 
+        value={activeTab}
+        onValueChange={setActiveTab}
+        className="w-full"
+      >
+        <div className="hidden md:block">
+          <TabsList className="mb-8 flex flex-wrap gap-2 justify-start">
+            {sections.map((section) => (
+              <TabsTrigger key={section.value} value={section.value}>
+                {section.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </div>
+
+        <div className="mt-8">
           <TabsContent value="quickstart">
             <QuickStart data={rulesData.quickStart} />
           </TabsContent>

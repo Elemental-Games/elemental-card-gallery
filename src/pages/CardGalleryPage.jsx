@@ -54,7 +54,7 @@ const CardGalleryPage = () => {
                 The Card Gallery and Deck Builder features will be available when we launch! 
               </p>
               <p className="mb-4">
-                For now, be sure to check out our Weekly Card Reveals and stay updated with all things Elemental!
+                For now, be sure to check out our Weekly Card Reveals and join now to stay updated with all things Elemental!
               </p>
               <div className="flex flex-col gap-4 mt-6">
                 <Link to="/join">

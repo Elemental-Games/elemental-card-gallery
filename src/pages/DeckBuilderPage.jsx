@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { Link, useNavigate } from 'react-router-dom';
 import ElementSelection from '../components/DeckBuilder/ElementSelection';
 import DeckEditor from '../components/DeckBuilder/DeckEditor';
 import DeckStats from '../components/DeckBuilder/DeckStats';
@@ -7,7 +8,7 @@ import CardGallery from '../components/DeckBuilder/CardGallery';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
+import { AlertCircle, X } from "lucide-react";
 import {
   Dialog,
   DialogContent,
@@ -18,6 +19,7 @@ import {
 
 const DeckBuilderPage = () => {
   const [showAnnouncement] = useState(true);
+  const navigate = useNavigate();
   const [showWizard, setShowWizard] = useState(null);
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
@@ -121,6 +123,13 @@ const DeckBuilderPage = () => {
 
       <Dialog open={showAnnouncement} onOpenChange={() => {}}>
         <DialogContent className="sm:max-w-[425px]" onPointerDownOutside={(e) => e.preventDefault()}>
+          <button
+            onClick={() => navigate('/cards')}
+            className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground"
+          >
+            <X className="h-4 w-4" />
+            <span className="sr-only">Close</span>
+          </button>
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">Coming Soon!</DialogTitle>
             <DialogDescription className="text-lg mt-4">

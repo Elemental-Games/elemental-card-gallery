@@ -6,8 +6,8 @@ import HealthBar from './HealthBar';
 const AttackerSection = ({ attacker, isAttacking, selectedTarget, isRotated }) => {
   return (
     <div className="relative flex flex-col items-center">
-      <h3 className="text-xl font-semibold mb-4">Attacker</h3>
-      <div className="w-48">
+      <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-4">Attacker</h3>
+      <div className="w-32 sm:w-48">
         <HealthBar 
           health={attacker.health} 
           maxHealth={attacker.maxHealth} 
@@ -27,7 +27,7 @@ const AttackerSection = ({ attacker, isAttacking, selectedTarget, isRotated }) =
         <img 
           src={attacker.image} 
           alt={attacker.name} 
-          className="w-48 rounded-lg transition-transform duration-300"
+          className="w-32 sm:w-48 rounded-lg transition-transform duration-300"
         />
         <RippleEffect isActive={isAttacking && selectedTarget} />
       </motion.div>

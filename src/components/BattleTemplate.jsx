@@ -154,43 +154,49 @@ const BattleTemplate = ({
   }
 
   return (
-    <div className="p-4 bg-gray-800 text-white rounded-lg shadow">
-      <div className="flex flex-col gap-8">
+    <div className="p-2 sm:p-4 bg-gray-800 text-white rounded-lg shadow">
+      <div className="flex flex-col gap-4 sm:gap-8">
         <div className="text-center">
           <HealthBar health={playerHealth} maxHealth={500} label="Player Health" />
         </div>
 
-        <AttackerSection 
-          attacker={attacker}
-          isAttacking={isAttacking}
-          selectedTarget={selectedTarget}
-          isRotated={cardRotated}
-        />
+        <div className="scale-75 sm:scale-100 -mt-8 sm:mt-0">
+          <AttackerSection 
+            attacker={attacker}
+            isAttacking={isAttacking}
+            selectedTarget={selectedTarget}
+            isRotated={cardRotated}
+          />
+        </div>
 
         {showAirAnimation && <AirAnimation isActive={true} />}
 
-        <DefendersSection 
-          defenders={defenders}
-          selectedTarget={selectedTarget}
-          onSelectTarget={onSelectTarget}
-          battleState={battleState}
-          isDestroying={isDestroying}
-          onTargetConfirm={handleTargetConfirm}
-          onTargetCancel={() => onSelectTarget(null)}
-          showBlockPrompt={showBlockPrompt}
-          onBlockConfirm={() => handleBlockingDecision(true)}
-          onBlockCancel={() => handleBlockingDecision(false)}
-          showTargetOverlay={showTargetOverlay}
-          showDodgePrompt={showDodgePrompt}
-          onDodgeConfirm={() => handleDodgeDecision(true)}
-          onDodgeCancel={() => handleDodgeDecision(false)}
-        />
+        <div className="scale-75 sm:scale-100 -mt-8 sm:mt-0">
+          <DefendersSection 
+            defenders={defenders}
+            selectedTarget={selectedTarget}
+            onSelectTarget={onSelectTarget}
+            battleState={battleState}
+            isDestroying={isDestroying}
+            onTargetConfirm={handleTargetConfirm}
+            onTargetCancel={() => onSelectTarget(null)}
+            showBlockPrompt={showBlockPrompt}
+            onBlockConfirm={() => handleBlockingDecision(true)}
+            onBlockCancel={() => handleBlockingDecision(false)}
+            showTargetOverlay={showTargetOverlay}
+            showDodgePrompt={showDodgePrompt}
+            onDodgeConfirm={() => handleDodgeDecision(true)}
+            onDodgeCancel={() => handleDodgeDecision(false)}
+          />
+        </div>
 
-        <div className="text-center mt-4">
+        <div className="text-center -mt-8 sm:mt-0">
           <HealthBar health={opponentHealth} maxHealth={500} label="Opponent Health" />
         </div>
 
-        <BattleLog logs={battleLog} />
+        <div className="scale-90 sm:scale-100">
+          <BattleLog logs={battleLog} />
+        </div>
       </div>
 
       <AlertDialog open={showAgilityWarning} onOpenChange={setShowAgilityWarning}>

@@ -19,11 +19,11 @@ const KinbroldMap = () => {
 
   const zoomLocations = {
     start: { scale: 1, x: 0, y: 0 },
-    evermere: { scale: 2, x: -800, y: -600 }, // Adjusted higher
-    zalos: { scale: 2, x: -200, y: -200 }, // Top left
-    tsunareth: { scale: 2, x: -800, y: -1200 }, // Bottom middle
-    scarto: { scale: 2, x: -1200, y: -400 }, // Mid/upper right
-    grivoss: { scale: 2, x: -400, y: -800 }, // Mid left
+    evermere: { scale: 2, x: -800, y: -600 },
+    zalos: { scale: 2, x: -200, y: -200 },
+    tsunareth: { scale: 2, x: -800, y: -1200 },
+    scarto: { scale: 2, x: -1200, y: -400 },
+    grivoss: { scale: 2, x: -400, y: -800 },
     frozen_ridge: { scale: 3, x: -300, y: -300 },
     shroud_peak: { scale: 3, x: -1700, y: -300 },
     mount_surya: { scale: 3, x: -1700, y: -700 },
@@ -115,6 +115,8 @@ const KinbroldMap = () => {
             />
           )}
           <DialogueBox
+            isOpen={showTour}
+            onClose={endTour}
             text={dialogueText}
             onContinue={advanceTour}
             onSkip={endTour}

@@ -1,7 +1,8 @@
 import React from 'react';
 import { X } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
-const DialogueBox = ({ isOpen, onClose, children }) => {
+const DialogueBox = ({ isOpen, onClose, text, onContinue, onSkip, isLastStep }) => {
   if (!isOpen) return null;
 
   return (
@@ -14,7 +15,19 @@ const DialogueBox = ({ isOpen, onClose, children }) => {
           <X className="h-6 w-6" />
         </button>
         <div className="p-6 pt-12">
-          {children}
+          <p className="text-lg mb-6">{text}</p>
+          <div className="flex justify-between">
+            {!isLastStep ? (
+              <Button onClick={onContinue}>Continue</Button>
+            ) : (
+              <Button onClick={onSkip}>End Tour</Button>
+            )}
+            {!isLastStep && (
+              <Button variant="outline" onClick={onSkip}>
+                Skip Tour
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>

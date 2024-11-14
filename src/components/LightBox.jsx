@@ -48,11 +48,11 @@ const LightBox = () => {
             <img 
               src={cardImages[currentImageIndex]}
               alt="Featured Card" 
-              className="w-full h-auto object-contain max-h-[250px] sm:max-h-[400px] rounded-lg shadow-lg"
+              className="w-full h-auto object-contain max-h-[300px] sm:max-h-[400px] rounded-lg shadow-lg mb-4"
             />
             <Button
               onClick={shuffleImage}
-              className="absolute bottom-2 left-1/2 transform -translate-x-1/2 bg-accent/80 hover:bg-accent text-accent-foreground"
+              className="bg-purple-800 hover:bg-darkPurple text-white w-full max-w-[200px] transition-colors duration-300"
             >
               <Shuffle className="mr-2 h-4 w-4" />
               Shuffle Card

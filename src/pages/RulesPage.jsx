@@ -11,7 +11,6 @@ import CardTypes from '../components/RulesComponents/CardTypes';
 import Gameplay from '../components/RulesComponents/Gameplay';
 import Combat from '../components/RulesComponents/Combat';
 import FAQ from '../components/RulesComponents/FAQ';
-import TournamentRules from '../components/RulesComponents/TournamentRules';
 import Elements from '../components/RulesComponents/Elements';
 
 const RulesPage = () => {
@@ -37,7 +36,6 @@ const RulesPage = () => {
           <TabsTrigger value="gameplay">Gameplay</TabsTrigger>
           <TabsTrigger value="combat">Combat</TabsTrigger>
           <TabsTrigger value="elements">Elements</TabsTrigger>
-          <TabsTrigger value="tournament">Tournament Rules</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
         </TabsList>
 
@@ -61,9 +59,6 @@ const RulesPage = () => {
         </TabsContent>
         <TabsContent value="elements">
           <Elements data={rulesData.elements} />
-        </TabsContent>
-        <TabsContent value="tournament">
-          <TournamentRules data={rulesData.tournament} />
         </TabsContent>
         <TabsContent value="faq">
           <FAQ data={rulesData.faq} />

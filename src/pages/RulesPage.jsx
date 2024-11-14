@@ -56,11 +56,12 @@ const RulesPage = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-full">
-            <DropdownMenuGroup>
+            <DropdownMenuGroup className="w-full">
               {sections.map((section) => (
                 <DropdownMenuItem 
                   key={section.value}
                   onClick={() => setActiveTab(section.value)}
+                  className="w-full"
                 >
                   {section.label}
                 </DropdownMenuItem>
@@ -88,6 +89,7 @@ const RulesPage = () => {
         </div>
 
         <div className="mt-8">
+          {/* ... keep existing code (TabsContent sections) */}
           <TabsContent value="quickstart">
             <QuickStart data={rulesData.quickStart} />
           </TabsContent>

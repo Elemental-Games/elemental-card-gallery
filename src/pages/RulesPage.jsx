@@ -28,7 +28,7 @@ const RulesPage = () => {
       </Button>
 
       <Tabs defaultValue="quickstart" className="w-full">
-        <TabsList className="mb-4 flex flex-wrap justify-start">
+        <TabsList className="mb-4 flex flex-wrap gap-2 justify-start">
           <TabsTrigger value="quickstart">Quick Start</TabsTrigger>
           <TabsTrigger value="fullrules">Full Rules</TabsTrigger>
           <TabsTrigger value="deckbuilding">Deck Building</TabsTrigger>

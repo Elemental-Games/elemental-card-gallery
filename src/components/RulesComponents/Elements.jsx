@@ -2,6 +2,10 @@ import React from 'react';
 import { Card } from "@/components/ui/card";
 
 const Elements = ({ data }) => {
+  if (!data || !data.mainElements || !data.combinationalElements) {
+    return <div>Loading elements data...</div>;
+  }
+
   return (
     <div className="space-y-8">
       <h2 className="text-2xl font-semibold mb-4">Elements</h2>
@@ -13,13 +17,13 @@ const Elements = ({ data }) => {
           <Card key={index} className="p-4">
             <div className="aspect-w-16 aspect-h-9 relative mb-4">
               <img
-                src={element.image || "https://images.unsplash.com/photo-1472396961693-142e6e269027"}
+                src={element.image || "/placeholder.svg"}
                 alt={element.name}
                 className="w-full h-full object-cover rounded"
               />
             </div>
             <h4 className="text-lg font-semibold mb-2">{element.name}</h4>
-            <p className="text-sm text-gray-600">{element.description}</p>
+            <p className="text-sm text-muted-foreground">{element.description}</p>
           </Card>
         ))}
 
@@ -29,16 +33,16 @@ const Elements = ({ data }) => {
           <Card key={index} className="p-4">
             <div className="aspect-w-16 aspect-h-9 relative mb-4">
               <img
-                src={element.image || "https://images.unsplash.com/photo-1472396961693-142e6e269027"}
+                src={element.image || "/placeholder.svg"}
                 alt={element.name}
                 className="w-full h-full object-cover rounded"
               />
             </div>
             <h4 className="text-lg font-semibold mb-2">{element.name}</h4>
-            <p className="text-sm text-gray-600">
+            <p className="text-sm text-muted-foreground">
               Combination of {element.components.join(" + ")}
             </p>
-            <p className="text-sm text-gray-600 mt-2">{element.description}</p>
+            <p className="text-sm text-muted-foreground mt-2">{element.description}</p>
           </Card>
         ))}
       </div>

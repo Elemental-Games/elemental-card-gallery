@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 const CardGalleryPage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
-  const [showAnnouncement] = React.useState(true); // Removed setShowAnnouncement since we don't want to close
+  const [showAnnouncement] = React.useState(true);
 
   useEffect(() => {
     setTimeout(() => {

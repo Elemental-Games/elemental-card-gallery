@@ -8,8 +8,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 
 const DeckBuilderPage = () => {
+  const [showAnnouncement] = useState(true);
   const [showWizard, setShowWizard] = useState(null);
   const [selectedElements, setSelectedElements] = useState([]);
   const [mainDeck, setMainDeck] = useState([]);
@@ -110,6 +118,28 @@ const DeckBuilderPage = () => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg/cards/deck-builder" />
       </Helmet>
+
+      <Dialog open={showAnnouncement} onOpenChange={() => {}}>
+        <DialogContent className="sm:max-w-[425px]" onPointerDownOutside={(e) => e.preventDefault()}>
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold">Coming Soon!</DialogTitle>
+            <DialogDescription className="text-lg mt-4">
+              <p className="mb-4">
+                The Card Gallery and Deck Builder features will be available when we launch! 
+              </p>
+              <p className="mb-4">
+                For now, be sure to check out our Weekly Card Reveals and stay updated with all things Elemental!
+              </p>
+              <div className="flex flex-col gap-4 mt-6">
+                <Link to="/join">
+                  <Button className="w-full">Subscribe for Updates</Button>
+                </Link>
+              </div>
+            </DialogDescription>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+
       <div className="relative">
         <div className="container mx-auto px-4 py-8">
           <h1 className="text-4xl font-bold mb-6">Deck Builder</h1>

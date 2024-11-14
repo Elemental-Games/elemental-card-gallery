@@ -28,7 +28,7 @@ const RulesPage = () => {
       </Button>
 
       <Tabs defaultValue="quickstart" className="w-full">
-        <TabsList className="mb-4 flex flex-wrap gap-2 justify-start">
+        <TabsList className="mb-8 flex flex-wrap gap-2 justify-start">
           <TabsTrigger value="quickstart">Quick Start</TabsTrigger>
           <TabsTrigger value="fullrules">Full Rules</TabsTrigger>
           <TabsTrigger value="deckbuilding">Deck Building</TabsTrigger>
@@ -39,30 +39,32 @@ const RulesPage = () => {
           <TabsTrigger value="faq">FAQ</TabsTrigger>
         </TabsList>
 
-        <TabsContent value="quickstart">
-          <QuickStart data={rulesData.quickStart} />
-        </TabsContent>
-        <TabsContent value="fullrules">
-          <FullRules data={rulesData.fullRules} />
-        </TabsContent>
-        <TabsContent value="deckbuilding">
-          <DeckBuilding data={rulesData.deckBuilding} />
-        </TabsContent>
-        <TabsContent value="cardtypes">
-          <CardTypes data={rulesData.cardTypes} />
-        </TabsContent>
-        <TabsContent value="gameplay">
-          <Gameplay data={rulesData.gameplay} />
-        </TabsContent>
-        <TabsContent value="combat">
-          <Combat data={rulesData.combat} />
-        </TabsContent>
-        <TabsContent value="elements">
-          <Elements data={rulesData.elements} />
-        </TabsContent>
-        <TabsContent value="faq">
-          <FAQ data={rulesData.faq} />
-        </TabsContent>
+        <div className="mt-6">
+          <TabsContent value="quickstart">
+            <QuickStart data={rulesData.quickStart} />
+          </TabsContent>
+          <TabsContent value="fullrules">
+            <FullRules data={rulesData.fullRules} />
+          </TabsContent>
+          <TabsContent value="deckbuilding">
+            <DeckBuilding data={rulesData.deckBuilding} />
+          </TabsContent>
+          <TabsContent value="cardtypes">
+            <CardTypes data={rulesData.cardTypes} />
+          </TabsContent>
+          <TabsContent value="gameplay">
+            <Gameplay data={rulesData.gameplay} />
+          </TabsContent>
+          <TabsContent value="combat">
+            <Combat data={rulesData.combat} />
+          </TabsContent>
+          <TabsContent value="elements">
+            <Elements data={rulesData.elements} />
+          </TabsContent>
+          <TabsContent value="faq">
+            <FAQ data={rulesData.faq} />
+          </TabsContent>
+        </div>
       </Tabs>
     </motion.div>
   );

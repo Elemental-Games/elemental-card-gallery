@@ -19,7 +19,6 @@ export const rulesData = {
         "The player going first cannot attack on their first turn."
       ]
     },
-    // Add more sections as needed
   },
   deckBuilding: [
     "Your deck must contain exactly 40 cards.",
@@ -59,6 +58,67 @@ export const rulesData = {
       question: "Can I attack my opponent directly if they have no creatures?",
       answer: "Yes, if your opponent has no creatures, you can attack their shields or health points directly."
     },
-    // Add more FAQ items as needed
-  ]
+  ],
+  elements: {
+    mainElements: [
+      {
+        name: "Air",
+        description: "Masters of speed and agility, Air creatures excel at quick strikes and evasive maneuvers.",
+        image: "/icons/Air.png"
+      },
+      {
+        name: "Water",
+        description: "Fluid and adaptable, Water creatures control the flow of battle through strategic positioning.",
+        image: "/icons/Water.png"
+      },
+      {
+        name: "Fire",
+        description: "Aggressive and powerful, Fire creatures overwhelm opponents with raw strength and devastating effects.",
+        image: "/icons/Fire.png"
+      },
+      {
+        name: "Earth",
+        description: "Steadfast and resilient, Earth creatures provide strong defense and reliable power.",
+        image: "/icons/Earth.png"
+      }
+    ],
+    combinationalElements: [
+      {
+        name: "Frost",
+        components: ["Water", "Air"],
+        description: "Combining Water's flow with Air's speed, Frost creatures can freeze and control their opponents.",
+        image: "/icons/Frost.png"
+      },
+      {
+        name: "Lightning",
+        components: ["Air", "Fire"],
+        description: "The fusion of Air's speed and Fire's power creates devastating chain reactions.",
+        image: "/icons/Lightning.png"
+      },
+      {
+        name: "Crystal",
+        components: ["Water", "Earth"],
+        description: "Merging Water's adaptability with Earth's resilience forms unbreakable defensive formations.",
+        image: "/icons/Crystal.png"
+      },
+      {
+        name: "Lava",
+        components: ["Fire", "Earth"],
+        description: "Earth's stability and Fire's aggression combine to create overwhelming offensive pressure.",
+        image: "/icons/Lava.png"
+      },
+      {
+        name: "Poison",
+        components: ["Water", "Fire"],
+        description: "The volatile mix of Water and Fire produces deadly effects that weaken opponents over time.",
+        image: "/icons/Poison.png"
+      },
+      {
+        name: "Sand",
+        components: ["Air", "Earth"],
+        description: "Air's mobility and Earth's strength create unpredictable battlefield control.",
+        image: "/icons/Sand.png"
+      }
+    ]
+  }
 };

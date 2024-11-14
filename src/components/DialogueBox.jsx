@@ -6,28 +6,40 @@ const DialogueBox = ({ isOpen, onClose, text, onContinue, onSkip, isLastStep }) 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
-      <div className="relative bg-white dark:bg-gray-800 rounded-lg shadow-xl w-full max-w-md max-h-[90vh] overflow-y-auto">
+    <div className="absolute bottom-8 left-[200px] md:left-[300px] right-4 pointer-events-auto">
+      <div className="relative bg-darkPurple/80 backdrop-blur-sm rounded-lg shadow-xl p-6 text-white">
         <button
           onClick={onClose}
-          className="absolute right-2 top-2 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full z-10"
+          className="absolute right-2 top-2 p-2 hover:bg-white/10 rounded-full"
         >
           <X className="h-6 w-6" />
         </button>
-        <div className="p-6 pt-12">
-          <p className="text-lg mb-6">{text}</p>
-          <div className="flex justify-between">
-            {!isLastStep ? (
-              <Button onClick={onContinue}>Continue</Button>
-            ) : (
-              <Button onClick={onSkip}>End Tour</Button>
-            )}
-            {!isLastStep && (
-              <Button variant="outline" onClick={onSkip}>
+        <p className="text-lg mb-6 pr-8">{text}</p>
+        <div className="flex justify-end gap-4">
+          {!isLastStep ? (
+            <>
+              <Button 
+                variant="outline" 
+                onClick={onSkip}
+                className="hover:bg-white/10"
+              >
                 Skip Tour
               </Button>
-            )}
-          </div>
+              <Button 
+                onClick={onContinue}
+                className="bg-purple-800 hover:bg-purple-700"
+              >
+                Continue
+              </Button>
+            </>
+          ) : (
+            <Button 
+              onClick={onSkip}
+              className="bg-purple-800 hover:bg-purple-700"
+            >
+              End Tour
+            </Button>
+          )}
         </div>
       </div>
     </div>

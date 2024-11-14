@@ -77,7 +77,7 @@ const KinbroldMap = () => {
   };
 
   return (
-    <div className="relative w-full h-screen">
+    <div className="relative w-full min-h-screen overflow-hidden">
       <TransformWrapper
         ref={transformComponentRef}
         initialScale={1}
@@ -85,12 +85,22 @@ const KinbroldMap = () => {
         initialPositionY={0}
         minScale={0.5}
         maxScale={4}
-        limitToBounds={false}
+        limitToBounds={true}
         disabled={!allowManualControl}
       >
         {({ zoomIn, zoomOut, resetTransform }) => (
           <>
-            <TransformComponent wrapperStyle={{ width: '100%', height: '100vh' }}>
+            <TransformComponent 
+              wrapperStyle={{ 
+                width: '100%', 
+                height: '100vh',
+                overflow: 'hidden'
+              }}
+              contentStyle={{
+                width: '100%',
+                height: '100%'
+              }}
+            >
               <MapComponent showInteractivity={allowManualControl} width={2000} height={2000} />
             </TransformComponent>
             {allowManualControl && (
@@ -105,7 +115,7 @@ const KinbroldMap = () => {
       </TransformWrapper>
 
       {showTour && (
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 pointer-events-none">
           <SpeakerComponent image={`/tour/${currentSpeaker}.png`} />
           {displayedDragon && (
             <DragonComponent

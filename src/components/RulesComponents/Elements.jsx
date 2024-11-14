@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
-import Image from 'next/image';
 
 const Elements = ({ data }) => {
   return (
@@ -13,12 +12,10 @@ const Elements = ({ data }) => {
         {data.mainElements.map((element, index) => (
           <Card key={index} className="p-4">
             <div className="aspect-w-16 aspect-h-9 relative mb-4">
-              <Image
+              <img
                 src={element.image || "https://images.unsplash.com/photo-1472396961693-142e6e269027"}
                 alt={element.name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
+                className="w-full h-full object-cover rounded"
               />
             </div>
             <h4 className="text-lg font-semibold mb-2">{element.name}</h4>
@@ -31,12 +28,10 @@ const Elements = ({ data }) => {
         {data.combinationalElements.map((element, index) => (
           <Card key={index} className="p-4">
             <div className="aspect-w-16 aspect-h-9 relative mb-4">
-              <Image
+              <img
                 src={element.image || "https://images.unsplash.com/photo-1472396961693-142e6e269027"}
                 alt={element.name}
-                layout="fill"
-                objectFit="cover"
-                className="rounded"
+                className="w-full h-full object-cover rounded"
               />
             </div>
             <h4 className="text-lg font-semibold mb-2">{element.name}</h4>

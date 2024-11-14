@@ -1,145 +1,50 @@
-import React, { useState, useEffect } from 'react';
-import { Card } from '@/components/ui/card';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import FilterOptions from '../components/FilterOptions';
+import React from 'react';
+import { Helmet } from 'react-helmet-async';
+import CardGallery from '../components/CardGallery';
+import { Skeleton } from '@/components/ui/skeleton';
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { AlertCircle } from "lucide-react";
 
 const CardGalleryPage = () => {
-  const [cards, setCards] = useState([]);
-  const [filteredCards, setFilteredCards] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
-  const [element, setElement] = useState('All Elements');
-  const [type, setType] = useState('all');
-  const [idSort, setIdSort] = useState(null);
-  const [rarity, setRarity] = useState('all');
-  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = React.useState(true);
+  const [error, setError] = React.useState(null);
 
-  useEffect(() => {
-    const fetchCards = async () => {
-      try {
-        const response = await fetch('/data/cards.json');
-        const data = await response.json();
-        setCards(data.cards);
-        setFilteredCards(data.cards);
-      } catch (error) {
-        console.error('Error fetching cards:', error);
-      }
-    };
-
-    fetchCards();
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
   }, []);
 
-  useEffect(() => {
-    const filtered = cards.filter(card => {
-      const cardName = String(card.name).toLowerCase();
-      const nameMatch = cardName.includes(searchTerm.toLowerCase());
-      const elementMatch = element === 'All Elements' || card.element === element;
-      const typeMatch = type === 'all' || card.type === type;
-      const rarityMatch = rarity === 'all' ||
-        (rarity === 'common' && card.rarity === 'C') ||
-        (rarity === 'uncommon' && card.rarity === 'U') ||
-        (rarity === 'rare' && card.rarity.trim() === 'R') ||
-        (rarity === 'epic' && card.rarity === 'E') ||
-        (rarity === 'legendary' && card.rarity === 'L');
-
-      return nameMatch && elementMatch && typeMatch && rarityMatch;
-    });
-
-    if (idSort) {
-      filtered.sort((a, b) => {
-        return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
-      });
-    }
-
-    setFilteredCards(filtered);
-  }, [searchTerm, element, type, cards, idSort, rarity]);
-
-  const handleFilterChange = (filterType, value) => {
-    switch (filterType) {
-      case 'element':
-        setElement(value);
-        break;
-      case 'type':
-        setType(value.toLowerCase());
-        break;
-      case 'rarity':
-        setRarity(value.toLowerCase());
-        break;
-      case 'idSort':
-        setIdSort(value);
-        break;
-      default:
-        break;
-    }
-  };
-
-  const resetFilters = () => {
-    setSearchTerm('');
-    setElement('All Elements');
-    setType('all');
-    setIdSort(null);
-    setRarity('all');
-  };
-
-  const getCardName = (card) => {
-    if (typeof card.name === 'number') {
-      const cardWithName = cards.find(c => c.cardNumber === card.name);
-      return cardWithName ? cardWithName.name : `Card ${card.name}`;
-    }
-    return card.name;
-  };
-
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Card Gallery</h1>
-      
-      <FilterOptions 
-        cards={cards}
-        onFilterChange={handleFilterChange}
-        onResetFilters={resetFilters}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        currentType={type}
-      />
-
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-        {filteredCards.map((card) => (
-          <motion.div
-            key={card.id}
-            whileHover={{ scale: 1.05 }}
-            onClick={() => navigate(`/cards/${card.id}`)}
-          >
-            <Card className="p-4 cursor-pointer">
-              <img 
-                src={`/images/cards/${card.id}.webp`}
-                alt={card.name} 
-                className="w-full h-48 object-contain mb-2"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `/images/cards/${card.id}.png`;
-                }}
-              />
-              <h3 className="font-semibold text-lg">{card.name}</h3>
-              <p className="text-sm text-gray-600">
-                {card.element} | {card.type} | {
-                  card.rarity === 'C' ? 'Common' :
-                  card.rarity === 'U' ? 'Uncommon' :
-                  card.rarity.trim() === 'R' ? 'Rare' :
-                  card.rarity === 'E' ? 'Epic' :
-                  card.rarity === 'L' ? 'Legendary' :
-                  card.rarity
-                }
-              </p>
-              {card.type === 'Creature' && (
-                <p className="text-sm text-gray-600">
-                  STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
-                </p>
-              )}
-            </Card>
-          </motion.div>
-        ))}
+    <>
+      <Helmet>
+        <title>Card Gallery - Browse Elemental Masters TCG Cards</title>
+        <meta name="description" content="Explore the complete collection of Elemental Masters Trading Card Game cards. Browse creatures, runes, counters, and shields from all elements." />
+        <meta name="keywords" content="Elemental Masters cards, TCG card gallery, trading card collection, card database, elemental cards" />
+        <meta property="og:title" content="Card Gallery - Elemental Masters TCG Collection" />
+        <meta property="og:description" content="Browse and discover all cards in the Elemental Masters Trading Card Game. Find creatures, runes, counters, and shields from every element." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://elementalgames.gg/cards/gallery" />
+      </Helmet>
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-4xl font-bold mb-8 text-center">Card Gallery</h1>
+        {isLoading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+            {[...Array(20)].map((_, index) => (
+              <Skeleton key={index} className="w-full h-64" />
+            ))}
+          </div>
+        ) : error ? (
+          <Alert variant="destructive">
+            <AlertCircle className="h-4 w-4" />
+            <AlertTitle>Error</AlertTitle>
+            <AlertDescription>Failed to load cards: {error}</AlertDescription>
+          </Alert>
+        ) : (
+          <CardGallery />
+        )}
       </div>
-    </div>
+    </>
   );
 };
 

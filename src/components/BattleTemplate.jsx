@@ -68,29 +68,39 @@ const BattleTemplate = ({
     setShowTargetOverlay(false);
 
     if (willBlock) {
-      // Cloud Sprinter deals damage
+      // Mark the blocking creature as having used its action
+      const updatedDefenders = defenders.map(def => 
+        def.id === 'cloud-sprinter' 
+          ? { ...def, hasAction: false }
+          : def
+      );
+      setDefenders(updatedDefenders);
+
+      // Cloud Sprinter deals damage to Glacis
       setShowAirAnimation(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       if (attacker.health) attacker.health -= 75;
       setShowAirAnimation(false);
       await new Promise(resolve => setTimeout(resolve, 500));
       
-      // Glacis attacks and destroys Cloud Sprinter
+      // Glacis attacks and deals damage to Cloud Sprinter
       setIsAttacking(true);
       await new Promise(resolve => setTimeout(resolve, 500));
       setIsAttacking(false);
       
       // Update Cloud Sprinter's health
-      const updatedDefenders = defenders.map(def => 
+      const updatedDefendersAfterBlock = updatedDefenders.map(def => 
         def.id === 'cloud-sprinter' 
-          ? { ...def, health: 0 }
+          ? { ...def, health: Math.max(0, def.health - attacker.strength) }
           : def
       );
-      setDefenders(updatedDefenders);
+      setDefenders(updatedDefendersAfterBlock);
       
-      setIsDestroying(true);
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setIsDestroying(false);
+      if (updatedDefendersAfterBlock.find(d => d.id === 'cloud-sprinter').health <= 0) {
+        setIsDestroying(true);
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        setIsDestroying(false);
+      }
       setCardRotated(true);
       onAction();
     } else {

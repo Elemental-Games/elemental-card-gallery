@@ -6,7 +6,7 @@ const DialogueBox = ({ isOpen, onClose, text, onContinue, onSkip, isLastStep }) 
   if (!isOpen) return null;
 
   return (
-    <div className="absolute bottom-8 left-4 md:left-[200px] right-[200px] md:right-[300px] pointer-events-auto">
+    <div className="absolute bottom-8 left-4 md:left-[200px] right-[200px] md:right-[300px] pointer-events-auto z-50">
       <div className="relative bg-darkPurple/80 backdrop-blur-sm rounded-lg shadow-xl p-6 text-white max-w-[600px]">
         <button
           onClick={onClose}

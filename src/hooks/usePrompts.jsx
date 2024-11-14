@@ -1,40 +1,23 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 
 export const usePrompts = (selectedTarget) => {
-  const [showDodgePrompt, setShowDodgePrompt] = useState(false);
-  const [showBlockPrompt, setShowBlockPrompt] = useState(false);
   const [showAgilityWarning, setShowAgilityWarning] = useState(false);
-  const [showTargetOverlay, setShowTargetOverlay] = useState(false);
-
-  useEffect(() => {
-    if (selectedTarget?.id === 'cloud-sprinter') {
-      setShowDodgePrompt(true);
-      setShowTargetOverlay(false);
-    } else if (selectedTarget) {
-      setShowTargetOverlay(true);
-      setShowDodgePrompt(false);
-    } else {
-      setShowTargetOverlay(false);
-      setShowDodgePrompt(false);
-    }
-  }, [selectedTarget]);
+  const [showBlockPrompt, setShowBlockPrompt] = useState(false);
+  const [showDodgePrompt, setShowDodgePrompt] = useState(false);
 
   const resetPrompts = () => {
-    setShowDodgePrompt(false);
-    setShowBlockPrompt(false);
     setShowAgilityWarning(false);
-    setShowTargetOverlay(false);
+    setShowBlockPrompt(false);
+    setShowDodgePrompt(false);
   };
 
   return {
-    showDodgePrompt,
-    setShowDodgePrompt,
-    showBlockPrompt,
-    setShowBlockPrompt,
     showAgilityWarning,
     setShowAgilityWarning,
-    showTargetOverlay,
-    setShowTargetOverlay,
+    showBlockPrompt,
+    setShowBlockPrompt,
+    showDodgePrompt,
+    setShowDodgePrompt,
     resetPrompts
   };
 };

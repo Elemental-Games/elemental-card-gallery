@@ -17,7 +17,7 @@ import { Button } from "@/components/ui/button";
 const CardGalleryPage = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState(null);
-  const [showAnnouncement, setShowAnnouncement] = React.useState(true);
+  const [showAnnouncement] = React.useState(true); // Removed setShowAnnouncement since we don't want to close
 
   useEffect(() => {
     setTimeout(() => {
@@ -37,8 +37,8 @@ const CardGalleryPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/cards/gallery" />
       </Helmet>
 
-      <Dialog open={showAnnouncement} onOpenChange={setShowAnnouncement}>
-        <DialogContent className="sm:max-w-[425px]">
+      <Dialog open={showAnnouncement} onOpenChange={() => {}}>
+        <DialogContent className="sm:max-w-[425px]" onPointerDownOutside={(e) => e.preventDefault()}>
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold">Coming Soon!</DialogTitle>
             <DialogDescription className="text-lg mt-4">

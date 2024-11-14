@@ -89,7 +89,6 @@ const RulesPage = () => {
         </div>
 
         <div className="mt-8">
-          {/* ... keep existing code (TabsContent sections) */}
           <TabsContent value="quickstart">
             <QuickStart data={rulesData.quickStart} />
           </TabsContent>

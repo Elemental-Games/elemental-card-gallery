@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Download } from 'lucide-react';
+import { rulesData } from '../data/rulesData';
 import QuickStart from '../components/RulesComponents/QuickStart';
 import FullRules from '../components/RulesComponents/FullRules';
 import DeckBuilding from '../components/RulesComponents/DeckBuilding';
@@ -10,7 +11,8 @@ import CardTypes from '../components/RulesComponents/CardTypes';
 import Gameplay from '../components/RulesComponents/Gameplay';
 import Combat from '../components/RulesComponents/Combat';
 import FAQ from '../components/RulesComponents/FAQ';
-import { rulesData } from '../data/rulesData';
+import TournamentRules from '../components/RulesComponents/TournamentRules';
+import Elements from '../components/RulesComponents/Elements';
 
 const RulesPage = () => {
   return (
@@ -34,6 +36,8 @@ const RulesPage = () => {
           <TabsTrigger value="cardtypes">Card Types</TabsTrigger>
           <TabsTrigger value="gameplay">Gameplay</TabsTrigger>
           <TabsTrigger value="combat">Combat</TabsTrigger>
+          <TabsTrigger value="elements">Elements</TabsTrigger>
+          <TabsTrigger value="tournament">Tournament Rules</TabsTrigger>
           <TabsTrigger value="faq">FAQ</TabsTrigger>
         </TabsList>
 
@@ -54,6 +58,12 @@ const RulesPage = () => {
         </TabsContent>
         <TabsContent value="combat">
           <Combat data={rulesData.combat} />
+        </TabsContent>
+        <TabsContent value="elements">
+          <Elements data={rulesData.elements} />
+        </TabsContent>
+        <TabsContent value="tournament">
+          <TournamentRules data={rulesData.tournament} />
         </TabsContent>
         <TabsContent value="faq">
           <FAQ data={rulesData.faq} />

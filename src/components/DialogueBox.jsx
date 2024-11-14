@@ -6,30 +6,30 @@ const DialogueBox = ({ isOpen, onClose, text, onContinue, onSkip, isLastStep }) 
   if (!isOpen) return null;
 
   return (
-    <div className="absolute bottom-8 left-[200px] md:left-[300px] right-4 pointer-events-auto">
-      <div className="relative bg-darkPurple/80 backdrop-blur-sm rounded-lg shadow-xl p-6 text-white">
+    <div className="absolute bottom-8 left-4 md:left-[200px] right-[200px] md:right-[300px] pointer-events-auto">
+      <div className="relative bg-darkPurple/80 backdrop-blur-sm rounded-lg shadow-xl p-6 text-white max-w-[600px]">
         <button
           onClick={onClose}
           className="absolute right-2 top-2 p-2 hover:bg-white/10 rounded-full"
         >
           <X className="h-6 w-6" />
         </button>
-        <p className="text-lg mb-6 pr-8">{text}</p>
-        <div className="flex justify-end gap-4">
+        <p className="text-lg mb-6 pr-8 break-words">{text}</p>
+        <div className="flex justify-start gap-4">
           {!isLastStep ? (
             <>
+              <Button 
+                onClick={onContinue}
+                className="bg-purple-800 hover:bg-purple-700"
+              >
+                Continue
+              </Button>
               <Button 
                 variant="outline" 
                 onClick={onSkip}
                 className="hover:bg-white/10"
               >
                 Skip Tour
-              </Button>
-              <Button 
-                onClick={onContinue}
-                className="bg-purple-800 hover:bg-purple-700"
-              >
-                Continue
               </Button>
             </>
           ) : (

@@ -3,11 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { Alert } from '@/components/ui/alert';
 
 const regions = [
-  { name: 'Evermere', image: '/path/evermere_path.png', route: '/evermere' },
-  { name: 'Grivoss', image: '/path/grivoss_path.png', route: '/grivoss' },
-  { name: 'Scarto', image: '/path/scarto_path.png', route: '/scarto' },
-  { name: 'Tsunareth', image: '/path/tsunareth_path.png', route: '/tsunareth' },
-  { name: 'Zalos', image: '/path/zalos_path.png', route: '/zalos' },
+  { name: 'Evermere', image: '/path/evermere_path.png', route: '/kinbrold/evermere', coords: { x: 800, y: 600 } },
+  { name: 'Grivoss', image: '/path/grivoss_path.png', route: '/kinbrold/grivoss', coords: { x: 400, y: 800 } },
+  { name: 'Scarto', image: '/path/scarto_path.png', route: '/kinbrold/scarto', coords: { x: 1200, y: 400 } },
+  { name: 'Tsunareth', image: '/path/tsunareth_path.png', route: '/kinbrold/tsunareth', coords: { x: 800, y: 1200 } },
+  { name: 'Zalos', image: '/path/zalos_path.png', route: '/kinbrold/zalos', coords: { x: 200, y: 200 } },
 ];
 
 const MapComponent = ({ showInteractivity, width, height }) => {

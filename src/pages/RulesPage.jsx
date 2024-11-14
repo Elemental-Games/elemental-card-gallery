@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -56,7 +56,7 @@ const RulesPage = () => {
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-full">
-            <DropdownMenuGroup className="w-full">
+            <DropdownMenuGroup>
               {sections.map((section) => (
                 <DropdownMenuItem 
                   key={section.value}
@@ -79,7 +79,7 @@ const RulesPage = () => {
         className="w-full"
       >
         <div className="hidden md:block">
-          <TabsList className="mb-8 flex flex-wrap gap-2 justify-start">
+          <TabsList className="mb-8 inline-flex h-10 items-center justify-start gap-2 rounded-md bg-muted p-1 text-muted-foreground">
             {sections.map((section) => (
               <TabsTrigger key={section.value} value={section.value}>
                 {section.label}

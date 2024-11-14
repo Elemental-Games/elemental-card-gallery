@@ -10,7 +10,6 @@ import {
 } from "@/components/ui/dialog";
 import { Button } from '@/components/ui/button';
 import { X } from "lucide-react";
-import DeckBuilderContent from '../components/DeckBuilder/DeckBuilderContent';
 
 const DeckBuilderPage = () => {
   const [showAnnouncement] = useState(true);
@@ -56,7 +55,10 @@ const DeckBuilderPage = () => {
         </DialogContent>
       </Dialog>
 
-      <DeckBuilderContent />
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-3xl font-bold mb-6">Deck Builder</h1>
+        <p className="text-lg text-muted-foreground">Loading deck builder...</p>
+      </div>
     </>
   );
 };

@@ -1,77 +1,81 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 
 const features = [
   {
     title: 'Interactive Card Technology',
     description: 'Every card has a unique QR code, unlocking a wealth of information, lore, strategies, and more.',
-    icon: '🔍'
+    icon: '/svgs/magnifying-glass-solid.svg'
   },
   {
     title: 'Rich World',
     description: 'Explore the world and five Kingdoms of Kinbrold - consisting of 4 Elemental Kingdoms, a Kingdom for those without elemental control, and 6 regions connecting all 5 major Kingdoms.',
-    icon: '🌍'
+    icon: '/svgs/earth-americas-solid.svg'
   },
   {
     title: 'Diverse Creatures',
     description: 'Command Air, Water, Fire, and Earth creatures, including exotic combinational types like Lava, Poison, Sand, Frost, Lightning, and Crystal elements in the form of Dragons.',
-    icon: '🐉'
+    icon: '/svgs/dragon.svg'
   },
   {
     title: 'Unique Battle Mechanics',
     description: 'Each creature has a Strength and an Agility which determine their damage dealt, health, and how fast they can attack, block, or dodge respectively. Protecting you from your opponent are three shields, each with an increasingly powerful effect when broken.',
-    icon: '⚔️'
+    icon: '/svgs/swords.svg'
   },
   {
     title: 'Quick Yet Strategic',
     description: 'Easy to learn but challenging to master, with games lasting around 20 minutes and a simple gameplay mechanic.',
-    icon: '⏱️'
+    icon: '/svgs/clock-regular.svg'
   }
 ];
 
-const FeatureCard = ({ feature, isExpanded, onClick }) => (
-  <motion.div
-    className={`bg-purple-800 p-6 rounded-lg shadow-lg cursor-pointer ${isExpanded ? 'col-span-2' : ''}`}
-    onClick={onClick}
-    layout
-    transition={{ duration: 0.5, type: 'spring' }}
-  >
-    <div className="flex items-center mb-4">
-      <span className="text-4xl mr-4">{feature.icon}</span>
-      <h3 className="text-xl font-semibold">{feature.title}</h3>
-    </div>
-    {isExpanded ? (
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
+const FeatureCard = ({ feature }) => (
+  <Dialog>
+    <DialogTrigger asChild>
+      <motion.div
+        className="bg-purple-800 p-6 rounded-lg shadow-lg cursor-pointer"
+        whileHover={{ scale: 1.05 }}
+        whileTap={{ scale: 0.95 }}
       >
+        <div className="flex items-center mb-4">
+          <img 
+            src={feature.icon} 
+            alt={feature.title} 
+            className="w-8 h-8 mr-4 invert" // invert to make SVGs white
+          />
+          <h3 className="text-xl font-semibold">{feature.title}</h3>
+        </div>
+        <p className="text-sm text-gray-300">
+          Click to learn more
+        </p>
+      </motion.div>
+    </DialogTrigger>
+    <DialogContent className="bg-purple-900 text-white">
+      <DialogHeader>
+        <DialogTitle className="flex items-center gap-2">
+          <img 
+            src={feature.icon} 
+            alt={feature.title} 
+            className="w-6 h-6 invert"
+          />
+          {feature.title}
+        </DialogTitle>
+      </DialogHeader>
+      <p className="mt-4">
         {feature.description}
-      </motion.p>
-    ) : (
-      <motion.p
-        className="text-sm text-gray-300"
-        initial={{ opacity: 1 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      >
-        Click to learn more
-      </motion.p>
-    )}
-  </motion.div>
+      </p>
+    </DialogContent>
+  </Dialog>
 );
 
 const KeyFeatures = () => {
-  const [expandedIndex, setExpandedIndex] = useState(null);
-
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {features.map((feature, index) => (
         <FeatureCard
           key={index}
           feature={feature}
-          isExpanded={expandedIndex === index}
-          onClick={() => setExpandedIndex(expandedIndex === index ? null : index)}
         />
       ))}
     </div>

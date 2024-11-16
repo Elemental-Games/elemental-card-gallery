@@ -51,18 +51,18 @@ const FeatureCard = ({ feature }) => (
         </p>
       </motion.div>
     </DialogTrigger>
-    <DialogContent className="bg-purple-900 text-white">
+    <DialogContent className="bg-purple-900 text-white w-[95vw] max-w-[800px] h-auto max-h-[90vh] p-8 sm:p-10">
       <DialogHeader>
-        <DialogTitle className="flex items-center gap-2">
+        <DialogTitle className="flex items-center gap-3 text-2xl sm:text-3xl mb-6">
           <img 
             src={feature.icon} 
             alt={feature.title} 
-            className="w-6 h-6 invert"
+            className="w-8 h-8 sm:w-10 sm:h-10 invert"
           />
           {feature.title}
         </DialogTitle>
       </DialogHeader>
-      <p className="mt-4">
+      <p className="mt-6 text-lg sm:text-xl leading-relaxed">
         {feature.description}
       </p>
     </DialogContent>

@@ -12,6 +12,39 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+const kingdoms = [
+  {
+    name: 'Evermere',
+    path: '/kinbrold/evermere',
+    description: 'The Central Kingdom',
+    color: 'from-purple-500 to-purple-700'
+  },
+  {
+    name: 'Zalos',
+    path: '/kinbrold/zalos',
+    description: 'Kingdom of Air',
+    color: 'from-blue-400 to-blue-600'
+  },
+  {
+    name: 'Tsunareth',
+    path: '/kinbrold/tsunareth',
+    description: 'Kingdom of Water',
+    color: 'from-cyan-500 to-cyan-700'
+  },
+  {
+    name: 'Scarto',
+    path: '/kinbrold/scarto',
+    description: 'Kingdom of Fire',
+    color: 'from-red-500 to-red-700'
+  },
+  {
+    name: 'Grivoss',
+    path: '/kinbrold/grivoss',
+    description: 'Kingdom of Earth',
+    color: 'from-green-500 to-green-700'
+  }
+];
+
 const KinbroldPage = () => {
   const navigate = useNavigate();
   const [selectedDragon, setSelectedDragon] = useState(null);

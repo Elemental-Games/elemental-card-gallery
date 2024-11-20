@@ -16,10 +16,10 @@ const CardsPage = () => {
       <div className="container mx-auto px-4 py-8">
         <Alert className="mb-8">
           <AlertCircle className="h-4 w-4" />
-          <AlertTitle>Coming Soon!</AlertTitle>
-          <AlertDescription className="mt-2">
+          <AlertTitle className="text-2xl font-bold">Coming Soon!</AlertTitle>
+          <AlertDescription className="mt-2 text-xl">
             The Card Gallery and Deck Builder features will be available post-launch. 
-            <Link to="/join-now" className="ml-2 text-primary hover:underline">
+            <Link to="/join-now" className="ml-2 text-primary hover:text-yellow-400 transition-colors">
               Join now to stay updated and be the first to access these features!
             </Link>
           </AlertDescription>

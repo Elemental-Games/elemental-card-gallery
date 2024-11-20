@@ -62,7 +62,7 @@ const KinbroldPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/kinbrold" />
       </Helmet>
       <div className="flex flex-col w-full">
-        <section className="relative w-full h-[85vh] overflow-hidden">
+        <section className="relative w-full h-screen overflow-hidden">
           <KinbroldMap />
         </section>
 

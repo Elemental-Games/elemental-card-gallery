@@ -19,12 +19,16 @@ if (!RESEND_API_KEY) {
 
 const resend = new Resend(RESEND_API_KEY);
 
-// Enable CORS for all routes with more permissive settings for production
+// Enable CORS with specific configuration
 app.use(cors({
-  origin: [SITE_URL, 'https://elementalgames.gg'],
-  methods: ['GET', 'POST'],
-  credentials: true
+  origin: true, // Allow all origins in development
+  methods: ['GET', 'POST', 'OPTIONS'],
+  credentials: true,
+  allowedHeaders: ['Content-Type']
 }));
+
+// Handle preflight requests
+app.options('*', cors());
 
 app.use(express.json());
 

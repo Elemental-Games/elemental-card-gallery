@@ -24,39 +24,6 @@ const KinbroldPage = () => {
     'Balon': { name: 'Balon', image: '/tour/balon1.png' }
   };
 
-  const kingdoms = [
-    { 
-      name: 'Evermere',
-      path: '/kinbrold/evermere',
-      color: 'from-purple-700 to-purple-900 shadow-purple-500/50',
-      description: 'The Central Kingdom'
-    },
-    { 
-      name: 'Grivoss',
-      path: '/kinbrold/grivoss',
-      color: 'from-green-600 to-green-800 shadow-green-500/50',
-      description: 'The Earth Kingdom'
-    },
-    { 
-      name: 'Scarto',
-      path: '/kinbrold/scarto',
-      color: 'from-red-600 to-red-800 shadow-red-500/50',
-      description: 'The Fire Kingdom'
-    },
-    { 
-      name: 'Tsunareth',
-      path: '/kinbrold/tsunareth',
-      color: 'from-blue-600 to-blue-800 shadow-blue-500/50',
-      description: 'The Water Kingdom'
-    },
-    { 
-      name: 'Zalos',
-      path: '/kinbrold/zalos',
-      color: 'from-gray-300 to-gray-500 shadow-gray-400/50',
-      description: 'The Air Kingdom'
-    }
-  ];
-
   return (
     <>
       <Helmet>
@@ -91,14 +58,14 @@ const KinbroldPage = () => {
         </section>
 
         <Dialog open={!!selectedDragon} onOpenChange={() => setSelectedDragon(null)}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] w-full">
             <DialogHeader>
               <DialogTitle>{selectedDragon?.name}</DialogTitle>
               <DialogDescription>
                 <img 
                   src={selectedDragon?.image} 
                   alt={selectedDragon?.name}
-                  className="w-full h-auto rounded-lg mt-4"
+                  className="w-full h-auto rounded-lg mt-4 object-contain max-h-[70vh]"
                 />
               </DialogDescription>
             </DialogHeader>
@@ -106,14 +73,14 @@ const KinbroldPage = () => {
         </Dialog>
 
         <Dialog open={!!selectedElementalist} onOpenChange={() => setSelectedElementalist(null)}>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] w-full">
             <DialogHeader>
               <DialogTitle>{selectedElementalist?.name}</DialogTitle>
               <DialogDescription>
                 <img 
                   src={selectedElementalist?.image} 
                   alt={selectedElementalist?.name}
-                  className="w-full h-auto rounded-lg mt-4"
+                  className="w-full h-auto rounded-lg mt-4 object-contain max-h-[70vh]"
                 />
               </DialogDescription>
             </DialogHeader>

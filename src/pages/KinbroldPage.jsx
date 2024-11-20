@@ -23,13 +23,13 @@ const kingdoms = [
     name: 'Zalos',
     path: '/kinbrold/zalos',
     description: 'Kingdom of Air',
-    color: 'from-blue-400 to-blue-600'
+    color: 'from-white to-gray-100'
   },
   {
     name: 'Tsunareth',
     path: '/kinbrold/tsunareth',
     description: 'Kingdom of Water',
-    color: 'from-cyan-500 to-cyan-700'
+    color: 'from-blue-700 to-blue-900'
   },
   {
     name: 'Scarto',
@@ -50,13 +50,6 @@ const KinbroldPage = () => {
   const [selectedDragon, setSelectedDragon] = useState(null);
   const [selectedElementalist, setSelectedElementalist] = useState(null);
 
-  const elementalists = {
-    'Galea': { name: 'Galea', image: '/tour/galea1.png' },
-    'Mek': { name: 'Mek', image: '/tour/mek1.png' },
-    'Osao': { name: 'Osao', image: '/tour/osao1.png' },
-    'Balon': { name: 'Balon', image: '/tour/balon1.png' }
-  };
-
   return (
     <>
       <Helmet>
@@ -69,7 +62,7 @@ const KinbroldPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/kinbrold" />
       </Helmet>
       <div className="flex flex-col w-full">
-        <section className="relative w-full h-[100vh] overflow-hidden">
+        <section className="relative w-full h-[85vh] overflow-hidden">
           <KinbroldMap />
         </section>
 
@@ -81,7 +74,7 @@ const KinbroldPage = () => {
               <Button
                 key={kingdom.name}
                 onClick={() => navigate(kingdom.path)}
-                className={`bg-gradient-to-br ${kingdom.color} w-full h-24 font-bold flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl`}
+                className={`bg-gradient-to-br ${kingdom.color} w-full h-24 font-bold flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl ${kingdom.name === 'Zalos' ? 'text-gray-800' : 'text-white'}`}
               >
                 <span className="text-lg">{kingdom.name}</span>
                 <span className="text-sm opacity-80">{kingdom.description}</span>

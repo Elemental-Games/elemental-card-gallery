@@ -19,7 +19,7 @@ const CardsPage = () => {
           <AlertTitle className="text-2xl font-bold">Coming Soon!</AlertTitle>
           <AlertDescription className="mt-2 text-xl">
             The Card Gallery and Deck Builder features will be available post-launch. 
-            <Link to="/join-now" className="ml-2 text-primary hover:text-yellow-400 transition-colors">
+            <Link to="/join" className="ml-2 text-primary hover:text-yellow-400 transition-colors">
               Join now to stay updated and be the first to access these features!
             </Link>
           </AlertDescription>

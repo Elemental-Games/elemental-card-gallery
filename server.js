@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const SITE_URL = process.env.SITE_URL;
+const SITE_URL = process.env.SITE_URL || 'https://www.elementalgames.gg';
 
 console.log('Server starting...');
 console.log('SITE_URL:', SITE_URL);
@@ -21,7 +21,7 @@ const resend = new Resend(RESEND_API_KEY);
 
 // Enable CORS with specific configuration
 app.use(cors({
-  origin: true, // Allow all origins in development
+  origin: ['https://www.elementalgames.gg', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
   allowedHeaders: ['Content-Type']

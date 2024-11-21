@@ -1,8 +1,12 @@
 export async function sendWelcomeEmail(email) {
   try {
     console.log('Starting email send to:', email);
+    
+    // Default to production URL if VITE_API_URL is not set
+    const apiUrl = import.meta.env.VITE_API_URL || 'https://www.elementalgames.gg';
+    console.log('Using API URL:', apiUrl);
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/subscribe`, {
+    const response = await fetch(`${apiUrl}/api/subscribe`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

@@ -12,7 +12,7 @@ const JoinNowPage = () => {
 
   const calculateDaysUntil = () => {
     const today = new Date();
-    const targetDate = new Date('2024-12-01');
+    const targetDate = new Date('2025-02-07');
     const timeDiff = targetDate.getTime() - today.getTime();
     return Math.ceil(timeDiff / (1000 * 3600 * 24));
   };
@@ -38,7 +38,7 @@ const JoinNowPage = () => {
       <div className="bg-primary text-primary-foreground p-4 rounded-lg mb-8 text-center max-w-md mx-auto">
         <h2 className="text-2xl font-semibold mb-2">Countdown to Launch</h2>
         <p className="text-3xl font-bold font-heading">{calculateDaysUntil()} days</p>
-        <p>Mark your calendars for December 1st, 2024!</p>
+        <p>Mark your calendars for February 7th, 2025!</p>
       </div>
 
       <Card className="p-6 mb-8 bg-accent text-accent-foreground">

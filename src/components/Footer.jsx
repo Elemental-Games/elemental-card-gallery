@@ -56,7 +56,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="mt-8">
-          <p>&copy; 2024 Elemental Games. All rights reserved.</p>
+          <p>&copy; 2025 Elemental Games LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>

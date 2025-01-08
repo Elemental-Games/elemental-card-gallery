@@ -7,87 +7,53 @@ dotenv.config();
 
 const app = express();
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
-const SITE_URL = process.env.SITE_URL || 'https://www.elementalgames.gg';
+const isProd = process.env.NODE_ENV === 'production';
 
-console.log('Server starting...');
-console.log('SITE_URL:', SITE_URL);
-
-if (!RESEND_API_KEY) {
-  console.error('ERROR: RESEND_API_KEY is not set in environment variables');
-  process.exit(1);
-}
-
-const resend = new Resend(RESEND_API_KEY);
-
-// Update CORS configuration to be more permissive during development
+// CORS configuration based on environment
 const corsOptions = {
-  origin: process.env.NODE_ENV === 'production'
-    ? ['https://www.elementalgames.gg']
-    : ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'],
+  origin: isProd 
+    ? ['https://elementalgames.gg', 'https://www.elementalgames.gg']
+    : ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: ['Content-Type', 'Origin', 'Authorization']
 };
 
 app.use(cors(corsOptions));
-
-// Add a preflight handler
-app.options('*', cors(corsOptions));
-
 app.use(express.json());
 
-// Health check endpoint
+// Test endpoint
 app.get('/api/health', (req, res) => {
-  console.log('Health check endpoint hit');
-  res.status(200).json({ status: 'ok' });
+  res.json({ status: 'ok' });
 });
 
 app.post('/api/subscribe', async (req, res) => {
-  console.log('Subscribe endpoint hit');
-  console.log('Request body:', req.body);
-
+  console.log('Subscribe endpoint hit with:', req.body);
+  
   if (!req.body.email) {
-    console.log('No email provided');
     return res.status(400).json({ message: 'Email is required' });
   }
 
   try {
+    const resend = new Resend(RESEND_API_KEY);
     const { email } = req.body;
-    const unsubscribeToken = Buffer.from(email).toString('base64');
-    const unsubscribeUrl = `${SITE_URL}/unsubscribe?token=${unsubscribeToken}`;
 
-    console.log('Attempting to send email to:', email);
-    
-    const emailResponse = await resend.emails.send({
+    const data = await resend.emails.send({
       from: 'Elemental Masters <contact@elementalgames.gg>',
       to: email,
-      subject: 'Welcome to the World of Elemental Masters!',
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-          <h1>Welcome to Elemental Masters!</h1>
-          <p>Thank you for joining our community!</p>
-          <a href="${unsubscribeUrl}">Unsubscribe</a>
-        </div>
-      `,
+      subject: 'Welcome to Elemental Masters!',
+      html: `<p>Welcome to Elemental Masters!</p>`
     });
 
-    console.log('Email sent successfully:', emailResponse);
-    return res.status(200).json({ 
-      message: 'Successfully subscribed', 
-      emailResponse 
-    });
-
+    console.log('Email sent:', data);
+    res.json({ message: 'Successfully subscribed!' });
   } catch (error) {
-    console.error('Email sending error:', error);
-    return res.status(500).json({ 
-      message: 'Error subscribing', 
-      error: error.message 
-    });
+    console.error('Subscription error:', error);
+    res.status(500).json({ message: 'Error subscribing', error: error.message });
   }
 });
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
   console.log(`CORS enabled for: ${corsOptions.origin.join(', ')}`);
 });

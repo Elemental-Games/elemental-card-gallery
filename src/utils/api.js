@@ -1,3 +1,37 @@
+const fs = require('fs');
+const path = require('path');
+
+// Read the JSON file from the public directory
+const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
+const rawData = fs.readFileSync(filePath);
+const cards = JSON.parse(rawData).cards;
+
+// Function to process each card
+function processCard(card) {
+  const processedCard = { ...card };
+
+  for (const [key, value] of Object.entries(processedCard)) {
+    if (value === 'NaN') {
+      if (['synergies', 'counters', 'news'].includes(key)) {
+        processedCard[key] = '[]';
+      } else {
+        processedCard[key] = null;
+      }
+    }
+  }
+
+  return processedCard;
+}
+
+// Process all cards
+const processedCards = cards.map(processCard);
+
+// Write the processed data back to a new JSON file
+const outputPath = path.join(process.cwd(), 'public', 'data', 'processed-cards.json');
+fs.writeFileSync(outputPath, JSON.stringify({ cards: processedCards }, null, 2));
+
+console.log('Cards have been processed and saved to processed-cards.json');
+
 export const fetchRulesData = async () => {
   return {
     quickStart: [
@@ -19,25 +53,26 @@ export const fetchRulesData = async () => {
           "Flip a coin to determine who goes first.",
           "The player going first cannot attack on their first turn."
         ]
-      }
-    }
+      },
+      // ... Add more sections as needed
+    },
+    // ... Add data for other sections (deckBuilding, cardTypes, gameplay, combat, faq)
   };
 };
 
 export const subscribeEmail = async (email) => {
-  const API_URL = import.meta.env.DEV 
-    ? 'http://localhost:3001'
-    : 'https://www.elementalgames.gg';
+  // Use relative URL in production, full URL in development
+  const API_URL = import.meta.env.PROD 
+    ? '/api/subscribe'  // This will use the same domain as the website
+    : 'http://localhost:3001/api/subscribe';
   
   try {
-    console.log('Making API call to:', `${API_URL}/api/subscribe`);
-    const response = await fetch(`${API_URL}/api/subscribe`, {
+    console.log('Making API call to:', API_URL);
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Origin': window.location.origin
       },
-      credentials: 'include',
       body: JSON.stringify({ email }),
     });
 

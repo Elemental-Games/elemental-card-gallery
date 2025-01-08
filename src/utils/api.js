@@ -1,45 +1,27 @@
-const API_URL = import.meta.env.VITE_API_URL || 'https://api.elementalgames.gg';
-
-export const checkSubscriptionStatus = async (email) => {
+export const subscribeEmail = async (email) => {
+  // Use relative URL in production, full URL in development
+  const API_URL = import.meta.env.PROD 
+    ? 'https://elementalgames.gg/api/subscribe'  // Production URL
+    : 'http://localhost:3001/api/subscribe';     // Development URL
+  
   try {
-    const response = await fetch(`${API_URL}/check-subscription`, {
+    console.log('Making API call to:', API_URL);
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ email }),
     });
-    
-    const data = await response.json();
-    return data.isSubscribed;
-  } catch (error) {
-    console.error('Error checking subscription:', error);
-    return false;
-  }
-};
 
-export const handleNewSignup = async (email) => {
-  try {
-    // First check if they're already subscribed
-    const isSubscribed = await checkSubscriptionStatus(email);
-    
-    if (!isSubscribed) {
-      // If not subscribed, handle new signup
-      const response = await fetch(`${API_URL}/signup`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email }),
-      });
-      
-      const data = await response.json();
-      return data.success;
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'Failed to subscribe');
     }
-    
-    return false; // Already subscribed
+
+    return await response.json();
   } catch (error) {
-    console.error('Error handling signup:', error);
-    return false;
+    console.error('Subscription error:', error);
+    throw error;
   }
 };

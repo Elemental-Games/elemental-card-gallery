@@ -1,11 +1,17 @@
-import axios from 'axios';
-
-const API_URL = import.meta.env.VITE_API_URL;
+const API_URL = import.meta.env.VITE_API_URL || 'https://api.elementalgames.gg';
 
 export const checkSubscriptionStatus = async (email) => {
   try {
-    const response = await axios.post(`${API_URL}/check-subscription`, { email });
-    return response.data.isSubscribed;
+    const response = await fetch(`${API_URL}/check-subscription`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    });
+    
+    const data = await response.json();
+    return data.isSubscribed;
   } catch (error) {
     console.error('Error checking subscription:', error);
     return false;
@@ -19,8 +25,16 @@ export const handleNewSignup = async (email) => {
     
     if (!isSubscribed) {
       // If not subscribed, handle new signup
-      const response = await axios.post(`${API_URL}/signup`, { email });
-      return response.data.success;
+      const response = await fetch(`${API_URL}/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+      
+      const data = await response.json();
+      return data.success;
     }
     
     return false; // Already subscribed

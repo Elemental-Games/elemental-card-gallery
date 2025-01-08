@@ -19,16 +19,20 @@ if (!RESEND_API_KEY) {
 
 const resend = new Resend(RESEND_API_KEY);
 
-// Enable CORS with specific configuration
-app.use(cors({
-  origin: ['https://www.elementalgames.gg', 'http://localhost:3000'],
+// Update CORS configuration to be more permissive during development
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production'
+    ? ['https://www.elementalgames.gg']
+    : ['http://localhost:5173', 'http://localhost:3000', 'http://127.0.0.1:5173'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
-  allowedHeaders: ['Content-Type']
-}));
+  allowedHeaders: ['Content-Type', 'Origin', 'Authorization']
+};
 
-// Handle preflight requests
-app.options('*', cors());
+app.use(cors(corsOptions));
+
+// Add a preflight handler
+app.options('*', cors(corsOptions));
 
 app.use(express.json());
 
@@ -85,4 +89,5 @@ app.post('/api/subscribe', async (req, res) => {
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
+  console.log(`CORS enabled for: ${corsOptions.origin.join(', ')}`);
 });

@@ -1,37 +1,3 @@
-const fs = require('fs');
-const path = require('path');
-
-// Read the JSON file from the public directory
-const filePath = path.join(process.cwd(), 'public', 'data', 'cards.json');
-const rawData = fs.readFileSync(filePath);
-const cards = JSON.parse(rawData).cards;
-
-// Function to process each card
-function processCard(card) {
-  const processedCard = { ...card };
-
-  for (const [key, value] of Object.entries(processedCard)) {
-    if (value === 'NaN') {
-      if (['synergies', 'counters', 'news'].includes(key)) {
-        processedCard[key] = '[]';
-      } else {
-        processedCard[key] = null;
-      }
-    }
-  }
-
-  return processedCard;
-}
-
-// Process all cards
-const processedCards = cards.map(processCard);
-
-// Write the processed data back to a new JSON file
-const outputPath = path.join(process.cwd(), 'public', 'data', 'processed-cards.json');
-fs.writeFileSync(outputPath, JSON.stringify({ cards: processedCards }, null, 2));
-
-console.log('Cards have been processed and saved to processed-cards.json');
-
 export const fetchRulesData = async () => {
   return {
     quickStart: [
@@ -53,9 +19,37 @@ export const fetchRulesData = async () => {
           "Flip a coin to determine who goes first.",
           "The player going first cannot attack on their first turn."
         ]
-      },
-      // ... Add more sections as needed
-    },
-    // ... Add data for other sections (deckBuilding, cardTypes, gameplay, combat, faq)
+      }
+    }
   };
+};
+
+export const subscribeEmail = async (email) => {
+  const API_URL = import.meta.env.DEV 
+    ? 'http://localhost:3001'
+    : 'https://www.elementalgames.gg';
+  
+  try {
+    console.log('Making API call to:', `${API_URL}/api/subscribe`);
+    const response = await fetch(`${API_URL}/api/subscribe`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Origin': window.location.origin
+      },
+      credentials: 'include',
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('API response:', data);
+    return data;
+  } catch (error) {
+    console.error('Subscription error:', error);
+    throw error;
+  }
 };

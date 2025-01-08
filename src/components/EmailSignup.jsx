@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { subscribeEmail } from '../lib/supabase';
+import { subscribeEmail } from '../utils/api';
 
 const EmailSignup = ({ onClose, buttonClassName }) => {
   const [email, setEmail] = useState('');
@@ -18,12 +18,12 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
       const result = await subscribeEmail(email);
       console.log('Subscription result:', result);
 
-      if (result.success) {
+      if (result.message) {
         toast.success(result.message);
         setEmail('');
         if (onClose) onClose();
       } else {
-        toast.error(result.message);
+        toast.error("Failed to subscribe. Please try again later.");
       }
     } catch (error) {
       console.error('Form submission error:', error);

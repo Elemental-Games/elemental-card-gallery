@@ -1,27 +1,31 @@
-export const subscribeEmail = async (email) => {
-  // Use relative URL in production, full URL in development
-  const API_URL = import.meta.env.PROD 
-    ? 'https://elementalgames.gg/api/subscribe'  // Production URL
-    : 'http://localhost:3001/api/subscribe';     // Development URL
-  
+import axios from 'axios';
+
+const API_URL = import.meta.env.VITE_API_URL;
+
+export const checkSubscriptionStatus = async (email) => {
   try {
-    console.log('Making API call to:', API_URL);
-    const response = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      throw new Error(errorData.message || 'Failed to subscribe');
-    }
-
-    return await response.json();
+    const response = await axios.post(`${API_URL}/check-subscription`, { email });
+    return response.data.isSubscribed;
   } catch (error) {
-    console.error('Subscription error:', error);
-    throw error;
+    console.error('Error checking subscription:', error);
+    return false;
+  }
+};
+
+export const handleNewSignup = async (email) => {
+  try {
+    // First check if they're already subscribed
+    const isSubscribed = await checkSubscriptionStatus(email);
+    
+    if (!isSubscribed) {
+      // If not subscribed, handle new signup
+      const response = await axios.post(`${API_URL}/signup`, { email });
+      return response.data.success;
+    }
+    
+    return false; // Already subscribed
+  } catch (error) {
+    console.error('Error handling signup:', error);
+    return false;
   }
 };

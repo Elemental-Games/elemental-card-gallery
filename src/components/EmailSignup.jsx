@@ -14,16 +14,14 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
     setIsLoading(true);
 
     try {
-      console.log('Submitting email:', email);
       const result = await subscribeEmail(email);
-      console.log('Subscription result:', result);
-
-      if (result.message) {
+      
+      if (result.success) {
         toast.success(result.message);
         setEmail('');
         if (onClose) onClose();
       } else {
-        toast.error("Failed to subscribe. Please try again later.");
+        toast.error(result.message);
       }
     } catch (error) {
       console.error('Form submission error:', error);

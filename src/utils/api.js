@@ -1,5 +1,4 @@
 import { supabase } from '../lib/supabase';
-import { sendWelcomeEmail } from '../lib/email-service';
 
 export const subscribeEmail = async (email) => {
   try {
@@ -24,19 +23,13 @@ export const subscribeEmail = async (email) => {
       };
     }
 
-    // Generate a unique unsubscribe token
-    const unsubscribeToken = crypto.randomUUID();
-
-    // Insert new subscriber with all columns
+    // Insert new subscriber
     const { error: insertError } = await supabase
       .from('subscribers')
       .insert([{
         email: cleanEmail,
         status: 'active',
-        subscribed_at: new Date().toISOString(),
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-        unsubscribe_token: unsubscribeToken
+        subscribed_at: new Date().toISOString()
       }]);
 
     if (insertError) {
@@ -44,15 +37,20 @@ export const subscribeEmail = async (email) => {
       throw insertError;
     }
 
-    // Send welcome email
-    const emailResult = await sendWelcomeEmail(cleanEmail);
-    console.log('Welcome email result:', emailResult);
+    // Call our Edge Function to send welcome email
+    const { data: emailData, error: emailError } = await supabase.functions.invoke('send-welcome-email', {
+      body: { email: cleanEmail }
+    });
+
+    if (emailError) {
+      console.error('Error sending welcome email:', emailError);
+    }
 
     return {
       success: true,
-      message: emailResult.success 
-        ? 'Successfully subscribed! Please check your email for a welcome message.'
-        : 'Successfully subscribed! Welcome email will be sent shortly.'
+      message: emailError 
+        ? 'Successfully subscribed! Welcome email will be sent shortly.'
+        : 'Successfully subscribed! Please check your email for a welcome message.'
     };
   } catch (error) {
     console.error('Subscription error:', error);

@@ -1,32 +1,38 @@
 import { Resend } from 'resend';
 
-let resend;
-
-try {
-  if (!import.meta.env.VITE_RESEND_API_KEY) {
-    console.warn('RESEND_API_KEY is not set in environment variables');
-    resend = null;
-  } else {
-    resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+// Initialize Resend with error handling
+const initializeResend = () => {
+  try {
+    const apiKey = import.meta.env.VITE_RESEND_API_KEY;
+    if (!apiKey) {
+      console.warn('RESEND_API_KEY is not set in environment variables');
+      return null;
+    }
+    return new Resend(apiKey);
+  } catch (error) {
+    console.error('Failed to initialize Resend:', error);
+    return null;
   }
-} catch (error) {
-  console.error('Failed to initialize Resend:', error);
-  resend = null;
-}
+};
 
 export const sendWelcomeEmail = async (email) => {
+  const resend = initializeResend();
+  
   if (!resend) {
     console.error('Cannot send email: Resend not properly initialized');
     return {
       success: false,
-      message: 'Email service not configured'
+      message: 'Email service temporarily unavailable'
     };
   }
 
   try {
-    const { data, error } = await resend.emails.send({
+    console.log('Attempting to send welcome email to:', email);
+    console.log('Using Resend API key:', import.meta.env.VITE_RESEND_API_KEY ? 'Present' : 'Missing');
+
+    const response = await resend.emails.send({
       from: 'Elemental Masters <noreply@elementalgames.gg>',
-      to: email,
+      to: [email], // Make sure email is in an array
       subject: 'Welcome to Elemental Masters!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
@@ -50,7 +56,8 @@ export const sendWelcomeEmail = async (email) => {
       `
     });
 
-    if (error) throw error;
+    console.log('Email send response:', response);
+
     return {
       success: true,
       message: 'Welcome email sent successfully'
@@ -59,7 +66,7 @@ export const sendWelcomeEmail = async (email) => {
     console.error('Error sending welcome email:', error);
     return {
       success: false,
-      message: 'Failed to send welcome email'
+      message: `Failed to send welcome email: ${error.message}`
     };
   }
 };

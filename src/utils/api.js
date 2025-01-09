@@ -3,24 +3,24 @@ import { sendWelcomeEmail } from '../lib/email-service';
 
 export const subscribeEmail = async (email) => {
   try {
-    const cleanEmail = email.toLowerCase().trim();
-    console.log('Starting subscription process for:', cleanEmail);
+    console.log('Starting subscription process for:', email);
 
-    // Check if email already exists using count instead of select
-    const { count, error: countError } = await supabase
+    // Check if email already exists
+    const { data: existingUser, error: checkError } = await supabase
       .from('subscribers')
-      .select('*', { count: 'exact', head: true })
-      .eq('email', cleanEmail);
+      .select('*')
+      .eq('email', email.toLowerCase().trim())
+      .single();
 
-    if (countError) {
-      console.error('Error checking subscriber count:', countError);
-      throw countError;
+    if (checkError && checkError.code !== 'PGRST116') {
+      console.error('Error checking existing subscriber:', checkError);
+      throw checkError;
     }
 
-    if (count > 0) {
+    if (existingUser) {
       return {
         success: false,
-        message: 'This email is already subscribed!'
+        message: 'You are already subscribed!'
       };
     }
 
@@ -28,7 +28,7 @@ export const subscribeEmail = async (email) => {
     const { error: insertError } = await supabase
       .from('subscribers')
       .insert([{
-        email: cleanEmail,
+        email: email.toLowerCase().trim(),
         status: 'active',
         subscribed_at: new Date().toISOString()
       }]);
@@ -39,13 +39,13 @@ export const subscribeEmail = async (email) => {
     }
 
     // Send welcome email
-    const emailResult = await sendWelcomeEmail(cleanEmail);
+    const emailResult = await sendWelcomeEmail(email);
     console.log('Welcome email result:', emailResult);
 
     return {
       success: true,
       message: emailResult.success 
-        ? 'Successfully subscribed! Please check your email for a welcome message.'
+        ? 'Successfully subscribed! Check your email for a welcome message.'
         : 'Successfully subscribed! Welcome email will be sent shortly.'
     };
   } catch (error) {

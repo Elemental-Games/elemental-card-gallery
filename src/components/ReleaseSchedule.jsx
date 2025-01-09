@@ -140,7 +140,25 @@ const ReleaseSchedule = () => {
       <Card className="mt-6 bg-purple-800/10 border border-purple-300/50">
         <CardContent className="p-4 text-center">
           <p className="text-purple-200">
-            Stay updated! Follow us on X and join our Discord community for daily card reveals and discussions.
+            Stay updated! Follow us on{' '}
+            <a 
+              href="https://x.com/elemental_tcg" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-yellow-400 hover:text-yellow-300 transition-colors"
+            >
+              X
+            </a>
+            {' '}and join our{' '}
+            <a 
+              href="https://discord.gg/qXNWh4dMve" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-yellow-400 hover:text-yellow-300 transition-colors"
+            >
+              Discord
+            </a>
+            {' '}community for daily card reveals and discussions.
             Check out our Cards of the Week features every Monday!
           </p>
         </CardContent>

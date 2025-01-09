@@ -39,7 +39,7 @@ export async function subscribeEmail(email) {
 
     return {
       success: true,
-      message: 'Successfully subscribed! Check your email for a welcome message.'
+      message: 'Successfully subscribed! Check your email for a welcome message'
     };
   } catch (error) {
     console.error('Subscription error:', error);

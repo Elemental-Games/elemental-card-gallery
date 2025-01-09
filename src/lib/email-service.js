@@ -1,8 +1,19 @@
 import { Resend } from 'resend';
 
+// Initialize Resend with the API key
 const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
+// Add a check to ensure the API key is available
+if (!import.meta.env.VITE_RESEND_API_KEY) {
+  console.error('RESEND_API_KEY is not set in environment variables');
+}
+
 export const sendWelcomeEmail = async (email) => {
+  if (!import.meta.env.VITE_RESEND_API_KEY) {
+    console.error('Cannot send email: Missing Resend API key');
+    return false;
+  }
+
   try {
     const { data, error } = await resend.emails.send({
       from: 'Elemental Masters <noreply@elementalgames.gg>',

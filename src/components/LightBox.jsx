@@ -16,23 +16,24 @@ const LightBox = () => {
   ];
 
   useEffect(() => {
-    const hasSeenPopup = localStorage.getItem('hasSeenPopup');
+    const hasSeenLightbox = localStorage.getItem('hasSeenLightbox');
     
-    const timer = setTimeout(() => {
+    if (!hasSeenLightbox) {
       setIsOpen(true);
-    }, 2500);
-    
-    return () => clearTimeout(timer);
+      localStorage.setItem('hasSeenLightbox', 'true');
+    }
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
-    localStorage.setItem('hasSeenPopup', 'true');
+    localStorage.setItem('hasSeenLightbox', 'true');
   };
 
   const shuffleImage = () => {
     setCurrentImageIndex((prevIndex) => (prevIndex + 1) % cardImages.length);
   };
+
+  if (!isOpen) return null;
 
   return (
     <Dialog modal={true} open={isOpen} onOpenChange={setIsOpen}>

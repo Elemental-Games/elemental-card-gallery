@@ -1,17 +1,26 @@
 import { Resend } from 'resend';
 
-// Initialize Resend with the API key
-const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+let resend;
 
-// Add a check to ensure the API key is available
-if (!import.meta.env.VITE_RESEND_API_KEY) {
-  console.error('RESEND_API_KEY is not set in environment variables');
+try {
+  if (!import.meta.env.VITE_RESEND_API_KEY) {
+    console.warn('RESEND_API_KEY is not set in environment variables');
+    resend = null;
+  } else {
+    resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+  }
+} catch (error) {
+  console.error('Failed to initialize Resend:', error);
+  resend = null;
 }
 
 export const sendWelcomeEmail = async (email) => {
-  if (!import.meta.env.VITE_RESEND_API_KEY) {
-    console.error('Cannot send email: Missing Resend API key');
-    return false;
+  if (!resend) {
+    console.error('Cannot send email: Resend not properly initialized');
+    return {
+      success: false,
+      message: 'Email service not configured'
+    };
   }
 
   try {
@@ -42,9 +51,15 @@ export const sendWelcomeEmail = async (email) => {
     });
 
     if (error) throw error;
-    return true;
+    return {
+      success: true,
+      message: 'Welcome email sent successfully'
+    };
   } catch (error) {
     console.error('Error sending welcome email:', error);
-    return false;
+    return {
+      success: false,
+      message: 'Failed to send welcome email'
+    };
   }
 };

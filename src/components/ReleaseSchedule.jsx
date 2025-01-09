@@ -6,62 +6,70 @@ const ReleaseSchedule = () => {
   const schedule = [
     {
       week: 1,
-      date: "January 1st - January 7th",
+      date: "January 10th - January 16th",
       details: [
-        { type: "Basic Creatures", count: 20, note: "5 per element" },
+        { type: "Basic Creatures", count: 16, note: "4 per element" },
         { type: "Rune Cards", count: 4, note: "1 per element" },
         { type: "Counter Cards", count: 4, note: "Basic counters" },
-        { type: "Tier I Shields", count: 5, note: "Basic protection" },
-        { type: "Dragon", count: 1, note: "First dragon reveal!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "First dragon revealed!", isSpecial: true }
       ],
       featured: "Featured: 4 Cards of the Week"
     },
     {
       week: 2,
-      date: "January 8th - January 14th",
+      date: "January 17th - January 23rd",
       details: [
-        { type: "Basic Creatures", count: 24, note: "6 per element" },
-        { type: "Rune Cards", count: 5, note: "Advanced runes" },
-        { type: "Counter Cards", count: 5, note: "Tactical counters" },
-        { type: "Tier I Shields", count: 5, note: "Enhanced protection" },
-        { type: "Tier II Shields", count: 3, note: "Advanced shields" },
-        { type: "Dragon", count: 1, note: "Second dragon appears!", isSpecial: true }
+        { type: "Basic Creatures", count: 20, note: "5 per element" },
+        { type: "Rune Cards", count: 4, note: "Advanced runes" },
+        { type: "Tier I Shields", count: 5, note: "Basic protection" },
+        { type: "Dragon", count: 1, note: "Second dragon emerges!", isSpecial: true }
       ],
       featured: "Featured: 4 Cards of the Week"
     },
     {
       week: 3,
-      date: "January 15th - January 21st",
+      date: "January 24th - January 30th",
       details: [
-        { type: "Basic Creatures", count: 24, note: "6 per element" },
-        { type: "Rune Cards", count: 6, note: "Power runes" },
-        { type: "Counter Cards", count: 6, note: "Strategic counters" },
-        { type: "Tier I Shields", count: 5, note: "Final Tier I" },
-        { type: "Tier II Shields", count: 4, note: "Power shields" },
-        { type: "Dragon", count: 1, note: "Third dragon emerges!", isSpecial: true }
+        { type: "Basic Creatures", count: 20, note: "5 per element" },
+        { type: "Rune Cards", count: 5, note: "Power runes" },
+        { type: "Counter Cards", count: 8, note: "Tactical counters" },
+        { type: "Tier I Shields", count: 5, note: "Enhanced protection" },
+        { type: "Dragon", count: 1, note: "Third dragon rises!", isSpecial: true }
       ],
       featured: "Featured: 4 Cards of the Week"
     },
     {
       week: 4,
-      date: "January 22nd - January 28th",
+      date: "January 31st - February 6th",
       details: [
-        { type: "Basic Creatures", count: 20, note: "5 per element" },
-        { type: "Rune Cards", count: 6, note: "Ultimate runes" },
-        { type: "Counter Cards", count: 5, note: "Elite counters" },
-        { type: "Tier II Shields", count: 3, note: "Final Tier II" },
+        { type: "Basic Creatures", count: 16, note: "4 per element" },
+        { type: "Rune Cards", count: 4, note: "Elite runes" },
+        { type: "Counter Cards", count: 8, note: "Strategic counters" },
+        { type: "Tier II Shields", count: 5, note: "Advanced shields" },
+        { type: "Dragon", count: 1, note: "Fourth dragon appears!", isSpecial: true }
+      ],
+      featured: "Featured: 4 Cards of the Week"
+    },
+    {
+      week: 5,
+      date: "February 7th - February 13th",
+      details: [
+        { type: "Basic Creatures", count: 16, note: "4 per element" },
+        { type: "Rune Cards", count: 4, note: "Ultimate runes" },
+        { type: "Tier II Shields", count: 5, note: "Power shields" },
         { type: "Tier III Shields", count: 2, note: "First legendary shields" },
-        { type: "Dragon", count: 1, note: "Fourth dragon rises!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "Fifth dragon unleashed!", isSpecial: true }
       ],
       featured: "Featured: 4 Cards of the Week"
     },
     {
       final: true,
-      date: "January 29th - February 7th",
+      date: "February 14th - February 21st",
       details: [
-        { type: "Dragons", count: 2, note: "Final dragons revealed!", isSpecial: true },
-        { type: "Elementalists", count: 4, note: "All elementalists unleashed!", isSpecial: true },
-        { type: "Tier III Shields", count: 3, note: "Final legendary shields!", isSpecial: true }
+        { type: "Final Dragon", count: 1, note: "The ultimate dragon revealed!", isSpecial: true },
+        { type: "Elementalists", count: 4, note: "The masters unleashed!", isSpecial: true },
+        { type: "Tier III Shields", count: 3, note: "Final legendary shields", isSpecial: true },
+        { type: "Secret Cards", count: 4, note: "Special reveal!", isSpecial: true }
       ],
       featured: "Grand Finale Showcase"
     }

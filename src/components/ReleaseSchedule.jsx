@@ -87,8 +87,10 @@ const ReleaseSchedule = () => {
             </p>
           </div>
           <p className="text-center text-purple-200 mt-4">
-            We'll be giving away prizes, packs, and more to random folllowers on our social media accounts every week!
-            Set 1: Champions of Kinbrold include 169 cards including 88 Basic Creatures, 21 Runes, 20 Counters, 30 Shields (15 Tier I, 10 Tier II, 5 Tier III), 6 Dragons, and 4 Elementalists
+            We'll be giving away prizes, packs, and more to random followers on our social media accounts every week!
+          </p>
+          <p className="text-center text-purple-200 mt-4">
+            Set 1: Champions of Kinbrold includes 169 cards including 88 Basic Creatures, 21 Runes, 20 Counters, 30 Shields (15 Tier I, 10 Tier II, 5 Tier III), 6 Dragons, and 4 Elementalists
           </p>
         </CardHeader>
       </Card>

@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Progress } from '@/components/ui/progress';
 
 const DonationLeaderboard = () => {
   const [currentWeek] = useState(1); // This would be dynamic based on release schedule
-  const weeklyGoal = 500;
-  const overallGoal = 2500;
 
   // Example data - this would come from your backend
   const weeklyDonations = [
@@ -24,64 +21,57 @@ const DonationLeaderboard = () => {
     { id: 5, name: "Sam T.", amount: 125 },
   ];
 
-  const calculateProgress = (donations, goal) => {
-    const total = donations.reduce((sum, donation) => sum + donation.amount, 0);
-    return Math.min((total / goal) * 100, 100);
-  };
-
   return (
-    <Card className="bg-purple-800/10 border border-purple-300/50">
+    <Card className="bg-purple-900/90 border border-yellow-400/50">
       <CardHeader>
-        <CardTitle className="text-2xl text-purple-100">Donation Leaderboard</CardTitle>
+        <CardTitle className="text-2xl text-yellow-400 text-center">Donation Leaderboard</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="weekly" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-4">
-            <TabsTrigger value="weekly">Week {currentWeek}</TabsTrigger>
-            <TabsTrigger value="overall">Overall</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 mb-6 bg-yellow-900/20">
+            <TabsTrigger 
+              value="weekly" 
+              className="data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900 text-yellow-400"
+            >
+              Week {currentWeek}
+            </TabsTrigger>
+            <TabsTrigger 
+              value="overall" 
+              className="data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900 text-yellow-400"
+            >
+              Overall
+            </TabsTrigger>
           </TabsList>
 
           <TabsContent value="weekly">
-            <div className="mb-6">
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-purple-200">Weekly Goal: ${weeklyGoal}</span>
-                <span className="text-purple-200">
-                  ${weeklyDonations.reduce((sum, d) => sum + d.amount, 0)} raised
-                </span>
-              </div>
-              <Progress value={calculateProgress(weeklyDonations, weeklyGoal)} className="h-2" />
-            </div>
             <div className="space-y-4">
               {weeklyDonations.map((donation, index) => (
-                <div key={donation.id} className="flex items-center justify-between p-2 rounded-lg bg-purple-800/20">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400 font-bold">#{index + 1}</span>
-                    <span className="text-purple-100">{donation.name}</span>
+                <div 
+                  key={donation.id} 
+                  className="flex items-center justify-between p-3 rounded-lg bg-yellow-900/20 border border-yellow-400/30"
+                >
+                  <div className="flex items-center space-x-3">
+                    <span className="text-yellow-400 font-bold text-lg">#{index + 1}</span>
+                    <span className="text-yellow-200 font-medium">{donation.name}</span>
                   </div>
-                  <span className="text-purple-200">${donation.amount}</span>
+                  <span className="text-yellow-400 font-bold">${donation.amount}</span>
                 </div>
               ))}
             </div>
           </TabsContent>
 
           <TabsContent value="overall">
-            <div className="mb-6">
-              <div className="flex justify-between text-sm mb-2">
-                <span className="text-purple-200">Overall Goal: ${overallGoal}</span>
-                <span className="text-purple-200">
-                  ${overallDonations.reduce((sum, d) => sum + d.amount, 0)} raised
-                </span>
-              </div>
-              <Progress value={calculateProgress(overallDonations, overallGoal)} className="h-2" />
-            </div>
             <div className="space-y-4">
               {overallDonations.map((donation, index) => (
-                <div key={donation.id} className="flex items-center justify-between p-2 rounded-lg bg-purple-800/20">
-                  <div className="flex items-center space-x-2">
-                    <span className="text-yellow-400 font-bold">#{index + 1}</span>
-                    <span className="text-purple-100">{donation.name}</span>
+                <div 
+                  key={donation.id} 
+                  className="flex items-center justify-between p-3 rounded-lg bg-yellow-900/20 border border-yellow-400/30"
+                >
+                  <div className="flex items-center space-x-3">
+                    <span className="text-yellow-400 font-bold text-lg">#{index + 1}</span>
+                    <span className="text-yellow-200 font-medium">{donation.name}</span>
                   </div>
-                  <span className="text-purple-200">${donation.amount}</span>
+                  <span className="text-yellow-400 font-bold">${donation.amount}</span>
                 </div>
               ))}
             </div>

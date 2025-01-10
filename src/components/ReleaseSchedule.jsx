@@ -9,8 +9,8 @@ const ReleaseSchedule = () => {
       date: "January 10th - January 16th",
       details: [
         { type: "Basic Creatures", count: 16, note: "4 per element" },
-        { type: "Rune Cards", count: 4, note: "4 Normal Runes" },
-        { type: "Counter Cards", count: 4, note: "4 Normal Counters" },
+        { type: "Rune Cards", count: 4, note: "Normal Runes" },
+        { type: "Counter Cards", count: 4, note: "Normal Counters" },
         { type: "Dragon", count: 1, note: "First Dragon Revealed", isSpecial: true }
       ],
       featured: "If we hit $500 in donations this week, we will give one random donor a free A COMPLETE SET post-launch!"
@@ -31,7 +31,7 @@ const ReleaseSchedule = () => {
       date: "January 24th - January 30th",
       details: [
         { type: "Basic Creatures", count: 20, note: "5 per element" },
-        { type: "Rune Cards", count: 5, note: "5 Normal Runes" },
+        { type: "Rune Cards", count: 5, note: "Normal Runes" },
         { type: "Counter Cards", count: 8, note: "Normal Counters" },
         { type: "Tier I Shields", count: 5, note: "Enhanced protection" },
         { type: "Dragon", count: 1, note: "Third dragon rises", isSpecial: true }
@@ -43,8 +43,8 @@ const ReleaseSchedule = () => {
       date: "January 31st - February 6th",
       details: [
         { type: "Basic Creatures", count: 16, note: "4 per element" },
-        { type: "Rune Cards", count: 4, note: "4 Normal Runes" },
-        { type: "Counter Cards", count: 8, note: "8 Normal Counters" },
+        { type: "Rune Cards", count: 4, note: "Normal Runes" },
+        { type: "Counter Cards", count: 8, note: "Normal Counters" },
         { type: "Tier II Shields", count: 5, note: "Advanced shields" },
         { type: "Dragon", count: 1, note: "Fourth dragon is awoken", isSpecial: true }
       ],

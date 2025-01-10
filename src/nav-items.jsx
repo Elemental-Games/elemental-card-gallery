@@ -1,4 +1,4 @@
-import { HomeIcon, GamepadIcon, LayoutGridIcon, MapIcon, InfoIcon, UserPlusIcon } from "lucide-react";
+import { HomeIcon, GamepadIcon, LayoutGridIcon, MapIcon, InfoIcon, UserPlusIcon, HeartIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
 import GameplayPage from "./pages/GameplayPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";

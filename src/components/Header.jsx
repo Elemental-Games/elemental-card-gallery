@@ -13,6 +13,15 @@ import { Menu } from "lucide-react";
 import { navItems } from '../nav-items';
 
 const Header = () => {
+  const navigation = [
+    { name: 'Home', href: '/' },
+    { name: 'About', href: '/about' },
+    { name: 'Cards', href: '/cards' },
+    { name: 'Kinbrold', href: '/kinbrold' },
+    { name: 'Join', href: '/join' },
+    { name: 'Donate', href: '/donate' },
+  ];
+
   return (
     <>
       <Helmet>
@@ -24,64 +33,66 @@ const Header = () => {
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg" />
       </Helmet>
-      <nav className="bg-darkPurple/30 backdrop-blur-sm p-4 sticky top-0 z-50 w-full">
-        <div className="container mx-auto flex justify-between items-center">
-          <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/Games_Logo.png" 
-                alt="Elemental Masters Logo" 
-                className="h-16 w-16 mr-2"
-              />
-              <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
-                Elemental Masters
-              </span>
-            </Link>
-          </div>
-          
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <ul className="flex space-x-6">
-              {navItems.map((item) => (
-                <li key={item.title}>
-                  <Link 
-                    to={item.to} 
-                    className="text-white hover:text-accent transition-colors duration-200 font-sans"
-                  >
-                    {item.title}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
+      <header className="bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="flex h-16 justify-between">
+            <div className="flex items-center">
+              <Link to="/" className="flex items-center">
+                <img 
+                  src="/Games_Logo.png" 
+                  alt="Elemental Masters Logo" 
+                  className="h-16 w-16 mr-2"
+                />
+                <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
+                  Elemental Masters
+                </span>
+              </Link>
+            </div>
+            
+            {/* Desktop Navigation */}
+            <div className="hidden md:block">
+              <ul className="flex space-x-6">
+                {navItems.map((item) => (
+                  <li key={item.title}>
+                    <Link 
+                      to={item.to} 
+                      className="text-white hover:text-accent transition-colors duration-200 font-sans"
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:bg-white/10">
-                    <Menu className="h-6 w-6 text-white" />
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[calc(100vw-2rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg">
-                      {navItems.map((item) => (
-                        <Link 
-                          key={item.title}
-                          to={item.to} 
-                          className="block py-2 px-4 text-white hover:text-accent transition-colors duration-200 font-sans"
-                        >
-                          {item.title}
-                        </Link>
-                      ))}
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+            {/* Mobile Navigation */}
+            <div className="md:hidden">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent hover:bg-white/10">
+                      <Menu className="h-6 w-6 text-white" />
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[calc(100vw-2rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg">
+                        {navItems.map((item) => (
+                          <Link 
+                            key={item.title}
+                            to={item.to} 
+                            className="block py-2 px-4 text-white hover:text-accent transition-colors duration-200 font-sans"
+                          >
+                            {item.title}
+                          </Link>
+                        ))}
+                      </div>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
           </div>
-        </div>
-      </nav>
+        </nav>
+      </header>
     </>
   );
 };

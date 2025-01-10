@@ -24,6 +24,7 @@ import ScartoPage from "./pages/ScartoPage";
 import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
 import LandingPage from "./pages/LandingPage";
+import DonatePage from '@/pages/DonatePage';
 
 const queryClient = new QueryClient();
 
@@ -85,6 +86,7 @@ const App = () => (
                     <Route path="/kinbrold/scarto" element={<ScartoPage />} />
                     <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
                     <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                    <Route path="/donate" element={<DonatePage />} />
                   </Routes>
                 </main>
                 <Footer />

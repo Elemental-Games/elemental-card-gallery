@@ -2,8 +2,22 @@ import { Link } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 
 const Footer = () => {
+  const navigation = {
+    main: [
+      { name: 'Home', href: '/' },
+      { name: 'About', href: '/about' },
+      { name: 'Cards', href: '/cards' },
+      { name: 'Kinbrold', href: '/kinbrold' },
+      { name: 'Join', href: '/join' },
+      { name: 'Donate', href: '/donate' },
+    ],
+    social: [
+      // ... existing social links ...
+    ]
+  };
+
   return (
-    <footer className="bg-darkPurple text-white py-8 w-full mt-auto">
+    <footer className="bg-background mt-auto">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>

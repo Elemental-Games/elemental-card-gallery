@@ -11,9 +11,9 @@ const ReleaseSchedule = () => {
         { type: "Basic Creatures", count: 16, note: "4 per element" },
         { type: "Rune Cards", count: 4, note: "1 per element" },
         { type: "Counter Cards", count: 4, note: "Basic counters" },
-        { type: "Dragon", count: 1, note: "First dragon revealed!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "First dragon revealed", isSpecial: true }
       ],
-      featured: "Featured: 4 Cards of the Week"
+      featured: "If we hit $500 in donations this week, we will give one random donor a free A COMPLETE SET post-launch!"
     },
     {
       week: 2,
@@ -22,9 +22,9 @@ const ReleaseSchedule = () => {
         { type: "Basic Creatures", count: 20, note: "5 per element" },
         { type: "Rune Cards", count: 4, note: "Advanced runes" },
         { type: "Tier I Shields", count: 5, note: "Basic protection" },
-        { type: "Dragon", count: 1, note: "Second dragon emerges!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "Second dragon emerges", isSpecial: true }
       ],
-      featured: "Featured: 4 Cards of the Week"
+      featured: "The top 3 Donors of the Week will each receive 5 free packs of their choice post-launch!"
     },
     {
       week: 3,
@@ -34,9 +34,9 @@ const ReleaseSchedule = () => {
         { type: "Rune Cards", count: 5, note: "Power runes" },
         { type: "Counter Cards", count: 8, note: "Tactical counters" },
         { type: "Tier I Shields", count: 5, note: "Enhanced protection" },
-        { type: "Dragon", count: 1, note: "Third dragon rises!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "Third dragon rises", isSpecial: true }
       ],
-      featured: "Featured: 4 Cards of the Week"
+      featured: "The Top Donor of the Week will receive a custom game mat designed by our artist using the card of their choice!"
     },
     {
       week: 4,
@@ -46,9 +46,9 @@ const ReleaseSchedule = () => {
         { type: "Rune Cards", count: 4, note: "Elite runes" },
         { type: "Counter Cards", count: 8, note: "Strategic counters" },
         { type: "Tier II Shields", count: 5, note: "Advanced shields" },
-        { type: "Dragon", count: 1, note: "Fourth dragon appears!", isSpecial: true }
+        { type: "Dragon", count: 1, note: "Fourth dragon is awoken", isSpecial: true }
       ],
-      featured: "Featured: 4 Cards of the Week"
+      featured: "The top 3 Donors of the Week will each receive an exclusive Deck Box, Game Mat, and Essence Tokens!"
     },
     {
       week: 5,
@@ -60,7 +60,7 @@ const ReleaseSchedule = () => {
         { type: "Tier III Shields", count: 2, note: "First legendary shields" },
         { type: "Dragon", count: 1, note: "Fifth dragon unleashed!", isSpecial: true }
       ],
-      featured: "Featured: 4 Cards of the Week"
+      featured: "The Top 5 Donors of the Week will each receive 2 starter decks (of their choice) and respective deck boxes, game mats, and essence tokens with each deck!"
     },
     {
       final: true,
@@ -71,7 +71,7 @@ const ReleaseSchedule = () => {
         { type: "Tier III Shields", count: 3, note: "Final legendary shields", isSpecial: true },
         { type: "Secret Cards", count: 4, note: "Special reveal!", isSpecial: true }
       ],
-      featured: "Grand Finale Showcase"
+      featured: "Top Overall Donor will receive a 1/1 alternate art card of their choice! The top 3 Overall Top Donors will receive a custom deck (40-60 cards) using cards of their choice. Each card in the deckwill be in a special limited edition design!"
     }
   ];
 

@@ -9,9 +9,9 @@ const ReleaseSchedule = () => {
       date: "January 10th - January 16th",
       details: [
         { type: "Basic Creatures", count: 16, note: "4 per element" },
-        { type: "Rune Cards", count: 4, note: "1 per element" },
-        { type: "Counter Cards", count: 4, note: "Basic counters" },
-        { type: "Dragon", count: 1, note: "First dragon revealed", isSpecial: true }
+        { type: "Rune Cards", count: 4, note: "4 Normal Runes" },
+        { type: "Counter Cards", count: 4, note: "4 Basic Counters" },
+        { type: "Dragon", count: 1, note: "First Dragon Revealed", isSpecial: true }
       ],
       featured: "If we hit $500 in donations this week, we will give one random donor a free A COMPLETE SET post-launch!"
     },
@@ -87,7 +87,8 @@ const ReleaseSchedule = () => {
             </p>
           </div>
           <p className="text-center text-purple-200 mt-4">
-            Journey through 169 cards including 88 Basic Creatures, 21 Runes, 20 Counters, 30 Shields (15 Tier I, 10 Tier II, 5 Tier III), 6 Dragons, and 4 Elementalists
+            We'll be giving away prizes, packs, and more to random folllowers on our social media accounts every week!
+            Set 1: Champions of Kinbrold include 169 cards including 88 Basic Creatures, 21 Runes, 20 Counters, 30 Shields (15 Tier I, 10 Tier II, 5 Tier III), 6 Dragons, and 4 Elementalists
           </p>
         </CardHeader>
       </Card>

@@ -8,6 +8,7 @@ import JoinNowPage from "./pages/JoinNowPage.jsx";
 import RulesPage from "./pages/RulesPage.jsx";
 import LearnToPlayPage from "./pages/LearnToPlayPage.jsx";
 import BattleSimulationPage from "./pages/BattleSimulationPage.jsx";
+import DonatePage from "./pages/DonatePage.jsx";
 
 export const navItems = [
   {
@@ -92,5 +93,11 @@ export const navItems = [
     to: "/join", 
     icon: <UserPlusIcon className="h-4 w-4" />, 
     page: <JoinNowPage /> 
+  },
+  { 
+    title: "Donate", 
+    to: "/donate", 
+    icon: <HeartIcon className="h-4 w-4" />, 
+    page: <DonatePage /> 
   },
 ];

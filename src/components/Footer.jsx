@@ -1,29 +1,11 @@
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  const quickLinks = {
-    column1: [
-      { name: 'Home', href: '/' },
-      { name: 'About', href: '/about' },
-      { name: 'Cards', href: '/cards' },
-    ],
-    column2: [
-      { name: 'Kinbrold', href: '/kinbrold' },
-      { name: 'Join', href: '/join' },
-      { name: 'Donate', href: '/donate' },
-    ],
-  };
-
-  const socialLinks = [
-    { name: 'Discord', href: 'https://discord.gg/qXNWh4dMve' },
-    { name: 'X', href: 'https://x.com/elemental_tcg' },
-  ];
-
   return (
     <footer className="bg-background mt-auto border-t border-border/40">
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Logo and Description */}
+          {/* Company Info */}
           <div className="md:col-span-2">
             <Link to="/" className="flex items-center mb-4">
               <img src="/logo.png" alt="Elemental Masters" className="h-8 w-auto" />
@@ -34,37 +16,57 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links Column 1 */}
+          {/* Quick Links */}
           <div>
             <h3 className="text-sm font-semibold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              {quickLinks.column1.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link to="/kinbrold" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Kinbrold
+                </Link>
+              </li>
+              <li>
+                <Link to="/join" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Join Now
+                </Link>
+              </li>
+              <li>
+                <Link to="/donate" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Donate
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Quick Links Column 2 */}
+          {/* Elemental Masters */}
           <div>
-            <h3 className="text-sm font-semibold mb-4">More Links</h3>
+            <h3 className="text-sm font-semibold mb-4">Elemental Masters</h3>
             <ul className="space-y-2">
-              {quickLinks.column2.map((link) => (
-                <li key={link.name}>
-                  <Link
-                    to={link.href}
-                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                  >
-                    {link.name}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/gameplay" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Gameplay
+                </Link>
+              </li>
+              <li>
+                <Link to="/cards" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Cards
+                </Link>
+              </li>
+              <li>
+                <Link to="/rules" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                  Rules
+                </Link>
+              </li>
             </ul>
           </div>
         </div>
@@ -76,17 +78,22 @@ const Footer = () => {
               © 2024 Elemental Masters. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-muted-foreground hover:text-primary transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
+              <a
+                href="https://discord.gg/qXNWh4dMve"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Discord
+              </a>
+              <a
+                href="https://x.com/elemental_tcg"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                X
+              </a>
             </div>
           </div>
         </div>

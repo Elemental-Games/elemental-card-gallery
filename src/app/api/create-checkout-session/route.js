@@ -21,7 +21,7 @@ export async function POST(req) {
     const body = await req.json();
     const { amount, email, displayName, isAnonymous, subscribeToUpdates, message } = body;
 
-    console.log('Creating checkout session for:', { amount, email, displayName });
+    console.log('📝 Creating checkout session:', { amount, email, displayName });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -48,7 +48,7 @@ export async function POST(req) {
       cancel_url: `${process.env.SITE_URL}/donate`,
     });
 
-    console.log('Created checkout session:', session.id);
+    console.log('✅ Created checkout session:', session.id);
 
     // Store initial donation record
     const { error: donationError } = await supabase.from('donations').insert([{
@@ -59,10 +59,14 @@ export async function POST(req) {
       email,
       payment_status: 'pending',
       payment_intent: session.payment_intent,
-      subscribe_to_updates: subscribeToUpdates
+      subscribe_to_updates: subscribeToUpdates,
+      session_id: session.id
     }]);
 
-    if (donationError) throw donationError;
+    if (donationError) {
+      console.error('❌ Error storing donation:', donationError);
+      throw donationError;
+    }
 
     // If they opted in for updates, add to subscribers table
     if (subscribeToUpdates) {
@@ -72,18 +76,23 @@ export async function POST(req) {
         .eq('email', email);
 
       if (count === 0) {
-        await supabase.from('subscribers').insert([{
+        const { error: subscribeError } = await supabase.from('subscribers').insert([{
           email,
           status: 'active',
           subscribed_at: new Date().toISOString(),
           source: 'donation'
         }]);
+
+        if (subscribeError) {
+          console.error('❌ Error adding subscriber:', subscribeError);
+          // Don't throw error - we don't want to break the donation flow
+        }
       }
     }
 
     return NextResponse.json({ sessionId: session.id });
   } catch (err) {
-    console.error('Checkout session error:', err);
+    console.error('❌ Checkout session error:', err);
     return NextResponse.json(
       { error: 'Internal server error', details: err.message },
       { status: 500 }

@@ -1,13 +1,13 @@
+import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
+import { supabase } from '@/lib/supabase';
+
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ message: 'Method not allowed' });
-  }
-
+export async function POST(req) {
   try {
-    const { amount, email, displayName, isAnonymous, subscribeToUpdates } = req.body;
+    const body = await req.json();
+    const { amount, email, displayName, isAnonymous, subscribeToUpdates } = body;
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -28,12 +28,29 @@ export default async function handler(req, res) {
         subscribeToUpdates,
       },
       customer_email: email,
-      success_url: `${req.headers.origin}/donation-success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${req.headers.origin}/donate`,
+      success_url: `${process.env.NEXT_PUBLIC_URL}/donation-success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_URL}/donate`,
     });
 
-    res.status(200).json({ sessionId: session.id });
+    // Store donation in Supabase
+    const { error } = await supabase.from('donations').insert([{
+      amount,
+      display_name: displayName,
+      is_anonymous: isAnonymous,
+      email,
+      payment_status: 'pending',
+      payment_intent: session.payment_intent,
+      subscribe_to_updates: subscribeToUpdates
+    }]);
+
+    if (error) throw error;
+
+    return NextResponse.json({ sessionId: session.id });
   } catch (err) {
-    res.status(500).json({ message: err.message });
+    console.error('Checkout session error:', err);
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    );
   }
 } 

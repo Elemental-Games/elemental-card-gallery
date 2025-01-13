@@ -188,11 +188,4 @@ const DonationForm = () => {
   );
 };
 
-// Wrap the form with Stripe Elements
-const USDDonationForm = () => (
-  <Elements stripe={stripePromise}>
-    <DonationForm />
-  </Elements>
-);
-
-export default USDDonationForm; 
+export default DonationForm; 

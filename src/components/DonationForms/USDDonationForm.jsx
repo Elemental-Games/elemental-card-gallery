@@ -1,113 +1,64 @@
 import { useState } from 'react';
-import { useStripe, useElements, Elements } from '@stripe/react-stripe-js';
-import { stripePromise } from '@/lib/stripe';
-import StripeCardElement from './StripeCardElement';
+import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
-import { useToast } from "@/components/ui/use-toast"
-import { Loader2 } from "lucide-react"
-import DonationDisclaimer from "@/components/DonationDisclaimer"
+import { useToast } from "@/components/ui/use-toast";
+import { Loader2 } from "lucide-react";
+import DonationDisclaimer from "@/components/DonationDisclaimer";
+
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
 
 const DonationForm = () => {
-  const stripe = useStripe();
-  const elements = useElements();
-  const { toast } = useToast()
+  const { toast } = useToast();
   const [amount, setAmount] = useState('');
   const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
-  const [message, setMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [subscribeToUpdates, setSubscribeToUpdates] = useState(false);
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [error, setError] = useState(null);
 
   const presetAmounts = [5, 10, 25, 50, 100];
 
-  const handleSubmit = async (e) => {
+  const handleDonate = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements || !acceptTerms) return;
+    if (!acceptTerms) return;
 
     setIsProcessing(true);
-    setError(null);
 
     try {
-      // Validate inputs
-      if (!email || !email.includes('@')) {
-        throw new Error('Please enter a valid email address');
-      }
-
-      const numAmount = Number(amount);
-      if (isNaN(numAmount) || numAmount < 1) {
-        throw new Error('Please enter a valid amount');
-      }
-
-      if (!isAnonymous && !displayName.trim()) {
-        throw new Error('Please enter a display name or choose to remain anonymous');
-      }
-
-      // Create payment intent
-      const response = await fetch('/api/create-payment-intent', {
+      const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: numAmount,
+          amount: Number(amount),
           email,
           displayName: isAnonymous ? 'Anonymous' : displayName,
-          message,
           isAnonymous,
           subscribeToUpdates
         }),
       });
 
-      if (!response.ok) {
-        const error = await response.json();
-        throw new Error(error.message || 'Failed to process donation');
-      }
+      const { sessionId } = await response.json();
+      const stripe = await stripePromise;
+      const { error } = await stripe.redirectToCheckout({ sessionId });
 
-      const { clientSecret } = await response.json();
-
-      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card: elements.getElement('CardElement'),
-          billing_details: {
-            name: isAnonymous ? 'Anonymous' : displayName,
-            email: email
-          },
-        },
-      });
-
-      if (stripeError) {
-        throw new Error(stripeError.message);
-      }
-
-      if (paymentIntent.status === 'succeeded') {
+      if (error) {
         toast({
-          title: "Thank you for your donation!",
-          description: "Your support means a lot to us.",
-          className: "bg-green-800 border-green-400 text-white",
+          variant: "destructive",
+          title: "Error",
+          description: error.message,
         });
-
-        // Clear form
-        setAmount('');
-        setEmail('');
-        setDisplayName('');
-        setMessage('');
-        setSubscribeToUpdates(false);
-        setAcceptTerms(false);
-        elements.getElement('CardElement').clear();
       }
-
     } catch (err) {
       toast({
         variant: "destructive",
-        title: "Error processing donation",
-        description: err.message,
+        title: "Error",
+        description: "Failed to process donation",
       });
-      setError(err.message);
     } finally {
       setIsProcessing(false);
     }
@@ -117,7 +68,7 @@ const DonationForm = () => {
     <Card className="bg-purple-900/90">
       <CardContent className="p-6">
         <DonationDisclaimer />
-        <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+        <form onSubmit={handleDonate} className="space-y-6 mt-6">
           {/* Amount Selection */}
           <div className="space-y-2">
             <Label htmlFor="amount" className="text-yellow-400">Amount (USD)</Label>
@@ -189,24 +140,6 @@ const DonationForm = () => {
             />
           </div>
 
-          {/* Message */}
-          <div className="space-y-2">
-            <Label htmlFor="message" className="text-yellow-400">Message (Optional)</Label>
-            <Input
-              id="message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="bg-purple-800/50 border-yellow-400/20 text-yellow-200"
-              placeholder="Leave a message"
-            />
-          </div>
-
-          {/* Card Element */}
-          <div className="space-y-2">
-            <Label className="text-yellow-400">Card Details</Label>
-            <StripeCardElement />
-          </div>
-
           {/* Subscribe to Updates */}
           <div className="flex items-center space-x-2">
             <Checkbox
@@ -234,15 +167,11 @@ const DonationForm = () => {
             </Label>
           </div>
 
-          {error && (
-            <p className="text-red-400 text-sm">{error}</p>
-          )}
-
           {/* Submit Button */}
           <Button 
             type="submit" 
             className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300"
-            disabled={!stripe || !amount || isProcessing || !acceptTerms || !email}
+            disabled={!stripePromise || !amount || isProcessing || !acceptTerms || !email}
           >
             {isProcessing ? (
               <div className="flex items-center space-x-2">

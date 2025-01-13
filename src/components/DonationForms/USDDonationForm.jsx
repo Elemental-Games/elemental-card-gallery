@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { loadStripe } from '@stripe/stripe-js';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,8 +7,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { useToast } from "@/components/ui/use-toast";
 import { Loader2 } from "lucide-react";
 import DonationDisclaimer from "@/components/DonationDisclaimer";
-
-const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY);
+import { stripePromise } from '@/lib/stripe';
 
 const DonationForm = () => {
   const { toast } = useToast();

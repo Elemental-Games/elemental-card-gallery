@@ -51,7 +51,7 @@ export async function POST(req) {
     console.log('Created checkout session:', session.id);
 
     // Store initial donation record
-    const { error } = await supabase.from('donations').insert([{
+    const { error: donationError } = await supabase.from('donations').insert([{
       amount,
       display_name: displayName,
       message,
@@ -62,9 +62,23 @@ export async function POST(req) {
       subscribe_to_updates: subscribeToUpdates
     }]);
 
-    if (error) {
-      console.error('Error storing donation:', error);
-      throw error;
+    if (donationError) throw donationError;
+
+    // If they opted in for updates, add to subscribers table
+    if (subscribeToUpdates) {
+      const { count } = await supabase
+        .from('subscribers')
+        .select('*', { count: 'exact', head: true })
+        .eq('email', email);
+
+      if (count === 0) {
+        await supabase.from('subscribers').insert([{
+          email,
+          status: 'active',
+          subscribed_at: new Date().toISOString(),
+          source: 'donation'
+        }]);
+      }
     }
 
     return NextResponse.json({ sessionId: session.id });

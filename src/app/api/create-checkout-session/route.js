@@ -4,10 +4,24 @@ import { supabase } from '@/lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+// Add support for OPTIONS method
+export async function OPTIONS() {
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    },
+  });
+}
+
 export async function POST(req) {
   try {
     const body = await req.json();
     const { amount, email, displayName, isAnonymous, subscribeToUpdates, message } = body;
+
+    console.log('Creating checkout session for:', { amount, email, displayName });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -34,6 +48,8 @@ export async function POST(req) {
       cancel_url: `${process.env.SITE_URL}/donate`,
     });
 
+    console.log('Created checkout session:', session.id);
+
     // Store initial donation record
     const { error } = await supabase.from('donations').insert([{
       amount,
@@ -46,13 +62,16 @@ export async function POST(req) {
       subscribe_to_updates: subscribeToUpdates
     }]);
 
-    if (error) throw error;
+    if (error) {
+      console.error('Error storing donation:', error);
+      throw error;
+    }
 
     return NextResponse.json({ sessionId: session.id });
   } catch (err) {
     console.error('Checkout session error:', err);
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error', details: err.message },
       { status: 500 }
     );
   }

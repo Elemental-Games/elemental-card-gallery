@@ -16,9 +16,12 @@ const DonationForm = () => {
   const elements = useElements();
   const { toast } = useToast()
   const [amount, setAmount] = useState('');
+  const [email, setEmail] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [message, setMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
+  const [subscribeToUpdates, setSubscribeToUpdates] = useState(false);
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
   const [error, setError] = useState(null);
 
@@ -26,28 +29,24 @@ const DonationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements) {
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Stripe has not been initialized"
-      });
-      return;
-    }
+    if (!stripe || !elements || !acceptTerms) return;
 
     setIsProcessing(true);
     setError(null);
 
     try {
-      // Validate amount
-      const numAmount = Number(amount);
-      if (isNaN(numAmount) || numAmount < 1) {
-        throw new Error("Please enter a valid amount");
+      // Validate inputs
+      if (!email || !email.includes('@')) {
+        throw new Error('Please enter a valid email address');
       }
 
-      // Validate display name if not anonymous
+      const numAmount = Number(amount);
+      if (isNaN(numAmount) || numAmount < 1) {
+        throw new Error('Please enter a valid amount');
+      }
+
       if (!isAnonymous && !displayName.trim()) {
-        throw new Error("Please enter a display name or choose to remain anonymous");
+        throw new Error('Please enter a display name or choose to remain anonymous');
       }
 
       // Create payment intent
@@ -56,9 +55,11 @@ const DonationForm = () => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           amount: numAmount,
+          email,
           displayName: isAnonymous ? 'Anonymous' : displayName,
           message,
-          isAnonymous
+          isAnonymous,
+          subscribeToUpdates
         }),
       });
 
@@ -69,12 +70,12 @@ const DonationForm = () => {
 
       const { clientSecret } = await response.json();
 
-      // Confirm payment
       const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement('CardElement'),
           billing_details: {
             name: isAnonymous ? 'Anonymous' : displayName,
+            email: email
           },
         },
       });
@@ -92,8 +93,11 @@ const DonationForm = () => {
 
         // Clear form
         setAmount('');
+        setEmail('');
         setDisplayName('');
         setMessage('');
+        setSubscribeToUpdates(false);
+        setAcceptTerms(false);
         elements.getElement('CardElement').clear();
       }
 
@@ -113,46 +117,59 @@ const DonationForm = () => {
     <Card className="bg-purple-900/90">
       <CardContent className="p-6">
         <DonationDisclaimer />
-        <form onSubmit={handleSubmit} className="space-y-6">
-          {/* Preset Amounts */}
-          <div className="grid grid-cols-5 gap-2">
-            {presetAmounts.map((preset) => (
-              <Button
-                key={preset}
-                type="button"
-                variant={amount === preset.toString() ? 'default' : 'outline'}
-                className="w-full text-yellow-400 hover:text-yellow-300"
-                onClick={() => setAmount(preset.toString())}
-              >
-                ${preset}
-              </Button>
-            ))}
-          </div>
-
-          {/* Custom Amount */}
+        <form onSubmit={handleSubmit} className="space-y-6 mt-6">
+          {/* Amount Selection */}
           <div className="space-y-2">
-            <Label htmlFor="amount" className="text-yellow-400">Custom Amount (USD)</Label>
-            <div className="relative">
-              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-yellow-400">$</span>
-              <Input
-                id="amount"
-                type="number"
-                min="1"
-                step="1"
-                value={amount}
-                onChange={(e) => setAmount(e.target.value)}
-                className="pl-8 bg-purple-800/50 border-yellow-400/20 text-yellow-200"
-                placeholder="Enter amount"
-              />
+            <Label htmlFor="amount" className="text-yellow-400">Amount (USD)</Label>
+            <div className="grid grid-cols-5 gap-2 mb-2">
+              {presetAmounts.map((preset) => (
+                <Button
+                  key={preset}
+                  type="button"
+                  variant="outline"
+                  className={`${
+                    amount === preset.toString()
+                      ? 'bg-yellow-400 text-purple-900'
+                      : 'bg-purple-800/50 text-yellow-400'
+                  } border-yellow-400/20 hover:bg-yellow-400 hover:text-purple-900`}
+                  onClick={() => setAmount(preset.toString())}
+                >
+                  ${preset}
+                </Button>
+              ))}
             </div>
+            <Input
+              id="amount"
+              type="number"
+              min="1"
+              step="1"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              className="bg-purple-800/50 border-yellow-400/20 text-yellow-200"
+              placeholder="Custom amount"
+            />
           </div>
 
-          {/* Display Name */}
+          {/* Email */}
+          <div className="space-y-2">
+            <Label htmlFor="email" className="text-yellow-400">Email Address</Label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="bg-purple-800/50 border-yellow-400/20 text-yellow-200"
+              placeholder="your@email.com"
+            />
+          </div>
+
+          {/* Display Name and Anonymous Option */}
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <Label htmlFor="displayName" className="text-yellow-400">Display Name</Label>
               <div className="flex items-center space-x-2">
-                <Checkbox 
+                <Checkbox
                   id="anonymous"
                   checked={isAnonymous}
                   onCheckedChange={setIsAnonymous}
@@ -184,10 +201,37 @@ const DonationForm = () => {
             />
           </div>
 
-          {/* Stripe Card Element */}
+          {/* Card Element */}
           <div className="space-y-2">
             <Label className="text-yellow-400">Card Details</Label>
             <StripeCardElement />
+          </div>
+
+          {/* Subscribe to Updates */}
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="subscribe"
+              checked={subscribeToUpdates}
+              onCheckedChange={setSubscribeToUpdates}
+              className="border-yellow-400/20"
+            />
+            <Label htmlFor="subscribe" className="text-yellow-200">
+              Subscribe to Elemental Masters updates and news
+            </Label>
+          </div>
+
+          {/* Terms Acceptance */}
+          <div className="flex items-center space-x-2">
+            <Checkbox
+              id="terms"
+              required
+              checked={acceptTerms}
+              onCheckedChange={setAcceptTerms}
+              className="border-yellow-400/20"
+            />
+            <Label htmlFor="terms" className="text-yellow-200">
+              I acknowledge that I have read and agree to the donation terms
+            </Label>
           </div>
 
           {error && (
@@ -198,13 +242,13 @@ const DonationForm = () => {
           <Button 
             type="submit" 
             className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300"
-            disabled={!stripe || !amount || isProcessing || (!displayName && !isAnonymous)}
+            disabled={!stripe || !amount || isProcessing || !acceptTerms || !email}
           >
             {isProcessing ? (
-              <>
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Processing...
-              </>
+              <div className="flex items-center space-x-2">
+                <span className="animate-spin">⌛</span>
+                <span>Processing...</span>
+              </div>
             ) : (
               'Donate'
             )}

@@ -15,6 +15,10 @@ export default async function handler(req, res) {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: amount * 100, // Convert to cents
       currency: 'usd',
+      metadata: {
+        week_number: getCurrentWeekNumber(),
+        display_name: isAnonymous ? 'Anonymous' : displayName,
+      }
     });
 
     // Store donation in Supabase

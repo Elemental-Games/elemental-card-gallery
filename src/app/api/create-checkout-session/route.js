@@ -4,21 +4,27 @@ import { supabase } from '@/lib/supabase';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
-// Add support for OPTIONS method
+// Add OPTIONS method for CORS
 export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
+      'Allow': 'POST, OPTIONS',
       'Access-Control-Allow-Origin': '*',
       'Access-Control-Allow-Methods': 'POST, OPTIONS',
-      'Access-Control-Allow-Headers': 'Content-Type',
+      'Access-Control-Allow-Headers': 'Content-Type, Authorization',
     },
   });
 }
 
+// Add explicit method check
 export async function POST(req) {
+  console.log('🔍 Received request method:', req.method);
+  
   try {
     const body = await req.json();
+    console.log('📦 Received request body:', body);
+    
     const { amount, email, displayName, isAnonymous, subscribeToUpdates, message } = body;
 
     console.log('📝 Creating checkout session:', { amount, email, displayName });
@@ -92,7 +98,7 @@ export async function POST(req) {
 
     return NextResponse.json({ sessionId: session.id });
   } catch (err) {
-    console.error('❌ Checkout session error:', err);
+    console.error('❌ Error:', err);
     return NextResponse.json(
       { error: 'Internal server error', details: err.message },
       { status: 500 }

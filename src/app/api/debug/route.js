@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/headers';
+import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 
 export async function GET() {
@@ -6,27 +6,45 @@ export async function GET() {
     const headersList = headers();
     const host = headersList.get('host') || 'unknown';
     const userAgent = headersList.get('user-agent') || 'unknown';
+    const url = headersList.get('x-url') || 'unknown';
     
-    return NextResponse.json({
+    // Force an immediate response to check if we reach this point
+    console.log('Debug endpoint hit:', { host, userAgent });
+    
+    return new NextResponse(JSON.stringify({
       status: 'online',
       server: {
         host,
         timestamp: new Date().toISOString(),
         environment: process.env.NODE_ENV,
-        userAgent
+        userAgent,
+        url
       },
       routes: {
         webhook: '/api/webhook',
         checkout: '/api/create-checkout-session'
       }
+    }), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store'
+      }
     });
   } catch (error) {
     console.error('Debug endpoint error:', error);
-    return NextResponse.json({
+    return new NextResponse(JSON.stringify({
       error: 'Server diagnostic failed',
       details: error.message,
+      stack: error.stack,
       timestamp: new Date().toISOString()
-    }, { status: 500 });
+    }), {
+      status: 500,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-store'
+      }
+    });
   }
 }
 

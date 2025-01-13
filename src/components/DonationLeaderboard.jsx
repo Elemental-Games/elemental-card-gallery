@@ -5,57 +5,86 @@ import { supabase } from '@/lib/supabase';
 
 const DonationLeaderboard = () => {
   const [currentWeek] = useState(1);
-  const [weeklyDonations, setWeeklyDonations] = useState([
-    { id: 1, name: "Alex S.", amount: 100, message: "Let's make this happen!" },
-    { id: 2, name: "Maria R.", amount: 75, message: "Love the concept!" },
-    { id: 3, name: "Anonymous", amount: 50 },
-    { id: 4, name: "Chris P.", amount: 25, message: "Can't wait to play!" },
-  ]);
-  const [overallDonations, setOverallDonations] = useState([
-    { id: 1, name: "Alex S.", amount: 250 },
-    { id: 2, name: "Maria R.", amount: 200 },
-    { id: 3, name: "Chris P.", amount: 175 },
-    { id: 4, name: "Anonymous", amount: 150 },
-    { id: 5, name: "Sam T.", amount: 125 },
-  ]);
+  const [weeklyDonations, setWeeklyDonations] = useState([]);
+  const [overallDonations, setOverallDonations] = useState([]);
 
   useEffect(() => {
-    // Subscribe to new donations
+    // Initial fetch of donations
+    const fetchDonations = async () => {
+      try {
+        // Fetch weekly donations
+        const { data: weeklyData, error: weeklyError } = await supabase
+          .from('donations')
+          .select('*')
+          .eq('week_number', currentWeek)
+          .eq('payment_status', 'completed')
+          .order('amount', { ascending: false })
+          .limit(10);
+
+        if (weeklyError) throw weeklyError;
+        setWeeklyDonations(weeklyData || []);
+
+        // Fetch overall donations
+        const { data: overallData, error: overallError } = await supabase
+          .from('donations')
+          .select('*')
+          .eq('payment_status', 'completed')
+          .order('amount', { ascending: false })
+          .limit(10);
+
+        if (overallError) throw overallError;
+        setOverallDonations(overallData || []);
+
+      } catch (error) {
+        console.error('Error fetching donations:', error);
+      }
+    };
+
+    fetchDonations();
+
+    // Set up realtime subscription
     const subscription = supabase
-      .from('donations')
-      .on('INSERT', (payload) => {
-        if (payload.new.payment_status === 'completed') {
-          // Update leaderboard data
+      .channel('donations-changes')
+      .on(
+        'postgres_changes',
+        {
+          event: 'INSERT',
+          schema: 'public',
+          table: 'donations',
+          filter: 'payment_status=eq.completed'
+        },
+        (payload) => {
+          // Update lists when new donation comes in
           if (payload.new.week_number === currentWeek) {
-            setWeeklyDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount));
+            setWeeklyDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount).slice(0, 10));
           }
-          setOverallDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount));
+          setOverallDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount).slice(0, 10));
         }
-      })
+      )
       .subscribe();
 
     return () => {
-      supabase.removeSubscription(subscription);
+      supabase.removeChannel(subscription);
     };
   }, [currentWeek]);
 
   return (
     <Card className="bg-purple-900/90">
       <CardHeader>
-        <CardTitle className="text-2xl text-yellow-400 text-center">Donation Leaderboard</CardTitle>
+        <CardTitle className="text-yellow-400">Top Supporters</CardTitle>
       </CardHeader>
       <CardContent>
         <Tabs defaultValue="weekly" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 mb-6 bg-purple-800">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger 
-              value="weekly" 
-              className="px-8 py-3 data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900 text-yellow-400 hover:text-yellow-300 transition-colors"
+              value="weekly"
+              className="data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900"
             >
-              Week {currentWeek}
+              This Week
             </TabsTrigger>
             <TabsTrigger 
-              value="overall" 
-              className="px-8 py-3 data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900 text-yellow-400 hover:text-yellow-300 transition-colors"
+              value="overall"
+              className="data-[state=active]:bg-yellow-400 data-[state=active]:text-purple-900"
             >
               Overall
             </TabsTrigger>
@@ -70,7 +99,9 @@ const DonationLeaderboard = () => {
                 >
                   <div className="flex items-center space-x-4">
                     <span className="text-yellow-400 font-bold text-xl">#{index + 1}</span>
-                    <span className="text-yellow-200 font-medium">{donation.name}</span>
+                    <span className="text-yellow-200 font-medium">
+                      {donation.is_anonymous ? 'Anonymous' : donation.display_name}
+                    </span>
                   </div>
                   <span className="text-yellow-400 font-bold text-lg">${donation.amount}</span>
                 </div>

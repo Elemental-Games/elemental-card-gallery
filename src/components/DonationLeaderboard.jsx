@@ -1,24 +1,43 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { supabase } from '@/lib/supabase';
 
 const DonationLeaderboard = () => {
   const [currentWeek] = useState(1);
-
-  const weeklyDonations = [
+  const [weeklyDonations, setWeeklyDonations] = useState([
     { id: 1, name: "Alex S.", amount: 100, message: "Let's make this happen!" },
     { id: 2, name: "Maria R.", amount: 75, message: "Love the concept!" },
     { id: 3, name: "Anonymous", amount: 50 },
     { id: 4, name: "Chris P.", amount: 25, message: "Can't wait to play!" },
-  ];
-
-  const overallDonations = [
+  ]);
+  const [overallDonations, setOverallDonations] = useState([
     { id: 1, name: "Alex S.", amount: 250 },
     { id: 2, name: "Maria R.", amount: 200 },
     { id: 3, name: "Chris P.", amount: 175 },
     { id: 4, name: "Anonymous", amount: 150 },
     { id: 5, name: "Sam T.", amount: 125 },
-  ];
+  ]);
+
+  useEffect(() => {
+    // Subscribe to new donations
+    const subscription = supabase
+      .from('donations')
+      .on('INSERT', (payload) => {
+        if (payload.new.payment_status === 'completed') {
+          // Update leaderboard data
+          if (payload.new.week_number === currentWeek) {
+            setWeeklyDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount));
+          }
+          setOverallDonations(prev => [...prev, payload.new].sort((a, b) => b.amount - a.amount));
+        }
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeSubscription(subscription);
+    };
+  }, [currentWeek]);
 
   return (
     <Card className="bg-purple-900/90">

@@ -1,50 +1,69 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useStripe, useElements, Elements } from '@stripe/react-stripe-js';
+import { stripePromise } from '@/lib/stripe';
+import StripeCardElement from './StripeCardElement';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
-import { CardElement, useStripe, useElements } from '@stripe/stripe-js';
 
-const USDDonationForm = () => {
+const DonationForm = () => {
+  const stripe = useStripe();
+  const elements = useElements();
   const [amount, setAmount] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [message, setMessage] = useState('');
   const [isAnonymous, setIsAnonymous] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [error, setError] = useState(null);
 
   const presetAmounts = [5, 10, 25, 50, 100];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!stripe || !elements) return;
+
     setIsProcessing(true);
+    setError(null);
 
     try {
-      const response = await fetch('/api/donate', {
+      // Create payment intent
+      const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount,
+          amount: Number(amount),
           displayName: isAnonymous ? 'Anonymous' : displayName,
           message,
+          isAnonymous
         }),
       });
 
       const { clientSecret } = await response.json();
 
-      // Use Stripe.js to handle the payment
-      const { error } = await stripe.confirmCardPayment(clientSecret, {
+      // Confirm payment
+      const { error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
-          card: elements.getElement(CardElement),
-          billing_details: { name: displayName },
+          card: elements.getElement('CardElement'),
+          billing_details: {
+            name: isAnonymous ? 'Anonymous' : displayName,
+          },
         },
       });
 
-      if (error) throw error;
+      if (stripeError) {
+        throw new Error(stripeError.message);
+      }
 
-      console.log('Donation successful');
-    } catch (error) {
-      console.error('Donation failed:', error);
+      // Clear form
+      setAmount('');
+      setDisplayName('');
+      setMessage('');
+      elements.getElement('CardElement').clear();
+
+    } catch (err) {
+      setError(err.message);
     } finally {
       setIsProcessing(false);
     }
@@ -124,11 +143,21 @@ const USDDonationForm = () => {
             />
           </div>
 
+          {/* Stripe Card Element */}
+          <div className="space-y-2">
+            <Label className="text-yellow-400">Card Details</Label>
+            <StripeCardElement />
+          </div>
+
+          {error && (
+            <p className="text-red-400 text-sm">{error}</p>
+          )}
+
           {/* Submit Button */}
           <Button 
             type="submit" 
             className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300"
-            disabled={!amount || isProcessing || (!displayName && !isAnonymous)}
+            disabled={!stripe || !amount || isProcessing || (!displayName && !isAnonymous)}
           >
             {isProcessing ? 'Processing...' : 'Donate'}
           </Button>
@@ -137,5 +166,12 @@ const USDDonationForm = () => {
     </Card>
   );
 };
+
+// Wrap the form with Stripe Elements
+const USDDonationForm = () => (
+  <Elements stripe={stripePromise}>
+    <DonationForm />
+  </Elements>
+);
 
 export default USDDonationForm; 

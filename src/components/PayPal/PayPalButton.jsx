@@ -12,7 +12,7 @@ export function PayPalButton({ amount, onSuccess, isProcessing, metadata = {} })
             value: amount,
             currency_code: "USD"
           },
-          description: "Donation to Elemental Master",
+          description: "Donation to Elemental Masters",
           custom_id: JSON.stringify(metadata)
         }
       ],

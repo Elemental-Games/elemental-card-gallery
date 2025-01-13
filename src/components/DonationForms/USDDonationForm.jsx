@@ -7,10 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Card, CardContent } from '@/components/ui/card';
+import { useToast } from "@/components/ui/use-toast"
+import { Loader2 } from "lucide-react"
+import DonationDisclaimer from "@/components/DonationDisclaimer"
 
 const DonationForm = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const { toast } = useToast()
   const [amount, setAmount] = useState('');
   const [displayName, setDisplayName] = useState('');
   const [message, setMessage] = useState('');
@@ -22,28 +26,51 @@ const DonationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements) return;
+    if (!stripe || !elements) {
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Stripe has not been initialized"
+      });
+      return;
+    }
 
     setIsProcessing(true);
     setError(null);
 
     try {
+      // Validate amount
+      const numAmount = Number(amount);
+      if (isNaN(numAmount) || numAmount < 1) {
+        throw new Error("Please enter a valid amount");
+      }
+
+      // Validate display name if not anonymous
+      if (!isAnonymous && !displayName.trim()) {
+        throw new Error("Please enter a display name or choose to remain anonymous");
+      }
+
       // Create payment intent
       const response = await fetch('/api/create-payment-intent', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          amount: Number(amount),
+          amount: numAmount,
           displayName: isAnonymous ? 'Anonymous' : displayName,
           message,
           isAnonymous
         }),
       });
 
+      if (!response.ok) {
+        const error = await response.json();
+        throw new Error(error.message || 'Failed to process donation');
+      }
+
       const { clientSecret } = await response.json();
 
       // Confirm payment
-      const { error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+      const { error: stripeError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement('CardElement'),
           billing_details: {
@@ -56,13 +83,26 @@ const DonationForm = () => {
         throw new Error(stripeError.message);
       }
 
-      // Clear form
-      setAmount('');
-      setDisplayName('');
-      setMessage('');
-      elements.getElement('CardElement').clear();
+      if (paymentIntent.status === 'succeeded') {
+        toast({
+          title: "Thank you for your donation!",
+          description: "Your support means a lot to us.",
+          className: "bg-green-800 border-green-400 text-white",
+        });
+
+        // Clear form
+        setAmount('');
+        setDisplayName('');
+        setMessage('');
+        elements.getElement('CardElement').clear();
+      }
 
     } catch (err) {
+      toast({
+        variant: "destructive",
+        title: "Error processing donation",
+        description: err.message,
+      });
       setError(err.message);
     } finally {
       setIsProcessing(false);
@@ -72,6 +112,7 @@ const DonationForm = () => {
   return (
     <Card className="bg-purple-900/90">
       <CardContent className="p-6">
+        <DonationDisclaimer />
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* Preset Amounts */}
           <div className="grid grid-cols-5 gap-2">
@@ -159,7 +200,14 @@ const DonationForm = () => {
             className="w-full bg-yellow-400 text-purple-900 hover:bg-yellow-300"
             disabled={!stripe || !amount || isProcessing || (!displayName && !isAnonymous)}
           >
-            {isProcessing ? 'Processing...' : 'Donate'}
+            {isProcessing ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Processing...
+              </>
+            ) : (
+              'Donate'
+            )}
           </Button>
         </form>
       </CardContent>

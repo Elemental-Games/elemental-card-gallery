@@ -1,7 +1,7 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useToast } from "@/components/ui/use-toast";
 
-export default function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
+export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   const { toast } = useToast();
 
   const createOrder = (data, actions) => {

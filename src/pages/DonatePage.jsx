@@ -1,7 +1,10 @@
 import { PayPalForm } from "@/components/PayPal";
 import { PayPalProvider } from "@/components/PayPal";
+import { CoinbaseForm } from "@/components/Coinbase";
+import { CoinbaseProvider } from "@/components/Coinbase";
 import DonationLeaderboard from "@/components/DonationLeaderboard";
 import DonationDisclaimer from "@/components/DonationDisclaimer";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export default function DonatePage() {
   return (
@@ -12,9 +15,22 @@ export default function DonatePage() {
       
       <div className="grid md:grid-cols-2 gap-8">
         <div className="space-y-6">
-          <PayPalProvider>
-            <PayPalForm />
-          </PayPalProvider>
+          <Tabs defaultValue="paypal" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="paypal">PayPal</TabsTrigger>
+              <TabsTrigger value="crypto">Crypto</TabsTrigger>
+            </TabsList>
+            <TabsContent value="paypal">
+              <PayPalProvider>
+                <PayPalForm />
+              </PayPalProvider>
+            </TabsContent>
+            <TabsContent value="crypto">
+              <CoinbaseProvider>
+                <CoinbaseForm />
+              </CoinbaseProvider>
+            </TabsContent>
+          </Tabs>
           <DonationDisclaimer />
         </div>
         

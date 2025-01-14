@@ -42,32 +42,21 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   };
 
   return (
-    <div className="relative rounded-lg p-4">
-      {/* Large radial gradient background */}
-      <div 
-        className="absolute inset-0 rounded-lg"
+    <div className="rounded-lg p-4 bg-white border-2 border-[rgb(14,8,20)]">
+      <PayPalButtons
         style={{
-          background: 'radial-gradient(circle at center, white 85%, rgb(14, 8, 20) 200%)'
+          layout: "vertical",
+          color: "gold",
+          shape: "pill",
+          height: 55,
+          label: "donate",
+          fundingicons: true,
+          tagline: false
         }}
+        createOrder={createOrder}
+        onApprove={onApprove}
+        disabled={isProcessing}
       />
-      
-      {/* Content */}
-      <div className="relative space-y-2">
-        <PayPalButtons
-          style={{
-            layout: "vertical",
-            color: "gold",
-            shape: "pill",
-            height: 55,
-            label: "donate",
-            fundingicons: true,
-            tagline: false
-          }}
-          createOrder={createOrder}
-          onApprove={onApprove}
-          disabled={isProcessing}
-        />
-      </div>
     </div>
   );
 } 

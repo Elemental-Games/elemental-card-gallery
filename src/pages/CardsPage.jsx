@@ -10,11 +10,13 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 
-const scrollGallery = (scrollRef, direction) => {
-  if (scrollRef.current) {
-    const scrollAmount = 300; // Adjust this value to control scroll distance
-    scrollRef.current.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
+const scrollGallery = (direction) => {
+  const container = scrollContainerRef.current;
+  if (container) {
+    const scrollAmount = 600; // Adjust this value to control scroll distance
+    const currentScroll = container.scrollLeft;
+    container.scrollTo({
+      left: currentScroll + (direction === 'left' ? -scrollAmount : scrollAmount),
       behavior: 'smooth'
     });
   }
@@ -114,7 +116,7 @@ const CardsPage = () => {
     return colors[element] || 'from-gray-500/20 to-gray-700/20';
   };
 
-  const scrollRef = useRef(null);
+  const scrollContainerRef = useRef(null);
 
   return (
     <>
@@ -139,7 +141,10 @@ const CardsPage = () => {
           <h2 className="text-3xl font-bold mb-6 text-yellow-400">Released Cards</h2>
           <div className="relative">
             <ScrollArea className="w-full whitespace-nowrap rounded-md border border-yellow-500/20">
-              <div className="flex w-max space-x-4 p-4" ref={scrollRef}>
+              <div 
+                className="flex w-max space-x-4 p-4" 
+                ref={scrollContainerRef}
+              >
                 {releasedCards.map((card) => (
                   <motion.div
                     key={card.id}
@@ -173,7 +178,7 @@ const CardsPage = () => {
             
             {/* Left Arrow */}
             <button
-              onClick={() => scrollGallery(scrollRef, 'left')}
+              onClick={() => scrollGallery('left')}
               className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-yellow-500/20 flex items-center justify-center text-yellow-400 transition-all hover:scale-110 z-10"
               aria-label="Scroll left"
             >
@@ -182,7 +187,7 @@ const CardsPage = () => {
 
             {/* Right Arrow */}
             <button
-              onClick={() => scrollGallery(scrollRef, 'right')}
+              onClick={() => scrollGallery('right')}
               className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-yellow-500/20 flex items-center justify-center text-yellow-400 transition-all hover:scale-110 z-10"
               aria-label="Scroll right"
             >

@@ -42,14 +42,14 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   };
 
   return (
-    <div className="bg-purple-900/90 rounded-md p-4 space-y-2">
+    <div className="bg-purple-900 bg-opacity-95 rounded-lg p-4 space-y-2 border border-yellow-400/20">
       <PayPalButtons
         style={{
           layout: "vertical",
-          color: "gold",  // or "blue"
-          shape: "rect",
-          label: "donate",
+          color: "gold",
+          shape: "pill",
           height: 55,
+          label: "donate",
           fundingicons: true,
           tagline: false
         }}

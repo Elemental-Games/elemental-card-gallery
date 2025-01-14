@@ -10,6 +10,8 @@ export async function recordDonation(donationData) {
     paypalEmail 
   } = donationData;
 
+  const now = new Date();
+  
   try {
     // Store donation record
     const { error: donationError } = await supabase.from('donations').insert([{
@@ -17,11 +19,12 @@ export async function recordDonation(donationData) {
       display_name: displayName,
       is_anonymous: isAnonymous,
       email: paypalEmail,
-      status: 'completed',
-      provider: 'paypal',
-      order_id: orderId,
-      subscribe_updates: subscribeToUpdates,
-      created_at: new Date().toISOString()
+      payment_status: 'completed',
+      payment_provider: 'paypal',
+      payment_id: orderId,
+      subscribe_to_updates: subscribeToUpdates,
+      created_at: now.toISOString(),
+      week_number: getWeekNumber(now)
     }]);
 
     if (donationError) {
@@ -40,7 +43,7 @@ export async function recordDonation(donationData) {
         await supabase.from('subscribers').insert([{
           email: paypalEmail,
           status: 'active',
-          subscribed_at: new Date().toISOString(),
+          subscribed_at: now.toISOString(),
           source: 'donation'
         }]);
       }
@@ -51,4 +54,11 @@ export async function recordDonation(donationData) {
     console.error('❌ Error:', err);
     throw new Error('Failed to record donation');
   }
+}
+
+function getWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil((((d - yearStart) / 86400000) + 1) / 7);
 } 

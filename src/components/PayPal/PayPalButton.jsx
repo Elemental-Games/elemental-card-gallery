@@ -42,21 +42,27 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   };
 
   return (
-    <div className="bg-purple-900 bg-opacity-95 rounded-lg p-4 space-y-2 border border-yellow-400/20">
-      <PayPalButtons
-        style={{
-          layout: "vertical",
-          color: "gold",
-          shape: "pill",
-          height: 55,
-          label: "donate",
-          fundingicons: true,
-          tagline: false
-        }}
-        createOrder={createOrder}
-        onApprove={onApprove}
-        disabled={isProcessing}
-      />
+    <div className="relative rounded-lg p-4">
+      {/* Gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-purple-900/50 to-white rounded-lg" />
+      
+      {/* Content */}
+      <div className="relative space-y-2">
+        <PayPalButtons
+          style={{
+            layout: "vertical",
+            color: "gold",
+            shape: "pill",
+            height: 55,
+            label: "donate",
+            fundingicons: true,
+            tagline: false
+          }}
+          createOrder={createOrder}
+          onApprove={onApprove}
+          disabled={isProcessing}
+        />
+      </div>
     </div>
   );
 } 

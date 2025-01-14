@@ -19,11 +19,15 @@ export async function recordDonation(donationData) {
       email: paypalEmail,
       payment_status: 'completed',
       payment_provider: 'paypal',
-      payment_id: orderId,
-      subscribe_to_updates: subscribeToUpdates
+      paypal_order_id: orderId,
+      subscribe_to_updates: subscribeToUpdates,
+      created_at: new Date().toISOString()
     }]);
 
-    if (donationError) throw donationError;
+    if (donationError) {
+      console.error('Donation Error:', donationError);
+      throw donationError;
+    }
 
     // Handle newsletter subscription
     if (subscribeToUpdates) {

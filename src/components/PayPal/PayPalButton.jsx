@@ -43,20 +43,22 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
 
   return (
     <div className="rounded-lg p-4 bg-white border-[14px] border-[rgb(75, 0, 130)]">
-      <PayPalButtons
-        style={{
-          layout: "vertical",
-          color: "gold",
-          shape: "pill",
-          height: 55,
-          label: "donate",
-          fundingicons: true,
-          tagline: false
-        }}
-        createOrder={createOrder}
-        onApprove={onApprove}
-        disabled={isProcessing}
-      />
+      <div className='bg-white rounded-lg p-4'>
+        <PayPalButtons
+          style={{
+            layout: "vertical",
+            color: "gold",
+            shape: "pill",
+            height: 55,
+            label: "donate",
+            fundingicons: true,
+            tagline: false
+          }}
+          createOrder={createOrder}
+          onApprove={onApprove}
+          disabled={isProcessing}
+        />
+      </div>
     </div>
   );
 } 

@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
-import { validatePayPalTransaction } from '@/components/PayPal/utils';
 
 export async function POST(req) {
   try {
@@ -20,7 +19,7 @@ export async function POST(req) {
       display_name: displayName,
       is_anonymous: isAnonymous,
       email: paypalEmail,
-      payment_status: 'completed', // PayPal payments are already confirmed
+      payment_status: 'completed',
       payment_provider: 'paypal',
       payment_id: orderId,
       subscribe_to_updates: subscribeToUpdates

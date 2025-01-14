@@ -1,24 +1,22 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useToast } from "@/components/ui/use-toast";
 
-export function PayPalButton({ amount, onSuccess, isProcessing, metadata = {} }) {
+export default function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   const { toast } = useToast();
 
   const createOrder = (data, actions) => {
+    const formattedAmount = Number(amount).toFixed(2);
+    
     return actions.order.create({
-      purchase_units: [
-        {
-          amount: {
-            value: amount,
-            currency_code: "USD"
-          },
-          description: "Donation to Elemental Masters",
-          custom_id: JSON.stringify(metadata)
-        }
-      ],
+      purchase_units: [{
+        amount: {
+          value: formattedAmount,
+          currency_code: "USD"
+        },
+        description: "Donation to Elemental Masters",
+        custom_id: JSON.stringify(metadata)
+      }],
       application_context: {
-        return_url: `${import.meta.env.VITE_SITE_URL}/donation-success`,
-        cancel_url: `${import.meta.env.VITE_SITE_URL}/donate`,
         shipping_preference: 'NO_SHIPPING'
       }
     });
@@ -27,7 +25,7 @@ export function PayPalButton({ amount, onSuccess, isProcessing, metadata = {} })
   const onApprove = async (data, actions) => {
     try {
       const order = await actions.order.capture();
-      onSuccess?.(order);
+      await onSuccess(order);
       
       toast({
         title: "Thank you!",

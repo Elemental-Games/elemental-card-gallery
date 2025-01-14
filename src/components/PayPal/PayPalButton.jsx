@@ -42,7 +42,7 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   };
 
   return (
-    <div className="rounded-lg p-4 bg-white border-[24px] border-[rgb(28,16,40)]">
+    <div className="rounded-lg p-4 bg-white border-[14px] border-[rgb(75, 0, 130)]">
       <PayPalButtons
         style={{
           layout: "vertical",

@@ -14,14 +14,82 @@ const CardsPage = () => {
   const releasedCards = [
     // Example structure - update with your actual released cards
     {
-      id: 1,
-      name: "Torrent",
-      image: "/cards/torrent.png",
-      element: "water",
-      type: "Basic Creature",
-      releaseDate: "2024-01-01"
+      id: "cloud-sprinter",
+      name: "Cloud Sprinter",
+      image: "/images/cards/cloud-sprinter.png",
+      element: "Air",
+      type: "Basic Creature"
     },
-    // Add more cards as they're released
+    {
+      id: "essence-exchange",
+      name: "Essence Exchange",
+      image: "/images/cards/essence-exchange.png",
+      element: "Special",
+      type: "Counter"
+    },
+    {
+      id: "counter-pulse",
+      name: "Counter Pulse",
+      image: "/images/cards/counter-pulse.png",
+      element: "Special",
+      type: "Counter"
+    },
+    {
+      id: "breeze-imp",
+      name: "Breeze Imp",
+      image: "/images/cards/breeze-imp.png",
+      element: "Air",
+      type: "Basic Creature"
+    },
+    {
+      id: "terra-sprinter",
+      name: "Terra Sprinter",
+      image: "/images/cards/terra-sprinter.png",
+      element: "Earth",
+      type: "Basic Creature"
+    },
+    {
+      id: "ember-flicker",
+      name: "Ember Flicker",
+      image: "/images/cards/ember-flicker.png",
+      element: "Fire",
+      type: "Basic Creature"
+    },
+    {
+      id: "aqua-dart",
+      name: "Aqua Dart",
+      image: "/images/cards/aqua-dart.png",
+      element: "Water",
+      type: "Basic Creature"
+    },
+    {
+      id: "gust-griffin",
+      name: "Gust Griffin",
+      image: "/images/cards/gust-griffin.png",
+      element: "Air",
+      type: "Basic Creature"
+    },
+    {
+      id: "tide-chaser",
+      name: "Tide Chaser",
+      image: "/images/cards/tide-chaser.png",
+      element: "Water",
+      type: "Basic Creature"
+    },
+    {
+      id: "inferno-serpent",
+      name: "Inferno Serpent",
+      image: "/images/cards/inferno-serpent.png",
+      element: "Fire",
+      type: "Basic Creature"
+    },
+    {
+      id: "sandy-scuttler",
+      name: "Sandy Scuttler",
+      image: "/images/cards/sandy-scuttler.png",
+      element: "Earth",
+      type: "Basic Creature"
+    }
   ];
 
   const getElementColor = (element) => {
@@ -44,6 +112,14 @@ const CardsPage = () => {
 
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6 text-yellow-400">Cards</h1>
+
+        {/* Release Schedule Section */}
+        <section className="mb-16">
+          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Release Schedule</h2>
+          <div className="flex justify-center">
+            <ReleaseSchedule />
+          </div>
+        </section>
 
         {/* Released Cards Gallery Section */}
         <section className="mb-16">
@@ -94,14 +170,6 @@ const CardsPage = () => {
               <Button>Get Notified</Button>
             </Link>
           </Card>
-        </section>
-
-        {/* Release Schedule Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Release Schedule</h2>
-          <div className="flex justify-center">
-            <ReleaseSchedule />
-          </div>
         </section>
       </div>
     </>

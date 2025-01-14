@@ -1,5 +1,6 @@
 import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useToast } from "@/components/ui/use-toast";
+import { recordDonation } from '@/api/record-paypal-donation';
 
 export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   const { toast } = useToast();
@@ -25,7 +26,18 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
   const onApprove = async (data, actions) => {
     try {
       const order = await actions.order.capture();
-      await onSuccess(order);
+      
+      // Record the donation directly using Supabase
+      await recordDonation({
+        orderId: order.id,
+        amount: Number(amount),
+        displayName: metadata.displayName,
+        isAnonymous: metadata.isAnonymous,
+        subscribeToUpdates: metadata.subscribeToUpdates,
+        paypalEmail: order.payer.email_address
+      });
+
+      onSuccess?.(order);
       
       toast({
         title: "Thank you!",

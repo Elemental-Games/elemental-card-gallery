@@ -47,7 +47,7 @@ export function PayPalButton({ amount, metadata, onSuccess, isProcessing }) {
       <div 
         className="absolute inset-0 rounded-lg"
         style={{
-          background: 'radial-gradient(circle at center, white 70%, rgb(88, 28, 135) 150%)'
+          background: 'radial-gradient(circle at center, white 85%, rgb(14, 8, 20) 200%)'
         }}
       />
       

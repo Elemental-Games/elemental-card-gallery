@@ -17,7 +17,7 @@ const DonationLeaderboard = () => {
           .from('donations')
           .select('*')
           .eq('week_number', currentWeek)
-          .eq('payment_status', 'completed')
+          .eq('status', 'completed')
           .order('amount', { ascending: false })
           .limit(10);
 
@@ -28,7 +28,7 @@ const DonationLeaderboard = () => {
         const { data: overallData, error: overallError } = await supabase
           .from('donations')
           .select('*')
-          .eq('payment_status', 'completed')
+          .eq('status', 'completed')
           .order('amount', { ascending: false })
           .limit(10);
 

@@ -5,10 +5,14 @@ export function CoinbaseButton({ metadata }) {
 
   const handleClick = async () => {
     try {
-      // Create Coinbase Commerce charge
+      console.log('Creating Coinbase charge...');
+      
       const response = await fetch('/api/create-coinbase-charge', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
         body: JSON.stringify({
           metadata: {
             displayName: metadata.displayName,
@@ -18,17 +22,27 @@ export function CoinbaseButton({ metadata }) {
         })
       });
 
-      if (!response.ok) throw new Error('Failed to create charge');
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Coinbase API error:', errorData);
+        throw new Error(errorData.details || 'Failed to create charge');
+      }
       
-      const { hosted_url } = await response.json();
-      window.location.href = hosted_url;
+      const data = await response.json();
+      console.log('Charge created:', data);
+      
+      if (!data.hosted_url) {
+        throw new Error('No hosted_url in response');
+      }
+
+      window.location.href = data.hosted_url;
       
     } catch (error) {
       console.error('Coinbase error:', error);
       toast({
         variant: "destructive",
         title: "Error",
-        description: "There was a problem connecting to Coinbase.",
+        description: error.message || "There was a problem connecting to Coinbase.",
       });
     }
   };

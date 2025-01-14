@@ -17,8 +17,8 @@ export async function POST(req) {
       // Update donation status
       const { error: updateError } = await supabase
         .from('donations')
-        .update({ payment_status: 'completed' })
-        .eq('payment_id', payment.id);
+        .update({ status: 'completed' })
+        .eq('order_id', payment.id);
 
       if (updateError) {
         console.error('❌ Error updating donation:', updateError);

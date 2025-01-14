@@ -19,10 +19,10 @@ export async function recordDonation(donationData) {
       display_name: displayName,
       is_anonymous: isAnonymous,
       email: paypalEmail,
-      payment_status: 'completed',
-      payment_provider: 'paypal',
-      payment_id: orderId,
-      subscribe_to_updates: subscribeToUpdates,
+      status: 'completed',
+      provider: 'paypal',
+      order_id: orderId,
+      subscribe_updates: subscribeToUpdates,
       created_at: now.toISOString(),
       week_number: getWeekNumber(now)
     }]);

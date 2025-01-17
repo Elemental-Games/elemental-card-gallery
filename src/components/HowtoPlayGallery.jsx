@@ -11,11 +11,13 @@ const galleryItems = [
     src: '/how-to-play/cards.png',
     alt: 'Card Collection'
   },
+  /*
   {
     type: 'video',
     src: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
     title: 'How to Play Tutorial'
   },
+  */
   // Add more items as needed
 ];
 

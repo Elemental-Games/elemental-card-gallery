@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
-import GameplayGallery from '@/components/GameplayGallery';
+import HowtoPlayGallery from '@/components/HowtoPlayGallery';
 
 const HowToPlayPage = () => {
   return (
@@ -20,7 +20,7 @@ const HowToPlayPage = () => {
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6">How to Play</h1>
         
-        <GameplayGallery />
+        <HowtoPlayGallery />
 
         <div className="mb-6 flex flex-wrap gap-4">
           <Link to="/how-to-play/rules">

@@ -3,13 +3,23 @@ import React, { useState, useEffect } from 'react';
 const galleryItems = [
   {
     type: 'image',
-    src: '/how-to-play/battle1.png',
-    alt: 'Battle Scene 1'
+    src: '/images/backgrounds/Ancient Winds.png',
+    alt: 'Ancient Winds'
   },
   {
     type: 'image',
-    src: '/how-to-play/cards.png',
-    alt: 'Card Collection'
+    src: '/images/backgrounds/Ancient Ember2.png',
+    alt: 'Ancient Ember'
+  },
+  {
+    type: 'image',
+    src: '/images/backgrounds/Ancient Tide.png',
+    alt: 'Ancient Tide'
+  },
+  {
+    type: 'image',
+    src: '/images/backgrounds/Ancient Roots.png',
+    alt: 'Ancient Roots'
   },
   /*
   {

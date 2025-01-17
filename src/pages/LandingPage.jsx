@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import ImageHero from '../components/ImageHero';
@@ -10,7 +10,7 @@ import LightBox from '../components/LightBox';
 import { Book, ScrollText, Gamepad2, LayoutGrid, ChevronRight } from 'lucide-react';
 
 const LandingPage = () => {
-  const [transitionElement, setTransitionElement] = React.useState(null);
+  const [transitionElement, setTransitionElement] = useState(null);
 
   const kingdoms = [
     { 
@@ -67,7 +67,7 @@ const LandingPage = () => {
   }
 
   return (
-    <div className="bg-gradient-to-br from-purple-900 to-indigo-900 text-white min-h-screen">
+    <div className="bg-[#1A103C] text-white min-h-screen">
       <ImageHero />
       <LightBox />
       

@@ -22,8 +22,8 @@ const CardsOfTheWeek = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-900 border-4 border-yellow-500">
-      <div className="container mx-auto px-4">
+    <div className="border-[6px] border-yellow-500 rounded-xl bg-transparent">
+      <div className="container mx-auto px-4 py-8">
         <h2 className="text-4xl font-bold mb-8 text-center text-white">Cards of the Week</h2>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {fixedCards.map((card) => (

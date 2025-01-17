@@ -30,80 +30,132 @@ const features = [
   }
 ];
 
-const FeatureModal = ({ feature, isOpen, onClose }) => (
-  <AnimatePresence>
-    {isOpen && (
-      <>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 0.5 }}
-          exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black z-40"
-          onClick={onClose}
-        />
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: 50 }}
-          className="fixed inset-x-4 top-[50%] translate-y-[-50%] max-w-2xl mx-auto z-50 bg-purple-800 rounded-xl shadow-2xl p-8"
-        >
-          <button
-            onClick={onClose}
-            className="absolute top-4 right-4 text-gray-300 hover:text-white"
-          >
-            <X size={24} />
-          </button>
-          <div className="flex items-center mb-6">
-            <div className="mr-6 p-2 bg-purple-700/50 rounded-lg">
-              {feature.icon}
-            </div>
-            <h3 className="text-2xl font-bold">{feature.title}</h3>
-          </div>
-          <p className="text-lg leading-relaxed text-gray-100">{feature.description}</p>
-        </motion.div>
-      </>
-    )}
-  </AnimatePresence>
-);
-
-const FeatureCard = ({ feature, onClick }) => (
-  <motion.div
-    className="bg-purple-800/50 backdrop-blur-sm p-6 rounded-xl shadow-lg cursor-pointer 
-               hover:bg-purple-700/50 transition-colors duration-300"
-    onClick={onClick}
-    whileHover={{ scale: 1.02 }}
-    whileTap={{ scale: 0.98 }}
-  >
-    <div className="flex items-center mb-4">
-      <div className="mr-4 p-2 bg-purple-700/50 rounded-lg">
-        {feature.icon}
-      </div>
-      <h3 className="text-xl font-semibold">{feature.title}</h3>
-    </div>
-    <p className="text-sm text-gray-300">Click to learn more</p>
-  </motion.div>
-);
-
 const KeyFeatures = () => {
   const [selectedFeature, setSelectedFeature] = useState(null);
 
   return (
-    <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {features.map((feature, index) => (
-          <FeatureCard
-            key={index}
-            feature={feature}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16 mb-1">
+      {/* Top Row - 3 cards */}
+      <motion.div
+        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+          border border-purple-500/30 hover:border-purple-500/50"
+        whileHover={{ scale: 1.02 }}
+        onClick={() => setSelectedFeature(features[0])}
+      >
+        <div className="flex items-center h-20">
+          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
+            {features[0].icon}
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-1">{features[0].title}</h3>
+            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+              Click to learn more
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+          border border-purple-500/30 hover:border-purple-500/50"
+        whileHover={{ scale: 1.02 }}
+        onClick={() => setSelectedFeature(features[1])}
+      >
+        <div className="flex items-center h-20">
+          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
+            {features[1].icon}
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-1">Rich World</h3>
+            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+              Click to learn more
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+          border border-purple-500/30 hover:border-purple-500/50"
+        whileHover={{ scale: 1.02 }}
+        onClick={() => setSelectedFeature(features[2])}
+      >
+        <div className="flex items-center h-20">
+          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
+            {features[2].icon}
+          </div>
+          <div>
+            <h3 className="text-xl font-semibold text-white mb-1">Diverse Creatures</h3>
+            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+              Click to learn more
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Bottom Row - 2 centered cards */}
+      <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[660px] mx-auto w-full">
+        {features.slice(3).map((feature, index) => (
+          <motion.div
+            key={index + 3}
+            className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+              shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+              border border-purple-500/30 hover:border-purple-500/50"
+            whileHover={{ scale: 1.02 }}
             onClick={() => setSelectedFeature(feature)}
-          />
+          >
+            <div className="flex items-center h-20">
+              <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
+                {feature.icon}
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold text-white mb-1">{feature.title}</h3>
+                <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
+                  Click to learn more
+                </p>
+              </div>
+            </div>
+          </motion.div>
         ))}
       </div>
-      <FeatureModal
-        feature={selectedFeature || {}}
-        isOpen={!!selectedFeature}
-        onClose={() => setSelectedFeature(null)}
-      />
-    </>
+
+      <AnimatePresence>
+        {selectedFeature && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50"
+            onClick={() => setSelectedFeature(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="bg-purple-950 p-6 rounded-lg max-w-2xl relative"
+              onClick={e => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedFeature(null)}
+                className="absolute top-2 right-2 text-gray-400 hover:text-white"
+              >
+                <X className="h-6 w-6" />
+              </button>
+              <div className="flex items-center mb-4">
+                <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
+                  {selectedFeature.icon}
+                </div>
+                <h3 className="text-2xl font-semibold text-white">{selectedFeature.title}</h3>
+              </div>
+              <p className="text-gray-300">{selectedFeature.description}</p>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
   );
 };
 

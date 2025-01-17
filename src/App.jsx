@@ -24,6 +24,7 @@ import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
 import LandingPage from "./pages/LandingPage";
 import DonatePage from '@/pages/DonatePage';
+import HowToPlayPage from "./pages/HowToPlayPage";
 
 const queryClient = new QueryClient();
 

@@ -9,6 +9,7 @@ import { Card } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import { useRef } from "react";
+import SEO from '../components/SEO';
 
 const scrollGallery = (direction) => {
   const container = scrollContainerRef.current;
@@ -120,10 +121,12 @@ const CardsPage = () => {
 
   return (
     <>
-      <Helmet>
-        <title>Cards - Elemental Masters TCG</title>
-        <meta name="description" content="Browse our extensive collection of Elemental Masters trading cards. Discover rare cards, build your deck, and master the elements." />
-      </Helmet>
+      <SEO 
+        title="Card Gallery"
+        description="Explore the complete collection of Elemental Masters cards. Browse through Air, Water, Fire, and Earth elements, discover rare cards, and build your perfect deck."
+        path="/cards"
+        image="/images/cards-preview.jpg"
+      />
 
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold mb-6 text-yellow-400">Cards</h1>

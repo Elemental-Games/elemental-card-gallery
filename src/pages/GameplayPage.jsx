@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Download } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
+import GameplayGallery from '@/components/GameplayGallery';
 
-const GameplayPage = () => {
+const HowToPlayPage = () => {
   return (
     <>
       <Helmet>
@@ -14,28 +15,25 @@ const GameplayPage = () => {
         <meta property="og:title" content="How to Play Elemental Masters TCG - Game Rules & Mechanics" />
         <meta property="og:description" content="Master the elements in Elemental Masters TCG. Learn game rules, deck building strategies, and combat mechanics." />
         <meta property="og:type" content="article" />
-        <link rel="canonical" href="https://elementalgames.gg/gameplay" />
+        <link rel="canonical" href="https://elementalgames.gg/how-to-play" />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6">Gameplay Overview</h1>
-        <h1 className="text-3xl font-bold mb-6">Gameplay</h1>
-        <p className="mb-4">
-          Elemental Masters is an exciting 2-player trading card game where you harness the power of the elements to defeat your opponents. An average game lasts 20-25 minutes.
-        </p>
+        <h1 className="text-4xl font-bold mb-6">How to Play</h1>
+        
+        <GameplayGallery />
+
         <div className="mb-6 flex flex-wrap gap-4">
-          <Link to="/gameplay/rules">
+          <Link to="/how-to-play/rules">
             <Button>View Full Rules</Button>
           </Link>
           <Button onClick={() => window.open('/rulebook.pdf', '_blank')}>
             <Download className="mr-2 h-4 w-4" /> Download Rulebook PDF
           </Button>
-          <Link to="/gameplay/battle-simulation">
+          <Link to="/how-to-play/battle-simulation">
             <Button>Try Battle Simulation</Button>
           </Link>
-          <Link to="/gameplay/learn-to-play">
-            <Button>Learn More</Button>
-          </Link>
         </div>
+
         <h2 className="text-2xl font-semibold mb-4">Quick Overview</h2>
         <ul className="list-disc list-inside mb-6 space-y-2">
           <li>Build a deck of 40 cards, combining different elements and strategies.</li>
@@ -66,4 +64,4 @@ const GameplayPage = () => {
   );
 };
 
-export default GameplayPage;
+export default HowToPlayPage;

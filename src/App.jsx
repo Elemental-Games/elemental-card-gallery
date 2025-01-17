@@ -17,7 +17,6 @@ import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import BattleSimulationPage from "./pages/BattleSimulationPage";
 import RulesPage from "./pages/RulesPage";
-import LearnToPlayPage from "./pages/LearnToPlayPage";
 import EvermerePage from "./pages/EvermerePage";
 import GrivossPage from "./pages/GrivossPage";
 import ScartoPage from "./pages/ScartoPage";
@@ -78,9 +77,8 @@ const App = () => (
                     <Route path="/cards/gallery" element={<CardGalleryPage />} />
                     <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
                     <Route path="/cards/:id" element={<CardDetailPage />} />
-                    <Route path="/gameplay/battle-simulation" element={<BattleSimulationPage />} />
-                    <Route path="/gameplay/rules/*" element={<RulesPage />} />
-                    <Route path="/gameplay/learn" element={<LearnToPlayPage />} />
+                    <Route path="/how-to-play/battle-simulation" element={<BattleSimulationPage />} />
+                    <Route path="/how-to-play/rules/*" element={<RulesPage />} />
                     <Route path="/kinbrold/evermere" element={<EvermerePage />} />
                     <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
                     <Route path="/kinbrold/scarto" element={<ScartoPage />} />

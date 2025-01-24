@@ -1,131 +1,56 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Download } from 'lucide-react';
-import { Helmet } from 'react-helmet-async';
-import HowtoPlayGallery from '@/components/HowtoPlayGallery';
+import { useState } from 'react';
+import RulesTabs from '../components/rules/RulesTabs';
+import QuickReference from '../components/rules/QuickReference';
+import RulesContent from '../components/rules/RulesContent';
+import HowtoPlayGallery from '../components/HowtoPlayGallery';
 
 const HowToPlayPage = () => {
+  const [activeTab, setActiveTab] = useState('setup');
+
   return (
-    <div className="min-h-screen bg-[#1A103C]">
+    <div className="min-h-screen bg-[#1A103C] text-white">
       <div className="container mx-auto px-4 py-8">
-        <HowtoPlayGallery />
+        {/* Image Gallery Section */}
+        <section className="mb-12">
+          <HowtoPlayGallery />
+        </section>
+
+        <div className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-bold">How to Play</h1>
+          <a 
+            href="/data/TCG Rulebook.pdf"
+            download
+            className="flex items-center gap-2 px-6 py-3 bg-purple-700 hover:bg-purple-600 
+              rounded-lg transition-colors shadow-lg border border-purple-500/30"
+          >
+            <svg 
+              className="w-5 h-5" 
+              fill="none" 
+              stroke="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                strokeWidth={2} 
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+              />
+            </svg>
+            <span>Download Rulebook PDF</span>
+          </a>
+        </div>
         
-        {/* Main Content with Sidebar Layout */}
-        <div className="mt-12 flex flex-col lg:flex-row gap-8">
+        <RulesTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        
+        <div className="flex flex-col md:flex-row gap-8">
           {/* Main Content */}
-          <div className="flex-grow max-w-4xl">
-            <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-purple-200 border-b border-purple-200/30 pb-2">
-                Game Overview
-              </h2>
-              <div className="space-y-6">
-                <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-semibold mb-4 text-purple-200">Quick Start Guide</h3>
-                  <ul className="list-disc list-inside space-y-2 text-gray-200">
-                    <li>Build a deck of 40 cards, combining different elements and strategies</li>
-                    <li>Start with 3 shields (1 of each tier) and draw 5 cards</li>
-                    <li>Generate and use essence as a resource to play cards and activate abilities</li>
-                    <li>Take turns playing creatures, runes, and counters, and engaging in combat</li>
-                    <li>Destroy your opponent's shields and deplete their health points to zero to win!</li>
-                    <li>Alternatively, win by collecting all 4 ancient elemental cards and playing the "Ancient Sigil" rune</li>
-                  </ul>
-                </div>
-
-                <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-semibold mb-4 text-purple-200">Key Game Elements</h3>
-                  <ul className="space-y-4 text-gray-200">
-                    <li className="flex gap-4">
-                      <span className="font-semibold text-yellow-400">Creatures:</span>
-                      <span>Main battling units from 4 elements (Air, Water, Fire, Earth) and 6 combinational elements for Dragons</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="font-semibold text-yellow-400">Runes:</span>
-                      <span>Types include Normal, Equipments, and Instants. Have a variety of effects that can support your strategy or disrupt your opponent's</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="font-semibold text-yellow-400">Counters:</span>
-                      <span>Can be activated during either player's turn, often in response to specific actions</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="font-semibold text-yellow-400">Shields:</span>
-                      <span>Your last line of defense, providing a choice between powerful effects when broken</span>
-                    </li>
-                    <li className="flex gap-4">
-                      <span className="font-semibold text-yellow-400">Essence:</span>
-                      <span>Resource generated by creatures, used to play cards and activate abilities</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </section>
-
-            {/* Advanced Mechanics Section */}
-            <section className="mb-12">
-              <h2 className="text-3xl font-bold mb-6 text-yellow-400 border-b border-yellow-400/30 pb-2">
-                Advanced Mechanics
-              </h2>
-              <div className="space-y-6">
-                <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-semibold mb-4 text-purple-200">Combat System</h3>
-                  {/* Add combat mechanics details */}
-                </div>
-                <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-                  <h3 className="text-xl font-semibold mb-4 text-purple-200">Shield Mechanics</h3>
-                  {/* Add shield system details */}
-                </div>
-              </div>
-            </section>
+          <div className="md:w-2/3">
+            <RulesContent activeTab={activeTab} />
           </div>
-
-          {/* Sidebar */}
-          <div className="lg:w-80 space-y-6">
-            {/* Quick Reference */}
-            <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-yellow-400">Quick Reference</h3>
-              <nav className="space-y-4">
-                <div>
-                  <h4 className="font-semibold text-purple-200 mb-2">Card Types</h4>
-                  <ul className="text-gray-200 text-sm space-y-1">
-                    <li>Creatures</li>
-                    <li>Runes (Normal)</li>
-                    <li>Runes (Equipment)</li>
-                    <li>Runes (Instant)</li>
-                    <li>Counters</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-purple-200 mb-2">Elements</h4>
-                  <ul className="text-gray-200 text-sm space-y-1">
-                    <li>Air</li>
-                    <li>Water</li>
-                    <li>Fire</li>
-                    <li>Earth</li>
-                    <li>Combinational (Dragons)</li>
-                  </ul>
-                </div>
-                <div>
-                  <h4 className="font-semibold text-purple-200 mb-2">Key Terms</h4>
-                  <ul className="text-gray-200 text-sm space-y-1">
-                    <li>Essence</li>
-                    <li>Strength</li>
-                    <li>Agility</li>
-                    <li>Shield Tiers</li>
-                  </ul>
-                </div>
-              </nav>
-            </div>
-
-            {/* Tips & Strategies Box */}
-            <div className="bg-purple-900/30 p-6 rounded-lg shadow-lg">
-              <h3 className="text-xl font-semibold mb-4 text-yellow-400">Tips & Strategies</h3>
-              <ul className="text-gray-200 text-sm space-y-2">
-                <li>Balance your deck's essence costs</li>
-                <li>Consider creature stats for your strategy</li>
-                <li>Keep some counters for defense</li>
-                <li>Plan your shield breaks carefully</li>
-              </ul>
-            </div>
+          
+          {/* Quick Reference Sidebar */}
+          <div className="md:w-1/3">
+            <QuickReference setActiveTab={setActiveTab} />
           </div>
         </div>
       </div>

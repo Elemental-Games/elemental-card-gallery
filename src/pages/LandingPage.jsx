@@ -18,28 +18,28 @@ const LandingPage = () => {
       element: 'Air',
       color: 'bg-gray-300', 
       hoverColor: 'hover:bg-gray-400',
-      description: 'The Air Kingdom, where creatures are the fastest and ever-changing.'
+      description: 'Among the mountain peaks are floating cities created by the architects and scholars who have harnessed the power of the air.'
     },
     { 
       name: 'Tsunareth', 
       element: 'Water',
       color: 'bg-blue-300', 
       hoverColor: 'hover:bg-blue-400',
-      description: 'The Water Kingdom, focusing on card milling features and swift actions.'
+      description: 'Beneath crystalline waves lie the ancient coral cities where wisdom flows as freely as the tides that shape them.'
     },
     { 
       name: 'Scarto', 
       element: 'Fire',
       color: 'bg-red-300', 
       hoverColor: 'hover:bg-red-400',
-      description: 'The Fire Kingdom, built for damage and steadily taking down opponents.'
+      description: 'From volcanic depths, rise citadels created from those who have mastered the power of fire, where passionate warriors forge their own destiny.'
     },
     { 
       name: 'Grivoss', 
       element: 'Earth',
       color: 'bg-green-300', 
       hoverColor: 'hover:bg-green-400',
-      description: 'The Earth Kingdom, standing strong with resilient and defensive creatures.'
+      description: 'Deep within mountain strongholds, stand the steadfast people who carve their legacy and test the limits on the land of Kinbrold.'
     }
   ];
 
@@ -76,7 +76,7 @@ const LandingPage = () => {
         <div className="flex items-start justify-between">
           <div className="flex-grow mr-8">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-4xl font-bold">Game Overview</h2>
+              <h2 className="text-4xl font-bold">Elemental Masters | Game Overview</h2>
               <img 
                 src="/Masters_Logo.png" 
                 alt="Masters Logo" 
@@ -126,16 +126,49 @@ const LandingPage = () => {
           </div>
         </section>
 
-        <section className="mb-32">
-          <h2 className="text-4xl font-bold mb-8 flex items-center justify-center">
-            Explore More
-          </h2>
-          <div className="flex flex-wrap justify-center gap-8">
-            {exploreItems.map((item, index) => (
-              <Link to={item.link} key={index}>
-                <ExploreItem title={item.title} icon={item.icon} />
-              </Link>
-            ))}
+        {/* Explore More Section */}
+        <section className="container mx-auto px-4 py-16 text-center">
+          <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <Link to="/kinbrold">
+              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
+                <h3 className="text-2xl font-semibold text-white">Kinbrold Lore</h3>
+                <p className="text-purple-300 mt-2 text-sm">Discover the world</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+              </div>
+            </Link>
+
+            <Link to="/deck-builder">
+              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
+                <h3 className="text-2xl font-semibold text-white">Deck Builder</h3>
+                <p className="text-purple-300 mt-2 text-sm">Create your strategy</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+              </div>
+            </Link>
+
+            <Link to="/how-to-play">
+              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
+                <h3 className="text-2xl font-semibold text-white">Gameplay</h3>
+                <p className="text-purple-300 mt-2 text-sm">Learn the basics</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+              </div>
+            </Link>
+
+            <Link to="/cards">
+              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
+                <h3 className="text-2xl font-semibold text-white">Card Gallery</h3>
+                <p className="text-purple-300 mt-2 text-sm">Browse collection</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+              </div>
+            </Link>
           </div>
         </section>
       </div>

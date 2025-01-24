@@ -30,11 +30,11 @@ const Header = () => {
             <Link to="/" className="flex items-center">
               <img 
                 src="/Games_Logo.png" 
-                alt="Elemental Masters Logo" 
+                alt="Elemental Games Logo" 
                 className="h-16 w-16 mr-2"
               />
               <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
-                Elemental Masters
+                Elemental Games
               </span>
             </Link>
           </div>

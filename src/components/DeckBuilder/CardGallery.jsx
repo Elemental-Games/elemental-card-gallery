@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus } from 'lucide-react';
-import FilterOptions from '../FilterOptions';
+import FilterOptions from '@/components/FilterOptions';
+import { Link } from 'react-router-dom';
 
-const CardGallery = ({ cards, onCardSelect, deck }) => {
+const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck: [] } }) => {
   const [filteredCards, setFilteredCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('');
@@ -19,14 +20,19 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
 
   useEffect(() => {
     try {
-      const filtered = cards.filter(card => {
-        const nameMatch = card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      // First, filter out any invalid cards
+      const validCards = cards.filter(card => card && typeof card === 'object' && card.name);
+      
+      const filtered = validCards.filter(card => {
+        const nameMatch = searchTerm === '' || 
+          card.name.toLowerCase().includes(searchTerm.toLowerCase());
+        
         const elementMatch = element === '' || card.element === element;
         const typeMatch = type === 'all' || card.type === type;
         const rarityMatch = rarity === 'all' ||
           (rarity === 'common' && card.rarity === 'C') ||
           (rarity === 'uncommon' && card.rarity === 'U') ||
-          (rarity === 'rare' && card.rarity.trim() === 'R') ||
+          (rarity === 'rare' && card.rarity === 'R') ||
           (rarity === 'epic' && card.rarity === 'E') ||
           (rarity === 'legendary' && card.rarity === 'L');
         const tierMatch = tier === null || card.tier === tier;
@@ -34,52 +40,57 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         return nameMatch && elementMatch && typeMatch && rarityMatch && tierMatch;
       });
 
-      filtered.sort((a, b) => {
-        if (idSort) {
-          return idSort === 'asc' ? a.cardNumber - b.cardNumber : b.cardNumber - a.cardNumber;
-        }
-        if (strengthAgilitySort) {
-          const [attribute, order] = strengthAgilitySort.split('-');
-          const aValue = Number(a[attribute]) || 0;
-          const bValue = Number(b[attribute]) || 0;
-          return order === 'asc' 
-            ? (aValue - bValue) || (a.cardNumber - b.cardNumber)
-            : (bValue - aValue) || (b.cardNumber - a.cardNumber);
-        }
-        return a.cardNumber - b.cardNumber;
-      });
+      let sorted = [...filtered];
 
-      setFilteredCards(filtered);
-      setError(null);
-    } catch (error) {
-      console.error('Error filtering cards:', error);
+      if (idSort !== null) {
+        sorted.sort((a, b) => {
+          const aId = parseInt(a.cardNumber) || 0;
+          const bId = parseInt(b.cardNumber) || 0;
+          return idSort === 'asc' ? aId - bId : bId - aId;
+        });
+      }
+
+      if (strengthAgilitySort !== null) {
+        sorted.sort((a, b) => {
+          const aValue = (parseInt(a.strength) || 0) + (parseInt(a.agility) || 0);
+          const bValue = (parseInt(b.strength) || 0) + (parseInt(b.agility) || 0);
+          return strengthAgilitySort === 'asc' ? aValue - bValue : bValue - aValue;
+        });
+      }
+
+      setFilteredCards(sorted);
+    } catch (err) {
+      console.error('Error filtering cards:', err);
       setError('An error occurred while filtering cards. Please try again.');
     }
-  }, [searchTerm, element, type, cards, idSort, strengthAgilitySort, rarity, tier]);
+  }, [cards, searchTerm, element, type, rarity, tier, idSort, strengthAgilitySort]);
 
   const handleFilterChange = (filterType, value) => {
     switch (filterType) {
       case 'element':
-        setElement(value === 'All Elements' ? '' : value);
+        setElement(value);
         break;
       case 'type':
-        setType(value === 'All Types' ? 'all' : value);
+        setType(value);
         break;
       case 'rarity':
-        setRarity(value === 'All Rarities' ? 'all' : value.toLowerCase());
-        break;
-      case 'idSort':
-        setIdSort(value);
-        break;
-      case 'strengthAgilitySort':
-        setStrengthAgilitySort(value);
+        setRarity(value);
         break;
       case 'tier':
         setTier(value);
         break;
+      case 'idSort':
+        setIdSort(value);
+        setStrengthAgilitySort(null);
+        break;
+      case 'strengthAgilitySort':
+        setStrengthAgilitySort(value);
+        setIdSort(null);
+        break;
       default:
         break;
     }
+    setCurrentPage(1);
   };
 
   const resetFilters = () => {
@@ -90,20 +101,23 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
     setStrengthAgilitySort(null);
     setRarity('all');
     setTier(null);
+    setCurrentPage(1);
   };
 
   const handleCardClick = (card, amount) => {
-    if (onCardSelect) {
+    if (onCardSelect && card) {
       onCardSelect(card, amount);
     }
   };
 
   const getCardCount = (cardId) => {
-    const mainDeckCard = deck.mainDeck.find(c => c.id === cardId);
-    const sideDeckCard = deck.sideDeck.find(c => c.id === cardId);
+    if (!cardId) return 0;
+    const mainDeckCard = deck.mainDeck?.find(c => c.id === cardId);
+    const sideDeckCard = deck.sideDeck?.find(c => c.id === cardId);
     return (mainDeckCard?.quantity || 0) + (sideDeckCard?.quantity || 0);
   };
 
+  // Pagination
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
   const currentCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard);
@@ -115,7 +129,6 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
   return (
     <div className="mt-4">
       <FilterOptions 
-        cards={cards}
         onFilterChange={handleFilterChange}
         onResetFilters={resetFilters}
         searchTerm={searchTerm}
@@ -127,7 +140,7 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
         {currentCards.map((card) => (
           <Card 
             key={card.id} 
-            className="p-2 cursor-pointer hover:shadow-lg transition-shadow duration-200"
+            className="p-2 hover:shadow-lg transition-shadow duration-200"
           >
             <img 
               src={`/images/cards/${card.id}.webp`} 
@@ -138,41 +151,43 @@ const CardGallery = ({ cards, onCardSelect, deck }) => {
                 e.target.src = `/images/cards/${card.id}.png`;
               }}
             />
-            <p className="text-center mt-2">{card.name}</p>
-            <p className="text-center text-sm text-gray-600">
-              {card.element} | {card.type} | {
-                card.rarity === 'C' ? 'Common' :
-                card.rarity === 'U' ? 'Uncommon' :
-                card.rarity.trim() === 'R' ? 'Rare' :
-                card.rarity === 'E' ? 'Epic' :
-                card.rarity === 'L' ? 'Legendary' :
-                card.rarity
-              }
-            </p>
-            {card.type === 'Creature' && (
-              <p className="text-center text-sm">
-                STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
-              </p>
-            )}
-            <div className="flex justify-center items-center mt-2">
-              <Button size="sm" variant="outline" onClick={() => handleCardClick(card, -1)}>
-                <Minus className="h-4 w-4" />
+            <div className="flex flex-col gap-2 mt-3">
+              <Button 
+                variant="outline" 
+                className="w-full bg-purple-900/50 hover:bg-purple-800/50"
+                onClick={() => handleCardClick(card, 1)}
+              >
+                Add to Deck
               </Button>
-              <span className="mx-2">{getCardCount(card.id)}</span>
-              <Button size="sm" variant="outline" onClick={() => handleCardClick(card, 1)}>
-                <Plus className="h-4 w-4" />
-              </Button>
+              <Link to={`/cards/${card.id}`} className="w-full">
+                <Button 
+                  variant="outline" 
+                  className="w-full bg-yellow-500 hover:bg-yellow-400"
+                >
+                  Learn More
+                </Button>
+              </Link>
             </div>
           </Card>
         ))}
       </div>
       
       <div className="mt-4 flex justify-center space-x-2">
-        <Button onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} disabled={currentPage === 1}>
+        <Button 
+          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
+          disabled={currentPage === 1}
+        >
           Previous
         </Button>
-        <span className="self-center">{currentPage} / {Math.ceil(filteredCards.length / cardsPerPage)}</span>
-        <Button onClick={() => setCurrentPage(prev => Math.min(prev + 1, Math.ceil(filteredCards.length / cardsPerPage)))} disabled={currentPage === Math.ceil(filteredCards.length / cardsPerPage)}>
+        <span className="self-center">
+          {currentPage} / {Math.ceil(filteredCards.length / cardsPerPage)}
+        </span>
+        <Button 
+          onClick={() => setCurrentPage(prev => 
+            Math.min(prev + 1, Math.ceil(filteredCards.length / cardsPerPage))
+          )} 
+          disabled={currentPage === Math.ceil(filteredCards.length / cardsPerPage)}
+        >
           Next
         </Button>
       </div>

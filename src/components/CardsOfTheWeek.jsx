@@ -1,43 +1,83 @@
 import React from 'react';
-import CardDisplay from './CardDisplay';
+import { motion } from 'framer-motion';
+import CardOfTheWeek from './cards/CardOfTheWeek';
 
 const CardsOfTheWeek = () => {
-  const fixedCards = [
+  const weeklyCards = [
     {
       id: "cloud-sprinter",
-      element: "Air"
+      name: "Cloud Sprinter",
+      image: "/images/cards/cloud-sprinter.webp"
     },
     {
       id: "swiftreaver",
-      element: "Earth"
+      name: "Swiftreaver",
+      image: "/images/cards/swiftreaver.webp"
     },
     {
       id: "aqua-shade",
-      element: "Water"
+      name: "Aqua Shade",
+      image: "/images/cards/aqua-shade.webp"
     },
     {
       id: "flamekeeper",
-      element: "Fire"
+      name: "Flamekeeper",
+      image: "/images/cards/flamekeeper.webp"
     }
   ];
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { 
+      opacity: 0,
+      y: 50,
+      scale: 0.9
+    },
+    visible: { 
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
+
   return (
-    <div className="border-[6px] border-yellow-500 rounded-xl bg-transparent">
+    <motion.div 
+      className="border-[6px] border-yellow-500 rounded-xl bg-transparent"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
       <div className="container mx-auto px-4 py-8">
-        <h2 className="text-4xl font-bold mb-8 text-center text-white">Cards of the Week</h2>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {fixedCards.map((card) => (
-            <div key={card.id} className="aspect-[1500/2100] relative">
-              <CardDisplay 
-                card={card} 
-                variant="cardsOfWeek"
-                className="absolute inset-0 w-full h-full object-contain"
-              />
-            </div>
+        <motion.h2 
+          className="text-4xl font-bold mb-8 text-center text-yellow-500"
+          variants={itemVariants}
+        >
+          Cards of the Week
+        </motion.h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {weeklyCards.map((card) => (
+            <motion.div key={card.id} variants={itemVariants}>
+              <CardOfTheWeek card={card} />
+            </motion.div>
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

@@ -10,6 +10,7 @@ import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { motion } from "framer-motion";
 import { useRef } from "react";
 import SEO from '../components/SEO';
+import CardOfTheWeek from '@/components/cards/CardOfTheWeek';
 
 const scrollGallery = (direction) => {
   const container = scrollContainerRef.current;
@@ -24,196 +25,131 @@ const scrollGallery = (direction) => {
 };
 
 const CardsPage = () => {
-  // This would come from your database/API in a real implementation
-  const releasedCards = [
-    // Example structure - update with your actual released cards
+  const weeklyCards = [
     {
       id: "cloud-sprinter",
       name: "Cloud Sprinter",
-      image: "/images/cards/cloud-sprinter.png",
-      element: "Air",
-      type: "Basic Creature"
+      image: "/images/cards/cloud-sprinter.webp"
     },
     {
-      id: "essence-exchange",
-      name: "Essence Exchange",
-      image: "/images/cards/essence-exchange.png",
-      element: "Special",
-      type: "Counter"
+      id: "swiftreaver",
+      name: "Swiftreaver",
+      image: "/images/cards/swiftreaver.webp"
     },
     {
-      id: "counter-pulse",
-      name: "Counter Pulse",
-      image: "/images/cards/counter-pulse.png",
-      element: "Special",
-      type: "Counter"
+      id: "aqua-shade",
+      name: "Aqua Shade",
+      image: "/images/cards/aqua-shade.webp"
     },
     {
-      id: "breeze-imp",
-      name: "Breeze Imp",
-      image: "/images/cards/breeze-imp.png",
-      element: "Air",
-      type: "Basic Creature"
-    },
-    {
-      id: "terra-sprinter",
-      name: "Terra Sprinter",
-      image: "/images/cards/terra-sprinter.png",
-      element: "Earth",
-      type: "Basic Creature"
-    },
-    {
-      id: "ember-flicker",
-      name: "Ember Flicker",
-      image: "/images/cards/ember-flicker.png",
-      element: "Fire",
-      type: "Basic Creature"
-    },
-    {
-      id: "aqua-dart",
-      name: "Aqua Dart",
-      image: "/images/cards/aqua-dart.png",
-      element: "Water",
-      type: "Basic Creature"
-    },
-    {
-      id: "gust-griffin",
-      name: "Gust Griffin",
-      image: "/images/cards/gust-griffin.png",
-      element: "Air",
-      type: "Basic Creature"
-    },
-    {
-      id: "tide-chaser",
-      name: "Tide Chaser",
-      image: "/images/cards/tide-chaser.png",
-      element: "Water",
-      type: "Basic Creature"
-    },
-    {
-      id: "inferno-serpent",
-      name: "Inferno Serpent",
-      image: "/images/cards/inferno-serpent.png",
-      element: "Fire",
-      type: "Basic Creature"
-    },
-    {
-      id: "sandy-scuttler",
-      name: "Sandy Scuttler",
-      image: "/images/cards/sandy-scuttler.png",
-      element: "Earth",
-      type: "Basic Creature"
+      id: "flamekeeper",
+      name: "Flamekeeper",
+      image: "/images/cards/flamekeeper.webp"
     }
   ];
 
-  const getElementColor = (element) => {
-    const colors = {
-      Air: 'from-sky-500/20 to-sky-700/20',
-      Water: 'from-blue-500/20 to-blue-700/20',
-      Fire: 'from-red-500/20 to-red-700/20',
-      Earth: 'from-green-500/20 to-green-700/20',
-      Special: 'from-purple-500/20 to-purple-700/20'
-    };
-    return colors[element] || 'from-gray-500/20 to-gray-700/20';
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
   };
 
-  const scrollContainerRef = useRef(null);
+  const itemVariants = {
+    hidden: { 
+      opacity: 0,
+      x: -50,
+      rotateY: 45
+    },
+    visible: { 
+      opacity: 1,
+      x: 0,
+      rotateY: 0,
+      transition: {
+        type: "spring",
+        stiffness: 100,
+        damping: 12
+      }
+    }
+  };
 
   return (
-    <>
-      <SEO 
-        title="Card Gallery"
-        description="Explore the complete collection of Elemental Masters cards. Browse through Air, Water, Fire, and Earth elements, discover rare cards, and build your perfect deck."
-        path="/cards"
-        image="/images/cards-preview.jpg"
-      />
-
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold mb-6 text-yellow-400">Cards</h1>
-
-        {/* Release Schedule Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Release Schedule</h2>
-          <div className="flex justify-center">
-            <ReleaseSchedule />
+    <div className="min-h-screen bg-[#1A103C] text-white overflow-hidden">
+      <motion.div 
+        className="container mx-auto px-4 py-12 max-w-6xl"
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+      >
+        {/* Weekly Deep Dives Section */}
+        <motion.div 
+          className="bg-purple-950/70 p-8 rounded-2xl border border-yellow-500/30 
+            shadow-[0_0_30px_rgba(234,179,8,0.1)]"
+          initial={{ scale: 0.9, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <h2 className="text-3xl font-bold mb-3 text-center bg-gradient-to-r from-yellow-400 to-yellow-400 
+            bg-clip-text text-transparent">Weekly Card Deep Dives</h2>
+          <p className="mb-8 text-center text-purple-200 max-w-2xl mx-auto">
+            Every week, we analyze four new cards in detail, exploring their strategies, 
+            combinations, and impact on the game.
+          </p>
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {weeklyCards.map((card, index) => (
+              <motion.div key={card.id} variants={itemVariants}>
+                <CardOfTheWeek card={card} />
+              </motion.div>
+            ))}
           </div>
-        </section>
+        </motion.div>
 
-        {/* Released Cards Gallery Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Released Cards</h2>
-          <div className="relative">
-            <ScrollArea className="w-full whitespace-nowrap rounded-md border border-yellow-500/20">
-              <div 
-                className="flex w-max space-x-4 p-4" 
-                ref={scrollContainerRef}
-              >
-                {releasedCards.map((card) => (
-                  <motion.div
-                    key={card.id}
-                    whileHover={{ 
-                      scale: 1.05,
-                      transition: { duration: 0.2 }
-                    }}
-                    className="relative"
-                  >
-                    <Card className={`overflow-hidden inline-block w-[240px] bg-gradient-to-br ${getElementColor(card.element)} hover:shadow-lg hover:shadow-${card.element.toLowerCase()}-500/20 transition-all duration-300`}>
-                      <div className="aspect-[7/10] relative">
-                        <img 
-                          src={card.image} 
-                          alt={card.name}
-                          className="object-cover w-full h-full"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300" />
-                      </div>
-                      <div className="p-4 bg-black/40 backdrop-blur-sm">
-                        <h3 className="font-semibold text-yellow-400">{card.name}</h3>
-                        <p className="text-sm text-yellow-400/70">
-                          {card.type} • {card.element}
-                        </p>
-                      </div>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
-            
-            {/* Left Arrow */}
-            <button
-              onClick={() => scrollGallery('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-yellow-500/20 flex items-center justify-center text-yellow-400 transition-all hover:scale-110 z-10"
-              aria-label="Scroll left"
+        <motion.div 
+          className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
+          variants={containerVariants}
+        >
+          {/* Card Gallery Section */}
+          <motion.div 
+            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+              shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
+              transition-all duration-300"
+            variants={itemVariants}
+          >
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Card Gallery</h2>
+            <p className="mb-4 text-purple-200">Browse our complete collection of cards.</p>
+            <Link 
+              to="/cards/gallery"
+              className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
+                transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-
-            {/* Right Arrow */}
-            <button
-              onClick={() => scrollGallery('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-10 h-10 rounded-full bg-black/60 hover:bg-black/80 border border-yellow-500/20 flex items-center justify-center text-yellow-400 transition-all hover:scale-110 z-10"
-              aria-label="Scroll right"
-            >
-              <ChevronRight className="w-6 h-6" />
-            </button>
-          </div>
-        </section>
-
-        {/* Full Card Gallery Section */}
-        <section className="mb-16">
-          <h2 className="text-3xl font-bold mb-6 text-yellow-400">Full Card Gallery</h2>
-          <Card className="p-6 text-center bg-muted">
-            <h3 className="text-xl font-semibold mb-2">Coming January 1st!</h3>
-            <p className="text-muted-foreground">
-              The first wave of cards will be revealed soon. Subscribe to our newsletter to be notified!
-            </p>
-            <Link to="/join" className="inline-block mt-4">
-              <Button>Get Notified</Button>
+              View Gallery
             </Link>
-          </Card>
-        </section>
-      </div>
-    </>
+          </motion.div>
+
+          {/* Deck Builder Section */}
+          <motion.div 
+            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+              shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
+              transition-all duration-300"
+            variants={itemVariants}
+          >
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Deck Builder</h2>
+            <p className="mb-4 text-purple-200">Create and share your custom decks.</p>
+            <Link 
+              to="/cards/deck-builder"
+              className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
+                transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
+            >
+              Build Deck
+            </Link>
+          </motion.div>
+        </motion.div>
+      </motion.div>
+    </div>
   );
 };
 

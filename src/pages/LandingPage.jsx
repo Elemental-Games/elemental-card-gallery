@@ -131,42 +131,42 @@ const LandingPage = () => {
           <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
             <Link to="/kinbrold">
-              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
                 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
                 border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Kinbrold Lore</h3>
-                <p className="text-purple-300 mt-2 text-sm">Discover the world</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+                <h3 className="text-2xl font-semibold text-white">Lore</h3>
+                <p className="text-purple-300 mt-2 text-sm">World of Kinbrold</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Learn more →</p>
               </div>
             </Link>
 
             <Link to="/deck-builder">
-              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
                 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
                 border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Deck Builder</h3>
-                <p className="text-purple-300 mt-2 text-sm">Create your strategy</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+                <h3 className="text-2xl font-semibold text-white">Build</h3>
+                <p className="text-purple-300 mt-2 text-sm">Create your deck</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Start now →</p>
               </div>
             </Link>
 
             <Link to="/how-to-play">
-              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
                 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
                 border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Gameplay</h3>
-                <p className="text-purple-300 mt-2 text-sm">Learn the basics</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+                <h3 className="text-2xl font-semibold text-white">Play</h3>
+                <p className="text-purple-300 mt-2 text-sm">Learn the game</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Get started →</p>
               </div>
             </Link>
 
             <Link to="/cards">
-              <div className="bg-purple-950/70 p-8 rounded-lg cursor-pointer transition-all duration-300
+              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
                 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
                 border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Card Gallery</h3>
-                <p className="text-purple-300 mt-2 text-sm">Browse collection</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Click to learn more →</p>
+                <h3 className="text-2xl font-semibold text-white">Cards</h3>
+                <p className="text-purple-300 mt-2 text-sm">View collection</p>
+                <p className="text-yellow-500 mt-auto pt-4 text-sm">Browse now →</p>
               </div>
             </Link>
           </div>

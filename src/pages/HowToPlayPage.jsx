@@ -40,7 +40,12 @@ const HowToPlayPage = () => {
           </a>
         </div>
         
-        <RulesTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+        {/* Tabs Section */}
+        <div className="w-full overflow-x-auto scrollbar-hide">
+          <div className="min-w-full">
+            <RulesTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+          </div>
+        </div>
         
         <div className="flex flex-col md:flex-row gap-8">
           {/* Main Content */}

@@ -1,26 +1,38 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { Twitter, MessageCircle } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 import CardDisplay from '../components/CardDisplay';
 import EmailSignup from '../components/EmailSignup';
+import FlippableCard from '../components/FlippableCard';
+import LaunchCountdown from '../components/LaunchCountdown';
+
+const SocialCard = ({ platform, icon, memberCount, link }) => {
+  return (
+    <a 
+      href={link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="relative group"
+    >
+      <div className="absolute inset-0 bg-purple-500/20 blur-[50px] rounded-full group-hover:bg-purple-500/30 transition-colors duration-300" />
+      <div className="relative bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 
+        hover:border-purple-500/50 transition-all duration-300 group">
+        <div className="flex flex-col items-center text-center">
+          <div className="mb-4 text-yellow-400 group-hover:text-yellow-300 transition-colors">
+            {icon}
+          </div>
+          <h3 className="text-xl font-semibold mb-2">{platform}</h3>
+          <p className="text-purple-200">{memberCount} members</p>
+        </div>
+      </div>
+    </a>
+  );
+};
 
 const JoinNowPage = () => {
-  const signUpRef = useRef(null);
-
-  const calculateDaysUntil = () => {
-    const today = new Date();
-    const targetDate = new Date('2025-02-21');
-    const timeDiff = targetDate.getTime() - today.getTime();
-    return Math.ceil(timeDiff / (1000 * 3600 * 24));
-  };
-
-  const scrollToSignUp = () => {
-    signUpRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -28,110 +40,111 @@ const JoinNowPage = () => {
       exit={{ opacity: 0 }}
       className="container mx-auto px-4 py-8"
     >
-      <div ref={signUpRef} className="max-w-md mx-auto mb-8">
-        <Card className="p-6 border-2 border-yellow-500">
-          <h3 className="text-xl font-semibold mb-4 text-purple-300">Sign up for Updates</h3>
+      <div className="bg-purple-950/70 p-4 mb-8 rounded-lg border border-purple-500/30 overflow-hidden">
+        <motion.div
+          animate={{ x: ["0%", "-100%"] }}
+          transition={{ 
+            duration: 20,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="flex whitespace-nowrap"
+        >
+          {[...Array(2)].map((_, i) => (
+            <div key={i} className="flex gap-8">
+              <p className="text-yellow-400 mx-8">"Amazing game and unique battle mechanics!" - Beta Tester Joey O</p>
+              <p className="text-yellow-400 mx-8">"The shield system is revolutionary!" - TCG Veteran J. Iovanisci</p>
+              <p className="text-yellow-400 mx-8">"QR Code comes in clutch for deck building" - Community Member Sarah</p>
+              <p className="text-yellow-400 mx-8">"Can't wait for launch!" - Community Member Jordan</p>
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30">
+          <h2 className="text-3xl font-bold mb-4">Launch Countdown</h2>
+          <LaunchCountdown />
+        </div>
+
+        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30">
+          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
           <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
-        </Card>
+        </div>
       </div>
 
-      <div className="bg-primary text-primary-foreground p-4 rounded-lg mb-8 text-center max-w-md mx-auto">
-        <h2 className="text-2xl font-semibold mb-2">Countdown to Launch</h2>
-        <p className="text-3xl font-bold font-heading">{calculateDaysUntil()} days</p>
-        <p>Mark your calendars for February 21st, 2025!</p>
+      <div className="flex flex-col md:flex-row gap-8 mb-12">
+        <div className="md:w-1/2">
+          <h2 className="text-3xl font-bold mb-4">Master the Elements</h2>
+          <p className="text-lg mb-6">
+            Dive into a world where elements clash and strategy reigns supreme. 
+            Elemental Masters brings you an innovative TCG experience with unique mechanics, 
+            beautiful artwork, and deep strategic gameplay.
+          </p>
+          <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold">
+            Pre-order Now
+          </Button>
+        </div>
+        <div className="md:w-1/2">
+          <FlippableCard 
+            frontImage="/images/cards/ancient-sigil.webp"
+            backImage="/Card_Back.png"
+          />
+        </div>
+        <div className="md:w-1/2">
+          <h2 className="text-3xl font-bold mb-4">Dive into Kinbrold</h2>
+          <p className="text-lg mb-6">
+            Check out the Kinbrold map and learn about the world of Elemental Games. 
+            Each Kingdom has its own backstory and characters that are vital to the story of Kinbrold.
+          </p>
+          <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold">
+            Kinbrold Map
+          </Button>
+        </div>
       </div>
 
-      <Card className="p-6 mb-8 bg-accent text-accent-foreground">
-        <h2 className="text-2xl font-semibold mb-4">Early Bird Special</h2>
-        <p className="mb-4">The first 169 backers of $50 or more will receive an autographed card of their choice (in addition to the usual $50 Kickstarter reward). This will be first come, first serve, and there will only be 1 autographed version of each card. A live list of cards left to be autographed will be on the website at time of purchase.</p>
-        <p className="mb-4">So, be ready to grab your 1/1 Autographed card on December 1st!</p>
-        <Button size="lg" className="w-full" onClick={scrollToSignUp}>
-          Sign Up Now!
-        </Button>
-      </Card>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Artwork Showcase</h2>
-        <div className="flex justify-center gap-8">
-          <div className="text-center w-2/5">
-            <CardDisplay 
-              card={{ id: 'torrent', name: 'Torrent', image: 'torrent.png' }}
-              variant="artworkShowcase"
-              className="w-full h-auto object-contain mx-auto"
-            />
-            <p className="mt-2 italic">Front of an ability card</p>
-          </div>
-          <div className="text-center w-2/5">
-            <img 
-              src="/Card_Back.png"
-              alt="Card Back" 
-              className="w-full h-auto object-contain mx-auto"
-            />
-            <p className="mt-2 italic">Back of an Elemental Master card</p>
-          </div>
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <SocialCard 
+            platform="Discord"
+            icon={
+              <svg width="32" height="32" viewBox="0 0 127.14 96.36" className="fill-current text-white">
+                <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
+              </svg>
+            }
+            memberCount="1,300+"
+            link="https://discord.gg/qXNWh4dMve"
+          />
+          <SocialCard 
+            platform="X"
+            icon={
+              <img 
+                src="/x-twitter-brands-solid.svg" 
+                alt="X (Twitter)" 
+                className="h-8 w-8"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+            }
+            memberCount="350+"
+            link="https://x.com/elemental_tcg"
+          />
+          <SocialCard 
+            platform="Instagram"
+            icon={
+              <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 448 512" className="fill-current text-white">
+                <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
+              </svg>
+            }
+            memberCount="1,250+"
+            link="https://instagram.com/elemental_tcg"
+          />
         </div>
       </section>
 
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Discover Elemental Masters</h2>
-        <ul className="list-disc list-inside space-y-2">
-          <li>Interactive card technology (QR codes)</li>
-          <li>Rich world and lore</li>
-          <li>Diverse creatures (4 main elements, 6 combinational)</li>
-          <li>Unique battle mechanics (strength and agility stats)</li>
-          <li>Quick 20-minute games, easy to learn, challenging to master</li>
-        </ul>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Kickstarter Goals</h2>
-        <ul className="space-y-4">
-          <li className="flex items-center">
-            <span className="bg-primary text-primary-foreground px-2 py-1 rounded-full mr-2">$50,000</span>
-            <span>Initial Goal: Base game production</span>
-          </li>
-          <li className="flex items-center">
-            <span className="bg-secondary text-secondary-foreground px-2 py-1 rounded-full mr-2">$75,000</span>
-            <span>Stretch Goal 1: Exclusive game mats</span>
-          </li>
-          <li className="flex items-center">
-            <span className="bg-accent text-accent-foreground px-2 py-1 rounded-full mr-2">$100,000</span>
-            <span>Stretch Goal 2: Increased print run (5,000 to 10,000 sets)</span>
-          </li>
-          <li className="flex items-center">
-            <span className="bg-orange-500 text-white px-2 py-1 rounded-full mr-2">$150,000</span>
-            <span>Stretch Goal 3: Enhanced marketing and in-person event (Location TBA: Philadelphia, New York City, or LA)</span>
-          </li>
-          <li className="flex items-center">
-            <span className="bg-red-700 text-white px-2 py-1 rounded-full mr-2">$250,000</span>
-            <span>Dream Goal: Surprise expansion</span>
-          </li>
-        </ul>
-      </section>
-
-      <section className="mb-8 flex justify-center space-x-4">
-        <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" size="lg" className="flex items-center">
-            <Twitter className="mr-2 h-4 w-4" /> Follow us on X
-          </Button>
-        </a>
-        <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer">
-          <Button variant="outline" size="lg" className="flex items-center">
-            <MessageCircle className="mr-2 h-4 w-4" /> Join our Discord
-          </Button>
-        </a>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Experience Elemental Masters</h2>
-        <p className="mb-4">Stay tuned for upcoming local playtests! Dates and locations to be announced.</p>
-        <p className="mb-4">Join our weekly X spaces for live events and Q&A sessions during the Kickstarter campaign.</p>
-        <p>Schedule of upcoming X events coming soon!</p>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Frequently Asked Questions</h2>
-        <Accordion type="single" collapsible className="mb-8">
+      <section className="mb-12">
+        <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
+        <Accordion type="single" collapsible className="space-y-2">
           <AccordionItem value="item-1">
             <AccordionTrigger>Can the average person pick up and play Elemental Masters?</AccordionTrigger>
             <AccordionContent>
@@ -163,17 +176,6 @@ const JoinNowPage = () => {
             </AccordionContent>
           </AccordionItem>
         </Accordion>
-      </section>
-
-      <section className="mb-8">
-        <h2 className="text-3xl font-semibold mb-4">Updates to Come</h2>
-        <p className="mb-4">Sign up for our email list and create a website profile to stay up-to-date on all things Elemental, get full website access (including deck saving capabilities), and much more!</p>
-        <h3 className="text-2xl font-semibold mb-2">Official Elemental Masters Marketplace</h3>
-        <p className="mb-2">Coming after launch:</p>
-        <ul className="list-disc list-inside">
-          <li>Direct card purchases available</li>
-          <li>Special discounts on the cards of the week</li>
-        </ul>
       </section>
 
       <div className="text-center">

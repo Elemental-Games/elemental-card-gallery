@@ -14,12 +14,12 @@ const RulesTabs = ({ activeTab, setActiveTab }) => {
 
   return (
     <div className="relative mb-8">
-      <div className="flex space-x-2 border-b border-purple-500/30">
+      <div className="flex flex-wrap md:flex-nowrap overflow-x-auto scrollbar-hide space-x-2 border-b border-purple-500/30">
         {tabs.map((tab) => (
           <button
             key={tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className={`px-4 py-2 relative transition-colors
+            className={`px-4 py-2 relative transition-colors whitespace-nowrap flex-shrink-0
               ${activeTab === tab.id 
                 ? 'text-yellow-500' 
                 : 'text-white/70 hover:text-white'

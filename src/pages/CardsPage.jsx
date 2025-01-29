@@ -109,7 +109,7 @@ const CardsPage = () => {
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12"
           variants={containerVariants}
         >
           {/* Card Gallery Section */}
@@ -126,7 +126,7 @@ const CardsPage = () => {
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              View Gallery
+              View Gallery (Coming Soon)
             </Link>
           </motion.div>
 
@@ -144,7 +144,25 @@ const CardsPage = () => {
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              Build Deck
+              Build Deck (Coming Soon)
+            </Link>
+          </motion.div>
+
+          {/* Beta Game Section */}
+          <motion.div 
+            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+              shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
+              transition-all duration-300"
+            variants={itemVariants}
+          >
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Browser Beta</h2>
+            <p className="mb-4 text-purple-200">Try out the browser-based version of Elemental Masters.</p>
+            <Link 
+              to="/cards/beta-game"
+              className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
+                transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
+            >
+              Coming Soon
             </Link>
           </motion.div>
         </motion.div>

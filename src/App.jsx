@@ -25,6 +25,9 @@ import ZalosPage from "./pages/ZalosPage";
 import LandingPage from "./pages/LandingPage";
 import DonatePage from '@/pages/DonatePage';
 import HowToPlayPage from "./pages/HowToPlayPage";
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsOfService from './pages/TermsOfService';
+import BetaGamePage from "./pages/BetaGamePage";
 
 const queryClient = new QueryClient();
 
@@ -86,6 +89,9 @@ const App = () => (
                     <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
                     <Route path="/kinbrold/zalos" element={<ZalosPage />} />
                     <Route path="/donate" element={<DonatePage />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/terms-of-service" element={<TermsOfService />} />
+                    <Route path="/cards/beta-game" element={<BetaGamePage />} />
                   </Routes>
                 </main>
                 <Footer />

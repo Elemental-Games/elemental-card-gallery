@@ -9,9 +9,11 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [imageError, setImageError] = useState(false);
 
   const containerClasses = {
-    default: "w-full aspect-[1500/2100] rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 relative",
-    cardsOfWeek: "w-full h-full perspective-1000 cursor-pointer relative",
-    artworkShowcase: "w-full h-auto object-contain mx-auto"
+    'default': 'relative w-full aspect-[2.5/3.5] rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300',
+    'cardsOfWeek': 'relative w-[200px] sm:w-[250px] lg:w-[300px] aspect-[2.5/3.5] rounded-lg overflow-hidden cursor-pointer mx-auto',
+    'artworkShowcase': 'relative w-full max-w-[400px] aspect-[2.5/3.5] rounded-lg overflow-hidden mx-auto',
+    'gallery': 'relative w-[150px] sm:w-[200px] lg:w-[250px] aspect-[2.5/3.5] rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300',
+    'deckBuilder': 'relative w-[150px] sm:w-[180px] lg:w-[200px] aspect-[2.5/3.5] rounded-lg overflow-hidden hover:shadow-lg transition-shadow duration-300'
   };
 
   const imageClasses = {

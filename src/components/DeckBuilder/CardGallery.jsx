@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus } from 'lucide-react';
@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 
 const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck: [] } }) => {
   const [filteredCards, setFilteredCards] = useState([]);
+  const [displayedCards, setDisplayedCards] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [element, setElement] = useState('');
   const [type, setType] = useState('all');
@@ -15,26 +16,37 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
   const [rarity, setRarity] = useState('all');
   const [tier, setTier] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const cardsPerPage = 20;
+  const cardsPerPage = 50;
+
+  const observer = useRef();
+  const loadMoreRef = useCallback(node => {
+    if (loading) return;
+    if (observer.current) observer.current.disconnect();
+    
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && displayedCards.length < filteredCards.length) {
+        loadMoreCards();
+      }
+    });
+    
+    if (node) observer.current.observe(node);
+  }, [loading, displayedCards.length, filteredCards.length]);
 
   useEffect(() => {
     try {
-      // First, filter out any invalid cards
-      const validCards = cards.filter(card => card && typeof card === 'object' && card.name);
-      
-      const filtered = validCards.filter(card => {
-        const nameMatch = searchTerm === '' || 
-          card.name.toLowerCase().includes(searchTerm.toLowerCase());
+      const filtered = cards.filter(card => {
+        if (!card || typeof card !== 'object') {
+          console.log('Invalid card:', card);
+          return false;
+        }
         
-        const elementMatch = element === '' || card.element === element;
+        const nameMatch = !searchTerm || (card.name && 
+          card.name.toLowerCase().includes(searchTerm.toLowerCase()));
+        const elementMatch = !element || card.element === element;
         const typeMatch = type === 'all' || card.type === type;
-        const rarityMatch = rarity === 'all' ||
-          (rarity === 'common' && card.rarity === 'C') ||
-          (rarity === 'uncommon' && card.rarity === 'U') ||
-          (rarity === 'rare' && card.rarity === 'R') ||
-          (rarity === 'epic' && card.rarity === 'E') ||
-          (rarity === 'legendary' && card.rarity === 'L');
+        const rarityMatch = rarity === 'all' || card.rarity === rarity;
         const tierMatch = tier === null || card.tier === tier;
 
         return nameMatch && elementMatch && typeMatch && rarityMatch && tierMatch;
@@ -50,20 +62,26 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
         });
       }
 
-      if (strengthAgilitySort !== null) {
-        sorted.sort((a, b) => {
-          const aValue = (parseInt(a.strength) || 0) + (parseInt(a.agility) || 0);
-          const bValue = (parseInt(b.strength) || 0) + (parseInt(b.agility) || 0);
-          return strengthAgilitySort === 'asc' ? aValue - bValue : bValue - aValue;
-        });
-      }
-
+      console.log('Filtered cards:', filtered.length);
       setFilteredCards(sorted);
+      setDisplayedCards(sorted.slice(0, cardsPerPage));
     } catch (err) {
       console.error('Error filtering cards:', err);
       setError('An error occurred while filtering cards. Please try again.');
     }
-  }, [cards, searchTerm, element, type, rarity, tier, idSort, strengthAgilitySort]);
+  }, [cards, searchTerm, element, type, rarity, tier, idSort]);
+
+  const loadMoreCards = () => {
+    setLoading(true);
+    const currentLength = displayedCards.length;
+    const nextBatch = filteredCards.slice(
+      currentLength,
+      currentLength + cardsPerPage
+    );
+    
+    setDisplayedCards(prev => [...prev, ...nextBatch]);
+    setLoading(false);
+  };
 
   const handleFilterChange = (filterType, value) => {
     switch (filterType) {
@@ -91,6 +109,7 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
         break;
     }
     setCurrentPage(1);
+    setDisplayedCards([]);
   };
 
   const resetFilters = () => {
@@ -102,6 +121,7 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
     setRarity('all');
     setTier(null);
     setCurrentPage(1);
+    setDisplayedCards([]);
   };
 
   const handleCardClick = (card, amount) => {
@@ -120,7 +140,7 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
   // Pagination
   const indexOfLastCard = currentPage * cardsPerPage;
   const indexOfFirstCard = indexOfLastCard - cardsPerPage;
-  const currentCards = filteredCards.slice(indexOfFirstCard, indexOfLastCard);
+  const currentCards = displayedCards.slice(indexOfFirstCard, indexOfLastCard);
 
   if (error) {
     return <div className="text-red-500">{error}</div>;
@@ -136,7 +156,7 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
         currentType={type}
       />
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
         {currentCards.map((card) => (
           <Card 
             key={card.id} 
@@ -171,26 +191,20 @@ const CardGallery = ({ cards = [], onCardSelect, deck = { mainDeck: [], sideDeck
           </Card>
         ))}
       </div>
-      
-      <div className="mt-4 flex justify-center space-x-2">
-        <Button 
-          onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))} 
-          disabled={currentPage === 1}
+
+      {/* Infinite scroll trigger element */}
+      {displayedCards.length < filteredCards.length && (
+        <div 
+          ref={loadMoreRef}
+          className="h-10 w-full flex justify-center items-center mt-4"
         >
-          Previous
-        </Button>
-        <span className="self-center">
-          {currentPage} / {Math.ceil(filteredCards.length / cardsPerPage)}
-        </span>
-        <Button 
-          onClick={() => setCurrentPage(prev => 
-            Math.min(prev + 1, Math.ceil(filteredCards.length / cardsPerPage))
-          )} 
-          disabled={currentPage === Math.ceil(filteredCards.length / cardsPerPage)}
-        >
-          Next
-        </Button>
-      </div>
+          {loading ? (
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500" />
+          ) : (
+            <div className="h-8 w-8" /> // Invisible spacer
+          )}
+        </div>
+      )}
     </div>
   );
 };

@@ -31,7 +31,7 @@ const Header = () => {
               <img 
                 src="/Games_Logo.png" 
                 alt="Elemental Games Logo" 
-                className="h-16 w-16 mr-2"
+                className="h-16 w-16 mr-6"
               />
               <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
                 Elemental Games
@@ -56,7 +56,7 @@ const Header = () => {
           </div>
 
           {/* Mobile Navigation */}
-          <div className="md:hidden">
+          <div className="md:hidden pl-4">
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
@@ -64,7 +64,7 @@ const Header = () => {
                     <Menu className="h-6 w-6 text-white" />
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
-                    <div className="w-[calc(100vw-2rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg">
+                    <div className="w-[calc(100vw-6rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg ml-[-1rem]">
                       {navItems.map((item) => (
                         <Link 
                           key={item.title}

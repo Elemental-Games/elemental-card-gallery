@@ -8,6 +8,7 @@ import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
 import LightBox from '../components/LightBox';
 import { Book, ScrollText, Gamepad2, LayoutGrid, ChevronRight } from 'lucide-react';
+import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = useState(null);
@@ -68,19 +69,19 @@ const LandingPage = () => {
 
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
-      <ImageHero />
-      <LightBox />
+      <AnimatedCardBackground />
       
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">
         <div className="flex items-start justify-between">
           <div className="flex-grow mr-8">
             <div className="flex items-center justify-between mb-8">
-              <h2 className="text-4xl font-bold">Elemental Masters | Game Overview</h2>
+              <h2 className="text-6xl font-bold">Elemental Masters</h2>
+              <h3 className="text-4xl ml-1000">| Game Overview</h3>
               <img 
                 src="/Masters_Logo.png" 
                 alt="Masters Logo" 
-                className="w-40 h-auto"
+                className="w-80 h-auto"
               />
             </div>
             <p className="mb-6 text-lg">

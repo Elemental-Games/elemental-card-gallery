@@ -73,18 +73,20 @@ const LandingPage = () => {
       
       {/* Game Overview Section */}
       <section className="container mx-auto px-4 py-16">
-        <div className="flex items-start justify-between">
-          <div className="flex-grow mr-8">
-            <div className="flex items-center justify-between mb-8">
-              <h2 className="text-6xl font-bold">Elemental Masters</h2>
-              <h3 className="text-4xl ml-1000">| Game Overview</h3>
+        <div className="flex flex-col lg:flex-row items-start justify-between">
+          <div className="flex-grow w-full lg:mr-8">
+            <div className="flex flex-col lg:flex-row items-center justify-between mb-8 gap-4">
+              <div>
+                <h2 className="text-4xl lg:text-6xl font-bold text-center lg:text-left">Elemental Masters</h2>
+                <h3 className="text-2xl lg:text-3xl mt-2">A Game Overview</h3>
+              </div>
               <img 
                 src="/Masters_Logo.png" 
                 alt="Masters Logo" 
-                className="w-80 h-auto"
+                className="w-48 lg:w-80 h-auto"
               />
             </div>
-            <p className="mb-6 text-lg">
+            <p className="mb-6 text-lg text-center lg:text-left">
               Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
             </p>
             <KeyFeatures />

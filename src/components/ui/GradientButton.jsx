@@ -10,7 +10,7 @@ const GradientButton = () => {
     >
       {/* Gradient border with rotating colors */}
       <div 
-        className="absolute -inset-[3px] rounded-full overflow-hidden"
+        className="absolute -inset-[5px] rounded-full overflow-hidden"
         style={{
           background: 'linear-gradient(to right, #4C1D95 45%, #FCD34D 48%, #4C1D95 51%, #4C1D95 100%)',
           backgroundSize: '300% 100%',

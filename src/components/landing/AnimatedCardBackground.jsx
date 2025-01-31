@@ -250,7 +250,7 @@ const AnimatedCardBackground = () => {
       <motion.div 
         className="absolute z-30 w-full flex justify-center"
         style={{ 
-          bottom: '10vh'
+          bottom: '13vh'
         }}
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

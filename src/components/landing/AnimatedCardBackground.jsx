@@ -143,12 +143,12 @@ const AnimatedCardBackground = () => {
                   opacity: 1,
                   transition: { duration: 0.2 }
                 }}
-                className="opacity-20 transition-all duration-300 hover:opacity-100 hover:scale-105"
+                className="opacity-20 transition-all duration-300 hover:opacity-100"
               >
                 <img 
                   src={card.image} 
                   alt={card.name}
-                  className="w-full h-auto rounded-lg select-none hover:opacity-100 hover:scale-105"
+                  className="w-full h-auto rounded-lg select-none hover:opacity-100"
                   onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = card.image.replace('.webp', '.png');

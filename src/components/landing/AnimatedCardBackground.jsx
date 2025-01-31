@@ -139,7 +139,7 @@ const AnimatedCardBackground = () => {
             >
               <motion.div
                 whileHover={{ 
-                  scale: 1.1,
+                  scale: 1.05,
                   opacity: 1,
                   transition: { duration: 0.2 }
                 }}
@@ -166,7 +166,7 @@ const AnimatedCardBackground = () => {
             >
               <motion.div
                 whileHover={{ 
-                  scale: 1.1,
+                  scale: 1,
                   opacity: 1,
                   transition: { duration: 0.2 }
                 }}

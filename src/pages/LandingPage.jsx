@@ -76,9 +76,9 @@ const LandingPage = () => {
         <div className="flex flex-col lg:flex-row items-start justify-between">
           <div className="flex-grow w-full lg:mr-8">
             <div className="flex flex-col lg:flex-row items-center justify-between mb-8 gap-4">
-              <div>
-                <h2 className="text-4xl lg:text-6xl font-bold text-center lg:text-left">Elemental Masters</h2>
-                <h3 className="text-2xl lg:text-3xl mt-2">A Game Overview</h3>
+              <div className="text-center lg:text-left">
+                <h2 className="text-4xl lg:text-6xl font-bold">Elemental Masters</h2>
+                <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Game Overview</h3>
               </div>
               <img 
                 src="/Masters_Logo.png" 

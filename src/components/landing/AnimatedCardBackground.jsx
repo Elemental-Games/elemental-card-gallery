@@ -220,14 +220,14 @@ const AnimatedCardBackground = () => {
         <motion.img
           src="/Games_Logo.png"
           alt="Elemental Games Logo"
-          className="w-64 md:w-80 -mb-8 -mt-3"
+          className="w-64 md:w-80 mb-4 md:mb-0"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         />
         
         <motion.h1 
-          className="text-5xl md:text-7xl font-extrabold mb-8 text-white"
+          className="text-5xl md:text-7xl font-extrabold mb-4 md:mb-6 text-white"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.6 }}
@@ -237,7 +237,7 @@ const AnimatedCardBackground = () => {
         </motion.h1>
         
         <motion.p 
-          className="text-xl md:text-2xl mb-9 text-purple-200 max-w-2xl font-medium"
+          className="text-xl md:text-2xl mb-6 md:mb-8 text-purple-200 max-w-2xl font-medium"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.6 }}

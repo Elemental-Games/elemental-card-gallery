@@ -108,17 +108,11 @@ const CardsPage = () => {
           </div>
         </motion.div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12"
-          variants={containerVariants}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
           {/* Card Gallery Section */}
-          <motion.div 
-            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+          <div className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
               shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
-              transition-all duration-300"
-            variants={itemVariants}
-          >
+              transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-yellow-400">Card Gallery</h2>
             <p className="mb-4 text-purple-200">Browse our complete collection of cards.</p>
             <Link 
@@ -126,17 +120,14 @@ const CardsPage = () => {
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              View Gallery (Coming Soon)
+              View Gallery
             </Link>
-          </motion.div>
+          </div>
 
           {/* Deck Builder Section */}
-          <motion.div 
-            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+          <div className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
               shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
-              transition-all duration-300"
-            variants={itemVariants}
-          >
+              transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-yellow-400">Deck Builder</h2>
             <p className="mb-4 text-purple-200">Create and share your custom decks.</p>
             <Link 
@@ -146,15 +137,12 @@ const CardsPage = () => {
             >
               Build Deck (Coming Soon)
             </Link>
-          </motion.div>
+          </div>
 
           {/* Beta Game Section */}
-          <motion.div 
-            className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
+          <div className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
               shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
-              transition-all duration-300"
-            variants={itemVariants}
-          >
+              transition-all duration-300">
             <h2 className="text-2xl font-bold mb-4 text-yellow-400">Browser Beta</h2>
             <p className="mb-4 text-purple-200">Try out the browser-based version of Elemental Masters.</p>
             <Link 
@@ -164,8 +152,8 @@ const CardsPage = () => {
             >
               Coming Soon
             </Link>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </motion.div>
     </div>
   );

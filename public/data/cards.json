@@ -3,7 +3,7 @@
     {
       "cardNumber": 1,
       "id": "cloud-sprinter",
-      "name": 0,
+      "name": "Cloud Sprinter",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/cloud-sprinter.png",
@@ -72,7 +72,7 @@
     {
       "cardNumber": 2,
       "id": "breeze-imp",
-      "name": 1,
+      "name": "Breeze Imp",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/breeze-imp.png",
@@ -97,7 +97,7 @@
     {
       "cardNumber": 3,
       "id": "gust-griffin",
-      "name": 2,
+      "name": "Gust Griffin",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/gust-griffin.png",
@@ -122,7 +122,7 @@
     {
       "cardNumber": 4,
       "id": "wind-rider",
-      "name": 3,
+      "name": "Wind Rider",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/wind-rider.png",
@@ -147,7 +147,7 @@
     {
       "cardNumber": 5,
       "id": "flying-dwarf",
-      "name": 4,
+      "name": "Flying Dwarf",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/flying-dwarf.png",
@@ -172,7 +172,7 @@
     {
       "cardNumber": 6,
       "id": "stormreaver",
-      "name": 5,
+      "name": "Stormreaver",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/stormreaver.png",
@@ -197,7 +197,7 @@
     {
       "cardNumber": 7,
       "id": "cloud-warden",
-      "name": 6,
+      "name": "Cloud Warden",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/cloud-warden.png",
@@ -222,7 +222,7 @@
     {
       "cardNumber": 8,
       "id": "aqua-dart",
-      "name": 7,
+      "name": "Aqua Dart",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/aqua-dart.png",
@@ -247,7 +247,7 @@
     {
       "cardNumber": 9,
       "id": "tide-chaser",
-      "name": 8,
+      "name": "Tide Chaser",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/tide-chaser.png",
@@ -272,7 +272,7 @@
     {
       "cardNumber": 10,
       "id": "riptide-revenant",
-      "name": 9,
+      "name": "Riptide Revenant",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/riptide-revenant.png",
@@ -297,7 +297,7 @@
     {
       "cardNumber": 11,
       "id": "misty-mutt",
-      "name": 10,
+      "name": "Misty Mutt",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/misty-mutt.png",
@@ -322,7 +322,7 @@
     {
       "cardNumber": 12,
       "id": "lagoon-lurker",
-      "name": 11,
+      "name": "Lagoon Lurker",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/lagoon-lurker.png",
@@ -347,7 +347,7 @@
     {
       "cardNumber": 13,
       "id": "vortex-mauler",
-      "name": 12,
+      "name": "Vortex Mauler",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/vortex-mauler.png",
@@ -372,7 +372,7 @@
     {
       "cardNumber": 14,
       "id": "wave-guarder",
-      "name": 13,
+      "name": "Wave Guarder",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/wave-guarder.png",
@@ -397,7 +397,7 @@
     {
       "cardNumber": 15,
       "id": "ember-flicker",
-      "name": 14,
+      "name": "Ember Flicker",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/ember-flicker.png",
@@ -422,7 +422,7 @@
     {
       "cardNumber": 16,
       "id": "inferno-serpent",
-      "name": 15,
+      "name": "Inferno Serpent",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/inferno-serpent.png",
@@ -447,7 +447,7 @@
     {
       "cardNumber": 17,
       "id": "swiftfire-wyvern",
-      "name": 16,
+      "name": "Swiftfire Wyvern",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/swiftfire-wyvern.png",
@@ -472,7 +472,7 @@
     {
       "cardNumber": 18,
       "id": "sizzle-snout",
-      "name": 17,
+      "name": "Sizzle Snout",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/sizzle-snout.png",
@@ -497,7 +497,7 @@
     {
       "cardNumber": 19,
       "id": "firestorm-brute",
-      "name": 18,
+      "name": "Firestorm Brute",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/firestorm-brute.png",
@@ -522,7 +522,7 @@
     {
       "cardNumber": 20,
       "id": "flame-ravager",
-      "name": 19,
+      "name": "Flame Ravager",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/flame-ravager.png",
@@ -547,7 +547,7 @@
     {
       "cardNumber": 21,
       "id": "flame-guardian",
-      "name": 20,
+      "name": "Flame Guardian",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/flame-guardian.png",
@@ -572,7 +572,7 @@
     {
       "cardNumber": 22,
       "id": "terra-sprinter",
-      "name": 21,
+      "name": "Terra Sprinter",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/terra-sprinter.png",
@@ -597,7 +597,7 @@
     {
       "cardNumber": 23,
       "id": "sandy-scuttler",
-      "name": 22,
+      "name": "Sandy Scuttler",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/sandy-scuttler.png",
@@ -622,7 +622,7 @@
     {
       "cardNumber": 24,
       "id": "swiftreaver",
-      "name": 23,
+      "name": "Swiftreaver",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/swiftreaver.png",
@@ -647,7 +647,7 @@
     {
       "cardNumber": 25,
       "id": "earth-dweller",
-      "name": 24,
+      "name": "Earth Dweller",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/earth-dweller.png",
@@ -672,7 +672,7 @@
     {
       "cardNumber": 26,
       "id": "geo-monkey",
-      "name": 25,
+      "name": "Geo Monkey",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/geo-monkey.png",
@@ -697,7 +697,7 @@
     {
       "cardNumber": 27,
       "id": "mountain-crusher",
-      "name": 26,
+      "name": "Mountain Crusher",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/mountain-crusher.png",
@@ -722,7 +722,7 @@
     {
       "cardNumber": 28,
       "id": "stone-behemoth",
-      "name": 27,
+      "name": "Stone Behemoth",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/stone-behemoth.png",
@@ -747,7 +747,7 @@
     {
       "cardNumber": 29,
       "id": "wind-sprite",
-      "name": 28,
+      "name": "Wind Sprite",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/wind-sprite.png",
@@ -775,7 +775,7 @@
     {
       "cardNumber": 30,
       "id": "aerofeet",
-      "name": 29,
+      "name": "Aerofeet",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/aerofeet.png",
@@ -803,7 +803,7 @@
     {
       "cardNumber": 31,
       "id": "skyborne-slicer",
-      "name": 30,
+      "name": "Skyborne Slicer",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/skyborne-slicer.png",
@@ -831,7 +831,7 @@
     {
       "cardNumber": 32,
       "id": "aero-elf",
-      "name": 31,
+      "name": "Aero Elf",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/aero-elf.png",
@@ -859,7 +859,7 @@
     {
       "cardNumber": 33,
       "id": "storm-ghost",
-      "name": 32,
+      "name": "Storm Ghost",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/storm-ghost.png",
@@ -887,7 +887,7 @@
     {
       "cardNumber": 34,
       "id": "wind-troll",
-      "name": 33,
+      "name": "Wind Troll",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/wind-troll.png",
@@ -915,7 +915,7 @@
     {
       "cardNumber": 35,
       "id": "cyclone-sentinel",
-      "name": 34,
+      "name": "Cyclone Sentinel",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/cyclone-sentinel.png",
@@ -943,7 +943,7 @@
     {
       "cardNumber": 36,
       "id": "river-sprite",
-      "name": 35,
+      "name": "River Sprite",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/river-sprite.png",
@@ -971,7 +971,7 @@
     {
       "cardNumber": 37,
       "id": "aqua-shade",
-      "name": 36,
+      "name": "Aqua Shade",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/aqua-shade.png",
@@ -999,7 +999,7 @@
     {
       "cardNumber": 38,
       "id": "sea-serpent",
-      "name": 37,
+      "name": "Sea Serpent",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/sea-serpent.png",
@@ -1027,7 +1027,7 @@
     {
       "cardNumber": 39,
       "id": "naiad-elf",
-      "name": 38,
+      "name": "Naiad Elf",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/naiad-elf.png",
@@ -1055,7 +1055,7 @@
     {
       "cardNumber": 40,
       "id": "deepseer",
-      "name": 39,
+      "name": "Deepseer",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/deepseer.png",
@@ -1083,7 +1083,7 @@
     {
       "cardNumber": 41,
       "id": "oceanus",
-      "name": 40,
+      "name": "Oceanus",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/oceanus.png",
@@ -1111,7 +1111,7 @@
     {
       "cardNumber": 42,
       "id": "aquarion",
-      "name": 41,
+      "name": "Aquarion",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/aquarion.png",
@@ -1139,7 +1139,7 @@
     {
       "cardNumber": 43,
       "id": "cinder-sprite",
-      "name": 42,
+      "name": "Cinder Sprite",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/cinder-sprite.png",
@@ -1167,7 +1167,7 @@
     {
       "cardNumber": 44,
       "id": "embermander",
-      "name": 43,
+      "name": "Embermander",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/embermander.png",
@@ -1195,7 +1195,7 @@
     {
       "cardNumber": 45,
       "id": "solar-phoenix",
-      "name": 44,
+      "name": "Solar Phoenix",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/solar-phoenix.png",
@@ -1223,7 +1223,7 @@
     {
       "cardNumber": 46,
       "id": "ardor-elf",
-      "name": 45,
+      "name": "Ardor Elf",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/ardor-elf.png",
@@ -1251,7 +1251,7 @@
     {
       "cardNumber": 47,
       "id": "emberwing",
-      "name": 46,
+      "name": "Emberwing",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/emberwing.png",
@@ -1279,7 +1279,7 @@
     {
       "cardNumber": 48,
       "id": "inferno-beast",
-      "name": 47,
+      "name": "Inferno Beast",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/inferno-beast.png",
@@ -1307,7 +1307,7 @@
     {
       "cardNumber": 49,
       "id": "flamekeeper",
-      "name": 48,
+      "name": "Flamekeeper",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/flamekeeper.png",
@@ -1335,7 +1335,7 @@
     {
       "cardNumber": 50,
       "id": "ivy-gila",
-      "name": 49,
+      "name": "Ivy Gila",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/ivy-gila.png",
@@ -1363,7 +1363,7 @@
     {
       "cardNumber": 51,
       "id": "nimblefoot",
-      "name": 50,
+      "name": "Nimblefoot",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/nimblefoot.png",
@@ -1391,7 +1391,7 @@
     {
       "cardNumber": 52,
       "id": "terragon",
-      "name": 51,
+      "name": "Terragon",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/terragon.png",
@@ -1419,7 +1419,7 @@
     {
       "cardNumber": 53,
       "id": "verdant-elf",
-      "name": 52,
+      "name": "Verdant Elf",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/verdant-elf.png",
@@ -1447,7 +1447,7 @@
     {
       "cardNumber": 54,
       "id": "boulder-brute",
-      "name": 53,
+      "name": "Boulder Brute",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/boulder-brute.png",
@@ -1475,7 +1475,7 @@
     {
       "cardNumber": 55,
       "id": "mountain-giant",
-      "name": 54,
+      "name": "Mountain Giant",
       "type": "Creature",
       "rarity": "C",
       "imagePath": "/images/cards/mountain-giant.png",
@@ -1503,7 +1503,7 @@
     {
       "cardNumber": 56,
       "id": "terra-warden",
-      "name": 55,
+      "name": "Terra Warden",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/terra-warden.png",
@@ -1531,7 +1531,7 @@
     {
       "cardNumber": 57,
       "id": "cyclonos",
-      "name": 56,
+      "name": "Cyclonos",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/cyclonos.png",
@@ -1556,7 +1556,7 @@
     {
       "cardNumber": 58,
       "id": "avis",
-      "name": 57,
+      "name": "Avis",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/avis.png",
@@ -1581,7 +1581,7 @@
     {
       "cardNumber": 59,
       "id": "vayute",
-      "name": 58,
+      "name": "Vayute",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/vayute.png",
@@ -1606,7 +1606,7 @@
     {
       "cardNumber": 60,
       "id": "zephos",
-      "name": 59,
+      "name": "Zephos",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/zephos.png",
@@ -1631,7 +1631,7 @@
     {
       "cardNumber": 61,
       "id": "hydran",
-      "name": 60,
+      "name": "Hydran",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/hydran.png",
@@ -1656,7 +1656,7 @@
     {
       "cardNumber": 62,
       "id": "typhos",
-      "name": 61,
+      "name": "Typhos",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/typhos.png",
@@ -1681,7 +1681,7 @@
     {
       "cardNumber": 63,
       "id": "vapora",
-      "name": 62,
+      "name": "Vapora",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/vapora.png",
@@ -1706,7 +1706,7 @@
     {
       "cardNumber": 64,
       "id": "glacis",
-      "name": 63,
+      "name": "Glacis",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/glacis.png",
@@ -1731,7 +1731,7 @@
     {
       "cardNumber": 65,
       "id": "sunny",
-      "name": 64,
+      "name": "Sunny",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/sunny.png",
@@ -1756,7 +1756,7 @@
     {
       "cardNumber": 66,
       "id": "kindro",
-      "name": 65,
+      "name": "Kindro",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/kindro.png",
@@ -1781,7 +1781,7 @@
     {
       "cardNumber": 67,
       "id": "nova",
-      "name": 66,
+      "name": "Nova",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/nova.png",
@@ -1806,7 +1806,7 @@
     {
       "cardNumber": 68,
       "id": "vorax",
-      "name": 67,
+      "name": "Vorax",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/vorax.png",
@@ -1831,7 +1831,7 @@
     {
       "cardNumber": 69,
       "id": "oris",
-      "name": 68,
+      "name": "Oris",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/oris.png",
@@ -1856,7 +1856,7 @@
     {
       "cardNumber": 70,
       "id": "quarris",
-      "name": 69,
+      "name": "Quarris",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/quarris.png",
@@ -1881,7 +1881,7 @@
     {
       "cardNumber": 71,
       "id": "roc",
-      "name": 70,
+      "name": "Roc",
       "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/roc.png",
@@ -1906,7 +1906,7 @@
     {
       "cardNumber": 72,
       "id": "geodar",
-      "name": 71,
+      "name": "Geodar",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/geodar.png",
@@ -1930,12 +1930,12 @@
     },
     {
       "cardNumber": 73,
-      "id": "nimbus-the-air-titan",
-      "name": 72,
+      "id": "nimbus",
+      "name": "Nimbus the Air Titan",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/nimbus-the-air-titan.png",
-      "webpPath": "/images/cards/webp/nimbus-the-air-titan.webp",
+      "imagePath": "/images/cards/nimbus.png",
+      "webpPath": "/images/cards/webp/nimbus.webp",
       "element": "Air",
       "stats": {
         "strength": 135,
@@ -1966,12 +1966,12 @@
     },
     {
       "cardNumber": 74,
-      "id": "lazu-the-air-tempest",
-      "name": 73,
+      "id": "lazu",
+      "name": "Lazu the Air Tempest",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/lazu-the-air-tempest.png",
-      "webpPath": "/images/cards/webp/lazu-the-air-tempest.webp",
+      "imagePath": "/images/cards/lazu.png",
+      "webpPath": "/images/cards/webp/lazu.webp",
       "element": "Air",
       "stats": {
         "strength": 115,
@@ -2002,12 +2002,12 @@
     },
     {
       "cardNumber": 75,
-      "id": "aeris-the-air-slyph",
-      "name": 74,
+      "id": "aeris",
+      "name": "Aeris the Air Slyph",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/aeris-the-air-slyph.png",
-      "webpPath": "/images/cards/webp/aeris-the-air-slyph.webp",
+      "imagePath": "/images/cards/aeris.png",
+      "webpPath": "/images/cards/webp/aeris.webp",
       "element": "Air",
       "stats": {
         "strength": 105,
@@ -2038,12 +2038,12 @@
     },
     {
       "cardNumber": 76,
-      "id": "torrent-the-water-titan",
-      "name": 75,
+      "id": "torrent",
+      "name": "Torrent the Water Titan",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/torrent-the-water-titan.png",
-      "webpPath": "/images/cards/webp/torrent-the-water-titan.webp",
+      "imagePath": "/images/cards/torrent.png",
+      "webpPath": "/images/cards/webp/torrent.webp",
       "element": "Water",
       "stats": {
         "strength": 140,
@@ -2074,12 +2074,12 @@
     },
     {
       "cardNumber": 77,
-      "id": "azura-the-water-tempest",
-      "name": 76,
+      "id": "azura",
+      "name": "Azura the Water Tempest",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/azura-the-water-tempest.png",
-      "webpPath": "/images/cards/webp/azura-the-water-tempest.webp",
+      "imagePath": "/images/cards/azura.png",
+      "webpPath": "/images/cards/webp/azura.webp",
       "element": "Water",
       "stats": {
         "strength": 120,
@@ -2110,12 +2110,12 @@
     },
     {
       "cardNumber": 78,
-      "id": "undine-the-water-oracle",
-      "name": 77,
+      "id": "undine",
+      "name": "Undine the Water Oracle",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/undine-the-water-oracle.png",
-      "webpPath": "/images/cards/webp/undine-the-water-oracle.webp",
+      "imagePath": "/images/cards/undine.png",
+      "webpPath": "/images/cards/webp/undine.webp",
       "element": "Water",
       "stats": {
         "strength": 130,
@@ -2146,12 +2146,12 @@
     },
     {
       "cardNumber": 79,
-      "id": "ignus-the-fire-titan",
-      "name": 78,
+      "id": "ignus",
+      "name": "Ignus the Fire Titan",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/ignus-the-fire-titan.png",
-      "webpPath": "/images/cards/webp/ignus-the-fire-titan.webp",
+      "imagePath": "/images/cards/ignus.png",
+      "webpPath": "/images/cards/webp/ignus.webp",
       "element": "Fire",
       "stats": {
         "strength": 145,
@@ -2182,12 +2182,12 @@
     },
     {
       "cardNumber": 80,
-      "id": "sigmus-the-fire-tempest",
-      "name": 79,
+      "id": "sigmus",
+      "name": "Sigmus the Fire Tempest",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/sigmus-the-fire-tempest.png",
-      "webpPath": "/images/cards/webp/sigmus-the-fire-tempest.webp",
+      "imagePath": "/images/cards/sigmus.png",
+      "webpPath": "/images/cards/webp/sigmus.webp",
       "element": "Fire",
       "stats": {
         "strength": 125,
@@ -2218,12 +2218,12 @@
     },
     {
       "cardNumber": 81,
-      "id": "viktor-the-fire-demon",
-      "name": 80,
+      "id": "viktor",
+      "name": "Viktor the Fire Demon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/viktor-the-fire-demon.png",
-      "webpPath": "/images/cards/webp/viktor-the-fire-demon.webp",
+      "imagePath": "/images/cards/viktor.png",
+      "webpPath": "/images/cards/webp/viktor.webp",
       "element": "Fire",
       "stats": {
         "strength": 135,
@@ -2254,12 +2254,12 @@
     },
     {
       "cardNumber": 82,
-      "id": "terra-the-earth-titan",
-      "name": 81,
+      "id": "terra",
+      "name": "Terra the Earth Titan",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/terra-the-earth-titan.png",
-      "webpPath": "/images/cards/webp/terra-the-earth-titan.webp",
+      "imagePath": "/images/cards/terra.png",
+      "webpPath": "/images/cards/webp/terra.webp",
       "element": "Earth",
       "stats": {
         "strength": 150,
@@ -2290,12 +2290,12 @@
     },
     {
       "cardNumber": 83,
-      "id": "oryssa-the-earth-tempest",
-      "name": 82,
+      "id": "oryssa",
+      "name": "Oryssa the Earth Tempest",
       "type": "Creature",
       "rarity": "R",
-      "imagePath": "/images/cards/oryssa-the-earth-tempest.png",
-      "webpPath": "/images/cards/webp/oryssa-the-earth-tempest.webp",
+      "imagePath": "/images/cards/oryssa.png",
+      "webpPath": "/images/cards/webp/oryssa.webp",
       "element": "Earth",
       "stats": {
         "strength": 130,
@@ -2326,12 +2326,12 @@
     },
     {
       "cardNumber": 84,
-      "id": "leo-the-earth-sovereign",
-      "name": 83,
+      "id": "leo",
+      "name": "Leo the Earth Sovereign",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/leo-the-earth-sovereign.png",
-      "webpPath": "/images/cards/webp/leo-the-earth-sovereign.webp",
+      "imagePath": "/images/cards/leo.png",
+      "webpPath": "/images/cards/webp/leo.webp",
       "element": "Earth",
       "stats": {
         "strength": 160,
@@ -2363,7 +2363,7 @@
     {
       "cardNumber": 85,
       "id": "essence-exchange",
-      "name": 84,
+      "name": "Essence Exchange",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/essence-exchange.png",
@@ -2374,7 +2374,7 @@
     {
       "cardNumber": 86,
       "id": "cleanse-and-adapt",
-      "name": 85,
+      "name": "Cleanse And Adapt",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/cleanse-and-adapt.png",
@@ -2385,7 +2385,7 @@
     {
       "cardNumber": 87,
       "id": "quick-spurt",
-      "name": 86,
+      "name": "Quick Spurt",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/quick-spurt.png",
@@ -2396,7 +2396,7 @@
     {
       "cardNumber": 88,
       "id": "flaming-resolve",
-      "name": 87,
+      "name": "Flaming Resolve",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/flaming-resolve.png",
@@ -2407,7 +2407,7 @@
     {
       "cardNumber": 89,
       "id": "waves-endurance",
-      "name": 88,
+      "name": "Waves Endurance",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/waves-endurance.png",
@@ -2418,7 +2418,7 @@
     {
       "cardNumber": 90,
       "id": "unbreakable-force",
-      "name": 89,
+      "name": "Unbreakable Force",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/unbreakable-force.png",
@@ -2429,7 +2429,7 @@
     {
       "cardNumber": 91,
       "id": "gales-veil",
-      "name": 90,
+      "name": "Gales Veil",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/gales-veil.png",
@@ -2440,7 +2440,7 @@
     {
       "cardNumber": 92,
       "id": "scrying-glass",
-      "name": 91,
+      "name": "Scrying Glass",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/scrying-glass.png",
@@ -2451,7 +2451,7 @@
     {
       "cardNumber": 93,
       "id": "heavy-chains",
-      "name": 92,
+      "name": "Heavy Chains",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/heavy-chains.png",
@@ -2462,7 +2462,7 @@
     {
       "cardNumber": 94,
       "id": "statis-field",
-      "name": 93,
+      "name": "Statis Field",
       "type": "Rune",
       "rarity": "C",
       "imagePath": "/images/cards/statis-field.png",
@@ -2473,7 +2473,7 @@
     {
       "cardNumber": 95,
       "id": "elemental-barrage",
-      "name": 94,
+      "name": "Elemental Barrage",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/elemental-barrage.png",
@@ -2484,7 +2484,7 @@
     {
       "cardNumber": 96,
       "id": "essence-leak",
-      "name": 95,
+      "name": "Essence Leak",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/essence-leak.png",
@@ -2495,7 +2495,7 @@
     {
       "cardNumber": 97,
       "id": "elemental-surge",
-      "name": 96,
+      "name": "Elemental Surge",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/elemental-surge.png",
@@ -2506,7 +2506,7 @@
     {
       "cardNumber": 98,
       "id": "essence-amplifier",
-      "name": 97,
+      "name": "Essence Amplifier",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/essence-amplifier.png",
@@ -2517,7 +2517,7 @@
     {
       "cardNumber": 99,
       "id": "binding-coils",
-      "name": 98,
+      "name": "Binding Coils",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/binding-coils.png",
@@ -2528,7 +2528,7 @@
     {
       "cardNumber": 100,
       "id": "intrusion-seal",
-      "name": 99,
+      "name": "Intrusion Seal",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/intrusion-seal.png",
@@ -2539,7 +2539,7 @@
     {
       "cardNumber": 101,
       "id": "direct-assault",
-      "name": 100,
+      "name": "Direct Assault",
       "type": "Rune",
       "rarity": "U",
       "imagePath": "/images/cards/direct-assault.png",
@@ -2550,7 +2550,7 @@
     {
       "cardNumber": 102,
       "id": "draconic-adaptability",
-      "name": 101,
+      "name": "Draconic Adaptability",
       "type": "Rune",
       "rarity": "R",
       "imagePath": "/images/cards/draconic-adaptability.png",
@@ -2561,7 +2561,7 @@
     {
       "cardNumber": 103,
       "id": "lifebound-armour",
-      "name": 102,
+      "name": "Lifebound Armour",
       "type": "Rune",
       "rarity": "R",
       "imagePath": "/images/cards/lifebound-armour.png",
@@ -2572,7 +2572,7 @@
     {
       "cardNumber": 104,
       "id": "ethereal-vitality",
-      "name": 103,
+      "name": "Ethereal Vitality",
       "type": "Rune",
       "rarity": "R",
       "imagePath": "/images/cards/ethereal-vitality.png",
@@ -2583,7 +2583,7 @@
     {
       "cardNumber": 105,
       "id": "counter-pulse",
-      "name": 104,
+      "name": "Counter Pulse",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/counter-pulse.png",
@@ -2594,7 +2594,7 @@
     {
       "cardNumber": 106,
       "id": "essence-leech",
-      "name": 105,
+      "name": "Essence Leech",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/essence-leech.png",
@@ -2605,7 +2605,7 @@
     {
       "cardNumber": 107,
       "id": "denial-decimation",
-      "name": 106,
+      "name": "Denial Decimation",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/denial-decimation.png",
@@ -2616,7 +2616,7 @@
     {
       "cardNumber": 108,
       "id": "redirecting-gust",
-      "name": 107,
+      "name": "Redirecting Gust",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/redirecting-gust.png",
@@ -2627,7 +2627,7 @@
     {
       "cardNumber": 109,
       "id": "armour-degradation",
-      "name": 108,
+      "name": "Armour Degradation",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/armour-degradation.png",
@@ -2638,7 +2638,7 @@
     {
       "cardNumber": 110,
       "id": "reflective-barrier",
-      "name": 109,
+      "name": "Reflective Barrier",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/reflective-barrier.png",
@@ -2649,7 +2649,7 @@
     {
       "cardNumber": 111,
       "id": "whirlwind-retreat",
-      "name": 110,
+      "name": "Whirlwind Retreat",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/whirlwind-retreat.png",
@@ -2660,7 +2660,7 @@
     {
       "cardNumber": 112,
       "id": "chaos-hand",
-      "name": 111,
+      "name": "Chaos Hand",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/chaos-hand.png",
@@ -2671,7 +2671,7 @@
     {
       "cardNumber": 113,
       "id": "agilitys-valor",
-      "name": 112,
+      "name": "Agilitys Valor",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/agilitys-valor.png",
@@ -2682,7 +2682,7 @@
     {
       "cardNumber": 114,
       "id": "time-freeze",
-      "name": 113,
+      "name": "Time Freeze",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/time-freeze.png",
@@ -2693,7 +2693,7 @@
     {
       "cardNumber": 115,
       "id": "quietening-wind",
-      "name": 114,
+      "name": "Quietening Wind",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/quietening-wind.png",
@@ -2704,7 +2704,7 @@
     {
       "cardNumber": 116,
       "id": "vortex-shift",
-      "name": 115,
+      "name": "Vortex Shift",
       "type": "Counter",
       "rarity": "C",
       "imagePath": "/images/cards/vortex-shift.png",
@@ -2715,7 +2715,7 @@
     {
       "cardNumber": 117,
       "id": "power-surge",
-      "name": 116,
+      "name": "Power Surge",
       "type": "Counter",
       "rarity": "U",
       "imagePath": "/images/cards/power-surge.png",
@@ -2726,7 +2726,7 @@
     {
       "cardNumber": 118,
       "id": "essence-bloom",
-      "name": 117,
+      "name": "Essence Bloom",
       "type": "Counter",
       "rarity": "U",
       "imagePath": "/images/cards/essence-bloom.png",
@@ -2737,7 +2737,7 @@
     {
       "cardNumber": 119,
       "id": "elemental-reaction",
-      "name": 118,
+      "name": "Elemental Reaction",
       "type": "Counter",
       "rarity": "U",
       "imagePath": "/images/cards/elemental-reaction.png",
@@ -2748,7 +2748,7 @@
     {
       "cardNumber": 120,
       "id": "unbreakable",
-      "name": 119,
+      "name": "Unbreakable",
       "type": "Counter",
       "rarity": "U",
       "imagePath": "/images/cards/unbreakable.png",
@@ -2759,7 +2759,7 @@
     {
       "cardNumber": 121,
       "id": "rapid-recovery",
-      "name": 120,
+      "name": "Rapid Recovery",
       "type": "Counter",
       "rarity": "U",
       "imagePath": "/images/cards/rapid-recovery.png",
@@ -2770,7 +2770,7 @@
     {
       "cardNumber": 122,
       "id": "revival-rain",
-      "name": 121,
+      "name": "Revival Rain",
       "type": "Counter",
       "rarity": "R",
       "imagePath": "/images/cards/revival-rain.png",
@@ -2781,7 +2781,7 @@
     {
       "cardNumber": 123,
       "id": "echo-of-destruction",
-      "name": 122,
+      "name": "Echo of Destruction",
       "type": "Counter",
       "rarity": "R",
       "imagePath": "/images/cards/echo-of-destruction.png",
@@ -2792,7 +2792,7 @@
     {
       "cardNumber": 124,
       "id": "oblivion-rift",
-      "name": 123,
+      "name": "Oblivion Rift",
       "type": "Counter",
       "rarity": "R",
       "imagePath": "/images/cards/oblivion-rift.png",
@@ -2803,7 +2803,7 @@
     {
       "cardNumber": 125,
       "id": "guardians-sanctuary",
-      "name": 124,
+      "name": "Guardians Sanctuary",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/guardians-sanctuary.png",
@@ -2815,7 +2815,7 @@
     {
       "cardNumber": 126,
       "id": "mystic-ward",
-      "name": 125,
+      "name": "Mystic Ward",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/mystic-ward.png",
@@ -2827,7 +2827,7 @@
     {
       "cardNumber": 127,
       "id": "oracles-guard",
-      "name": 126,
+      "name": "Oracle's Guard",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/oracles-guard.png",
@@ -2839,7 +2839,7 @@
     {
       "cardNumber": 128,
       "id": "scholars-protection",
-      "name": 127,
+      "name": "Scholars Protection",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/scholars-protection.png",
@@ -2851,7 +2851,7 @@
     {
       "cardNumber": 129,
       "id": "woodland-wall",
-      "name": 128,
+      "name": "Woodland Wall",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/woodland-wall.png",
@@ -2863,7 +2863,7 @@
     {
       "cardNumber": 130,
       "id": "aqua-ward",
-      "name": 129,
+      "name": "Aqua Ward",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/aqua-ward.png",
@@ -2875,7 +2875,7 @@
     {
       "cardNumber": 131,
       "id": "ember-bulwark",
-      "name": 130,
+      "name": "Ember Bulwark",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/ember-bulwark.png",
@@ -2887,7 +2887,7 @@
     {
       "cardNumber": 132,
       "id": "gust-screen",
-      "name": 131,
+      "name": "Gust Screen",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/gust-screen.png",
@@ -2899,7 +2899,7 @@
     {
       "cardNumber": 133,
       "id": "frost-veil",
-      "name": 132,
+      "name": "Frost Veil",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/frost-veil.png",
@@ -2911,7 +2911,7 @@
     {
       "cardNumber": 134,
       "id": "spark-wall",
-      "name": 133,
+      "name": "Spark Wall",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/spark-wall.png",
@@ -2923,7 +2923,7 @@
     {
       "cardNumber": 135,
       "id": "lava-guard",
-      "name": 134,
+      "name": "Lava Guard",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/lava-guard.png",
@@ -2935,7 +2935,7 @@
     {
       "cardNumber": 136,
       "id": "toxic-guard",
-      "name": 135,
+      "name": "Toxic Guard",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/toxic-guard.png",
@@ -2947,7 +2947,7 @@
     {
       "cardNumber": 137,
       "id": "sand-fortress",
-      "name": 136,
+      "name": "Sand Fortress",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/sand-fortress.png",
@@ -2959,7 +2959,7 @@
     {
       "cardNumber": 138,
       "id": "crystal-shield",
-      "name": 137,
+      "name": "Crystal Shield",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/crystal-shield.png",
@@ -2971,7 +2971,7 @@
     {
       "cardNumber": 139,
       "id": "radiant-buckler",
-      "name": 138,
+      "name": "Radiant Buckler",
       "type": "Shield",
       "rarity": "C",
       "imagePath": "/images/cards/radiant-buckler.png",
@@ -2983,7 +2983,7 @@
     {
       "cardNumber": 140,
       "id": "mythical-barrier",
-      "name": 139,
+      "name": "Mythical Barrier",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/mythical-barrier.png",
@@ -2995,7 +2995,7 @@
     {
       "cardNumber": 141,
       "id": "shadow-guard",
-      "name": 140,
+      "name": "Shadow Guard",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/shadow-guard.png",
@@ -3007,7 +3007,7 @@
     {
       "cardNumber": 142,
       "id": "harmonic-shield",
-      "name": 141,
+      "name": "Harmonic Shield",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/harmonic-shield.png",
@@ -3019,7 +3019,7 @@
     {
       "cardNumber": 143,
       "id": "draconic-shield",
-      "name": 142,
+      "name": "Draconic Shield",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/draconic-shield.png",
@@ -3031,7 +3031,7 @@
     {
       "cardNumber": 144,
       "id": "spectral-shield",
-      "name": 143,
+      "name": "Spectral Shield",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/spectral-shield.png",
@@ -3043,7 +3043,7 @@
     {
       "cardNumber": 145,
       "id": "phantom-veil",
-      "name": 144,
+      "name": "Phantom Veil",
       "type": "Shield",
       "rarity": "U",
       "imagePath": "/images/cards/phantom-veil.png",
@@ -3055,7 +3055,7 @@
     {
       "cardNumber": 146,
       "id": "whirlwind-barrier",
-      "name": 145,
+      "name": "Whirlwind Barrier",
       "type": "Shield",
       "rarity": "R",
       "imagePath": "/images/cards/whirlwind-barrier.png",
@@ -3067,7 +3067,7 @@
     {
       "cardNumber": 147,
       "id": "torrent-barrier",
-      "name": 146,
+      "name": "Torrent Barrier",
       "type": "Shield",
       "rarity": "R",
       "imagePath": "/images/cards/torrent-barrier.png",
@@ -3079,7 +3079,7 @@
     {
       "cardNumber": 148,
       "id": "flame-barrier",
-      "name": 147,
+      "name": "Flame Barrier",
       "type": "Shield",
       "rarity": "R",
       "imagePath": "/images/cards/flame-barrier.png",
@@ -3091,7 +3091,7 @@
     {
       "cardNumber": 149,
       "id": "geode-barrier",
-      "name": 148,
+      "name": "Geode Barrier",
       "type": "Shield",
       "rarity": "R",
       "imagePath": "/images/cards/geode-barrier.png",
@@ -3103,7 +3103,7 @@
     {
       "cardNumber": 150,
       "id": "phoenix-shield",
-      "name": 149,
+      "name": "Phoenix Shield",
       "type": "Shield",
       "rarity": "E",
       "imagePath": "/images/cards/phoenix-shield.png",
@@ -3115,7 +3115,7 @@
     {
       "cardNumber": 151,
       "id": "titans-shield",
-      "name": 150,
+      "name": "Titans Shield",
       "type": "Shield",
       "rarity": "E",
       "imagePath": "/images/cards/titans-shield.png",
@@ -3127,7 +3127,7 @@
     {
       "cardNumber": 152,
       "id": "celestial-fortress",
-      "name": 151,
+      "name": "Celestial Fortress",
       "type": "Shield",
       "rarity": "E",
       "imagePath": "/images/cards/celestial-fortress.png",
@@ -3139,7 +3139,7 @@
     {
       "cardNumber": 153,
       "id": "tempest-barrier",
-      "name": 152,
+      "name": "Tempest Barrier",
       "type": "Shield",
       "rarity": "E",
       "imagePath": "/images/cards/tempest-barrier.png",
@@ -3151,7 +3151,7 @@
     {
       "cardNumber": 154,
       "id": "elemental-shield",
-      "name": 153,
+      "name": "Elemental Shield",
       "type": "Shield",
       "rarity": "E",
       "imagePath": "/images/cards/elemental-shield.png",
@@ -3163,7 +3163,7 @@
     {
       "cardNumber": 155,
       "id": "ancient-winds",
-      "name": 154,
+      "name": "Ancient Winds",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/ancient-winds.png",
@@ -3191,7 +3191,7 @@
     {
       "cardNumber": 156,
       "id": "ancient-tide",
-      "name": 155,
+      "name": "Ancient Tide",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/ancient-tide.png",
@@ -3219,7 +3219,7 @@
     {
       "cardNumber": 157,
       "id": "ancient-roots",
-      "name": 156,
+      "name": "Ancient Roots",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/ancient-roots.png",
@@ -3247,7 +3247,7 @@
     {
       "cardNumber": 158,
       "id": "ancient-ember",
-      "name": 157,
+      "name": "Ancient Ember",
       "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/ancient-ember.png",
@@ -3275,7 +3275,7 @@
     {
       "cardNumber": 159,
       "id": "ancient-sigil",
-      "name": 158,
+      "name": "Ancient Sigil",
       "type": "Rune",
       "rarity": "E",
       "imagePath": "/images/cards/ancient-sigil.png",
@@ -3285,12 +3285,12 @@
     },
     {
       "cardNumber": 160,
-      "id": "eldritch-the-frost-dragon",
-      "name": 159,
+      "id": "eldritch",
+      "name": "Eldritch the Frost Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/eldritch-the-frost-dragon.png",
-      "webpPath": "/images/cards/webp/eldritch-the-frost-dragon.webp",
+      "imagePath": "/images/cards/eldritch.png",
+      "webpPath": "/images/cards/webp/eldritch.webp",
       "element": "Frost",
       "stats": {
         "strength": 185,
@@ -3321,12 +3321,12 @@
     },
     {
       "cardNumber": 161,
-      "id": "veton-the-lightning-dragon",
-      "name": 160,
+      "id": "veton",
+      "name": "Veton the Lightning Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/veton-the-lightning-dragon.png",
-      "webpPath": "/images/cards/webp/veton-the-lightning-dragon.webp",
+      "imagePath": "/images/cards/veton.png",
+      "webpPath": "/images/cards/webp/veton.webp",
       "element": "Lightning",
       "stats": {
         "strength": 190,
@@ -3357,12 +3357,12 @@
     },
     {
       "cardNumber": 162,
-      "id": "diamoria-the-crystal-dragon",
-      "name": 161,
+      "id": "diamoria",
+      "name": "Diamoria the Crystal Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/diamoria-the-crystal-dragon.png",
-      "webpPath": "/images/cards/webp/diamoria-the-crystal-dragon.webp",
+      "imagePath": "/images/cards/diamoria.png",
+      "webpPath": "/images/cards/webp/diamoria.webp",
       "element": "Crystal",
       "stats": {
         "strength": 205,
@@ -3393,12 +3393,12 @@
     },
     {
       "cardNumber": 163,
-      "id": "zoryn-the-lava-dragon",
-      "name": 162,
+      "id": "zoryn",
+      "name": "Zoryn the Lava Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/zoryn-the-lava-dragon.png",
-      "webpPath": "/images/cards/webp/zoryn-the-lava-dragon.webp",
+      "imagePath": "/images/cards/zoryn.png",
+      "webpPath": "/images/cards/webp/zoryn.webp",
       "element": "Lava",
       "stats": {
         "strength": 210,
@@ -3429,12 +3429,12 @@
     },
     {
       "cardNumber": 164,
-      "id": "noxilus-the-poison-dragon",
-      "name": 163,
+      "id": "noxilus",
+      "name": "Noxilus the Poison Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/noxilus-the-poison-dragon.png",
-      "webpPath": "/images/cards/webp/noxilus-the-poison-dragon.webp",
+      "imagePath": "/images/cards/noxilus.png",
+      "webpPath": "/images/cards/webp/noxilus.webp",
       "element": "Poison",
       "stats": {
         "strength": 200,
@@ -3465,12 +3465,12 @@
     },
     {
       "cardNumber": 165,
-      "id": "aridus-the-sand-dragon",
-      "name": 164,
+      "id": "aridus",
+      "name": "Aridus the Sand Dragon",
       "type": "Creature",
       "rarity": "E",
-      "imagePath": "/images/cards/aridus-the-sand-dragon.png",
-      "webpPath": "/images/cards/webp/aridus-the-sand-dragon.webp",
+      "imagePath": "/images/cards/aridus.png",
+      "webpPath": "/images/cards/webp/aridus.webp",
       "element": "Sand",
       "stats": {
         "strength": 195,
@@ -3501,12 +3501,12 @@
     },
     {
       "cardNumber": 166,
-      "id": "galea-the-air-elementalist",
-      "name": 165,
+      "id": "galea",
+      "name": "Galea",
       "type": "Creature",
       "rarity": "L",
-      "imagePath": "/images/cards/galea-the-air-elementalist.png",
-      "webpPath": "/images/cards/webp/galea-the-air-elementalist.webp",
+      "imagePath": "/images/cards/galea.png",
+      "webpPath": "/images/cards/webp/galea.webp",
       "element": "Air",
       "stats": {
         "strength": 225,
@@ -3537,12 +3537,12 @@
     },
     {
       "cardNumber": 167,
-      "id": "mek-the-water-elementalist",
-      "name": 166,
+      "id": "mek",
+      "name": "Mek the Water Elementalist",
       "type": "Creature",
       "rarity": "L",
-      "imagePath": "/images/cards/mek-the-water-elementalist.png",
-      "webpPath": "/images/cards/webp/mek-the-water-elementalist.webp",
+      "imagePath": "/images/cards/mek.png",
+      "webpPath": "/images/cards/webp/mek.webp",
       "element": "Water",
       "stats": {
         "strength": 270,
@@ -3572,13 +3572,49 @@
       }
     },
     {
-      "cardNumber": 169,
-      "id": "balon-the-earth-elementalist",
-      "name": 168,
+      "cardNumber": 168,
+      "id": "osao",
+      "name": "Osao the Fire Elementalist",
       "type": "Creature",
       "rarity": "L",
-      "imagePath": "/images/cards/balon-the-earth-elementalist.png",
-      "webpPath": "/images/cards/webp/balon-the-earth-elementalist.webp",
+      "imagePath": "/images/cards/osao.png",
+      "webpPath": "/images/cards/webp/osao.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 315,
+        "agility": 135
+      },
+      "ability": {
+        "name": "Blazing Support",
+        "description": "While this card is on the field, all Fire creatures gain Pierce."
+      },
+      "specialAbility": {
+        "name": "Tremor",
+        "description": "Deal 10 damage to creature creature your opponent controls per essence spent ('X')",
+        "cost": {
+          "amount": "X",
+          "element": "Fire"
+        }
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      }
+    },
+    {
+      "cardNumber": 169,
+      "id": "balon",
+      "name": "Balon the Earth Elementalist",
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/balon.png",
+      "webpPath": "/images/cards/webp/balon.webp",
       "element": "Earth",
       "stats": {
         "strength": 360,

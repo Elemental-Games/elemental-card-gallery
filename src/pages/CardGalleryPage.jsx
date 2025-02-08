@@ -1,87 +1,279 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { debounce } from 'lodash';
+import { motion, AnimatePresence } from 'framer-motion';
 import { useToast } from '@/components/ui/use-toast';
 import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
+import { useNavigate } from 'react-router-dom';
 
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [displayedCards, setDisplayedCards] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const { toast } = useToast();
-  const cardsPerPage = 8;
+  const [page, setPage] = useState(1);
+  const cardsPerPage = 10;
+  const loadingRef = useRef(null);
 
+  const [filters, setFilters] = useState({
+    element: '',
+    type: '',
+    rarity: '',
+    sortOrder: 'asc' // 'asc' or 'desc' for card number
+  });
+  const [searchTerm, setSearchTerm] = useState('');
+
+  const elements = ['Earth', 'Water', 'Fire', 'Air', 'Combinational'];
+  const types = ['Creature', 'Rune', 'Counter', 'Shield'];
+  const rarities = ['C', 'U', 'R', 'E', 'L'];
+
+  const { toast } = useToast();
+
+  const [selectedCard, setSelectedCard] = useState(null);
+
+  // Add a state to track if there are more cards to load
+  const [hasMore, setHasMore] = useState(true);
+
+  const navigate = useNavigate();
+
+  // Intersection Observer for infinite scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !loading && hasMore) {
+          setPage(prev => prev + 1);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (loadingRef.current) {
+      observer.observe(loadingRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, [loading, hasMore]);
+
+  // Load more cards when page changes
+  useEffect(() => {
+    const filtered = filterCards();
+    const nextCards = filtered.slice(0, page * cardsPerPage);
+    setDisplayedCards(nextCards);
+    setHasMore(nextCards.length < filtered.length);
+  }, [page, filters, searchTerm, cards]);
+
+  // Initial load of cards
   useEffect(() => {
     const loadCards = async () => {
       try {
-        const elements = ['air', 'water', 'fire', 'earth'];
-        const allCards = [];
-
-        for (const element of elements) {
-          const response = await fetch(`/data/cards/${element}Cards.json`);
-          if (!response.ok) {
-            throw new Error(`Failed to fetch ${element} cards (${response.status})`);
-          }
-          const data = await response.json();
-          if (data && Array.isArray(data.cards)) {
-            allCards.push(...data.cards);
-          }
+        setLoading(true);
+        setError(null);
+        const response = await fetch('/data/cards.json');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-
-        const sortedCards = allCards.sort((a, b) => 
-          (parseInt(a.cardNumber) || 0) - (parseInt(b.cardNumber) || 0)
-        );
-
-        setCards(sortedCards);
-        setDisplayedCards(sortedCards.slice(0, cardsPerPage));
-        setIsLoading(false);
-      } catch (error) {
-        console.error('Error loading cards:', error);
-        setError(`Failed to load cards: ${error.message}`);
-        setIsLoading(false);
-        toast({
-          variant: "destructive",
-          title: "Error loading cards",
-          description: `Please try again later. (${error.message})`,
-        });
+        const data = await response.json();
+        if (!data || !data.cards) {
+          throw new Error('Invalid data format');
+        }
+        setCards(data.cards);
+        // Set initial displayed cards
+        const initialCards = data.cards.slice(0, cardsPerPage);
+        setDisplayedCards(initialCards);
+      } catch (err) {
+        console.error('Error loading cards:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     loadCards();
-  }, [toast]);
+  }, []);
 
-  const observer = useRef();
-  const loadMoreRef = useCallback(node => {
-    if (loading) return;
-    if (observer.current) observer.current.disconnect();
-    
-    observer.current = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && displayedCards.length < cards.length) {
-        loadMoreCards();
+  const filterCards = useCallback(() => {
+    let filtered = [...cards];
+
+    if (searchTerm) {
+      filtered = filtered.filter(card => 
+        card.name.toString().toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    if (filters.element) {
+      if (filters.element === 'Combinational') {
+        filtered = filtered.filter(card => 
+          ['Frost', 'Crystal', 'Poison', 'Sand', 'Lava', 'Lightning'].includes(card.element)
+        );
+      } else {
+        filtered = filtered.filter(card => card.element === filters.element);
       }
-    });
-    
-    if (node) observer.current.observe(node);
-  }, [loading, displayedCards.length, cards.length]);
+      if (!filters.type) setFilters(prev => ({ ...prev, type: 'Creature' }));
+    }
 
-  const loadMoreCards = () => {
-    setLoading(true);
-    const currentLength = displayedCards.length;
-    const nextBatch = cards.slice(currentLength, currentLength + cardsPerPage);
-    setDisplayedCards(prev => [...prev, ...nextBatch]);
-    setLoading(false);
+    if (filters.type) {
+      filtered = filtered.filter(card => card.type === filters.type);
+    }
+
+    if (filters.rarity) {
+      filtered = filtered.filter(card => card.rarity === filters.rarity);
+    }
+
+    filtered.sort((a, b) => {
+      return filters.sortOrder === 'asc' 
+        ? a.cardNumber - b.cardNumber 
+        : b.cardNumber - a.cardNumber;
+    });
+
+    return filtered;
+  }, [cards, filters, searchTerm]);
+
+  // Update debounce time to 1.15 seconds
+  const debouncedSearch = useCallback(
+    debounce((value) => {
+      setSearchTerm(value);
+    }, 1150),
+    []
+  );
+
+  const handleFilterChange = (type, value) => {
+    setFilters(prev => {
+      const newFilters = { ...prev };
+      
+      if (type === 'element') {
+        // When selecting an element, auto-set type to Creature
+        newFilters.element = value;
+        newFilters.type = 'Creature';
+      } else if (type === 'type') {
+        // When changing type, if it's not Creature, clear element filter
+        newFilters.type = value;
+        if (value !== 'Creature') {
+          newFilters.element = '';
+        }
+      } else {
+        newFilters[type] = value;
+      }
+      
+      // Reset page when filters change
+      setPage(1);
+      return newFilters;
+    });
   };
 
-  if (isLoading) {
+  // Reset page when filters change
+  useEffect(() => {
+    setPage(1);
+  }, [filters, searchTerm]);
+
+  // Card component with simplified hover state
+  const CardItem = ({ card }) => {
+    const [isHovering, setIsHovering] = useState(false);
+    const navigate = useNavigate();
+
+    // Ensure card name is a string
+    const cardName = typeof card.name === 'number' ? `Card ${card.name}` : card.name;
+
     return (
-      <div className="min-h-screen bg-[#1A103C] text-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500" />
+      <div
+        onMouseEnter={() => setIsHovering(true)}
+        onMouseLeave={() => setIsHovering(false)}
+        onClick={() => navigate(`/cards/${card.id}`)}
+        className={`bg-purple-950/70 p-4 rounded-lg border border-purple-500/30
+          transition-all duration-300 cursor-pointer
+          ${isHovering ? 'shadow-lg shadow-purple-500/30 border-purple-500/50' : ''}`}
+      >
+        <div className="relative group">
+          <img 
+            src={`/images/cards/${card.id}.webp`}
+            alt={cardName}
+            className="w-full h-auto rounded-lg"
+            onError={(e) => {
+              e.target.onerror = null;
+              e.target.src = `/images/cards/${card.id}.png`;
+            }}
+          />
+          
+          {isHovering && (
+            <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
+              <p className="text-white text-center px-4">
+                View Card Details
+              </p>
+            </div>
+          )}
+        </div>
+        
+        <div className="mt-2 text-center">
+          <h3 className="font-bold text-white">{cardName}</h3>
+          <p className="text-sm text-purple-200">
+            {card.element} • {card.type} • #{card.cardNumber}
+          </p>
+        </div>
       </div>
     );
-  }
+  };
+
+  // Expanded Card Modal
+  const ExpandedCard = ({ card }) => {
+    if (!card) return null;
+
+    return (
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
+        onClick={() => setSelectedCard(null)}
+      >
+        <motion.div
+          initial={{ scale: 0.8, y: 50 }}
+          animate={{ scale: 1, y: 0 }}
+          exit={{ scale: 0.8, y: 50 }}
+          className="bg-purple-950/90 p-6 rounded-xl max-w-2xl w-full mx-4 relative"
+          onClick={e => e.stopPropagation()}
+        >
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <img 
+                src={card.webpPath}
+                alt={card.name}
+                className="w-full h-auto rounded-lg"
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = card.imagePath;
+                }}
+              />
+            </div>
+            <div>
+              <h2 className="text-2xl font-bold text-white mb-4">{card.name}</h2>
+              <p className="text-purple-200 mb-2">
+                {card.element} • {card.type} • #{card.cardNumber}
+              </p>
+              {card.ability && (
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold text-purple-300">Ability</h3>
+                  <p className="text-white">{card.ability.description}</p>
+                </div>
+              )}
+              {card.specialAbility && (
+                <div className="mb-4">
+                  <h3 className="text-lg font-semibold text-purple-300">Special Ability</h3>
+                  <p className="text-white">{card.specialAbility.description}</p>
+                </div>
+              )}
+              <button
+                className="mt-4 px-6 py-2 bg-purple-700 hover:bg-purple-600 rounded-lg 
+                  transition-colors border border-purple-500/50 text-white"
+                onClick={() => setSelectedCard(null)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </motion.div>
+      </motion.div>
+    );
+  };
 
   if (error) {
     return (
@@ -97,39 +289,114 @@ const CardGalleryPage = () => {
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-center text-yellow-400">Card Gallery</h1>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-        {displayedCards.map((card) => (
-          <Card 
-            key={card.id}
-            className="p-4 hover:shadow-lg transition-shadow duration-200 bg-purple-950/70 border border-yellow-500/30"
+      {/* Filters Section */}
+      <div className="mb-8 flex justify-center px-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7 gap-4 w-full max-w-[1920px]">
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search cards..."
+            className={`p-2 rounded-lg font-medium transition-all duration-300
+              bg-purple-600/50 text-white border-2 border-purple-400/50 
+              placeholder:text-purple-300
+              hover:bg-purple-500/50 hover:border-purple-300/50 
+              focus:shadow-lg focus:shadow-purple-400/20 focus:outline-none
+              focus:bg-purple-500/50 focus:border-purple-300/50
+              w-full`}
+            onChange={(e) => debouncedSearch(e.target.value)}
+          />
+          
+          {/* Filter Selects */}
+          <select
+            value={filters.element}
+            onChange={(e) => handleFilterChange('element', e.target.value)}
+            className="p-2 rounded bg-purple-900/50 text-white border border-purple-500/30 w-full"
           >
-            <img 
-              src={`/images/cards/${card.id}.webp`}
-              alt={card.name}
-              className="w-full h-auto object-contain mx-auto rounded-lg"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `/images/cards/${card.id}.png`;
-              }}
-            />
-            <div className="mt-2 text-center">
-              <h3 className="font-bold text-yellow-400">{card.name}</h3>
-              <p className="text-sm text-purple-200">Element: {card.element}</p>
-            </div>
-          </Card>
+            <option value="">All Elements</option>
+            {elements.map(element => (
+              <option key={element} value={element}>{element}</option>
+            ))}
+          </select>
+
+          <select
+            value={filters.type}
+            onChange={(e) => handleFilterChange('type', e.target.value)}
+            className="p-2 rounded bg-purple-900/50 text-white border border-purple-500/30 w-full"
+          >
+            <option value="">All Types</option>
+            {types.map(type => (
+              <option key={type} value={type}>{type}</option>
+            ))}
+          </select>
+
+          <select
+            value={filters.rarity}
+            onChange={(e) => handleFilterChange('rarity', e.target.value)}
+            className="p-2 rounded bg-purple-900/50 text-white border border-purple-500/30 w-full"
+          >
+            <option value="">All Rarities</option>
+            {rarities.map(rarity => (
+              <option key={rarity} value={rarity}>
+                {rarity === 'C' ? 'Common' :
+                 rarity === 'U' ? 'Uncommon' :
+                 rarity === 'R' ? 'Rare' :
+                 rarity === 'E' ? 'Epic' :
+                 'Legendary'}
+              </option>
+            ))}
+          </select>
+
+          <select
+            value={filters.sortOrder}
+            onChange={(e) => handleFilterChange('sortOrder', e.target.value)}
+            className="p-2 rounded bg-purple-900/50 text-white border border-purple-500/30 w-full"
+          >
+            <option value="asc">Lowest to Highest</option>
+            <option value="desc">Highest to Lowest</option>
+          </select>
+
+          {/* Reset Button */}
+          <button
+            onClick={() => {
+              setFilters({
+                element: '',
+                type: '',
+                rarity: '',
+                sortOrder: 'asc'
+              });
+              setSearchTerm('');
+              setPage(1);
+            }}
+            className={`p-2 rounded-lg font-medium transition-all duration-300 w-full
+              ${(filters.element || filters.type || filters.rarity || searchTerm)
+                ? 'bg-purple-600/50 text-white border-2 border-purple-400/50 hover:bg-purple-500/50 hover:border-purple-300/50 hover:shadow-lg hover:shadow-purple-400/20'
+                : 'bg-purple-900/30 text-purple-400/50 border-2 border-purple-500/20 cursor-not-allowed'
+              }`}
+            disabled={!filters.element && !filters.type && !filters.rarity && !searchTerm}
+          >
+            Reset Filters
+          </button>
+        </div>
+      </div>
+
+      {/* Cards Grid - No Animation */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        {displayedCards.map((card) => (
+          <CardItem key={card.id} card={card} />
         ))}
       </div>
 
-      {displayedCards.length < cards.length && (
-        <div 
-          ref={loadMoreRef}
-          className="h-10 w-full flex justify-center items-center mt-4"
-        >
-          {loading && (
-            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500" />
-          )}
+      {/* Loading indicator */}
+      {hasMore && (
+        <div ref={loadingRef} className="flex justify-center mt-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-yellow-500"></div>
         </div>
       )}
+
+      {/* Expanded Card Modal */}
+      <AnimatePresence>
+        {selectedCard && <ExpandedCard card={selectedCard} />}
+      </AnimatePresence>
     </div>
   );
 };

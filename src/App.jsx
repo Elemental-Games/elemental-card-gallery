@@ -28,8 +28,18 @@ import HowToPlayPage from "./pages/HowToPlayPage";
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import BetaGamePage from "./pages/BetaGamePage";
+import { createClient } from '@supabase/supabase-js';
+import { SessionContextProvider } from '@supabase/auth-helpers-react';
+import AuthPage from './pages/AuthPage';
+import AuthCallbackPage from './pages/AuthCallbackPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 const queryClient = new QueryClient();
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -65,42 +75,50 @@ const renderRoutes = (items) => {
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-        <TooltipProvider>
-          <AuthProvider>
-            <Toaster />
-            <SpeedInsights />
-            <BrowserRouter>
-              <ScrollToTop />
-              <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
-                <Header />
-                <main className="flex-grow w-full">
-                  <Routes>
-                    <Route path="/" element={<LandingPage />} />
-                    {renderRoutes(navItems)}
-                    <Route path="/cards/gallery" element={<CardGalleryPage />} />
-                    <Route path="/cards/deck-builder" element={<DeckBuilderPage />} />
-                    <Route path="/cards/:id" element={<CardDetailPage />} />
-                    <Route path="/how-to-play/battle-simulation" element={<BattleSimulationPage />} />
-                    <Route path="/how-to-play/rules/*" element={<RulesPage />} />
-                    <Route path="/kinbrold/evermere" element={<EvermerePage />} />
-                    <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
-                    <Route path="/kinbrold/scarto" element={<ScartoPage />} />
-                    <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
-                    <Route path="/kinbrold/zalos" element={<ZalosPage />} />
-                    <Route path="/donate" element={<DonatePage />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/terms-of-service" element={<TermsOfService />} />
-                    <Route path="/cards/beta-game" element={<BetaGamePage />} />
-                  </Routes>
-                </main>
-                <Footer />
-                <CookieConsent />
-              </div>
-            </BrowserRouter>
-          </AuthProvider>
-        </TooltipProvider>
-      </ThemeProvider>
+      <SessionContextProvider supabaseClient={supabase}>
+        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
+          <TooltipProvider>
+            <AuthProvider>
+              <Toaster />
+              <SpeedInsights />
+              <BrowserRouter>
+                <ScrollToTop />
+                <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
+                  <Header />
+                  <main className="flex-grow w-full">
+                    <Routes>
+                      <Route path="/" element={<LandingPage />} />
+                      <Route path="/login" element={<AuthPage />} />
+                      <Route path="/auth/callback" element={<AuthCallbackPage />} />
+                      {renderRoutes(navItems)}
+                      <Route path="/cards/gallery" element={<CardGalleryPage />} />
+                      <Route path="/cards/deck-builder" element={
+                        <ProtectedRoute>
+                          <DeckBuilderPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/:id" element={<CardDetailPage />} />
+                      <Route path="/how-to-play/battle-simulation" element={<BattleSimulationPage />} />
+                      <Route path="/how-to-play/rules/*" element={<RulesPage />} />
+                      <Route path="/kinbrold/evermere" element={<EvermerePage />} />
+                      <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                      <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                      <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                      <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                      <Route path="/donate" element={<DonatePage />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/terms-of-service" element={<TermsOfService />} />
+                      <Route path="/cards/beta-game" element={<BetaGamePage />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                  <CookieConsent />
+                </div>
+              </BrowserRouter>
+            </AuthProvider>
+          </TooltipProvider>
+        </ThemeProvider>
+      </SessionContextProvider>
     </QueryClientProvider>
   </HelmetProvider>
 );

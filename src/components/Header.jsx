@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
@@ -11,8 +10,23 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Menu } from "lucide-react";
 import { navItems } from '../nav-items';
+import { useUser } from '@supabase/auth-helpers-react';
+import { signOut } from '@/lib/supabase';
+import { toast } from 'sonner';
+import { Button } from "@/components/ui/button";
 
 const Header = () => {
+  const user = useUser();
+
+  const handleSignOut = async () => {
+    const success = await signOut();
+    if (success) {
+      toast.success('Successfully signed out');
+    } else {
+      toast.error('Error signing out');
+    }
+  };
+
   return (
     <>
       <Helmet>
@@ -80,6 +94,16 @@ const Header = () => {
               </NavigationMenuList>
             </NavigationMenu>
           </div>
+
+          {user && (
+            <Button
+              variant="ghost"
+              onClick={handleSignOut}
+              className="text-purple-300 hover:text-purple-200"
+            >
+              Sign Out
+            </Button>
+          )}
         </div>
       </nav>
     </>

@@ -1,10 +1,17 @@
-import React from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { motion } from 'framer-motion';
+import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
 import { Helmet } from 'react-helmet-async';
 import DeckEditor from '@/components/DeckBuilder/DeckEditor';
 import CardGallery from '@/components/DeckBuilder/CardGallery';
-import { useState } from 'react';
 
 const DeckBuilderPage = () => {
+  const navigate = useNavigate();
+  const supabase = useSupabaseClient();
+  const user = useUser();
   const [mainDeck, setMainDeck] = useState([]);
   const [sideDeck, setSideDeck] = useState([]);
 
@@ -21,6 +28,14 @@ const DeckBuilderPage = () => {
     }
   };
 
+  const handleStartWizard = () => {
+    navigate('/deck-builder/wizard');
+  };
+
+  const handleManualBuild = () => {
+    navigate('/deck-builder/manual');
+  };
+
   return (
     <>
       <Helmet>
@@ -33,28 +48,56 @@ const DeckBuilderPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/cards/deck-builder" />
       </Helmet>
 
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-3xl font-bold mb-6">Deck Builder</h1>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          <div>
-            <CardGallery 
-              cards={[]} // We'll need to pass actual cards data here
-              onCardSelect={handleCardSelect}
-              deck={[...mainDeck, ...sideDeck]}
-            />
-          </div>
-          
-          <div>
-            <DeckEditor 
-              mainDeck={mainDeck}
-              sideDeck={sideDeck}
-              setMainDeck={setMainDeck}
-              setSideDeck={setSideDeck}
-              canAddCard={canAddCard}
-            />
-          </div>
-        </div>
+      <div className="container mx-auto px-4 py-12">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="max-w-2xl mx-auto"
+        >
+          <Card className="bg-purple-950/70 p-8 border border-purple-500/30">
+            <h1 className="text-3xl font-bold text-center text-yellow-400 mb-8">
+              Deck Builder
+            </h1>
+
+            <div className="space-y-6">
+              {!user ? (
+                <div className="text-center p-4 bg-purple-900/50 rounded-lg">
+                  <p className="text-purple-200 mb-4">
+                    Please sign in to save your decks
+                  </p>
+                  <Button 
+                    onClick={() => navigate('/login')}
+                    className="bg-purple-600 hover:bg-purple-500"
+                  >
+                    Sign In
+                  </Button>
+                </div>
+              ) : (
+                <>
+                  <Button
+                    onClick={handleStartWizard}
+                    className="w-full p-6 text-lg bg-purple-700 hover:bg-purple-600"
+                  >
+                    Start Deck Building Wizard
+                    <p className="text-sm text-purple-300 mt-2">
+                      Get guided through the deck building process
+                    </p>
+                  </Button>
+
+                  <Button
+                    onClick={handleManualBuild}
+                    className="w-full p-6 text-lg bg-purple-700/50 hover:bg-purple-600/50"
+                  >
+                    Build Deck Manually
+                    <p className="text-sm text-purple-300 mt-2">
+                      Jump straight into deck building
+                    </p>
+                  </Button>
+                </>
+              )}
+            </div>
+          </Card>
+        </motion.div>
       </div>
     </>
   );

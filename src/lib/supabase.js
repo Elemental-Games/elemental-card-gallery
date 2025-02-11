@@ -9,7 +9,32 @@ if (!supabaseUrl || !supabaseAnonKey) {
   console.error('Missing Supabase credentials');
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+  },
+});
+
+export const getUser = async () => {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    return user;
+  } catch (error) {
+    console.error('Error getting user:', error);
+    return null;
+  }
+};
+
+export const signOut = async () => {
+  try {
+    await supabase.auth.signOut();
+    return true;
+  } catch (error) {
+    console.error('Error signing out:', error);
+    return false;
+  }
+};
 
 export async function subscribeEmail(email) {
   try {

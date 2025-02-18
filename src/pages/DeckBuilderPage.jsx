@@ -1,39 +1,21 @@
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useUser } from '@supabase/auth-helpers-react';
 import { Helmet } from 'react-helmet-async';
-import DeckEditor from '@/components/DeckBuilder/DeckEditor';
-import CardGallery from '@/components/DeckBuilder/CardGallery';
 
 const DeckBuilderPage = () => {
   const navigate = useNavigate();
-  const supabase = useSupabaseClient();
   const user = useUser();
-  const [mainDeck, setMainDeck] = useState([]);
-  const [sideDeck, setSideDeck] = useState([]);
-
-  const canAddCard = (card) => {
-    const totalCards = mainDeck.reduce((sum, c) => sum + c.quantity, 0);
-    return totalCards < 40;
-  };
-
-  const handleCardSelect = (card) => {
-    if (card.type === 'Shield') {
-      setSideDeck(prev => [...prev, card]);
-    } else {
-      setMainDeck(prev => [...prev, card]);
-    }
-  };
 
   const handleStartWizard = () => {
-    navigate('/deck-builder/wizard');
+    // Coming soon
+    navigate('/cards/deck-builder/wizard');
   };
 
   const handleManualBuild = () => {
-    navigate('/deck-builder/manual');
+    navigate('/cards/deck-builder/manual');
   };
 
   return (
@@ -76,17 +58,17 @@ const DeckBuilderPage = () => {
                 <>
                   <Button
                     onClick={handleStartWizard}
-                    className="w-full p-6 text-lg bg-purple-700 hover:bg-purple-600"
+                    className="w-full p-6 text-lg bg-purple-700/50 hover:bg-purple-600/50"
                   >
                     Start Deck Building Wizard
                     <p className="text-sm text-purple-300 mt-2">
-                      Get guided through the deck building process
+                      Get guided through the deck building process (Coming Soon)
                     </p>
                   </Button>
 
                   <Button
                     onClick={handleManualBuild}
-                    className="w-full p-6 text-lg bg-purple-700/50 hover:bg-purple-600/50"
+                    className="w-full p-6 text-lg bg-purple-700 hover:bg-purple-600"
                   >
                     Build Deck Manually
                     <p className="text-sm text-purple-300 mt-2">

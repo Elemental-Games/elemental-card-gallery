@@ -54,6 +54,11 @@ const AuthPage = () => {
     // Check if we have a redirect URL in the state
     const from = location.state?.from || '/cards/deck-builder';
     
+    // Check if we have a mode in the state
+    if (location.state?.mode === 'signup') {
+      setIsLogin(false);
+    }
+    
     // Listen for auth state changes
     const { data: { subscription } } = supabase.auth.onAuthStateChange((event) => {
       if (event === 'SIGNED_IN') {
@@ -66,6 +71,14 @@ const AuthPage = () => {
         }, 2000);
       }
     });
+
+    // Check for pre-filled email from signup form
+    const signupEmail = localStorage.getItem('signupEmail');
+    if (signupEmail) {
+      setEmail(signupEmail);
+      setIsLogin(true); // Ensure we're on the login form
+      localStorage.removeItem('signupEmail'); // Clear the stored email
+    }
 
     return () => subscription.unsubscribe();
   }, [navigate, location]);
@@ -241,7 +254,9 @@ const AuthPage = () => {
               <div className="mb-6">
                 <PartyPopper className="w-16 h-16 text-yellow-400" />
               </div>
-              <h2 className="text-3xl font-bold text-yellow-400 mb-4">Welcome aboard!</h2>
+              <h2 className="text-2xl font-bold text-white mb-4">
+                {isLogin ? 'Welcome Back!' : 'Welcome Aboard!'}
+              </h2>
               <p className="text-xl text-purple-200 mb-8">Get ready to build some amazing decks!</p>
               <Button
                 onClick={() => navigate('/elekin/online')}

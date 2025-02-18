@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
+import ManualDeckBuilderPage from "./pages/ManualDeckBuilderPage";
 import EvermerePage from "./pages/EvermerePage";
 import GrivossPage from "./pages/GrivossPage";
 import ScartoPage from "./pages/ScartoPage";
@@ -101,6 +102,11 @@ const App = () => (
                       <Route path="/cards/deck-builder" element={
                         <ProtectedRoute>
                           <DeckBuilderPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/deck-builder/manual" element={
+                        <ProtectedRoute>
+                          <ManualDeckBuilderPage />
                         </ProtectedRoute>
                       } />
                       <Route path="/cards/:id" element={<CardDetailPage />} />

@@ -1,11 +1,8 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { MessageCircle } from 'lucide-react';
-import CardDisplay from '../components/CardDisplay';
-import EmailSignup from '../components/EmailSignup';
+import SignupForm from '../components/auth/SignupForm';
 import FlippableCard from '../components/FlippableCard';
 import LaunchCountdown from '../components/LaunchCountdown';
 
@@ -68,8 +65,8 @@ const JoinNowPage = () => {
         </div>
 
         <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30">
-          <h2 className="text-3xl font-bold mb-4">Stay Updated</h2>
-          <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+          <h2 className="text-3xl font-bold mb-4">Join Now</h2>
+          <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
         </div>
       </div>
 
@@ -180,8 +177,8 @@ const JoinNowPage = () => {
 
       <div className="text-center">
         <Card className="p-6 max-w-md mx-auto border-2 border-yellow-500">
-          <h3 className="text-xl font-semibold mb-4">Stay Updated</h3>
-          <EmailSignup buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+          <h3 className="text-xl font-semibold mb-4">Join Now</h3>
+          <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
         </Card>
       </div>
     </motion.div>

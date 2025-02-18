@@ -83,11 +83,26 @@ const ProfilePage = () => {
     try {
       setLoading(true);
       const { error } = await supabase.auth.updateUser({
-        data: { username }
+        data: { username },
+        options: {
+          data: { username }  // For metadata
+        }
       });
 
       if (error) {
         throw error;
+      }
+
+      // Update display name in Supabase
+      const { error: updateError } = await supabase.auth.updateUser({
+        data: {
+          full_name: username,  // This sets the display name
+          username: username    // Keep metadata in sync
+        }
+      });
+
+      if (updateError) {
+        throw updateError;
       }
 
       toast.success('Profile updated successfully');

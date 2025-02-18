@@ -41,19 +41,18 @@ const Footer = () => {
                   style={{ filter: 'brightness(0) invert(1)' }}
                 />
               </a>
-              <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              <a href="https://discord.gg/qXNWh4dMve" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity">
                 <img 
                   src="/discord.svg" 
                   alt="Discord" 
-                  className="h-6 w-6 fill-current text-white"
-                  style={{ filter: 'brightness(0) invert(1)' }}
+                  className="h-6 w-6"
                 />
               </a>
             </div>
           </div>
         </div>
-        <div className="mt-8">
-          <p>&copy; 2024 Elemental Games LLC. All rights reserved.</p>
+        <div className="mt-8 text-center">
+          <p>&copy; 2025 Elemental Games LLC. All rights reserved.</p>
         </div>
       </div>
     </footer>

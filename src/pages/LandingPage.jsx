@@ -1,14 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import ImageHero from '../components/ImageHero';
+import { Book, LayoutGrid, Map, Gamepad } from 'lucide-react';
+import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import KeyFeatures from '../components/KeyFeatures';
-import ExploreItem from '../components/ExploreItem';
 import ElementalTransition from '../components/ElementalTransition';
-import LightBox from '../components/LightBox';
-import { Book, ScrollText, Gamepad2, LayoutGrid, ChevronRight } from 'lucide-react';
-import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = useState(null);
@@ -44,17 +41,6 @@ const LandingPage = () => {
     }
   ];
 
-  const exploreItems = [
-    { title: 'Kinbrold Lore', icon: <Book size={24} />, link: '/kinbrold' },
-    { title: 'Deck Builder', icon: <LayoutGrid size={24} />, link: '/cards/deck-builder' },
-    { title: 'Gameplay', icon: <Gamepad2 size={24} />, link: '/gameplay' },
-    { title: 'Card Gallery', icon: <ScrollText size={24} />, link: '/cards/gallery' },
-  ];
-
-  const handleElementClick = (element) => {
-    setTransitionElement(element);
-  };
-
   if (transitionElement) {
     return (
       <ElementalTransition element={transitionElement}>
@@ -86,8 +72,8 @@ const LandingPage = () => {
                 className="w-48 lg:w-80 h-auto"
               />
             </div>
-            <p className="mb-6 text-lg text-center lg:text-left">
-              Welcome to Kinbrold, a world of elemental mastery and strategic conquest. Elemental Masters is not just another trading card game – it's a gateway to a rich, immersive universe where every card tells a story and every game is an adventure.
+            <p className="text-lg text-purple-200 mb-8">
+              Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
             </p>
             <KeyFeatures />
           </div>
@@ -103,7 +89,6 @@ const LandingPage = () => {
           <Link to="/kinbrold">
             <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
               Explore the World of Kinbrold
-              <ChevronRight className="ml-2 w-8 h-8" />
             </h2>
           </Link>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -132,45 +117,46 @@ const LandingPage = () => {
         {/* Explore More Section */}
         <section className="container mx-auto px-4 py-16 text-center">
           <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <Link to="/kinbrold">
-              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Lore</h3>
-                <p className="text-purple-300 mt-2 text-sm">World of Kinbrold</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Learn more →</p>
-              </div>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Map className="mr-3 h-8 w-8" />
+                Explore Lore
+              </Button>
             </Link>
-
-            <Link to="/deck-builder">
-              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Build</h3>
-                <p className="text-purple-300 mt-2 text-sm">Create your deck</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Start now →</p>
-              </div>
+            <Link to="/cards/deck-builder">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <LayoutGrid className="mr-3 h-8 w-8" />
+                Build Deck
+              </Button>
             </Link>
-
-            <Link to="/how-to-play">
-              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Play</h3>
-                <p className="text-purple-300 mt-2 text-sm">Learn the game</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Get started →</p>
-              </div>
+            <Link to="/elekin/online">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Gamepad className="mr-3 h-8 w-8" />
+                Play Online
+              </Button>
             </Link>
-
-            <Link to="/cards">
-              <div className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-                shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-                border border-purple-500/30 hover:border-purple-500/50 h-full flex flex-col">
-                <h3 className="text-2xl font-semibold text-white">Cards</h3>
-                <p className="text-purple-300 mt-2 text-sm">View collection</p>
-                <p className="text-yellow-500 mt-auto pt-4 text-sm">Browse now →</p>
-              </div>
+            <Link to="/cards/gallery">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Book className="mr-3 h-8 w-8" />
+                View Cards
+              </Button>
             </Link>
           </div>
         </section>

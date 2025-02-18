@@ -8,15 +8,12 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { navItems } from "./nav-items";
-import ThemeToggle from "./components/ThemeToggle";
 import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
-import BattleSimulationPage from "./pages/BattleSimulationPage";
-import RulesPage from "./pages/RulesPage";
 import EvermerePage from "./pages/EvermerePage";
 import GrivossPage from "./pages/GrivossPage";
 import ScartoPage from "./pages/ScartoPage";
@@ -24,15 +21,19 @@ import TsunarethPage from "./pages/TsunarethPage";
 import ZalosPage from "./pages/ZalosPage";
 import LandingPage from "./pages/LandingPage";
 import DonatePage from '@/pages/DonatePage';
-import HowToPlayPage from "./pages/HowToPlayPage";
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import BetaGamePage from "./pages/BetaGamePage";
+import ElekinPage from "./pages/ElekinPage";
+import ElekinOnlinePage from "./pages/ElekinOnlinePage";
+import ElekinRulebook from "./pages/ElekinRulebook";
+import HowToPlayPage from "./pages/HowToPlayPage";
+import ElekinRoadmap from "./pages/ElekinRoadmap";
 import { createClient } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import AuthPage from './pages/AuthPage';
 import AuthCallbackPage from './pages/AuthCallbackPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import ProfilePage from './pages/ProfilePage';
 
 const queryClient = new QueryClient();
 
@@ -90,6 +91,11 @@ const App = () => (
                       <Route path="/" element={<LandingPage />} />
                       <Route path="/login" element={<AuthPage />} />
                       <Route path="/auth/callback" element={<AuthCallbackPage />} />
+                      <Route path="/profile" element={
+                        <ProtectedRoute>
+                          <ProfilePage />
+                        </ProtectedRoute>
+                      } />
                       {renderRoutes(navItems)}
                       <Route path="/cards/gallery" element={<CardGalleryPage />} />
                       <Route path="/cards/deck-builder" element={
@@ -98,8 +104,6 @@ const App = () => (
                         </ProtectedRoute>
                       } />
                       <Route path="/cards/:id" element={<CardDetailPage />} />
-                      <Route path="/how-to-play/battle-simulation" element={<BattleSimulationPage />} />
-                      <Route path="/how-to-play/rules/*" element={<RulesPage />} />
                       <Route path="/kinbrold/evermere" element={<EvermerePage />} />
                       <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
                       <Route path="/kinbrold/scarto" element={<ScartoPage />} />
@@ -108,7 +112,15 @@ const App = () => (
                       <Route path="/donate" element={<DonatePage />} />
                       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                       <Route path="/terms-of-service" element={<TermsOfService />} />
-                      <Route path="/cards/beta-game" element={<BetaGamePage />} />
+                      <Route path="/elekin" element={<ElekinPage />} />
+                      <Route path="/elekin/online" element={
+                        <ProtectedRoute>
+                          <ElekinOnlinePage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
+                      <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
+                      <Route path="/elekin/roadmap" element={<ElekinRoadmap />} />
                     </Routes>
                   </main>
                   <Footer />

@@ -143,14 +143,14 @@ const CardsPage = () => {
           <div className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
               shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
               transition-all duration-300">
-            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Browser Beta</h2>
-            <p className="mb-4 text-purple-200">Try out the browser-based version of Elemental Masters.</p>
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Play Online</h2>
+            <p className="mb-4 text-purple-200">Try out the browser-based version of Elekin: Masters of Kinbrold.</p>
             <Link 
-              to="/cards/beta-game"
+              to="/elekin/online"
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              Coming Soon
+              Play Beta Now
             </Link>
           </div>
         </div>

@@ -1,12 +1,26 @@
+import { useState } from 'react';
 import { useUser } from '@supabase/auth-helpers-react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
+import LoginPromptModal from './auth/LoginPromptModal';
 
 const ProtectedRoute = ({ children }) => {
   const user = useUser();
-  const location = useLocation();
+  const [showLoginPrompt, setShowLoginPrompt] = useState(!user);
+
+  if (!user && !showLoginPrompt) {
+    return <Navigate to="/" replace />;
+  }
 
   if (!user) {
-    return <Navigate to="/login" state={{ from: location.pathname }} replace />;
+    return (
+      <>
+        <LoginPromptModal 
+          isOpen={showLoginPrompt} 
+          onClose={() => setShowLoginPrompt(false)} 
+        />
+        <div className="min-h-screen bg-[#1A103C] opacity-50" />
+      </>
+    );
   }
 
   return children;

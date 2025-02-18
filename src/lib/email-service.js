@@ -1,38 +1,18 @@
 import { Resend } from 'resend';
 
-const isDev = import.meta.env.DEV;
-
-const mockEmailService = {
-  emails: {
-    send: async (options) => {
-      console.log('Mock email sent:', options);
-      return { data: {}, error: null };
-    }
-  }
-};
-
-const emailClient = isDev ? mockEmailService : new Resend(import.meta.env.VITE_RESEND_API_KEY);
+const emailClient = new Resend(import.meta.env.VITE_RESEND_API_KEY);
 
 export const sendWelcomeEmail = async (email) => {
-  // Skip sending emails in development
-  if (import.meta.env.DEV) {
-    console.log('Development mode: Skipping welcome email to', email);
-    return {
-      success: true,
-      message: 'Email skipped in development'
-    };
-  }
-
   try {
     const { data, error } = await emailClient.emails.send({
-      from: 'Elemental Games <noreply@elementalgames.gg>',
+      from: 'Elemental Games <contact@elementalgames.gg>',
       to: email,
       subject: 'Welcome to Elemental Games!',
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
           <h1 style="color: #6d28d9;">Welcome to Elemental Games!</h1>
-          <p>Thank you for creating an account!</p>
-          <p>You can now:</p>
+          <p>Thank you for creating an account! Please check your email for a verification link to complete your registration.</p>
+          <p>Once verified, you can:</p>
           <ul>
             <li>Build and save your decks</li>
             <li>Share decks with the community</li>
@@ -52,15 +32,9 @@ export const sendWelcomeEmail = async (email) => {
 
     if (error) {
       console.error('Failed to send welcome email:', error);
-      if (error.message?.includes('rate') || error.statusCode === 429) {
-        return {
-          success: false,
-          message: 'Too many emails sent. Please try again later.'
-        };
-      }
       return {
         success: false,
-        message: error.message
+        message: 'Failed to send welcome email'
       };
     }
 
@@ -70,12 +44,6 @@ export const sendWelcomeEmail = async (email) => {
     };
   } catch (error) {
     console.error('Failed to send welcome email:', error);
-    if (error.message?.includes('rate') || error.statusCode === 429) {
-      return {
-        success: false,
-        message: 'Too many emails sent. Please try again later.'
-      };
-    }
     return {
       success: false,
       message: error.message

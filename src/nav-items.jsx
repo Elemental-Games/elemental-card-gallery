@@ -1,13 +1,23 @@
-import { HomeIcon, GamepadIcon, LayoutGridIcon, MapIcon, InfoIcon, UserPlusIcon, HeartIcon } from "lucide-react";
+import { 
+  Map,
+  Info as InfoIcon,
+  UserPlus as UserPlusIcon,
+  Heart as HeartIcon,
+  Gamepad as GamepadIcon,
+  Book as BookIcon,
+  LayoutGrid as LayoutGridIcon
+} from "lucide-react";
+import { HomeIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
-import HowToPlayPage from "./pages/HowToPlayPage.jsx";
 import CardsPage from "./pages/CardsPage.jsx";
 import KinbroldPage from "./pages/KinbroldPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import JoinNowPage from "./pages/JoinNowPage.jsx";
-import RulesPage from "./pages/RulesPage.jsx";
-import BattleSimulationPage from "./pages/BattleSimulationPage.jsx";
 import DonatePage from "./pages/DonatePage.jsx";
+import ElekinPage from "./pages/ElekinPage.jsx";
+import ElekinRulebook from "./pages/ElekinRulebook.jsx";
+import HowToPlayPage from "./pages/HowToPlayPage.jsx";
+import ElekinRoadmap from "./pages/ElekinRoadmap.jsx";
 
 export const navItems = [
   {
@@ -17,63 +27,40 @@ export const navItems = [
     page: <LandingPage />,
   },
   {
-    title: "How to Play",
-    to: "/how-to-play",
+    title: "Elekin",
+    to: "/elekin",
     icon: <GamepadIcon className="h-4 w-4" />,
-    page: <HowToPlayPage />,
+    page: <ElekinPage />,
     subPages: [
       {
-        title: "Rules",
-        to: "/how-to-play/rules",
-        page: <RulesPage />,
-        subPages: [
-          {
-            title: "Quick Start",
-            to: "/how-to-play/rules/quick-start",
-          },
-          {
-            title: "Full Rules",
-            to: "/how-to-play/rules/full-rules",
-          },
-          {
-            title: "Deck Building",
-            to: "/how-to-play/rules/deck-building",
-          },
-          {
-            title: "Card Types",
-            to: "/how-to-play/rules/card-types",
-          },
-          {
-            title: "Gameplay",
-            to: "/how-to-play/rules/gameplay",
-          },
-          {
-            title: "Combat",
-            to: "/how-to-play/rules/combat",
-          },
-          {
-            title: "FAQ",
-            to: "/how-to-play/rules/faq",
-          },
-        ],
+        title: "Cards",
+        to: "/cards",
+        icon: <LayoutGridIcon className="h-4 w-4" />,
+        page: <CardsPage />,
       },
       {
-        title: "Battle Simulation",
-        to: "/how-to-play/battle-simulation",
-        page: <BattleSimulationPage />,
+        title: "How to Play",
+        to: "/elekin/how-to-play",
+        page: <HowToPlayPage />,
       },
-    ],
-  },
-  { 
-    title: "Cards", 
-    to: "/cards", 
-    icon: <LayoutGridIcon className="h-4 w-4" />, 
-    page: <CardsPage /> 
+      {
+        title: "Rulebook",
+        to: "/elekin/rulebook",
+        icon: <BookIcon className="h-4 w-4" />,
+        page: <ElekinRulebook />,
+      },
+      {
+        title: "Roadmap",
+        to: "/elekin/roadmap",
+        icon: <Map className="h-4 w-4" />,
+        page: <ElekinRoadmap />,
+      }
+    ]
   },
   { 
     title: "Kinbrold", 
     to: "/kinbrold", 
-    icon: <MapIcon className="h-4 w-4" />, 
+    icon: <Map className="h-4 w-4" />, 
     page: <KinbroldPage /> 
   },
   { 

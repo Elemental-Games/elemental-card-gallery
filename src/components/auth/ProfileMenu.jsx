@@ -102,15 +102,15 @@ const ProfileMenu = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative h-14 w-14 rounded-full p-0">
+        <Button variant="ghost" className="relative h-12 w-12 rounded-full p-0">
           {user.user_metadata?.avatar_url ? (
             <img
               src={user.user_metadata.avatar_url}
               alt="Profile"
-              className="h-14 w-14 rounded-full object-cover"
+              className="h-12 w-12 rounded-full object-cover"
             />
           ) : (
-            <User className="h-8 w-8 text-purple-300" />
+            <User className="h-7 w-7 text-purple-300" />
           )}
         </Button>
       </DropdownMenuTrigger>

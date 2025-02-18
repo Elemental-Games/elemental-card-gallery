@@ -12,6 +12,8 @@ const LoginPromptModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
 
   const handleLogin = () => {
+    // Store the current location in localStorage before navigating
+    localStorage.setItem('returnTo', window.location.pathname);
     navigate('/login');
   };
 

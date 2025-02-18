@@ -52,7 +52,7 @@ const AuthPage = () => {
 
   useEffect(() => {
     // Check if we have a redirect URL in the state
-    const from = location.state?.from || '/cards/deck-builder';
+    const returnTo = localStorage.getItem('returnTo') || '/';
     
     // Check if we have a mode in the state
     if (location.state?.mode === 'signup') {
@@ -67,7 +67,7 @@ const AuthPage = () => {
         toast.success('Successfully signed in!');
         setTimeout(() => {
           setShowSuccess(false);
-          navigate(from);
+          navigate(returnTo);
         }, 2000);
       }
     });

@@ -10,7 +10,6 @@ const DeckBuilderPage = () => {
   const user = useUser();
 
   const handleStartWizard = () => {
-    // Coming soon
     navigate('/cards/deck-builder/wizard');
   };
 
@@ -30,56 +29,70 @@ const DeckBuilderPage = () => {
         <link rel="canonical" href="https://elementalgames.gg/cards/deck-builder" />
       </Helmet>
 
-      <div className="container mx-auto px-4 py-12">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="max-w-2xl mx-auto"
-        >
-          <Card className="bg-purple-950/70 p-8 border border-purple-500/30">
-            <h1 className="text-3xl font-bold text-center text-yellow-400 mb-8">
-              Deck Builder
-            </h1>
+      <div className="min-h-screen bg-[#1A103C] py-16">
+        <div className="container mx-auto px-4">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="max-w-6xl mx-auto"
+          >
+            <Card className="bg-purple-950/70 p-12 border border-purple-500/30">
+              <h1 className="text-4xl font-bold text-center text-yellow-400 mb-12">
+                Deck Builder
+              </h1>
 
-            <div className="space-y-6">
               {!user ? (
-                <div className="text-center p-4 bg-purple-900/50 rounded-lg">
-                  <p className="text-purple-200 mb-4">
+                <div className="text-center p-8 bg-purple-900/50 rounded-lg">
+                  <p className="text-purple-200 text-lg mb-6">
                     Please sign in to save your decks
                   </p>
                   <Button 
                     onClick={() => navigate('/login')}
-                    className="bg-purple-600 hover:bg-purple-500"
+                    className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-8 py-6 text-lg"
                   >
                     Sign In
                   </Button>
                 </div>
               ) : (
-                <>
-                  <Button
-                    onClick={handleStartWizard}
-                    className="w-full p-6 text-lg bg-purple-700/50 hover:bg-purple-600/50"
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="group"
                   >
-                    Start Deck Building Wizard
-                    <p className="text-sm text-purple-300 mt-2">
-                      Get guided through the deck building process (Coming Soon)
-                    </p>
-                  </Button>
+                    <Button
+                      onClick={handleStartWizard}
+                      className="w-full h-full p-8 text-xl bg-purple-800/50 hover:bg-purple-700/50 border-2 border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300"
+                    >
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Start Deck Building Wizard</h2>
+                        <p className="text-base text-purple-300 group-hover:text-purple-200">
+                          Get guided through the deck building process
+                        </p>
+                      </div>
+                    </Button>
+                  </motion.div>
 
-                  <Button
-                    onClick={handleManualBuild}
-                    className="w-full p-6 text-lg bg-purple-700 hover:bg-purple-600"
+                  <motion.div
+                    whileHover={{ scale: 1.02 }}
+                    className="group"
                   >
-                    Build Deck Manually
-                    <p className="text-sm text-purple-300 mt-2">
-                      Jump straight into deck building
-                    </p>
-                  </Button>
-                </>
+                    <Button
+                      onClick={handleManualBuild}
+                      className="w-full h-full p-8 text-xl bg-purple-700 hover:bg-purple-600 border-2 border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300"
+                    >
+                      <div>
+                        <h2 className="text-2xl font-bold mb-4">Build Deck Manually</h2>
+                        <p className="text-base text-purple-300 group-hover:text-purple-200">
+                          Jump straight into deck building
+                        </p>
+                      </div>
+                    </Button>
+                  </motion.div>
+                </div>
               )}
-            </div>
-          </Card>
-        </motion.div>
+            </Card>
+          </motion.div>
+        </div>
       </div>
     </>
   );

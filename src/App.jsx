@@ -35,6 +35,7 @@ import AuthPage from './pages/AuthPage';
 import AuthCallbackPage from './pages/AuthCallbackPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
+import DeckBuilderWizardPage from "./pages/DeckBuilderWizardPage";
 
 const queryClient = new QueryClient();
 
@@ -107,6 +108,11 @@ const App = () => (
                       <Route path="/cards/deck-builder/manual" element={
                         <ProtectedRoute>
                           <ManualDeckBuilderPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/deck-builder/wizard" element={
+                        <ProtectedRoute>
+                          <DeckBuilderWizardPage />
                         </ProtectedRoute>
                       } />
                       <Route path="/cards/:id" element={<CardDetailPage />} />

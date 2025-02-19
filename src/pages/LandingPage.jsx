@@ -58,24 +58,26 @@ const LandingPage = () => {
       <AnimatedCardBackground />
       
       {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-16">
-        <div className="flex flex-col lg:flex-row items-start justify-between">
-          <div className="flex-grow w-full lg:mr-8">
-            <div className="flex flex-col lg:flex-row items-center justify-between mb-8 gap-4">
-              <div className="text-center lg:text-left">
+      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col items-center lg:flex-row lg:items-start lg:justify-between gap-8">
+            <div className="flex-grow w-full lg:max-w-2xl">
+              <div className="text-center lg:text-left mb-8">
                 <h2 className="text-4xl lg:text-6xl font-bold">Elemental Masters</h2>
                 <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Game Overview</h3>
               </div>
+              <p className="text-lg text-purple-200 mb-8 text-center lg:text-left">
+                Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
+              </p>
+              <KeyFeatures />
+            </div>
+            <div className="w-full lg:w-auto flex justify-center">
               <img 
                 src="/Masters_Logo.png" 
                 alt="Masters Logo" 
                 className="w-48 lg:w-80 h-auto"
               />
             </div>
-            <p className="text-lg text-purple-200 mb-8">
-              Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
-            </p>
-            <KeyFeatures />
           </div>
         </div>
       </section>

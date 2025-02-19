@@ -140,10 +140,10 @@ const AnimatedCardBackground = () => {
               <motion.div
                 whileHover={{ 
                   scale: 1.05,
-                  opacity: 1,
+                  opacity: 0.8,
                   transition: { duration: 0.2 }
                 }}
-                className="opacity-20 transition-all duration-300 hover:opacity-100"
+                className="opacity-10 transition-all duration-300 hover:opacity-80"
               >
                 <img 
                   src={card.image} 
@@ -167,10 +167,10 @@ const AnimatedCardBackground = () => {
               <motion.div
                 whileHover={{ 
                   scale: 1,
-                  opacity: 1,
+                  opacity: 0.8,
                   transition: { duration: 0.2 }
                 }}
-                className="opacity-70 transition-all duration-300"
+                className="opacity-10 transition-all duration-300"
               >
                 <img 
                   src={card.image} 

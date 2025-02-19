@@ -23,11 +23,11 @@ const GradientButton = () => {
       
       {/* Button */}
       <Link
-        to="/join-now"
+        to="/login"
         className="relative block px-8 py-6 bg-yellow-500 text-purple-900 text-2xl font-bold rounded-full 
           hover:bg-yellow-400 transition-colors duration-300"
       >
-        Join the Battle
+        Join Now
       </Link>
 
       <style>

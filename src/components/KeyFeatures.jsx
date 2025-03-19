@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
@@ -34,92 +34,98 @@ const KeyFeatures = () => {
   const [selectedFeature, setSelectedFeature] = useState(null);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-16 mb-1">
-      {/* Top Row - 3 cards */}
-      <motion.div
-        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-          border border-purple-500/30 hover:border-purple-500/50"
-        whileHover={{ scale: 1.02 }}
-        onClick={() => setSelectedFeature(features[0])}
-      >
-        <div className="flex items-center h-20">
-          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
-            {features[0].icon}
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold text-white mb-1">{features[0].title}</h3>
-            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
-              Click to learn more
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-          border border-purple-500/30 hover:border-purple-500/50"
-        whileHover={{ scale: 1.02 }}
-        onClick={() => setSelectedFeature(features[1])}
-      >
-        <div className="flex items-center h-20">
-          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
-            {features[1].icon}
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold text-white mb-1">Rich World</h3>
-            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
-              Click to learn more
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-          shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-          border border-purple-500/30 hover:border-purple-500/50"
-        whileHover={{ scale: 1.02 }}
-        onClick={() => setSelectedFeature(features[2])}
-      >
-        <div className="flex items-center h-20">
-          <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
-            {features[2].icon}
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold text-white mb-1">Diverse Creatures</h3>
-            <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
-              Click to learn more
-            </p>
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Bottom Row - 2 centered cards */}
-      <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-[660px] mx-auto w-full">
-        {features.slice(3).map((feature, index) => (
-          <motion.div
-            key={index + 3}
-            className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
-              shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
-              border border-purple-500/30 hover:border-purple-500/50"
-            whileHover={{ scale: 1.02 }}
-            onClick={() => setSelectedFeature(feature)}
-          >
-            <div className="flex items-center h-20">
-              <div className="bg-purple-800/50 p-3 rounded-lg mr-4">
-                {feature.icon}
-              </div>
-              <div>
-                <h3 className="text-xl font-semibold text-white mb-1">{feature.title}</h3>
-                <p className="text-sm text-purple-300 hover:text-purple-200 transition-colors">
-                  Click to learn more
-                </p>
-              </div>
+    <>
+      {/* Features grid - full width layout */}
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+        <motion.div
+          className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+            shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            border border-purple-500/30 hover:border-purple-500/50"
+          whileHover={{ scale: 1.02 }}
+          onClick={() => setSelectedFeature(features[0])}
+        >
+          <div className="flex flex-col sm:flex-row items-center sm:items-start h-full">
+            <div className="bg-purple-800/50 p-3 rounded-lg mb-3 sm:mb-0 sm:mr-4">
+              {features[0].icon}
             </div>
-          </motion.div>
-        ))}
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl font-semibold text-white mb-2">Interactive Card Technology</h3>
+              <p className="text-sm text-purple-300">Click to learn more</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+            shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            border border-purple-500/30 hover:border-purple-500/50"
+          whileHover={{ scale: 1.02 }}
+          onClick={() => setSelectedFeature(features[1])}
+        >
+          <div className="flex flex-col sm:flex-row items-center sm:items-start h-full">
+            <div className="bg-purple-800/50 p-3 rounded-lg mb-3 sm:mb-0 sm:mr-4">
+              {features[1].icon}
+            </div>
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl font-semibold text-white mb-2">Rich World</h3>
+              <p className="text-sm text-purple-300">Click to learn more</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+            shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            border border-purple-500/30 hover:border-purple-500/50"
+          whileHover={{ scale: 1.02 }}
+          onClick={() => setSelectedFeature(features[2])}
+        >
+          <div className="flex flex-col sm:flex-row items-center sm:items-start h-full">
+            <div className="bg-purple-800/50 p-3 rounded-lg mb-3 sm:mb-0 sm:mr-4">
+              {features[2].icon}
+            </div>
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl font-semibold text-white mb-2">Diverse Creatures</h3>
+              <p className="text-sm text-purple-300">Click to learn more</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+            shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            border border-purple-500/30 hover:border-purple-500/50"
+          whileHover={{ scale: 1.02 }}
+          onClick={() => setSelectedFeature(features[3])}
+        >
+          <div className="flex flex-col sm:flex-row items-center sm:items-start h-full">
+            <div className="bg-purple-800/50 p-3 rounded-lg mb-3 sm:mb-0 sm:mr-4">
+              {features[3].icon}
+            </div>
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl font-semibold text-white mb-2">Unique Battle Mechanics</h3>
+              <p className="text-sm text-purple-300">Click to learn more</p>
+            </div>
+          </div>
+        </motion.div>
+
+        <motion.div
+          className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
+            shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
+            border border-purple-500/30 hover:border-purple-500/50"
+          whileHover={{ scale: 1.02 }}
+          onClick={() => setSelectedFeature(features[4])}
+        >
+          <div className="flex flex-col sm:flex-row items-center sm:items-start h-full">
+            <div className="bg-purple-800/50 p-3 rounded-lg mb-3 sm:mb-0 sm:mr-4">
+              {features[4].icon}
+            </div>
+            <div className="text-center sm:text-left">
+              <h3 className="text-xl font-semibold text-white mb-2">Quick Yet Strategic</h3>
+              <p className="text-sm text-purple-300">Click to learn more</p>
+            </div>
+          </div>
+        </motion.div>
       </div>
 
       <AnimatePresence>
@@ -155,7 +161,7 @@ const KeyFeatures = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

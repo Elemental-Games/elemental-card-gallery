@@ -8,11 +8,13 @@ import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import { useNavigate } from 'react-router-dom';
+import { sendSubscriptionThanksEmail } from '../lib/email-service';
 
 const EmailSubscriptionModal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [error, setError] = useState(null);
   const supabase = useSupabaseClient();
   const navigate = useNavigate();
 
@@ -27,28 +29,45 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError(null);
+
+    if (!email || !/\S+@\S+\.\S+/.test(email)) {
+      setError('Please enter a valid email address');
+      setLoading(false);
+      return;
+    }
 
     try {
-      // Insert into subscribers table
-      const { error } = await supabase
+      // Check if email already exists
+      const { data: existingSubscriber } = await supabase
+        .from('subscribers')
+        .select()
+        .eq('email', email)
+        .single();
+
+      if (existingSubscriber) {
+        setError('This email is already subscribed to our mailing list');
+        toast.info("You are already on our mailing list!");
+        setLoading(false);
+        return;
+      }
+
+      // Add new subscriber
+      const { error: insertError } = await supabase
         .from('subscribers')
         .insert([{ email, subscribed_at: new Date() }]);
 
-      if (error) {
-        console.error('Error adding subscriber:', error);
-        if (error.code === '23505') { // Unique violation (email already exists)
-          toast.info("You&apos;re already on our mailing list!");
-          setSuccess(true);
-        } else {
-          toast.error('Failed to subscribe. Please try again.');
-        }
-      } else {
-        setSuccess(true);
-        shootConfetti();
-        toast.success('Successfully subscribed to our mailing list!');
-      }
-    } catch (error) {
-      console.error('Subscription error:', error);
+      if (insertError) throw insertError;
+
+      // Send thank you email
+      await sendSubscriptionThanksEmail(email);
+      
+      setSuccess(true);
+      shootConfetti();
+      toast.success('Successfully subscribed to our mailing list!');
+    } catch (err) {
+      console.error('Error during subscription:', err);
+      setError('There was an error subscribing. Please try again later.');
       toast.error('An unexpected error occurred. Please try again.');
     } finally {
       setLoading(false);
@@ -130,8 +149,11 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     onChange={(e) => setEmail(e.target.value)}
                     required
                     placeholder="your.email@example.com"
-                    className="bg-purple-900/50 border-purple-500/30 text-white placeholder-purple-300 py-6 text-lg"
+                    className="bg-purple-900/50 border-purple-500/30 text-white placeholder-purple-300 py-6 text-md"
                   />
+                  {error && (
+                    <p className="text-red-400 text-sm mt-1">{error}</p>
+                  )}
                 </div>
                 
                 <div className="flex gap-3 pt-2">
@@ -139,14 +161,14 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     type="button"
                     variant="outline"
                     onClick={closeModal}
-                    className="flex-1 border-purple-500/30 hover:bg-purple-800/30 py-6 text-lg"
+                    className="flex-1 border-purple-500/30 hover:bg-purple-800/30 py-6 text-md"
                     disabled={loading}
                   >
                     Cancel
                   </Button>
                   <Button
                     type="submit"
-                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-lg"
+                    className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                     disabled={loading}
                   >
                     {loading ? 'Subscribing...' : 'Subscribe'}

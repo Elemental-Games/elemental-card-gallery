@@ -25,10 +25,11 @@ import DonatePage from '@/pages/DonatePage';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
 import ElekinPage from "./pages/ElekinPage";
-import ElekinOnlinePage from "./pages/ElekinOnlinePage";
+// Beta version temporarily hidden
+// import ElekinOnlinePage from "./pages/ElekinOnlinePage";
 import ElekinRulebook from "./pages/ElekinRulebook";
 import HowToPlayPage from "./pages/HowToPlayPage";
-import ElekinRoadmap from "./pages/ElekinRoadmap";
+import KinbroldPage from "./pages/KinbroldPage";
 import { createClient } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import AuthPage from './pages/AuthPage';
@@ -125,14 +126,16 @@ const App = () => (
                       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                       <Route path="/terms-of-service" element={<TermsOfService />} />
                       <Route path="/elekin" element={<ElekinPage />} />
+                      {/* Beta version temporarily hidden
                       <Route path="/elekin/online" element={
                         <ProtectedRoute>
                           <ElekinOnlinePage />
                         </ProtectedRoute>
                       } />
+                      */}
                       <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
                       <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
-                      <Route path="/elekin/roadmap" element={<ElekinRoadmap />} />
+                      <Route path="/kinbrold" element={<KinbroldPage />} />
                     </Routes>
                   </main>
                   <Footer />

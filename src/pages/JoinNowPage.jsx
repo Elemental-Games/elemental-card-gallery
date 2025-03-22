@@ -59,14 +59,18 @@ const JoinNowPage = () => {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8 mb-12">
-        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30">
-          <h2 className="text-3xl font-bold mb-4">Launch Countdown</h2>
-          <LaunchCountdown />
+        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 flex flex-col">
+          <h2 className="text-3xl font-bold mb-4 text-center">Launch Countdown</h2>
+          <div className="flex-grow flex items-center justify-center">
+            <LaunchCountdown />
+          </div>
         </div>
 
-        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30">
-          <h2 className="text-3xl font-bold mb-4">Join Now</h2>
-          <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+        <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 flex flex-col">
+          <h2 className="text-3xl font-bold mb-4 text-center">Join Our Mailing List Now</h2>
+          <div className="flex-grow flex items-center justify-center w-full">
+            <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+          </div>
         </div>
       </div>
 
@@ -177,8 +181,10 @@ const JoinNowPage = () => {
 
       <div className="text-center">
         <Card className="p-6 max-w-md mx-auto border-2 border-yellow-500">
-          <h3 className="text-xl font-semibold mb-4">Join Now</h3>
-          <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+          <h3 className="text-xl font-semibold mb-4 text-center">Join Our Mailing List Now</h3>
+          <div className="w-full">
+            <SignupForm buttonClassName="bg-primary hover:bg-primary/90 border-2 border-yellow-500" />
+          </div>
         </Card>
       </div>
     </motion.div>

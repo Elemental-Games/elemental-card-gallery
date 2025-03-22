@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -31,7 +30,7 @@ const AboutUsPage = () => {
             Elemental Games was founded in 2024 by Mark Diorio, a visionary game developer with a passion for elemental themes and strategic gameplay. Mark has been developing and creating the world of Kinbrold and Elemental Games since the beginning of 2022. With a background in Electrical and Computer Engineering, Mark brings a unique blend of technical expertise and creative game design to the world of Kinbrold.
             <br />
             <br />
-            "<span className="text-accent">This journey with Elemental Games began years ago as a passion project</span>, and I was thrilled to see it evolve into an official LLC in 2024. As we approach our Kickstarter launch on <span className="text-accent">February 7th, 2025</span>, I'm incredibly grateful for the support from our engineers, beta-testers, and artists who have helped shape this vision along the way. What started as a solo project is growing into something bigger, and <span className="text-accent">I'm excited to expand our team and bring the world of Kinbrold to life in the coming year.</span>" - Mark Diorio
+            "<span className="text-accent">This journey with Elemental Games began years ago as a passion project</span>, and I was thrilled to see it evolve into an official LLC in 2024. As we approach our Kickstarter launch on <span className="text-accent">June 26th, 2025</span>, I'm incredibly grateful for the support from our engineers, beta-testers, and artists who have helped shape this vision along the way. What started as a solo project is growing into something bigger, and <span className="text-accent">I'm excited to expand our team and bring the world of Kinbrold to life in the coming year.</span>" - Mark Diorio
           </p>
         </div>
         <div className="md:w-1/3 mt-4 md:mt-0">
@@ -82,7 +81,7 @@ const AboutUsPage = () => {
           Whether you're a seasoned TCG veteran or new to the world of elemental mastery, we invite you to join us on this exciting journey. Elemental Games is more than a company—it's a community of players, creators, and dreamers united by our passion for strategic gameplay and rich, immersive worlds.
         </p>
         <div className="mt-6 mb-4">
-          <Link to="/join">
+          <Link to="/join-now">
             <Button 
               size="lg" 
               variant="outline" 

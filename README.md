@@ -1,4 +1,59 @@
-# Elemental Masters - Trading Card Game
+# Elemental Card Gallery
+
+A showcase for the Elekin card game, featuring card browsing, deck building, and game mechanics.
+
+## Setting Up Email Subscription Feature
+
+To enable the email subscription feature, you need to set up the `subscribers` table in your Supabase project:
+
+1. Navigate to your Supabase project dashboard.
+2. Select the SQL Editor tab.
+3. Create a new query and paste the contents of the `src/db/setup-subscribers-table.sql` file.
+4. Run the query to create the table and necessary policies.
+
+Alternatively, you can run this command using the Supabase CLI:
+
+```bash
+supabase db execute < src/db/setup-subscribers-table.sql
+```
+
+## Features
+
+- Browse elemental cards and their details
+- View featured cards of the week
+- Join the newsletter to stay updated on game launches
+- Responsive design for all devices
+
+## Development
+
+### Prerequisites
+
+- Node.js 16+ 
+- npm or yarn
+
+### Setup
+
+```bash
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
+```
+
+### Build for Production
+
+```bash
+npm run build
+```
+
+## Tech Stack
+
+- React
+- Next.js
+- Tailwind CSS
+- Framer Motion
+- Supabase
 
 ## Local Setup
 

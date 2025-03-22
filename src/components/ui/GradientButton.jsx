@@ -1,4 +1,3 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +22,7 @@ const GradientButton = () => {
       
       {/* Button */}
       <Link
-        to="/login"
+        to="/join"
         className="relative block px-8 py-6 bg-yellow-500 text-purple-900 text-2xl font-bold rounded-full 
           hover:bg-yellow-400 transition-colors duration-300"
       >

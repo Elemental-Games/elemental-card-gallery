@@ -181,6 +181,21 @@ const AuthPage = () => {
         }
 
         if (data?.user) {
+          // Add user to subscribers table
+          try {
+            const { error: subError } = await supabase
+              .from('subscribers')
+              .insert([{ email, subscribed_at: new Date() }]);
+              
+            if (subError && subError.code !== '23505') { // Ignore unique violation errors
+              console.error('Error adding to subscribers:', subError);
+            } else if (!subError) {
+              console.log('Added to subscribers successfully');
+            }
+          } catch (subErr) {
+            console.error('Failed to add to subscribers:', subErr);
+          }
+          
           setShowSuccess(true);
           shootConfetti();
           // Attempt to send welcome email
@@ -259,7 +274,7 @@ const AuthPage = () => {
               </h2>
               <p className="text-xl text-purple-200 mb-8">Get ready to build some amazing decks!</p>
               <Button
-                onClick={() => navigate('/elekin/online')}
+                onClick={() => navigate('/')}
                 className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-8 py-6 text-xl w-full"
               >
                 Close

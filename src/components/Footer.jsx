@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import SubscribeButton from './SubscribeButton';
 
 const Footer = () => {
   return (
@@ -17,7 +18,15 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Elekin</h3>
             <ul className="space-y-2">
-              <li><Link to="/elekin/online" className="hover:text-accent transition-colors">Play Online</Link></li>
+              <li>
+                <SubscribeButton 
+                  variant="link" 
+                  className="p-0 text-white hover:text-accent transition-colors h-auto" 
+                  showIcon={false}
+                >
+                  Newsletter
+                </SubscribeButton>
+              </li>
               <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
               <li><Link to="/elekin/how-to-play" className="hover:text-accent transition-colors">How to Play</Link></li>
               <li><Link to="/elekin/rulebook" className="hover:text-accent transition-colors">Rulebook</Link></li>

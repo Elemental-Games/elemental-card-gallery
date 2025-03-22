@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Book, Map } from 'lucide-react';
+import { LayoutGrid, Book } from 'lucide-react';
+import SubscribeButton from '@/components/SubscribeButton';
 
 const ElekinPage = () => {
   return (
@@ -35,21 +36,18 @@ const ElekinPage = () => {
               Unleash the power of the elements
             </p>
             <div className="flex justify-center gap-4">
-              <Link to="/elekin/online">
-                <Button 
-                  size="lg"
-                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6"
-                >
-                  Play Beta Now
-                </Button>
-              </Link>
+              <SubscribeButton 
+                size="lg"
+                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6"
+                iconClassName="mr-2 h-6 w-6"
+              />
             </div>
           </motion.div>
         </section>
 
         {/* Navigation Bubbles */}
         <section className="container mx-auto px-4 py-16">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <Link to="/elekin/how-to-play">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -89,27 +87,6 @@ const ElekinPage = () => {
                 </Button>
               </motion.div>
             </Link>
-
-            <Link to="/elekin/roadmap">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="group bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 hover:bg-purple-800/30 transition-all cursor-pointer flex flex-col items-center text-center"
-              >
-                <Map className="w-16 h-16 mb-4 text-yellow-500" />
-                <h3 className="text-2xl font-bold mb-4 text-white">View Roadmap</h3>
-                <p className="text-purple-200 mb-6">
-                  Follow our journey and see what exciting features are coming next.
-                  <br />
-                </p>
-                <Button 
-                  className="bg-purple-700/50 hover:bg-purple-600/50 text-white group-hover:bg-yellow-500 group-hover:text-purple-900 transition-all"
-                >
-                  View Roadmap
-                </Button>
-              </motion.div>
-            </Link>
           </div>
         </section>
 
@@ -121,18 +98,15 @@ const ElekinPage = () => {
             transition={{ duration: 0.8, delay: 0.8 }}
             className="bg-purple-900/30 p-12 rounded-lg border border-purple-500/30 max-w-3xl mx-auto"
           >
-            <h2 className="text-4xl font-bold mb-6 text-white">Ready to Begin Your Journey?</h2>
+            <h2 className="text-4xl font-bold mb-6 text-white">Stay Updated on Launch News</h2>
             <p className="text-xl mb-8 text-purple-200">
-              Join the beta and become a Master of Kinbrold today.
+              Join our mailing list to receive updates and be the first to know when the game launches!
             </p>
-            <Link to="/elekin/online">
-              <Button 
-                size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6"
-              >
-                Play Beta Now
-              </Button>
-            </Link>
+            <SubscribeButton 
+              size="lg"
+              className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6"
+              iconClassName="mr-2 h-6 w-6"
+            />
           </motion.div>
         </section>
       </div>

@@ -17,7 +17,6 @@ import DonatePage from "./pages/DonatePage.jsx";
 import ElekinPage from "./pages/ElekinPage.jsx";
 import ElekinRulebook from "./pages/ElekinRulebook.jsx";
 import HowToPlayPage from "./pages/HowToPlayPage.jsx";
-import ElekinRoadmap from "./pages/ElekinRoadmap.jsx";
 
 export const navItems = [
   {
@@ -27,7 +26,7 @@ export const navItems = [
     page: <LandingPage />,
   },
   {
-    title: "Elekin",
+    title: "TCG",
     to: "/elekin",
     icon: <GamepadIcon className="h-4 w-4" />,
     page: <ElekinPage />,
@@ -48,17 +47,11 @@ export const navItems = [
         to: "/elekin/rulebook",
         icon: <BookIcon className="h-4 w-4" />,
         page: <ElekinRulebook />,
-      },
-      {
-        title: "Roadmap",
-        to: "/elekin/roadmap",
-        icon: <Map className="h-4 w-4" />,
-        page: <ElekinRoadmap />,
       }
     ]
   },
   { 
-    title: "Kinbrold", 
+    title: "Lore", 
     to: "/kinbrold", 
     icon: <Map className="h-4 w-4" />, 
     page: <KinbroldPage /> 

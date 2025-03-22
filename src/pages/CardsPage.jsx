@@ -1,16 +1,15 @@
-import React from 'react';
+import { useRef } from "react";
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
-import { Button } from '@/components/ui/button';
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle, ChevronLeft, ChevronRight } from "lucide-react";
-import ReleaseSchedule from '@/components/ReleaseSchedule';
+import { AlertCircle } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { motion } from "framer-motion";
-import { useRef } from "react";
+import ReleaseSchedule from '@/components/ReleaseSchedule';
 import SEO from '../components/SEO';
 import CardOfTheWeek from '@/components/cards/CardOfTheWeek';
+import SubscribeButton from '@/components/SubscribeButton';
 
 const scrollGallery = (direction) => {
   const container = scrollContainerRef.current;
@@ -139,19 +138,18 @@ const CardsPage = () => {
             </Link>
           </div>
 
-          {/* Beta Game Section */}
+          {/* Newsletter Section */}
           <div className="bg-purple-950/70 p-6 rounded-xl border border-yellow-500/30 
               shadow-[0_0_20px_rgba(234,179,8,0.1)] hover:shadow-[0_0_30px_rgba(234,179,8,0.2)]
               transition-all duration-300">
-            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Play Online</h2>
-            <p className="mb-4 text-purple-200">Try out the browser-based version of Elekin: Masters of Kinbrold.</p>
-            <Link 
-              to="/elekin/online"
+            <h2 className="text-2xl font-bold mb-4 text-yellow-400">Stay Updated</h2>
+            <p className="mb-4 text-purple-200">Join our mailing list to be notified when Elekin: Masters of Kinbrold launches.</p>
+            <SubscribeButton
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
             >
-              Play Beta Now
-            </Link>
+              Join Our Newsletter
+            </SubscribeButton>
           </div>
         </div>
       </motion.div>

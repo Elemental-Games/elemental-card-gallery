@@ -32,8 +32,8 @@ const LaunchCountdown = () => {
   }, []);
 
   return (
-    <div className="text-center">
-      <div className="grid grid-cols-4 gap-4">
+    <div className="text-center w-full">
+      <div className="grid grid-cols-4 gap-4 mb-4">
         <div className="bg-purple-900/50 p-4 rounded-lg">
           <div className="text-3xl font-bold text-yellow-400">{timeLeft.days}</div>
           <div className="text-sm text-purple-200">Days</div>
@@ -51,7 +51,7 @@ const LaunchCountdown = () => {
           <div className="text-sm text-purple-200">Seconds</div>
         </div>
       </div>
-      <p className="mt-4 text-purple-200">Until Launch Day on June 26th, 2025!</p>
+      <p className="text-purple-200">Until Launch Day on June 26th, 2025!</p>
     </div>
   );
 };

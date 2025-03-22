@@ -1,11 +1,12 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Book, LayoutGrid, Map, Gamepad } from 'lucide-react';
+import { Book, LayoutGrid, Map } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import KeyFeatures from '../components/KeyFeatures';
 import ElementalTransition from '../components/ElementalTransition';
+import SubscribeButton from '@/components/SubscribeButton';
 
 const LandingPage = () => {
   const [transitionElement, setTransitionElement] = useState(null);
@@ -64,8 +65,8 @@ const LandingPage = () => {
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 mb-12">
             <div className="flex-grow w-full">
               <div className="text-center lg:text-left">
-                <h2 className="text-4xl lg:text-6xl font-bold">Elemental Masters</h2>
-                <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Game Overview</h3>
+                <h2 className="text-4xl lg:text-6xl font-bold">Elekin - Game Overview</h2>
+                <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Masters of Kinbrold</h3>
               </div>
               <p className="text-lg text-purple-200 mt-4 text-center lg:text-left">
                 Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
@@ -145,16 +146,14 @@ const LandingPage = () => {
                 Build Deck
               </Button>
             </Link>
-            <Link to="/elekin/online">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <Gamepad className="mr-3 h-8 w-8" />
-                Play Online
-              </Button>
-            </Link>
+            <SubscribeButton 
+              variant="outline"
+              size="lg"
+              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              iconClassName="mr-3 h-8 w-8"
+            >
+              Join Email List
+            </SubscribeButton>
             <Link to="/cards/gallery">
               <Button 
                 variant="outline" 

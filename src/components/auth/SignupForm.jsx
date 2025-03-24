@@ -3,16 +3,15 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import confetti from 'canvas-confetti';
 import { CheckCircle } from 'lucide-react';
+import { subscribeEmail } from '../../utils/api';
 
 const SignupForm = ({ buttonClassName }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const navigate = useNavigate();
-  const supabase = useSupabaseClient();
 
   const shootConfetti = () => {
     confetti({
@@ -27,29 +26,24 @@ const SignupForm = ({ buttonClassName }) => {
     setIsLoading(true);
 
     try {
-      // Insert into subscribers table
-      const { error } = await supabase
-        .from('subscribers')
-        .insert([{ email, subscribed_at: new Date() }]);
+      // Use our centralized subscription function
+      const result = await subscribeEmail(email);
 
-      if (error) {
-        console.error('Error adding subscriber:', error);
-        if (error.code === '23505') { // Unique violation (email already exists)
+      if (result.success) {
+        shootConfetti();
+        toast.success(result.message || 'Successfully subscribed to our mailing list!');
+        setSuccess(true);
+        
+        // Store email in localStorage to pre-fill it on the login page
+        localStorage.setItem('signupEmail', email);
+      } else {
+        if (result.message && result.message.includes('already subscribed')) {
           toast.info("You're already on our mailing list!");
           setSuccess(true);
         } else {
-          toast.error('Failed to subscribe. Please try again.');
-          setIsLoading(false);
-          return;
+          toast.error(result.message || 'Failed to subscribe. Please try again.');
         }
-      } else {
-        shootConfetti();
-        toast.success('Successfully subscribed to our mailing list!');
-        setSuccess(true);
       }
-
-      // Store email in localStorage to pre-fill it on the login page
-      localStorage.setItem('signupEmail', email);      
     } catch (error) {
       console.error('Form submission error:', error);
       toast.error("Something went wrong. Please try again.");
@@ -68,12 +62,15 @@ const SignupForm = ({ buttonClassName }) => {
         <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
         <h3 className="text-xl font-bold text-green-400 mb-2">Thank You!</h3>
         <p className="text-purple-200 mb-6">
-          You&apos;re now on our mailing list and will be the first to know when Elekin launches!
+          You&apos;re now on our mailing list! You&apos;ll be among the first to know when Elekin launches.
+          <br /><span className="text-sm mt-2 block opacity-80">
+            A welcome email should arrive in your inbox shortly.
+          </span>
         </p>
         <div className="space-y-3">
           <Button 
             onClick={goToSignUp}
-            className={`w-full bg-yellow-500 hover:bg-yellow-400 text-yellow-400 font-semibold py-6 text-md ${buttonClassName}`}
+            className={`w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md ${buttonClassName}`}
           >
             Create an Account for More Early Benefits
           </Button>

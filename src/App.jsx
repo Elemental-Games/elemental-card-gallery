@@ -5,6 +5,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SpeedInsights } from "@vercel/speed-insights/react";
+import { createClient } from '@supabase/supabase-js';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { navItems } from "./nav-items";
@@ -30,7 +31,6 @@ import ElekinPage from "./pages/ElekinPage";
 import ElekinRulebook from "./pages/ElekinRulebook";
 import HowToPlayPage from "./pages/HowToPlayPage";
 import KinbroldPage from "./pages/KinbroldPage";
-import { createClient } from '@supabase/supabase-js';
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import AuthPage from './pages/AuthPage';
 import AuthCallbackPage from './pages/AuthCallbackPage';
@@ -43,7 +43,15 @@ const queryClient = new QueryClient();
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Create a separate instance for auth context
+const supabaseAuth = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+    flowType: 'pkce'
+  },
+});
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -79,7 +87,7 @@ const renderRoutes = (items) => {
 const App = () => (
   <HelmetProvider>
     <QueryClientProvider client={queryClient}>
-      <SessionContextProvider supabaseClient={supabase}>
+      <SessionContextProvider supabaseClient={supabaseAuth}>
         <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
           <TooltipProvider>
             <AuthProvider>

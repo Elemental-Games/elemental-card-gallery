@@ -1,6 +1,5 @@
 // src/lib/supabase.js
 import { createClient } from '@supabase/supabase-js';
-import { sendWelcomeEmail } from './email-service';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
@@ -37,44 +36,81 @@ export const signOut = async () => {
 };
 
 export async function subscribeEmail(email) {
-  try {
-    // Check if email already exists
-    const { data: existingUser } = await supabase
-      .from('subscribers')
-      .select('*')
-      .eq('email', email.toLowerCase().trim())
-      .single();
+  // Check if browser is online
+  if (typeof navigator !== 'undefined' && navigator.onLine === false) {
+    console.warn('Attempted to subscribe while offline');
+    return {
+      success: false,
+      message: 'Unable to subscribe while offline. Please check your internet connection.'
+    };
+  }
 
-    if (existingUser) {
-      return {
-        success: false,
-        message: 'You are already subscribed!'
-      };
+  try {
+    const normalizedEmail = email.toLowerCase().trim();
+    console.log('Starting subscription process for:', normalizedEmail);
+
+    // Check if email already exists - use a try-catch to handle potential network issues
+    try {
+      const { data: existingSubscriber, error: queryError } = await supabase
+        .from('subscribers')
+        .select('email')
+        .eq('email', normalizedEmail)
+        .maybeSingle();
+
+      if (queryError) {
+        console.error('Error checking existing subscriber:', queryError);
+        // Continue anyway, we'll check for duplicates at insert time
+      } else if (existingSubscriber) {
+        return {
+          success: false,
+          message: 'You are already subscribed!'
+        };
+      }
+    } catch (queryException) {
+      console.error('Exception checking subscriber:', queryException);
+      // Continue with insert attempt
     }
 
-    // Insert new subscriber
-    const { error: insertError } = await supabase
-      .from('subscribers')
-      .insert([{
-        email: email.toLowerCase().trim(),
-        status: 'active',
-        subscribed_at: new Date().toISOString()
-      }]);
+    // Insert new subscriber - use try-catch for network issues
+    try {
+      const { error: insertError } = await supabase
+        .from('subscribers')
+        .insert([{
+          email: normalizedEmail,
+          status: 'active',
+          subscribed_at: new Date().toISOString()
+        }]);
 
-    if (insertError) throw insertError;
+      if (insertError) {
+        console.error('Error inserting subscriber:', insertError);
+        
+        // Check if it's a unique violation (email already exists)
+        if (insertError.code === '23505') {
+          return {
+            success: false,
+            message: 'This email is already subscribed!'
+          };
+        }
+        
+        throw insertError;
+      }
+    } catch (insertException) {
+      console.error('Exception inserting subscriber:', insertException);
+      throw insertException;
+    }
 
-    // Send welcome email
-    await sendWelcomeEmail(email);
-
+    // IMPORTANT: Skip direct email sending in client - this should be handled by a serverless function or backend
+    // Email sending from browser causes CORS issues with Resend API
+    
     return {
       success: true,
-      message: 'Successfully subscribed! Check your email for a welcome message.'
+      message: 'Successfully subscribed! You\'ll receive a welcome email shortly.'
     };
   } catch (error) {
     console.error('Subscription error:', error);
     return {
       success: false,
-      message: 'Failed to subscribe. Please try again later.'
+      message: error.message || 'Failed to subscribe. Please try again later.'
     };
   }
 }

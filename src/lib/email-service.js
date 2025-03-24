@@ -1,10 +1,28 @@
 import { Resend } from 'resend';
 
-const emailClient = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+const resend = new Resend(import.meta.env.VITE_RESEND_API_KEY);
+
+// This function checks if we're currently online
+const checkOnlineStatus = () => {
+  return typeof navigator !== 'undefined' && typeof navigator.onLine === 'boolean' 
+    ? navigator.onLine 
+    : true; // Assume online if we can't detect
+};
 
 export const sendSubscriptionThanksEmail = async (email) => {
   try {
-    const { error } = await emailClient.emails.send({
+    // Check if we're online before attempting to send
+    if (!checkOnlineStatus()) {
+      console.warn('Offline: Cannot send subscription thank you email');
+      return {
+        success: false,
+        message: 'Cannot send email while offline',
+        offline: true
+      };
+    }
+
+    // Continue with sending the email
+    const { error } = await resend.emails.send({
       from: 'Elemental Games <contact@elementalgames.gg>',
       to: email,
       subject: '🔥 Welcome to the World of Elekin! 🌊',
@@ -44,7 +62,8 @@ export const sendSubscriptionThanksEmail = async (email) => {
           </div>
           
           <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 12px;">
-            <p>⚡ The game launches on <strong>June 26th, 2025</strong>! Mark your calendar! ⚡</p>
+            <p>⚡ Launching in <strong>June 2025</strong>! ⚡</p>
+            <p style="color: #9ca3af; font-size: 11px;">Until Launch Month June 2025</p>
             <p>Elemental Games LLC © 2024. All rights reserved.</p>
             <p>You're receiving this email because you signed up for updates about Elekin: Masters of Kinbrold.</p>
           </div>
@@ -53,10 +72,10 @@ export const sendSubscriptionThanksEmail = async (email) => {
     });
 
     if (error) {
-      console.error('Failed to send subscription thank you email:', error);
+      console.error('Resend API error:', error);
       return {
         success: false,
-        message: 'Failed to send subscription thank you email'
+        message: error.message || 'Failed to send email'
       };
     }
 
@@ -68,14 +87,25 @@ export const sendSubscriptionThanksEmail = async (email) => {
     console.error('Failed to send subscription thank you email:', error);
     return {
       success: false,
-      message: error.message
+      message: error.message || 'Failed to send email'
     };
   }
 };
 
 export const sendWelcomeEmail = async (email) => {
   try {
-    const { error } = await emailClient.emails.send({
+    // Check if we're online before attempting to send
+    if (!checkOnlineStatus()) {
+      console.warn('Offline: Cannot send welcome email');
+      return {
+        success: false,
+        message: 'Cannot send email while offline',
+        offline: true
+      };
+    }
+
+    // Continue with sending the email
+    const { error } = await resend.emails.send({
       from: 'Elemental Games <contact@elementalgames.gg>',
       to: email,
       subject: 'Welcome to Elemental Games!',
@@ -102,10 +132,10 @@ export const sendWelcomeEmail = async (email) => {
     });
 
     if (error) {
-      console.error('Failed to send welcome email:', error);
+      console.error('Resend API error:', error);
       return {
         success: false,
-        message: 'Failed to send welcome email'
+        message: error.message || 'Failed to send email'
       };
     }
 
@@ -117,7 +147,7 @@ export const sendWelcomeEmail = async (email) => {
     console.error('Failed to send welcome email:', error);
     return {
       success: false,
-      message: error.message
+      message: error.message || 'Failed to send email'
     };
   }
 };

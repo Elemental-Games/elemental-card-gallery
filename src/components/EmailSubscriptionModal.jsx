@@ -4,18 +4,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { X, Mail, CheckCircle } from 'lucide-react';
-import { useSupabaseClient } from '@supabase/auth-helpers-react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
 import { useNavigate } from 'react-router-dom';
-import { sendSubscriptionThanksEmail } from '../lib/email-service';
+import { subscribeEmail } from '../utils/api';
 
 const EmailSubscriptionModal = ({ isOpen, onClose }) => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const supabase = useSupabaseClient();
   const navigate = useNavigate();
 
   const shootConfetti = () => {
@@ -38,33 +36,28 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
     }
 
     try {
-      // Check if email already exists
-      const { data: existingSubscriber } = await supabase
-        .from('subscribers')
-        .select()
-        .eq('email', email)
-        .single();
-
-      if (existingSubscriber) {
-        setError('This email is already subscribed to our mailing list');
-        toast.info("You are already on our mailing list!");
+      // Check for network connectivity
+      if (!navigator.onLine) {
+        setError('You appear to be offline. Please check your internet connection and try again.');
+        toast.error('Network connection error');
         setLoading(false);
         return;
       }
 
-      // Add new subscriber
-      const { error: insertError } = await supabase
-        .from('subscribers')
-        .insert([{ email, subscribed_at: new Date() }]);
-
-      if (insertError) throw insertError;
-
-      // Send thank you email
-      await sendSubscriptionThanksEmail(email);
+      const result = await subscribeEmail(email);
       
-      setSuccess(true);
-      shootConfetti();
-      toast.success('Successfully subscribed to our mailing list!');
+      if (result.success) {
+        setSuccess(true);
+        shootConfetti();
+        toast.success(result.message || 'Successfully subscribed to our mailing list!');
+      } else {
+        setError(result.message || 'There was an error subscribing. Please try again later.');
+        if (result.message.includes('already subscribed')) {
+          toast.info("You're already on our mailing list!");
+        } else {
+          toast.error(result.message || 'An unexpected error occurred. Please try again.');
+        }
+      }
     } catch (err) {
       console.error('Error during subscription:', err);
       setError('There was an error subscribing. Please try again later.');
@@ -115,7 +108,10 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-green-400 mb-2">Thank You!</h3>
                 <p className="text-purple-200 mb-6">
-                  You&apos;re now on our mailing list and will be the first to know when Elekin launches!
+                  You&apos;re now on our mailing list! You&apos;ll be among the first to know when Elekin launches.
+                  <br /><span className="text-sm mt-2 block opacity-80">
+                    A welcome email should arrive in your inbox shortly.
+                  </span>
                 </p>
                 <div className="space-y-3">
                   <Button 

@@ -1,62 +1,40 @@
+import { subscribeEmail as supabaseSubscribeEmail } from '../lib/supabase';
 import { supabase } from '../lib/supabase';
+
+export const triggerWelcomeEmail = async (email) => {
+  try {
+    const { error } = await supabase.functions.invoke('send-welcome-email', {
+      body: { email }
+    });
+
+    if (error) {
+      console.error('Error triggering welcome email:', error);
+      return { success: false, message: error.message };
+    }
+
+    return { success: true, message: 'Welcome email sent successfully' };
+  } catch (err) {
+    console.error('Exception triggering welcome email:', err);
+    return { success: false, message: 'Unable to send welcome email' };
+  }
+};
 
 export const subscribeEmail = async (email) => {
   try {
-    const cleanEmail = email.toLowerCase().trim();
-    console.log('Starting subscription process for:', cleanEmail);
-
-    // Check if email already exists
-    const { count, error: countError } = await supabase
-      .from('subscribers')
-      .select('*', { count: 'exact', head: true })
-      .eq('email', cleanEmail);
-
-    if (countError) {
-      console.error('Error checking subscriber count:', countError);
-      throw countError;
+    // Use the improved subscribeEmail function from supabase.js
+    const result = await supabaseSubscribeEmail(email);
+    
+    // If subscription was successful, attempt to trigger welcome email via edge function
+    if (result.success) {
+      await triggerWelcomeEmail(email);
     }
-
-    if (count > 0) {
-      return {
-        success: false,
-        message: 'This email is already subscribed!'
-      };
-    }
-
-    // Insert new subscriber
-    const { error: insertError } = await supabase
-      .from('subscribers')
-      .insert([{
-        email: cleanEmail,
-        status: 'active',
-        subscribed_at: new Date().toISOString()
-      }]);
-
-    if (insertError) {
-      console.error('Error inserting subscriber:', insertError);
-      throw insertError;
-    }
-
-    // Call our Edge Function to send welcome email
-    const { data: emailData, error: emailError } = await supabase.functions.invoke('send-welcome-email', {
-      body: { email: cleanEmail }
-    });
-
-    if (emailError) {
-      console.error('Error sending welcome email:', emailError);
-    }
-
-    return {
-      success: true,
-      message: emailError 
-        ? 'Successfully subscribed! Welcome email will be sent shortly.'
-        : 'Successfully subscribed! Please check your email for a welcome message.'
-    };
+    
+    return result;
   } catch (error) {
-    console.error('Subscription error:', error);
+    console.error('API subscription error:', error);
     return {
       success: false,
-      message: 'Failed to subscribe. Please try again later.'
+      message: error.message || 'Failed to subscribe. Please try again later.'
     };
   }
 };

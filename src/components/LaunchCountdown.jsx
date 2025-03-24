@@ -9,7 +9,7 @@ const LaunchCountdown = () => {
   });
 
   useEffect(() => {
-    const launchDate = new Date('2025-06-26T00:00:00'); // June 26th, 2025
+    const launchDate = new Date('2025-06-01T00:00:00'); // June 1st, 2025
 
     const calculateTimeLeft = () => {
       const now = new Date();
@@ -51,7 +51,7 @@ const LaunchCountdown = () => {
           <div className="text-sm text-purple-200">Seconds</div>
         </div>
       </div>
-      <p className="text-purple-200">Until Launch Day on June 26th, 2025!</p>
+      <p className="text-purple-200">Until Launch Month June 2025</p>
     </div>
   );
 };

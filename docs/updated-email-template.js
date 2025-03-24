@@ -34,7 +34,7 @@ serve(async (req) => {
         html: `
           <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1A103C; color: #fff; padding: 30px; border-radius: 15px; border: 2px solid #fcd34d;">
             <div style="text-align: center; margin-bottom: 30px;">
-              <!-- Removed external image link -->
+              <!-- No image or use a data URI for an embedded image -->
               <h1 style="margin: 0; color: #fcd34d; font-size: 32px; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0px 2px 4px rgba(0,0,0,0.5);">Welcome to Elekin TCG</h1>
             </div>
 

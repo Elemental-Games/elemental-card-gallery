@@ -70,7 +70,7 @@ const SignupForm = ({ buttonClassName }) => {
         <div className="space-y-3">
           <Button 
             onClick={goToSignUp}
-            className={`w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md ${buttonClassName}`}
+            className={`w-full bg-yellow-500 hover:bg-yellow-400 text-yellow-400 font-semibold py-6 text-md ${buttonClassName}`}
           >
             Create an Account for More Early Benefits
           </Button>

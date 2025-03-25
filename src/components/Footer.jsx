@@ -29,7 +29,6 @@ const Footer = () => {
               </li>
               <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
               <li><Link to="/elekin/how-to-play" className="hover:text-accent transition-colors">How to Play</Link></li>
-              <li><Link to="/elekin/rulebook" className="hover:text-accent transition-colors">Rulebook</Link></li>
             </ul>
           </div>
           <div>

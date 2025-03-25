@@ -37,6 +37,7 @@ import AuthCallbackPage from './pages/AuthCallbackPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 import DeckBuilderWizardPage from "./pages/DeckBuilderWizardPage";
+import AboutUsPage from "./pages/AboutUsPage";
 
 const queryClient = new QueryClient();
 
@@ -134,7 +135,7 @@ const App = () => (
                       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                       <Route path="/terms-of-service" element={<TermsOfService />} />
                       <Route path="/elekin" element={<ElekinPage />} />
-                      {/* Beta version temporarily hidden
+                      {/*
                       <Route path="/elekin/online" element={
                         <ProtectedRoute>
                           <ElekinOnlinePage />
@@ -144,6 +145,7 @@ const App = () => (
                       <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
                       <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
                       <Route path="/kinbrold" element={<KinbroldPage />} />
+                      <Route path="/about" element={<AboutUsPage />} />
                     </Routes>
                   </main>
                   <Footer />

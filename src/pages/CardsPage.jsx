@@ -147,6 +147,7 @@ const CardsPage = () => {
             <SubscribeButton
               className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
                 transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
+              showIcon={false}
             >
               Join Our Newsletter
             </SubscribeButton>

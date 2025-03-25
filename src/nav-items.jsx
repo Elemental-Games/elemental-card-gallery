@@ -4,7 +4,6 @@ import {
   UserPlus as UserPlusIcon,
   Heart as HeartIcon,
   Gamepad as GamepadIcon,
-  Book as BookIcon,
   LayoutGrid as LayoutGridIcon
 } from "lucide-react";
 import { HomeIcon } from "lucide-react";
@@ -15,7 +14,6 @@ import AboutUsPage from "./pages/AboutUsPage.jsx";
 import JoinNowPage from "./pages/JoinNowPage.jsx";
 import DonatePage from "./pages/DonatePage.jsx";
 import ElekinPage from "./pages/ElekinPage.jsx";
-import ElekinRulebook from "./pages/ElekinRulebook.jsx";
 import HowToPlayPage from "./pages/HowToPlayPage.jsx";
 
 export const navItems = [
@@ -41,12 +39,6 @@ export const navItems = [
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,
-      },
-      {
-        title: "Rulebook",
-        to: "/elekin/rulebook",
-        icon: <BookIcon className="h-4 w-4" />,
-        page: <ElekinRulebook />,
       }
     ]
   },

@@ -129,7 +129,7 @@ const JoinNowPage = () => {
                 />
               }
               memberCount="350+"
-              link="https://x.com/elemental_tcg"
+              link="https://x.com/elekinTCG"
             />
             <SocialCard 
               platform="Instagram"
@@ -139,7 +139,7 @@ const JoinNowPage = () => {
                 </svg>
               }
               memberCount="1,250+"
-              link="https://instagram.com/elemental_tcg"
+              link="https://instagram.com/elekin_TCG"
             />
           </div>
         </section>

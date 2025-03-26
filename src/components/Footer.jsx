@@ -41,7 +41,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Connect With Us</h3>
             <div className="flex space-x-4">
-              <a href="https://x.com/elemental_tcg" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+              <a href="https://x.com/elekinTCG" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
                 <img 
                   src="/x-twitter-brands-solid.svg" 
                   alt="X (Twitter)" 
@@ -56,6 +56,14 @@ const Footer = () => {
                   className="h-6 w-6"
                 />
               </a>
+              {/* <a href="https://instagram.com/elekin_TCG" target="_blank" rel="noopener noreferrer" className="hover:text-accent transition-colors">
+                <img 
+                  src="/x-twitter-brands-solid.svg" 
+                  alt="Instagram" 
+                  className="h-6 w-6 fill-current text-white"
+                  style={{ filter: 'brightness(0) invert(1)' }}
+                />
+              </a> */}
             </div>
           </div>
         </div>

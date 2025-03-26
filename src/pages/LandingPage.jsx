@@ -130,7 +130,7 @@ const LandingPage = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               >
                 <Map className="mr-3 h-8 w-8" />
                 Explore Lore
@@ -140,7 +140,7 @@ const LandingPage = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               >
                 <LayoutGrid className="mr-3 h-8 w-8" />
                 Build Deck
@@ -149,7 +149,7 @@ const LandingPage = () => {
             <SubscribeButton 
               variant="outline"
               size="lg"
-              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               iconClassName="mr-3 h-8 w-8"
             >
               Join Email List
@@ -158,7 +158,7 @@ const LandingPage = () => {
               <Button 
                 variant="outline" 
                 size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               >
                 <Book className="mr-3 h-8 w-8" />
                 View Cards

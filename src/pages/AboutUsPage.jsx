@@ -7,10 +7,10 @@ const AboutUsPage = () => {
   return (
     <>
       <Helmet>
-        <title>About Elemental Games - Creators of Elemental Masters TCG</title>
+        <title>About Elemental Games - Creators of Elekin TCG</title>
         <meta name="description" content="Learn about Elemental Games, the visionary team behind Elemental Masters Trading Card Game. Discover our story, mission, and the magical world of Kinbrold." />
-        <meta name="keywords" content="Elemental Games, Elemental Masters, trading card game, TCG, game developer, Kinbrold, Mark Diorio" />
-        <meta property="og:title" content="About Elemental Games - Creators of Elemental Masters TCG" />
+        <meta name="keywords" content="Elemental Games, Elekin, trading card game, TCG, game developer, Kinbrold, Mark Diorio" />
+        <meta property="og:title" content="About Elemental Games - Creators of Elekin TCG" />
         <meta property="og:description" content="Discover the story behind Elemental Games and our mission to revolutionize the gaming industry through immersive elemental experiences." />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg/about" />
@@ -48,7 +48,7 @@ const AboutUsPage = () => {
         <section className="mb-6">
           <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
           <p>
-            At Elemental Games, we're on a quest to revolutionize the gaming industry by creating immersive experiences centered around the four primordial elements: Air, Water, Earth, and Fire. Our journey begins with Elemental Masters, a Trading Card Game that serves as the cornerstone of our expanding universe.
+            At Elemental Games, we're on a quest to revolutionize the gaming industry by creating immersive experiences centered around the four primordial elements: Air, Water, Earth, and Fire. Our journey begins with Elekin: Masters of Kinbrold, a Trading Card Game that serves as the cornerstone of our expanding universe.
           </p>
         </section>
 
@@ -62,7 +62,7 @@ const AboutUsPage = () => {
         <section className="mb-8">
           <h2 className="text-2xl font-semibold mb-4">Our Vision</h2>
           <p>
-            We're not just creating games; we're building worlds. Our long-term vision extends beyond Elemental Masters, encompassing a diverse range of gaming experiences—from MMOs to RPGs and beyond. Each game will be a new chapter in the ever-expanding lore of Kinbrold, offering players fresh ways to engage with our elemental universe.
+            We're not just creating games; we're building worlds. Our long-term vision extends beyond Elekin: Masters of Kinbrold, encompassing a diverse range of gaming experiences—from MMOs to RPGs and beyond. Each game will be a new chapter in the ever-expanding lore of Kinbrold, offering players fresh ways to engage with our elemental universe.
           </p>
         </section>
 
@@ -70,7 +70,7 @@ const AboutUsPage = () => {
           <h2 className="text-2xl font-semibold mb-4">The Future of Elemental Games</h2>
           <ul className="list-disc list-inside">
             <li>Expanding our team with passionate developers and creatives</li>
-            <li>Launching new generations of Elemental Masters</li>
+            <li>Launching new generations of Elekin</li>
             <li>Developing online play and hosting exciting tournaments</li>
             <li>Exploring new genres while maintaining our core elemental theme</li>
           </ul>

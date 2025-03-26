@@ -157,7 +157,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     type="button"
                     variant="outline"
                     onClick={closeModal}
-                    className="flex-1 border-purple-500/30 hover:bg-purple-800/30 py-6 text-md"
+                    className="flex-1 border-purple-500/30 hover:bg-purple-800/30 hover:text-white py-6 text-md"
                     disabled={loading}
                   >
                     Cancel

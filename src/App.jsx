@@ -9,7 +9,6 @@ import { createClient } from '@supabase/supabase-js';
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { navItems } from "./nav-items";
-import CookieConsent from "./components/CookieConsent";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
@@ -38,6 +37,8 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 import DeckBuilderWizardPage from "./pages/DeckBuilderWizardPage";
 import AboutUsPage from "./pages/AboutUsPage";
+import JoinNowPage from './pages/JoinNowPage';
+import LegalPage from './pages/LegalPage';
 
 const queryClient = new QueryClient();
 
@@ -146,10 +147,11 @@ const App = () => (
                       <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
                       <Route path="/kinbrold" element={<KinbroldPage />} />
                       <Route path="/about" element={<AboutUsPage />} />
+                      <Route path="/join-now" element={<JoinNowPage />} />
+                      <Route path="/legal" element={<LegalPage />} />
                     </Routes>
                   </main>
                   <Footer />
-                  <CookieConsent />
                 </div>
               </BrowserRouter>
             </AuthProvider>

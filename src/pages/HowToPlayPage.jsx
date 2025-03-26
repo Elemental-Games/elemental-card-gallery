@@ -1,9 +1,7 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
-import { Download, Book, Sword, Sparkles, Shield, Scroll, Wand } from 'lucide-react';
+import { Download, Sword, Sparkles, Shield, Scroll, Wand } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const HowToPlayPage = () => {
@@ -166,18 +164,9 @@ const HowToPlayPage = () => {
               Master the elements and become a legendary card master in the world of Kinbrold
             </p>
             <div className="flex justify-center gap-6">
-              <Link to="/elekin/rulebook">
-                <Button 
-                  size="lg"
-                  className="bg-purple-900/50 hover:bg-purple-800/50 text-white border border-purple-500/30 px-8 py-6 text-lg h-[72px] min-w-[240px]"
-                >
-                  <Book className="w-6 h-6 mr-2" />
-                  View Rulebook
-                </Button>
-              </Link>
-          <a 
-            href="/data/TCG Rulebook.pdf"
-            download
+              <a 
+                href="/data/TCG Rulebook.pdf"
+                download
                 className="inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
                   font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
               >
@@ -421,8 +410,8 @@ const HowToPlayPage = () => {
                         <li>Choose one of two effects when broken</li>
                         <li>Shield effects cannot be countered</li>
                       </ul>
-        </div>
-        
+                    </div>
+
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Shield Example</h3>
                       <div className="flex flex-col items-start gap-6">
@@ -469,9 +458,9 @@ const HowToPlayPage = () => {
                           <li>Defensive plays</li>
                           <li>Chain reactions</li>
                         </ul>
-          </div>
-        </div>
-        
+                      </div>
+                    </div>
+                    
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Dragon Cards</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -515,7 +504,7 @@ const HowToPlayPage = () => {
                         <li>Generate multiple types of essence</li>
                         <li>Often have powerful special abilities</li>
                       </ul>
-          </div>
+                    </div>
 
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Strategic Tips</h3>

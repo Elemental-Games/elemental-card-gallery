@@ -75,7 +75,7 @@ const PrivacyPolicy = () => {
       </section>
 
       <div className="mt-8 text-center">
-        <p>Questions about our privacy practices? Contact us at: <a href="mailto:contact@elementalgames.gg" className="text-yellow-400 hover:text-yellow-300 transition-colors">privacy@elementalgames.gg</a></p>
+        <p>Questions about our privacy practices? Contact us at: <a href="mailto:contact@elementalgames.gg" className="text-yellow-400 hover:text-yellow-300 transition-colors">contact@elementalgames.gg</a></p>
       </div>
     </motion.div>
   );

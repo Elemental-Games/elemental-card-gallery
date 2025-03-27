@@ -124,8 +124,7 @@ serve(async (req)=>{
           </div>
 
           <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 12px;">
-            <p>⚡ Launching in <strong>June 2025</strong> ⚡</p>
-            <p style="color: #9ca3af; font-size: 11px;">${daysUntilLaunch} days until month of launch - June 2025</p>
+            <p>⚡ Launching in <strong>Summer of 2025</strong> ⚡</p>
             <p>Elemental Games LLC © 2025. All rights reserved.</p>
             <p>You're receiving this email because you signed up for updates about Elekin: Masters of Kinbrold.</p>
             <p><a href="https://elementalgames.gg/unsubscribe?email=${email}&token=${unsubscribeToken}" style="color: #9ca3af; text-decoration: underline;">Unsubscribe</a></p>

@@ -164,9 +164,9 @@ const HowToPlayPage = () => {
               Master the elements and become a legendary card master in the world of Kinbrold
             </p>
             <div className="flex justify-center gap-6">
-              <a 
-                href="/data/TCG Rulebook.pdf"
-                download
+          <a 
+            href="/data/TCG Rulebook.pdf"
+            download
                 className="inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
                   font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
               >
@@ -410,8 +410,8 @@ const HowToPlayPage = () => {
                         <li>Choose one of two effects when broken</li>
                         <li>Shield effects cannot be countered</li>
                       </ul>
-                    </div>
-
+        </div>
+        
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Shield Example</h3>
                       <div className="flex flex-col items-start gap-6">
@@ -458,9 +458,9 @@ const HowToPlayPage = () => {
                           <li>Defensive plays</li>
                           <li>Chain reactions</li>
                         </ul>
-                      </div>
-                    </div>
-                    
+          </div>
+        </div>
+        
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Dragon Cards</h3>
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -515,7 +515,7 @@ const HowToPlayPage = () => {
                         <li>Protect with counters and shields</li>
                       </ul>
                     </div>
-                  </div>
+          </div>
                 </TabsContent>
               </Tabs>
             </motion.div>

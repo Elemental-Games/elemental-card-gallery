@@ -4,7 +4,6 @@ import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SignupForm from '../components/auth/SignupForm';
 import FlippableCard from '../components/FlippableCard';
-import LaunchCountdown from '../components/LaunchCountdown';
 
 const SocialCard = ({ platform, icon, memberCount, link }) => {
   return (
@@ -60,10 +59,11 @@ const JoinNowPage = () => {
         </div>
 
         <div className="grid md:grid-cols-2 gap-8 mb-12">
-          <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 flex flex-col">
-            <h2 className="text-3xl font-bold mb-4 text-center">Launch Countdown</h2>
-            <div className="flex-grow flex items-center justify-center">
-              <LaunchCountdown />
+          <div className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 flex flex-col items-center justify-center">
+            <h2 className="text-3xl font-bold mb-6 text-center">Launch Countdown</h2>
+            <div className="text-center">
+              <p className="text-4xl font-bold text-yellow-400 mb-3">Summer 2025</p>
+              <p className="text-xl text-purple-200">Expected Launch Date</p>
             </div>
           </div>
 

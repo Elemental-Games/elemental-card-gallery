@@ -65,7 +65,7 @@ const LandingPage = () => {
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 mb-12">
             <div className="flex-grow w-full">
               <div className="text-center lg:text-left">
-                <h2 className="text-4xl lg:text-6xl font-bold">Elekin - Game Overview</h2>
+                <h2 className="text-4xl lg:text-6xl font-bold">Elekin TCG - Game Overview</h2>
                 <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Masters of Kinbrold</h3>
               </div>
               <p className="text-lg text-purple-200 mt-4 text-center lg:text-left">

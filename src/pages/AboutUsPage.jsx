@@ -254,7 +254,7 @@ const AboutUsPage = () => {
                   </svg>
                 </a>
                 <a 
-                  href="https://discord.gg/elemental-games" 
+                  href="https://discord.gg/qXNWh4dMve" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="px-5 py-2 bg-indigo-600 hover:bg-indigo-500 rounded-full transition-colors duration-300 text-white font-medium flex items-center"

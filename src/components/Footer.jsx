@@ -16,18 +16,10 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold mb-4">Elekin</h3>
+            <h3 className="text-lg font-semibold mb-4">TCG</h3>
             <ul className="space-y-2">
-              <li>
-                <SubscribeButton 
-                  variant="link" 
-                  className="p-0 text-white hover:text-accent transition-colors h-auto" 
-                  showIcon={false}
-                >
-                  Newsletter
-                </SubscribeButton>
-              </li>
-              <li><Link to="/cards" className="hover:text-accent transition-colors">Cards</Link></li>
+            <li><Link to="/elekin" className="hover:text-accent transition-colors">Cards of the Week</Link></li>
+              <li><Link to="/cards/gallery" className="hover:text-accent transition-colors">Card Gallery</Link></li>
               <li><Link to="/elekin/how-to-play" className="hover:text-accent transition-colors">How to Play</Link></li>
             </ul>
           </div>

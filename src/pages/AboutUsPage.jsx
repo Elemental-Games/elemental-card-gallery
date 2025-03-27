@@ -11,13 +11,13 @@ const contentBubbles = [
   {
     id: 'childhood',
     title: 'Childhood Dreams',
-    content: 'Ever since I was a kid, I\'ve been captivated by the world of Pokémon, games like Yu-Gi-Oh and Magic: The Gathering, and shows like Dragon Ball Z and Avatar: The Last Airbender. These experiences weren\'t just entertainment—they were the seeds of something I knew I wanted to create someday.',
+    content: 'Ever since I was a kid, I\'ve been captivated by the world of Pokémon, games like Yu-Gi-Oh and Magic: The Gathering, and shows like Dragon Ball Z and Avatar: The Last Airbender. These games and shows although began as forms of entertainment, combined and grew to be the seeds of something I knew I wanted to create someday.',
     position: { x: -200, y: -150 }
   },
   {
     id: 'journey',
     title: 'Journey of Creation',
-    content: 'My game design journey started formally during my freshman year of college, where I developed VR games during an internship. But the elements—fire, water, earth, air—have always called to me. Every game concept I sketched returned to elemental powers in some form, until finally, Elekin was born.',
+    content: 'My game design journey started formally during my freshman year of college, where I developed VR games during an internship. But I was always most intriguied by strategic games rather than visually pleasing ones. With each game concept or journey I pursued, I always returned to the idea of adding the 4 basic elements seamlessly into a game until finally, Elekin was born.',
     position: { x: 200, y: -150 }
   },
   {
@@ -29,7 +29,7 @@ const contentBubbles = [
   {
     id: 'solo',
     title: 'Solo Mission',
-    content: 'This project is both intensely personal and incredibly ambitious. As a solo creator, every aspect of Elekin represents my vision and dedication. I\'m currently in the final phases of balancing the gameplay, with rules finalized and card interactions undergoing rigorous testing.',
+    content: 'This initially began as a passion project for myself to pursue, and has slowly but surely become my newfound full-time focus. As a solo creator, every aspect of Elekin and Elemental Games represents my vision and dedication. I\'m currently in the final phases of balancing the gameplay, with rules finalized, and card interactions undergoing rigorous testing. I\'m beginning the marketing process and looking forward to sharing Elekin with the world.',
     position: { x: 200, y: 150 }
   }
 ];

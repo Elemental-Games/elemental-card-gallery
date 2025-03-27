@@ -1,28 +1,27 @@
-import React from 'react';
 import { motion } from 'framer-motion';
 import CardOfTheWeek from './cards/CardOfTheWeek';
 
 const CardsOfTheWeek = () => {
   const weeklyCards = [
     {
-      id: "cloud-sprinter",
-      name: "Cloud Sprinter",
-      image: "/images/cards/cloud-sprinter.webp"
+      id: "wind-sprite",
+      name: "Wind Sprite",
+      image: "/images/cards/wind-sprite.webp"
     },
     {
-      id: "swiftreaver",
-      name: "Swiftreaver",
-      image: "/images/cards/swiftreaver.webp"
+      id: "deepseer",
+      name: "Deepseer",
+      image: "/images/cards/deepseer.webp"
     },
     {
-      id: "aqua-shade",
-      name: "Aqua Shade",
-      image: "/images/cards/aqua-shade.webp"
+      id: "mountain-giant",
+      name: "Mountain Giant",
+      image: "/images/cards/mountain-giant.webp"
     },
     {
-      id: "flamekeeper",
-      name: "Flamekeeper",
-      image: "/images/cards/flamekeeper.webp"
+      id: "emberwing",
+      name: "Emberwing",
+      image: "/images/cards/emberwing.webp"
     }
   ];
 
@@ -71,7 +70,7 @@ const CardsOfTheWeek = () => {
         </motion.h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {weeklyCards.map((card) => (
-            <motion.div key={card.id} variants={itemVariants}>
+            <motion.div key={card.id} variants={itemVariants} className="scale-90">
               <CardOfTheWeek card={card} />
             </motion.div>
           ))}

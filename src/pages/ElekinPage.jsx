@@ -21,24 +21,24 @@ const ElekinPage = () => {
   // Cards of the Week data
   const weeklyCards = [
     {
-      id: "cloud-sprinter",
-      name: "Cloud Sprinter",
-      image: "/images/cards/cloud-sprinter.webp"
+      id: "wind-sprite",
+      name: "Wind Sprite",
+      image: "/images/cards/wind-sprite.webp"
     },
     {
-      id: "swiftreaver",
-      name: "Swiftreaver",
-      image: "/images/cards/swiftreaver.webp"
+      id: "deepseer",
+      name: "Deepseer",
+      image: "/images/cards/deepseer.webp"
     },
     {
-      id: "aqua-shade",
-      name: "Aqua Shade",
-      image: "/images/cards/aqua-shade.webp"
+      id: "mountain-giant",
+      name: "Mountain Giant",
+      image: "/images/cards/mountain-giant.webp"
     },
     {
-      id: "flamekeeper",
-      name: "Flamekeeper",
-      image: "/images/cards/flamekeeper.webp"
+      id: "emberwing",
+      name: "Emberwing",
+      image: "/images/cards/emberwing.webp"
     }
   ];
 
@@ -116,7 +116,7 @@ const ElekinPage = () => {
           <motion.div 
             className="bg-purple-950/70 p-4 rounded-2xl border border-yellow-500/30 
               shadow-[0_0_30px_rgba(234,179,8,0.1)]"
-            initial={{ scale: 0.9, opacity: 0 }}
+            initial={{ scale: 1, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
@@ -248,7 +248,7 @@ const ElekinPage = () => {
             onClick={() => setShowConfirmation(false)}
           >
             <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
+              initial={{ scale: 1, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.9, opacity: 0 }}
               className="bg-purple-950 border border-purple-500/30 rounded-lg shadow-xl max-w-md w-full p-6"

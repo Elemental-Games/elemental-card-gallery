@@ -1,7 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useParams, Link, useLocation, useNavigate } from 'react-router-dom';
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
+import { useState, useEffect } from 'react';
+import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 const CardDetailPage = () => {
@@ -10,7 +8,6 @@ const CardDetailPage = () => {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
 
   // Determine the previous page and back link
   const getBackInfo = () => {
@@ -33,7 +30,8 @@ const CardDetailPage = () => {
     return { text: backText, link: backLink };
   };
 
-  const { text: backText, link: backLink } = getBackInfo();
+  // We'll get these values but use them later when needed
+  getBackInfo();
 
   useEffect(() => {
     fetch('/data/cards.json')
@@ -52,7 +50,7 @@ const CardDetailPage = () => {
         }
         setLoading(false);
       })
-      .catch(err => {
+      .catch(() => {
         setError('Error loading card data');
         setLoading(false);
       });
@@ -79,6 +77,15 @@ const CardDetailPage = () => {
       </div>
     );
   }
+
+  // Cloud Sprinter lore data
+  const cloudSprinterLore = id === 'cloud-sprinter' ? {
+    habitat: "Between Zalos and Evermere, primarily within the Zalos Kingdom",
+    appearance: "Squirrel-like creature with webbed arms",
+    behavior: "Loves to hop from cloud to cloud and feed on high-flying insects",
+    travel: "Uses webbed arms to dive down and sprint around Kinbrold",
+    notes: "Most at home in the clouds, where they're frequently seen playing"
+  } : null;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -231,11 +238,61 @@ const CardDetailPage = () => {
 
           {card.quote && (
             <div className="mt-6 border-t border-purple-500/30 pt-4">
-              <p className="text-purple-200 italic">"{card.quote}"</p>
+              <p className="text-purple-200 italic">&quot;{card.quote}&quot;</p>
             </div>
           )}
         </div>
       </div>
+
+      {/* Cloud Sprinter lore section */}
+      {cloudSprinterLore && (
+        <div className="max-w-6xl mx-auto mt-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30"
+          >
+            <h2 className="text-2xl font-bold text-yellow-400 mb-4">Lore: {card.name}</h2>
+            
+            <div className="grid md:grid-cols-2 gap-6">
+              <div>
+                <p className="text-white leading-relaxed">
+                  Cloud Sprinter is a squirrel-like creature that resides in and around the Zalos Kingdom. 
+                  It&apos;s most notably found in the clouds between Zalos and Evermere. Cloud Sprinters love to 
+                  hop cloud to cloud and feed on the high-flying insects.
+                </p>
+                <p className="text-white mt-4 leading-relaxed">
+                  They dive down using their webbed-arms to sprint around Kinbrold, but they have the most 
+                  fun up in the clouds, where they can be seen playfully chasing each other through the sky.
+                </p>
+              </div>
+              
+              <div className="space-y-4">
+                <div>
+                  <h3 className="text-purple-300 font-medium">Habitat</h3>
+                  <p className="text-white">{cloudSprinterLore.habitat}</p>
+                </div>
+                
+                <div>
+                  <h3 className="text-purple-300 font-medium">Appearance</h3>
+                  <p className="text-white">{cloudSprinterLore.appearance}</p>
+                </div>
+                
+                <div>
+                  <h3 className="text-purple-300 font-medium">Behavior</h3>
+                  <p className="text-white">{cloudSprinterLore.behavior}</p>
+                </div>
+                
+                <div>
+                  <h3 className="text-purple-300 font-medium">Travel Method</h3>
+                  <p className="text-white">{cloudSprinterLore.travel}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
     </div>
   );
 };

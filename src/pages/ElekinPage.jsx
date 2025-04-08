@@ -26,14 +26,14 @@ const ElekinPage = () => {
       image: "/images/cards/wind-sprite.webp"
     },
     {
-      id: "deepseer",
-      name: "Deepseer",
-      image: "/images/cards/deepseer.webp"
+      id: "aqua-dart",
+      name: "Aqua Dart",
+      image: "/images/cards/aqua-dart.webp"
     },
     {
-      id: "mountain-giant",
-      name: "Mountain Giant",
-      image: "/images/cards/mountain-giant.webp"
+      id: "nimblefoot",
+      name: "Nimblefoot",
+      image: "/images/cards/nimblefoot.webp"
     },
     {
       id: "emberwing",

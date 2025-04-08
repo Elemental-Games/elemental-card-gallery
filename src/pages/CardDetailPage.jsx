@@ -87,6 +87,21 @@ const CardDetailPage = () => {
     notes: "Most at home in the clouds, where they're frequently seen playing"
   } : null;
 
+  // Aqua Dart lore data
+  const aquaDartLore = id === 'aqua-dart' ? {
+    backstory: "Sleek, powerful fish with distinctive spear-like bills that cut through water with minimal resistance. Aqua Darts are believed to be some of the fastest creatures in and around the oceans of Tsunareth, capable of explosive bursts of speed that create visible pressure waves. Their scales contain specialized channels that direct water flow around their bodies, further reducing drag.",
+    cardFact: "Tsunareth fishermen consider catching an Aqua Dart to be a supreme test of skill, though most practice catch-and-release out of respect for these magnificent creatures."
+  } : null;
+
+  // Nimblefoot lore data
+  const nimblefootLore = id === 'nimblefoot' ? {
+    habitat: "Complex cave networks and rocky canyons throughout Grivoss",
+    appearance: "Reptilian creature adapted for climbing and traversing difficult terrain",
+    behavior: "Makes their homes near underground water sources",
+    characteristics: "Surprisingly intelligent and curious, often following Grivoss explorers at a distance",
+    notes: "Despite their fearsome appearance, they're curious and studiously observe travelers navigating challenging passages"
+  } : null;
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Link 
@@ -253,41 +268,87 @@ const CardDetailPage = () => {
             transition={{ duration: 0.5 }}
             className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30"
           >
-            <h2 className="text-2xl font-bold text-yellow-400 mb-4">Lore: {card.name}</h2>
+            <h2 className="text-2xl font-bold text-yellow-400 mb-4">{card.name} in the World of Kinbrold</h2>
             
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-6">
               <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
                 <p className="text-white leading-relaxed">
                   Cloud Sprinter is a squirrel-like creature that resides in and around the Zalos Kingdom. 
                   It&apos;s most notably found in the clouds between Zalos and Evermere. Cloud Sprinters love to 
                   hop cloud to cloud and feed on the high-flying insects.
                 </p>
-                <p className="text-white mt-4 leading-relaxed">
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
+                <p className="text-white leading-relaxed">
                   They dive down using their webbed-arms to sprint around Kinbrold, but they have the most 
                   fun up in the clouds, where they can be seen playfully chasing each other through the sky.
                 </p>
               </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <h3 className="text-purple-300 font-medium">Habitat</h3>
-                  <p className="text-white">{cloudSprinterLore.habitat}</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-purple-300 font-medium">Appearance</h3>
-                  <p className="text-white">{cloudSprinterLore.appearance}</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-purple-300 font-medium">Behavior</h3>
-                  <p className="text-white">{cloudSprinterLore.behavior}</p>
-                </div>
-                
-                <div>
-                  <h3 className="text-purple-300 font-medium">Travel Method</h3>
-                  <p className="text-white">{cloudSprinterLore.travel}</p>
-                </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Aqua Dart lore section */}
+      {aquaDartLore && (
+        <div className="max-w-6xl mx-auto mt-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30"
+          >
+            <h2 className="text-2xl font-bold text-yellow-400 mb-4">{card.name} in the World of Kinbrold</h2>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
+                <p className="text-white leading-relaxed">
+                  {aquaDartLore.backstory}
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
+                <p className="text-white leading-relaxed">
+                  {aquaDartLore.cardFact}
+                </p>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      {/* Nimblefoot lore section */}
+      {nimblefootLore && (
+        <div className="max-w-6xl mx-auto mt-8">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30"
+          >
+            <h2 className="text-2xl font-bold text-yellow-400 mb-4">{card.name} in the World of Kinbrold</h2>
+            
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
+                <p className="text-white leading-relaxed">
+                  A Nimblefoot is a reptilian creature adapted for climbing and traversing difficult terrain. 
+                  These creatures inhabit the complex cave networks and rocky canyons throughout Grivoss, 
+                  making their homes near underground water sources.
+                </p>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
+                <p className="text-white leading-relaxed">
+                  Despite their fearsome appearance, they&apos;re curious and surprisingly intelligent, often following 
+                  Grivoss explorers at a distance, studiously observing as travelers navigate challenging passages.
+                </p>
               </div>
             </div>
           </motion.div>

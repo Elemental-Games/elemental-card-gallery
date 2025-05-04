@@ -126,6 +126,26 @@ const LandingPage = () => {
         <section className="container mx-auto px-4 py-16 text-center">
           <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Link to="/cards/gallery">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <LayoutGrid className="mr-3 h-8 w-8" />
+                View Gallery
+              </Button>
+            </Link>
+            <Link to="/elekin/how-to-play">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Book className="mr-3 h-8 w-8" />
+                View Rulebook
+              </Button>
+            </Link>
             <Link to="/kinbrold">
               <Button 
                 variant="outline" 
@@ -136,16 +156,6 @@ const LandingPage = () => {
                 Explore Lore
               </Button>
             </Link>
-            <Link to="/cards/deck-builder">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <LayoutGrid className="mr-3 h-8 w-8" />
-                Build Deck
-              </Button>
-            </Link>
             <SubscribeButton 
               variant="outline"
               size="lg"
@@ -154,16 +164,6 @@ const LandingPage = () => {
             >
               Join Email List
             </SubscribeButton>
-            <Link to="/cards/gallery">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <Book className="mr-3 h-8 w-8" />
-                View Cards
-              </Button>
-            </Link>
           </div>
         </section>
       </div>

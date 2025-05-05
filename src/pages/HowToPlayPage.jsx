@@ -1285,11 +1285,10 @@ const HowToPlayPage = () => {
                       <li>Starting Health: 500</li>
                       <li>Starting Hand: 5 cards</li>
                       <li>Max Hand Size: 7 cards</li>
-                      <li>Field Size: 5 creatures</li>
+                      <li>Field Size: Max of 5 creatures per player</li>
                       <li>Shield Tiers: 3</li>
                       <li>Elements: 4 primary, 6 combinational</li>
                       <li>Max Essence: 20 per element</li>
-                      <li>Actions: Based on position (1-5)</li>
                     </ul>
                   </div>
 

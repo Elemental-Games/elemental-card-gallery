@@ -4,6 +4,7 @@ import { Card } from '@/components/ui/card';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import SignupForm from '../components/auth/SignupForm';
 import FlippableCard from '../components/FlippableCard';
+import { Helmet } from 'react-helmet-async';
 
 const SocialCard = ({ platform, icon, memberCount, link }) => {
   return (
@@ -36,6 +37,66 @@ const JoinNowPage = () => {
       exit={{ opacity: 0 }}
       className="min-h-screen bg-[#1A103C]"
     >
+      <Helmet>
+        <title>Join Elekin TCG - Early Access Sign Up</title>
+        <meta name="description" content="Sign up for early access to Elekin Trading Card Game. Be among the first to experience this innovative elemental-based TCG with unique battling mechanics." />
+        <meta name="keywords" content="Elekin signup, join Elekin, TCG early access, card game beta, Elekin community" />
+        <meta property="og:title" content="Join Elekin TCG - Early Access Sign Up" />
+        <meta property="og:description" content="Be among the first to experience Elekin TCG. Get early access, exclusive offers, and join our growing community of card game enthusiasts." />
+        <meta property="og:type" content="website" />
+        <link rel="canonical" href="https://elementalgames.gg/join" />
+        
+        {/* FAQ structured data */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Can the average person pick up and play Elemental Masters?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elemental Masters."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What makes Elemental Masters unique?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent's attacks. This is a system that's never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How long does a typical game take?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The average game takes 20-25 minutes."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How can I participate in playtests?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Join our community in Discord, attend our live spaces on X, or write our support team an email requesting to participate (Discord, X, and email link)."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Will there be opportunities to interact with the creator?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Of course! You can attend our live spaces on X and ask our creators any questions during their weekly Q&A sessions. Also, you can join our discord and shoot some messages out there as they're quite active."
+                }
+              }
+            ]
+          }
+        `}</script>
+      </Helmet>
+
       <div className="container mx-auto px-4 py-8">
         <div className="bg-purple-950/70 p-4 mb-8 rounded-lg border border-purple-500/30 overflow-hidden">
           <motion.div

@@ -1,5 +1,36 @@
+# Elekin Trading Card Game - robots.txt
+# https://elementalgames.gg
+
 User-agent: *
 Allow: /
+
+# Disallow admin and auth paths
+Disallow: /admin/
+Disallow: /auth/callback
+
+# Allow all bots to see all content
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: Baiduspider
+Allow: /
+
+User-agent: YandexBot
+Allow: /
+
+# Sitemap location
 Sitemap: https://elementalgames.gg/sitemap.xml
 
 # Allow crawling of all content

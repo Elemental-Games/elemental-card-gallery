@@ -147,8 +147,75 @@ const HowToPlayPage = () => {
   return (
     <>
       <Helmet>
-        <title>How to Play Elekin - Masters of Kinbrold</title>
-        <meta name="description" content="Learn how to play Elekin: Masters of Kinbrold - A strategic trading card game where you harness the power of elemental creatures." />
+        <title>How To Play Elekin TCG - Game Rules & Instructions</title>
+        <meta name="description" content="Learn how to play Elekin Trading Card Game with our comprehensive rules, tutorials, and strategy guides. Perfect for beginners and experienced players alike." />
+        <meta name="keywords" content="Elekin rules, how to play Elekin, TCG instructions, card game tutorial, Elekin strategy guide, trading card game rules" />
+        <meta property="og:title" content="How To Play Elekin TCG - Game Rules & Instructions" />
+        <meta property="og:description" content="Master the Elekin Trading Card Game with our easy-to-follow rules and guides. Learn gameplay mechanics, card types, and winning strategies." />
+        <meta property="og:type" content="article" />
+        <link rel="canonical" href="https://elementalgames.gg/how-to-play" />
+
+        {/* HowTo structured data */}
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            "name": "How To Play Elekin Trading Card Game",
+            "description": "Learn how to play the Elekin Trading Card Game with these comprehensive instructions.",
+            "totalTime": "PT15M",
+            "tool": [
+              {
+                "@type": "HowToTool",
+                "name": "Elekin deck of cards"
+              },
+              {
+                "@type": "HowToTool",
+                "name": "Game board (optional)"
+              },
+              {
+                "@type": "HowToTool",
+                "name": "Element tokens"
+              }
+            ],
+            "step": [
+              {
+                "@type": "HowToStep",
+                "name": "Prepare Your Deck",
+                "text": "Build a deck of 40 cards, including Elementalist cards, Element cards, and Action cards.",
+                "url": "https://elementalgames.gg/how-to-play#deck-building",
+                "image": "https://elementalgames.gg/images/how-to-play/deck-building.jpg"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Setup The Game",
+                "text": "Each player draws 5 cards. Determine who goes first randomly.",
+                "url": "https://elementalgames.gg/how-to-play#game-setup",
+                "image": "https://elementalgames.gg/images/how-to-play/game-setup.jpg"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Play Elements",
+                "text": "Place element cards to generate resources for playing other cards.",
+                "url": "https://elementalgames.gg/how-to-play#playing-elements",
+                "image": "https://elementalgames.gg/images/how-to-play/elements.jpg"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Summon Creatures",
+                "text": "Use element resources to play creature cards to attack and defend.",
+                "url": "https://elementalgames.gg/how-to-play#creatures",
+                "image": "https://elementalgames.gg/images/how-to-play/creatures.jpg"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Attack and Defend",
+                "text": "Use your creatures to attack the opponent and defend against their attacks.",
+                "url": "https://elementalgames.gg/how-to-play#combat",
+                "image": "https://elementalgames.gg/images/how-to-play/combat.jpg"
+              }
+            ]
+          }
+        `}</script>
       </Helmet>
 
       <div className="min-h-screen bg-[#1A103C]">

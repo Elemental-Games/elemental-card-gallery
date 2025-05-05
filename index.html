@@ -8,6 +8,9 @@
     <meta name="keywords" content="Elekin, TCG, trading card game, card game, fantasy card game, elemental powers, strategy game, collectible card game, CCG, magical card game, online card game, Air element, Water element, Fire element, Earth element" />
     <meta name="author" content="Elemental Games" />
     
+    <!-- Google Search Console Verification -->
+    <meta name="google-site-verification" content="ADD_YOUR_VERIFICATION_CODE_HERE" />
+    
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://elementalgames.gg" />
@@ -32,15 +35,46 @@
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "VideoGame",
+        "@type": ["VideoGame", "Game"],
         "name": "Elekin TCG",
-        "description": "A strategic trading card game featuring elemental powers and immersive gameplay",
-        "genre": ["Trading Card Game", "Strategy Game", "Fantasy Game"],
-        "gamePlatform": ["Web", "Mobile"],
+        "alternateName": "Elekin: Masters of Kinbrold",
+        "description": "A strategic trading card game featuring elemental powers and immersive gameplay set in the world of Kinbrold. Battle with cards representing the elements of Air, Water, Fire, and Earth to become a Master Elementalist.",
+        "image": "https://elementalgames.gg/Games_Logo.png",
+        "url": "https://elementalgames.gg",
+        "genre": ["Trading Card Game", "Strategy Game", "Fantasy Game", "Collectible Card Game"],
+        "gamePlatform": ["Web", "Mobile", "Physical Card Game"],
+        "playMode": "MultiPlayer",
+        "applicationCategory": "Game",
+        "contentRating": "Everyone",
+        "gameLocation": {
+          "@type": "Place",
+          "name": "Kinbrold",
+          "description": "A fantasy world with five elemental kingdoms: Zalos, Tsunareth, Scarto, Grivoss, and Evermere"
+        },
+        "characterAttribute": [
+          {
+            "@type": "Thing",
+            "name": "Elements",
+            "description": "Air, Water, Fire, Earth, and Energy powers"
+          }
+        ],
         "publisher": {
           "@type": "Organization",
           "name": "Elemental Games",
-          "url": "https://elementalgames.gg"
+          "url": "https://elementalgames.gg",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://elementalgames.gg/Games_Logo.png",
+            "width": "512",
+            "height": "512"
+          }
+        },
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "price": "0",
+          "priceCurrency": "USD",
+          "url": "https://elementalgames.gg/join"
         }
       }
     </script>

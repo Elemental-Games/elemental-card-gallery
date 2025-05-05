@@ -1,13 +1,22 @@
 // src/components/EmailSignup.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { subscribeEmail } from '../utils/api';
+import confetti from 'canvas-confetti';
 
 const EmailSignup = ({ onClose, buttonClassName }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const shootConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,10 +27,17 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
       
       if (result.success) {
         toast.success(result.message);
+        shootConfetti();
         setEmail('');
         if (onClose) onClose();
       } else {
-        toast.error(result.message);
+        // If already subscribed, still show confetti
+        if (result.message && result.message.includes('already subscribed')) {
+          toast.info("You're already on our mailing list!");
+          shootConfetti(); // Still celebrate their enthusiasm
+        } else {
+          toast.error(result.message);
+        }
       }
     } catch (error) {
       console.error('Form submission error:', error);

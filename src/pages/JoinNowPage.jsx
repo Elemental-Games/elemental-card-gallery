@@ -5,6 +5,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/
 import SignupForm from '../components/auth/SignupForm';
 import FlippableCard from '../components/FlippableCard';
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
+import EmailSignup from '../components/EmailSignup';
+import { useState } from 'react';
 
 const SocialCard = ({ platform, icon, memberCount, link }) => {
   return (
@@ -30,6 +34,8 @@ const SocialCard = ({ platform, icon, memberCount, link }) => {
 };
 
 const JoinNowPage = () => {
+  const [preOrderDialogOpen, setPreOrderDialogOpen] = useState(false);
+  
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -97,6 +103,24 @@ const JoinNowPage = () => {
         `}</script>
       </Helmet>
 
+      {/* Pre-order Dialog */}
+      <Dialog open={preOrderDialogOpen} onOpenChange={setPreOrderDialogOpen}>
+        <DialogContent className="bg-purple-950 border-2 border-yellow-500 text-white">
+          <DialogHeader>
+            <DialogTitle className="text-2xl text-yellow-400">Pre-orders Coming Soon!</DialogTitle>
+            <DialogDescription className="text-purple-200 text-lg">
+              Join our waiting list now to be the first to know when pre-orders are available.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="p-4">
+            <EmailSignup 
+              buttonClassName="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-900 font-bold"
+              onClose={() => setPreOrderDialogOpen(false)}
+            />
+          </div>
+        </DialogContent>
+      </Dialog>
+
       <div className="container mx-auto px-4 py-8">
         <div className="bg-purple-950/70 p-4 mb-8 rounded-lg border border-purple-500/30 overflow-hidden">
           <motion.div
@@ -144,13 +168,17 @@ const JoinNowPage = () => {
               Elekin brings you an innovative TCG experience with unique mechanics, 
               beautiful artwork, and deep strategic gameplay.
             </p>
-            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold">
+            <Button 
+              size="lg" 
+              className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold"
+              onClick={() => setPreOrderDialogOpen(true)}
+            >
               Pre-order Now
             </Button>
           </div>
           <div className="md:w-1/2">
             <FlippableCard 
-              frontImage="/images/cards/ancient-sigil.webp"
+              frontImage="/images/cards/new/ancient sigil.webp"
               backImage="/Card_Back.png"
             />
           </div>
@@ -160,9 +188,14 @@ const JoinNowPage = () => {
               Check out the Kinbrold map and learn about the world of Elemental Games. 
               Each Kingdom has its own backstory and characters that are vital to the story of Kinbrold.
             </p>
-            <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold">
-              Kinbrold Map
-            </Button>
+            <Link to="/kinbrold">
+              <Button 
+                size="lg" 
+                className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold"
+              >
+                Kinbrold Map
+              </Button>
+            </Link>
           </div>
         </div>
 

@@ -86,6 +86,16 @@ const ElekinPage = () => {
     }
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
   const shootConfetti = () => {
     confetti({
       particleCount: 100,
@@ -145,29 +155,39 @@ const ElekinPage = () => {
         <section className="container mx-auto px-4 py-10">
           <div className="max-w-6xl mx-auto">
             <motion.div 
-              className="bg-purple-950/70 p-4 rounded-2xl border border-yellow-500/30 
-                shadow-[0_0_30px_rgba(234,179,8,0.1)]"
-              initial={{ scale: 1, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
+              className="border-[4px] sm:border-[5px] border-yellow-500 rounded-xl bg-transparent"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-100px" }}
+              variants={containerVariants}
             >
-              <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-yellow-400 to-yellow-400 
-                bg-clip-text text-transparent">Weekly Card Deep Dives</h2>
-              <p className="mb-4 text-center text-purple-200 max-w-2xl mx-auto text-lg">
-                Every week, we analyze four new cards in detail, exploring their strategies, 
-                combinations, and impact on the game.
-              </p>
-              
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
-                {weeklyCards.map((card) => (
-                  <motion.div 
-                    key={card.id} 
-                    variants={itemVariants} 
-                    className="scale-100"
-                  >
-                    <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
-                  </motion.div>
-                ))}
+              <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
+                <motion.h2 
+                  className="text-3xl sm:text-4xl font-bold mb-6 text-center text-yellow-500"
+                  variants={itemVariants}
+                >
+                  Weekly Card Deep Dives
+                </motion.h2>
+                <motion.p 
+                  className="mb-4 text-center text-purple-200 max-w-2xl mx-auto"
+                  variants={itemVariants}
+                >
+                  Every week, we analyze four new cards in detail, exploring their strategies, 
+                  combinations, and impact on the game.
+                </motion.p>
+                
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
+                  {weeklyCards.map((card) => (
+                    <motion.div 
+                      key={card.id} 
+                      variants={itemVariants} 
+                      className="scale-95 md:scale-100 w-full mx-auto"
+                      style={{ maxWidth: "240px" }}
+                    >
+                      <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </motion.div>
           </div>

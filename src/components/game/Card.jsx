@@ -25,7 +25,7 @@ const Card = ({ card, onClick, isPlayable = false, showBack = false }) => {
     >
       {/* Card Image */}
       <img
-        src={`/images/cards/${card.id}.webp`}
+        src={`/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`}
         alt={card.name}
         className={`w-full h-full object-cover rounded-lg ${isPlayable ? 'ring-2 ring-yellow-500/50' : ''}`}
       />

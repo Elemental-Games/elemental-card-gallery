@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { debounce } from 'lodash';
-import { motion, AnimatePresence } from 'framer-motion';
-import { useToast } from '@/components/ui/use-toast';
-import { Card } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { AlertCircle } from "lucide-react";
-import { useNavigate } from 'react-router-dom';
+import CardDetailSidebar from '@/components/CardDetailSidebar';
+import { getOptimizedCardImage, handleImageError } from '@/utils/imageUtils';
 
 const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
@@ -28,14 +26,10 @@ const CardGalleryPage = () => {
   const types = ['Creature', 'Rune', 'Counter', 'Shield'];
   const rarities = ['C', 'U', 'R', 'E', 'L'];
 
-  const { toast } = useToast();
-
   const [selectedCard, setSelectedCard] = useState(null);
 
   // Add a state to track if there are more cards to load
   const [hasMore, setHasMore] = useState(true);
-
-  const navigate = useNavigate();
 
   // Intersection Observer for infinite scroll
   useEffect(() => {
@@ -69,7 +63,7 @@ const CardGalleryPage = () => {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch('/data/cards.json');
+        const response = await fetch('/data/new_cards.json');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -169,29 +163,30 @@ const CardGalleryPage = () => {
   // Card component with simplified hover state
   const CardItem = ({ card }) => {
     const [isHovering, setIsHovering] = useState(false);
-    const navigate = useNavigate();
 
     // Ensure card name is a string
     const cardName = typeof card.name === 'number' ? `Card ${card.name}` : card.name;
+
+    // Generate the original image path
+    const originalImagePath = `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
+    // Get the optimized image path for thumbnail size
+    const optimizedImagePath = getOptimizedCardImage(originalImagePath, 'thumbnail');
 
     return (
       <div
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
-        onClick={() => navigate(`/cards/${card.id}`)}
+        onClick={() => setSelectedCard(card)}
         className={`bg-purple-950/70 p-4 rounded-lg border border-purple-500/30
           transition-all duration-300 cursor-pointer
           ${isHovering ? 'shadow-lg shadow-purple-500/30 border-purple-500/50' : ''}`}
       >
         <div className="relative group">
           <img 
-            src={`/images/cards/${card.id}.webp`}
+            src={optimizedImagePath}
             alt={cardName}
             className="w-full h-auto rounded-lg"
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = `/images/cards/${card.id}.png`;
-            }}
+            onError={handleImageError}
           />
           
           {isHovering && (
@@ -210,68 +205,6 @@ const CardGalleryPage = () => {
           </p>
         </div>
       </div>
-    );
-  };
-
-  // Expanded Card Modal
-  const ExpandedCard = ({ card }) => {
-    if (!card) return null;
-
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="fixed inset-0 bg-black/80 flex items-center justify-center z-50"
-        onClick={() => setSelectedCard(null)}
-      >
-        <motion.div
-          initial={{ scale: 0.8, y: 50 }}
-          animate={{ scale: 1, y: 0 }}
-          exit={{ scale: 0.8, y: 50 }}
-          className="bg-purple-950/90 p-6 rounded-xl max-w-2xl w-full mx-4 relative"
-          onClick={e => e.stopPropagation()}
-        >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <img 
-                src={card.webpPath}
-                alt={card.name}
-                className="w-full h-auto rounded-lg"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = card.imagePath;
-                }}
-              />
-            </div>
-            <div>
-              <h2 className="text-2xl font-bold text-white mb-4">{card.name}</h2>
-              <p className="text-purple-200 mb-2">
-                {card.element} • {card.type} • #{card.cardNumber}
-              </p>
-              {card.ability && (
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-purple-300">Ability</h3>
-                  <p className="text-white">{card.ability.description}</p>
-                </div>
-              )}
-              {card.specialAbility && (
-                <div className="mb-4">
-                  <h3 className="text-lg font-semibold text-purple-300">Special Ability</h3>
-                  <p className="text-white">{card.specialAbility.description}</p>
-                </div>
-              )}
-              <button
-                className="mt-4 px-6 py-2 bg-purple-700 hover:bg-purple-600 rounded-lg 
-                  transition-colors border border-purple-500/50 text-white"
-                onClick={() => setSelectedCard(null)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </motion.div>
-      </motion.div>
     );
   };
 
@@ -393,10 +326,12 @@ const CardGalleryPage = () => {
         </div>
       )}
 
-      {/* Expanded Card Modal */}
-      <AnimatePresence>
-        {selectedCard && <ExpandedCard card={selectedCard} />}
-      </AnimatePresence>
+      {/* Card Detail Sidebar */}
+      <CardDetailSidebar
+        card={selectedCard}
+        isOpen={!!selectedCard}
+        onClose={() => setSelectedCard(null)}
+      />
     </div>
   );
 };

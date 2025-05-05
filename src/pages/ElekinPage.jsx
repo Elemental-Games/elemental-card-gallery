@@ -2,13 +2,14 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Book, Palette } from 'lucide-react';
+import { LayoutGrid, Book, Palette, X } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { subscribeEmail } from '@/utils/api';
 import confetti from 'canvas-confetti';
-import { CheckCircle, Info, X } from 'lucide-react';
+import { CheckCircle, Info as InfoIcon } from 'lucide-react';
 import CardOfTheWeek from '@/components/cards/CardOfTheWeek';
+import CardDetailSidebar from '@/components/CardDetailSidebar';
 
 const ElekinPage = () => {
   // State for email subscription
@@ -17,28 +18,53 @@ const ElekinPage = () => {
   const [showConfirmation, setShowConfirmation] = useState(false);
   const [confirmationEmail, setConfirmationEmail] = useState('');
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   // Cards of the Week data
   const weeklyCards = [
     {
-      id: "wind-sprite",
-      name: "Wind Sprite",
-      image: "/images/cards/wind-sprite.webp"
+      id: "swoop",
+      name: "Swoop",
+      image: "/images/cards/new/swoop.webp",
+      element: "Air",
+      type: "Creature",
+      rarity: "Common",
+      stats: "70/55",
+      description: "A swift bird of prey that dives down on unsuspecting enemies. Ideal for early game pressure.",
+      ability: "Aerial Assault: When this creature attacks, it does +20 damage if your opponent has no flying creatures."
     },
     {
       id: "aqua-dart",
       name: "Aqua Dart",
-      image: "/images/cards/aqua-dart.webp"
+      image: "/images/cards/new/aqua dart.webp",
+      element: "Water",
+      type: "Creature",
+      rarity: "Common",
+      stats: "65/75",
+      description: "A sleek aquatic creature with impressive speed and agility, perfect for evading stronger opponents.",
+      ability: "Swift Current: This creature can attack immediately after being played (no summoning sickness)."
+    },
+    {
+      id: "ember-flicker",
+      name: "Ember Flicker",
+      image: "/images/cards/new/ember flicker.webp",
+      element: "Fire",
+      type: "Creature",
+      rarity: "Common",
+      stats: "80/60",
+      description: "A dancing flame entity that grows stronger as the battle progresses. Great for longer games.",
+      ability: "Growing Flames: At the start of your turn, add +5/+5 to this creature."
     },
     {
       id: "nimblefoot",
       name: "Nimblefoot",
-      image: "/images/cards/nimblefoot.webp"
-    },
-    {
-      id: "emberwing",
-      name: "Emberwing",
-      image: "/images/cards/emberwing.webp"
+      image: "/images/cards/new/nimblefoot.webp",
+      element: "Earth",
+      type: "Creature",
+      rarity: "Common",
+      stats: "60/85",
+      description: "A small, agile earth creature that excels at avoiding attacks while providing steady essence generation.",
+      ability: "Stone Step: Once per turn, this creature can dodge an attack without turning horizontal."
     }
   ];
 
@@ -103,6 +129,10 @@ const ElekinPage = () => {
     }
   };
 
+  const handleLearnMore = (card) => {
+    setSelectedCard(card);
+  };
+
   return (
     <>
       <Helmet>
@@ -110,33 +140,39 @@ const ElekinPage = () => {
         <meta name="description" content="Play Elekin: Masters of Kinbrold in your browser - A strategic trading card game set in the mystical world of Kinbrold." />
       </Helmet>
       
-      <div className="min-h-screen bg-[#1A103C]">
+      <div className="min-h-screen bg-[#1A103C] relative">
         {/* Cards of the Week Section */}
         <section className="container mx-auto px-4 py-10">
-          <motion.div 
-            className="bg-purple-950/70 p-4 rounded-2xl border border-yellow-500/30 
-              shadow-[0_0_30px_rgba(234,179,8,0.1)]"
-            initial={{ scale: 1, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-yellow-400 to-yellow-400 
-              bg-clip-text text-transparent">Weekly Card Deep Dives</h2>
-            <p className="mb-4 text-center text-purple-200 max-w-2xl mx-auto text-lg">
-              Every week, we analyze four new cards in detail, exploring their strategies, 
-              combinations, and impact on the game.
-            </p>
-            
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
-              {weeklyCards.map((card) => (
-                <motion.div key={card.id} variants={itemVariants} className="scale-100">
-                  <CardOfTheWeek card={card} />
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="bg-purple-950/70 p-4 rounded-2xl border border-yellow-500/30 
+                shadow-[0_0_30px_rgba(234,179,8,0.1)]"
+              initial={{ scale: 1, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.5 }}
+            >
+              <h2 className="text-4xl font-bold mb-2 text-center bg-gradient-to-r from-yellow-400 to-yellow-400 
+                bg-clip-text text-transparent">Weekly Card Deep Dives</h2>
+              <p className="mb-4 text-center text-purple-200 max-w-2xl mx-auto text-lg">
+                Every week, we analyze four new cards in detail, exploring their strategies, 
+                combinations, and impact on the game.
+              </p>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 max-w-5xl mx-auto">
+                {weeklyCards.map((card) => (
+                  <motion.div 
+                    key={card.id} 
+                    variants={itemVariants} 
+                    className="scale-100"
+                  >
+                    <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          </div>
         </section>
-
+        
         {/* Navigation Bubbles */}
         <section className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
@@ -235,6 +271,90 @@ const ElekinPage = () => {
             </div>
           </motion.div>
         </section>
+
+        {/* Sidebar that peeks from the right */}
+        <AnimatePresence>
+          {selectedCard && (
+            <motion.div
+              initial={{ opacity: 0, x: 300 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 300 }}
+              transition={{ type: "spring", stiffness: 300, damping: 30 }}
+              className="fixed top-0 right-0 bottom-0 w-full max-w-md z-50"
+            >
+              <div className="h-full bg-purple-950/95 border-l border-yellow-500/30 shadow-[-10px_0px_30px_rgba(0,0,0,0.5)] p-6 overflow-y-auto">
+                <div className="flex justify-between items-center mb-6">
+                  <h3 className="text-2xl font-bold text-yellow-400">{selectedCard.name}</h3>
+                  <button 
+                    onClick={() => setSelectedCard(null)}
+                    className="p-1 rounded-full hover:bg-purple-800/50 transition-colors"
+                  >
+                    <X className="w-6 h-6 text-purple-300" />
+                  </button>
+                </div>
+                
+                <div className="mb-8 flex justify-center">
+                  <img 
+                    src={selectedCard.image} 
+                    alt={selectedCard.name}
+                    className="rounded-lg shadow-lg max-w-[250px]"
+                  />
+                </div>
+                
+                <div className="space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div>
+                      <h4 className="text-sm text-purple-300 font-medium">Element</h4>
+                      <p className="text-white text-lg">{selectedCard.element}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-purple-300 font-medium">Type</h4>
+                      <p className="text-white text-lg">{selectedCard.type}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-purple-300 font-medium">Rarity</h4>
+                      <p className="text-white text-lg">{selectedCard.rarity}</p>
+                    </div>
+                    <div>
+                      <h4 className="text-sm text-purple-300 font-medium">Stats</h4>
+                      <p className="text-white text-lg">{selectedCard.stats}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="pt-6 border-t border-purple-500/30">
+                    <div>
+                      <h4 className="text-sm text-purple-300 font-medium mb-1">Description</h4>
+                      <p className="text-white">{selectedCard.description}</p>
+                    </div>
+                    
+                    <div className="mt-4">
+                      <h4 className="text-sm text-purple-300 font-medium mb-1">Ability</h4>
+                      <p className="text-white">{selectedCard.ability}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="mt-8">
+                    <Link 
+                      to={`/cards/${selectedCard.id}`}
+                      className="inline-block w-full text-center px-6 py-4 bg-yellow-500 hover:bg-yellow-400 rounded-lg transition-colors text-purple-900 font-bold text-lg"
+                    >
+                      View Full Details
+                    </Link>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Background overlay */}
+              <motion.div 
+                className="fixed inset-0 bg-black/60 z-[-1]"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setSelectedCard(null)}
+              />
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
 
       {/* Success/Already Subscribed Modal */}
@@ -269,7 +389,7 @@ const ElekinPage = () => {
               <div className="text-center py-4">
                 {alreadySubscribed ? (
                   <>
-                    <Info className="h-16 w-16 text-blue-400 mx-auto mb-4" />
+                    <InfoIcon className="h-16 w-16 text-blue-400 mx-auto mb-4" />
                     <h3 className="text-xl font-bold text-blue-400 mb-2">Already Subscribed!</h3>
                     <p className="text-purple-200 mb-6">
                       It looks like {confirmationEmail} is already on our subscriber list. Thanks for your enthusiasm! We appreciate your continued support.
@@ -303,6 +423,13 @@ const ElekinPage = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* Add CardDetailSidebar at the bottom of the component */}
+      <CardDetailSidebar
+        card={selectedCard}
+        isOpen={!!selectedCard}
+        onClose={() => setSelectedCard(null)}
+      />
     </>
   );
 };

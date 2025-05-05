@@ -45,7 +45,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const cardContent = (
     <>
       <img 
-        src={`/images/cards/${card.id}.webp`}
+        src={`/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`}
         alt={card.name} 
         className={`${imageClasses[variant]} ${className}`}
         onError={handleImageError}

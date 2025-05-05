@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Book, LayoutGrid, Map } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
@@ -56,6 +57,14 @@ const LandingPage = () => {
 
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
+      <Helmet>
+        <title>Elekin Trading Card Game</title>
+        <meta name="description" content="Unleash the power of the elements in Kinbrold! Battle with elemental cards, strategic gameplay, and discover an immersive fantasy universe in Elekin TCG." />
+        <meta property="og:title" content="Elekin TCG - Strategic Elemental Card Game" />
+        <meta property="og:description" content="Unleash the power of the elements in Kinbrold! Battle with elemental cards, strategic gameplay, and discover an immersive fantasy universe in Elekin TCG." />
+        <meta property="og:image" content="/Games_Logo.png" />
+      </Helmet>
+      
       <AnimatedCardBackground />
       
       {/* Game Overview Section */}
@@ -88,9 +97,12 @@ const LandingPage = () => {
         </div>
       </section>
 
-      <div className="container mx-auto px-4 py-16">
-        <div className="bg-purple-800 bg-opacity-50 rounded-xl p-8 mb-32">
-          <CardsOfTheWeek />
+      {/* Cards of the Week Section */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="bg-purple-800 bg-opacity-40 rounded-xl p-6 mb-20">
+          <div className="max-w-6xl mx-auto">
+            <CardsOfTheWeek />
+          </div>
         </div>
 
         <section className="mb-16">

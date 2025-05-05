@@ -34,7 +34,7 @@ const DeckBuilderWizardPage = () => {
     const loadCards = async () => {
       if (step > 1) {
         try {
-          const response = await fetch('/data/cards.json');
+          const response = await fetch('/data/new_cards.json');
           if (!response.ok) {
             throw new Error('Failed to load cards');
           }

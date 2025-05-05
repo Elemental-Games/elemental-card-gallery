@@ -266,12 +266,12 @@ const CardGallery = ({ cards = [], onCardSelect, selectedCards = [], maxPerEleme
           >
             <div className="relative aspect-[2/3] w-full">
               <img 
-                src={`/images/cards/${card.id}.webp`} 
+                src={`/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`} 
                 alt={card.name} 
                 className="w-full h-full object-contain rounded-lg"
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = `/images/cards/${card.id}.png`;
+                  e.target.src = `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
                 }}
               />
               

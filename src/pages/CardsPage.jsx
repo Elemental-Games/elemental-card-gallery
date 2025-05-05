@@ -1,49 +1,57 @@
-import { useRef } from "react";
+import { useState } from "react";
 import { Link } from 'react-router-dom';
-import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { AlertCircle } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import ReleaseSchedule from '@/components/ReleaseSchedule';
-import SEO from '../components/SEO';
+import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 import CardOfTheWeek from '@/components/cards/CardOfTheWeek';
 import SubscribeButton from '@/components/SubscribeButton';
 
-const scrollGallery = (direction) => {
-  const container = scrollContainerRef.current;
-  if (container) {
-    const scrollAmount = 600; // Adjust this value to control scroll distance
-    const currentScroll = container.scrollLeft;
-    container.scrollTo({
-      left: currentScroll + (direction === 'left' ? -scrollAmount : scrollAmount),
-      behavior: 'smooth'
-    });
-  }
-};
-
 const CardsPage = () => {
+  const [selectedCard, setSelectedCard] = useState(null);
+  
   const weeklyCards = [
     {
-      id: "cloud-sprinter",
-      name: "Cloud Sprinter",
-      image: "/images/cards/cloud-sprinter.webp"
+      id: "swoop",
+      name: "Swoop",
+      image: "/images/cards/new/swoop.webp",
+      element: "Air",
+      type: "Creature",
+      rarity: "Common",
+      stats: "70/55",
+      description: "A swift bird of prey that dives down on unsuspecting enemies. Ideal for early game pressure.",
+      ability: "Aerial Assault: When this creature attacks, it does +20 damage if your opponent has no flying creatures."
     },
     {
-      id: "swiftreaver",
-      name: "Swiftreaver",
-      image: "/images/cards/swiftreaver.webp"
+      id: "aqua-dart",
+      name: "Aqua Dart",
+      image: "/images/cards/new/aqua dart.webp",
+      element: "Water",
+      type: "Creature",
+      rarity: "Common",
+      stats: "65/75",
+      description: "A sleek aquatic creature with impressive speed and agility, perfect for evading stronger opponents.",
+      ability: "Swift Current: This creature can attack immediately after being played (no summoning sickness)."
     },
     {
-      id: "aqua-shade",
-      name: "Aqua Shade",
-      image: "/images/cards/aqua-shade.webp"
+      id: "ember-flicker",
+      name: "Ember Flicker",
+      image: "/images/cards/new/ember flicker.webp",
+      element: "Fire",
+      type: "Creature",
+      rarity: "Common",
+      stats: "80/60",
+      description: "A dancing flame entity that grows stronger as the battle progresses. Great for longer games.",
+      ability: "Growing Flames: At the start of your turn, add +5/+5 to this creature."
     },
     {
-      id: "flamekeeper",
-      name: "Flamekeeper",
-      image: "/images/cards/flamekeeper.webp"
+      id: "nimblefoot",
+      name: "Nimblefoot",
+      image: "/images/cards/new/nimblefoot.webp",
+      element: "Earth",
+      type: "Creature",
+      rarity: "Common",
+      stats: "60/85",
+      description: "A small, agile earth creature that excels at avoiding attacks while providing steady essence generation.",
+      ability: "Stone Step: Once per turn, this creature can dodge an attack without turning horizontal."
     }
   ];
 
@@ -61,7 +69,7 @@ const CardsPage = () => {
     hidden: { 
       opacity: 0,
       x: -50,
-      rotateY: 45
+      rotateY: 0
     },
     visible: { 
       opacity: 1,
@@ -75,8 +83,12 @@ const CardsPage = () => {
     }
   };
 
+  const handleLearnMore = (card) => {
+    setSelectedCard(card);
+  };
+
   return (
-    <div className="min-h-screen bg-[#1A103C] text-white overflow-hidden">
+    <div className="min-h-screen bg-[#1A103C] text-white overflow-hidden relative">
       <motion.div 
         className="container mx-auto px-4 py-12 max-w-6xl"
         initial="hidden"
@@ -86,7 +98,7 @@ const CardsPage = () => {
         {/* Weekly Deep Dives Section */}
         <motion.div 
           className="bg-purple-950/70 p-8 rounded-2xl border border-yellow-500/30 
-            shadow-[0_0_30px_rgba(234,179,8,0.1)]"
+            shadow-[0_0_30px_rgba(234,179,8,0.1)] mb-8"
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -98,10 +110,14 @@ const CardsPage = () => {
             combinations, and impact on the game.
           </p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {weeklyCards.map((card, index) => (
-              <motion.div key={card.id} variants={itemVariants}>
-                <CardOfTheWeek card={card} />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {weeklyCards.map((card) => (
+              <motion.div 
+                key={card.id} 
+                variants={itemVariants}
+                className="cursor-pointer"
+              >
+                <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
               </motion.div>
             ))}
           </div>
@@ -154,6 +170,88 @@ const CardsPage = () => {
           </div>
         </div>
       </motion.div>
+
+      {/* Sidebar that peeks from the right */}
+      <AnimatePresence>
+        {selectedCard && (
+          <motion.div
+            initial={{ opacity: 0, x: 300 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: 300 }}
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 bottom-0 w-full max-w-md z-50"
+          >
+            <div className="h-full bg-purple-950/95 border-l border-yellow-500/30 shadow-[-10px_0px_30px_rgba(0,0,0,0.5)] p-6 overflow-y-auto">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-yellow-400">{selectedCard.name}</h3>
+                <button 
+                  onClick={() => setSelectedCard(null)}
+                  className="p-1 rounded-full hover:bg-purple-800/50 transition-colors"
+                >
+                  <X className="w-6 h-6 text-purple-300" />
+                </button>
+              </div>
+              
+              <div className="mb-8 flex justify-center">
+                <img 
+                  src={selectedCard.image} 
+                  alt={selectedCard.name}
+                  className="rounded-lg shadow-lg max-w-[250px]"
+                />
+              </div>
+              
+              <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-6">
+                  <div>
+                    <h4 className="text-sm text-purple-300 font-medium">Element</h4>
+                    <p className="text-white text-lg">{selectedCard.element}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm text-purple-300 font-medium">Type</h4>
+                    <p className="text-white text-lg">{selectedCard.type}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm text-purple-300 font-medium">Rarity</h4>
+                    <p className="text-white text-lg">{selectedCard.rarity}</p>
+                  </div>
+                  <div>
+                    <h4 className="text-sm text-purple-300 font-medium">Stats</h4>
+                    <p className="text-white text-lg">{selectedCard.stats}</p>
+                  </div>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm text-purple-300 font-medium mb-1">Description</h4>
+                  <p className="text-white">{selectedCard.description}</p>
+                </div>
+                
+                <div>
+                  <h4 className="text-sm text-purple-300 font-medium mb-1">Ability</h4>
+                  <p className="text-white">{selectedCard.ability}</p>
+                </div>
+                
+                <div className="mt-8">
+                  <Link 
+                    to={`/cards/${selectedCard.id}`}
+                    className="inline-block w-full text-center px-6 py-4 bg-yellow-500 hover:bg-yellow-400 rounded-lg transition-colors text-purple-900 font-bold text-lg"
+                  >
+                    View Full Details
+                  </Link>
+                </div>
+              </div>
+            </div>
+            
+            {/* Background overlay */}
+            <motion.div 
+              className="fixed inset-0 bg-black/60 z-[-1]"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setSelectedCard(null)}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

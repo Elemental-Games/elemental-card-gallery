@@ -23,7 +23,7 @@ const GradientButton = () => {
       {/* Button */}
       <Link
         to="/join"
-        className="relative block px-8 py-6 bg-yellow-500 text-purple-900 text-2xl font-bold rounded-full 
+        className="relative block px-8 py-5 sm:px-10 sm:py-6 bg-yellow-500 text-purple-900 text-2xl sm:text-3xl font-bold rounded-full 
           hover:bg-yellow-400 transition-colors duration-300"
       >
         Join Now

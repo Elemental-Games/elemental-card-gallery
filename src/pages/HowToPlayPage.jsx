@@ -18,28 +18,28 @@ const HowToPlayPage = () => {
   const elementalCards = {
     air: {
       name: "Cloud Sprinter",
-      image: "/images/cards/cloud-sprinter.png",
+      image: "/images/cards/new/cloud sprinter.webp",
       stats: "75/75",
       element: "Air",
       description: "Agile air creature with balanced stats"
     },
     water: {
       name: "Aqua Dart",
-      image: "/images/cards/aqua-dart.png",
+      image: "/images/cards/new/aqua dart.webp",
       stats: "90/120",
       element: "Water",
       description: "High agility water creature with dodge ability"
     },
     fire: {
       name: "Flamekeeper",
-      image: "/images/cards/flamekeeper.png",
+      image: "/images/cards/new/flamekeeper.webp",
       stats: "110/50",
       element: "Fire",
       description: "High strength fire creature with powerful attacks"
     },
     earth: {
       name: "Sandy Scuttler",
-      image: "/images/cards/sandy-scuttler.png",
+      image: "/images/cards/new/sandy scuttler.webp",
       stats: "70/90",
       element: "Earth",
       description: "Defensive earth creature with high durability"
@@ -72,7 +72,7 @@ const HowToPlayPage = () => {
   const cardExamples = {
     creature: {
       name: "Flamekeeper",
-      image: "/images/cards/flamekeeper.png",
+      image: "/images/cards/new/flamekeeper.webp",
       type: "Creature",
       element: "Fire",
       stats: "110/50",
@@ -80,28 +80,28 @@ const HowToPlayPage = () => {
     },
     rune: {
       name: "Essence Exchange",
-      image: "/images/cards/essence-exchange.png",
+      image: "/images/cards/new/essence exchange.webp",
       type: "Rune",
       element: "Water",
       description: "Convert essence from one element to another"
     },
     counter: {
       name: "Counter Pulse",
-      image: "/images/cards/counter-pulse.png",
+      image: "/images/cards/new/counter pulse.webp",
       type: "Counter",
       element: "Water",
       description: "Negate an opponent's card effect"
     },
     shield: {
       name: "Mystic Ward",
-      image: "/images/cards/mystic-ward.png",
+      image: "/images/cards/new/mystic ward.webp",
       type: "Shield",
       tier: "1",
       health: "150"
     },
     dragon: {
       name: "Eldritch the Frost Dragon",
-      image: "/images/cards/eldritch.png",
+      image: "/images/cards/new/eldritch.webp",
       type: "Dragon",
       elements: ["Air", "Water"],
       stats: "200/150",
@@ -109,7 +109,7 @@ const HowToPlayPage = () => {
     },
     victory: {
       name: "Ancient Sigil",
-      image: "/images/cards/ancient-sigil.png",
+      image: "/images/cards/new/ancient sigil.webp",
       type: "Rune",
       description: "Legendary card that grants instant victory"
     }

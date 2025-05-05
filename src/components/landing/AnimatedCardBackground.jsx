@@ -1,89 +1,89 @@
-import React from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import GradientButton from '../ui/GradientButton';
+import CardDetailSidebar from '@/components/CardDetailSidebar';
+import { getOptimizedCardImage, handleImageError } from '@/utils/imageUtils';
 
 const AnimatedCardBackground = () => {
   const [cards, setCards] = useState([]);
-  const [animationComplete, setAnimationComplete] = useState(false);
+  const [selectedCard, setSelectedCard] = useState(null);
 
   useEffect(() => {
     const existingCards = [
       {
-        id: "cloud-sprinter",
-        name: "Cloud Sprinter",
-        image: "/images/cards/cloud-sprinter.webp"
+        id: "scirrus",
+        name: "Scirrus",
+        image: "/images/cards/new/scirrus.webp"
       },
       {
-        id: "swiftreaver",
-        name: "Swiftreaver",
-        image: "/images/cards/swiftreaver.webp"
+        id: "nimblefoot",
+        name: "Nimblefoot",
+        image: "/images/cards/new/nimblefoot.webp"
       },
       {
-        id: "aqua-shade",
-        name: "Aqua Shade",
-        image: "/images/cards/aqua-shade.webp"
+        id: "aqua-dart",
+        name: "Aqua Dart",
+        image: "/images/cards/new/aqua dart.webp"
       },
       {
-        id: "cloud-warden",
-        name: "Cloud Warden",
-        image: "/images/cards/cloud-warden.webp"
+        id: "swoop",
+        name: "Swoop",
+        image: "/images/cards/new/swoop.webp"
       },
       {
-        id: "mountain-crusher",
-        name: "Mountain Crusher",
-        image: "/images/cards/mountain-crusher.webp"
+        id: "dire-pack",
+        name: "Dire Pack",
+        image: "/images/cards/new/dire pack.webp"
       },
       {
-        id: "river-sprite",
-        name: "River Sprite",
-        image: "/images/cards/river-sprite.webp"
+        id: "tentik",
+        name: "Tentik",
+        image: "/images/cards/new/tentik.webp"
       },
       {
-        id: "nova",
-        name: "Nova",
-        image: "/images/cards/nova.webp"
+        id: "ember-flicker",
+        name: "Ember Flicker",
+        image: "/images/cards/new/ember flicker.webp"
       },
       {
-        id: "glacis",
-        name: "Glacis",
-        image: "/images/cards/glacis.webp"
+        id: "undine",
+        name: "Undine, The Water Tempest",
+        image: "/images/cards/new/undine.webp"
       },
       {
-        id: "terra-warden",
-        name: "Terra Warden",
-        image: "/images/cards/terra-warden.webp"
+        id: "terra",
+        name: "Terra, The Earth Titan",
+        image: "/images/cards/new/terra.webp"
       },
       {
-        id: "deepseer",
-        name: "Deepseer",
-        image: "/images/cards/deepseer.webp"
+        id: "revival-rain",
+        name: "Revival Rain",
+        image: "/images/cards/new/revival rain.webp"
       },
       {
-        id: "gust-griffin",
-        name: "Gust Griffin",
-        image: "/images/cards/gust-griffin.webp"
+        id: "heavy-chains",
+        name: "Heavy Chains",
+        image: "/images/cards/new/heavy chains.webp"
       },
       {
-        id: "ivy-gila",
-        name: "Ivy Gila",
-        image: "/images/cards/ivy-gila.webp"
+        id: "glint",
+        name: "Glint",
+        image: "/images/cards/new/glint.webp"
       },
       {
-        id: "riptide-revenant",
-        name: "Riptide Revenant",
-        image: "/images/cards/riptide-revenant.webp"
+        id: "cleanse-and-adapt",
+        name: "Cleanse and Adapt",
+        image: "/images/cards/new/cleanse and adapt.webp"
       },
       {
         id: "viktor",
         name: "Viktor, The Fire Demon",
-        image: "/images/cards/viktor.webp"
+        image: "/images/cards/new/viktor.webp"
       },
       {
-        id: "flamekeeper",
-        name: "Flamekeeper",
-        image: "/images/cards/flamekeeper.webp"
+        id: "reflective-barrier",
+        name: "Reflective Barrier",
+        image: "/images/cards/new/reflective barrier.webp"
       }
     ];
 
@@ -91,7 +91,11 @@ const AnimatedCardBackground = () => {
     setCards(duplicatedCards);
   }, []);
 
-  const createRow = (direction, speed, yOffset, startPosition = 0, zIndex) => {
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+  };
+
+  const createRow = (direction, speed, yOffset, startPosition = 0) => {
     const rowCards = cards.slice(startPosition, startPosition + 40);
     if (rowCards.length === 0) return null;
 
@@ -111,8 +115,7 @@ const AnimatedCardBackground = () => {
         animate={{ rotate: 0, y: 0 }}
         transition={{ 
           duration: 1,
-          ease: "easeOut",
-          onComplete: () => setAnimationComplete(true)
+          ease: "easeOut"
         }}
       >
         <motion.div
@@ -131,59 +134,63 @@ const AnimatedCardBackground = () => {
           style={{ gap: '1rem' }}
         >
           {/* First set of cards */}
-          {rowCards.map((card, i) => (
-            <Link 
-              key={`${card.id}-${i}-1`}
-              to={`/cards/${card.id}`}
-              className="block w-40 shrink-0 cursor-pointer pointer-events-auto"
-            >
-              <motion.div
-                whileHover={{ 
-                  scale: 1.05,
-                  opacity: 0.8,
-                  transition: { duration: 0.2 }
-                }}
-                className="opacity-10 transition-all duration-300 hover:opacity-80"
+          {rowCards.map((card, i) => {
+            // Generate optimized image path
+            const optimizedImagePath = getOptimizedCardImage(card.image, 'thumbnail');
+            
+            return (
+              <div 
+                key={`${card.id}-${i}-1`}
+                className="block w-40 shrink-0 cursor-pointer pointer-events-auto"
+                onClick={() => handleCardClick(card)}
               >
-                <img 
-                  src={card.image} 
-                  alt={card.name}
-                  className="w-full h-auto rounded-lg select-none hover:opacity-100"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = card.image.replace('.webp', '.png');
+                <motion.div
+                  whileHover={{ 
+                    scale: 1.05,
+                    opacity: 0.8,
+                    transition: { duration: 0.2 }
                   }}
-                />
-              </motion.div>
-            </Link>
-          ))}
+                  className="opacity-10 transition-all duration-300 hover:opacity-80"
+                >
+                  <img 
+                    src={optimizedImagePath}
+                    alt={card.name}
+                    className="w-full h-auto rounded-lg select-none hover:opacity-100"
+                    onError={handleImageError}
+                  />
+                </motion.div>
+              </div>
+            );
+          })}
           {/* Duplicate set of cards for seamless loop */}
-          {rowCards.map((card, i) => (
-            <Link 
-              key={`${card.id}-${i}-2`}
-              to={`/cards/${card.id}`}
-              className="block w-40 shrink-0 cursor-pointer pointer-events-auto"
-            >
-              <motion.div
-                whileHover={{ 
-                  scale: 1,
-                  opacity: 0.8,
-                  transition: { duration: 0.2 }
-                }}
-                className="opacity-10 transition-all duration-300"
+          {rowCards.map((card, i) => {
+            // Generate optimized image path
+            const optimizedImagePath = getOptimizedCardImage(card.image, 'thumbnail');
+            
+            return (
+              <div 
+                key={`${card.id}-${i}-2`}
+                className="block w-40 shrink-0 cursor-pointer pointer-events-auto"
+                onClick={() => handleCardClick(card)}
               >
-                <img 
-                  src={card.image} 
-                  alt={card.name}
-                  className="w-full h-auto rounded-lg select-none"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = card.image.replace('.webp', '.png');
+                <motion.div
+                  whileHover={{ 
+                    scale: 1,
+                    opacity: 0.8,
+                    transition: { duration: 0.2 }
                   }}
-                />
-              </motion.div>
-            </Link>
-          ))}
+                  className="opacity-10 transition-all duration-300"
+                >
+                  <img 
+                    src={optimizedImagePath}
+                    alt={card.name}
+                    className="w-full h-auto rounded-lg select-none"
+                    onError={handleImageError}
+                  />
+                </motion.div>
+              </div>
+            );
+          })}
         </motion.div>
       </motion.div>
     );
@@ -195,9 +202,9 @@ const AnimatedCardBackground = () => {
       <div className="absolute inset-0 z-10 w-full">
         {cards.length > 0 && (
           <>
-            {createRow(1, 80, 0, 0, 1)}
-            {createRow(-1, 85, 30, 10, 2)}
-            {createRow(1, 85, 60, 20, 3)}
+            {createRow(1, 80, 0, 0)}
+            {createRow(-1, 85, 30, 10)}
+            {createRow(1, 85, 60, 20)}
           </>
         )}
       </div>
@@ -205,9 +212,10 @@ const AnimatedCardBackground = () => {
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-[#1A103C]/80 via-[#1A103C]/60 to-[#1A103C] z-0" />
       
-      {/* Text Content - pointer-events-none */}
+      {/* Content Container - positioned right at the top */}
       <motion.div 
-        className="relative z-20 flex flex-col items-center justify-start h-full text-center px-4 pointer-events-none"
+        className="relative z-20 flex flex-col items-center h-full text-center px-4 pointer-events-none"
+        style={{ paddingTop: '1rem' }}
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ 
@@ -215,51 +223,54 @@ const AnimatedCardBackground = () => {
           delay: 1,
           ease: "easeOut"
         }}
-        style={{ paddingTop: '0vh' }}
       >
         <motion.img
           src="/Games_Logo.png"
           alt="Elemental Games Logo"
-          className="w-64 md:w-80 mb-4 md:mb-0"
+          className="w-60 md:w-72 -mb-10"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         />
         
-        <motion.h1 
-          className="text-5xl md:text-7xl font-extrabold mb-4 md:mb-6 text-white"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-        >
-          Welcome to<br />
-          Elemental Games
-        </motion.h1>
+        <div className="flex flex-col justify-center flex-grow-0 my-4">
+          <motion.h1 
+            className="text-4xl md:text-6xl font-extrabold mb-2 text-white"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+          >
+            Welcome to<br />
+            Elemental Games
+          </motion.h1>
+          
+          <motion.p 
+            className="text-lg md:text-xl mb-8 text-purple-200 max-w-2xl font-medium"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.4, duration: 0.6 }}
+          >
+            Master the elements, build your deck, and become a legend in the world of Kinbrold
+          </motion.p>
+        </div>
         
-        <motion.p 
-          className="text-xl md:text-2xl mb-6 md:mb-8 text-purple-200 max-w-2xl font-medium"
+        {/* Button with pointer-events-auto */}
+        <motion.div 
+          className="pointer-events-auto"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.6 }}
+          transition={{ delay: 1.6, duration: 0.6 }}
         >
-          Master the elements, build your deck, and become a legend in the world of Kinbrold
-        </motion.p>
+          <GradientButton />
+        </motion.div>
       </motion.div>
 
-      {/* Button Container - separate with pointer-events-auto */}
-      <motion.div 
-        className="absolute z-30 w-full flex justify-center"
-        style={{ 
-          bottom: '15vh'
-        }}
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.6, duration: 0.6 }}
-      >
-        <div className="pointer-events-auto">
-          <GradientButton />
-        </div>
-      </motion.div>
+      {/* Card Detail Sidebar */}
+      <CardDetailSidebar
+        card={selectedCard}
+        isOpen={!!selectedCard}
+        onClose={() => setSelectedCard(null)}
+      />
     </div>
   );
 };

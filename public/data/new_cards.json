@@ -1,0 +1,4880 @@
+{
+  "cards": [
+    {
+      "cardNumber": 1,
+      "id": "skitters",
+      "name": "Skitters",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/skitters.webp",
+      "webpPath": "/images/cards/new/skitters.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 75
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Their wings create a distinctive humming tone that changes pitch with approaching weather shifts.",
+      "loreDescription": "Skitters are tiny insect creatures that blow around in the wind, living and feeding on the grass found all across Kinbrold. Most commonly found in higher altitude locations around Kinbrold, but also thrives wherever green grass grows. Its elusiveness is its most common defense mechanism, being nearly impossible to catch when riding gusts and air currents.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 2,
+      "id": "glint",
+      "name": "Glint",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/glint.webp",
+      "webpPath": "/images/cards/new/glint.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Glints are prized by card crafters who claim their crystalline wings and air essence to create Elekin cards.",
+      "loreDescription": "A lightning-fast insect with iridescent wings that shimmer with every color of the rainbow as it darts through the air. Glints can hover perfectly still one moment and disappear in a blur of movement the next.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 3,
+      "id": "thrummer",
+      "name": "Thrummer",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/thrummer.webp",
+      "webpPath": "/images/cards/new/thrummer.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Thrummers collect essence from elemental sources to craft their honeycombs.",
+      "loreDescription": "A stocky, vibrating creature with a fuzzy body and rapidly beating wings that generate a distinctive resonant hum. Unlike ordinary bees, Thrums are drawn to areas rich in elemental energy, where they collect pure essence rather than pollen. They store this essence within specialized chambers of their vibrating honeycombs, creating crystallized structures that pulse with elemental power.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 4,
+      "id": "kinbat",
+      "name": "Kinbat",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/kinbat.webp",
+      "webpPath": "/images/cards/new/kinbat.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Their ears allow them to triangulate the exact location of both prey and predators simultaneously.",
+      "loreDescription": "Agile nocturnal flyers that navigate Kinbrold's darkness with exceptional precision. Their large, expressive ears constantly rotate to capture even the faintest sounds, while their wing membranes shimmer faintly in moonlight.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 5,
+      "id": "scirrus",
+      "name": "Scirrus",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/scirrus.webp",
+      "webpPath": "/images/cards/new/scirrus.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Often seen hopping through clouds, leaving trails of mist in playful patterns.",
+      "loreDescription": "Scirrus is a squirrel-like creature that resides around each major Kingdom in Kinbrold. They're most notably found in the clouds connecting the 5 major Kingdoms. Scirrus love to hop cloud to cloud and feed on the high-flying insects. They dive down using their webbed-arms to sprint around Kinbrold, but they have the most fun up in the clouds.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 6,
+      "id": "rook",
+      "name": "Rook",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/rook.webp",
+      "webpPath": "/images/cards/new/rook.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Rooks collect and trade shiny objects among their flocks, developing a complex value system based on each item.",
+      "loreDescription": "Intelligent, social birds with glossy black feathers that shimmer with subtle blue highlights when viewed in strong light. Rooks possess remarkable problem-solving abilities and long memories, recognizing individual people for years. They establish complex social hierarchies in their flocks, communicating through an intricate language of calls and gestures. Zalos scholars are still studying the roots of their intelligence.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 7,
+      "id": "lumifts",
+      "name": "Lumifts",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/lumifts.webp",
+      "webpPath": "/images/cards/new/lumifts.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "cardFact": "Citizens of Kinbrold often gather on clear evenings to watch drifting groups of Lumifts illuminate the night sky.",
+      "loreDescription": "A delicate, translucent creature that drifts through Kinbrold's skies. Resembling airborne jellyfish with dome-shaped bodies filled with lighter-than-air gas and trailing, sensitive tendrils. They pulse gently to control their movement and glow softly at night.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 8,
+      "id": "driplets",
+      "name": "Driplets",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/driplets.webp",
+      "webpPath": "/images/cards/new/driplets.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Their fins create subtle vibrations in water that act as an early warning system for approaching predators.",
+      "loreDescription": "Driplets are small, nimble fish found throughout Kinbrold's waterways. Their bodies shimmer with bioluminescent patterns that change with water temperature. Most commonly found in clear, fast-flowing streams around Tsunareth, but also thrive in smaller bodies of water. Their remarkable sensing abilities allow them to detect disturbances in water from considerable distances, making them nearly impossible to catch by conventional fishing methods.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 9,
+      "id": "glurb",
+      "name": "Glurb",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/glurb.webp",
+      "webpPath": "/images/cards/new/glurb.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Glurbs are sought after by card crafters who distill their skin secretions to create counter cards.",
+      "loreDescription": "A swift amphibian with translucent skin that produces a fine mist when threatened. Glurbs can leap extraordinary distances and hover briefly mid-air by releasing controlled bursts of vapor. They inhabit the marshlands throughout Kinbrold, where they feed on small insects and elemental motes. Their distinctive croaking intensifies before rainfall, making them natural weather predictors for local communities",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 10,
+      "id": "shelt",
+      "name": "Shelt",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/shelt.webp",
+      "webpPath": "/images/cards/new/shelt.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Shelts extract essence from underwater sources, storing the essence within their intricate, color-changing shells.",
+      "loreDescription": "A turtle-like creature with a shell composed of living coral that grows throughout its lifetime. Each Shelt's pattern is unique, forming elaborate designs that reflect their journey and the specific elemental energies they've absorbed. Water essence scholars study these patterns to map underwater essence flows. Though slow on land, they move with surprising grace and speed underwater, using their fins to harness currents",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 11,
+      "id": "skiff",
+      "name": "Skiff",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/skiff.webp",
+      "webpPath": "/images/cards/new/skiff.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Their webbed feet allow them to skip across water surfaces very quickly.",
+      "loreDescription": "Agile shoreline dwellers that navigate Kinbrold's coastal regions with remarkable precision. Skiffs possess specialized pads on their feet that create surface tension bubbles. They feed primarily on small fish and water insects caught during their characteristic bouncing movement across water. They can often be seen in the sky forming a V-formation when traveling across Kinbrold.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 12,
+      "id": "burble",
+      "name": "Burble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/burble.webp",
+      "webpPath": "/images/cards/new/burble.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Often seen building intricate underwater lodges, and spitting bubbles.",
+      "loreDescription": "Burble is a resourceful aquatic mammal that thrives in the freshwater lakes of Kinbrold. Their distinctive feature is their ability to create and manipulate water bubbles using specialized glands in their cheeks. These bubbles can be hardened into surprisingly durable structures or used as oxygen reserves. Burbles work in colonies to create elaborate underwater communities, connecting their bubble lodges with tunnel systems that can span entire lake beds",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 13,
+      "id": "murk",
+      "name": "Murk",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/murk.webp",
+      "webpPath": "/images/cards/new/murk.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "Their whiskers can detect the slightest vibrations from fishing lines and net, making catching them extremely difficult.",
+      "loreDescription": "A stealthy catfish-like predator that glides across the bottom of Kinbrold's lakes and rivers. Their elongated whiskers serve as an advanced sensory network, capable of detecting the faintest disturbances in the water—particularly those caused by fishermen. Murks have developed a natural wariness of people, as their essence-rich scales are highly prized by crafters throughout Kinbrold. They spend daylight hours buried in silt or hidden beneath submerged logs, emerging at dusk to hunt smaller fish. Despite numerous attempts to domesticate them for their essence-generating capabilities, Murks have proven impossible to breed in captivity. Local legends claim that catching a glimpse of a Murk's distinctive blue-green eyes brings good fortune.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 14,
+      "id": "gleel",
+      "name": "Gleel",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/gleel.webp",
+      "webpPath": "/images/cards/new/gleel.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "cardFact": "In the darkness of Kinbrold's deepest waters, a Gleel's eyes can illuminate entire caverns.",
+      "loreDescription": "A sleek eel with extraordinarily luminescent eyes that pierce through murky waters. Gleels inhabit the depths of Kinbrold's lakes and rivers, rarely venturing to the shallows except to breed. Their eyes function as natural searchlights, becoming blindingly bright when threatened. Tsunareth divers tell tales of being guided to safety when lost in underwater caverns by the curious creatures. Despite researchers' efforts, the secret behind their unwavering light remains a mystery the Gleels seem determined to keep.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 15,
+      "id": "pyro-mites",
+      "name": "Pyro Mites",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/pyro mites.webp",
+      "webpPath": "/images/cards/new/pyro mites.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 85,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "Pyro mites can withstand even the hottest of temperatures.",
+      "loreDescription": "Tiny insects with brilliant red exoskeletons that work in highly organized colonies throughout Scarto's volcanic plains. Unlike ordinary mites, Pyro mites can withstand extreme temperatures. Scarto scholars study their remarkable ability to withstand such extreme temperatures.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 16,
+      "id": "salix",
+      "name": "Salix",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/salix.webp",
+      "webpPath": "/images/cards/new/salix.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "A Salix's heat signature remains visible for hours after it has departed, seen by many travelers across Kinbrold.",
+      "loreDescription": "Salamander-like creatures with skin that shifts between deep crimson and bright orange as they move. Salix thrive in geothermal springs and lava flows, absorbing heat directly through specialized scales. Their footprints leave glowing trails that slowly fade over time. Despite their fiery habitat, they're remarkably gentle creatures, often adopted by Scarto children as pets that warm their pillows on cold nights.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 17,
+      "id": "cinders",
+      "name": "Cinders",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/cinders.webp",
+      "webpPath": "/images/cards/new/cinders.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "Cinders consume impurities in fires, producing purified flames that burn without smoke or ash.",
+      "loreDescription": "Small imp-like beings composed of living flame with bright yellow eyes. They dance through fires without consuming additional fuel, feeding instead on the essence within the flames themselves. They tend to appear when a long-lasting fire occurs. Osao, the Fire Elementalist, values them for their ability to stabilize and enhance ritual fires. Though mischievous, they form strong bonds with those who respect fire's power, often becoming lifelong companions.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 18,
+      "id": "pyrusk",
+      "name": "Pyrusk",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/pyrusk.webp",
+      "webpPath": "/images/cards/new/pyrusk.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "A Pyrusk's fur generates enough heat to survive Kinbrold's harshest winters.",
+      "loreDescription": "Small, agile mammals with distinctive red-orange fur. Pyrusks inhabit the forested lands south of Scarto. Their bushy tails serve as both balance aids and temperature regulators, glowing softly in darkness. Despite their fiery appearance, they're gentle creatures that primarily feed on ripened fruits and insects drawn to their warmth.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 19,
+      "id": "kindler",
+      "name": "Kindler",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/kindler.webp",
+      "webpPath": "/images/cards/new/kindler.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "Kindler's silk is extremely sought after by card crafters all across Kinbrold.",
+      "loreDescription": "Heat-resistant arachnids found in dry region of Kinbrold, forests prone to wildfire, and near settlements throughout Kinbrold. Kindlers produce remarkably durable silk that they weave into intricate nests capable of withstanding extreme temperatures. Their bodies contain specialized glands that secrete flame-retardant compounds, which they share with their offspring. Communities value Kindlers for their role in preventing fire spread, often constructing special habitats to encourage their presence near valuable structures or forestland. Harvesting their silk is a task that scares most.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 20,
+      "id": "rawn",
+      "name": "Rawn",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/rawn.webp",
+      "webpPath": "/images/cards/new/rawn.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "A Rawn's morning call heralds the rising sun with such precision that timekeepers set their chronometers by it.",
+      "loreDescription": "Rooster-like creatures with magnificent tail feathers that trail embers when they run. Their distinctive crests flare into actual flames during territorial displays or mating rituals. Rawns are highly territorial, establishing boundaries with spectacular flame displays at dawn and dusk. They're revered in Scarto culture, where families of high standing traditionally keep a Rawn as both a status symbol and practical timekeeper.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 21,
+      "id": "kitsol",
+      "name": "Kitsol",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/kitsol.webp",
+      "webpPath": "/images/cards/new/kitsol.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "cardFact": "Their fur changes color with the temperature, allowing them to blend perfectly with autumn foliage or summer wildfires.",
+      "loreDescription": "Fox-like creatures with multiple tails that end in small flame tufts. Foxfires are native to the border regions between Scarto and Evermere, where seasonal fires renew the grasslands. However, they've been spotted in dying forests across Kinbrold. Their body temperature fluctuates dramatically, allowing them to survive both frigid nights and scorching days. They're known for their intelligence and cunningness, often leading travelers safely through fire-prone regions—or mischievously astray if they sense ill intent.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 22,
+      "id": "twill",
+      "name": "Twill",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/twill.webp",
+      "webpPath": "/images/cards/new/twill.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 90,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "Their limbs can perfectly mimic any plant species native to Kinbrold, making them virtually undetectable to predators.",
+      "loreDescription": "Slender insect-like creatures with articulated bodies that can stretch or compress to match surrounding vegetation. Twills are master camouflage artists, able to alter their coloration and texture to blend with almost any forest environment throughout Kinbrold. They move with incredible slowness when observed, but display surprising bursts of speed when they believe they're unwatched. Forest trackers value them as guides, as they instinctively avoid paths that lead to danger.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 23,
+      "id": "khorn",
+      "name": "Khorn",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/khorn.webp",
+      "webpPath": "/images/cards/new/khorn.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "A Khorn's horns grow throughout their lives, accumulating layers from regions they've inhabited.",
+      "loreDescription": "Elegant deer-like creatures found in the rocky highlands and forests throughout Kinbrold. Khorns possess remarkable horns that absorb and store earth essence, growing more intricate with age. Their hooves leave temporary imprints that bolster nearby plants. Highly territorial, they use precise hoof movements to communicate with others of their kind and mark boundaries. Card Crafters often seek shed Khorn horns for gathering earth essence.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 24,
+      "id": "dirt-mites",
+      "name": "Dirt Mites",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/dirt mites.webp",
+      "webpPath": "/images/cards/new/dirt mites.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 100,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "Dirt Mite colonies can process enough soil in a season for an entire farm.",
+      "loreDescription": "Tiny ant-like creatures that work in complex hierarchical societies throughout Kinbrold's grasslands. Unlike regular ants, Dirt Mites possess an innate ability to identify and concentrate earth essence in the soil. Their elaborate underground networks feature specialized chambers where they cultivate essence-rich crystals. Farmers often create special habitats to attract Teet colonies, knowing their presence ensures bountiful harvests. The oldest queens develop small crystal crowns that glow with stored essence.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 25,
+      "id": "burrit",
+      "name": "Burrit",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/burrit.webp",
+      "webpPath": "/images/cards/new/burrit.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "Their powerful legs allow them to precisely calculate jumps that would seem impossible.",
+      "loreDescription": "Rabbit-like creatures with extraordinarily powerful hind legs and sensitive paws that can detect subtle changes in the ground. Burrits inhabit rocky mountain terrain as well as well-kept grass throughout Kinbrold, using their remarkable jumping ability to navigate areas inaccessible to larger creatures. Burrit's are often soughtafter as common pets, but they love to try and escape.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 26,
+      "id": "terem",
+      "name": "Terem",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/terem.webp",
+      "webpPath": "/images/cards/new/terem.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 110,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "Their tounge strikes with such precision and speed, that insects don't stand a chance.",
+      "loreDescription": "Lizard-like creature with green and brown scale patterns that reflect the mineral composition of their habitat. Found in rockier regions throughout Kinbrold. Terems dart across stone surfaces with surprising speed, hunting insects with their lightning-fast tongues. Despite their small size, they're known for their tenacity, often battling creatures much larger than themselves to defend their territory.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 27,
+      "id": "skimble",
+      "name": "Skimble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/skimble.webp",
+      "webpPath": "/images/cards/new/skimble.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 115,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "A Skimble's balance is so refined they can traverse the thinnest branches while carrying heavy loads.",
+      "loreDescription": "Lemur-like creatures with long, prehensile tails and specialized paws perfectly adapted for digging and climbing. Skimbles inhabit the dense forests across Kinbrold, where they construct elaborate homes in the junction between tree roots and earth. They possess an uncanny ability to locate underground water sources and mineral deposits, leading them to dig precisely where resources are most abundant.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 28,
+      "id": "crag",
+      "name": "Crag",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/crag.webp",
+      "webpPath": "/images/cards/new/crag.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 120,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "cardFact": "Crags create natural monuments that travelers use as landmarks throughout Kinbrold.",
+      "loreDescription": "Boulder-like creatures with tough, stone-like exteriors and softly glowing moss that grows in patterns across their bodies. Crags move incredibly slowly, sometimes remaining stationary for months before suddenly relocating. They absorb earth essence directly from the ground, processing it through specialized internal chambers that produce the bioluminescent moss on their surfaces. Their presence enriches surrounding soil, creating fertile patches in otherwise barren landscapes. Ancient Crags can grow to massive sizes, often being mistaken for small hills until they decide to move.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 29,
+      "id": "crillus",
+      "name": "Crillus",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/crillus.webp",
+      "webpPath": "/images/cards/new/crillus.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 55,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Wind Surge",
+        "description": "When this card blocks for another creature, gain 45 Strength until the end of the turn."
+      },
+      "cardFact": "A Crillus' gaze doesn't truly petrify, but rather creates a stasis field that temporarily freezes its prey in place allowing it to take a direct strike.",
+      "loreDescription": "Peculiar creatures with reptilian bodies, avian features, and distinctive crown-like crests that channel air essence. Found primarily in the mountainous regions of Zalos, Crillus possess the unique ability to temporarily suspend air movement around their targets. Though feared in folklore, they're primarily use their abilities defensively. Zalos scholars study their crests to understand how they manipulate the air with such precision.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 30,
+      "id": "dustwing",
+      "name": "Dustwing",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/dustwing.webp",
+      "webpPath": "/images/cards/new/dustwing.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 60,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Endless Flight",
+        "description": "This creature does not become Exhausted after attacking. This creature can only attack once per turn."
+      },
+      "cardFact": "Dustwings release microscopic scales that capture and store moonlight, allowing them to glow with accumulated luminescence for days afterward.",
+      "loreDescription": "Delicate nocturnal creatures with powder-coated wings that shimmer in darkness. Dustwings navigate by scent. They're drawn to areas rich in air essence, often serving as natural indicators of powerful ley lines throughout Kinbrold. Their scale-dust is prized by card crafters who use it to create counter cards.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 31,
+      "id": "white-warble",
+      "name": "White Warble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/white warble.webp",
+      "webpPath": "/images/cards/new/white warble.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Air Channel",
+        "description": "You may sacrifice this card to special summon an Air creature that costs 2 or less essence to summon from your hand without paying its essence cost. The summoned creature enters play Exhausted."
+      },
+      "cardFact": "White Warbles sing in perfect harmony with the shifting air currents, their melodies changing pitch and tempo with each breeze that passes through the spires of Zalos.",
+      "loreDescription": "A White Warble is a common bird native to the airways of Kinbrold. Its specialized wing structures allow it to ride air currents with minimal effort, enabling it to traverse vast distances across all regions of Kinbrold. Warbles are known for their beautiful color adaptations. The White Warble resides in and around the Kingdom of Zalos.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 32,
+      "id": "swoop",
+      "name": "Swoop",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/swoop.webp",
+      "webpPath": "/images/cards/new/swoop.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Swift Snatch",
+        "description": "When this card is summoned, you may choose 1 creature on the field (that costs 0 essence to summon) and return it to the owner’s hand."
+      },
+      "cardFact": "A Swoop's unique dive doesn't leave a sliver of hope for it's prey.",
+      "loreDescription": "A medium-sized predatory bird found throughout all regions of Kinbrold. With a sharp, curved beak and keen eyesight, the Swoop hunts small creatures from high vantage points. They're known for their distinctive hunting style—folding their wings and diving straight down at tremendous speeds before extending their talons at the last moment. Swoops build their nests on cliff edges and tall trees, and are often seen circling lazily on thermal updrafts while scanning for prey. Their piercing call serves both as a territorial marker and as a means of communication with their mates. Swoops are predominantly brown with darker wing tips and a pale chest—across all regions of Kinbrold.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 33,
+      "id": "malith",
+      "name": "Malith",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/malith.webp",
+      "webpPath": "/images/cards/new/malith.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Spectral Gift",
+        "description": "When this card is destroyed by battle, you may bring one Air creature from your discard pile into your hand (excluding “Malith”)."
+      },
+      "cardFact": "Maliths leave no physical footprints, yet trained trackers can follow their passage by detecting the subtle disturbences they trail behind.",
+      "loreDescription": "Spectral serpentine entities composed of semi-substantial air essence that flow through the land in and around Zalos. Their transparent spectral bodies occasionally solidify enough to interact with the physical world. Maliths are neither truly alive nor dead, existing in a state between material and elemental. They're attracted to areas where the boundary between Kinbrold and the elemental planes grows thin, making their increased presence a warning sign of potential disturbances.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 34,
+      "id": "vespor-swarm",
+      "name": "Vespor Swarm",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/vespor swarm.webp",
+      "webpPath": "/images/cards/new/vespor swarm.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Stinging Blow",
+        "description": "While attacking, gain 45 Strength until the end of the turn."
+      },
+      "cardFact": "While a single Vespor sting merely numbs, each additional sting multiplies the potency exponentially—twenty stings can paralyze a full-grown Khorn for days.",
+      "loreDescription": "Tiny, aggressive insects that travel in synchronized clouds throughout Zalos' mountain passes. Each individual Vespor packs mean sting. Their transparent wings refract light in ways that confuse predators, creating illusion-like patterns in the air. The venom from their stingers contains a distinctive numbing quality that scholars prize for medicinal purposes.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 35,
+      "id": "stawid",
+      "name": "Stawid",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/stawid.webp",
+      "webpPath": "/images/cards/new/stawid.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Wind Rush",
+        "description": "This creature's attacks cannot be blocked."
+      },
+      "cardFact": "Stawids construct their nests at precisely the junction of conflicting wind currents, creating microenvironments where young can grow in solitude.",
+      "loreDescription": "Tall, elegant birds with specialized legs that can sense changes in atmospheric pressure. Stawids migrate across all of Kinbrold, functioning as natural barometers that predict weather patterns days in advance. Zalos weather-readers traditionally follow Stawid migration patterns to make seasonal predictions of exceptional accuracy.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 36,
+      "id": "visage",
+      "name": "Visage",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/visage.webp",
+      "webpPath": "/images/cards/new/visage.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Wind Martyr",
+        "description": "When an Air creature you control would be destroyed by effect, you may destroy this card to negate that card effect."
+      },
+      "cardFact": "Visages can rotate their heads 180 degrees and fly in complete silence, the only creatures known to create absolutely no disturbance in the air as they move.",
+      "loreDescription": "Wise, patient predators with exceptional night vision and hearing so acute they can detect the smallest disruptions. Visages are revered in Zalos culture as symbols of knowledge and foresight. Their specialized feathers absorb sound, allowing them to fly in perfect silence. The oldest Visages develop distinctive facial markings that resemble ancient Kinbrold script, leading to myths that they can read the future on the winds.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 37,
+      "id": "air-bugs",
+      "name": "Air Bugs",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/air bugs.webp",
+      "webpPath": "/images/cards/new/air bugs.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Air Catalyst",
+        "description": "Generate 1 Air Essence for each Air creature you control."
+      },
+      "cardFact": "Air Bugs' wings vibrate at most annoying of frequencies, bothering nearly all the locals when they're grouped up.",
+      "loreDescription": "Small, iridescent beetles with oversized wings that allow them to hover with remarkable stability. Air Bugs produce a distinctive humming noise that's revered as annoying to the locals. Crafters and collectors prize them for their shells, which retain their essence-boosting properties even after the creature has departed.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 38,
+      "id": "carron",
+      "name": "Carron",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/carron.webp",
+      "webpPath": "/images/cards/new/carron.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Aerial Shift",
+        "description": "When this card is normal summoned, you may Exhaust 1 creature on the field."
+      },
+      "cardFact": "Their vision is so acute, they can spot essence disturbances from hundreds of feet above.",
+      "loreDescription": "Imposing bird with a wingspan that can reach impressive lengths. Carrons soar effortlessly on thermal updrafts throughout Kinbrold, rarely needing to flap their wings. Despite their intimidating appearance, Carrons are gentle scavengers that help maintain the balance of the ecosystem by consuming remnants of creatures who've fallen. The oldest specimens develop distinctive white feather patterns.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 39,
+      "id": "piddip",
+      "name": "Piddip",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/piddip.webp",
+      "webpPath": "/images/cards/new/piddip.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 60,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Essence Well",
+        "description": "When this card inflicts battle damage to a creature, generate 1 Water Essence. "
+      },
+      "cardFact": "Puddips can sense electrical signals produced by other creatures' water flow, allowing them to hunt effectively even in the murkiest waters.",
+      "loreDescription": "An unusual aquatic mammal with a distinctive bill and webbed feet found in the calm rivers and lakes throughout Tsunareth. Puddips are skilled swimmers that build elaborate underwater dens lined with essence-rich materials collected from riverbeds. Though seemingly awkward on land, they move with surprising grace in water. Tsunareth scholars study their unique bill structures.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 40,
+      "id": "aqua-dart",
+      "name": "Aqua Dart",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/aqua dart.webp",
+      "webpPath": "/images/cards/new/aqua dart.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Hydro Blur",
+        "description": "When this card is normal summoned, this creature cannot be attacked or targeted by abilities or effects until the beginning of your next turn."
+      },
+      "cardFact": "Aqua Darts can accelerate so rapidly they momentarily superheat the water around them, leaving trails of steam as they pursue prey.",
+      "loreDescription": "Sleek, powerful fish with distinctive spear-like bills that cut through water with minimal resistance. Aqua Darts are the one of the fastest creatures in and around the oceans of Tsunareth, capable of explosive bursts of speed that create visible pressure waves. Their scales contain specialized channels that direct water flow around their bodies, further reducing drag. Tsunareth fishermen consider catching an Aqua Dart to be a supreme test of skill, though most practice catch-and-release out of respect for these magnificent creatures.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 41,
+      "id": "blue-warble",
+      "name": "Blue Warble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/blue warble.webp",
+      "webpPath": "/images/cards/new/blue warble.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Water Channel",
+        "description": "You may sacrifice this card to special summon a Water creature that costs 2 or less essence to summon from your hand without paying its essence cost. The summoned creature enters play Exhausted."
+      },
+      "cardFact": "Blue Warbles dive beneath Tsunareth's waves for minutes at a time, their waterproof feathers trap tiny air bubbles that glimmer like sapphires in the depths.",
+      "loreDescription": "A Blue Warble is a common bird native to the airways of Kinbrold. Its specialized wing structures allow it to ride air currents with minimal effort, enabling it to traverse vast distances across all regions of Kinbrold. Warbles are known for their beautiful color adaptations. The Blue Warble resides in and around the Kingdom of Tsunareth.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 42,
+      "id": "water-bugs",
+      "name": "Water Bugs",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/water bugs.webp",
+      "webpPath": "/images/cards/new/water bugs.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Water Catalyst",
+        "description": "Generate 1 Water Essence for each Water creature you control."
+      },
+      "cardFact": "Water Bugs can skate across the surface with such precise tension control that they can detect approaching predators from ripple patterns unnoticeable to most creatures.",
+      "loreDescription": "Small insects with specialized leg structures that distribute their weight perfectly across water's surface tension. Water Bugs gather in groups across Kinbrold's calm ponds and slow-moving streams, seeming to dance as they dart and pivot. Tsunareth scholars study their remarkable water-walking ability.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 43,
+      "id": "sonarp",
+      "name": "Sonarp",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/sonarp.webp",
+      "webpPath": "/images/cards/new/sonarp.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Deep Sight",
+        "description": "Look at the bottom 2 cards of your deck. Send 1 card to the graveyard and put the other card on top of your deck."
+      },
+      "cardFact": "Sonarps can project essence-infused sound waves that temporarily render water transparent to their vision, allowing them to 'see' inside solid objects.",
+      "loreDescription": "Intelligent, social mammals that navigate Kinbrold's oceans in tight-knit pods. Sonarps possess remarkable communication abilities, using complex patterns of noises to share detailed information. Their specialized echo-location allows them to create mental maps of their surroundings with astonishing precision. They form symbiotic relationships with Tsunareth sailors, often guiding ships through treacherous waters in exchange for offerings of food.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 44,
+      "id": "clacker",
+      "name": "Clacker",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/clacker.webp",
+      "webpPath": "/images/cards/new/clacker.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Tidal Burst",
+        "description": "When this card is destroyed by battle, generate 2 Water Essence. "
+      },
+      "cardFact": "Clacker shells grow throughout their lives, incorporating minerals and essence from their environment to create patterns that record the history of waters they've inhabited.",
+      "loreDescription": "Shelled creatures with powerful pincers that inhabit Kinbrold's tidal zones. Clackers move sideways with surprising speed, navigating complex shoreline environments with ease. Young Clackers molt regularly, but adults develop permanent shells that grow increasingly intricate and colorful with age, becoming living records of water essence fluctuations in their habitat.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 45,
+      "id": "snapaw",
+      "name": "Snapaw",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/snapaw.webp",
+      "webpPath": "/images/cards/new/snapaw.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Death Roll",
+        "description": "When attacking blocking creatures, gain 40 Strength until the end of the turn."
+      },
+      "cardFact": "A Snapaw's jaw generate enough pressure to shatter stone, yet they can delicately carry their newborn young without causing the slightest harm.",
+      "loreDescription": "Formidable reptilian predators that patrol rivers swampy teritory in between Grivoss, Evermere, and Tsunareth. Their eyes and nostrils remain visible above water while they swim. Masters of patience, they can remain motionless for hours before striking with explosive speed. They fiercely protect their young until they're able to fend for themselves.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 46,
+      "id": "slipp",
+      "name": "Slipp",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/slipp.webp",
+      "webpPath": "/images/cards/new/slipp.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Waddle Rally",
+        "description": "When another creature blocks for this card, the blocking creature gains 50 Strength until the end of the turn."
+      },
+      "cardFact": "On land Slipps appear clumsy, but underwater they manipulate the water to create friction-free channels, achieving speeds that rival even the fastest of fish.",
+      "loreDescription": "Flightless birds adapted perfectly for aquatic life in Tsunareth and Zalos' colder waters. Slipps have waterproof feathers that trap insulating air, allowing them to dive in frigid seas for extended periods. They form large colonies in coastal regions, working together to protect their young from predators. Though awkward while walking, they transform into elegant swimmers once in water, using their wing-like flippers to propel themselves with remarkable agility and precision.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 47,
+      "id": "tentik",
+      "name": "Tentik",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/tentik.webp",
+      "webpPath": "/images/cards/new/tentik.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Essence Plunder",
+        "description": "When this card destroys another creature by battle, Steal 1 essence from your opponent."
+      },
+      "cardFact": "A Tentik's skin can perfectly mimic not just the color but the texture of its surroundings, making it virtually undetectable to both predators and prey.",
+      "loreDescription": "Highly intelligent cephalopods with remarkable problem-solving abilities and eight prehensile limbs. Tentiks inhabit the deeper coastal waters of Tsunareth, creating hidden dens filled with collected trinkets and tools. Their unqiue skin allow them to change color and texture instantly, while their boneless bodies can squeeze through openings seemingly too small for their size. Card crafters and collectors alike often seek their ink, which retains essence-manipulating properties even after extraction.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 48,
+      "id": "tidal-ray",
+      "name": "Tidal Ray",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/tidal ray.webp",
+      "webpPath": "/images/cards/new/tidal ray.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 105,
+        "agility": 20
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Aquatic Wisdom",
+        "description": "When this card is destroyed, draw one card."
+      },
+      "cardFact": "Tidal Rays migrate with schools of smaller fish, acting as lifelong body guards.",
+      "loreDescription": "Massive, graceful swimmers with wing-like fins that span impressive widths. Tidal Rays glide effortlessly through Tsunareth's oceans with schools of smaller fish, their movements resemble flight underwater. Tsunareth scholars study there flight-like swimming capabilities",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 49,
+      "id": "flints",
+      "name": "Flints",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/flints.webp",
+      "webpPath": "/images/cards/new/flints.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 60,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Spark Touch",
+        "description": "When this card inflicts battle damage to a creature, generate 1 Fire Essence. "
+      },
+      "cardFact": "Their bodies ignite spontaneously when striking hard surfaces, creating momentary light shows that disorient predators.",
+      "loreDescription": "Tiny beetle-like creatures with metallic exoskeletons that can generate sparks when they move. Flints gather in swarms around dry and warm regions of Kinbrold, particularly near Scarto. Each Flint contains a minuscule ember core that remains lit throughout their lifespan. They're collected by card crafters who study their remarkable ability to maintain internal flame without fuel. When threatened, they release synchronous flash bursts that create dazzling defensive patterns.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 50,
+      "id": "fire-bugs",
+      "name": "Fire Bugs",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/fire bugs.webp",
+      "webpPath": "/images/cards/new/fire bugs.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Fire Catalyst",
+        "description": "Generate 1 Fire Essence for each Fire creature you control."
+      },
+      "cardFact": "Fire Bugs are very expeditious, never settling down in one location due to their curious nature.",
+      "loreDescription": "Flying bugs with illuminated backs. Fire Bugs thrive throughout the forest regions surrounding Scarto, scattered throughout. It's common to see one or two, but extremely rare to see clusters of fire bugs in one location due to their curious nature.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 51,
+      "id": "bancoon",
+      "name": "Bancoon",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/bancoon.webp",
+      "webpPath": "/images/cards/new/bancoon.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 70,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Final Snatch",
+        "description": "When this card is destroyed, discard 1 card from your opponent's hand."
+      },
+      "cardFact": "Bancoons steal food and belongings from nearby citizens, rarely getting caught.",
+      "loreDescription": "Clever, natural-masked creatures with heat-resistant paws. Bancoons are notorious for their mischievous nature and remarkable problem-solving abilities. Native to the forested edges of Scarto, they're often seen washing food in hot springs. Their distinctive striped tails serve as temperature indicators, changing pattern intensity based on their surroundings. Scarto citizens scare away all the Bancoons as they commonly steal food and belongings.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 52,
+      "id": "red-warble",
+      "name": "Red Warble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/red warble.webp",
+      "webpPath": "/images/cards/new/red warble.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Fire Channel",
+        "description": "You may sacrifice this card to special summon a Fire creature that costs 2 or less essence to summon from your hand without paying its essence cost. The summoned creature enters play Exhausted."
+      },
+      "cardFact": "Red Warbles bathe in Scarto's volcanic vents, their specialized feathers absorbing heat without burning—a phenomenon that has mystified elemental scholars for generations.",
+      "loreDescription": "A Red Warble is a common bird native to the airways of Kinbrold. Its specialized wing structures allow it to ride air currents with minimal effort, enabling it to traverse vast distances across all regions of Kinbrold. Warbles are known for their beautiful color adaptations. The Red Warble resides in and around the Kingdom of Scarto.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 53,
+      "id": "scorpid",
+      "name": "Scorpid",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/scorpid.webp",
+      "webpPath": "/images/cards/new/scorpid.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Venom Strike",
+        "description": "When this card is summoned, you may deal 50 damage to any target."
+      },
+      "cardFact": "Their sting injects venom that causes an intense burning sensation.",
+      "loreDescription": "Armored creatures with segmented bodies that glow from within due to their semi-transparent appearance. Scorpids make their homes in dry and rocky terrain throughout Kinbrold around Scarto and Grivoss. Their impressive pincers can withstand incredible heat, allowing them to manipulate smoldering materials to construct protective small barriers around their territories. Young Scorpids molt multiple times before reaching adulthood, each new shell displaying more intricate fire-like patterns.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 54,
+      "id": "horned-ra",
+      "name": "Horned Ra",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/horned ra.webp",
+      "webpPath": "/images/cards/new/horned ra.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Burning Bite",
+        "description": "When this card destroys a creature by battle, deal 50 damage directly to your opponent."
+      },
+      "cardFact": "Their distinctive horns absorb and store heat throughout the day, allowing it to continue hunting in cold desert nights when other predators must retreat.",
+      "loreDescription": "Sinuous reptiles with heat-resistant scales and distinctive horn-like protrusions on their heads. Hornra thrive in Scarto's harshest environments, using their specialized infrared vision to detect prey by body heat alone. Their striking appearance has made them symbols of endurance in Scarto culture, represented in ceremonial armor and weapons. Though very dangerous, they only attack people if threatened, preferring to display their impressive horns as warnings.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 55,
+      "id": "ember-flicker",
+      "name": "Ember Flicker",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/ember flicker.webp",
+      "webpPath": "/images/cards/new/ember flicker.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Combustion",
+        "description": "Deal 30 damage to any creature or shield on the field."
+      },
+      "cardFact": "When threatened they igniting twigs with their touch before flicking them at predators with surprising accuracy.",
+      "loreDescription": "Charming panda-like creature with white and dark rusty-red fur. Ember Flickers meticulously gather twigs and forest debris, arranging them in precise patterns before setting them ablaze. Their methodical clearing of forest floors prevents larger wildfires from spreading through Kinbrold's regions. When danger approaches, they don't flee—instead, they ignite collected materials and flick burning debris at threats with remarkable precision.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 56,
+      "id": "night-vox",
+      "name": "Night Vox",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/night vox.webp",
+      "webpPath": "/images/cards/new/night vox.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Ash Release",
+        "description": "When this card is destroyed by battle, generate 2 Fire Essence. "
+      },
+      "cardFact": "They can elevate their body temperature so rapidly that they leave smoldering paw prints when moving quickly.",
+      "loreDescription": "Elegant, medium-sized predators with thick fur that seems to flicker like flames when they run. Night Vox make their homes in the warmer regions of Kinbrold, particularly around Scarto. Their multi-tailed appearance becomes more pronounced as they age, with elder specimens sometimes displaying up to seven distinct tail-tips. They're known for their cunning intelligence and playful nature, often forming bonds with those who have strong spiritual connections.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 57,
+      "id": "chimet",
+      "name": "Chimet",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/chimet.webp",
+      "webpPath": "/images/cards/new/chimet.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Chimet's Revenge",
+        "description": "When this card is destroyed by battle, your opponent consumes 2 Essence of any element(s)."
+      },
+      "cardFact": "Chimets seem to be the combination of multiple creature archetypes.",
+      "loreDescription": "Unusual creatures that appear to combine features of several animals—typically the body of a small mammal, reptilian tail, and bird-like eyes or feathers. Chimets are rare throughout Kinbrold but most commonly found near the borders between elemental kingdoms, particularly where Scarto meets other regions. Scholars debate whether they evolved naturally or resulted from ancient essence experiments.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 58,
+      "id": "brimfang",
+      "name": "Brimfang",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/brimfang.webp",
+      "webpPath": "/images/cards/new/brimfang.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 105,
+        "agility": 20
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Molten Fangs",
+        "description": "When this card attacks a creature, gain Pierce."
+      },
+      "cardFact": "Brimfangs superheated breathe can scare away the strongest of creatures.",
+      "loreDescription": "Powerful canine predators with coal-black fur accented by glowing red-orange patterns that shift with their mood. Brimfangs inhabit the most volcanically active regions of Scarto, where they hunt in small, highly coordinated packs. Their exceptional loyalty has led some Scarto warriors to tame them as companions, though this requires earning their respect through trials of courage. When threatened, they can expel superheated breath that ignites flammable materials on contact.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 59,
+      "id": "ivy-mantis",
+      "name": "Ivy Mantis",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/ivy mantis.webp",
+      "webpPath": "/images/cards/new/ivy mantis.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 65,
+        "agility": 60
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Sneaky Insight",
+        "description": "Reveal 1 card your opponent controls. If the chosen card is a shield, it remains face-up."
+      },
+      "cardFact": "Ivy Mantis can blend in with their surroundings so its prey won't even know they're there.",
+      "loreDescription": "Insect-like creatures with distinctive prayer-like hands. Ivy Manti inhabit the densely vegetated regions of Grivoss, perfectly blending with foliage through both coloration and actual plant growth on their bodies. Built up Earth essence collected through their specialized limbs grants them remarkable precision in movement, allowing them to strike with pinpoint accuracy.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 60,
+      "id": "earth-bugs",
+      "name": "Earth Bugs",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/earth bugs.webp",
+      "webpPath": "/images/cards/new/earth bugs.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Earth Catalyst",
+        "description": "Generate 1 Earth Essence for each Earth creature you control."
+      },
+      "cardFact": "Their mandibles exert over 300 times their body weight in crushing force, capable of pulverizing gemstones that even Grivoss's finest mining tools cannot penetrate.",
+      "loreDescription": "Creatures with iron-like shells that thrive in the land and soil of Kinbrold. Burrowers command the underground with their devastating mandibles. Their massive jaws can shear through solid rock like butter, yet close with such delicate control they can handle the most fragile crystal formations. They are burrowers by nature, their shells impervious to the most powerful of impacts.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 61,
+      "id": "green-warble",
+      "name": "Green Warble",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/green warble.webp",
+      "webpPath": "/images/cards/new/green warble.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 75,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Earth Channel",
+        "description": "You may sacrifice this card to special summon an Earth creature that costs 2 or less essence to summon from your hand without paying its essence cost. The summoned creature enters play Exhausted."
+      },
+      "cardFact": "Green Warbles build their nests using only fallen materials, weaving Grivoss's minerals and plants into structures so sturdy they've been known to withstand rockslides.",
+      "loreDescription": "A Green Warble is a common bird native to the airways of Kinbrold. Its specialized wing structures allow it to ride air currents with minimal effort, enabling it to traverse vast distances across all regions of Kinbrold. Warbles are known for their beautiful color adaptations. The Green Warble resides in and around the Kingdom of Grivoss.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 62,
+      "id": "rammer",
+      "name": "Rammer",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/rammer.webp",
+      "webpPath": "/images/cards/new/rammer.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 80,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Mountain Charge",
+        "description": "When this card blocks for another creature, gain 1 Earth Essence."
+      },
+      "cardFact": "Rammers can use precisely targeted headbutts to split boulders perfectly in half.",
+      "loreDescription": "Sure-footed creature with impressive curved horns that inhabit Kinbrold's most vertical terrains. Rammers possess specialized hooves that grip seemingly smooth rock faces, allowing them to navigate cliffs that appear impassable. Their remarkable horns grow throughout their lives, incorporating minerals from their environment that record elevation changes and essence concentrations. Card crafters prize these horns for tools and instruments.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 63,
+      "id": "nimblefoot",
+      "name": "Nimblefoot",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/nimblefoot.webp",
+      "webpPath": "/images/cards/new/nimblefoot.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 85,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Phantom Steps",
+        "description": "This creature's attacks cannot be blocked."
+      },
+      "cardFact": "Nimblefoot claws allow them to dig through and navigate cave systems that haven't seen sunlight in millennia.",
+      "loreDescription": "Reptillian creature adapted for climbing and traversing difficult terrain. Nimblefeet inhabit the complex cave networks and rocky canyons throughout Grivoss, making their homes near underground water sources. Despite their fearsome appearance, they're curious and surprisingly intelligent, often following Grivoss explorers at a distance, seemingly studying their techniques for navigating challenging passages.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 64,
+      "id": "grimclaw",
+      "name": "Grimclaw",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/grimclaw.webp",
+      "webpPath": "/images/cards/new/grimclaw.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 90,
+        "agility": 35
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Terrain Shift",
+        "description": "When this card is summoned, you may Exhaust 1 creature on the field."
+      },
+      "cardFact": "Grimclaws possess incredible tenacity, documented to pursue prey for days without rest and fight off creatures five times their size.",
+      "loreDescription": "Muscular predators with remarkably powerful claws that can shear through root systems and stone. Grimclaws inhabit the harshest mountain regions of Grivoss, carving elaborate tunnel systems through seemingly impenetrable terrain. Their thick hides grant them unmatched endurance and recovery abilities. Though solitary by nature, they form lifelong bonds with chosen mates, working together to defend their extensive territories.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 65,
+      "id": "shiftix",
+      "name": "Shiftix",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/shiftix.webp",
+      "webpPath": "/images/cards/new/shiftix.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Final Shift",
+        "description": "When this creature is destroyed, you may destroy 1 creature on the field that costs 0 essence to summon."
+      },
+      "cardFact": "A Shiftix doesn't merely mimic colors—it perfectly reproduces the mineral composition of surrounding terrain.",
+      "loreDescription": "Small creature with eyes that move independently and curled tails that help them navigate complex environments. Shiftix possess remarkable control over the earth essence flowing through their scales, allowing them to change not just color but texture to match their surroundings with uncanny precision. They move with deliberate slowness, conserving energy while hunting insects with lightning-fast extendable tongues.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 66,
+      "id": "dire-pack",
+      "name": "Dire Pack",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/dire pack.webp",
+      "webpPath": "/images/cards/new/dire pack.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 100,
+        "agility": 25
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Pack Fury",
+        "description": "Gain 55 Strength until the end of the turn. This effect may only be used when you have 0 Earth Essence."
+      },
+      "cardFact": "Dire Packs coordinate complex hunting strategies with their family group to take down larger predators.",
+      "loreDescription": "Social predators that operate in family groups throughout Grivoss's forests and mountains. Unlike solitary hunters, Dire Packs employ sophisticated group tactics, using their collective intelligence to bring down prey much larger than any individual member could handle. Their hunting tactics make it nearly impossible to evade.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 67,
+      "id": "quarroo",
+      "name": "Quarroo",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/quarroo.webp",
+      "webpPath": "/images/cards/new/quarroo.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 105,
+        "agility": 20
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Barrier Buster",
+        "description": "When attacking a shield, gain 55 Strength."
+      },
+      "cardFact": "Quarroos carry not just their young in their pouches, but also collections of stones.",
+      "loreDescription": "Powerful leaping creature with strong hind legs and specialized pouches on their abdomens. Quarroos inhabit the rocky plateaus of Grivoss, using their remarkable jumping ability to navigate difficult terrain effortlessly. Their pouches gain properties from prolonged contact with their bodies, often becoming potent focus items for card crafters.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 68,
+      "id": "buffaton",
+      "name": "Buffaton",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/buffaton.webp",
+      "webpPath": "/images/cards/new/buffaton.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 110,
+        "agility": 15
+      },
+      "essence": {
+        "cost": {
+          "amount": 0,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 2,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Herd Defense",
+        "description": "When a creature blocks for this card, the blocking creature gains 50 Strength until the end of the turn."
+      },
+      "cardFact": "A Buffton's footsteps actually strengthen the earth beneath them, their migration routes becoming the most fertile soil in all of Kinbrold.",
+      "loreDescription": "Massive, shaggy creatures with imposing shoulders that roam Grivoss' grasslands in thundering herds. Bufftons possess an innate connection to Kinbrold's grass, their movements creating resonant vibrations that compact and enrich soil. Their herds are incredibly strong, and stampede through anything in their way.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 69,
+      "id": "dumoles",
+      "name": "Dumoles",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/dumoles.webp",
+      "webpPath": "/images/cards/new/dumoles.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 75,
+        "agility": 100
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Protective Blast",
+        "description": "When blocking for another creature, gain 75 Strength until the end of the turn."
+      },
+      "cardFact": "Dumole create complex tunnel networks that naturally collect air essence. Zalos researchers have discovered these tunnels can remain pressurized for years after being abandoned, making them valuable waypoints for mountain expeditions.",
+      "loreDescription": "Dumoles are paired mole creatures that inhabit the highest peaks of Kinbrold, where the air is thin but rich in elemental essence. These silver-furred creatures always travel in bonded pairs, sharing the work of digging elaborate tunnel systems through rocky mountain soil. Their specialized front paws can both carve through stone and spread wide to catch air currents, allowing them to glide between peaks in perfect synchronization. Dumoles have developed unique communication using air vibrations that can travel through their tunnel networks for miles.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 70,
+      "id": "stormcrest",
+      "name": "Stormcrest",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/stormcrest.webp",
+      "webpPath": "/images/cards/new/stormcrest.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 70
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Air Control",
+        "description": "When this card is summoned, you may destroy 1 card in your opponent's Rune/Counter zone."
+      },
+      "cardFact": "Stormcrests manifest miniature storm clouds around their wings when agitated. Zalos naturalists discovered these clouds contain concentrated air essence, leading to the controversial practice of purposely disturbing the birds to harvest their defensive weather.",
+      "loreDescription": "The Stormcrest is a regal aerial hunter instantly recognizable by its snow-white head feathers that contrast with its deep blue-gray body. These powerful birds dominate the skies around Zalos's coastal cliffs, where they build enormous nests lined with clouds they've physically gathered. Stormcrests possess the unique ability to sense approaching weather patterns, often seen performing elaborate aerial displays before major storms. Their distinctive shrieking call can be heard for miles, signaling territorial boundaries to other aerial predators.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 71,
+      "id": "skerodact",
+      "name": "Skerodact",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/skerodact.webp",
+      "webpPath": "/images/cards/new/skerodact.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 130,
+        "agility": 45
+      },
+      "essence": {
+        "cost": {
+          "amount": 2,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Aerial Plunder",
+        "description": "When this card is destroyed, draw 1 card."
+      },
+      "cardFact": "Skerodacts molt their wing membranes annually, with the shed material being highly prized by air essence crafters. The discarded leathery tissue holds trace amounts of pure air essence and is one of the key materials used in crafting flying machines.",
+      "loreDescription": "The Skerodact is an ancient reptilian hunter with vast leathery wings that can span twice its body length. Distinguished by its sharp-crested head and hooked beak, these creatures patrol Kinbrold's upper atmosphere where air essence is most concentrated. Their hollow bones and air sacs allow them to remain aloft for days without landing, riding thermal currents between the mountains of Zalos. Skerodacts hunt in dramatic dives, folding their wings to achieve tremendous speeds before snatching prey with razor-sharp talons.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 72,
+      "id": "cutless",
+      "name": "Cutless",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/cutless.webp",
+      "webpPath": "/images/cards/new/cutless.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 80,
+        "agility": 95
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Full Send",
+        "description": "You may destroy this card to discard 1 card from your opponent's hand and draw 1 card from your deck."
+      },
+      "cardFact": "Cutless can reach attack speeds of 35 body-lengths per second, making it one of the fastest strikers in all of Kinbrold's waters. Tsunareth fishermen tell tales of these creatures cutting fishing nets clean through without slowing down.",
+      "loreDescription": "A sleek predator of the deep currents, Cutless slices through water with unmatched precision. Its metallic scales reflect the faintest light, creating a flash of silver moments before it strikes. With razor-edged fins and a jaw that can snap shut in milliseconds, this water hunter embodies speed and deadly accuracy.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 73,
+      "id": "manasee",
+      "name": "Manasee",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/manasee.webp",
+      "webpPath": "/images/cards/new/manasee.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 110,
+        "agility": 65
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Tidal Swap",
+        "description": "Discard 1 card from your hand, then bring one creature from your discard pile to your hand (cannot be the discarded card)."
+      },
+      "cardFact": "Manasees consume aquatic plants that would be toxic to other creatures, filtering out impurities and converting them into pure water essence. Areas where Manasee pods regularly feed develop unique crystalline reefs that serve as natural essence reservoirs for Tsunareth harvesters.",
+      "loreDescription": "The Manasee is a gentle aquatic herbivore found in the shallow coastal waters of Tsunareth. Unlike ordinary manatees, Manasees possess crystalline growths along their spine that collect and purify water essence as they graze. Their thick bluish hide is embedded with trace minerals that shimmer underwater, creating camouflage against predators. Most distinctively, Manasees can temporarily solidify water around them, creating protective barriers when threatened. They travel in small family pods, communicating through melodic underwater songs that can calm aggressive creatures.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 74,
+      "id": "malletin",
+      "name": "Malletin",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/malletin.webp",
+      "webpPath": "/images/cards/new/malletin.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 135,
+        "agility": 40
+      },
+      "essence": {
+        "cost": {
+          "amount": 2,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Crystalline Seer",
+        "description": "When this card is normal summoned, you may bring one Equipment Rune card from your deck to your hand."
+      },
+      "cardFact": "Malletins possess unique teeth that continuously absorb and filter water essence from their prey. Discarded Malletin teeth are among the most efficient natural essence conduits, making them highly valued components in water-based Elekin equipment.",
+      "loreDescription": "The Malletin is a fearsome predator of Kinbrold's deeper waters, instantly recognizable by its T-shaped head. Unlike ordinary hammerheads, the Malletin's distinctive head contains specialized water essence chambers that allow it to detect currents and essence flows from miles away. Their skin shimmers with a blue-green iridescence, and they possess small crystalline formations along their fins that can absorb and temporarily store water essence. Malletins are primarily solitary hunters, but during the crystalline moon of Tsunareth, they gather in large groups near underwater essence springs.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 75,
+      "id": "lavrok",
+      "name": "Lavrok",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/lavrok.webp",
+      "webpPath": "/images/cards/new/lavrok.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 145,
+        "agility": 30
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Magma Splash",
+        "description": "When this card is summoned, you may Exhaust 1 creature on the field."
+      },
+      "cardFact": "Lavroks are born when magma pools deep within volcanic chambers absorb elemental essence over centuries. The oldest specimens can transform their bodies from solid rock to flowing lava at will, making them nearly impossible to permanently damage.",
+      "loreDescription": "Formed from cooling magma and living stone, Lavrok's body pulses with molten veins that glow through cracks in its obsidian hide. Ancient runes etched into its rocky form channel the raw power of Kinbrold's volcanic heart. Its footsteps leave smoldering imprints, and its voice rumbles like distant eruptions.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 76,
+      "id": "blazorn",
+      "name": "Blazorn",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/blazorn.webp",
+      "webpPath": "/images/cards/new/blazorn.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 125,
+        "agility": 50
+      },
+      "essence": {
+        "cost": {
+          "amount": 2,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Fiery Birth",
+        "description": "You may special summon this card from your hand (free of cost) if you destroy 1  creature you control."
+      },
+      "cardFact": "Unlike other creatures, Blazorns don't truly die. When their physical form is destroyed, they collapse into a small ember that slowly regenerates over time. Scarto Fire Kingdom scholars have documented single Blazorns living for over 500 years through repeated regenerations.",
+      "loreDescription": "Wreathed in perpetual flame that never consumes, Blazorn soars on wings of pure fire energy. Its feathers shift between crimson, gold, and brilliant azure as it moves. When threatened, it can release a burst of purifying flame that reduces enemies to ash while rejuvenating allies with life-giving warmth.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 77,
+      "id": "nightpaw",
+      "name": "Nightpaw",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/nightpaw.webp",
+      "webpPath": "/images/cards/new/nightpaw.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 100,
+        "agility": 75
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Shadow Ambush",
+        "description": "When this card is normal summoned, you may destroy 1 creature on the field that costs 2 or less essence to summon."
+      },
+      "cardFact": "Nightpaws can blend so completely with darkness that even creatures with enhanced vision cannot detect them. They communicate through subsonic growls that only other Nightpaws can hear, allowing them to coordinate complex hunting strategies without alerting prey.",
+      "loreDescription": "Moving like a shadow given form, Nightpaw's midnight-black fur absorbs light rather than reflecting it. Its eyes glow with an eerie emerald luminescence that can track prey through total darkness. Silent but deadly, this predator's power comes from stealth and precision rather than brute force.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 78,
+      "id": "odomok",
+      "name": "Odomok",
+      "type": "Creature",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/odomok.webp",
+      "webpPath": "/images/cards/new/odomok.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 95,
+        "agility": 80
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Earth Strike",
+        "description": "When this card inflicts battle damage to a creature, generate 2 Earth essence."
+      },
+      "cardFact": "Odomoks secrete a unique venom that doesn't kill instantly but instead systematically weakens their prey's elemental connection. Victims report feeling their essence being drained away long before physical symptoms appear. The reptiles can track poisoned targets for miles through the essence disruption alone.",
+      "loreDescription": "A massive reptilian hunter whose scales shift between earth tones to match its surroundings. Odomok's bite delivers a potent toxin that slowly weakens its prey. Patient and calculating, it can remain motionless for days before striking, its ancient eyes betraying an unsettling intelligence that seems to assess your weaknesses.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 79,
+      "id": "tuskhammer",
+      "name": "Tuskhammer",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/tuskhammer.webp",
+      "webpPath": "/images/cards/new/tuskhammer.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 150,
+        "agility": 25
+      },
+      "essence": {
+        "cost": {
+          "amount": 2,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Battering Charge",
+        "description": "When attacking a shield, gain 50 Strength."
+      },
+      "cardFact": "Tuskhammers possess a unique form of memory transference—when elder members sense their time nearing, they press their tusks to the earth, storing their accumulated knowledge in crystalline structures beneath the soil. Young Tuskhammers can later absorb these memories by finding and touching these crystal formations, allowing the herd's wisdom to persist for centuries even as individuals pass on.",
+      "loreDescription": "An imposing earth-aligned behemoth whose massive frame belies its graceful movements. Tuskhammer's ivory protrusions curve majestically upward, inscribed with ancient runes that glow when it channels elemental power. Its thick, stone-like hide bears the scars of countless battles, yet its eyes reflect wisdom accumulated over generations. With each deliberate step, it sends subtle vibrations through the ground, communicating with distant kin.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 80,
+      "id": "brumaul",
+      "name": "Brumaul",
+      "type": "Creature",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/brumaul.webp",
+      "webpPath": "/images/cards/new/brumaul.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 120,
+        "agility": 55
+      },
+      "essence": {
+        "cost": {
+          "amount": 1,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Fertile Ground",
+        "description": "When this card is normal summoned, you may special summon 1 Earth creature that costs 0 essence from your discard pile. The summoned creature enters play Exhausted."
+      },
+      "cardFact": "Brumauls hibernate deep within mountain caves where they absorb Earth essence directly from the stone around them. When they emerge in spring, their fur often contains crystallized essence fragments that enhance their already formidable strength, making them temporarily unstoppable.",
+      "loreDescription": "A massive ursine force of nature with fur as thick and strong as mountain stone. Brumaul's roar can trigger minor avalanches, and its powerful paws can shatter boulders with a single swipe. Despite its fearsome appearance, it shows unexpected gentleness when protecting its territory and allies.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 81,
+      "id": "essence-exchange",
+      "name": "Essence Exchange",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/essence exchange.webp",
+      "webpPath": "/images/cards/new/essence exchange.webp",
+      "element": null,
+      "ability": "Exchange any amount of one elemental essence for an equal amount of a different elemental essence.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 82,
+      "id": "cleanse-and-adapt",
+      "name": "Cleanse and Adapt",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/cleanse and adapt.webp",
+      "webpPath": "/images/cards/new/cleanse and adapt.webp",
+      "element": null,
+      "ability": "Select 1 creature, remove any equipment cards, then Refresh its action.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 83,
+      "id": "quick-spurt",
+      "name": "Quick Spurt",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/quick spurt.webp",
+      "webpPath": "/images/cards/new/quick spurt.webp",
+      "element": null,
+      "ability": "Choose 1 effect: All of your creatures gain 20 Agility until the end of the turn. Or Choose 1 creature to gain 60 Agility until the end of the turn.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 84,
+      "id": "essence-generation",
+      "name": "Essence Generation",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/essence generation.webp",
+      "webpPath": "/images/cards/new/essence generation.webp",
+      "element": null,
+      "ability": "Generate 2 essence of an element.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 85,
+      "id": "pierce",
+      "name": "Pierce",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/pierce.webp",
+      "webpPath": "/images/cards/new/pierce.webp",
+      "element": null,
+      "ability": "Choose 1 creature to gain Pierce until the end of the turn.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 86,
+      "id": "revealing-shields",
+      "name": "Revealing Shields",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/revealing shields.webp",
+      "webpPath": "/images/cards/new/revealing shields.webp",
+      "element": null,
+      "ability": "Reveal all shields your opponent controls.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 87,
+      "id": "half-attack",
+      "name": "Half Attack",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/half attack.webp",
+      "webpPath": "/images/cards/new/half attack.webp",
+      "element": null,
+      "ability": "Choose 1 creature on the field to lose 50 Strength or 50 Agility until the end of the turn.",
+      "rune": "Instant",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 88,
+      "id": "scrying-glass",
+      "name": "Scrying Glass",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/scrying glass.webp",
+      "webpPath": "/images/cards/new/scrying glass.webp",
+      "element": null,
+      "ability": "Look at the top 2 cards of your deck, you may discard 1, then put the remaining card(s) on top of your deck in any order.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 89,
+      "id": "remnant-recall",
+      "name": "Remnant Recall",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/remnant recall.webp",
+      "webpPath": "/images/cards/new/remnant recall.webp",
+      "element": null,
+      "ability": "Bring 1 card from your discard pile to your hand.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 90,
+      "id": "heavy-chains",
+      "name": "Heavy Chains",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/heavy chains.webp",
+      "webpPath": "/images/cards/new/heavy chains.webp",
+      "element": null,
+      "ability": "Equip this card to a creature. While equipped, the creature loses 50 Strength and 25 Agility.",
+      "rune": "Equipment",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 91,
+      "id": "stasis-field",
+      "name": "Stasis Field",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/stasis field.webp",
+      "webpPath": "/images/cards/new/stasis field.webp",
+      "element": null,
+      "ability": "Exhaust or Refresh any creature on the field.",
+      "rune": "Instant",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 92,
+      "id": "elemental-barrage",
+      "name": "Elemental Barrage",
+      "type": "Rune",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/elemental barrage.webp",
+      "webpPath": "/images/cards/new/elemental barrage.webp",
+      "element": null,
+      "ability": "Choose 1 Element. All creatures you control of the chosen element gain 25 Strength until the end of the turn.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 93,
+      "id": "equilibrium",
+      "name": "Equilibrium",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/equilibrium.webp",
+      "webpPath": "/images/cards/new/equilibrium.webp",
+      "element": null,
+      "ability": "Deplete any amount of elemental essence. Your opponent depletes the same amount of essence using the element(s) of their choice.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 94,
+      "id": "elemental-surge",
+      "name": "Elemental Surge",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/elemental surge.webp",
+      "webpPath": "/images/cards/new/elemental surge.webp",
+      "element": null,
+      "ability": "Draw 1 card. If the drawn card is a Rune or Counter card, you may reveal it to draw 1 more card.",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 95,
+      "id": "essence-amplifier",
+      "name": "Essence Amplifier",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/essence amplifier.webp",
+      "webpPath": "/images/cards/new/essence amplifier.webp",
+      "element": null,
+      "ability": "Equip this card to a creature. While equipped, the creature produces double its normal essence during your generation phase.",
+      "rune": "Equipment",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 96,
+      "id": "binding-coils",
+      "name": "Binding Coils",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/binding coils.webp",
+      "webpPath": "/images/cards/new/binding coils.webp",
+      "element": null,
+      "ability": "Equip this card to a creature. While equipped, the creature becomes and remains Exhausted.",
+      "rune": "Equipment",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 97,
+      "id": "intrusion-seal",
+      "name": "Intrusion Seal",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/intrusion seal.webp",
+      "webpPath": "/images/cards/new/intrusion seal.webp",
+      "element": null,
+      "ability": "Choose 1 effect: Destroy a rune or counter card. or Negate the effect of a Rune or Counter card that your opponent activates.",
+      "rune": "Instant",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 98,
+      "id": "direct-assault",
+      "name": "Direct Assault",
+      "type": "Rune",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/direct assault.webp",
+      "webpPath": "/images/cards/new/direct assault.webp",
+      "element": null,
+      "ability": "Deal 50 damage to a selected target (creature or shield).",
+      "rune": "Instant",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 99,
+      "id": "draconic-adaptability",
+      "name": "Draconic Adaptability",
+      "type": "Rune",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/draconic adaptability.webp",
+      "webpPath": "/images/cards/new/draconic adaptability.webp",
+      "element": null,
+      "ability": "Until the end of the turn, \"Dragon\" creatures can be summoned using any combination of their two required elements (totaling 10 essence).",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 100,
+      "id": "lifebound-armour",
+      "name": "Lifebound Armour",
+      "type": "Rune",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/lifebound armour.webp",
+      "webpPath": "/images/cards/new/lifebound armour.webp",
+      "element": null,
+      "ability": "Equip this card to a creature. While equipped, if the creature would be destroyed by effect or ability, destroy this card instead and restore the creature to full strength.",
+      "rune": "Equipment",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 101,
+      "id": "ethereal-vitality",
+      "name": "Ethereal Vitality",
+      "type": "Rune",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/ethereal vitality.webp",
+      "webpPath": "/images/cards/new/ethereal vitality.webp",
+      "element": null,
+      "ability": "Choose 1 effect: Grant 100 Health to a selected Shield until the end of the turn. or Choose 1 creature to gain 25 Strength and 25 Agility until the end of the turn.",
+      "rune": "Instant",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 102,
+      "id": "counter-pulse",
+      "name": "Counter Pulse",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/counter pulse.webp",
+      "webpPath": "/images/cards/new/counter pulse.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Destroy the summoned creature. (this card cannot be used to prevent special summons from shield effects)"
+      },
+      "trigger": "When your opponent summons a creature without spending essence:",
+      "effect": "Destroy the summoned creature. (this card cannot be used to prevent special summons from shield effects)",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 103,
+      "id": "essence-leak",
+      "name": "Essence Leak",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/essence leak.webp",
+      "webpPath": "/images/cards/new/essence leak.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Negate the essence generation and prevent your opponent from generating essence until the end of the turn. (this card cannot be used in response to shield effects)"
+      },
+      "trigger": "When your opponent generates essence:",
+      "effect": "Negate the essence generation and prevent your opponent from generating essence until the end of the turn. (this card cannot be used in response to shield effects)",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 104,
+      "id": "time-freeze",
+      "name": "Time Freeze",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/time freeze.webp",
+      "webpPath": "/images/cards/new/time freeze.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Prevent your opponent from summoning creatures and declaring attacks until the end of the turn."
+      },
+      "trigger": "When your opponent generates essence:",
+      "effect": "Prevent your opponent from summoning creatures and declaring attacks until the end of the turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 105,
+      "id": "reflective-barrier",
+      "name": "Reflective Barrier",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/reflective barrier.webp",
+      "webpPath": "/images/cards/new/reflective barrier.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Change the target of the attack to another target on your side of the field."
+      },
+      "trigger": "When your opponent declares an attack:",
+      "effect": "Change the target of the attack to another target on your side of the field.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 106,
+      "id": "whirlwind-retreat",
+      "name": "Whirlwind Retreat",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/whirlwind retreat.webp",
+      "webpPath": "/images/cards/new/whirlwind retreat.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Negate the attack and return the attacker to your opponent's hand. Your opponent generates 2 essence of the creature's element. (this card cannot be used on Dragons or Elementalists)"
+      },
+      "trigger": "When your opponent declares an attack:",
+      "effect": "Negate the attack and return the attacker to your opponent's hand. Your opponent generates 2 essence of the creature's element. (this card cannot be used on Dragons or Elementalists)",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 107,
+      "id": "vortex-shift",
+      "name": "Vortex Shift",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/vortex shift.webp",
+      "webpPath": "/images/cards/new/vortex shift.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Refresh the action of any creature you control."
+      },
+      "trigger": "When your opponent declares an attack:",
+      "effect": "Refresh the action of any creature you control.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 108,
+      "id": "agilitys-valor",
+      "name": "Agility's Valor",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/agilitys valor.webp",
+      "webpPath": "/images/cards/new/agilitys valor.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Boost 1 creature's agility on the field by 50 until the end of the turn."
+      },
+      "trigger": "When your opponent declares an attack:",
+      "effect": "Boost 1 creature's agility on the field by 50 until the end of the turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 109,
+      "id": "passive-aggressive",
+      "name": "Passive Aggressive",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/passive aggressive.webp",
+      "webpPath": "/images/cards/new/passive aggressive.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon a creature of the same essence cost (excluding Dragons and Elementalists) from your hand or discard pile. The creature enters play Exhausted."
+      },
+      "trigger": "When your opponent summons a creature: ",
+      "effect": "Special summon a creature of the same essence cost (excluding Dragons and Elementalists) from your hand or discard pile. The creature enters play Exhausted.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 110,
+      "id": "chaos-hand",
+      "name": "Chaos Hand",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/chaos hand.webp",
+      "webpPath": "/images/cards/new/chaos hand.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Discard 1 card from your opponent's hand."
+      },
+      "trigger": "When your opponent draws a card:",
+      "effect": "Discard 1 card from your opponent's hand.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 111,
+      "id": "whispering-winds",
+      "name": "Whispering Winds",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/whispering winds.webp",
+      "webpPath": "/images/cards/new/whispering winds.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Negate the activation of the effect and prevent your opponent from using any other Creature or Rune effects until the end of the turn."
+      },
+      "trigger": "When your opponent uses a Creature or Rune card effect:",
+      "effect": "Negate the activation of the effect and prevent your opponent from using any other Creature or Rune effects until the end of the turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 112,
+      "id": "denial-decimation",
+      "name": "Denial Decimation",
+      "type": "Counter",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/denial decimation.webp",
+      "webpPath": "/images/cards/new/denial decimation.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Negate the enhanced effect. You may pay matching essence cost using any 1 element to destroy that card."
+      },
+      "trigger": "When your opponent uses an enhanced effect:",
+      "effect": "Negate the enhanced effect. You may pay matching essence cost using any 1 element to destroy that card.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 113,
+      "id": "armour-degradation",
+      "name": "Armour Degradation",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/armour degradation.webp",
+      "webpPath": "/images/cards/new/armour degradation.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "The blocking creature's Strength is reduced by 55 until the end of the turn."
+      },
+      "trigger": "When your opponent declares a blocking creature:",
+      "effect": "The blocking creature's Strength is reduced by 55 until the end of the turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 114,
+      "id": "power-surge",
+      "name": "Power Surge",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/power surge.webp",
+      "webpPath": "/images/cards/new/power surge.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "The blocking creature deals its Strength in damage to the attacking creature."
+      },
+      "trigger": "When your opponent attacks a blocking creature:",
+      "effect": "The blocking creature deals its Strength in damage to the attacking creature.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 115,
+      "id": "essence-bloom",
+      "name": "Essence Bloom",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/essence bloom.webp",
+      "webpPath": "/images/cards/new/essence bloom.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Generate an equal amount of essence using elements of your choice. (this card cannot be used in response to shield effects)"
+      },
+      "trigger": "When your opponent generates essence:",
+      "effect": "Generate an equal amount of essence using elements of your choice. (this card cannot be used in response to shield effects)",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 116,
+      "id": "elemental-reaction",
+      "name": "Elemental Reaction",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/elemental reaction.webp",
+      "webpPath": "/images/cards/new/elemental reaction.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Destroy the creature that generated essence. (this card cannot destroy an Elementalist)"
+      },
+      "trigger": "When your opponent generates essence using a creature:",
+      "effect": "Destroy the creature that generated essence. (this card cannot destroy an Elementalist)",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 117,
+      "id": "unbreakable",
+      "name": "Unbreakable",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/unbreakable.webp",
+      "webpPath": "/images/cards/new/unbreakable.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Prevent all damage to your shields for one turn."
+      },
+      "trigger": "When your opponent declares an attack:",
+      "effect": "Prevent all damage to your shields for one turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 118,
+      "id": "rapid-recovery",
+      "name": "Rapid Recovery",
+      "type": "Counter",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/rapid recovery.webp",
+      "webpPath": "/images/cards/new/rapid recovery.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Prevent the creature's destruction, fully restore its Strength, and it becomes or remains Exhausted."
+      },
+      "trigger": "When a creature you control would be destroyed by battle:",
+      "effect": "Prevent the creature's destruction, fully restore its Strength, and it becomes or remains Exhausted.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 119,
+      "id": "revival-rain",
+      "name": "Revival Rain",
+      "type": "Counter",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/revival rain.webp",
+      "webpPath": "/images/cards/new/revival rain.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon a creature of the same element (excluding Elementalists and the destroyed creature) from your discard pile. This creature enters Exhausted."
+      },
+      "trigger": "When a creature you control is destroyed:",
+      "effect": "Special summon a creature of the same element (excluding Elementalists and the destroyed creature) from your discard pile. This creature enters Exhausted.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 120,
+      "id": "shield-revenge",
+      "name": "Shield Revenge",
+      "type": "Counter",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/shield revenge.webp",
+      "webpPath": "/images/cards/new/shield revenge.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Destroy the creature that broke the shield."
+      },
+      "trigger": "When your opponent breaks a shield:",
+      "effect": "Destroy the creature that broke the shield.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 121,
+      "id": "oblivion-rift",
+      "name": "Oblivion Rift",
+      "type": "Counter",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/oblivion rift.webp",
+      "webpPath": "/images/cards/new/oblivion rift.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Negate the effect. Then, each player must destroy one of their placed Rune/Counter cards (including equipments)."
+      },
+      "trigger": "When your opponent uses a Rune or Counter card effect:",
+      "effect": "Negate the effect. Then, each player must destroy one of their placed Rune/Counter cards (including equipments).",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 122,
+      "id": "cyclonos",
+      "name": "Cyclonos",
+      "type": "Air",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/cyclonos.webp",
+      "webpPath": "/images/cards/new/cyclonos.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "cardFact": "Cyclonos alters air pressure around its body to reach speeds of over 110 body-lengths per second during pursuit.",
+      "loreDescription": "A fierce predator of the Zalos highlands, Cyclonos moves with unparalleled speed and aggression. Its dense white-and-black fur crackles with static electricity when it runs, sometimes creating visible sparks along its path. Despite its compact size, Cyclonos possesses strength that rivals creatures three times its mass, capable of bringing down much larger prey through relentless pursuit and powerful jaws. When channeling air essence, Cyclonos can briefly accelerate to speeds that make it appear as little more than a blur of motion and fury.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 123,
+      "id": "talus",
+      "name": "Talus",
+      "type": "Air",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/talus.webp",
+      "webpPath": "/images/cards/new/talus.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Shed feathers retain air essence, prized for crafting agility-enhancing equipment.",
+      "loreDescription": "A majestic aerial sovereign that commands the higher reaches of Kinbrold's mountains. Talus's multi-colored plumage contains specialized feathers that can detect and channel air currents with extraordinary precision. Its piercing gaze can spot movement from miles away, while the distinctive markings across its wings and chest form natural patterns that shimmer with stored air essence. Though primarily solitary, Talus occasionally forms temporary alliances with other air creatures, using its commanding presence to coordinate aerial maneuvers that leave even experienced Masters in awe.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 124,
+      "id": "vayute",
+      "name": "Vayute",
+      "type": "Air",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/vayute.webp",
+      "webpPath": "/images/cards/new/vayute.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Vayute's tusks channel concentrated air essence to create microfractures in defenses well beyond the initial impact point.",
+      "loreDescription": "An ancient behemoth that traverses Kinbrold's northern territories with thunderous steps. Vayute's massive frame supports tusks of extraordinary size and strength, capable of carving passages through glaciers or defending against multiple predators simultaneously. Its dense coat contains specialized follicles that absorb ambient air essence during seasonal migrations, providing reserves of energy for the harsh winter months. Though imposing in appearance, Vayute demonstrates remarkable intelligence and memory, following migratory routes established by ancestors thousands of years ago.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 125,
+      "id": "hydran",
+      "name": "Hydran",
+      "type": "Water",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/hydran.webp",
+      "webpPath": "/images/cards/new/hydran.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Hydran's eyes possesses a different type of vision—one sees heat while the other detects essence flow patterns.",
+      "loreDescription": "A fearsome aquatic predator that dominates the turbulent coastal waters of Tsunareth. Hydran's dual serpentine heads work in perfect coordination, one tracking prey while the other watches for threats. Its scales shimmer with iridescent blue energy that intensifies when it channels water essence through its powerful form. Unlike many water creatures that rely on stealth, Hydran confronts challenges directly with overwhelming force, creating massive waves that can capsize ships or erode shorelines in minutes.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 126,
+      "id": "typhos",
+      "name": "Typhos",
+      "type": "Water",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/typhos.webp",
+      "webpPath": "/images/cards/new/typhos.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "cardFact": "Typhos creates powerful underwater vortices that trap prey while it remains perfectly still at the center of the maelstrom.",
+      "loreDescription": "An ancient leviathan that lurks in the abyssal depths of Kinbrold's deepest oceans. Typhos's massive armored form has evolved for both extreme pressure and devastating attacks, with tooth-lined jaws capable of crushing stone and coral alike. The beast's eyes glow with an unsettling golden light that pierces through the darkness, while bioluminescent patterns along its scales serve as both camouflage and communication. Few who have witnessed Typhos at full power have survived to describe its devastating control over oceanic currents.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 127,
+      "id": "vapora",
+      "name": "Vapora",
+      "type": "Water",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/vapora.webp",
+      "webpPath": "/images/cards/new/vapora.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Vapora is one of the primary bridges between the real and ethereal",
+      "loreDescription": "A mesmerizing elemental composed of liquid light and flowing water essence. Vapora moves with hypnotic fluidity, able to shift between solid, liquid, and mist states instantaneously. Its ethereal body absorbs and refracts light, creating the illusion of multiple forms moving in concert. Ancient Water Kingdom sages believe Vapora represents the consciousness of water itself rather than a distinct entity, explaining its uncanny ability to flow through seemingly impenetrable barriers and appear in multiple locations simultaneously.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 128,
+      "id": "archen",
+      "name": "Archen",
+      "type": "Fire",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/archen.webp",
+      "webpPath": "/images/cards/new/archen.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Archen's scales contain superheated pockets that create defensive glass barriers.",
+      "loreDescription": "A formidable predator of Kinbrold's volcanic lowlands, Archen has evolved obsidian-like scales that absorb and redirect heat. This poison salamander's body temperature runs exceptionally hot, allowing it to survive environments that would incinerate lesser creatures. When hunting, Archen's fiery orange eyes track prey through smoke and ash with perfect clarity. Its powerful jaws can unhinge to consume prey three times its size, while specialized toxin glands beneath its claws secrete a potent venom that breaks down organic matter with alarming speed.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 129,
+      "id": "sunny",
+      "name": "Sunny",
+      "type": "Fire",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/sunny.webp",
+      "webpPath": "/images/cards/new/sunny.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Sunny's flames never burn those with pure intentions, instead providing warmth that accelerates healing.",
+      "loreDescription": "A radiant feline entity composed entirely of living flame, Sunny's mane resembles a blazing sunburst that pulses with golden light. Despite its fiery nature, Sunny moves with feline grace and precision, leaving subtle heat trails that quickly fade. Its bright, glowing eyes reflect both playfulness and wisdom, sensing thermal patterns invisible to others. The concentrated solar energy in its core allows it to generate warmth without consuming external fuel, making it a cherished companion in Kinbrold's northern regions.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 130,
+      "id": "vorax",
+      "name": "Vorax",
+      "type": "Fire",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/vorax.webp",
+      "webpPath": "/images/cards/new/vorax.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "cardFact": "Vorax detects thermal current fluctuations from miles away, anticipating volcanic activity before eruptions occur.",
+      "loreDescription": "A serpentine fire elemental that coils through volcanic fissures and magma channels with hypnotic fluidity. Vorax's body consists of interlocking flame scales that intensify from amber edges to a molten core. Ancient and cunning, it harnesses concentrated fire essence to manifest in various states between fully corporeal and pure energy. When threatened, Vorax can release controlled bursts of superheated air that create defensive perimeters without causing unintended destruction.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 131,
+      "id": "clay-stalkers",
+      "name": "Clay Stalkers",
+      "type": "Earth",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/clay stalkers.webp",
+      "webpPath": "/images/cards/new/clay stalkers.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Clay Stalkers coordinate perfect ambushes through subtle ground vibrations.",
+      "loreDescription": "Born from ancient earth magic, Clay Stalkers are sentient formations of living stone that move with surprising coordination. These tribal beings operate in small hunting packs, their glowing green eyes serving as windows to the elemental energy that animates them. Each Clay Stalker is connected to its kin through a primitive hive mind, allowing them to execute synchronized attacks without verbal communication. Their stone bodies absorb minerals from their environment, growing stronger and more defined with age.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 132,
+      "id": "quarris",
+      "name": "Quarris",
+      "type": "Earth",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/quarris.webp",
+      "webpPath": "/images/cards/new/quarris.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 3,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "cardFact": "Quarris can survive dormant for years, awakening only when its territory faces significant threats.",
+      "loreDescription": "Quarris is an ancient earth-aligned behemoth with a body formed from compressed mountain stone. Its back bristles with razor-sharp spikes that can deflect even the most powerful attacks. Despite its immense size and weight, Quarris moves with surprising purpose and efficiency, each step resonating with deep earth energy. Its armored hide bears natural geometric patterns that glow faintly when it channels its elemental abilities, particularly when defending itself against threats.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 133,
+      "id": "oaker",
+      "name": "Oaker",
+      "type": "Earth",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/oaker.webp",
+      "webpPath": "/images/cards/new/oaker.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "cardFact": "Oakers can remain motionless becoming indistinguishable from natural trees.",
+      "loreDescription": "At first glance merely an ancient oak, Oaker reveals its true nature when it uproots and walks on massive, gnarled limbs. Its bark-like skin houses entire ecosystems of moss, fungi, and small creatures. Birds nest in its branch-like arms, unperturbed when the giant moves, as if part of an ancient symbiosis.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 134,
+      "id": "nimbus",
+      "name": "Nimbus | The Air Titan",
+      "type": "Air",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/nimbus.webp",
+      "webpPath": "/images/cards/new/nimbus.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Storm Surge",
+        "description": "When this card is normal summoned, you may destroy 1 creature on the field."
+      },
+      "specialAbility": {
+        "name": "Last Breathe",
+        "description": "Destroy 1 Rune or Counter card on the field.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Nimbus can disperse its consciousness into thousands of individual air currents simultaneously, allowing it to monitor vast areas of Kinbrold's skies and respond instantly to threats anywhere within its domain.",
+      "loreDescription": "A towering entity of concentrated air essence, Nimbus manifests as a swirling vortex of clouds and lightning with a vaguely humanoid form. Crackling electrical currents trace intricate patterns throughout its body, connecting points of focused power. Nimbus can condense or expand its form at will, sometimes appearing as a massive thunderhead and other times compressing into a more defined shape with gleaming eyes of electric blue. Its mere presence affects atmospheric pressure for miles around, creating unpredictable weather patterns that respond to its emotions.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 135,
+      "id": "lazu",
+      "name": "Lazu | The Air Tempest",
+      "type": "Air",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/lazu.webp",
+      "webpPath": "/images/cards/new/lazu.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Aerial Accumulation",
+        "description": "While this card is in play, gain 1 Air essence for every rune card used."
+      },
+      "specialAbility": {
+        "name": "Conversion",
+        "description": "You may convert up to 5 essence from one element to another.",
+        "cost": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "cardFact": "Lazu developed a unique technique to convert essence between elements by passing it through specially calibrated air vortices, earning respect from masters of all four elemental disciplines.",
+      "loreDescription": "A swift and mercurial air master whose form constantly shifts between solid and gaseous states. Lazu's body appears as a sleek, streamlined figure composed of visible wind currents and atmospheric distortions. Silver-blue runes float around their limbs, allowing precise control over air pressure and essence flow. Unlike most air entities, Lazu specializes in essence manipulation, drawing power from atmospheric changes and redistributing it with calculated precision throughout Kinbrold's elemental web.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 136,
+      "id": "aeris",
+      "name": "Aeris | The Air Slyph",
+      "type": "Air",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/aeris.webp",
+      "webpPath": "/images/cards/new/aeris.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Galea's Grasp",
+        "description": "Exhaust or Refresh 1 creature on the field (excluding itself)."
+      },
+      "specialAbility": {
+        "name": "Retreat",
+        "description": "Send 1 Exhausted creature from the field to the owner's hand.",
+        "cost": {
+          "amount": 3,
+          "element": null
+        }
+      },
+      "cardFact": "Aeris can temporarily separate her consciousness into multiple wind currents, allowing her to observe different locations simultaneously before reforming—this explains her tactical ability to switch the positions of creatures on the battlefield with perfect precision.",
+      "loreDescription": "A mesmerizing entity of pure air essence, Aeris exists in a state between tangible and intangible. Her form shifts constantly like windswept clouds, occasionally revealing glimpses of delicate features framed by flowing currents of air. As she moves, Aeris leaves trails of gentle luminescence that fade like morning mist. Despite her ethereal appearance, she possesses remarkable control over the atmosphere, manipulating air pressure and wind direction with graceful, dance-like movements. Her connection to the wind allows her to hear conversations carried on distant breezes, making her an unparalleled gatherer of information.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 137,
+      "id": "torrent",
+      "name": "Torrent | The Water Titan",
+      "type": "Water",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/torrent.webp",
+      "webpPath": "/images/cards/new/torrent.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Mek's Fury",
+        "description": "While attacking, gain Double Strike until the end of the turn."
+      },
+      "specialAbility": {
+        "name": "Shield Crusher",
+        "description": "Gain 25 Strength when attacking Shields until the end of the turn.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Torrent possesses the unique ability to grant Double Strike to water creatures, infusing them with the primal rhythm of the tides that allows for perfectly synchronized dual attacks.",
+      "loreDescription": "A massive aquatic sovereign whose body transitions between solid, liquid, and vapor states depending on its purpose. Torrent's core appears as a humanoid figure formed of deep blue crystal, surrounded by concentric rings of flowing water that continuously cycle around it. Ancient symbols in the language of the first rains are etched into its crystalline center, glowing with accumulated wisdom. When fully manifested, Torrent towers over Kinbrold's largest waterfalls, directing the flow of water essence throughout the realm.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 138,
+      "id": "azura",
+      "name": "Azura | The Water Tempest",
+      "type": "Water",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/azura.webp",
+      "webpPath": "/images/cards/new/azura.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Wisdom Flow",
+        "description": "When this card is summoned, draw 2 cards."
+      },
+      "specialAbility": {
+        "name": "Beckoning",
+        "description": "You may normal summon 1 additional creature this turn.",
+        "cost": {
+          "amount": 3,
+          "element": null
+        }
+      },
+      "cardFact": "Azura's connection to water essence allows her to temporarily enhance the natural summoning bonds that exist within Kinbrold, enabling additional creatures to be called forth during crucial moments of need.",
+      "loreDescription": "A graceful water master who embodies the fluid intelligence of her element. Azura appears as a woman composed of clear water that reflects the colors around her, with eyes of deep sapphire that reveal her true form. Her movements flow with perfect efficiency, never wasting energy as she manipulates water in all its states. Rather than brute force, Azura specializes in knowledge and strategic foresight, drawing cards and insights from the ever-flowing river of possibility that water essence allows her to perceive.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 139,
+      "id": "undine",
+      "name": "Undine | The Water Oracle",
+      "type": "Water",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/undine.webp",
+      "webpPath": "/images/cards/new/undine.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Deep Insight",
+        "description": "Look at the top 2 cards of your deck. You may discard 1, then place the remaining card(s) on top of your deck in any order."
+      },
+      "specialAbility": {
+        "name": "Wise Wisdom",
+        "description": "Draw 1 card.",
+        "cost": {
+          "amount": 3,
+          "element": null
+        }
+      },
+      "cardFact": "Undine's connection to water essence allows her to temporarily glimpse the potential futures of cards in a deck, explaining her unique ability to rearrange the top cards for maximum strategic advantage.",
+      "loreDescription": "The enigmatic Undine serves as custodian of water's ancient wisdom, her translucent form rippling with currents of deep sapphire and aquamarine. As Water Oracle, she perceives time not as linear progression but as flowing streams of possibility, allowing her to glimpse fragments of potential futures and draw insights from the depths of the past. Her crystalline eyes reflect not what is before them but what might be, guiding her followers with cryptic visions and strategic foresight rather than direct intervention.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 140,
+      "id": "ignus",
+      "name": "Ignus | The Fire Titan",
+      "type": "Fire",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/ignus.webp",
+      "webpPath": "/images/cards/new/ignus.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Inferno Fury",
+        "description": "While attacking, this creature gains 50 Strength and Pierce."
+      },
+      "specialAbility": {
+        "name": "Infernal Rage",
+        "description": "Discard 1 card from your opponent's hand.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "When Ignus confronts an opponent, the ambient temperature rises so dramatically that nearby creatures instinctively give up their essence reserves, attempting to cool themselves in the face of its overwhelming heat.",
+      "loreDescription": "An ancient fire entity whose form resembles a towering warrior composed of controlled flame and molten rock. Ignus's core burns with a white-hot intensity that never diminishes, while the outer layers of its body range from deep crimson to brilliant gold. Centuries of existence have taught Ignus to harness fire's destructive potential with precise control, focusing its overwhelming strength exactly where needed. When it speaks, its voice carries the crackling intensity of a wildfire yet remains measured and deliberate.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 141,
+      "id": "sigmus",
+      "name": "Sigmus | The Fire Tempest",
+      "type": "Fire",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/sigmus.webp",
+      "webpPath": "/images/cards/new/sigmus.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Heatwave",
+        "description": "When this card is summoned, deal 50 damage to all creatures and shields your opponent controls."
+      },
+      "specialAbility": {
+        "name": "Solar Flare",
+        "description": "Deal 25 damage to all creatures and shields on the field.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Sigmus developed the Solar Flare technique after studying ancient volcanic glass formations, allowing for perfectly balanced damage distribution across both enemy and friendly forces when tactical situations demand such sacrifice.",
+      "loreDescription": "A fire master whose mastery lies not in raw power but in the precise distribution of heat and flame. Sigmus appears as a humanoid figure whose body is composed of controlled fire with patterns that resemble flowing robes or armor depending on their current purpose. Unlike more chaotic fire entities, Sigmus specializes in calculated, widespread effect, generating precisely calibrated waves of heat that can target multiple opponents simultaneously without causing collateral damage to allies.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 142,
+      "id": "viktor",
+      "name": "Viktor | The Fire Chimera",
+      "type": "Fire",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/viktor.webp",
+      "webpPath": "/images/cards/new/viktor.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Flame Ascendance",
+        "description": "You may destroy any creature you control to gain 65 Strength and 35 Agility and gain Pierce until the end of the turn."
+      },
+      "specialAbility": {
+        "name": "Fiery Rebirth",
+        "description": "Immediately after using Flame Ascendance, return the destroyed creature to the field.",
+        "cost": {
+          "amount": 3,
+          "element": null
+        }
+      },
+      "cardFact": "Viktor's unique physiology allows him to temporarily absorb the essence of destroyed creatures, incorporating their strongest traits into his own form before they dissipate back into elemental energy.",
+      "loreDescription": "A fearsome amalgamation of predatory beasts fused through ancient fire magic, Viktor's body radiates intense heat that warps the air around him. His primary salamander form is augmented with draconic features: serpentine neck, scaled wings, and a lashing scorpion-like tail tipped with venomous flame. When Viktor channels his power, the rune markings across his obsidian hide glow like magma flowing through cracks in cooling stone. Despite his monstrous appearance, Viktor possesses a calculating intelligence, carefully selecting which creatures to sacrifice to fuel his devastating flame ascendance.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 143,
+      "id": "terra",
+      "name": "Terra | The Earth Titan",
+      "type": "Earth",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/terra.webp",
+      "webpPath": "/images/cards/new/terra.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Ground Quake",
+        "description": "Exhaust or Refresh 1 creature on the field (excluding itself)."
+      },
+      "specialAbility": {
+        "name": "Seismic Tremor",
+        "description": "Deplete 2 essence from your opponent's essence pool.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Terra does not sleep but instead periodically merges completely with the ground, becoming indistinguishable from natural stone formations while their consciousness communes with the earth's deepest layers.",
+      "loreDescription": "A colossal entity born from the oldest mountains of Kinbrold, Terra stands as a living embodiment of earth's strength. Their massive body appears as a humanoid formation of interlocking stone plates that shift with surprising grace despite their immense weight. Terra's voice resonates with the deep rumble of tectonic movement, and each deliberate step connects with the ground in ways that can either stabilize or destabilize the surrounding terrain depending on their intent.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 144,
+      "id": "oryssa",
+      "name": "Oryssa | The Earth Tempest",
+      "type": "Earth",
+      "rarity": "R ",
+      "imagePath": "/images/cards/new/oryssa.webp",
+      "webpPath": "/images/cards/new/oryssa.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 4,
+          "element": null
+        },
+        "generation": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Fortified Bastion",
+        "description": "While this card is on the field, your shields gain 50 Health. When this card is destroyed, you may restore 1 Shield to its original Tier."
+      },
+      "specialAbility": {
+        "name": "Geo Surge",
+        "description": "Choose 1 creature on the field to gain 50 Strength until the end of the turn.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Oryssa developed her distinctive defensive techniques after studying the crystalline patterns formed when earth essence flows through different mineral compositions, allowing her shields to be both lighter and stronger than traditional stone barriers.",
+      "loreDescription": "A disciplined Earth Tempest who has mastered the art of manipulating stone with graceful precision. Oryssa channels ancient earth magic through controlled movements, allowing her to raise protective barriers and launch devastating counterattacks in a single fluid motion. Her emerald robes bear golden trim representing the sacred geometry of earth magic, while her focused expression reveals the intense concentration required to maintain control over the massive stone formations she commands.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 145,
+      "id": "leo",
+      "name": "Leo | The Earth Sovereign",
+      "type": "Earth",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/leo.webp",
+      "webpPath": "/images/cards/new/leo.webp",
+      "element": null,
+      "essence": {
+        "cost": {
+          "amount": 5,
+          "element": null
+        },
+        "generation": {
+          "amount": 1,
+          "element": null
+        }
+      },
+      "ability": {
+        "name": "Earthly Cycle",
+        "description": "When this creature is destroyed, special summon one Earth creature from your discard pile (except this card)."
+      },
+      "specialAbility": {
+        "name": "Quake Impact",
+        "description": "Exhaust or Refresh 1 creature.",
+        "cost": {
+          "amount": 2,
+          "element": null
+        }
+      },
+      "cardFact": "Leo can sense disturbances in earth essence across vast distances, making him Grivoss's most vigilant guardian against threats that would upset the balance of elemental power.",
+      "loreDescription": "The majestic Leo commands respect as the Earth Sovereign, taking the form of a massive lion with a mane of living crystal and jade. His golden-green eyes reflect centuries of accumulated wisdom, while his powerful form combines the ferocity of a predator with the immovable strength of mountains. Ancient earth runes shimmer across his stone-like hide when he channels his formidable earth magic, allowing him to reshape terrain and communicate with the very bedrock of Kinbrold.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 146,
+      "id": "guardians-sanctuary",
+      "name": "Guardian's Sanctuary",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/guardians sanctuary.webp",
+      "webpPath": "/images/cards/new/guardians sanctuary.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Draw 2 cards."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Deplete 3 Elemental Essence from your opponent’s essence pool(s).",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Draw 2 cards.",
+      "secondaryEffect": "Deplete 3 Elemental Essence from your opponent’s essence pool(s).",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 147,
+      "id": "mystic-ward",
+      "name": "Mystic Ward",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/mystic ward.webp",
+      "webpPath": "/images/cards/new/mystic ward.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Destroy 1 Rune/Counter card on the field."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Equip this card to a creature. The equipped creature loses 30 Strength and 10 Agility while this card remains equipped.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Destroy 1 Rune/Counter card on the field.",
+      "secondaryEffect": "Equip this card to a creature. The equipped creature loses 30 Strength and 10 Agility while this card remains equipped.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 148,
+      "id": "oracles-guard",
+      "name": "Oracle's Guard",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/oracles guard.webp",
+      "webpPath": "/images/cards/new/oracles guard.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Choose 1 Rune/Counter card from your deck, and add it to your hand."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Choose one card from your discard pile, and add to your hand.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Choose 1 Rune/Counter card from your deck, and add it to your hand.",
+      "secondaryEffect": "Choose one card from your discard pile, and add to your hand.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 149,
+      "id": "scholars-protection",
+      "name": "Scholar's Protection",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/scholars protection.webp",
+      "webpPath": "/images/cards/new/scholars protection.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Look at the top 3 cards of your deck, discard 1, then put the 2 remaining cards in your hand."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Draw 1 card. Discard 1 card from your opponent's hand.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Look at the top 3 cards of your deck, discard 1, then put the 2 remaining cards in your hand.",
+      "secondaryEffect": "Draw 1 card. Discard 1 card from your opponent's hand.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 150,
+      "id": "essence-wall",
+      "name": "Essence Wall",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/essence wall.webp",
+      "webpPath": "/images/cards/new/essence wall.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Draw 1 card. Gain 3 essence of an element."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Select 2 elements. Gain 2 essence of each selected element.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Draw 1 card. Gain 3 essence of an element.",
+      "secondaryEffect": "Select 2 elements. Gain 2 essence of each selected element.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 151,
+      "id": "radiant-buckler",
+      "name": "Radiant Buckler",
+      "type": "Shield",
+      "rarity": "C",
+      "imagePath": "/images/cards/new/radiant buckler.webp",
+      "webpPath": "/images/cards/new/radiant buckler.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Equip this card to a creature. While equipped, the creature does not generate essence during the generation phase."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Equip this card to a creature. While equipped, the creature gains 30 Strength and 10 Agility.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 1,
+      "primaryEffect": "Equip this card to a creature. While equipped, the creature does not generate essence during the generation phase.",
+      "secondaryEffect": "Equip this card to a creature. While equipped, the creature gains 30 Strength and 10 Agility.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 152,
+      "id": "mythical-barrier",
+      "name": "Mythical Barrier",
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/mythical barrier.webp",
+      "webpPath": "/images/cards/new/mythical barrier.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Draw 3 cards."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Discard 3 cards from your opponent's hand.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 2,
+      "primaryEffect": "Draw 3 cards.",
+      "secondaryEffect": "Discard 3 cards from your opponent's hand.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 153,
+      "id": "shadow-guard",
+      "name": "Shadow Guard",
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/shadow guard.webp",
+      "webpPath": "/images/cards/new/shadow guard.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Destroy 1 creature your opponent controls."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Destroy up to 2 Rune/Counter cards on the field.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 2,
+      "primaryEffect": "Destroy 1 creature your opponent controls.",
+      "secondaryEffect": "Destroy up to 2 Rune/Counter cards on the field.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 154,
+      "id": "draconic-shield",
+      "name": "Draconic Shield",
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/draconic shield.webp",
+      "webpPath": "/images/cards/new/draconic shield.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Generate 3 essence of an element. Choose 1 \"Dragon\" card in your deck, and add it to your hand."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Special summon 1 \"Dragon\" card from your hand or discard pile.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 2,
+      "primaryEffect": "Generate 3 essence of an element. Choose 1 \"Dragon\" card in your deck, and add it to your hand.",
+      "secondaryEffect": "Special summon 1 \"Dragon\" card from your hand or discard pile.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 155,
+      "id": "spectral-shield",
+      "name": "Spectral Shield",
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/spectral shield.webp",
+      "webpPath": "/images/cards/new/spectral shield.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon 2 creatures in your discard pile that each require 0 essence to summon. "
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Special summon 1 creature free of cost in your dicard pile that requires a total of 5 or less essence to summon.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 2,
+      "primaryEffect": "Special summon 2 creatures in your discard pile that each require 0 essence to summon. ",
+      "secondaryEffect": "Special summon 1 creature free of cost in your dicard pile that requires a total of 5 or less essence to summon.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 156,
+      "id": "essence-barrier",
+      "name": "Essence Barrier",
+      "type": "Shield",
+      "rarity": "U",
+      "imagePath": "/images/cards/new/essence barrier.webp",
+      "webpPath": "/images/cards/new/essence barrier.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Draw 1 card. Gain 5 essence of an element."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Select 2 elements. Gain 3 essence of each selected element.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 2,
+      "primaryEffect": "Draw 1 card. Gain 5 essence of an element.",
+      "secondaryEffect": "Select 2 elements. Gain 3 essence of each selected element.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 157,
+      "id": "titans-shield",
+      "name": "Titan's Shield",
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/titans shield.webp",
+      "webpPath": "/images/cards/new/titans shield.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon a \"Titan\" card from your deck. Equip this shield to that Titan. The equpped creature gains 50 Strength and Taunt."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Special summon 1 creature from your hand free of cost. The summoned creature gains Pierce until the end of your next turn.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 3,
+      "primaryEffect": "Special summon a \"Titan\" card from your deck. Equip this shield to that Titan. The equpped creature gains 50 Strength and Taunt.",
+      "secondaryEffect": "Special summon 1 creature from your hand free of cost. The summoned creature gains Pierce until the end of your next turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 158,
+      "id": "celestial-fortress",
+      "name": "Celestial Fortress",
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/celestial fortress.webp",
+      "webpPath": "/images/cards/new/celestial fortress.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Select 2 elements. Gain 6 essence of each selected element."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Choose 2 creatures that require 5 or less essence to summon from either your hand or discard pile. Special summon these creatures free of cost.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 3,
+      "primaryEffect": "Select 2 elements. Gain 6 essence of each selected element.",
+      "secondaryEffect": "Choose 2 creatures that require 5 or less essence to summon from either your hand or discard pile. Special summon these creatures free of cost.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 159,
+      "id": "tempest-barrier",
+      "name": "Tempest Barrier",
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/tempest barrier.webp",
+      "webpPath": "/images/cards/new/tempest barrier.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon a \"Tempest\" card from your deck. Equip this shield to that Tempest. While equipped, the Tempest generates 2 essence during your generation phase."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Freeze all creatures your opponent controls for 1 turn. You may normal summon 1 additional creature next turn.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 3,
+      "primaryEffect": "Special summon a \"Tempest\" card from your deck. Equip this shield to that Tempest. While equipped, the Tempest generates 2 essence during your generation phase.",
+      "secondaryEffect": "Freeze all creatures your opponent controls for 1 turn. You may normal summon 1 additional creature next turn.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 160,
+      "id": "elemental-shield",
+      "name": "Elemental Shield",
+      "type": "Shield",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/elemental shield.webp",
+      "webpPath": "/images/cards/new/elemental shield.webp",
+      "element": null,
+      "ability": {
+        "name": "",
+        "description": "Special summon 1 card from your graveyard (excluding Dragons). Gain 5 essence of the summoned creature's element."
+      },
+      "specialAbility": {
+        "name": "Special Ability",
+        "description": "Draw 2 cards. Select 2 elements. Deplete 5 essence from your opponent's essence pool for each selected element.",
+        "cost": {
+          "amount": 0,
+          "element": null
+        }
+      },
+      "tier": 3,
+      "primaryEffect": "Special summon 1 card from your graveyard (excluding Dragons). Gain 5 essence of the summoned creature's element.",
+      "secondaryEffect": "Draw 2 cards. Select 2 elements. Deplete 5 essence from your opponent's essence pool for each selected element.",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 161,
+      "id": "eldritch",
+      "name": "Eldritch | The Frost Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/eldritch.webp",
+      "webpPath": "/images/cards/new/eldritch.webp",
+      "element": "Frost",
+      "stats": {
+        "strength": 185,
+        "agility": 110
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Frost"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Frost"
+        }
+      },
+      "ability": {
+        "name": "Frostbite",
+        "description": "When this card is summoned, Freeze all creatures your opponent controls for 1 full turn."
+      },
+      "specialAbility": {
+        "name": "Glacial Roar",
+        "description": "Freeze 1 creature on the field for 1 turn.",
+        "cost": {
+          "amount": 2,
+          "element": "Frost"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 162,
+      "id": "veton",
+      "name": "Veton | The Lightning Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/veton.webp",
+      "webpPath": "/images/cards/new/veton.webp",
+      "element": "Lightning",
+      "stats": {
+        "strength": 190,
+        "agility": 105
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Lightning"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Lightning"
+        }
+      },
+      "ability": {
+        "name": "Chainlink",
+        "description": "When this card is summoned, choose one element and deal 75 damage to all opponent's creatures of the chosen element."
+      },
+      "specialAbility": {
+        "name": "Stormy Forecast",
+        "description": "Choose one element and deal 50 damage to all opponent's creatures of the chosen element.",
+        "cost": {
+          "amount": 3,
+          "element": "Lightning"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 163,
+      "id": "diamoria",
+      "name": "Diamoria | The Crystal Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/diamoria.webp",
+      "webpPath": "/images/cards/new/diamoria.webp",
+      "element": "Crystal",
+      "stats": {
+        "strength": 205,
+        "agility": 90
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Crystal"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Crystal"
+        }
+      },
+      "ability": {
+        "name": "Shielded Might",
+        "description": "Restore 1 Shield to its original tier."
+      },
+      "specialAbility": {
+        "name": "Bulwark",
+        "description": "This creature gains Double Strike until the end of the turn.",
+        "cost": {
+          "amount": 3,
+          "element": "Crystal"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 164,
+      "id": "zoryn",
+      "name": "Zoryn | The Lava Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/zoryn.webp",
+      "webpPath": "/images/cards/new/zoryn.webp",
+      "element": "Lava",
+      "stats": {
+        "strength": 210,
+        "agility": 85
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Lava"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Lava"
+        }
+      },
+      "ability": {
+        "name": "Dying Breathe",
+        "description": "When this card is destroyed, destroy 1 card on the field."
+      },
+      "specialAbility": {
+        "name": "Ignition",
+        "description": "Gain Pierce until the end of the turn.",
+        "cost": {
+          "amount": 1,
+          "element": "Lava"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 165,
+      "id": "noxilus",
+      "name": "Noxilus | The Poison Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/noxilus.webp",
+      "webpPath": "/images/cards/new/noxilus.webp",
+      "element": "Poison",
+      "stats": {
+        "strength": 200,
+        "agility": 95
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Poison"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Poison"
+        }
+      },
+      "ability": {
+        "name": "Toxic Splash",
+        "description": "When this card destroys an opponent's creature by battle, the opponent must deplete 2 essence of the destroyed creature’s element."
+      },
+      "specialAbility": {
+        "name": "Venomous",
+        "description": "Discard 1 card from your opponent's hand.",
+        "cost": {
+          "amount": 2,
+          "element": "Poison"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 166,
+      "id": "aridus",
+      "name": "Aridus | The Sand Dragon",
+      "type": "Creature",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/aridus.webp",
+      "webpPath": "/images/cards/new/aridus.webp",
+      "element": "Sand",
+      "stats": {
+        "strength": 195,
+        "agility": 100
+      },
+      "essence": {
+        "cost": {
+          "amount": 10,
+          "element": "Sand"
+        },
+        "generation": {
+          "amount": 0,
+          "element": "Sand"
+        }
+      },
+      "ability": {
+        "name": "Desert Mirage",
+        "description": "While this card is on the field, negate all Rune/Counter cards."
+      },
+      "specialAbility": {
+        "name": "Sandstorm",
+        "description": "For each essence spent, discard 1 placed Rune/Counter card you control to Exhaust/Refresh 1 creature.",
+        "cost": {
+          "amount": null,
+          "element": "Sand"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 167,
+      "id": "ancient-winds",
+      "name": "Ancient Winds",
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/ancient winds.webp",
+      "webpPath": "/images/cards/new/ancient winds.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Galea's Inspiration",
+        "description": "While this card is on the field, you may draw 1 card for every Air creature summoned."
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 168,
+      "id": "ancient-tide",
+      "name": "Ancient Tide",
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/ancient tide.webp",
+      "webpPath": "/images/cards/new/ancient tide.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Water's Flow",
+        "description": "At the end of your turn, you may discard up to 2 cards from your hand, then draw one card for each discarded card."
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 169,
+      "id": "ancient-roots",
+      "name": "Ancient Roots",
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/ancient roots.webp",
+      "webpPath": "/images/cards/new/ancient roots.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Kinbrold's Gift",
+        "description": "At the end of your turn, you may draw 1 card for every Earth creature you control."
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 170,
+      "id": "ancient-flame",
+      "name": "Ancient Flame",
+      "type": "Creature",
+      "rarity": "R",
+      "imagePath": "/images/cards/new/ancient flame.webp",
+      "webpPath": "/images/cards/new/ancient flame.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 30,
+        "agility": 30
+      },
+      "ability": {
+        "name": "Eternal Kindling",
+        "description": "While this card is on the field, draw 1 card for every creature destroyed by a Fire creature (in battle or by effect)."
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 171,
+      "id": "ancient-sigil",
+      "name": "Ancient Sigil",
+      "type": "Rune",
+      "rarity": "E",
+      "imagePath": "/images/cards/new/ancient sigil.webp",
+      "webpPath": "/images/cards/new/ancient sigil.webp",
+      "element": null,
+      "ability": "Discard \"Ancient\" cards from your hand. For each discarded, activate one of these effects:\r\n- Deal 150 Damage to a Creature or Shield\r\n- Exhaust all opposing creatures\r\n- Gain 6 Elemental Essence\r\n- Draw 3 cards",
+      "rune": "Normal",
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 172,
+      "id": "galea",
+      "name": "Galea | The Air Elementalist",
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/new/galea.webp",
+      "webpPath": "/images/cards/new/galea.webp",
+      "element": "Air",
+      "stats": {
+        "strength": 225,
+        "agility": 225
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Air"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Air"
+        }
+      },
+      "ability": {
+        "name": "Airflow",
+        "description": "This creature does not become Exhausted after attacking. This creature can only attack once per turn."
+      },
+      "specialAbility": {
+        "name": "Morphing Force",
+        "description": "Redistribute this card's total Strength and Agility (450 total) until the beginning of your next turn.",
+        "cost": {
+          "amount": 2,
+          "element": "Air"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 173,
+      "id": "mek",
+      "name": "Mek | The Water Elementalist",
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/new/mek.webp",
+      "webpPath": "/images/cards/new/mek.webp",
+      "element": "Water",
+      "stats": {
+        "strength": 270,
+        "agility": 180
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Water"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Water"
+        }
+      },
+      "ability": {
+        "name": "Aqua Affinity",
+        "description": "When a Water creature is summoned, generate 2 Water Essence."
+      },
+      "specialAbility": {
+        "name": "Surging Tides",
+        "description": "Draw one card for every Water creature on the field. ",
+        "cost": {
+          "amount": 5,
+          "element": "Water"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 174,
+      "id": "osao",
+      "name": "Osao | The Fire Elementalist",
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/new/osao.webp",
+      "webpPath": "/images/cards/new/osao.webp",
+      "element": "Fire",
+      "stats": {
+        "strength": 315,
+        "agility": 135
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Fire"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Fire"
+        }
+      },
+      "ability": {
+        "name": "Pyro",
+        "description": "During your end phase, you may destroy all Exhausted creatures on the field. "
+      },
+      "specialAbility": {
+        "name": "Inferno Surge",
+        "description": "Exhaust/Refresh 1 creature on the field for every 2 essence spent.",
+        "cost": {
+          "amount": null,
+          "element": "Fire"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    },
+    {
+      "cardNumber": 175,
+      "id": "balon",
+      "name": "Balon | The Earth Elementalist",
+      "type": "Creature",
+      "rarity": "L",
+      "imagePath": "/images/cards/new/balon.webp",
+      "webpPath": "/images/cards/new/balon.webp",
+      "element": "Earth",
+      "stats": {
+        "strength": 360,
+        "agility": 90
+      },
+      "essence": {
+        "cost": {
+          "amount": 12,
+          "element": "Earth"
+        },
+        "generation": {
+          "amount": 1,
+          "element": "Earth"
+        }
+      },
+      "ability": {
+        "name": "Sink Hole",
+        "description": "Destroy 1 Earth Creature you control to destroy 1 card on the field."
+      },
+      "specialAbility": {
+        "name": "Tremor",
+        "description": "Exhaust all creatures your opponent controls.",
+        "cost": {
+          "amount": 4,
+          "element": "Earth"
+        }
+      },
+      "synergies": [],
+      "counters": [],
+      "news": []
+    }
+  ]
+}

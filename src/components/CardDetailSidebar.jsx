@@ -3,6 +3,7 @@ import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
+import { getOptimizedCardImage, handleImageError } from '@/utils/imageUtils';
 
 const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
   const [card, setCard] = useState(null);
@@ -12,7 +13,7 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
       if (!initialCard) return;
       
       try {
-        const response = await fetch('/data/cards.json');
+        const response = await fetch('/data/new_cards.json');
         if (!response.ok) throw new Error('Failed to load card data');
         
         const data = await response.json();
@@ -32,6 +33,11 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
   }, [initialCard]);
 
   if (!card) return null;
+
+  // Generate the original image path
+  const originalImagePath = card.webpPath || `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
+  // Get the optimized image path for large size
+  const optimizedImagePath = getOptimizedCardImage(originalImagePath, 'large');
 
   return (
     <AnimatePresence>
@@ -70,13 +76,10 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
             <div className="flex justify-center mb-6">
               <div className="w-[300px]">
                 <img
-                  src={card.webpPath || `/images/cards/${card.id}.webp`}
+                  src={optimizedImagePath}
                   alt={card.name}
                   className="rounded-lg shadow-lg w-full"
-                  onError={(e) => {
-                    e.target.onerror = null;
-                    e.target.src = card.imagePath || `/images/cards/${card.id}.png`;
-                  }}
+                  onError={handleImageError}
                 />
               </div>
             </div>

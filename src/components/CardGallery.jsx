@@ -13,12 +13,12 @@ const Card = ({ card, onCardClick }) => {
       onClick={() => onCardClick(card)}
     >
       <img 
-        src={`${window.location.origin}/images/cards/${card.id}.webp`} 
+        src={`${window.location.origin}/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`} 
         alt={card.name} 
         className="absolute inset-0 w-full h-full object-cover"
         onError={(e) => {
           e.target.onerror = null;
-          e.target.src = `${window.location.origin}/images/cards/${card.id}.png`;
+          e.target.src = `${window.location.origin}/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
         }}
       />
       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">

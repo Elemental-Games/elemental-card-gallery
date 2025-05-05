@@ -2,7 +2,7 @@ import { Card } from './GameState';
 
 export async function loadCards(): Promise<Card[]> {
   try {
-    const response = await fetch('/data/cards.json');
+    const response = await fetch('/data/new_cards.json');
     if (!response.ok) {
       throw new Error('Failed to load cards');
     }
@@ -22,7 +22,7 @@ export async function loadCards(): Promise<Card[]> {
         name: card.ability.name,
         description: card.ability.description
       } : undefined,
-      image: card.image || `/images/cards/${card.id}.png`
+      image: card.image || `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`
     }));
   } catch (error) {
     console.error('Error loading cards:', error);

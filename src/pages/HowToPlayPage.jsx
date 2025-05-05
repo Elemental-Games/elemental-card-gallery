@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Download, Sword, Sparkles, Shield, Scroll, Wand, Zap, Lightbulb, Book, PocketKnife, BookText } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import React from 'react';
 
 const HowToPlayPage = () => {
   const [activeTab, setActiveTab] = useState('quickstart');
@@ -14,8 +15,7 @@ const HowToPlayPage = () => {
     { title: 'Combat', tab: 'combat', icon: Sword },
     { title: 'Shield Mechanics', tab: 'shields', icon: Shield },
     { title: 'Card Types', tab: 'cards', icon: Wand },
-    { title: 'Advanced Rules', tab: 'advanced', icon: Book },
-    { title: 'Strategy Guide', tab: 'strategy', icon: PocketKnife },
+    { title: 'Advanced', tab: 'advanced', icon: Book },
     { title: 'Glossary', tab: 'glossary', icon: BookText },
   ];
 
@@ -342,19 +342,27 @@ const HowToPlayPage = () => {
               className="md:w-3/4"
             >
               <Tabs value={activeTab} className="w-full" onValueChange={setActiveTab}>
-                <TabsList className="w-full bg-purple-900/30 border-b border-purple-500/30">
-                  {quickLinks.map((link) => (
-                    <TabsTrigger
-                      key={link.tab}
-                      value={link.tab}
-                      className="flex-1 data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900"
-                    >
-                      {link.title}
-                    </TabsTrigger>
+                <TabsList className="w-full bg-purple-900/50 border-b-2 border-purple-500/40 flex-wrap h-auto p-0.5 mb-4">
+                  {quickLinks.map((link, index) => (
+                    <React.Fragment key={link.tab}>
+                      {index > 0 && <div className="hidden sm:block h-6 w-px bg-purple-500/30"></div>}
+                      <TabsTrigger
+                        value={link.tab}
+                        className="flex-1 min-w-[90px] sm:min-w-[100px] py-1.5 px-0.5 sm:px-1 text-xs sm:text-sm 
+                        data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900 
+                        data-[state=active]:shadow-md data-[state=active]:shadow-yellow-500/20
+                        data-[state=active]:font-semibold data-[state=active]:translate-y-[-1px]
+                        data-[state=active]:border-b-2 data-[state=active]:border-b-yellow-600
+                        border-r border-purple-500/20 sm:border-r-0 last:border-r-0
+                        rounded-t-md transition-all hover:bg-purple-800/50"
+                      >
+                        {link.title}
+                      </TabsTrigger>
+                    </React.Fragment>
                   ))}
                 </TabsList>
 
-                <TabsContent value="quickstart" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="quickstart" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Quick Start Guide</h2>
                   <div className="space-y-6 text-purple-200">
                     <div className="bg-purple-950/60 p-6 rounded-lg border border-yellow-500/30">
@@ -382,21 +390,82 @@ const HowToPlayPage = () => {
                         </div>
                         
                         <div>
-                          <h4 className="text-xl font-bold text-white mb-3">3. Understanding Cards</h4>
-                          <ul className="list-disc list-inside space-y-2 text-lg">
-                            <li><span className="font-semibold">Strength (First number):</span> Both attack power and health</li>
-                            <li><span className="font-semibold">Agility (Second number):</span> Speed for attacking/blocking/dodging</li>
-                            <li><span className="font-semibold">Element:</span> Air, Water, Fire, or Earth</li>
-                          </ul>
+                          <h4 className="text-xl font-bold text-white mb-3">3. Card Anatomy</h4>
+                          <div className="space-y-4">
+                            <p className="text-lg">Each card in Elekin contains important information you need to understand to play effectively. Below are examples of the 4 card types and their key features:</p>
+                            
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                              <div className="bg-purple-950/50 p-6 rounded-lg">
+                                <h4 className="text-lg font-semibold text-yellow-400 mb-3">Creature Cards</h4>
+                                <div className="flex flex-col items-center">
+                                  <img src="/images/creature diagram2.png" alt="Creature Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                                  <div className="w-full">
+                                    <ul className="list-disc list-inside space-y-2 text-base">
+                                      <li><span className="font-semibold">Element and Essence Cost:</span> Element of the creature (Air, Water, Fire, Earth, or Combinational) & Essence cost of one of the primary elements</li>
+                                      <li><span className="font-semibold">Strength:</span> Attack power (Damage and Health)</li>
+                                      <li><span className="font-semibold">Agility:</span> Speed for action use (Attacking/Blocking/Dodging/Defending)</li>
+                                      <li><span className="font-semibold">Card Ability:</span> Used once per turn, or whenever applicable via ability description</li>
+                                      <li><span className="font-semibold">Essence Generated:</span> Essence produced during your Generation Phase</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="bg-purple-950/50 p-6 rounded-lg">
+                                <h4 className="text-lg font-semibold text-yellow-400 mb-3">Shield Cards</h4>
+                                <div className="flex flex-col items-center">
+                                  <img src="/images/shield diagram2.png" alt="Shield Card Anatomy" className="w-full max-w-[340px] -mb-4" />
+                                  <div className="w-full">
+                                    <ul className="list-disc list-inside space-y-2 text-base">
+                                      <li><span className="font-semibold">Shield Health:</span> Damage shield can take before breaking</li>
+                                      <li><span className="font-semibold">Shield Tier:</span> I, II, or III</li>
+                                      <li><span className="font-semibold">Card Abilities:</span> Choose 1 effect to trigger when broken and end opponent's battle phase</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="bg-purple-950/50 p-6 rounded-lg">
+                                <h4 className="text-lg font-semibold text-yellow-400 mb-3">Rune Cards</h4>
+                                <div className="flex flex-col items-center">
+                                  <img src="/images/rune diagram2.png" alt="Rune Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                                  <div className="w-full">
+                                    <ul className="list-disc list-inside space-y-2 text-base">
+                                      <li><span className="font-semibold">Rune Symbol:</span> Identifies card as a rune</li>
+                                      <li><span className="font-semibold">Rune Type:</span> Normal, Instant, or Equipment</li>
+                                      <li><span className="font-semibold">Card Ability:</span> Effect that resolves when played</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                              <div className="bg-purple-950/50 p-6 rounded-lg">
+                                <h4 className="text-lg font-semibold text-yellow-400 mb-3">Counter Cards</h4>
+                                <div className="flex flex-col items-center">
+                                  <img src="/images/counter diagram2.png" alt="Counter Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                                  <div className="w-full">
+                                    <ul className="list-disc list-inside space-y-2 text-base">
+                                      <li><span className="font-semibold">Counter Symbol:</span> Identifies card as a counter</li>
+                                      <li><span className="font-semibold">Trigger Condition:</span> When this card can be played if it is already placed in the Rune/Counter Zone</li>
+                                      <li><span className="font-semibold">Card Ability:</span> Effect that resolves when played</li>
+                                    </ul>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         </div>
                         
-                        <div>
+                        <div className="border-t border-purple-500/30 pt-6 mt-6">
                           <h4 className="text-xl font-bold text-white mb-3">4. Combat Basics</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
+                            <li>Every creature has an action which is used to Attack, Block, Dodge, or Defend</li>
+                            <li>Creatures without an action are Exhausted and turned horizontal</li>
+                            <li>Choose attacks one-by-one and not all at once during Battle Phase</li>
                             <li>Higher agility creature strikes first</li>
-                            <li>Creatures can block attacks for other creatures</li>
-                            <li>Faster creatures can dodge if they have an action available</li>
-                            <li>When shields break, special effects activate</li>
+                            <li>Creatures can block attacks from slower opponent's creatures, if they have an action available</li>
+                            <li>Faster creatures can dodge, if they have an action available</li>
+                            <li>When shields break, the battle phase ends and the controller chooses 1 of the 2 effects to activate</li>
                           </ul>
                         </div>
                         
@@ -404,8 +473,7 @@ const HowToPlayPage = () => {
                           <h4 className="text-xl font-bold text-white mb-3">5. Winning the Game</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
                             <li>Reduce your opponent's health to 0</li>
-                            <li>Force your opponent to draw when they have no cards left</li>
-                            <li>Activate special victory cards like "Ancient Sigil"</li>
+                            <li>Your opponent cannot draw a card during their Draw Phase</li>
                           </ul>
                         </div>
                       </div>
@@ -472,7 +540,7 @@ const HowToPlayPage = () => {
                   </div>
                 </TabsContent>
 
-                <TabsContent value="basics" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="basics" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Game Basics</h2>
                   <div className="space-y-6 text-purple-200">
                     <div>
@@ -480,7 +548,6 @@ const HowToPlayPage = () => {
                       <ul className="list-disc list-inside space-y-2">
                         <li>Begin with 500 health points</li>
                         <li>Draw 5 cards for your starting hand</li>
-                        <li>Maximum hand size is 7 cards</li>
                         <li>You may mulligan up to 2 times with your starting hand</li>
                         <li>A coin flip determines the first player</li>
                       </ul>
@@ -490,11 +557,11 @@ const HowToPlayPage = () => {
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Turn Structure</h3>
                       <ol className="list-decimal list-inside space-y-2">
                         <li><span className="font-semibold">Draw Phase:</span> Draw one card</li>
-                        <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures</li>
-                        <li><span className="font-semibold">Main Phase 1:</span> Summon creatures and play cards</li>
-                        <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures</li>
-                        <li><span className="font-semibold">Main Phase 2:</span> Play additional cards</li>
-                        <li><span className="font-semibold">End Phase:</span> Clean up and prepare for next turn</li>
+                        <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures on the field</li>
+                        <li><span className="font-semibold">Main Phase 1:</span> Refresh the action of all creatures on the field, normal summon up to 1 creature, use creature effects,and play/place runes and counters</li>
+                        <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures by choosing one at a time and finishing the battle with each creature before moving on to the next</li>
+                        <li><span className="font-semibold">Main Phase 2:</span> Use creature effects and play/place additional runes and counters</li>
+                        <li><span className="font-semibold">End Phase:</span> Discard down to 7 cards, then pass the turn to your opponent</li>
                       </ol>
                     </div>
 
@@ -504,19 +571,15 @@ const HowToPlayPage = () => {
                         <div className="flex-grow max-w-xl">
                           <ul className="list-disc list-inside space-y-2">
                             <li>Reduce opponent&apos;s health to 0</li>
-                            <li>Opponent cannot draw a card when required</li>
-                            <li>Activate the Ancient Sigil card</li>
+                            <li>Your opponent cannot draw a card during their Draw Phase</li>
                           </ul>
-                          <div className="mt-4">
-                            <CardImage card={cardExamples.victory} size="normal" />
-                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="essence" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="essence" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Essence Tracking</h2>
                   <div className="space-y-8 text-purple-200">
                     <div>
@@ -541,9 +604,9 @@ const HowToPlayPage = () => {
                       <ul className="list-disc list-inside space-y-2">
                         <li>Start with 0 essence of each element</li>
                         <li>Maximum 20 essence per element</li>
-                        <li>Generated during Generation Phase</li>
+                        <li>Generated during Generation Phase and via Effects and Abilities</li>
                         <li>Carries over between turns</li>
-                        <li>Used for summoning creatures and activating abilities</li>
+                        <li>Used for summoning creatures and activating certain abilities</li>
                       </ul>
                     </div>
 
@@ -553,20 +616,20 @@ const HowToPlayPage = () => {
                         <li>Creatures on your field</li>
                         <li>Special rune effects</li>
                         <li>Broken shield effects</li>
-                        <li>Dragon creatures can generate multiple types</li>
+                        <li>Creature abilities</li>
                       </ul>
                     </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="combat" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="combat" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Combat System</h2>
                   <div className="space-y-6 text-purple-200">
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Combat Stats</h3>
                       <ul className="list-disc list-inside space-y-2">
-                        <li><span className="font-semibold">Strength:</span> Determines damage dealt</li>
-                        <li><span className="font-semibold">Agility:</span> Determines attack order and dodge ability</li>
+                        <li><span className="font-semibold">Strength:</span> Determines damage dealt and health of creatures</li>
+                        <li><span className="font-semibold">Agility:</span> Determines attack order and dodge/block ability</li>
                       </ul>
                     </div>
 
@@ -575,8 +638,8 @@ const HowToPlayPage = () => {
                       <ol className="list-decimal list-inside space-y-2">
                         <li>Higher agility creature strikes first</li>
                         <li>Damage equal to strength is dealt</li>
-                        <li>If defending creature survives, it counter-attacks</li>
-                        <li>Effects trigger after damage resolution</li>
+                        <li>If defending creature survives, it counter-attacks dealing its original strength in damage</li>
+                        <li>Specified abilities and effects may trigger during any point of the battle</li>
                       </ol>
                     </div>
 
@@ -613,14 +676,15 @@ const HowToPlayPage = () => {
                                   <li>Ember Flicker survives (25 HP remaining)</li>
                                   <li>Ember Flicker counter-attacks for 90 damage</li>
                                   <li>Aqua Dart is destroyed</li>
+                                  <li>Ember Flicker is exhausted and turned horizontal</li>
                                 </ol>
                               </div>
                               <div>
                                 <h5 className="text-yellow-400 mb-3">Option 2: Dodge</h5>
                                 <ol className="list-decimal list-inside space-y-2">
-                                  <li>Aqua Dart uses dodge ability</li>
+                                  <li>Aqua Dart uses dodge action</li>
                                   <li>Turns horizontal (using its action)</li>
-                                  <li>Ember Flicker&apos;s attack deals 90 damage to opponent directly</li>
+                                  <li>Ember Flicker&apos;s attack misses and is now exhausted (turned horizontal)</li>
                                 </ol>
                               </div>
                             </div>
@@ -631,7 +695,7 @@ const HowToPlayPage = () => {
                   </div>
                 </TabsContent>
 
-                <TabsContent value="shields" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="shields" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Shield Mechanics</h2>
                   <div className="space-y-6 text-purple-200">
                     <div>
@@ -646,12 +710,11 @@ const HowToPlayPage = () => {
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Shield Mechanics</h3>
                       <ul className="list-disc list-inside space-y-2">
-                        <li>Start with 3 shields (one of each tier)</li>
-                        <li>Regenerate to next tier threshold</li>
-                        <li>Turn face-up when damaged</li>
+                        <li>Start with 3 shields face-down (one of each tier in any order)</li>
+                        <li>Regenerate to the next highest tier threshold</li>
+                        <li>Remains face-up when damaged</li>
                         <li>Cannot be replaced when broken</li>
-                        <li>Choose one of two effects when broken</li>
-                        <li>Shield effects cannot be countered</li>
+                        <li>Choose one of two effects when broken and end current battle phase</li>
                       </ul>
                     </div>
                     
@@ -662,8 +725,9 @@ const HowToPlayPage = () => {
                         <div className="w-full">
                           <p className="mb-2">Mystic Ward (Tier 1):</p>
                           <ul className="list-disc list-inside space-y-2">
-                            <li><span className="font-semibold">Primary Effect:</span> Destroy up to 2 Rune/Counter cards</li>
-                            <li><span className="font-semibold">Secondary Effect:</span> Equip to reduce creature stats</li>
+                            <li><span className="font-semibold">Effect #1:</span> Destroy 1 Rune/Counter card on the field.</li>
+                            <p className="mb-2">OR</p>
+                            <li><span className="font-semibold">Effect #2:</span> Equip this card to a creature. While equipped, the creature loses 30 Strength and 10 Agility.</li>
                           </ul>
                         </div>
                       </div>
@@ -671,72 +735,160 @@ const HowToPlayPage = () => {
                   </div>
                 </TabsContent>
 
-                <TabsContent value="cards" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="cards" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Card Types</h2>
                   <div className="space-y-8 text-purple-200">
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                      <div className="bg-purple-950/50 p-4 rounded-lg">
-                        <CardImage card={cardExamples.creature} className="mb-3" />
-                        <h3 className="text-xl font-semibold text-yellow-400 mb-2">Creatures</h3>
-                        <ul className="list-disc list-inside space-y-2">
-                          <li>Basic fighting force</li>
-                          <li>Generate essence</li>
-                          <li>Combat abilities</li>
-                        </ul>
+                    
+                    {/* Card Types with Diagrams */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                      <div className="bg-purple-950/50 p-6 rounded-lg">
+                        <h4 className="text-lg font-semibold text-yellow-400 mb-3">Creatures</h4>
+                        <div className="flex flex-col items-center">
+                          <img src="/images/creature diagram2.png" alt="Creature Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                          <div className="w-full">
+                            <ul className="list-disc list-inside space-y-2 text-base">
+                              <li><span className="font-semibold">Element and Essence Cost:</span> Element of the creature (Air, Water, Fire, Earth, or Combinational) & Essence cost of one of the primary elements</li>
+                              <li><span className="font-semibold">Strength:</span> Attack power (Damage and Health)</li>
+                              <li><span className="font-semibold">Agility:</span> Speed for action use (Attacking/Blocking/Dodging/Defending)</li>
+                              <li><span className="font-semibold">Card Ability:</span> Used once per turn, or whenever applicable via ability description</li>
+                              <li><span className="font-semibold">Essence Generated:</span> Essence produced during your Generation Phase</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-purple-950/50 p-4 rounded-lg">
-                        <CardImage card={cardExamples.rune} className="mb-3" />
-                        <h3 className="text-xl font-semibold text-yellow-400 mb-2">Runes</h3>
-                        <ul className="list-disc list-inside space-y-2">
-                          <li>Enhance creatures</li>
-                          <li>Powerful effects</li>
-                          <li>Multiple types</li>
-                        </ul>
+                      
+                      <div className="bg-purple-950/50 p-6 rounded-lg">
+                        <h4 className="text-lg font-semibold text-yellow-400 mb-3">Shield Cards</h4>
+                        <div className="flex flex-col items-center">
+                          <img src="/images/shield diagram2.png" alt="Shield Card Anatomy" className="w-full max-w-[340px] -mb-4" />
+                          <div className="w-full">
+                            <ul className="list-disc list-inside space-y-2 text-base">
+                              <li><span className="font-semibold">Shield Health:</span> Damage shield can take before breaking</li>
+                              <li><span className="font-semibold">Shield Tier:</span> I, II, or III</li>
+                              <li><span className="font-semibold">Card Abilities:</span> Choose 1 effect to trigger when broken and end opponent's battle phase</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
-                      <div className="bg-purple-950/50 p-4 rounded-lg">
-                        <CardImage card={cardExamples.counter} className="mb-3" />
-                        <h3 className="text-xl font-semibold text-yellow-400 mb-2">Counters</h3>
-                        <ul className="list-disc list-inside space-y-2">
-                          <li>Surprise tactics</li>
-                          <li>Defensive plays</li>
-                          <li>Chain reactions</li>
-                        </ul>
+                      
+                      <div className="bg-purple-950/50 p-6 rounded-lg">
+                        <h4 className="text-lg font-semibold text-yellow-400 mb-3">Rune Cards</h4>
+                        <div className="flex flex-col items-center">
+                          <img src="/images/rune diagram2.png" alt="Rune Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                          <div className="w-full">
+                            <ul className="list-disc list-inside space-y-2 text-base">
+                              <li><span className="font-semibold">Rune Symbol:</span> Identifies card as a rune</li>
+                              <li><span className="font-semibold">Rune Type:</span> Normal, Instant, or Equipment</li>
+                              <li><span className="font-semibold">Card Ability:</span> Effect that resolves when played</li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div className="bg-purple-950/50 p-6 rounded-lg">
+                        <h4 className="text-lg font-semibold text-yellow-400 mb-3">Counter Cards</h4>
+                        <div className="flex flex-col items-center">
+                          <img src="/images/counter diagram2.png" alt="Counter Card Anatomy" className="w-full max-w-[300px] -mb-4" />
+                          <div className="w-full">
+                            <ul className="list-disc list-inside space-y-2 text-base">
+                              <li><span className="font-semibold">Counter Symbol:</span> Identifies card as a counter</li>
+                              <li><span className="font-semibold">Trigger Condition:</span> When this card can be played if it is already placed in the Rune/Counter Zone</li>
+                              <li><span className="font-semibold">Card Ability:</span> Effect that resolves when played</li>
+                            </ul>
+                          </div>
+                        </div>
                       </div>
                     </div>
                     
-                    <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-2">Dragon Cards</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
-                        <div className="flex justify-center">
-                          <CardImage card={cardExamples.dragon} size="large" />
-                        </div>
-                        <div className="bg-purple-950/50 p-6 rounded-lg">
-                          <h3 className="text-xl font-semibold text-yellow-400 mb-6">Frost Dragon</h3>
-                          <div className="space-y-6">
-                            <div>
-                              <p className="font-semibold mb-2">Stats & Elements</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Power: 185/110</li>
-                                <li>Element: Frost (Air and Water)</li>
-                                <li>Cost: 5 Air, 5 Water</li>
-                              </ul>
+                    <div className="border-t border-purple-500/30 pt-8 mt-8">
+                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Special Creatures</h3>
+                      
+                      <div className="space-y-12">
+                        {/* Dragon Cards Section */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-white mb-4">Dragon Cards</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="flex justify-center">
+                              <CardImage card={cardExamples.dragon} size="large" />
                             </div>
-                            <div>
-                              <p className="font-semibold mb-2">Abilities</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Frostbite: When this card is summoned, Freeze all creatures your opponent controls (A frozen creature loses all actions).</li>
-                                <li>Glacial Roar: (Costs 4 Air/Water to use) Deal 50 damage to all frozen creatures (creatures with no remaining actions).</li>
-                              </ul>
+                            <div className="bg-purple-950/50 p-6 rounded-lg">
+                              <h5 className="text-lg font-semibold text-yellow-400 mb-3">Dual-Element Powerhouse</h5>
+                              <div className="space-y-6">
+                                <div>
+                                  <p className="font-semibold mb-2">Key Features:</p>
+                                  <ul className="list-disc list-inside space-y-2 text-base">
+                                    <li>Always represents two combined elements</li>
+                                    <li>Require 5 essence of each element to summon (10 total)</li>
+                                    <li>Powerful effects</li>
+                                    <li>Unique additional ability with an essence cost</li>
+                                  </ul>
+                                </div>
+                                <div>
+                                  <p className="font-semibold mb-2">Example: Eldritch the Frost Dragon</p>
+                                  <ul className="list-disc list-inside space-y-1">
+                                    <li>Elements: Air + Water (Frost)</li>
+                                    <li>Stats: 185/110</li>
+                                    <li>Frostbite: When this card is summoned, Freezes all creatures your opponent controls for 1 full turn.</li>
+                                    <li>Glacial Roar (Costs 2 Air or Water Essence): Freeze 1 creature on the field for 1 full turn.</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Elementalist Cards Section */}
+                        <div>
+                          <h4 className="text-lg font-semibold text-white mb-4">Elementalists</h4>
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div className="bg-purple-950/50 p-6 rounded-lg">
+                              <h5 className="text-lg font-semibold text-yellow-400 mb-3">Masters of an Element</h5>
+                              <div className="space-y-6">
+                                <div>
+                                  <p className="font-semibold mb-2">Key Features:</p>
+                                  <ul className="list-disc list-inside space-y-2 text-base">
+                                    <li>Unique character cards that are the strongest of their respective element</li>
+                                    <li>Each has an affinity for their primary element</li>
+                                    <li>Have additional abilities that cost essence</li>
+                                    <li>Remain in the command zone, not played to the field</li>
+                                    <li>Limited to 1 copy per deck</li>
+                                  </ul>
+                                </div>
+                                <div>
+                                  <p className="font-semibold mb-2">Example: Balon | The Earth Elementalist</p>
+                                  <ul className="list-disc list-inside space-y-1">
+                                    <li>Element: Earth</li>
+                                    <li>Sink Hole: Destroy 1 Earth creature you control to destroy 1 card on the field.</li>
+                                    <li>Tremor (Costs 4 Earth Essence): Exhaust all creatures your opponent controls.</li>
+                                  </ul>
+                                </div>
+                              </div>
+                            </div>
+                            <div className="flex justify-center items-center">
+                              <div className="relative">
+                                <img 
+                                  src="/images/cards/new/balon.webp" 
+                                  alt="Elementalist Card Example" 
+                                  className="w-full max-w-[300px] rounded-lg shadow-lg"
+                                />
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
                     </div>
+                    
+                    <div className="bg-yellow-500/20 p-6 rounded-lg border border-yellow-500/40 mt-8">
+                      <h4 className="text-lg font-semibold text-yellow-400 mb-2">Pro Tip: Card Synergies</h4>
+                      <p className="text-base">
+                        Build your deck with card synergies in mind. Pair creatures with runes that enhance their abilities, and include counters that protect your key combos. Elementalists are most effective with of their matching element in your deck.
+                      </p>
+                    </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="advanced" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Advanced Rules & Mechanics</h2>
+                <TabsContent value="advanced" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
+                  <h2 className="text-2xl font-bold mb-4 text-white">Advanced Rules & Strategy Guide</h2>
                   <div className="space-y-8 text-purple-200">
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-4">Combinational Elements</h3>
@@ -745,157 +897,83 @@ const HowToPlayPage = () => {
                           <h4 className="font-bold text-white mb-2">Frost (Air + Water)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
                             <li>Freeze effects (reduce actions)</li>
-                            <li>High agility, moderate strength</li>
                             <li>Control-focused playstyle</li>
-                            <li>Specializes in delaying opponents</li>
                           </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Lightning (Air + Fire)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
                             <li>Chain damage effects</li>
-                            <li>Extremely high agility</li>
-                            <li>Direct damage capabilities</li>
-                            <li>Focuses on quick elimination</li>
+                            <li>Helps discard opponent's cards in hand</li>
                           </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Crystal (Water + Earth)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
                             <li>Shield enhancement effects</li>
-                            <li>Card draw and filtering</li>
-                            <li>Healing capabilities</li>
-                            <li>Defensive control strategy</li>
+                            <li>Double strike capabilities</li>
                           </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Lava (Fire + Earth)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
-                            <li>Field-wide damage effects</li>
-                            <li>Highest strength creatures</li>
-                            <li>Resource destruction</li>
-                            <li>Overwhelming force strategy</li>
+                            <li>Card destruction effect when destroyed</li>
+                            <li>Pierce capabilities</li>
                           </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Sand (Earth + Air)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
-                            <li>Creature position manipulation</li>
-                            <li>Defensive battlefield control</li>
-                            <li>Damage reduction effects</li>
-                            <li>Long-game attrition strategy</li>
+                            <li>Offensive battlefield control</li>
+                            <li>Prevention of Rune/Counter activation</li>
                           </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Poison (Water + Fire)</h4>
                           <ul className="list-disc list-inside text-sm space-y-1">
-                            <li>Damage over time effects</li>
-                            <li>Hand disruption</li>
-                            <li>Essence corruption</li>
-                            <li>Resource denial strategy</li>
+                            <li>Depletion of opponent's essence</li>
+                            <li>Helps discard opponent's cards in hand</li>
                           </ul>
                         </div>
                       </div>
                     </div>
 
                     <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Action Points System</h3>
+                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Action System</h3>
                       <div className="bg-purple-950/50 p-6 rounded-lg">
                         <div className="space-y-4">
-                          <p>Each creature has action points equal to their position on the battlefield (1-5):</p>
-                          <div className="grid grid-cols-1 md:grid-cols-5 gap-2 text-center mb-4">
-                            <div className="bg-purple-900/50 p-2 rounded-lg">
-                              <p className="font-bold">Position 1</p>
-                              <p>1 Action</p>
-                            </div>
-                            <div className="bg-purple-900/50 p-2 rounded-lg">
-                              <p className="font-bold">Position 2</p>
-                              <p>2 Actions</p>
-                            </div>
-                            <div className="bg-purple-900/50 p-2 rounded-lg">
-                              <p className="font-bold">Position 3</p>
-                              <p>3 Actions</p>
-                            </div>
-                            <div className="bg-purple-900/50 p-2 rounded-lg">
-                              <p className="font-bold">Position 4</p>
-                              <p>4 Actions</p>
-                            </div>
-                            <div className="bg-purple-900/50 p-2 rounded-lg">
-                              <p className="font-bold">Position 5</p>
-                              <p>5 Actions</p>
-                            </div>
-                          </div>
-                          
-                          <h4 className="font-bold text-white mb-2">Action Usage:</h4>
-                          <ul className="list-disc list-inside space-y-2">
-                            <li><span className="font-semibold">Attack:</span> Costs 1 action</li>
-                            <li><span className="font-semibold">Block:</span> Costs 1 action</li>
-                            <li><span className="font-semibold">Activate Ability:</span> Varies (1-3 actions)</li>
-                            <li><span className="font-semibold">Dodge:</span> Costs all remaining actions</li>
-                          </ul>
-                          
-                          <div className="mt-4">
-                            <p className="font-semibold mb-2">Action Recovery:</p>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>Refresh all actions at the start of your turn</li>
-                              <li>Some abilities can restore actions during a turn</li>
-                              <li>Creatures retain their position-based action maximum</li>
-                            </ul>
-                          </div>
+                          <p>Each creature enters the battlefield with an action unless specified (enters play Exhausted):</p>
                         </div>
-                      </div>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Status Effects</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Positive Status Effects</h4>
-                          <ul className="list-disc list-inside space-y-2">
-                            <li><span className="font-semibold">Empowered:</span> +25 Strength until end of turn</li>
-                            <li><span className="font-semibold">Swift:</span> +25 Agility until end of turn</li>
-                            <li><span className="font-semibold">Protected:</span> Cannot be targeted by opponent's effects</li>
-                            <li><span className="font-semibold">Regenerating:</span> Heals 25 damage at end phase</li>
-                            <li><span className="font-semibold">Enraged:</span> Deals double damage but cannot block</li>
-                          </ul>
-                        </div>
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Negative Status Effects</h4>
-                          <ul className="list-disc list-inside space-y-2">
-                            <li><span className="font-semibold">Frozen:</span> Loses all actions for one turn</li>
-                            <li><span className="font-semibold">Burning:</span> Takes 25 damage at end phase</li>
-                            <li><span className="font-semibold">Poisoned:</span> Takes 15 damage for 3 turns</li>
-                            <li><span className="font-semibold">Weakened:</span> -25 Strength until end of turn</li>
-                            <li><span className="font-semibold">Slowed:</span> -25 Agility until end of turn</li>
-                            <li><span className="font-semibold">Stunned:</span> Cannot attack next turn</li>
-                          </ul>
-                        </div>
+                        <p>Actions may be used to attack, block, dodge, or defend during the battle phase.</p>
+                        <p> ---------------------------</p>
+                        <p>Attack: Declare an attack against an opposing target (creature, shield, or opponent if no shields remain)</p>
+                        <p>Block: Use a creature to block against an attack (changes the target of the attack to the blocking creature, the blocking creature does not attack back)</p>
+                        <p>Dodge: Use a creature to avoid an attack (the attack misses and both creatures lose their action, becoming Exhausted)</p>
+                        <p>Defend: Use a creature to defend against an attack (battle against the attacker)</p>
                       </div>
                     </div>
 
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-4">Chain Resolution</h3>
                       <div className="bg-purple-950/50 p-6 rounded-lg">
-                        <p className="mb-4">When cards and effects interact, they form a chain that resolves in a specific order:</p>
+                        <p className="mb-4">When cards and effects interact, they form a chain that resolves in a Last In, First Out (LIFO) order:</p>
                         <ol className="list-decimal list-inside space-y-3">
                           <li>Player 1 activates a card or effect (Chain Link 1)</li>
                           <li>Player 2 can respond with a Counter card (Chain Link 2)</li>
                           <li>Player 1 can respond to that Counter (Chain Link 3)</li>
-                          <li>Chain continues until both players pass</li>
+                          <li>Chain continues until a player passes</li>
                           <li>Chain resolves in reverse order (Last In, First Out)</li>
-                          <li>If a chain link is negated, all dependent effects are also negated</li>
                         </ol>
                         
                         <div className="mt-6">
                           <h4 className="font-bold text-white mb-2">Example Chain Resolution:</h4>
                           <div className="space-y-2 mt-4">
-                            <p>1. Player 1 plays "Flamekeeper" (Chain Link 1)</p>
-                            <p>2. Player 2 responds with "Counter Pulse" to negate (Chain Link 2)</p>
-                            <p>3. Player 1 responds with "Essence Exchange" to protect (Chain Link 3)</p>
-                            <p>4. Both players pass</p>
-                            <p>5. Resolution: "Essence Exchange" resolves first, making "Flamekeeper" immune to "Counter Pulse"</p>
-                            <p>6. "Counter Pulse" fails to negate</p>
-                            <p>7. "Flamekeeper" successfully enters the battlefield</p>
+                            <p>1. Player 1 plays "Cleanse and Adapt" (Chain Link 1)</p>
+                            <p>2. Player 2 responds with "Intrusion Seal" to negate Cleanse and Adapt(Chain Link 2)</p>
+                            <p>3. Player 1 responds with another "Intrustion Seal" to negate Player 2's Intrusion Seal (Chain Link 3)</p>
+                            <p>4. Player 2 passes</p>
+                            <p>5. Resolution: "Intrusion Seal" from Player 1 resolves first, negating "Intrusion Seal" from Player 2</p>
+                            <p>6. "Cleanse and Adapt" successfully enters the battlefield</p>
                           </div>
                         </div>
                       </div>
@@ -904,276 +982,15 @@ const HowToPlayPage = () => {
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-4">Battlefield Positioning</h3>
                       <div className="bg-purple-950/50 p-6 rounded-lg">
-                        <p className="mb-4">The battlefield consists of 5 positions for each player. A creature's position determines various gameplay factors:</p>
-                        
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Front Line (Positions 1-2)</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>First to block incoming attacks</li>
-                              <li>Fewer actions (1-2)</li>
-                              <li>Must be destroyed before hitting back lines</li>
-                              <li>Best positions for high-defense creatures</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Back Line (Positions 3-5)</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>Protected by front line</li>
-                              <li>More actions (3-5)</li>
-                              <li>Cannot block for front line creatures</li>
-                              <li>Best positions for ability-focused creatures</li>
-                            </ul>
-                          </div>
-                        </div>
-                        
-                        <div className="mt-6">
-                          <h4 className="font-bold text-white mb-2">Positioning Strategy:</h4>
-                          <ul className="list-disc list-inside space-y-2">
-                            <li>Place high-strength Earth creatures in front positions for defense</li>
-                            <li>Place high-agility Air/Water creatures in back positions for attacks</li>
-                            <li>When a creature is destroyed, others shift forward to fill the gap</li>
-                            <li>Some abilities allow you to swap creature positions</li>
-                          </ul>
-                        </div>
+                        <p className="mb-4">The battlefield allows for 5 creatures to be summoned by each player. A creature's position is determined by the creature's action availability. The battlefield also contains the Shield Zone or the Player themself if no shields remian in front of them.</p>
+                        <p>Available targets are the creatures, shields, or the player themself if no shields remain.</p>
+                        <p>Creatures can attack shields or the opponent directly even if the opponent has creatures on the field.</p>
                       </div>
                     </div>
                   </div>
                 </TabsContent>
 
-                <TabsContent value="strategy" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Strategy Guide</h2>
-                  <div className="space-y-8 text-purple-200">
-                    <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Deck Building Strategies</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Aggro Strategy</h4>
-                          <div className="space-y-4">
-                            <p>Focus on overwhelming opponents quickly with high-strength creatures.</p>
-                            <div>
-                              <p className="font-semibold mb-2">Recommended Elements:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Fire (primary)</li>
-                                <li>Earth (secondary)</li>
-                                <li>Lava combination for maximum damage</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Key Cards:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>High-strength creatures (90+ strength)</li>
-                                <li>Direct damage runes</li>
-                                <li>Essence acceleration cards</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Tips:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Aim to finish the game within 5-6 turns</li>
-                                <li>Prioritize summoning over countering</li>
-                                <li>Attack shields directly to deal early damage</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Control Strategy</h4>
-                          <div className="space-y-4">
-                            <p>Disrupt opponent's plans while building advantage over time.</p>
-                            <div>
-                              <p className="font-semibold mb-2">Recommended Elements:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Water (primary)</li>
-                                <li>Air (secondary)</li>
-                                <li>Frost combination for creature control</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Key Cards:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Status effect creatures</li>
-                                <li>Counter cards (4-6)</li>
-                                <li>Card draw and filtering effects</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Tips:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Save essence for counter opportunities</li>
-                                <li>Focus on preserving your shields</li>
-                                <li>Win through card advantage in late game</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Combo Strategy</h4>
-                          <div className="space-y-4">
-                            <p>Build powerful card combinations for explosive turns.</p>
-                            <div>
-                              <p className="font-semibold mb-2">Recommended Elements:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Air (primary)</li>
-                                <li>Fire (secondary)</li>
-                                <li>Lightning combination for chaining effects</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Key Cards:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Searcher/filter creatures</li>
-                                <li>Essence generation boosters</li>
-                                <li>Game-winning combo pieces</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Tips:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Mulligan aggressively for combo pieces</li>
-                                <li>Protect your shields until combo turn</li>
-                                <li>Include defensive options for survival</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div className="bg-purple-950/50 p-4 rounded-lg">
-                          <h4 className="font-bold text-white mb-2">Midrange Strategy</h4>
-                          <div className="space-y-4">
-                            <p>Balance offense and defense to adapt to any matchup.</p>
-                            <div>
-                              <p className="font-semibold mb-2">Recommended Elements:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Earth (primary)</li>
-                                <li>Water (secondary)</li>
-                                <li>Crystal combination for sustainability</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Key Cards:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Balanced stat creatures (70+/70+)</li>
-                                <li>Versatile runes with multiple effects</li>
-                                <li>Shield enhancement cards</li>
-                              </ul>
-                            </div>
-                            <div>
-                              <p className="font-semibold mb-2">Tips:</p>
-                              <ul className="list-disc list-inside space-y-1">
-                                <li>Adjust playstyle based on opponent's deck</li>
-                                <li>Trade resources efficiently</li>
-                                <li>Build board presence gradually</li>
-                              </ul>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Essential Gameplay Tips</h3>
-                      <div className="bg-purple-950/50 p-6 rounded-lg">
-                        <div className="space-y-6">
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Resource Management</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>Don't spend all your essence in one turn</li>
-                              <li>Keep at least 2-3 essence for emergency counter cards</li>
-                              <li>Balance creature summons with other card types</li>
-                              <li>Decide when to attack shields vs creatures strategically</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Card Advantage</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>One-for-one trades favor the player with more cards</li>
-                              <li>Use multi-target effects to gain advantage</li>
-                              <li>Preserve your resources when behind</li>
-                              <li>Force inefficient exchanges when ahead</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Timing Your Plays</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>Summon creatures in Main Phase 1 for immediate attacks</li>
-                              <li>Save some plays for Main Phase 2 to react to combat</li>
-                              <li>Use counters at the last possible moment</li>
-                              <li>Trigger shield effects at strategic moments</li>
-                            </ul>
-                          </div>
-                          
-                          <div>
-                            <h4 className="font-bold text-white mb-2">Reading Your Opponent</h4>
-                            <ul className="list-disc list-inside space-y-1">
-                              <li>Watch for essence they keep unspent (potential counters)</li>
-                              <li>Track their used shield effects</li>
-                              <li>Note which cards they hold for extended periods</li>
-                              <li>Identify their deck strategy early to counter effectively</li>
-                            </ul>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div>
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Common Tactics</h3>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Shield Baiting</h4>
-                          <p>Force your opponent to break shields early with small attacks, saving your strongest creatures for direct attacks later.</p>
-                        </div>
-                        
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Counter Chaining</h4>
-                          <p>Hold multiple counter cards to create long chains that protect your key plays while disrupting your opponent's responses.</p>
-                        </div>
-                        
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Essence Flooding</h4>
-                          <p>Rapidly generate large amounts of essence to overwhelm opponents with multiple high-cost creatures in a single turn.</p>
-                        </div>
-                        
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Battlefield Positioning</h4>
-                          <p>Strategically place creatures to optimize action points and protect valuable backline units.</p>
-                        </div>
-                        
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Card Cycling</h4>
-                          <p>Quickly move through your deck with draw/discard effects to find key cards while filling your discard pile for revival effects.</p>
-                        </div>
-                        
-                        <div className="bg-purple-950/60 p-4 rounded-lg border border-yellow-500/20">
-                          <h4 className="font-bold text-white mb-2">Status Stacking</h4>
-                          <p>Combine multiple status effects on opponent's creatures to render them ineffective (e.g., frozen + weakened).</p>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="bg-yellow-500/20 p-6 rounded-lg border border-yellow-500/40">
-                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Tournament Tips</h3>
-                      <div className="space-y-4">
-                        <p>For players looking to compete in organized play:</p>
-                        <ul className="list-disc list-inside space-y-2">
-                          <li>Build a consistent deck with minimal randomness</li>
-                          <li>Practice against all major archetypes (aggro, control, combo, midrange)</li>
-                          <li>Include 1-2 tech cards specifically for popular matchups</li>
-                          <li>Consider your side deck choices carefully (if format allows)</li>
-                          <li>Track the evolving meta and adjust your strategy accordingly</li>
-                          <li>Know all the rules thoroughly to avoid mistakes</li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </TabsContent>
-
-                <TabsContent value="glossary" className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 mt-4">
+                <TabsContent value="glossary" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Glossary of Terms</h2>
                   <div className="space-y-6 text-purple-200">
                     <p className="text-lg">This glossary provides definitions for common terms used in Elekin TCG.</p>
@@ -1184,16 +1001,16 @@ const HowToPlayPage = () => {
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">A</h3>
                           <div className="space-y-4">
                             <div>
+                              <p className="font-semibold">Action</p>
+                              <p className="text-sm">Resource that creatures use to attack, block, dodge, or defend. If a creature has no actions, it is Exhausted and turned horizontal.</p>
+                            </div>
+                            <div>
                               <p className="font-semibold">Agility</p>
                               <p className="text-sm">The second stat on a creature card that determines attack order, dodge capability, and movement speed.</p>
                             </div>
                             <div>
-                              <p className="font-semibold">Action Points</p>
-                              <p className="text-sm">Resources creatures use to attack, block, dodge, or activate abilities. Number of actions is based on battlefield position.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Ancient Sigil</p>
-                              <p className="text-sm">A legendary rune card that grants instant victory when specific conditions are met.</p>
+                              <p className="font-semibold">Attack</p>
+                              <p className="text-sm">Declare an attack against an opposing target (creature, shield, or opponent if no shields remain).</p>
                             </div>
                           </div>
                         </div>
@@ -1202,16 +1019,8 @@ const HowToPlayPage = () => {
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">B</h3>
                           <div className="space-y-4">
                             <div>
-                              <p className="font-semibold">Battle Phase</p>
-                              <p className="text-sm">The fourth phase of a turn when players can declare attacks with their creatures.</p>
-                            </div>
-                            <div>
                               <p className="font-semibold">Block</p>
                               <p className="text-sm">Using a creature to defend against an opponent's attack. Costs 1 action point.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Burning</p>
-                              <p className="text-sm">A status effect that deals 25 damage to the affected creature during each end phase.</p>
                             </div>
                           </div>
                         </div>
@@ -1224,12 +1033,12 @@ const HowToPlayPage = () => {
                               <p className="text-sm">A sequence of card effects and responses that resolves in reverse order (last in, first out).</p>
                             </div>
                             <div>
-                              <p className="font-semibold">Counter Card</p>
-                              <p className="text-sm">A card type that can be played outside your turn to negate or respond to opponent's actions.</p>
-                            </div>
-                            <div>
                               <p className="font-semibold">Combinational Element</p>
                               <p className="text-sm">One of six hybrid elements formed by combining two primary elements (e.g., Frost = Air + Water).</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold">Counter Card</p>
+                              <p className="text-sm">A card type that can be played outside your turn to negate or respond to opponent's actions.</p>
                             </div>
                           </div>
                         </div>
@@ -1239,15 +1048,11 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Dodge</p>
-                              <p className="text-sm">An action that allows a creature to avoid an attack completely. Costs all remaining action points.</p>
+                              <p className="text-sm">An action that allows a creature to avoid an attack completely, thus Exhausting both creatures (the attacker and creature dodging.</p>
                             </div>
                             <div>
                               <p className="font-semibold">Dragon</p>
-                              <p className="text-sm">A powerful dual-element creature type with higher stats and unique abilities.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Draw Phase</p>
-                              <p className="text-sm">The first phase of a turn when the active player draws one card.</p>
+                              <p className="text-sm">A powerful combinational element creature type with high stats and unique abilities.</p>
                             </div>
                           </div>
                         </div>
@@ -1257,15 +1062,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Essence</p>
-                              <p className="text-sm">The primary resource used to summon creatures and activate abilities. Comes in four elemental types.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">End Phase</p>
-                              <p className="text-sm">The final phase of a turn when shields regenerate and various end-of-turn effects occur.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Elementalist</p>
-                              <p className="text-sm">A special character card that provides unique bonuses to a specific element.</p>
+                              <p className="text-sm">The primary resource used to summon creatures and activate abilities. Comes in four elemental types (Air, Water, Fire, Earth).</p>
                             </div>
                           </div>
                         </div>
@@ -1275,29 +1072,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Frozen</p>
-                              <p className="text-sm">A status effect that removes all action points from the affected creature for one turn.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Field</p>
-                              <p className="text-sm">The play area where creatures are summoned, consisting of 5 positions for each player.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Front Line</p>
-                              <p className="text-sm">The first two positions on the battlefield that must be attacked before reaching the back line.</p>
-                            </div>
-                          </div>
-                        </div>
-                        
-                        <div>
-                          <h3 className="text-xl font-semibold text-yellow-400 mb-2">G</h3>
-                          <div className="space-y-4">
-                            <div>
-                              <p className="font-semibold">Generation Phase</p>
-                              <p className="text-sm">The second phase of a turn when essence is generated from creatures and other sources.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Guardian</p>
-                              <p className="text-sm">A creature type with enhanced defensive capabilities and blocking bonuses.</p>
+                              <p className="text-sm">A status effect that Exhausts the affected creature for one full turn.</p>
                             </div>
                           </div>
                         </div>
@@ -1306,12 +1081,8 @@ const HowToPlayPage = () => {
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">M</h3>
                           <div className="space-y-4">
                             <div>
-                              <p className="font-semibold">Main Phase</p>
-                              <p className="text-sm">Phases (1 and 2) when players can summon creatures and play non-counter cards.</p>
-                            </div>
-                            <div>
                               <p className="font-semibold">Mulligan</p>
-                              <p className="text-sm">The opportunity to redraw your starting hand (up to 2 times) before the game begins.</p>
+                              <p className="text-sm">The opportunity to redraw your starting hand with 1 less card from before (up to 2 times) before the game begins.</p>
                             </div>
                           </div>
                         </div>
@@ -1321,11 +1092,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Position</p>
-                              <p className="text-sm">A creature's place on the battlefield (1-5), which determines its action points and defensive priorities.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Poisoned</p>
-                              <p className="text-sm">A status effect that deals 15 damage to the affected creature for 3 consecutive turns.</p>
+                              <p className="text-sm">A vertical position indicates an available action, and a horizontal position indicates an exhausted creature (no available action).</p>
                             </div>
                           </div>
                         </div>
@@ -1333,13 +1100,13 @@ const HowToPlayPage = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">R</h3>
                           <div className="space-y-4">
-                            <div>
-                              <p className="font-semibold">Rune</p>
-                              <p className="text-sm">A card type that provides ongoing effects or one-time boosts to creatures and gameplay.</p>
+                          <div>
+                              <p className="font-semibold">Refresh</p>
+                              <p className="text-sm">Allows a creature to gain its action back after being Exhausted.</p>
                             </div>
                             <div>
-                              <p className="font-semibold">Regenerating</p>
-                              <p className="text-sm">A status effect that heals 25 damage from the affected creature during each end phase.</p>
+                              <p className="font-semibold">Rune</p>
+                              <p className="text-sm">A card type that provides ongoing effects or one-time effects to creatures and gameplay.</p>
                             </div>
                           </div>
                         </div>
@@ -1354,10 +1121,6 @@ const HowToPlayPage = () => {
                             <div>
                               <p className="font-semibold">Strength</p>
                               <p className="text-sm">The first stat on a creature card that determines both attack power and health points.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Status Effect</p>
-                              <p className="text-sm">A temporary condition that affects a creature's performance (e.g., Frozen, Burning, Empowered).</p>
                             </div>
                           </div>
                         </div>

@@ -14,7 +14,7 @@ const SEO = ({
   return (
     <Helmet>
       {/* Basic Meta Tags */}
-      <title>{`${title} | Elemental Masters TCG`}</title>
+      <title>{`${title} | Elekin TCG`}</title>
       <meta name="description" content={description} />
       
       {/* Open Graph / Facebook */}

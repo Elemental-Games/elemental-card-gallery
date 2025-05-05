@@ -15,10 +15,10 @@ const Header = () => {
   return (
     <>
       <Helmet>
-        <title>Elemental Masters - Trading Card Game</title>
-        <meta name="description" content="Navigate through the world of Elemental Masters. Access game rules, card gallery, and join our community." />
-        <meta name="keywords" content="trading card game, TCG, Elemental Masters, card game, fantasy game, elemental powers, strategy game" />
-        <meta property="og:title" content="Elemental Masters - Trading Card Game" />
+        <title>Elekin - Trading Card Game</title>
+        <meta name="description" content="Navigate through the world of Elekin. Access game rules, card gallery, and join our community." />
+        <meta name="keywords" content="trading card game, TCG, Elekin, card game, fantasy game, elemental powers, strategy game" />
+        <meta property="og:title" content="Elekin - Trading Card Game" />
         <meta property="og:description" content="Master the elements in this exciting trading card game. Collect cards, build decks, and battle for supremacy!" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg" />

@@ -53,11 +53,11 @@ const KinbroldPage = () => {
   return (
     <>
       <Helmet>
-        <title>The World of Kinbrold - Elemental Masters TCG Universe</title>
-        <meta name="description" content="Explore the magical world of Kinbrold, home to five elemental kingdoms: Zalos, Tsunareth, Scarto, Grivoss, and Evermere. Discover the rich lore and history behind Elemental Masters TCG." />
-        <meta name="keywords" content="Kinbrold, Elemental Masters lore, TCG world, fantasy kingdoms, elemental realms, Zalos, Tsunareth, Scarto, Grivoss, Evermere" />
-        <meta property="og:title" content="The World of Kinbrold - Elemental Masters TCG Universe" />
-        <meta property="og:description" content="Journey through the five elemental kingdoms of Kinbrold. Experience the rich lore and history behind Elemental Masters TCG." />
+        <title>The World of Kinbrold - Elekin TCG Universe</title>
+        <meta name="description" content="Explore the elemental world of Kinbrold, home to five elemental kingdoms: Zalos, Tsunareth, Scarto, Grivoss, and Evermere. Discover the rich lore and history behind Elekin TCG." />
+        <meta name="keywords" content="Kinbrold, Elekin lore, TCG world, fantasy kingdoms, elemental realms, Zalos, Tsunareth, Scarto, Grivoss, Evermere" />
+        <meta property="og:title" content="The World of Kinbrold - Elekin TCG Universe" />
+        <meta property="og:description" content="Journey through the five elemental kingdoms of Kinbrold. Experience the rich lore and history behind Elekin TCG." />
         <meta property="og:type" content="article" />
         <link rel="canonical" href="https://elementalgames.gg/kinbrold" />
       </Helmet>

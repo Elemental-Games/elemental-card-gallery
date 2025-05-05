@@ -54,15 +54,15 @@ const JoinNowPage = () => {
             "mainEntity": [
               {
                 "@type": "Question",
-                "name": "Can the average person pick up and play Elemental Masters?",
+                "name": "Can the average person pick up and play Elekin?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elemental Masters."
+                  "text": "Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elekin."
                 }
               },
               {
                 "@type": "Question",
-                "name": "What makes Elemental Masters unique?",
+                "name": "What makes Elekin unique?",
                 "acceptedAnswer": {
                   "@type": "Answer",
                   "text": "Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent's attacks. This is a system that's never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience."
@@ -141,7 +141,7 @@ const JoinNowPage = () => {
             <h2 className="text-3xl font-bold mb-4">Master the Elements</h2>
             <p className="text-lg mb-6">
               Dive into a world where elements clash and strategy reigns supreme. 
-              Elemental Masters brings you an innovative TCG experience with unique mechanics, 
+              Elekin brings you an innovative TCG experience with unique mechanics, 
               beautiful artwork, and deep strategic gameplay.
             </p>
             <Button size="lg" className="bg-yellow-500 hover:bg-yellow-600 border-2 border-purple-700 text-purple-700 font-bold">
@@ -209,13 +209,13 @@ const JoinNowPage = () => {
           <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
           <Accordion type="single" collapsible className="space-y-2">
             <AccordionItem value="item-1">
-              <AccordionTrigger>Can the average person pick up and play Elemental Masters?</AccordionTrigger>
+              <AccordionTrigger>Can the average person pick up and play Elekin?</AccordionTrigger>
               <AccordionContent>
-                Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elemental Masters.
+                Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elekin.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">
-              <AccordionTrigger>What makes Elemental Masters unique?</AccordionTrigger>
+              <AccordionTrigger>What makes Elekin unique?</AccordionTrigger>
               <AccordionContent>
                 Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent's attacks. This is a system that's never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience.
               </AccordionContent>

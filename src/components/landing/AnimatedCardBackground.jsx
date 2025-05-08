@@ -227,42 +227,68 @@ const AnimatedCardBackground = () => {
         <motion.img
           src="/Games_Logo.png"
           alt="Elemental Games Logo"
-          className="w-60 md:w-72 -mb-10"
+          className="w-60 md:w-72 mb-20"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.6 }}
         />
         
         <div className="flex flex-col justify-center flex-grow-0 my-4">
-          <motion.h1 
-            className="text-4xl md:text-6xl font-extrabold mb-2 text-white"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.2, duration: 0.6 }}
+          <motion.div
+            className="absolute inset-0 flex items-center justify-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1 }}
           >
-            Welcome to<br />
-            Elemental Games
-          </motion.h1>
+            <div className="text-center">
+              <motion.h1 
+                className="text-4xl md:text-6xl font-bold text-white mb-2 mt-10"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2 }}
+              >
+                <br></br>
+                ELEKIN TCG
+              </motion.h1>
+              <motion.h2 
+                className="text-2xl md:text-4xl font-bold text-white-400 mb-2"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                Masters of Kinbrold
+              </motion.h2>
+              <motion.p 
+                className="text-sm md:text-base text-purple-200 mb-6"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.8 }}
+              >
+                Created by Elemental Games
+              </motion.p>
+              <motion.p 
+                className="text-base md:text-lg text-purple-200 mb-10"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                Master the elements, build your deck, and become a master in the world of Kinbrold
+              </motion.p>
+              
+              {/* Button moved here */}
+              <motion.div 
+                className="pointer-events-auto"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.6, duration: 0.6 }}
+              >
+                <GradientButton />
+              </motion.div>
+            </div>
+          </motion.div>
           
-          <motion.p 
-            className="text-lg md:text-xl mb-8 text-purple-200 max-w-2xl font-medium"
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 1.4, duration: 0.6 }}
-          >
-            Master the elements, build your deck, and become a legend in the world of Kinbrold
-          </motion.p>
+          {/* Remove the old button position */}
         </div>
-        
-        {/* Button with pointer-events-auto */}
-        <motion.div 
-          className="pointer-events-auto"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.6, duration: 0.6 }}
-        >
-          <GradientButton />
-        </motion.div>
       </motion.div>
 
       {/* Card Detail Sidebar */}

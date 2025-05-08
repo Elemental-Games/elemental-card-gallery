@@ -1279,7 +1279,7 @@
       "id": "sonarp",
       "name": "Sonarp",
       "type": "Creature",
-      "rarity": "U",
+      "rarity": "C",
       "imagePath": "/images/cards/new/sonarp.webp",
       "webpPath": "/images/cards/new/sonarp.webp",
       "element": "Water",

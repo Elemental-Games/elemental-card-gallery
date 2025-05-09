@@ -68,26 +68,22 @@ const LandingPage = () => {
       <AnimatedCardBackground />
       
       {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
+      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10 -mt-20">
         <div className="max-w-7xl mx-auto">
           {/* Title and Introduction */}
-          <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 mb-12">
-            <div className="flex-grow w-full">
-              <div className="text-center lg:text-left">
-                <h2 className="text-4xl lg:text-6xl font-bold">Elekin TCG - Game Overview</h2>
-                <h3 className="text-xl lg:text-2xl mt-2 text-purple-300 font-medium">Masters of Kinbrold</h3>
-              </div>
-              <p className="text-lg text-purple-200 mt-4 text-center lg:text-left">
-                Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
-              </p>
-            </div>
-            <div className="lg:w-auto flex justify-center flex-shrink-0">
+          <div className="mb-12 -mt-5">
+            <div className="flex items-center">
               <img 
-                src="/Masters_Logo.png" 
-                alt="Masters Logo" 
-                className="w-48 lg:w-80 h-auto"
+                src="/LogoElekin1.png" 
+                alt="Elekin Logo" 
+                className="w-48 lg:w-64 h-auto mr-6 mb-3"
               />
+              <h2 className="text-4xl lg:text-6xl font-bold text-left -mb-1">Game Overview</h2>
             </div>
+            <h3 className="text-xl lg:text-2xl -mt-20 text-purple-300 font-medium text-left">Set 1: Masters of Kinbrold</h3>
+            <p className="text-lg text-purple-200 mt-4 text-left">
+              Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
+            </p>
           </div>
           
           {/* Features in full width */}

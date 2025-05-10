@@ -71,12 +71,17 @@ const LandingPage = () => {
       <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10 -mt-20">
         <div className="max-w-7xl mx-auto">
           {/* Title and Introduction */}
-          <div className="mb-12 -mt-5">
+          <div className="mb-12 -mt-10">
             <div className="flex items-center">
-              <h2 className="text-4xl lg:text-6xl font-bold text-left mb-3 mt-3">Elekin TCG: Game Overview</h2>
+              <img 
+                src="/LogoElekin1.png" 
+                alt="Elekin Logo" 
+                className="w-48 lg:w-64 h-auto mr-6 -mb-1"
+              />
+              <h2 className="text-4xl lg:text-6xl font-bold text-left -mb-7">Game Overview</h2>
             </div>
-            <h3 className="text-xl lg:text-2xl mt-1 text-purple-300 font-medium text-left">Set 1: Masters of Kinbrold</h3>
-            <p className="text-lg text-purple-200 mt-4 text-left">
+            <h3 className="text-xl lg:text-2xl -mt-10 text-purple-300 font-medium text-left ml-10">Set 1: Masters of Kinbrold</h3>
+            <p className="text-lg text-purple-200 mt-4 text-left ml-10">
               Embark on an epic journey through the mystical realm of Kinbrold. Master the elements, forge powerful decks, and become a legendary Elekin Master.
             </p>
           </div>

@@ -277,7 +277,7 @@ const HowToPlayPage = () => {
               </p>
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
-              </div>
+            </div>
             </motion.div>
 
             <motion.div 
@@ -303,7 +303,7 @@ const HowToPlayPage = () => {
               </p>
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
-              </div>
+            </div>
             </motion.div>
 
             <motion.div 
@@ -329,7 +329,7 @@ const HowToPlayPage = () => {
               </p>
               <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
-              </div>
+            </div>
             </motion.div>
           </motion.div>
 
@@ -346,8 +346,8 @@ const HowToPlayPage = () => {
                   {quickLinks.map((link, index) => (
                     <React.Fragment key={link.tab}>
                       {index > 0 && <div className="hidden sm:block h-6 w-px bg-purple-500/30"></div>}
-                      <TabsTrigger
-                        value={link.tab}
+                    <TabsTrigger
+                      value={link.tab}
                         className="flex-1 min-w-[90px] sm:min-w-[100px] py-1.5 px-0.5 sm:px-1 text-xs sm:text-sm 
                         data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900 
                         data-[state=active]:shadow-md data-[state=active]:shadow-yellow-500/20
@@ -355,9 +355,9 @@ const HowToPlayPage = () => {
                         data-[state=active]:border-b-2 data-[state=active]:border-b-yellow-600
                         border-r border-purple-500/20 sm:border-r-0 last:border-r-0
                         rounded-t-md transition-all hover:bg-purple-800/50"
-                      >
-                        {link.title}
-                      </TabsTrigger>
+                    >
+                      {link.title}
+                    </TabsTrigger>
                     </React.Fragment>
                   ))}
                 </TabsList>
@@ -716,8 +716,8 @@ const HowToPlayPage = () => {
                         <li>Cannot be replaced when broken</li>
                         <li>Choose one of two effects when broken and end current battle phase</li>
                       </ul>
-                    </div>
-                    
+        </div>
+        
                     <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Shield Example</h3>
                       <div className="flex flex-col items-start gap-6">
@@ -752,8 +752,8 @@ const HowToPlayPage = () => {
                               <li><span className="font-semibold">Agility:</span> Speed for action use (Attacking/Blocking/Dodging/Defending)</li>
                               <li><span className="font-semibold">Card Ability:</span> Used once per turn, or whenever applicable via ability description</li>
                               <li><span className="font-semibold">Essence Generated:</span> Essence produced during your Generation Phase</li>
-                            </ul>
-                          </div>
+                        </ul>
+                      </div>
                         </div>
                       </div>
                       
@@ -766,8 +766,8 @@ const HowToPlayPage = () => {
                               <li><span className="font-semibold">Shield Health:</span> Damage shield can take before breaking</li>
                               <li><span className="font-semibold">Shield Tier:</span> I, II, or III</li>
                               <li><span className="font-semibold">Card Abilities:</span> Choose 1 effect to trigger when broken and end opponent's battle phase</li>
-                            </ul>
-                          </div>
+                        </ul>
+                      </div>
                         </div>
                       </div>
                       
@@ -780,11 +780,11 @@ const HowToPlayPage = () => {
                               <li><span className="font-semibold">Rune Symbol:</span> Identifies card as a rune</li>
                               <li><span className="font-semibold">Rune Type:</span> Normal, Instant, or Equipment</li>
                               <li><span className="font-semibold">Card Ability:</span> Effect that resolves when played</li>
-                            </ul>
+                        </ul>
                           </div>
-                        </div>
-                      </div>
-                      
+          </div>
+        </div>
+        
                       <div className="bg-purple-950/50 p-6 rounded-lg">
                         <h4 className="text-lg font-semibold text-yellow-400 mb-3">Counter Cards</h4>
                         <div className="flex flex-col items-center">
@@ -805,16 +805,16 @@ const HowToPlayPage = () => {
                       
                       <div className="space-y-12">
                         {/* Dragon Cards Section */}
-                        <div>
+                    <div>
                           <h4 className="text-lg font-semibold text-white mb-4">Dragon Cards</h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div className="flex justify-center">
-                              <CardImage card={cardExamples.dragon} size="large" />
-                            </div>
-                            <div className="bg-purple-950/50 p-6 rounded-lg">
+                        <div className="flex justify-center">
+                          <CardImage card={cardExamples.dragon} size="large" />
+                        </div>
+                        <div className="bg-purple-950/50 p-6 rounded-lg">
                               <h5 className="text-lg font-semibold text-yellow-400 mb-3">Dual-Element Powerhouse</h5>
-                              <div className="space-y-6">
-                                <div>
+                          <div className="space-y-6">
+                            <div>
                                   <p className="font-semibold mb-2">Key Features:</p>
                                   <ul className="list-disc list-inside space-y-2 text-base">
                                     <li>Always represents two combined elements</li>
@@ -825,20 +825,20 @@ const HowToPlayPage = () => {
                                 </div>
                                 <div>
                                   <p className="font-semibold mb-2">Example: Eldritch the Frost Dragon</p>
-                                  <ul className="list-disc list-inside space-y-1">
+                              <ul className="list-disc list-inside space-y-1">
                                     <li>Elements: Air + Water (Frost)</li>
                                     <li>Stats: 185/110</li>
                                     <li>Frostbite: When this card is summoned, Freezes all creatures your opponent controls for 1 full turn.</li>
                                     <li>Glacial Roar (Costs 2 Air or Water Essence): Freeze 1 creature on the field for 1 full turn.</li>
-                                  </ul>
-                                </div>
+                              </ul>
+                            </div>
                               </div>
                             </div>
                           </div>
                         </div>
                         
                         {/* Elementalist Cards Section */}
-                        <div>
+                            <div>
                           <h4 className="text-lg font-semibold text-white mb-4">Elementalists</h4>
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                             <div className="bg-purple-950/50 p-6 rounded-lg">
@@ -856,14 +856,14 @@ const HowToPlayPage = () => {
                                 </div>
                                 <div>
                                   <p className="font-semibold mb-2">Example: Balon | The Earth Elementalist</p>
-                                  <ul className="list-disc list-inside space-y-1">
+                              <ul className="list-disc list-inside space-y-1">
                                     <li>Element: Earth</li>
                                     <li>Sink Hole: Destroy 1 Earth creature you control to destroy 1 card on the field.</li>
                                     <li>Tremor (Costs 4 Earth Essence): Exhaust all creatures your opponent controls.</li>
-                                  </ul>
-                                </div>
-                              </div>
+                              </ul>
                             </div>
+                          </div>
+                        </div>
                             <div className="flex justify-center items-center">
                               <div className="relative">
                                 <img 
@@ -871,7 +871,7 @@ const HowToPlayPage = () => {
                                   alt="Elementalist Card Example" 
                                   className="w-full max-w-[300px] rounded-lg shadow-lg"
                                 />
-                              </div>
+                      </div>
                             </div>
                           </div>
                         </div>
@@ -898,7 +898,7 @@ const HowToPlayPage = () => {
                           <ul className="list-disc list-inside text-sm space-y-1">
                             <li>Freeze effects (reduce actions)</li>
                             <li>Control-focused playstyle</li>
-                          </ul>
+                      </ul>
                         </div>
                         <div className="bg-purple-950/50 p-4 rounded-lg">
                           <h4 className="font-bold text-white mb-2">Lightning (Air + Fire)</h4>
@@ -1145,7 +1145,7 @@ const HowToPlayPage = () => {
                       <h3 className="text-lg font-semibold text-yellow-400 mb-2">Can't find a term?</h3>
                       <p>This glossary covers the most common terms. For more detailed explanations or specific card rulings, please consult the full rulebook or contact our support team.</p>
                     </div>
-                  </div>
+          </div>
                 </TabsContent>
               </Tabs>
             </motion.div>

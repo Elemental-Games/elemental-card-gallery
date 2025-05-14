@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import CardDetailSidebar from '@/components/CardDetailSidebar';
 
 const CardDetailPage = () => {
   const [card, setCard] = useState(null);
@@ -8,6 +9,7 @@ const CardDetailPage = () => {
   const [error, setError] = useState(null);
   const { id } = useParams();
   const location = useLocation();
+  const [sidebarCard, setSidebarCard] = useState(null);
 
   // Determine the previous page and back link
   const getBackInfo = () => {
@@ -235,6 +237,48 @@ const CardDetailPage = () => {
         </div>
       </div>
 
+      {/* Synergy and Counter Cards Section (side-by-side, with images) */}
+      {(Array.isArray(card.synergies) && card.synergies.length > 0) || (Array.isArray(card.counters) && card.counters.length > 0) ? (
+        <div className="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Synergy Cards */}
+          {Array.isArray(card.synergies) && card.synergies.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-bold text-yellow-400 mb-4">Synergy Cards</h2>
+              <div className="flex flex-wrap gap-4">
+                {card.synergies.map((synergy) => {
+                  let id = synergy.id || synergy;
+                  let name = synergy.name || id;
+                  let imgPath = `/images/cards/new/${id.replace(/-/g, ' ')}.webp`;
+                  return (
+                    <div key={id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard({ id })}>
+                      <img src={imgPath} alt={name} className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950" />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+          {/* Counter Cards */}
+          {Array.isArray(card.counters) && card.counters.length > 0 && (
+            <div>
+              <h2 className="text-2xl font-bold text-yellow-400 mb-4">Counter Cards</h2>
+              <div className="flex flex-wrap gap-4">
+                {card.counters.map((counter) => {
+                  let id = counter.id || counter;
+                  let name = counter.name || id;
+                  let imgPath = `/images/cards/new/${id.replace(/-/g, ' ')}.webp`;
+                  return (
+                    <div key={id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard({ id })}>
+                      <img src={imgPath} alt={name} className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950" />
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      ) : null}
+
       {/* Lore section */}
       {(card.loreDescription || card.cardFact) && (
         <div className="max-w-6xl mx-auto mt-8">
@@ -248,26 +292,64 @@ const CardDetailPage = () => {
             
             <div className="space-y-6">
               {card.loreDescription && (
-                <div>
-                  <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
-                  <p className="text-white leading-relaxed">
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
+                <p className="text-white leading-relaxed">
                     {card.loreDescription}
                   </p>
-                </div>
-              )}
+        </div>
+      )}
 
               {card.cardFact && (
-                <div>
-                  <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
-                  <p className="text-white leading-relaxed">
+              <div>
+                <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
+                <p className="text-white leading-relaxed">
                     {card.cardFact}
-                  </p>
-                </div>
-              )}
+                </p>
+        </div>
+      )}
             </div>
           </motion.div>
         </div>
       )}
+
+      {/* News Section with YouTube Thumbnails at the bottom */}
+      {Array.isArray(card.news) && card.news.length > 0 && (
+        <div className="max-w-6xl mx-auto mt-8">
+          <h2 className="text-2xl font-bold text-yellow-400 mb-4">News</h2>
+          <div className="flex flex-wrap gap-4">
+            {card.news.map((item) => {
+              let url = typeof item === 'string' ? item : (item && typeof item === 'object' && typeof item.link === 'string' ? item.link : null);
+              let title = (item && typeof item === 'object' && item.title) ? item.title : url;
+              let videoId = null;
+              let isYouTube = false;
+              if (typeof url === 'string' && url.includes('youtube.com/watch?v=')) {
+                isYouTube = true;
+                videoId = url.split('v=')[1]?.split('&')[0];
+              }
+              if (isYouTube && videoId) {
+                return (
+                  <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="block w-40 aspect-square rounded overflow-hidden border-2 border-yellow-400 hover:scale-105 transition-transform">
+                    <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={title} className="w-full h-full object-cover" />
+                  </a>
+                );
+              }
+              // Fallback for non-YouTube links
+              return (
+                <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="block w-40 aspect-square rounded overflow-hidden border-2 border-yellow-400 flex items-center justify-center bg-purple-900 text-yellow-400">
+                  <span className="text-center px-2">{title}</span>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      <CardDetailSidebar
+        card={sidebarCard}
+        isOpen={!!sidebarCard}
+        onClose={() => setSidebarCard(null)}
+      />
     </div>
   );
 };

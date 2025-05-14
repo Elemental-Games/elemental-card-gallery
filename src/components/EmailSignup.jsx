@@ -35,8 +35,8 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
         if (result.message && result.message.includes('already subscribed')) {
           toast.info("You're already on our mailing list!");
           shootConfetti(); // Still celebrate their enthusiasm
-        } else {
-          toast.error(result.message);
+      } else {
+        toast.error(result.message);
         }
       }
     } catch (error) {

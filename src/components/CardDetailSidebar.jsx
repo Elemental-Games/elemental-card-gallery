@@ -92,10 +92,13 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
                   <p className="text-xl text-white mt-2">{card.type}</p>
                 </div>
 
-                <div>
-                  <h3 className="text-2xl font-bold text-yellow-400">Element</h3>
-                  <p className="text-xl text-white mt-2">{card.element}</p>
-                </div>
+                {/* Only show element for non-Rune, non-Counter, non-Shield cards */}
+                {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield') && (
+                  <div>
+                    <h3 className="text-2xl font-bold text-yellow-400">Element</h3>
+                    <p className="text-xl text-white mt-2">{card.element}</p>
+                  </div>
+                )}
 
                 <div>
                   <h3 className="text-2xl font-bold text-yellow-400">Rarity</h3>
@@ -113,6 +116,24 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
                   <h3 className="text-2xl font-bold text-yellow-400">Card Number</h3>
                   <p className="text-xl text-white mt-2">#{card.cardNumber}</p>
                 </div>
+
+                {/* Show Shield effects if card is a Shield */}
+                {card.type === 'Shield' && (
+                  <div className="col-span-2">
+                    {card.primaryEffect && (
+                      <>
+                        <h3 className="text-2xl font-bold text-yellow-400 mt-4">Primary Effect</h3>
+                        <p className="text-xl text-purple-200 mt-2">{card.primaryEffect}</p>
+                      </>
+                    )}
+                    {card.secondaryEffect && (
+                      <>
+                        <h3 className="text-2xl font-bold text-yellow-400 mt-4">Secondary Effect</h3>
+                        <p className="text-xl text-purple-200 mt-2">{card.secondaryEffect}</p>
+                      </>
+                    )}
+                  </div>
+                )}
 
                 {card.type === 'Creature' && card.stats && (
                   <div className="col-span-2">

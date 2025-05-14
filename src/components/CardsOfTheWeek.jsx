@@ -63,29 +63,29 @@ const CardsOfTheWeek = () => {
 
   return (
     <>
-      <motion.div 
+    <motion.div 
         className="border-[4px] sm:border-[5px] border-yellow-500 rounded-xl bg-transparent"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        variants={containerVariants}
-      >
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, margin: "-100px" }}
+      variants={containerVariants}
+    >
         <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
-          <motion.h2 
+        <motion.h2 
             className="text-3xl sm:text-4xl font-bold mb-6 text-center text-yellow-500"
-            variants={itemVariants}
-          >
-            Cards of the Week
-          </motion.h2>
+          variants={itemVariants}
+        >
+          Cards of the Week
+        </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
-            {weeklyCards.map((card) => (
+          {weeklyCards.map((card) => (
               <motion.div key={card.id} variants={itemVariants} className="scale-95 md:scale-100 w-full mx-auto" style={{ maxWidth: "240px" }}>
                 <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
-              </motion.div>
-            ))}
-          </div>
+            </motion.div>
+          ))}
         </div>
-      </motion.div>
+      </div>
+    </motion.div>
 
       <CardDetailSidebar
         card={selectedCard}

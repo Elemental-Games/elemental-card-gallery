@@ -296,7 +296,21 @@ const CardGallery = ({ cards = [], onCardSelect, selectedCards = [], maxPerEleme
 
             <div className="mt-1 text-center">
               <p className="font-semibold text-white text-base truncate">{card.name}</p>
-              <p className="text-xs text-purple-300">{card.type} • {card.element}</p>
+              <p className="text-xs text-purple-300">
+                {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield')
+                  ? `${card.element} • ${card.type}`
+                  : `${card.type}`}
+              </p>
+              {card.type === 'Shield' && (
+                <>
+                  {card.primaryEffect && (
+                    <p className="text-xs text-purple-200 mt-1"><span className="font-bold">Primary:</span> {card.primaryEffect}</p>
+                  )}
+                  {card.secondaryEffect && (
+                    <p className="text-xs text-purple-200 mt-1"><span className="font-bold">Secondary:</span> {card.secondaryEffect}</p>
+                  )}
+                </>
+              )}
               
               <div className="flex items-center justify-center gap-4 mt-2">
                 <Button 

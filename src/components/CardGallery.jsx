@@ -24,13 +24,10 @@ const Card = ({ card, onCardClick }) => {
       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
         <h3 className="text-sm font-semibold">{typeof card.name === 'number' ? `Card ${card.name}` : card.name}</h3>
         <p className="text-xs">
-          {card.element} | {card.type} | {
-            card.rarity === 'C' ? 'Common' :
-            card.rarity === 'U' ? 'Uncommon' :
-            card.rarity.trim() === 'R' ? 'Rare' :
-            card.rarity === 'E' ? 'Epic' :
-            card.rarity === 'L' ? 'Legendary' :
-            card.rarity
+          {/* Only show element for non-Rune, non-Counter, non-Shield cards */}
+          {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield')
+            ? `${card.element} | ${card.type} | ${card.rarity === 'C' ? 'Common' : card.rarity === 'U' ? 'Uncommon' : card.rarity.trim() === 'R' ? 'Rare' : card.rarity === 'E' ? 'Epic' : card.rarity === 'L' ? 'Legendary' : card.rarity}`
+            : `${card.type} | ${card.rarity === 'C' ? 'Common' : card.rarity === 'U' ? 'Uncommon' : card.rarity.trim() === 'R' ? 'Rare' : card.rarity === 'E' ? 'Epic' : card.rarity === 'L' ? 'Legendary' : card.rarity}`
           }
         </p>
         {card.type === 'Creature' && (

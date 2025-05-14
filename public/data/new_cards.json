@@ -25,8 +25,13 @@
       },
       "cardFact": "Their wings create a distinctive humming tone that changes pitch with approaching weather shifts.",
       "loreDescription": "Skitters are tiny insect creatures that blow around in the wind, living and feeding on the grass found all across Kinbrold. Most commonly found in higher altitude locations around Kinbrold, but also thrives wherever green grass grows. Its elusiveness is its most common defense mechanism, being nearly impossible to catch when riding gusts and air currents.",
-      "synergies": [],
-      "counters": [],
+      "synergies": [
+        {"id": "swoop", "name": "Swoop"},
+        {"id": "cyclonos", "name": "Cyclonos"}
+      ],
+      "counters": [
+        {"id": "driplets", "name": "Driplets"}
+      ],
       "news": []
     },
     {
@@ -3227,19 +3232,23 @@
       "cardNumber": 122,
       "id": "cyclonos",
       "name": "Cyclonos",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/cyclonos.webp",
       "webpPath": "/images/cards/new/cyclonos.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 110,
+        "agility": 115
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Cyclonos alters air pressure around its body to reach speeds of over 110 body-lengths per second during pursuit.",
@@ -3252,19 +3261,23 @@
       "cardNumber": 123,
       "id": "talus",
       "name": "Talus",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/talus.webp",
       "webpPath": "/images/cards/new/talus.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Shed feathers retain air essence, prized for crafting agility-enhancing equipment.",
@@ -3277,19 +3290,23 @@
       "cardNumber": 124,
       "id": "vayute",
       "name": "Vayute",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/vayute.webp",
       "webpPath": "/images/cards/new/vayute.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 170,
+        "agility": 55
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Vayute's tusks channel concentrated air essence to create microfractures in defenses well beyond the initial impact point.",
@@ -3302,19 +3319,23 @@
       "cardNumber": 125,
       "id": "hydran",
       "name": "Hydran",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/hydran.webp",
       "webpPath": "/images/cards/new/hydran.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 125,
+        "agility": 100
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Hydran's eyes possesses a different type of vision—one sees heat while the other detects essence flow patterns.",
@@ -3327,19 +3348,23 @@
       "cardNumber": 126,
       "id": "typhos",
       "name": "Typhos",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/typhos.webp",
       "webpPath": "/images/cards/new/typhos.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 135,
+        "agility": 90
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Typhos creates powerful underwater vortices that trap prey while it remains perfectly still at the center of the maelstrom.",
@@ -3352,19 +3377,23 @@
       "cardNumber": 127,
       "id": "vapora",
       "name": "Vapora",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/vapora.webp",
       "webpPath": "/images/cards/new/vapora.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 155,
+        "agility": 70
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Vapora is one of the primary bridges between the real and ethereal",
@@ -3377,19 +3406,23 @@
       "cardNumber": 128,
       "id": "archen",
       "name": "Archen",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/archen.webp",
       "webpPath": "/images/cards/new/archen.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 140,
+        "agility": 85
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "Archen's scales contain superheated pockets that create defensive glass barriers.",
@@ -3402,19 +3435,23 @@
       "cardNumber": 129,
       "id": "sunny",
       "name": "Sunny",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/sunny.webp",
       "webpPath": "/images/cards/new/sunny.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 160,
+        "agility": 65
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "Sunny's flames never burn those with pure intentions, instead providing warmth that accelerates healing.",
@@ -3427,19 +3464,23 @@
       "cardNumber": 130,
       "id": "vorax",
       "name": "Vorax",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/vorax.webp",
       "webpPath": "/images/cards/new/vorax.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 170,
+        "agility": 55
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "Vorax detects thermal current fluctuations from miles away, anticipating volcanic activity before eruptions occur.",
@@ -3452,19 +3493,23 @@
       "cardNumber": 131,
       "id": "clay-stalkers",
       "name": "Clay Stalkers",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/clay stalkers.webp",
       "webpPath": "/images/cards/new/clay stalkers.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 165,
+        "agility": 60
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Clay Stalkers coordinate perfect ambushes through subtle ground vibrations.",
@@ -3477,19 +3522,23 @@
       "cardNumber": 132,
       "id": "quarris",
       "name": "Quarris",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/quarris.webp",
       "webpPath": "/images/cards/new/quarris.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 175,
+        "agility": 50
+      },
       "essence": {
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Quarris can survive dormant for years, awakening only when its territory faces significant threats.",
@@ -3502,19 +3551,23 @@
       "cardNumber": 133,
       "id": "oaker",
       "name": "Oaker",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/oaker.webp",
       "webpPath": "/images/cards/new/oaker.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 185,
+        "agility": 40
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Oakers can remain motionless becoming indistinguishable from natural trees.",
@@ -3527,19 +3580,23 @@
       "cardNumber": 134,
       "id": "nimbus",
       "name": "Nimbus | The Air Titan",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/nimbus.webp",
       "webpPath": "/images/cards/new/nimbus.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Air"
         }
       },
       "ability": {
@@ -3551,7 +3608,7 @@
         "description": "Destroy 1 Rune or Counter card on the field.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Nimbus can disperse its consciousness into thousands of individual air currents simultaneously, allowing it to monitor vast areas of Kinbrold's skies and respond instantly to threats anywhere within its domain.",
@@ -3564,19 +3621,23 @@
       "cardNumber": 135,
       "id": "lazu",
       "name": "Lazu | The Air Tempest",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/lazu.webp",
       "webpPath": "/images/cards/new/lazu.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 115,
+        "agility": 85
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Air"
         }
       },
       "ability": {
@@ -3588,7 +3649,7 @@
         "description": "You may convert up to 5 essence from one element to another.",
         "cost": {
           "amount": 1,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Lazu developed a unique technique to convert essence between elements by passing it through specially calibrated air vortices, earning respect from masters of all four elemental disciplines.",
@@ -3601,19 +3662,23 @@
       "cardNumber": 136,
       "id": "aeris",
       "name": "Aeris | The Air Slyph",
-      "type": "Air",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/aeris.webp",
       "webpPath": "/images/cards/new/aeris.webp",
-      "element": null,
+      "element": "Air",
+      "stats": {
+        "strength": 105,
+        "agility": 95
+      },
       "essence": {
         "cost": {
           "amount": 5,
-          "element": null
+          "element": "Air"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Air"
         }
       },
       "ability": {
@@ -3625,7 +3690,7 @@
         "description": "Send 1 Exhausted creature from the field to the owner's hand.",
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Air"
         }
       },
       "cardFact": "Aeris can temporarily separate her consciousness into multiple wind currents, allowing her to observe different locations simultaneously before reforming—this explains her tactical ability to switch the positions of creatures on the battlefield with perfect precision.",
@@ -3638,19 +3703,23 @@
       "cardNumber": 137,
       "id": "torrent",
       "name": "Torrent | The Water Titan",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/torrent.webp",
       "webpPath": "/images/cards/new/torrent.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 140,
+        "agility": 60
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Water"
         }
       },
       "ability": {
@@ -3662,7 +3731,7 @@
         "description": "Gain 25 Strength when attacking Shields until the end of the turn.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Torrent possesses the unique ability to grant Double Strike to water creatures, infusing them with the primal rhythm of the tides that allows for perfectly synchronized dual attacks.",
@@ -3675,19 +3744,23 @@
       "cardNumber": 138,
       "id": "azura",
       "name": "Azura | The Water Tempest",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/azura.webp",
       "webpPath": "/images/cards/new/azura.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 120,
+        "agility": 80
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Water"
         }
       },
       "ability": {
@@ -3699,7 +3772,7 @@
         "description": "You may normal summon 1 additional creature this turn.",
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Azura's connection to water essence allows her to temporarily enhance the natural summoning bonds that exist within Kinbrold, enabling additional creatures to be called forth during crucial moments of need.",
@@ -3712,19 +3785,23 @@
       "cardNumber": 139,
       "id": "undine",
       "name": "Undine | The Water Oracle",
-      "type": "Water",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/undine.webp",
       "webpPath": "/images/cards/new/undine.webp",
-      "element": null,
+      "element": "Water",
+      "stats": {
+        "strength": 130,
+        "agility": 70
+      },
       "essence": {
         "cost": {
           "amount": 5,
-          "element": null
+          "element": "Water"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Water"
         }
       },
       "ability": {
@@ -3736,7 +3813,7 @@
         "description": "Draw 1 card.",
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Water"
         }
       },
       "cardFact": "Undine's connection to water essence allows her to temporarily glimpse the potential futures of cards in a deck, explaining her unique ability to rearrange the top cards for maximum strategic advantage.",
@@ -3749,19 +3826,23 @@
       "cardNumber": 140,
       "id": "ignus",
       "name": "Ignus | The Fire Titan",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/ignus.webp",
       "webpPath": "/images/cards/new/ignus.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 145,
+        "agility": 55
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Fire"
         }
       },
       "ability": {
@@ -3773,7 +3854,7 @@
         "description": "Discard 1 card from your opponent's hand.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "When Ignus confronts an opponent, the ambient temperature rises so dramatically that nearby creatures instinctively give up their essence reserves, attempting to cool themselves in the face of its overwhelming heat.",
@@ -3786,19 +3867,23 @@
       "cardNumber": 141,
       "id": "sigmus",
       "name": "Sigmus | The Fire Tempest",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/sigmus.webp",
       "webpPath": "/images/cards/new/sigmus.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 125,
+        "agility": 75
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Fire"
         }
       },
       "ability": {
@@ -3810,7 +3895,7 @@
         "description": "Deal 25 damage to all creatures and shields on the field.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "Sigmus developed the Solar Flare technique after studying ancient volcanic glass formations, allowing for perfectly balanced damage distribution across both enemy and friendly forces when tactical situations demand such sacrifice.",
@@ -3823,19 +3908,23 @@
       "cardNumber": 142,
       "id": "viktor",
       "name": "Viktor | The Fire Chimera",
-      "type": "Fire",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/viktor.webp",
       "webpPath": "/images/cards/new/viktor.webp",
-      "element": null,
+      "element": "Fire",
+      "stats": {
+        "strength": 135,
+        "agility": 65
+      },
       "essence": {
         "cost": {
           "amount": 5,
-          "element": null
+          "element": "Fire"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Fire"
         }
       },
       "ability": {
@@ -3847,7 +3936,7 @@
         "description": "Immediately after using Flame Ascendance, return the destroyed creature to the field.",
         "cost": {
           "amount": 3,
-          "element": null
+          "element": "Fire"
         }
       },
       "cardFact": "Viktor's unique physiology allows him to temporarily absorb the essence of destroyed creatures, incorporating their strongest traits into his own form before they dissipate back into elemental energy.",
@@ -3860,19 +3949,23 @@
       "cardNumber": 143,
       "id": "terra",
       "name": "Terra | The Earth Titan",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/terra.webp",
       "webpPath": "/images/cards/new/terra.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 150,
+        "agility": 50
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Earth"
         }
       },
       "ability": {
@@ -3884,7 +3977,7 @@
         "description": "Deplete 2 essence from your opponent's essence pool.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Terra does not sleep but instead periodically merges completely with the ground, becoming indistinguishable from natural stone formations while their consciousness communes with the earth's deepest layers.",
@@ -3897,19 +3990,23 @@
       "cardNumber": 144,
       "id": "oryssa",
       "name": "Oryssa | The Earth Tempest",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "R",
       "imagePath": "/images/cards/new/oryssa.webp",
       "webpPath": "/images/cards/new/oryssa.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 130,
+        "agility": 70
+      },
       "essence": {
         "cost": {
           "amount": 4,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 0,
-          "element": null
+          "element": "Earth"
         }
       },
       "ability": {
@@ -3921,7 +4018,7 @@
         "description": "Choose 1 creature on the field to gain 50 Strength until the end of the turn.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Oryssa developed her distinctive defensive techniques after studying the crystalline patterns formed when earth essence flows through different mineral compositions, allowing her shields to be both lighter and stronger than traditional stone barriers.",
@@ -3934,19 +4031,23 @@
       "cardNumber": 145,
       "id": "leo",
       "name": "Leo | The Earth Sovereign",
-      "type": "Earth",
+      "type": "Creature",
       "rarity": "U",
       "imagePath": "/images/cards/new/leo.webp",
       "webpPath": "/images/cards/new/leo.webp",
-      "element": null,
+      "element": "Earth",
+      "stats": {
+        "strength": 160,
+        "agility": 40
+      },
       "essence": {
         "cost": {
           "amount": 5,
-          "element": null
+          "element": "Earth"
         },
         "generation": {
           "amount": 1,
-          "element": null
+          "element": "Earth"
         }
       },
       "ability": {
@@ -3958,7 +4059,7 @@
         "description": "Exhaust or Refresh 1 creature.",
         "cost": {
           "amount": 2,
-          "element": null
+          "element": "Earth"
         }
       },
       "cardFact": "Leo can sense disturbances in earth essence across vast distances, making him Grivoss's most vigilant guardian against threats that would upset the balance of elemental power.",
@@ -3985,7 +4086,7 @@
         "description": "Deplete 3 Elemental Essence from your opponent’s essence pool(s).",
         "cost": {
           "amount": 0,
-          "element": null
+          "element": "Earth"
         }
       },
       "tier": 1,

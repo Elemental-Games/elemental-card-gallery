@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AlertCircle } from "lucide-react";
@@ -53,7 +53,12 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">
           <h3 className="text-sm font-semibold">{card.name}</h3>
-          <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
+          {/* Only show element for non-Rune, non-Counter, non-Shield cards */}
+          {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield') ? (
+            <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
+          ) : (
+            <p className="text-xs">{card.type} | {card.rarity}</p>
+          )}
           {card.type === 'Creature' && (
             <p className="text-xs">
               STR: {card.stats?.strength || 'N/A'} | AGI: {card.stats?.agility || 'N/A'}

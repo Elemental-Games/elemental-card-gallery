@@ -154,7 +154,7 @@ const ElekinPage = () => {
         {/* Cards of the Week Section */}
         <section className="container mx-auto px-4 py-10">
           <div className="max-w-6xl mx-auto">
-            <motion.div 
+          <motion.div 
               className="border-[4px] sm:border-[5px] border-yellow-500 rounded-xl bg-transparent"
               initial="hidden"
               whileInView="visible"
@@ -172,12 +172,12 @@ const ElekinPage = () => {
                   className="mb-4 text-center text-purple-200 max-w-2xl mx-auto"
                   variants={itemVariants}
                 >
-                  Every week, we analyze four new cards in detail, exploring their strategies, 
-                  combinations, and impact on the game.
+              Every week, we analyze four new cards in detail, exploring their strategies, 
+              combinations, and impact on the game.
                 </motion.p>
-                
+            
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
-                  {weeklyCards.map((card) => (
+              {weeklyCards.map((card) => (
                     <motion.div 
                       key={card.id} 
                       variants={itemVariants} 
@@ -185,14 +185,14 @@ const ElekinPage = () => {
                       style={{ maxWidth: "240px" }}
                     >
                       <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
-                    </motion.div>
-                  ))}
+                </motion.div>
+              ))}
                 </div>
-              </div>
-            </motion.div>
+            </div>
+          </motion.div>
           </div>
         </section>
-        
+
         {/* Navigation Bubbles */}
         <section className="container mx-auto px-4 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">

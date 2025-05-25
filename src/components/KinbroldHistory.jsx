@@ -1,4 +1,3 @@
-import React from 'react';
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { dragonInfo } from '../data/dragonInfo';
 
@@ -20,11 +19,20 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
 
               <div>
                 <h4 className="text-xl font-heading mb-3">The Legendary Dragons</h4>
-                <div className="space-y-2">
+                <div className="space-y-2 relative">
+                  {/* Blur Overlay */}
+                  <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-lg flex items-center justify-center z-10">
+                    <div className="text-center text-white">
+                      <div className="text-2xl font-bold mb-2">🐉</div>
+                      <div className="text-lg font-semibold">Coming in Week 6</div>
+                      <div className="text-sm opacity-80">Dragon Gallery</div>
+                    </div>
+                  </div>
+                  
                   {Object.values(dragonInfo).map((dragon) => (
                     <div 
                       key={dragon.name} 
-                      className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors"
+                      className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors filter blur-sm"
                       onClick={() => setSelectedDragon(dragon)}
                     >
                       <h5 className="font-heading text-lg text-purple-900 dark:text-purple-100">{dragon.name}</h5>
@@ -62,7 +70,16 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
                   <p className="text-muted-foreground leading-relaxed">
                     Four great Elementalists arose, each mastering their respective elements:
                   </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative">
+                    {/* Blur Overlay */}
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-sm rounded-lg flex items-center justify-center z-10">
+                      <div className="text-center text-white">
+                        <div className="text-2xl font-bold mb-2">⚡</div>
+                        <div className="text-lg font-semibold">Coming in Week 6</div>
+                        <div className="text-sm opacity-80">Elementalist Gallery</div>
+                      </div>
+                    </div>
+                    
                     {[
                       { name: 'Galea', description: 'of the Air, founding Zalos in the windswept heights' },
                       { name: 'Mek', description: 'of the Water, establishing Tsunareth by the eternal tides' },
@@ -75,7 +92,7 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
                           name: elementalist.name, 
                           image: `/tour/${elementalist.name.toLowerCase()}1.png` 
                         })}
-                        className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors"
+                        className="p-4 rounded-lg border-2 border-accent bg-purple-100 dark:bg-purple-900/30 cursor-pointer hover:bg-purple-200 dark:hover:bg-purple-800/30 transition-colors filter blur-sm"
                       >
                         <h5 className="font-heading text-purple-900 dark:text-purple-100">{elementalist.name}</h5>
                         <p className="text-sm text-purple-800 dark:text-purple-200">{elementalist.description}</p>

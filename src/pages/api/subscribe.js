@@ -65,7 +65,7 @@ export default async function handler(req, res) {
             <p>Follow us for the latest updates:</p>
             <p>
               <a href="https://discord.gg/qXNWh4dMve" style="color: #7c3aed; text-decoration: none; margin: 0 10px;">Discord</a> |
-              <a href="https://x.com/elemental_tcg" style="color: #7c3aed; text-decoration: none; margin: 0 10px;">X (Twitter)</a>
+              <a href="https://www.tiktok.com/@elekin_tcg" style="color: #7c3aed; text-decoration: none; margin: 0 10px;">TikTok</a>
             </p>
           </div>
 

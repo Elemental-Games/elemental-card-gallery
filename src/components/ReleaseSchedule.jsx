@@ -154,7 +154,7 @@ const ReleaseSchedule = () => {
             </a>
             {' '}and join our{' '}
             <a 
-              href="https://discord.gg/qXNWh4dMve" 
+              href="https://discord.gg/PVrgZBmcMq" 
               target="_blank" 
               rel="noopener noreferrer" 
               className="text-yellow-400 hover:text-yellow-300 transition-colors"

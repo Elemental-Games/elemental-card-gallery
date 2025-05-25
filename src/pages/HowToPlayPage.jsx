@@ -3,10 +3,12 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Download, Sword, Sparkles, Shield, Scroll, Wand, Zap, Lightbulb, Book, PocketKnife, BookText } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import RulebookDownloadModal from '@/components/RulebookDownloadModal';
 import React from 'react';
 
 const HowToPlayPage = () => {
   const [activeTab, setActiveTab] = useState('quickstart');
+  const [showDownloadModal, setShowDownloadModal] = useState(false);
 
   const quickLinks = [
     { title: 'Quick Start', tab: 'quickstart', icon: Lightbulb },
@@ -230,20 +232,27 @@ const HowToPlayPage = () => {
             animate={{ opacity: 1, y: 0 }}
             className="text-center mb-12"
           >
-            <h1 className="text-4xl font-bold text-white mb-4">How to Play Elekin</h1>
+            <h1 className="text-5xl font-bold text-yellow-400 mb-4">How to Play Elekin</h1>
             <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
               Master the elements and become a legendary card master in the world of Kinbrold
             </p>
             <div className="flex justify-center gap-6">
-          <a 
-            href="/data/TCG Rulebook.pdf"
-            download
+              <a 
+                href="/elekin/rulebook"
+                className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 text-white 
+                  font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
+              >
+                <Book className="w-6 h-6" />
+                View Rulebook
+              </a>
+              <button 
+                onClick={() => setShowDownloadModal(true)}
                 className="inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
                   font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
               >
                 <Download className="w-6 h-6" />
-                Download Rulebook
-              </a>
+                Download via Email
+              </button>
             </div>
           </motion.div>
 
@@ -1309,6 +1318,11 @@ const HowToPlayPage = () => {
           </div>
         </div>
       </div>
+
+      <RulebookDownloadModal 
+        isOpen={showDownloadModal} 
+        onClose={() => setShowDownloadModal(false)} 
+      />
     </>
   );
 };

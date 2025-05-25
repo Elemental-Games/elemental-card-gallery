@@ -1,68 +1,35 @@
-import express from 'express';
-import cors from 'cors';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 
+// Load environment variables
 dotenv.config();
 
-const app = express();
 const RESEND_API_KEY = process.env.RESEND_API_KEY;
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
-const isProd = process.env.NODE_ENV === 'production';
 
-// CORS configuration based on environment
-const corsOptions = {
-  origin: isProd 
-    ? ['https://elementalgames.gg', 'https://www.elementalgames.gg']
-    : ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000', 'http://localhost:8082'],
-  methods: ['GET', 'POST', 'OPTIONS'],
-  credentials: true,
-};
-
-app.use(cors(corsOptions));
-app.use(express.json());
-
-// Test endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok' });
-});
-
-app.post('/api/subscribe', async (req, res) => {
-  console.log('Subscribe endpoint hit with:', req.body);
-  
-  if (!req.body.email) {
-    return res.status(400).json({ message: 'Email is required' });
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method not allowed' });
   }
 
-  try {
-    const resend = new Resend(RESEND_API_KEY);
-    const { email } = req.body;
-
-    const data = await resend.emails.send({
-      from: 'Elemental Masters <contact@elementalgames.gg>',
-      to: email,
-      subject: 'Welcome to Elemental Masters!',
-      html: `<p>Welcome to Elemental Masters!</p>`
+  if (!RESEND_API_KEY) {
+    console.error('RESEND_API_KEY is not set in environment variables');
+    return res.status(500).json({ 
+      message: 'Email service configuration error',
+      debug: { resendApiKeyExists: false }
     });
-
-    console.log('Email sent:', data);
-    res.json({ message: 'Successfully subscribed!' });
-  } catch (error) {
-    console.error('Subscription error:', error);
-    res.status(500).json({ message: 'Error subscribing', error: error.message });
   }
-});
 
-app.post('/api/download-rulebook', async (req, res) => {
-  console.log('Download rulebook endpoint hit with:', req.body);
-  
-  if (!req.body.email) {
-    return res.status(400).json({ message: 'Email is required' });
-  }
+  const resend = new Resend(RESEND_API_KEY);
 
   try {
-    const resend = new Resend(RESEND_API_KEY);
     const { email } = req.body;
+    
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+
+    console.log('Attempting to send rulebook to:', email);
 
     // Create unsubscribe token
     const unsubscribeToken = Buffer.from(email).toString('base64');
@@ -166,22 +133,17 @@ app.post('/api/download-rulebook', async (req, res) => {
     }
 
     console.log('Rulebook email sent successfully:', emailResponse);
-    res.json({ 
+    return res.status(200).json({ 
       message: 'Rulebook sent successfully! Check your email.',
       emailResponse
     });
 
   } catch (error) {
     console.error('Error sending rulebook:', error);
-    res.status(500).json({ 
+    
+    return res.status(500).json({ 
       message: 'Error sending rulebook', 
       error: error.message
     });
   }
-});
-
-const PORT = process.env.PORT || 3001;
-app.listen(PORT, () => {
-  console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
-  console.log(`CORS enabled for: ${corsOptions.origin.join(', ')}`);
-});
+} 

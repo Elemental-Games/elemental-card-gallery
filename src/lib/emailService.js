@@ -26,8 +26,8 @@ export const sendDonationEmail = async (donation) => {
           
           <p>Stay connected with us:</p>
           <ul>
-            <li>Follow us on X: <a href="https://x.com/elemental_tcg">@elemental_tcg</a></li>
-            <li>Join our Discord: <a href="https://discord.gg/qXNWh4dMve">Elemental Masters Discord</a></li>
+            <li>Follow us on TikTok: <a href="https://www.tiktok.com/@elekin_tcg">@elekin_tcg</a></li>
+            <li>Join our Discord: <a href="https://discord.gg/PVrgZBmcMq">Elemental Masters Discord</a></li>
           </ul>
           
           <p>Best regards,<br/>The Elemental Masters Team</p>

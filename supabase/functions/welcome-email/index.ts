@@ -1,5 +1,5 @@
 // supabase/functions/welcome-email/index.ts
-import { serve } from "https://deno.fresh.dev/std@v1.0/http/server.ts"
+import { serve } from "https://deno.land/std@0.168.0/http/server.ts"
 import { Resend } from 'https://esm.sh/resend@2.0.0'
 
 const resend = new Resend(Deno.env.get('RESEND_API_KEY'))
@@ -38,8 +38,8 @@ serve(async (req) => {
             
             <p>Connect with us:</p>
             <div style="text-align: center; margin: 20px 0;">
-              <a href="https://discord.gg/qXNWh4dMve" style="margin: 0 10px;">Discord</a>
-              <a href="https://x.com/elemental_tcg" style="margin: 0 10px;">X (Twitter)</a>
+              <a href="https://discord.gg/PVrgZBmcMq" style="margin: 0 10px;">Discord</a>
+              <a href="https://www.tiktok.com/@elekin_tcg" style="margin: 0 10px;">TikTok</a>
             </div>
             
             <p style="font-size: 12px; color: #666; text-align: center; margin-top: 40px;">

@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/navigation-menu";
 import { Menu } from "lucide-react";
 import { navItems } from '../nav-items';
-import ProfileMenu from './auth/ProfileMenu';
 
 const Header = () => {
   return (
@@ -51,19 +50,12 @@ const Header = () => {
                   </li>
                 ))}
               </ul>
-              <div className="ml-4 border-l border-purple-500/30 pl-4">
-                <ProfileMenu />
-              </div>
             </div>
           </div>
 
           {/* Mobile Navigation */}
           <div className="md:hidden flex items-center justify-between">
-            <div>
-              <ProfileMenu />
-            </div>
-            
-            <Link to="/" className="absolute left-1/2 transform -translate-x-1/2">
+            <Link to="/" className="flex items-center">
               <img 
                 src="/Games_Logo.png" 
                 alt="Elemental Games Logo" 

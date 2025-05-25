@@ -13,9 +13,9 @@ const CardDetailPage = () => {
 
   // Determine the previous page and back link
   const getBackInfo = () => {
-    // Default to gallery
-    let backText = "Back to Gallery";
-    let backLink = "/cards/gallery";
+    // Default to campaign
+    let backText = "Back to Campaign";
+    let backLink = "/cards/campaign";
 
     // Check the referrer path
     if (location.state?.from) {
@@ -71,10 +71,10 @@ const CardDetailPage = () => {
       <div className="flex flex-col items-center justify-center min-h-screen">
         <p className="text-red-500 mb-4">{error}</p>
         <Link 
-          to="/cards/gallery"
+          to="/cards/campaign"
           className="px-4 py-2 bg-purple-600/50 text-white rounded-lg hover:bg-purple-500/50"
         >
-          Back to Gallery
+          Back to Campaign
         </Link>
       </div>
     );
@@ -83,10 +83,10 @@ const CardDetailPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Link 
-        to="/cards/gallery"
+        to="/cards/campaign"
         className="inline-block mb-8 px-4 py-2 bg-purple-600/50 text-white rounded-lg hover:bg-purple-500/50"
       >
-        ← Gallery Page
+        ← Campaign Page
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">

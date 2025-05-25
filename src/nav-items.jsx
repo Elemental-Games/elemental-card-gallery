@@ -24,7 +24,7 @@ export const navItems = [
     page: <LandingPage />,
   },
   {
-    title: "TCG",
+    title: "Elekin",
     to: "/elekin",
     icon: <GamepadIcon className="h-4 w-4" />,
     page: <ElekinPage />,

@@ -12,6 +12,7 @@ import { navItems } from "./nav-items";
 import { AuthProvider } from "./hooks/useAuth";
 import { useEffect } from "react";
 import CardGalleryPage from "./pages/CardGalleryPage";
+import CardGalleryComingSoon from "./pages/CardGalleryComingSoon";
 import CardDetailPage from "./pages/CardDetailPage";
 import DeckBuilderPage from "./pages/DeckBuilderPage";
 import ManualDeckBuilderPage from "./pages/ManualDeckBuilderPage";
@@ -110,7 +111,8 @@ const App = () => (
                         </ProtectedRoute>
                       } />
                       {renderRoutes(navItems)}
-                      <Route path="/cards/gallery" element={<CardGalleryPage />} />
+                      <Route path="/cards/gallery" element={<CardGalleryComingSoon />} />
+                      <Route path="/cards/campaign" element={<CardGalleryPage />} />
                       <Route path="/cards/deck-builder" element={
                         <ProtectedRoute>
                           <DeckBuilderPage />

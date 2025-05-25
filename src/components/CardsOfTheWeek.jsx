@@ -1,33 +1,11 @@
 import { motion } from 'framer-motion';
-import CardOfTheWeek from './cards/CardOfTheWeek';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Calendar } from 'lucide-react';
 import CardDetailSidebar from './CardDetailSidebar';
 
 const CardsOfTheWeek = () => {
   const [selectedCard, setSelectedCard] = useState(null);
-  
-  const weeklyCards = [
-    {
-      id: "swoop",
-      name: "Swoop",
-      image: "/images/cards/new/swoop.webp"
-    },
-    {
-      id: "aqua-dart",
-      name: "Aqua Dart",
-      image: "/images/cards/new/aqua dart.webp"
-    },
-    {
-      id: "ember-flicker",
-      name: "Ember Flicker",
-      image: "/images/cards/new/ember flicker.webp"
-    },
-    {
-      id: "nimblefoot",
-      name: "Nimblefoot",
-      image: "/images/cards/new/nimblefoot.webp"
-    }
-  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -57,10 +35,6 @@ const CardsOfTheWeek = () => {
     }
   };
 
-  const handleLearnMore = (card) => {
-    setSelectedCard(card);
-  };
-
   return (
     <>
     <motion.div 
@@ -78,12 +52,59 @@ const CardsOfTheWeek = () => {
           Cards of the Week
         </motion.h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
-          {weeklyCards.map((card) => (
-              <motion.div key={card.id} variants={itemVariants} className="scale-95 md:scale-100 w-full mx-auto" style={{ maxWidth: "240px" }}>
-                <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
-            </motion.div>
-          ))}
+          {[1,2,3,4].map((placeholder) => {
+            const dates = [9, 16, 23, 30]; // June 9th, 16th, 23rd, 30th
+            const revealDate = dates[placeholder - 1];
+            
+            return (
+              <motion.div 
+                key={placeholder} 
+                variants={itemVariants} 
+                className="scale-95 md:scale-100 w-full mx-auto group cursor-pointer" 
+                style={{ maxWidth: "240px" }}
+              >
+                <div className="relative overflow-hidden rounded-xl bg-purple-950/40 border border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300">
+                  <div className="w-full aspect-[5/7] relative">
+                    <img 
+                      src="/Card_Back.png" 
+                      alt="Card Back"
+                      className="w-full h-full object-contain"
+                    />
+                    {/* Coming Soon Overlay */}
+                    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="text-4xl mb-2">🔒</div>
+                        <div className="text-yellow-400 font-bold text-lg">Coming Soon</div>
+                        <div className="text-purple-200 text-sm">June {revealDate}</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-white mb-2">Week {placeholder} Cards</h3>
+                    <div className="flex justify-between text-sm">
+                      <span className="text-purple-300">Reveals June {revealDate}</span>
+                      <span className="text-yellow-400">4 Cards</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
+
+        {/* See Full Campaign Button */}
+        <motion.div 
+          className="text-center mt-8"
+          variants={itemVariants}
+        >
+          <Link 
+            to="/cards/campaign"
+            className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-purple-400 hover:border-yellow-400 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
+          >
+            <Calendar className="w-5 h-5 mr-3" />
+            See Full Campaign Timeline
+          </Link>
+        </motion.div>
       </div>
     </motion.div>
 

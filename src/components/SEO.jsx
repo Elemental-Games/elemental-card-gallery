@@ -24,12 +24,7 @@ const SEO = ({
       <meta property="og:description" content={description} />
       <meta property="og:image" content={fullImage} />
       
-      {/* Twitter */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={fullUrl} />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={fullImage} />
+      {/* Social Media: TikTok @elekin_tcg - doesn't use standard meta tags */}
       
       <link rel="canonical" href={fullUrl} />
     </Helmet>

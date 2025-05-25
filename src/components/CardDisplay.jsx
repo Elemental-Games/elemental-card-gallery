@@ -55,7 +55,7 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
           <h3 className="text-sm font-semibold">{card.name}</h3>
           {/* Only show element for non-Rune, non-Counter, non-Shield cards */}
           {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield') ? (
-            <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
+          <p className="text-xs">{card.element} | {card.type} | {card.rarity}</p>
           ) : (
             <p className="text-xs">{card.type} | {card.rarity}</p>
           )}

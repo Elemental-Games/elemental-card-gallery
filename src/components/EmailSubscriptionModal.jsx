@@ -6,7 +6,6 @@ import { Label } from '@/components/ui/label';
 import { X, Mail, CheckCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
-import { useNavigate } from 'react-router-dom';
 import { subscribeEmail } from '../utils/api';
 
 const EmailSubscriptionModal = ({ isOpen, onClose }) => {
@@ -14,7 +13,6 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState(null);
-  const navigate = useNavigate();
 
   const shootConfetti = () => {
     confetti({
@@ -73,6 +71,12 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
     onClose();
   };
 
+  // Add Discord navigation handler
+  const handleDiscordJoin = () => {
+    window.open('https://discord.gg/PVrgZBmcMq', '_blank', 'noopener,noreferrer');
+    closeModal();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -80,20 +84,20 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-50"
+          className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 z-[60] pb-20"
           onClick={closeModal}
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             exit={{ scale: 0.9, opacity: 0 }}
-            className="bg-purple-950 border border-purple-500/30 rounded-lg shadow-xl max-w-md w-full p-6"
+            className="bg-purple-950 border border-purple-500/30 rounded-lg shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center w-full pr-6">
                 <Mail className="mr-2 h-5 w-5 text-yellow-400" />
-                Join Our Mailing List
+                Become an Early Access Elemental
               </h2>
               <button 
                 onClick={closeModal}
@@ -106,32 +110,60 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             {success ? (
               <div className="text-center py-8">
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-green-400 mb-2">Thank You!</h3>
+                <h3 className="text-xl font-bold text-green-400 mb-2">Welcome to the Early Access Elementals!</h3>
                 <p className="text-purple-200 mb-6">
-                  You&apos;re now on our mailing list! You&apos;ll be among the first to know when Elekin launches.
+                  You&apos;re now part of the <span className="text-yellow-400 font-bold">exclusive first 500 Early Access Elementals</span>! 
+                  <br />Your exclusive elemental rewards access is confirmed.
                   <br /><span className="text-sm mt-2 block opacity-80">
-                    A welcome email should arrive in your inbox shortly.
+                    Check your inbox for Early Access Elemental welcome email with your OG status confirmation.
                   </span>
                 </p>
                 <div className="space-y-3">
                   <Button 
-                    onClick={() => navigate('/login', { state: { mode: 'signup' } })}
+                    onClick={handleDiscordJoin}
                     className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                   >
-                    Create an Account for More Early Benefits
+                    Join Our Discord Community →
                   </Button>
                   <Button 
                     onClick={closeModal}
                     className="w-full bg-purple-900/50 hover:bg-purple-700/50 text-white py-6 text-md"
                   >
-                    Maybe Later
+                    Continue Exploring
                   </Button>
                 </div>
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <p className="text-purple-200 mb-4">
-                  Stay updated with the latest news, card releases, and be the first to know when the game launches!
+                {/* Early Access Elemental Benefits */}
+                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-4">
+                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 Your Early Access Elemental Rewards Include:</h3>
+                  <div className="space-y-2 text-sm text-purple-200">
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Exclusive OG Discord badge & Early Access Elemental role</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Eligible for free pack & starter deck giveaways</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Early access to launch date announcement</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Priority ordering when game launches</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Exclusive Early Access Elemental merchandise access</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <p className="text-purple-200 mb-4 text-center">
+                  <span className="text-yellow-400 font-semibold">Limited spots:</span> Be one of the first 500 Early Access Elementals before our launch date reveal!
                 </p>
                 
                 <div className="space-y-2">
@@ -167,7 +199,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                     disabled={loading}
                   >
-                    {loading ? 'Subscribing...' : 'Subscribe'}
+                    {loading ? 'Securing Status...' : 'Become an Early Access Elemental'}
                   </Button>
                 </div>
               </form>

@@ -2,13 +2,12 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { LayoutGrid, Book, Palette, X } from 'lucide-react';
+import { Book, X, Zap, Users, Gamepad2, Calendar, PlayCircle, Shield, Star } from 'lucide-react';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
 import { subscribeEmail } from '@/utils/api';
 import confetti from 'canvas-confetti';
 import { CheckCircle, Info as InfoIcon } from 'lucide-react';
-import CardOfTheWeek from '@/components/cards/CardOfTheWeek';
 import CardDetailSidebar from '@/components/CardDetailSidebar';
 
 const ElekinPage = () => {
@@ -20,81 +19,36 @@ const ElekinPage = () => {
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
 
-  // Cards of the Week data
-  const weeklyCards = [
-    {
-      id: "swoop",
-      name: "Swoop",
-      image: "/images/cards/new/swoop.webp",
-      element: "Air",
-      type: "Creature",
-      rarity: "Common",
-      stats: "70/55",
-      description: "A swift bird of prey that dives down on unsuspecting enemies. Ideal for early game pressure.",
-      ability: "Aerial Assault: When this creature attacks, it does +20 damage if your opponent has no flying creatures."
+  const elements = [
+    { 
+      name: 'Air', 
+      icon: '/icons/Air.png',
+      description: 'Swift and evasive',
+      glowColor: 'shadow-[0_0_20px_rgba(148,163,184,0.8)]', // slate-400 glow
+      borderColor: 'border-slate-400'
     },
-    {
-      id: "aqua-dart",
-      name: "Aqua Dart",
-      image: "/images/cards/new/aqua dart.webp",
-      element: "Water",
-      type: "Creature",
-      rarity: "Common",
-      stats: "65/75",
-      description: "A sleek aquatic creature with impressive speed and agility, perfect for evading stronger opponents.",
-      ability: "Swift Current: This creature can attack immediately after being played (no summoning sickness)."
+    { 
+      name: 'Water', 
+      icon: '/icons/Water.png',
+      description: 'Fluid and adaptive',
+      glowColor: 'shadow-[0_0_20px_rgba(37,99,235,0.8)]', // blue-600 glow
+      borderColor: 'border-blue-500'
     },
-    {
-      id: "ember-flicker",
-      name: "Ember Flicker",
-      image: "/images/cards/new/ember flicker.webp",
-      element: "Fire",
-      type: "Creature",
-      rarity: "Common",
-      stats: "80/60",
-      description: "A dancing flame entity that grows stronger as the battle progresses. Great for longer games.",
-      ability: "Growing Flames: At the start of your turn, add +5/+5 to this creature."
+    { 
+      name: 'Fire', 
+      icon: '/icons/Fire.png',
+      description: 'Aggressive and destructive',
+      glowColor: 'shadow-[0_0_20px_rgba(239,68,68,0.8)]', // red-500 glow
+      borderColor: 'border-red-500'
     },
-    {
-      id: "nimblefoot",
-      name: "Nimblefoot",
-      image: "/images/cards/new/nimblefoot.webp",
-      element: "Earth",
-      type: "Creature",
-      rarity: "Common",
-      stats: "60/85",
-      description: "A small, agile earth creature that excels at avoiding attacks while providing steady essence generation.",
-      ability: "Stone Step: Once per turn, this creature can dodge an attack without turning horizontal."
+    { 
+      name: 'Earth', 
+      icon: '/icons/Earth.png',
+      description: 'Strong and defensive',
+      glowColor: 'shadow-[0_0_20px_rgba(22,163,74,0.8)]', // green-600 glow
+      borderColor: 'border-green-500'
     }
   ];
-
-  const itemVariants = {
-    hidden: { 
-      opacity: 0,
-      x: -50,
-      rotateY: 0
-    },
-    visible: { 
-      opacity: 1,
-      x: 0,
-      rotateY: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 12
-      }
-    }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
-  };
 
   const shootConfetti = () => {
     confetti({
@@ -139,157 +93,283 @@ const ElekinPage = () => {
     }
   };
 
-  const handleLearnMore = (card) => {
-    setSelectedCard(card);
-  };
-
   return (
     <>
       <Helmet>
-        <title>Elekin: Masters of Kinbrold - Browser TCG Game</title>
-        <meta name="description" content="Play Elekin: Masters of Kinbrold in your browser - A strategic trading card game set in the mystical world of Kinbrold." />
+        <title>Elekin: Masters of Kinbrold - Strategic TCG with Elemental Mastery</title>
+        <meta name="description" content="Master the elements in Elekin: Masters of Kinbrold. Strategic TCG featuring Air, Water, Fire, and Earth elements with revolutionary combat mechanics." />
       </Helmet>
       
-      <div className="min-h-screen bg-[#1A103C] relative">
-        {/* Cards of the Week Section */}
-        <section className="container mx-auto px-4 py-10">
-          <div className="max-w-6xl mx-auto">
-          <motion.div 
-              className="border-[4px] sm:border-[5px] border-yellow-500 rounded-xl bg-transparent"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-100px" }}
-              variants={containerVariants}
+      <div className="min-h-screen bg-[#1A103C] relative overflow-hidden">
+        {/* Hero Section - TCG Introduction */}
+        <section className="container mx-auto px-4 py-16">
+          <div className="max-w-6xl mx-auto text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="container mx-auto px-3 sm:px-4 py-6 sm:py-8">
-                <motion.h2 
-                  className="text-3xl sm:text-4xl font-bold mb-6 text-center text-yellow-500"
-                  variants={itemVariants}
+              <h1 className="text-5xl lg:text-7xl font-bold mb-6">
+                <span 
+                  className="text-yellow-400"
+                  style={{
+                    textShadow: '0 0 5px #eab308, 0 0 10px #eab308'
+                  }}
                 >
-                  Weekly Card Deep Dives
-                </motion.h2>
-                <motion.p 
-                  className="mb-4 text-center text-purple-200 max-w-2xl mx-auto"
-                  variants={itemVariants}
+                  Elekin:
+                </span>{' '}
+                <motion.span 
+                  className="bg-gradient-to-r from-gray-400 via-blue-600 via-red-400 via-orange-500 to-green-600 bg-clip-text text-transparent bg-[length:200%_100%]"
+                  style={{
+                    textShadow: '0 0 5px #a855f7, 0 0 10px #a855f7'
+                  }}
+                  animate={{
+                    backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut"
+                  }}
                 >
-              Every week, we analyze four new cards in detail, exploring their strategies, 
-              combinations, and impact on the game.
-                </motion.p>
-            
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
-              {weeklyCards.map((card) => (
-                    <motion.div 
-                      key={card.id} 
-                      variants={itemVariants} 
-                      className="scale-95 md:scale-100 w-full mx-auto"
-                      style={{ maxWidth: "240px" }}
-                    >
-                      <CardOfTheWeek card={card} onLearnMore={handleLearnMore} />
+                  Masters of Kinbrold
+                </motion.span>
+              </h1>
+              
+              <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
+                A strategic Trading Card Game where you harness the power of <span className="text-yellow-400 font-semibold">four elements</span> to dominate the battlefield
+              </p>
+            </motion.div>
+
+            {/* Interactive Element Showcase */}
+            <motion.div 
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.3 }}
+            >
+              {elements.map((element) => (
+                <motion.div
+                  key={element.name}
+                  className={`relative p-8 rounded-full aspect-square bg-transparent border-4 ${element.borderColor} cursor-pointer group ${element.glowColor} hover:scale-105 flex flex-col items-center justify-center`}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                >
+                  <div className="w-48 h-48 -mt-5 -mb-10 flex items-center justify-center">
+                    <img 
+                      src={element.icon} 
+                      alt={`${element.name} Element`}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2 text-center">{element.name}</h3>
+                  <p className="text-white/90 text-sm text-center">{element.description}</p>
+                  
+                  {/* Hover effect overlay */}
+                  <motion.div
+                    className="absolute inset-0 bg-white/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    initial={false}
+                  />
                 </motion.div>
               ))}
-                </div>
-            </div>
-          </motion.div>
+            </motion.div>
+
+            {/* Core Features Highlight */}
+            <motion.div
+              className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.6 }}
+            >
+              <div className="bg-transparent p-6 rounded-xl border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:border-purple-300 transition-all duration-300">
+                <Zap className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Dynamic Combat</h3>
+                <p className="text-purple-200">Revolutionary Strength/Agility system that rewards strategic thinking and tactical actions</p>
+              </div>
+              
+              <div className="bg-transparent p-6 rounded-xl border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:border-purple-300 transition-all duration-300">
+                <Shield className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Comeback Mechanics</h3>
+                <p className="text-purple-200">Our Shields provide the perfect foundation for mounting a comeback, no matter the opposition</p>
+              </div>
+              
+              <div className="bg-transparent p-6 rounded-xl border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(168,85,247,0.6)] hover:border-purple-300 transition-all duration-300">
+                <Star className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+                <h3 className="text-xl font-bold text-white mb-3">Elemental Essence</h3>
+                <p className="text-purple-200">Generate essence from your creatures, store it, and use it to activate stronger abilities and summon more powerful creatures</p>
+              </div>
+            </motion.div>
           </div>
         </section>
 
-        {/* Navigation Bubbles */}
+        {/* Interactive Navigation Hub */}
         <section className="container mx-auto px-4 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <Link to="/elekin/how-to-play">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-                className="group bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 hover:bg-purple-800/30 transition-all cursor-pointer flex flex-col items-center text-center h-full"
-              >
-                <Book className="w-16 h-16 mb-4 text-yellow-500" />
-                <h3 className="text-2xl font-bold mb-4 text-white">Learn How to Play</h3>
-                <p className="text-purple-200 mb-6">
-                  Master the basics and advanced strategies with our comprehensive guides and tutorials.
-                </p>
-                <Button 
-                  className="bg-purple-700/50 hover:bg-purple-600/50 text-white group-hover:bg-yellow-500 group-hover:text-purple-900 transition-all mt-auto"
+          <div className="max-w-6xl mx-auto">
+            <motion.h2 
+              className="text-3xl lg:text-4xl font-bold text-center mb-12 text-yellow-400"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.9 }}
+            >
+              Explore Elekin
+            </motion.h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {/* Learn How to Play */}
+              <Link to="/elekin/how-to-play">
+                <motion.div
+                  className="group relative bg-transparent p-8 rounded-xl border-2 border-purple-400 hover:border-yellow-400 transition-all duration-300 h-full shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.0 }}
                 >
-                  Get Started
-                </Button>
-              </motion.div>
-            </Link>
+                  <Book className="w-16 h-16 text-yellow-400 mb-6 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-2xl font-bold text-white mb-4">Learn How to Play</h3>
+                  <p className="text-purple-200 mb-6">
+                    Master the rules, mechanics, and strategies. From basic gameplay to advanced tactics.
+                  </p>
+                  <div className="flex text-2xl items-center text-yellow-400 font-semibold group-hover:text-yellow-300">
+                    <PlayCircle className="w-8 h-8 mr-2" />
+                    Start Learning
+                  </div>
+                </motion.div>
+              </Link>
 
-            <Link to="/cards/gallery">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-                className="group bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 hover:bg-purple-800/30 transition-all cursor-pointer flex flex-col items-center text-center h-full"
-              >
-                <LayoutGrid className="w-16 h-16 mb-4 text-yellow-500" />
-                <h3 className="text-2xl font-bold mb-4 text-white">View Card Collection</h3>
-                <p className="text-purple-200 mb-6">
-                  Explore the complete collection of Elekin cards, from basic creatures to legendary dragons.
-                </p>
-                <Button 
-                  className="bg-purple-700/50 hover:bg-purple-600/50 text-white group-hover:bg-yellow-500 group-hover:text-purple-900 transition-all mt-auto"
+              {/* Card Reveal Campaign */}
+              <Link to="/cards/campaign">
+                <motion.div
+                  className="group relative bg-transparent p-8 rounded-xl border-2 border-purple-400 hover:border-yellow-400 transition-all duration-300 h-full shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
+                  whileHover={{ scale: 1.02, y: -5 }}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.1 }}
                 >
-                  View Cards
-                </Button>
-              </motion.div>
-            </Link>
+                  <Calendar className="w-16 h-16 text-yellow-400 mb-6 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-2xl font-bold text-white mb-4">Card Reveal Campaign</h3>
+                  <p className="text-purple-200 mb-6">
+                    Follow our 6-week journey as we unveil new cards every week leading to launch.
+                  </p>
+                  <div className="flex text-2xl items-center text-yellow-400 font-semibold group-hover:text-yellow-300">
+                    <Gamepad2 className="w-8 h-8 mr-2" />
+                    View Campaign
+                  </div>
+                </motion.div>
+              </Link>
 
-            <Link to="/cards/deck-builder">
+              {/* Join Community */}
               <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                className="group relative bg-transparent p-8 rounded-xl border-2 border-purple-400 hover:border-yellow-400 transition-all duration-300 h-full shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
+                whileHover={{ scale: 1.02, y: -5 }}
+                initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.6 }}
-                className="group bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 hover:bg-purple-800/30 transition-all cursor-pointer flex flex-col items-center text-center h-full"
+                transition={{ delay: 1.2 }}
               >
-                <Palette className="w-16 h-16 mb-4 text-yellow-500" />
-                <h3 className="text-2xl font-bold mb-4 text-white">Deck Builder</h3>
+                <Users className="w-16 h-16 text-yellow-400 mb-6 group-hover:scale-110 transition-transform" />
+                <h3 className="text-2xl font-bold text-white mb-4">Join Early Access</h3>
                 <p className="text-purple-200 mb-6">
-                  Create and share your custom decks with our interactive deck builder tool.
+                  Become an Early Access Elemental and get first access to reveals, updates, and community perks.
                 </p>
-                <Button 
-                  className="bg-purple-700/50 hover:bg-purple-600/50 text-white group-hover:bg-yellow-500 group-hover:text-purple-900 transition-all mt-auto"
-                >
-                  Coming Soon
-                </Button>
+                
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <Input
+                    type="email"
+                    placeholder="Enter email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                    className="w-full border border-purple-400 bg-purple-950/30 text-white placeholder-purple-300 focus:border-yellow-400"
+                  />
+                  <Button 
+                    type="submit" 
+                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold transition-all duration-200" 
+                    disabled={isLoading}
+                  >
+                    {isLoading ? "Joining..." : "Join Now"}
+                  </Button>
+                </form>
               </motion.div>
-            </Link>
+            </div>
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="container mx-auto px-4 py-12 text-center">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 max-w-3xl mx-auto"
-          >
-            <h2 className="text-3xl font-bold mb-4 text-white">Stay Updated on Launch News</h2>
-            <p className="text-lg mb-6 text-purple-200">
-              Join our mailing list to receive updates and be the first to know when the game launches!
-            </p>
-            <div className="max-w-md mx-auto">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full border-2 border-yellow-500"
-                />
-                <Button 
-                  type="submit" 
-                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-3" 
-                  disabled={isLoading}
+        {/* Featured Cards Section - Secondary */}
+        <section className="container mx-auto px-4 py-16">
+          <div className="max-w-6xl mx-auto">
+            <motion.div 
+              className="text-center mb-12"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.3 }}
+            >
+              <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-yellow-400">Featured Card Previews</h2>
+              <p className="text-xl text-purple-200 max-w-3xl mx-auto">
+                Card reveals begin June 9th! Follow our campaign to see strategic cards as they&apos;re unveiled weekly.
+              </p>
+            </motion.div>
+
+            <motion.div 
+              className="grid grid-cols-2 lg:grid-cols-4 gap-6"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 1.4 }}
+            >
+              {[1,2,3,4].map((placeholder) => {
+                const dates = [9, 16, 23, 30]; // June 9th, 16th, 23rd, 30th
+                const revealDate = dates[placeholder - 1];
+                
+                return (
+                <motion.div 
+                  key={placeholder}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 1.5 + placeholder * 0.1 }}
+                  className="group cursor-pointer"
                 >
-                  {isLoading ? "Subscribing..." : "Subscribe"}
-                </Button>
-              </form>
-            </div>
-          </motion.div>
+                  <div className="relative overflow-hidden rounded-xl bg-purple-950/40 border border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300">
+                    <div className="w-full aspect-[5/7] relative">
+                      <img 
+                        src="/Card_Back.png" 
+                        alt="Card Back"
+                        className="w-full h-full object-contain"
+                      />
+                      {/* Coming Soon Overlay */}
+                      <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                        <div className="text-center">
+                          <div className="text-4xl mb-2">🔒</div>
+                          <div className="text-yellow-400 font-bold text-lg">Coming Soon</div>
+                          <div className="text-purple-200 text-sm">June {revealDate}</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="text-lg font-bold text-white mb-2">Week {placeholder} Cards</h3>
+                      <div className="flex justify-between text-sm">
+                        <span className="text-purple-300">Reveals June {revealDate}</span>
+                        <span className="text-yellow-400">4 Cards</span>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+                );
+              })}
+            </motion.div>
+
+            <motion.div 
+              className="text-center mt-12"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 1.8 }}
+            >
+              <Link 
+                to="/cards/campaign"
+                className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-purple-400 hover:border-yellow-400 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
+              >
+                <Calendar className="w-5 h-5 mr-3" />
+                See Full Campaign Timeline
+              </Link>
+            </motion.div>
+          </div>
         </section>
 
         {/* Sidebar that peeks from the right */}

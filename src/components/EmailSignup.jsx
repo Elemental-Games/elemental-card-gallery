@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import { subscribeEmail } from '../utils/api';
 import confetti from 'canvas-confetti';
 
-const EmailSignup = ({ onClose, buttonClassName }) => {
+const EmailSignup = ({ onClose, buttonClassName, buttonText = "Subscribe" }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
@@ -62,7 +62,7 @@ const EmailSignup = ({ onClose, buttonClassName }) => {
         className={`w-full ${buttonClassName}`} 
         disabled={isLoading}
       >
-        {isLoading ? "Subscribing..." : "Subscribe"}
+        {isLoading ? "Processing..." : buttonText}
       </Button>
     </form>
   );

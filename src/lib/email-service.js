@@ -55,9 +55,9 @@ export const sendSubscriptionThanksEmail = async (email) => {
           <div style="background-color: rgba(252, 211, 77, 0.1); border-radius: 10px; padding: 20px; text-align: center; margin-top: 30px;">
             <p style="font-size: 16px; margin-bottom: 15px; color: #d1d5db;">Join our growing community:</p>
             <div style="display: flex; justify-content: center; gap: 20px; margin-bottom: 15px;">
-              <a href="https://discord.gg/qXNWh4dMve" style="color: #d1d5db; text-decoration: none; font-weight: bold;">Discord</a>
-              <a href="https://x.com/elemental_tcg" style="color: #d1d5db; text-decoration: none; font-weight: bold;">Twitter (X)</a>
-              <a href="https://instagram.com/elemental_tcg" style="color: #d1d5db; text-decoration: none; font-weight: bold;">Instagram</a>
+              <a href="https://discord.gg/PVrgZBmcMq" style="color: #d1d5db; text-decoration: none; font-weight: bold;">Discord</a>
+              <a href="https://www.tiktok.com/@elekin_tcg" style="color: #d1d5db; text-decoration: none; font-weight: bold;">TikTok</a>
+              <a href="https://www.instagram.com/elekin_tcg/" style="color: #d1d5db; text-decoration: none; font-weight: bold;">Instagram</a>
             </div>
           </div>
           
@@ -121,8 +121,8 @@ export const sendWelcomeEmail = async (email) => {
           </ul>
           <div style="margin: 20px 0;">
             <p>Connect with us:</p>
-            <a href="https://x.com/elemental_tcg" style="color: #6d28d9;">Twitter</a> | 
-            <a href="https://discord.gg/qXNWh4dMve" style="color: #6d28d9;">Discord</a>
+            <a href="https://www.tiktok.com/@elekin_tcg" style="color: #6d28d9;">TikTok</a> | 
+            <a href="https://discord.gg/PVrgZBmcMq" style="color: #6d28d9;">Discord</a>
           </div>
           <p style="font-size: 12px; color: #666; margin-top: 30px;">
             You received this email because you created an account at Elemental Games.

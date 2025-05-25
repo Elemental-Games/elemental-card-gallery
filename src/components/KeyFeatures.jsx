@@ -35,8 +35,10 @@ const KeyFeatures = () => {
 
   return (
     <>
-      {/* Features grid - full width layout */}
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 w-full">
+      {/* Features grid - custom layout to center bottom 2 items */}
+      <div className="w-full">
+        {/* Top row - 3 features */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
         <motion.div
           className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
             shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
@@ -90,7 +92,11 @@ const KeyFeatures = () => {
             </div>
           </div>
         </motion.div>
+        </div>
 
+        {/* Bottom row - 2 features centered */}
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-2xl">
         <motion.div
           className="bg-purple-950/70 p-6 rounded-lg cursor-pointer transition-all duration-300
             shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_30px_rgba(168,85,247,0.6)]
@@ -126,6 +132,8 @@ const KeyFeatures = () => {
             </div>
           </div>
         </motion.div>
+          </div>
+        </div>
       </div>
 
       <AnimatePresence>

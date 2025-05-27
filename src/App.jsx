@@ -40,6 +40,7 @@ import DeckBuilderWizardPage from "./pages/DeckBuilderWizardPage";
 import AboutUsPage from "./pages/AboutUsPage";
 import JoinNowPage from './pages/JoinNowPage';
 import LegalPage from './pages/LegalPage';
+import UnsubscribePage from './pages/UnsubscribePage';
 
 const queryClient = new QueryClient();
 
@@ -151,6 +152,7 @@ const App = () => (
                       <Route path="/about" element={<AboutUsPage />} />
                       <Route path="/join-now" element={<JoinNowPage />} />
                       <Route path="/legal" element={<LegalPage />} />
+                      <Route path="/unsubscribe" element={<UnsubscribePage />} />
                     </Routes>
                   </main>
                   <Footer />

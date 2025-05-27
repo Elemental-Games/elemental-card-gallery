@@ -60,9 +60,9 @@ const JoinNowPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Countdown to Launch Date Reveal (July 19, 2025)
+  // Countdown to Launch Date Reveal (July 26, 2025)
   useEffect(() => {
-    const targetDate = new Date('2025-07-19T12:00:00Z');
+    const targetDate = new Date('2025-07-26T12:00:00Z');
     
     const updateTimer = () => {
       const now = new Date();

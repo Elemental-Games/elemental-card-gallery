@@ -304,7 +304,7 @@ const ElekinPage = () => {
             >
               <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-yellow-400">Featured Card Previews</h2>
               <p className="text-xl text-purple-200 max-w-3xl mx-auto">
-                Card reveals begin June 9th! Follow our campaign to see strategic cards as they&apos;re unveiled weekly.
+                Card reveals begin June 16th! Follow our campaign to see strategic cards as they&apos;re unveiled weekly.
               </p>
             </motion.div>
 
@@ -315,8 +315,16 @@ const ElekinPage = () => {
               transition={{ delay: 1.4 }}
             >
               {[1,2,3,4].map((placeholder) => {
-                const dates = [9, 16, 23, 30]; // June 9th, 16th, 23rd, 30th
-                const revealDate = dates[placeholder - 1];
+                // Updated schedule: Week 1-3 in June, Week 4-6 in July
+                const weekDates = [
+                  { date: 16, month: 'June' },   // Week 1: June 16
+                  { date: 23, month: 'June' },   // Week 2: June 23  
+                  { date: 30, month: 'June' },   // Week 3: June 30
+                  { date: 7, month: 'July' },    // Week 4: July 7
+                  { date: 14, month: 'July' },   // Week 5: July 14
+                  { date: 21, month: 'July' }    // Week 6: July 21
+                ];
+                const revealInfo = weekDates[placeholder - 1];
                 
                 return (
                 <motion.div 
@@ -338,14 +346,14 @@ const ElekinPage = () => {
                         <div className="text-center">
                           <div className="text-4xl mb-2">🔒</div>
                           <div className="text-yellow-400 font-bold text-lg">Coming Soon</div>
-                          <div className="text-purple-200 text-sm">June {revealDate}</div>
+                          <div className="text-purple-200 text-sm">{revealInfo.month} {revealInfo.date}</div>
                         </div>
                       </div>
                     </div>
                     <div className="p-4">
                       <h3 className="text-lg font-bold text-white mb-2">Week {placeholder} Cards</h3>
                       <div className="flex justify-between text-sm">
-                        <span className="text-purple-300">Reveals June {revealDate}</span>
+                        <span className="text-purple-300">Reveals {revealInfo.month} {revealInfo.date}</span>
                         <span className="text-yellow-400">4 Cards</span>
                       </div>
                     </div>

@@ -68,9 +68,9 @@ const LandingPage = () => {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasTriggeredExitIntent]);
 
-  // Countdown to Launch Date Reveal (July 19, 2025)
+  // Countdown to Launch Date Reveal (July 26, 2025)
   useEffect(() => {
-    const targetDate = new Date('2025-07-19T12:00:00Z');
+    const targetDate = new Date('2025-07-26T12:00:00Z');
     
     const updateTimer = () => {
       const now = new Date();
@@ -345,12 +345,11 @@ const LandingPage = () => {
               </div>
             </div>
             <div className="flex items-center space-x-3">
-              <SubscribeButton 
-                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-6 py-2 rounded-lg"
-                showIcon={false}
-              >
-                Secure My Spot
-              </SubscribeButton>
+              <Link to="/join-now">
+                <Button className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-6 py-2 rounded-lg">
+                  Secure My Spot
+                </Button>
+              </Link>
               <Link to="/join-now">
                 <Button className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-2 rounded-lg">
                   Learn More

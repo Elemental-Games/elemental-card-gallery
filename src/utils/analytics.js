@@ -3,15 +3,17 @@ import { track } from '@vercel/analytics';
 
 // Campaign configuration
 export const CAMPAIGN_CONFIG = {
-  startDate: new Date('2025-06-09'), // June 9, 2025
-  weeklyUnlocks: [
-    { week: 1, kingdom: 'grivoss', unlockDate: new Date('2025-06-09') },
-    { week: 2, kingdom: 'zalos', unlockDate: new Date('2025-06-16') },
-    { week: 3, kingdom: 'evermere', unlockDate: new Date('2025-06-23') },
-    { week: 4, kingdom: 'scarto', unlockDate: new Date('2025-06-30') },
-    { week: 5, kingdom: 'tsunareth', unlockDate: new Date('2025-07-07') },
-    { week: 6, kingdom: 'sub_regions', unlockDate: new Date('2025-07-14') }
-  ]
+  // Campaign runs from June 16 - July 26, 2025 (6 weeks)
+  startDate: new Date('2025-06-16'), // June 16, 2025
+  weeks: [
+    { week: 1, kingdom: 'grivoss', unlockDate: new Date('2025-06-16') },
+    { week: 2, kingdom: 'zalos', unlockDate: new Date('2025-06-23') },
+    { week: 3, kingdom: 'evermere', unlockDate: new Date('2025-06-30') },
+    { week: 4, kingdom: 'scarto', unlockDate: new Date('2025-07-07') },
+    { week: 5, kingdom: 'tsunareth', unlockDate: new Date('2025-07-14') },
+    { week: 6, kingdom: 'dragons', unlockDate: new Date('2025-07-21') }
+  ],
+  endDate: new Date('2025-07-26') // Campaign end date (July 26, 2025)
 };
 
 // Development override for testing different unlock states
@@ -35,7 +37,7 @@ export const getCampaignStatus = () => {
   if (DEV_OVERRIDES.UNLOCK_ALL) {
     return {
       week: 6,
-      unlockedKingdoms: ['grivoss', 'zalos', 'evermere', 'scarto', 'tsunareth', 'sub_regions'],
+      unlockedKingdoms: ['grivoss', 'zalos', 'evermere', 'scarto', 'tsunareth', 'dragons'],
       nextUnlock: null,
       isActive: true,
       isComplete: true
@@ -44,14 +46,14 @@ export const getCampaignStatus = () => {
   
   if (DEV_OVERRIDES.FORCE_WEEK) {
     const forceWeek = DEV_OVERRIDES.FORCE_WEEK;
-    const unlockedKingdoms = CAMPAIGN_CONFIG.weeklyUnlocks
+    const unlockedKingdoms = CAMPAIGN_CONFIG.weeks
       .filter(unlock => unlock.week <= forceWeek)
       .map(unlock => unlock.kingdom);
     
     return {
       week: forceWeek,
       unlockedKingdoms,
-      nextUnlock: CAMPAIGN_CONFIG.weeklyUnlocks.find(unlock => unlock.week > forceWeek),
+      nextUnlock: CAMPAIGN_CONFIG.weeks.find(unlock => unlock.week > forceWeek),
       isActive: true,
       isComplete: forceWeek >= 6
     };
@@ -61,7 +63,7 @@ export const getCampaignStatus = () => {
     return { 
       week: 0, 
       unlockedKingdoms: [...DEV_OVERRIDES.FORCE_UNLOCKED], 
-      nextUnlock: CAMPAIGN_CONFIG.weeklyUnlocks[0],
+      nextUnlock: CAMPAIGN_CONFIG.weeks[0],
       isActive: false 
     };
   }
@@ -69,12 +71,12 @@ export const getCampaignStatus = () => {
   const weeksSinceStart = Math.floor((now - startDate) / (7 * 24 * 60 * 60 * 1000));
   const currentWeek = Math.min(weeksSinceStart + 1, 6);
   
-  const unlockedKingdoms = CAMPAIGN_CONFIG.weeklyUnlocks
+  const unlockedKingdoms = CAMPAIGN_CONFIG.weeks
     .filter(unlock => now >= unlock.unlockDate)
     .map(unlock => unlock.kingdom)
     .concat(DEV_OVERRIDES.FORCE_UNLOCKED);
   
-  const nextUnlock = CAMPAIGN_CONFIG.weeklyUnlocks
+  const nextUnlock = CAMPAIGN_CONFIG.weeks
     .find(unlock => now < unlock.unlockDate);
   
   return {

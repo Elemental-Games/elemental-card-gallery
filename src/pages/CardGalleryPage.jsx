@@ -7,11 +7,11 @@ import SubscribeButton from '@/components/SubscribeButton';
 const CardGalleryPage = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
 
-  // Countdown to first card reveal (June 9th, 2025) and subsequent weekly reveals
+  // Countdown to first card reveal (June 16th, 2025) and subsequent weekly reveals
   useEffect(() => {
     const getNextRevealDate = () => {
       const now = new Date();
-      const firstReveal = new Date('2025-06-09T12:00:00'); // June 9th, 2025 at noon
+      const firstReveal = new Date('2025-06-16T12:00:00'); // June 16th, 2025 at noon
       
       // If we haven't reached the first reveal date yet
       if (now < firstReveal) {
@@ -191,7 +191,7 @@ const CardGalleryPage = () => {
             </SubscribeButton>
             
             <p className="text-sm text-purple-400">
-              Full 175-card collection available at launch • No spam, just card reveals
+              Full 175-card collection available at launch
             </p>
           </div>
 
@@ -199,41 +199,76 @@ const CardGalleryPage = () => {
           <div className="mt-16 max-w-5xl mx-auto">
             <h2 className="text-2xl font-bold mb-8 text-center">6-Week Reveal Timeline</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 1</h3>
-                <p className="text-purple-200 text-sm">Common Elemental Creatures</p>
-                <div className="text-xs text-purple-400 mt-2">4 cards revealed</div>
+              <div className="bg-gradient-to-br from-green-800/30 to-green-900/50 border border-green-500/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <img src="/icons/Earth.png" alt="Earth" className="w-16 h-18" />
+                  <h3 className="text-green-400 font-bold text-lg">Week 1: Grivoss</h3>
+                </div>
+                <p className="text-green-200 text-sm mb-2">Earth Kingdom & Earth Creatures</p>
+                <p className="text-purple-300 text-xs mb-2">Grivoss Area • 4 Earth Creatures • 1 Elementalist</p>
+                <div className="text-xs text-green-400 mt-2 font-semibold">5 cards revealed</div>
               </div>
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 2</h3>
-                <p className="text-purple-200 text-sm">Runes & Counters</p>
-                <div className="text-xs text-purple-400 mt-2">4 cards revealed</div>
+              
+              <div className="bg-gradient-to-br from-gray-600/30 to-gray-800/50 border border-gray-400/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <img src="/icons/Air.png" alt="Air" className="w-16 h-18" />
+                  <h3 className="text-gray-300 font-bold text-lg">Week 2: Zalos</h3>
+                </div>
+                <p className="text-gray-200 text-sm mb-2">Air Kingdom & Air Creatures</p>
+                <p className="text-purple-300 text-xs mb-2">Zalos Area • 4 Air Creatures • 1 Elementalist</p>
+                <div className="text-xs text-gray-300 mt-2 font-semibold">5 cards revealed</div>
               </div>
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 3</h3>
-                <p className="text-purple-200 text-sm">Uncommon Elemental Creatures</p>
-                <div className="text-xs text-purple-400 mt-2">4 cards revealed</div>
+              
+              <div className="bg-gradient-to-br from-purple-700/30 to-purple-900/50 border border-purple-400/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <img src="/icons/Rune.png" alt="Rune" className="w-7 h-12 mr-2" />
+                  <h3 className="text-purple-400 font-bold text-lg">Week 3: Evermere</h3>
+                </div>
+                <p className="text-purple-200 text-sm mb-2 mt-8">Central Kingdom & Non-Creatures</p>
+                <p className="text-purple-300 text-xs mb-2">Evermere Area • 2 Runes • 2 Counters • 3 Shields</p>
+                <div className="text-xs text-purple-200 mt-2 font-semibold">7 cards revealed</div>
               </div>
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 4</h3>
-                <p className="text-purple-200 text-sm">Shields</p>
-                <div className="text-xs text-purple-400 mt-2">3 cards revealed</div>
+              
+              <div className="bg-gradient-to-br from-red-800/30 to-red-900/50 border border-red-500/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <img src="/icons/Fire.png" alt="Fire" className="w-16 h-18" />
+                  <h3 className="text-red-400 font-bold text-lg">Week 4: Scarto</h3>
+                </div>
+                <p className="text-red-200 text-sm mb-2">Fire Kingdom & Fire Creatures</p>
+                <p className="text-purple-300 text-xs mb-2">Scarto Area • 4 Fire Creatures • 1 Elementalist</p>
+                <div className="text-xs text-red-400 mt-2 font-semibold">5 cards revealed</div>
               </div>
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 5</h3>
-                <p className="text-purple-200 text-sm">Rare Elemental Creatures</p>
-                <div className="text-xs text-purple-400 mt-2">4 cards revealed</div>
+              
+              <div className="bg-gradient-to-br from-blue-800/30 to-blue-900/50 border border-blue-500/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <img src="/icons/Water.png" alt="Water" className="w-16 h-18" />
+                  <h3 className="text-blue-400 font-bold text-lg">Week 5: Tsunareth</h3>
+                </div>
+                <p className="text-blue-200 text-sm mb-2">Water Kingdom & Water Creatures</p>
+                <p className="text-purple-300 text-xs mb-2">Tsunareth Area • 4 Water Creatures • 1 Elementalist</p>
+                <div className="text-xs text-blue-400 mt-2 font-semibold">5 cards revealed</div>
               </div>
-              <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-6 text-center">
-                <h3 className="text-yellow-400 font-bold text-lg mb-2">Week 6</h3>
-                <p className="text-purple-200 text-sm">Elementalists</p>
-                <div className="text-xs text-purple-400 mt-2">4 cards revealed</div>
+              
+              <div className="bg-gradient-to-br from-yellow-700/30 to-orange-800/50 border border-yellow-500/30 rounded-lg p-6 text-center">
+                <div className="flex items-center justify-center mb-3">
+                  <span className="text-4xl mr-2 mt-3">🐉</span>
+                  <h3 className="text-yellow-400 font-bold text-lg mt-3">Week 6: Dragons</h3>
+                </div>
+                <p className="text-yellow-200 text-sm mb-2 mt-7">Kinbrold Sub-Regions & Dragons</p>
+                <p className="text-purple-300 text-xs mb-2">6 Sub-Regions • 6 Dragon Cards</p>
+                <div className="text-xs text-yellow-400 mt-2 font-semibold">6 cards revealed</div>
               </div>
             </div>
+            
             <div className="text-center mt-8">
               <p className="text-purple-300 text-sm">
-                <span className="text-yellow-400 font-semibold">23 total preview cards</span> • 
-                <span className="text-white"> Full 175-card collection at launch</span>
+                <span className="text-yellow-400 font-semibold">33 total preview cards</span> • 
+                <span className="text-white"> 20 Creatures • 6 Dragons • 4 Elementalists • 3 Shields • 2 Runes • 2 Counters</span>
+                <span className="text-yellow-400 font-semibold"><br></br>11 areas unlocked</span> • 
+                <span className="text-white"> 5 Kingdoms • 6 Sub-Regions</span>
+              </p>
+              <p className="text-purple-400 text-sm mt-2">
+                <br></br>Full 175-card collection available at Kickstarter launch
               </p>
             </div>
           </div>

@@ -89,11 +89,11 @@ const CardsPage = () => {
     setSelectedCard(card);
   };
 
-  // Countdown to first card reveal (June 9th, 2025)
+  // Countdown to first card reveal (June 16th, 2025)
   useEffect(() => {
     const getNextRevealDate = () => {
       const now = new Date();
-      const firstReveal = new Date('2025-06-09T12:00:00'); // June 9th, 2025 at noon
+      const firstReveal = new Date('2025-06-16T12:00:00'); // June 16th, 2025 at noon
       
       // If we haven't reached the first reveal date yet
       if (now < firstReveal) {

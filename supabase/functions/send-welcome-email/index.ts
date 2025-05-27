@@ -111,7 +111,7 @@ serve(async (req)=>{
           <div style="background-color: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; padding: 20px; margin-bottom: 25px; border-radius: 10px; text-align: center;">
             <h3 style="color: #ef4444; margin-top: 0; font-size: 20px;">⏰ LAUNCH DATE REVEAL COUNTDOWN</h3>
             <p style="color: #ffffff; font-size: 16px; margin: 10px 0;">The launch date will be revealed on:</p>
-            <p style="color: #fcd34d; font-size: 24px; font-weight: bold; margin: 15px 0;">July 19th, 2025</p>
+            <p style="color: #fcd34d; font-size: 24px; font-weight: bold; margin: 15px 0;">July 26th, 2025</p>
             <p style="color: #e2e8f0; font-size: 14px;">Until then, you'll get exclusive content, card reveals, and insider updates!</p>
           </div>
 
@@ -122,7 +122,7 @@ serve(async (req)=>{
               <p style="margin: 10px 0;"><strong>This Week:</strong> Join Discord & meet fellow Early Access Elementals</p>
               <p style="margin: 10px 0;"><strong>Weekly:</strong> Exclusive card reveals & strategic insights (Thursdays)</p>
               <p style="margin: 10px 0;"><strong>Build-up:</strong> Daily Discord updates, giveaways, and community events</p>
-              <p style="margin: 10px 0;"><strong>July 19th:</strong> Launch date reveal + celebration!</p>
+              <p style="margin: 10px 0;"><strong>July 26th:</strong> Launch date reveal + celebration!</p>
             </div>
           </div>
 
@@ -173,7 +173,6 @@ serve(async (req)=>{
 
           <!-- FOOTER -->
           <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 12px;">
-            <p>⚡ <strong>Early Access Elemental #${userPosition} of 500</strong> ⚡</p>
             <p>Elemental Games LLC © 2025. All rights reserved.</p>
             <p>You're receiving this email because you secured Early Access Elemental status for Elekin: Masters of Kinbrold.</p>
             <p><a href="https://elementalgames.gg/unsubscribe?email=${email}&token=${unsubscribeToken}" style="color: #9ca3af; text-decoration: underline;">Unsubscribe</a></p>

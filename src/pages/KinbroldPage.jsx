@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import ProgressiveKinbroldMap from '../components/ProgressiveKinbroldMap';
+import InteractiveKinbroldMap from '../components/InteractiveKinbroldMap';
 import KinbroldHistory from '../components/KinbroldHistory';
 import { Button } from '@/components/ui/button';
 import { trackPageView, getCampaignStatus } from '../utils/analytics';
@@ -95,21 +95,21 @@ const KinbroldPage = () => {
       </Helmet>
       
       <div className="flex flex-col w-full">
-        <section className="relative w-full h-screen overflow-hidden">
-          <ProgressiveKinbroldMap />
+        <section className="relative w-full py-8 px-4">
+          <InteractiveKinbroldMap />
         </section>
 
         <KinbroldHistory setSelectedDragon={setSelectedDragon} setSelectedElementalist={setSelectedElementalist} />
 
         <section className="w-full bg-background/95 backdrop-blur-sm p-8">
-          <div className="max-w-7xl mx-auto mb-6">
+          <div className="max-w-6xl mx-auto mb-6">
             <h2 className="text-2xl font-bold text-center mb-2">Elemental Kingdoms</h2>
             <p className="text-center text-gray-400">
               Campaign Week {campaignStatus.week} of 6 • {campaignStatus.unlockedKingdoms.length}/5 Kingdoms Unlocked
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
             {kingdoms.map((kingdom) => {
               return (
                 <Button

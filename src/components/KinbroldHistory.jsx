@@ -4,7 +4,7 @@ import { dragonInfo } from '../data/dragonInfo';
 const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
   return (
     <section className="w-full bg-background/95 backdrop-blur-sm p-8">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         <h2 className="text-4xl font-heading text-center mb-12">The History of Kinbrold</h2>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">

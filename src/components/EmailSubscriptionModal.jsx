@@ -97,7 +97,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center w-full pr-6">
                 <Mail className="mr-2 h-5 w-5 text-yellow-400" />
-                Become an Early Access Elemental
+                Get Free Early Access
               </h2>
               <button 
                 onClick={closeModal}
@@ -110,12 +110,12 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             {success ? (
               <div className="text-center py-8">
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
-                <h3 className="text-xl font-bold text-green-400 mb-2">Welcome to the Early Access Elementals!</h3>
+                <h3 className="text-xl font-bold text-green-400 mb-2">Welcome! You're Signed Up!</h3>
                 <p className="text-purple-200 mb-6">
-                  You&apos;re now part of the <span className="text-yellow-400 font-bold">exclusive first 500 Early Access Elementals</span>! 
-                  <br />Your exclusive elemental rewards access is confirmed.
+                  You'll now be notified of our <span className="text-yellow-400 font-bold">Kickstarter launch</span>! 
+                  <br />Your free early access is confirmed.
                   <br /><span className="text-sm mt-2 block opacity-80">
-                    Check your inbox for Early Access Elemental welcome email with your OG status confirmation.
+                    Check your inbox for your welcome email with Discord access details.
                   </span>
                 </p>
                 <div className="space-y-3">
@@ -137,33 +137,29 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Early Access Elemental Benefits */}
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-4">
-                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 Your Early Access Elemental Rewards Include:</h3>
+                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get (Free):</h3>
                   <div className="space-y-2 text-sm text-purple-200">
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Exclusive OG Discord badge & Early Access Elemental role</span>
+                      <span>Exclusive Discord role to claim</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Eligible for free pack & starter deck giveaways</span>
+                      <span>Kickstarter launch notifications</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Early access to launch date announcement</span>
+                      <span>Giveaway entries for free packs & merch</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Priority ordering when game launches</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Exclusive Early Access Elemental merchandise access</span>
+                      <span>Game development updates</span>
                     </div>
                   </div>
                 </div>
                 
                 <p className="text-purple-200 mb-4 text-center">
-                  <span className="text-yellow-400 font-semibold">Limited spots:</span> Be one of the first 500 Early Access Elementals before our launch date reveal!
+                  <span className="text-yellow-400 font-semibold">Free signup:</span> Be one of the first 500 sign-ups for our Kickstarter launch notifications!
                 </p>
                 
                 <div className="space-y-2">
@@ -199,7 +195,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                     disabled={loading}
                   >
-                    {loading ? 'Securing Status...' : 'Become an Early Access Elemental'}
+                    {loading ? 'Signing You Up...' : 'Get Free Early Access'}
                   </Button>
                 </div>
               </form>

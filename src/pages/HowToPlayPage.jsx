@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Download, Sword, Sparkles, Shield, Scroll, Wand, Zap, Lightbulb, Book, PocketKnife, BookText } from 'lucide-react';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText } from 'lucide-react';
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 import RulebookDownloadModal from '@/components/RulebookDownloadModal';
-import React from 'react';
 
 const HowToPlayPage = () => {
   const [activeTab, setActiveTab] = useState('quickstart');
@@ -351,25 +350,6 @@ const HowToPlayPage = () => {
               className="md:w-3/4"
             >
               <Tabs value={activeTab} className="w-full" onValueChange={setActiveTab}>
-                <TabsList className="w-full bg-purple-900/50 border-b-2 border-purple-500/40 flex-wrap h-auto p-0.5 mb-4">
-                  {quickLinks.map((link, index) => (
-                    <React.Fragment key={link.tab}>
-                      {index > 0 && <div className="hidden sm:block h-6 w-px bg-purple-500/30"></div>}
-                    <TabsTrigger
-                      value={link.tab}
-                        className="flex-1 min-w-[90px] sm:min-w-[100px] py-1.5 px-0.5 sm:px-1 text-xs sm:text-sm 
-                        data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900 
-                        data-[state=active]:shadow-md data-[state=active]:shadow-yellow-500/20
-                        data-[state=active]:font-semibold data-[state=active]:translate-y-[-1px]
-                        data-[state=active]:border-b-2 data-[state=active]:border-b-yellow-600
-                        border-r border-purple-500/20 sm:border-r-0 last:border-r-0
-                        rounded-t-md transition-all hover:bg-purple-800/50"
-                    >
-                      {link.title}
-                    </TabsTrigger>
-                    </React.Fragment>
-                  ))}
-                </TabsList>
 
                 <TabsContent value="quickstart" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
                   <h2 className="text-2xl font-bold mb-4 text-white">Quick Start Guide</h2>

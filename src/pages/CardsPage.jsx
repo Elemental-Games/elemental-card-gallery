@@ -89,11 +89,11 @@ const CardsPage = () => {
     setSelectedCard(card);
   };
 
-  // Countdown to first card reveal (June 16th, 2025)
+  // Countdown to first card reveal (June 23rd, 2025)
   useEffect(() => {
     const getNextRevealDate = () => {
       const now = new Date();
-      const firstReveal = new Date('2025-06-16T12:00:00'); // June 16th, 2025 at noon
+      const firstReveal = new Date('2025-06-23T12:00:00'); // June 23rd, 2025 at noon
       
       // If we haven't reached the first reveal date yet
       if (now < firstReveal) {
@@ -226,7 +226,8 @@ const CardsPage = () => {
               <Link 
                 to="/cards/campaign"
                 className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
-                  transition-colors border border-yellow-500/30 hover:border-yellow-500/50 w-full text-center"
+                  transition-all duration-300 border-2 border-purple-500/50 hover:border-purple-400/80 w-full text-center
+                  shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_35px_rgba(168,85,247,0.7)] hover:scale-105"
               >
                 View Campaign
               </Link>
@@ -241,7 +242,8 @@ const CardsPage = () => {
               <Link 
                 to="/cards/deck-builder"
                 className="inline-block px-6 py-3 bg-purple-700 hover:bg-purple-600 rounded-lg 
-                  transition-colors border border-yellow-500/30 hover:border-yellow-500/50"
+                  transition-all duration-300 border-2 border-purple-500/50 hover:border-purple-400/80
+                  shadow-[0_0_20px_rgba(168,85,247,0.5)] hover:shadow-[0_0_35px_rgba(168,85,247,0.7)] hover:scale-105"
               >
                 Build Deck (Coming Soon)
               </Link>
@@ -256,7 +258,8 @@ const CardsPage = () => {
               <p className="mb-4 text-purple-200 text-center">Get notified first when new cards are revealed each week. Exclusive OG benefits!</p>
               <SubscribeButton
                 className="w-full px-6 py-3 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold rounded-lg 
-                  transition-colors shadow-lg hover:scale-105 transition-all duration-200"
+                  transition-all duration-300 border-2 border-yellow-500/60 hover:border-yellow-400/80
+                  shadow-[0_0_25px_rgba(234,179,8,0.6)] hover:shadow-[0_0_40px_rgba(234,179,8,0.8)] hover:scale-105"
                 showIcon={false}
               >
                 Become an Early Access Elemental
@@ -327,7 +330,9 @@ const CardsPage = () => {
                   <div className="mt-8">
                     <Link 
                       to={`/cards/${selectedCard.id}`}
-                      className="inline-block w-full text-center px-6 py-4 bg-yellow-500 hover:bg-yellow-400 rounded-lg transition-colors text-purple-900 font-bold text-lg"
+                      className="inline-block w-full text-center px-6 py-4 bg-yellow-500 hover:bg-yellow-400 rounded-lg 
+                        transition-all duration-300 text-purple-900 font-bold text-lg border-2 border-yellow-500/60 hover:border-yellow-400/80
+                        shadow-[0_0_25px_rgba(234,179,8,0.6)] hover:shadow-[0_0_40px_rgba(234,179,8,0.8)] hover:scale-105"
                     >
                       View Full Details
                     </Link>

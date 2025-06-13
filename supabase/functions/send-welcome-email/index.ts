@@ -65,88 +65,76 @@ serve(async (req)=>{
     const { data, error } = await resend.emails.send({
       from: 'Elemental Games <noreply@elementalgames.gg>',
       to: email,
-      subject: '🔥 Your Early Access Elemental Status is CONFIRMED! Next step inside...',
+      subject: 'Welcome to Elekin TCG - Thanks for subscribing!',
       html: `
         <div style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #1A103C; color: #fff; padding: 30px; border-radius: 15px; border: 2px solid #fcd34d;">
           
-          <!-- CELEBRATION HEADER -->
+          <!-- WELCOME HEADER -->
           <div style="text-align: center; margin-bottom: 30px; background: linear-gradient(135deg, #9333ea, #fcd34d); padding: 20px; border-radius: 10px;">
-            <h1 style="margin: 0; color: #1A103C; font-size: 28px; font-weight: bold;">🎉 WELCOME TO THE KINBROLD! 🎉</h1>
-            <p style="margin: 10px 0 0 0; color: #1A103C; font-size: 18px; font-weight: bold;">You're now an Early Access Elemental!</p>
+            <h1 style="margin: 0; color: #1A103C; font-size: 28px; font-weight: bold;">🎉 Welcome to Elekin TCG 🎉</h1>
+            <p style="margin: 10px 0 0 0; color: #1A103C; font-size: 18px;">Thanks for subscribing to our updates</p>
           </div>
 
-          <!-- STATUS CONFIRMATION -->
-          <div style="background-color: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; padding: 20px; margin-bottom: 25px; border-radius: 10px; text-align: center;">
-            <h2 style="color: #22c55e; margin-top: 0; font-size: 24px;">✅ EXCLUSIVE STATUS CONFIRMED</h2>
-            <p style="color: #fcd34d; font-size: 18px; font-weight: bold; margin: 15px 0;">You're officially one of the first 500 Early Access Elementals!</p>
-            <p style="color: #e2e8f0; font-size: 16px; margin: 10px 0;">This exclusive status can never be earned again after launch.</p>
+          <!-- THANK YOU MESSAGE -->
+          <div style="background-color: rgba(147, 51, 234, 0.1); border-left: 4px solid #9333ea; padding: 20px; margin-bottom: 25px; border-radius: 4px;">
+            <h2 style="color: #fcd34d; margin-top: 0; font-size: 22px;">Thanks for joining us!</h2>
+            <p style="color: #ffffff; font-size: 16px; line-height: 1.6; margin: 15px 0;">
+              We're excited to have you as part of the Elekin community. You'll be among the first to know about card reveals, 
+              game updates, and our official launch date.
+            </p>
           </div>
 
-          <!-- URGENT DISCORD CTA -->
+          <!-- DISCORD INVITATION -->
           <div style="background-color: rgba(252, 211, 77, 0.1); border: 2px solid #fcd34d; padding: 25px; margin-bottom: 25px; border-radius: 10px; text-align: center;">
-            <h3 style="color: #fcd34d; margin-top: 0; font-size: 22px;">🚨 IMMEDIATE ACTION REQUIRED 🚨</h3>
-            <p style="color: #ffffff; font-size: 16px; margin-bottom: 20px;">Claim your exclusive <strong>Early Access, OG, Discord role</strong> while you can!</p>
+            <h3 style="color: #fcd34d; margin-top: 0; font-size: 20px;">Join Our Discord Community</h3>
+            <p style="color: #ffffff; font-size: 16px; margin-bottom: 20px;">
+              Connect with other players, get exclusive updates, and claim your early supporter role.
+            </p>
             
             <div style="margin: 25px 0;">
-              <a href="https://discord.gg/PVrgZBmcMq" style="display: inline-block; background: #6B21A8; color: white; text-decoration: none; padding: 18px 35px; border-radius: 10px; font-weight: bold; font-size: 18px; letter-spacing: 1px; box-shadow: 0 4px 15px rgba(107, 33, 168, 0.4);">
-                🎮 CLAIM YOUR DISCORD ROLE NOW →
+              <a href="https://discord.gg/PVrgZBmcMq" style="display: inline-block; background: #5865F2; color: white; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 16px;">
+                Click Here to Join Discord
               </a>
             </div>
             
-            <p style="color: #fcd34d; font-size: 14px; font-weight: bold;">⏰ Limited time: You have 24 hours to claim your role!!</p>
+            <p style="color: #fcd34d; font-size: 14px;">
+              ⏰ Claim your early supporter role within 24 hours of subscribing
+            </p>
           </div>
 
-          <!-- EXCLUSIVE BENEFITS PREVIEW -->
-          <div style="background-color: rgba(147, 51, 234, 0.1); border-left: 4px solid #9333ea; padding: 20px; margin-bottom: 25px; border-radius: 4px;">
-            <h3 style="color: #fcd34d; margin-top: 0;">🎁 Your Early Access Elemental Rewards Include:</h3>
-            <ul style="padding-left: 20px; color: #ffffff; margin: 15px 0;">
-              <li style="margin-bottom: 8px;"><strong style="color: #22c55e;">Exclusive OG Discord Badge</strong> - Permanent status that new members can't get</li>
-              <li style="margin-bottom: 8px;"><strong style="color: #22c55e;">Free Pack Giveaway Eligibility</strong> - Exclusive giveaways for Early Access Elementals only</li>
-              <li style="margin-bottom: 8px;"><strong style="color: #22c55e;">Launch Date Priority Access</strong> - First to know launch date & Early Bird pricing</li>
-              <li style="margin-bottom: 8px;"><strong style="color: #22c55e;">Exclusive Rewards on Launch Day</strong> - Stay tuned for more drops & exclusive bonuses</li>
-            </ul>
-          </div>
-
-          <!-- COUNTDOWN & TIMELINE -->
-          <div style="background-color: rgba(239, 68, 68, 0.1); border: 2px solid #ef4444; padding: 20px; margin-bottom: 25px; border-radius: 10px; text-align: center;">
-            <h3 style="color: #ef4444; margin-top: 0; font-size: 20px;">⏰ LAUNCH DATE REVEAL COUNTDOWN</h3>
-            <p style="color: #ffffff; font-size: 16px; margin: 10px 0;">The launch date will be revealed on:</p>
-            <p style="color: #fcd34d; font-size: 24px; font-weight: bold; margin: 15px 0;">July 26th, 2025</p>
-            <p style="color: #e2e8f0; font-size: 14px;">Until then, you'll get exclusive content, card reveals, and insider updates!</p>
-          </div>
-
-          <!-- WHAT'S NEXT -->
+          <!-- WHAT TO EXPECT -->
           <div style="background-color: rgba(252, 211, 77, 0.05); padding: 20px; margin-bottom: 25px; border-radius: 10px;">
-            <h3 style="color: #fcd34d; margin-top: 0;">📅 What to Expect Next:</h3>
-            <div style="color: #e2e8f0; font-size: 15px; line-height: 1.6;">
-              <p style="margin: 10px 0;"><strong>This Week:</strong> Join Discord & meet fellow Early Access Elementals</p>
-              <p style="margin: 10px 0;"><strong>Weekly:</strong> Exclusive card reveals & strategic insights (Thursdays)</p>
-              <p style="margin: 10px 0;"><strong>Build-up:</strong> Daily Discord updates, giveaways, and community events</p>
-              <p style="margin: 10px 0;"><strong>July 26th:</strong> Launch date reveal + celebration!</p>
+            <h3 style="color: #fcd34d; margin-top: 0; font-size: 24px; font-weight: bold; text-align: center; margin-bottom: 20px; text-transform: uppercase; letter-spacing: 1px;">📅 What to Expect:</h3>
+            <div style="color: #ffffff; font-size: 15px; line-height: 1.6;">
+              <p style="margin: 10px 0;"><strong style="color: #fcd34d;">Weekly card reveals:</strong> New cards unveiled every Monday starting June 23rd</p>
+              <p style="margin: 10px 0;"><strong style="color: #fcd34d;">Game updates:</strong> Development progress and behind-the-scenes content</p>
+              <p style="margin: 10px 0;"><strong style="color: #fcd34d;">Community events:</strong> Discord activities, giveaways, and discussions</p>
+              <p style="margin: 10px 0;"><strong style="color: #fcd34d;">Launch announcement:</strong> Official launch date revealed on August 4th, 2025</p>
             </div>
+          </div>
+
+          <!-- LAUNCH DATE INFO -->
+          <div style="background-color: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; padding: 20px; margin-bottom: 25px; border-radius: 10px; text-align: center;">
+            <h3 style="color: #22c55e; margin-top: 0; font-size: 18px;">Launch Date Reveal</h3>
+            <p style="color: #ffffff; font-size: 16px; margin: 10px 0;">Mark your calendar:</p>
+            <p style="color: #fcd34d; font-size: 24px; font-weight: bold; margin: 15px 0;">August 4th, 2025</p>
+            <p style="color: #ffffff; font-size: 14px;">We'll announce the official launch date and share exciting news about the game!</p>
           </div>
 
           <!-- PERSONAL NOTE -->
           <div style="border-top: 2px solid #374151; padding-top: 20px; margin-bottom: 25px;">
-            <p style="color: #e2e8f0; font-style: italic; font-size: 16px; line-height: 1.6;">
-              "Welcome to the inner elemental circle! As one of our first 500 Elementals, you're not just getting the exclusive rewards – you're becoming part of Elekin's origin story. I can't wait to see you in Discord, on Launch Day, and share this incredible journey with you!"
+            <p style="color: #ffffff; font-size: 16px; line-height: 1.6;">
+              Thanks again for your interest in Elekin TCG. We're working hard to create an amazing 
+              trading card game experience, and we can't wait to share it with you.
             </p>
             <p style="color: #fcd34d; margin-top: 15px; font-weight: bold;">
               - Mark Diorio, Founder of Elemental Games
             </p>
           </div>
 
-          <!-- FINAL DISCORD CTA -->
-          <div style="text-align: center; margin-bottom: 30px;">
-            <a href="https://discord.gg/PVrgZBmcMq" style="display: inline-block; background: linear-gradient(135deg, #9333ea, #fcd34d); color: white; text-decoration: none; padding: 20px 40px; border-radius: 12px; font-weight: bold; font-size: 20px; letter-spacing: 1px; box-shadow: 0 6px 20px rgba(147, 51, 234, 0.4);">
-              🚀 JOIN THE DISCORD COMMUNITY →
-            </a>
-            <p style="color: #9ca3af; font-size: 12px; margin-top: 10px;">Secure your OG status before spots fill up!</p>
-          </div>
-
           <!-- SOCIAL LINKS -->
           <div style="margin-bottom: 30px; text-align: center;">
-            <p style="margin-bottom: 15px; color: #e2e8f0;">Stay connected on all platforms:</p>
+            <p style="margin-bottom: 15px; color: #ffffff;">Follow us on social media:</p>
             <table role="presentation" style="margin: 0 auto; border-collapse: collapse;">
               <tr>
                 <td style="padding: 0 15px; text-align: center;">
@@ -174,7 +162,7 @@ serve(async (req)=>{
           <!-- FOOTER -->
           <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); text-align: center; color: #9ca3af; font-size: 12px;">
             <p>Elemental Games LLC © 2025. All rights reserved.</p>
-            <p>You're receiving this email because you secured Early Access Elemental status for Elekin: Masters of Kinbrold.</p>
+            <p>You're receiving this email because you subscribed to updates for Elekin: Masters of Kinbrold.</p>
             <p><a href="https://elementalgames.gg/unsubscribe?email=${email}&token=${unsubscribeToken}" style="color: #9ca3af; text-decoration: underline;">Unsubscribe</a></p>
           </div>
         </div>

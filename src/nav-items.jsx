@@ -2,7 +2,6 @@ import {
   Map,
   Info as InfoIcon,
   UserPlus as UserPlusIcon,
-  Heart as HeartIcon,
   Gamepad as GamepadIcon,
   LayoutGrid as LayoutGridIcon
 } from "lucide-react";
@@ -12,7 +11,6 @@ import CardsPage from "./pages/CardsPage.jsx";
 import KinbroldPage from "./pages/KinbroldPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import JoinNowPage from "./pages/JoinNowPage.jsx";
-import DonatePage from "./pages/DonatePage.jsx";
 import ElekinPage from "./pages/ElekinPage.jsx";
 import HowToPlayPage from "./pages/HowToPlayPage.jsx";
 
@@ -59,11 +57,5 @@ export const navItems = [
     to: "/join", 
     icon: <UserPlusIcon className="h-4 w-4" />, 
     page: <JoinNowPage /> 
-  },
-  { 
-    title: "Donate", 
-    to: "/donate", 
-    icon: <HeartIcon className="h-4 w-4" />, 
-    page: <DonatePage /> 
   },
 ];

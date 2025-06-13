@@ -54,14 +54,14 @@ const CardsOfTheWeek = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-5 max-w-6xl mx-auto">
           {[1,2,3,4].map((placeholder) => {
             // Updated schedule: Week 1-3 in June, Week 4-6 in July
-            const weekDates = [
-              { date: 16, month: 'June' },   // Week 1: June 16
-              { date: 23, month: 'June' },   // Week 2: June 23  
-              { date: 30, month: 'June' },   // Week 3: June 30
-              { date: 7, month: 'July' },    // Week 4: July 7
-              { date: 14, month: 'July' },   // Week 5: July 14
-              { date: 21, month: 'July' }    // Week 6: July 21
-            ];
+                          const weekDates = [
+                { date: 23, month: 'June' },   // Week 1: June 23
+                { date: 30, month: 'June' },   // Week 2: June 30  
+                { date: 7, month: 'July' },    // Week 3: July 7
+                { date: 14, month: 'July' },   // Week 4: July 14
+                { date: 21, month: 'July' },   // Week 5: July 21
+                { date: 28, month: 'July' }    // Week 6: July 28
+              ];
             const revealInfo = weekDates[placeholder - 1];
             
             return (

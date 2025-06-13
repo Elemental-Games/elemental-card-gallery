@@ -68,9 +68,9 @@ const LandingPage = () => {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasTriggeredExitIntent]);
 
-  // Countdown to Launch Date Reveal (July 26, 2025)
+  // Countdown to Launch Date Reveal (August 4, 2025)
   useEffect(() => {
-    const targetDate = new Date('2025-07-26T12:00:00Z');
+    const targetDate = new Date('2025-08-04T12:00:00Z');
     
     const updateTimer = () => {
       const now = new Date();
@@ -93,32 +93,40 @@ const LandingPage = () => {
 
   const kingdoms = [
     { 
+      name: 'Grivoss', 
+      element: 'Earth',
+      color: 'bg-green-300', 
+      hoverColor: 'hover:bg-green-400',
+      description: 'Mountain fortresses carved from living stone. The Grivoss people are builders, miners, and warriors who never back down from a fight.',
+      week: 1,
+      unlockDate: 'June 23, 2025'
+    },
+    { 
       name: 'Zalos', 
       element: 'Air',
       color: 'bg-gray-300', 
       hoverColor: 'hover:bg-gray-400',
-      description: 'Among the mountain peaks are floating cities created by the architects and scholars who have harnessed the power of the air.'
-    },
-    { 
-      name: 'Tsunareth', 
-      element: 'Water',
-      color: 'bg-blue-300', 
-      hoverColor: 'hover:bg-blue-400',
-      description: 'Beneath crystalline waves lie the ancient coral cities where wisdom flows as freely as the tides that shape them.'
+      description: 'Sky cities that float among the clouds. Home to brilliant inventors, wind-riders, and scholars who study the ancient arts.',
+      week: 2,
+      unlockDate: 'June 30, 2025'
     },
     { 
       name: 'Scarto', 
       element: 'Fire',
       color: 'bg-red-300', 
       hoverColor: 'hover:bg-red-400',
-      description: 'From volcanic depths, rise citadels created from those who have mastered the power of fire, where passionate warriors forge their own destiny.'
+      description: 'Volcanic cities built inside active craters. Fierce warriors and master smiths who forge weapons in eternal fire.',
+      week: 4,
+      unlockDate: 'July 14, 2025'
     },
     { 
-      name: 'Grivoss', 
-      element: 'Earth',
-      color: 'bg-green-300', 
-      hoverColor: 'hover:bg-green-400',
-      description: 'Deep within mountain strongholds, stand the steadfast people who carve their legacy and test the limits on the land of Kinbrold.'
+      name: 'Tsunareth', 
+      element: 'Water',
+      color: 'bg-blue-300', 
+      hoverColor: 'hover:bg-blue-400',
+      description: 'Riverside cities accompanied by the tides. Wise healers and sea-riders who command the tides and ocean storms.',
+      week: 5,
+      unlockDate: 'July 21, 2025'
     }
   ];
 
@@ -185,10 +193,10 @@ const LandingPage = () => {
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
         <title>Elekin TCG - Launching Soon</title>
-        <meta name="description" content="Be among the first 500 to become an Early Access Elemental for Elekin: Masters of Kinbrold. Limited spots available before launch date reveal!" />
-        <meta property="og:title" content="Elekin TCG - Limited Early Access Elemental Spots" />
-        <meta property="og:description" content="Only 500 Early Access Elemental spots available. Get exclusive rewards and OG status before launch!" />
-        <meta property="og:image" content="/Games_Logo.png" />
+        <meta name="description" content="Get free early access to Elekin: Masters of Kinbrold. Join our Discord community for exclusive updates and be first to know our launch date!" />
+        <meta property="og:title" content="Elekin TCG - Free Early Access" />
+        <meta property="og:description" content="Sign up for FREE for early access to Elekin TCG. Get exclusive updates and Discord access!" />
+        <meta property="og:image" content="/LogoClear.png" />
       </Helmet>
       
       <AnimatedCardBackground />
@@ -207,7 +215,7 @@ const LandingPage = () => {
               initial={{ scale: 0.9, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 50 }}
-              className="bg-gradient-to-br from-red-950 to-purple-950 border-2 border-yellow-500 rounded-xl shadow-2xl max-w-lg w-full p-8 relative"
+              className="bg-gradient-to-br from-red-950 to-purple-950 border-2 border-yellow-500 rounded-xl shadow-2xl max-w-md w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
@@ -227,16 +235,16 @@ const LandingPage = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h2 className="text-3xl font-bold mb-2 text-green-400">Welcome to the Early Access Elementals!</h2>
-                      <p className="text-xl text-green-300 font-semibold">Your exclusive elemental status is confirmed!</p>
+                      <h2 className="text-3xl font-bold mb-2 text-green-400">Welcome! You're In!</h2>
+                      <p className="text-xl text-green-300 font-semibold">Your free early access is confirmed!</p>
                     </div>
 
                     <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
                       <p className="text-white mb-4">
-                        You're now part of the <span className="text-yellow-400 font-bold">exclusive first 500 Early Access Elementals</span>!
+                        You're now signed up for <span className="text-yellow-400 font-bold">free early access</span>!
                       </p>
                       <p className="text-purple-200 text-sm mb-4">
-                        Check your inbox for your Early Access Elemental welcome email with exclusive benefits.
+                        Check your inbox for your welcome email with Discord access details.
                       </p>
                     </div>
 
@@ -261,28 +269,28 @@ const LandingPage = () => {
                       <div className="bg-red-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Clock className="w-8 h-8 text-red-400" />
                       </div>
-                      <h2 className="text-3xl font-bold mb-2">Wait! Don&apos;t Miss Out!</h2>
-                      <p className="text-xl text-red-300 font-semibold">Only {spotsRemaining} Early Access Elemental Spots Left!</p>
+                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Get Free Early Access</h2>
+                      <p className="text-base lg:text-lg text-purple-200 font-medium">Be notified of our Kickstarter launch + exclusive Discord role & giveaway entries!</p>
                     </div>
 
-                    <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6 mb-6">
-                      <h3 className="text-yellow-400 font-bold mb-3">🔥 LAST CHANCE: Become an Early Access Elemental!</h3>
-                      <div className="text-left space-y-2 text-sm">
-                        <div className="flex items-center">
-                          <span className="text-yellow-400 mr-2">✓</span>
-                          <span>Lock in exclusive OG elemental benefits</span>
+                                         <div className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border border-yellow-500/40 rounded-xl p-4 mb-4">
+                       <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get (Free):</h3>
+                       <div className="space-y-2">
+                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Exclusive Discord role to claim</span>
                         </div>
-                        <div className="flex items-center">
-                          <span className="text-yellow-400 mr-2">✓</span>
-                          <span>Free pack & deck giveaway eligibility</span>
+                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Kickstarter launch notifications</span>
                         </div>
-                        <div className="flex items-center">
-                          <span className="text-yellow-400 mr-2">✓</span>
-                          <span>Early access to launch date announcement</span>
+                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Giveaway entries for free packs & merch</span>
                         </div>
-                        <div className="flex items-center">
-                          <span className="text-yellow-400 mr-2">✓</span>
-                          <span>VIP Discord status that new elementals can&apos;t access</span>
+                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Game development updates</span>
                         </div>
                       </div>
                     </div>
@@ -295,25 +303,30 @@ const LandingPage = () => {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email here"
-                          className="w-full bg-purple-900/50 border-yellow-500/50 text-white placeholder-purple-300 py-4 text-md text-center font-semibold"
+                          className="w-full bg-gradient-to-r from-purple-900/70 to-purple-800/70 border-2 border-yellow-500/60 text-white placeholder-purple-300 py-5 text-lg text-center font-medium rounded-xl shadow-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
                           required
                         />
                       </div>
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg shadow-lg"
+                        className="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
                       >
-                        {loading ? 'Securing Your Spot...' : 'Become an Early Access Elemental'}
+                        {loading ? (
+                          <div className="flex items-center justify-center">
+                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
+                            Signing You Up...
+                          </div>
+                        ) : (
+                          <div className="flex items-center justify-center">
+                            <Gift className="w-5 h-5 mr-2" />
+                            Get Free Early Access
+                          </div>
+                        )}
                       </Button>
                     </form>
 
-                    <button 
-                      onClick={() => setShowExitIntent(false)}
-                      className="w-full bg-purple-800/50 hover:bg-purple-700/50 text-purple-200 hover:text-white border border-purple-500/30 font-medium py-3 px-6 rounded-lg transition-all duration-200"
-                    >
-                      No thanks, I&apos;ll miss out on exclusive rewards
-                    </button>
+
                   </>
                 )}
               </div>
@@ -329,43 +342,11 @@ const LandingPage = () => {
           showIcon={true}
           iconClassName="mr-2 h-5 w-5"
         >
-          Acquire Founding Status
+          Get Free Access
         </SubscribeButton>
       </div>
 
-      {/* Desktop Sticky Bar */}
-      {showStickyBar && (
-        <div className="fixed bottom-0 left-0 right-0 bg-purple-950/95 backdrop-blur-sm border-t border-purple-500/30 py-3 z-40 hidden lg:block">
-          <div className="container mx-auto px-4 flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <Clock className="w-5 h-5 text-yellow-400" />
-              <span className="font-semibold text-white">Limited Time: Only {spotsRemaining} Early Access Elemental Spots Left</span>
-              <div className="text-sm text-purple-300">
-                Launch date reveal in {timeLeft.days}d {timeLeft.hours}h {timeLeft.minutes}m
-              </div>
-            </div>
-            <div className="flex items-center space-x-3">
-              <Link to="/join-now">
-                <Button className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-6 py-2 rounded-lg">
-                  Secure My Spot
-                </Button>
-              </Link>
-              <Link to="/join-now">
-                <Button className="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-2 rounded-lg">
-                  Learn More
-                </Button>
-              </Link>
-              <button
-                onClick={() => setShowStickyBar(false)}
-                className="text-purple-300 hover:text-white transition-colors p-1 ml-2"
-                aria-label="Close notification bar"
-              >
-                <X className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+
       
       {/* HERO SECTION - UPDATED */}
       <section className="container mx-auto px-4 py-16 lg:py-24 relative z-10 -mb-20">
@@ -373,12 +354,12 @@ const LandingPage = () => {
           {/* Pre-Launch Badge */}
           <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-6">
             <Star className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-yellow-300 font-semibold">LIMITED EARLY ACCESS ELEMENTAL SPOTS</span>
+            <span className="text-yellow-300 font-semibold">FREE EARLY ACCESS</span>
           </div>
 
           {/* Main Headline */}
           <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-            Be One of the First <span className="text-yellow-400">500</span>
+            Get Free Early Access to
             <br />
             <motion.span 
               className="bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent bg-[length:200%_100%]"
@@ -391,16 +372,14 @@ const LandingPage = () => {
                 ease: "easeInOut"
               }}
             >
-              Early Access Elementals
+              Elekin TCG
             </motion.span>
-            <br />
-            in Elekin TCG
           </h1>
 
           {/* Subheadline */}
           <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
-            Secure your <span className="text-yellow-400 font-bold">exclusive OG elemental status</span> and unlock 
-            <span className="text-white font-semibold"> free pack giveaways, early access,</span> and elemental rewards before our launch date reveal
+            Sign up for <span className="text-yellow-400 font-bold">FREE</span> to be notified of our 
+            <span className="text-white font-semibold"> Kickstarter launch</span> and get an exclusive Discord role + entries to win free packs, decks & merch
           </p>
 
           {/* Countdown Timer - BIGGER FONTS */}
@@ -425,22 +404,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* Signup Progress - LARGER FONTS */}
-          <div className="bg-gradient-to-r from-green-950/50 to-yellow-950/50 border border-yellow-500/30 rounded-xl p-6 mb-8 max-w-xl mx-auto">
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-lg text-purple-300">Early Access Elementals Secured</span>
-              <span className="text-xl text-yellow-400 font-bold">{signupCount}/500</span>
-            </div>
-            <div className="w-full bg-purple-800/30 rounded-full h-4 mb-4">
-              <div 
-                className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-4 rounded-full transition-all duration-500"
-                style={{ width: `${Math.min((signupCount / 500) * 100, 100)}%` }}
-              ></div>
-            </div>
-            <p className="text-base text-center text-purple-300 font-semibold">
-              {spotsRemaining > 0 ? `${spotsRemaining} exclusive elemental spots remaining` : 'All Early Access Elemental spots claimed!'}
-            </p>
-          </div>
+
 
           {/* Social Proof */}
           <div className="flex items-center justify-center space-x-8 mb-8 text-sm text-purple-300">
@@ -450,7 +414,7 @@ const LandingPage = () => {
             </div>
             <div className="flex items-center">
               <Zap className="w-8 h-8 mr-2" />
-              <span>20-30 Min Strategic Games</span>
+              <span>2 Player Game | 20-30 Min</span>
             </div>
             <div className="flex items-center">
               <Star className="w-8 h-8 mr-2" />
@@ -458,7 +422,7 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* PRIMARY CTA BUTTONS - UPDATED */}
+          {/* PRIMARY CTA BUTTONS */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
             <SubscribeButton 
               size="lg"
@@ -466,7 +430,7 @@ const LandingPage = () => {
               showIcon={false}
             >
               <ArrowRight className="mr-2 w-5 h-5" />
-              Become an Early Access Elemental
+              Get Free Early Access
             </SubscribeButton>
             <Link to="/elekin">
               <Button 
@@ -474,7 +438,7 @@ const LandingPage = () => {
                 size="lg"
                 className="border-2 border-purple-400 text-white hover:bg-purple-400/20 hover:text-yellow-400 font-semibold text-lg px-8 py-6 rounded-xl"
               >
-                Learn More About Elekin
+                Learn About the Game
               </Button>
             </Link>
           </div>
@@ -485,22 +449,22 @@ const LandingPage = () => {
               <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Star className="w-6 h-6 text-yellow-400" />
               </div>
-              <h3 className="font-bold text-lg mb-2">OG Elemental Status</h3>
-              <p className="text-purple-300 text-sm">Exclusive Early Access Elemental Discord role & privileges that new elementals can&apos;t access</p>
-            </div>
-            <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-              <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Gift className="w-6 h-6 text-yellow-400" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Free Pack Giveaways</h3>
-              <p className="text-purple-300 text-sm">Eligible for exclusive OG giveaways including free booster packs, starter decks & more</p>
+              <h3 className="font-bold text-lg mb-2">Exclusive Discord Role</h3>
+              <p className="text-purple-300 text-sm">Claim your special role and join our growing community</p>
             </div>
             <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
               <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
                 <Clock className="w-6 h-6 text-yellow-400" />
               </div>
-              <h3 className="font-bold text-lg mb-2">Launch Day Priority</h3>
-              <p className="text-purple-300 text-sm">First to know launch date, Early Bird pricing access & priority ordering</p>
+              <h3 className="font-bold text-lg mb-2">Kickstarter Updates</h3>
+              <p className="text-purple-300 text-sm">Be notified when our campaign launches and development news</p>
+            </div>
+            <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
+              <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
+                <Gift className="w-6 h-6 text-yellow-400" />
+              </div>
+              <h3 className="font-bold text-lg mb-2">Giveaway Entries</h3>
+              <p className="text-purple-300 text-sm">Win free packs, starter decks, merch and more prizes</p>
             </div>
           </div>
         </div>
@@ -534,7 +498,7 @@ const LandingPage = () => {
       {/* CONTENT-GATED STRATEGY SECTION */}
       <section className="container mx-auto px-4 py-16 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border border-purple-500/30 rounded-xl p-8 text-center">
+          <div className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/60 rounded-xl p-8 text-center shadow-2xl shadow-yellow-500/20 hover:shadow-yellow-500/30 transition-all duration-300">
             {contentGatedSuccess ? (
               // SUCCESS STATE - Thank you message with Discord link
               <>
@@ -545,19 +509,19 @@ const LandingPage = () => {
                     </svg>
                   </div>
                   <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-green-400">
-                    Early Access Elemental Status Secured! 🎉
+                    Welcome! You're Signed Up! 🎉
                   </h2>
                   <p className="text-xl text-green-300 mb-6">
-                    You&apos;re now one of the exclusive first 500 Early Access Elementals!
+                    Your free early access is confirmed!
                   </p>
                 </div>
 
                 <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
                   <p className="text-white mb-4">
-                    Your exclusive OG elemental rewards are confirmed! Check your inbox for your welcome email.
+                    Check your inbox for your welcome email with Discord access details.
                   </p>
                   <p className="text-purple-200 text-sm">
-                    Next step: Join our Discord community to claim your exclusive Early Access Elemental role and connect with fellow elementals!
+                    Next step: Join our Discord community to get exclusive updates!
                   </p>
                 </div>
 
@@ -583,63 +547,33 @@ const LandingPage = () => {
                     <Gift className="w-8 h-8 text-yellow-400" />
                   </div>
                   <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                    Unlock <span className="text-yellow-400">Exclusive Early Access Elemental Rewards</span>
+                    Get <span className="text-yellow-400">Free Early Access</span>
                   </h2>
                   <p className="text-xl text-purple-200 mb-6">
-                    Join the first 500 elementals and get access to exclusive OG giveaways, early access content, and elemental privileges!
+                    Join our Discord community for exclusive updates and behind-the-scenes content!
                   </p>
                 </div>
 
-                <div className="grid md:grid-cols-2 gap-8 mb-8">
-                  <div className="bg-purple-900/30 rounded-lg p-6 border border-purple-500/20">
-                    <h3 className="font-bold text-lg mb-3 text-yellow-400">Exclusive Giveaways:</h3>
-                    <div className="text-left space-y-2 text-sm text-purple-200">
-                      <div className="flex items-center">
-                        <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Free booster pack giveaways</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Complimentary starter deck opportunities</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Limited edition card variants</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Exclusive merchandise drops</span>
-                      </div>
+                <div className="bg-purple-900/30 rounded-lg p-6 border border-purple-500/20 mb-8 max-w-md mx-auto">
+                  <h3 className="font-bold text-lg mb-3 text-yellow-400 text-center">Free Perks:</h3>
+                  <div className="text-left space-y-2 text-sm text-purple-200">
+                    <div className="flex items-center">
+                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
+                      <span>Kickstarter launch notifications</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
+                      <span>Exclusive discord role</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
+                      <span>Additional giveaway entries</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
+                      <span>Early-bird kickstarter rewards</span>
                     </div>
                   </div>
-
-                  <div className="bg-purple-900/30 rounded-lg p-6 border border-purple-500/20">
-                    <h3 className="font-bold text-lg mb-3 text-yellow-400">OG Member Benefits:</h3>
-                    <div className="text-left space-y-2 text-sm text-purple-200">
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>OG member Discord Role</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Early access to all announcements</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Exclusive Early Rewards</span>
-                      </div>
-                      <div className="flex items-center">
-                        <Star className="w-4 h-4 text-yellow-400 mr-2" />
-                        <span>Additional Rewards during Launch</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-red-950/30 border border-red-500/50 rounded-lg p-4 mb-6">
-                  <p className="text-red-300 font-semibold">
-                    🔥 Only {spotsRemaining} Early Access Elemental spots remaining - These rewards are exclusive to the first 500!
-                  </p>
                 </div>
 
                 {/* Direct Email Subscription Form */}
@@ -657,12 +591,12 @@ const LandingPage = () => {
                     className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-xl px-12 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200"
                     disabled={loading}
                   >
-                    {loading ? 'Securing Your Spot...' : 'Secure My Early Access Elemental Rewards'}
+                    {loading ? 'Signing You Up...' : 'Get Free Early Access'}
                   </Button>
                 </form>
 
                 <p className="text-sm text-purple-400 mt-4">
-                  Join {signupCount} elementals who&apos;ve already secured their early access status
+                  Join our growing community of TCG players
                 </p>
               </>
             )}
@@ -680,7 +614,7 @@ const LandingPage = () => {
 
         <section className="mb-16">
           <Link to="/kinbrold">
-            <h2 className="text-4xl font-bold mb-8 flex items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
+            <h2 className="text-4xl font-bold mb-8 text-center items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
               Explore the World of Kinbrold
             </h2>
           </Link>
@@ -688,20 +622,36 @@ const LandingPage = () => {
             {kingdoms.map((kingdom) => (
               <div 
                 key={kingdom.name} 
-                className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} cursor-pointer flex flex-col justify-between`}
+                className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} flex flex-col justify-between relative`}
               >
                 <div>
                   <img 
                     src={`/icons/${kingdom.element}.png`}
                     alt={`${kingdom.element} Icon`}
-                    className="w-24 h-24 mx-auto mb-4"
+                    className="w-24 h-24 mx-auto"
                   />
-                  <h3 className="text-2xl font-semibold mb-2">{kingdom.name}, <span className="text-sm font-bold">the {kingdom.element} Kingdom</span></h3>
-                  <p className="mb-4">{kingdom.description}</p>
+                  <h3 className="text-center text-2xl font-semibold mb-2">{kingdom.name} </h3>
+                  <h4 className="text-center text-sm font-semibold mb-2"><span className="text-sm font-bold">the {kingdom.element} Kingdom</span></h4>
+                  <p className="mb-2 text-center">{kingdom.description}</p>
                 </div>
-                <Link to={`/kinbrold/${kingdom.name.toLowerCase()}`}>
-                  <Button variant="outline" className="mt-auto w-full">Explore {kingdom.name}</Button>
-                </Link>
+                
+                {/* Week and Unlock Date Info */}
+                <div className="mt-auto">
+                  <div className="bg-purple-900/50 border border-purple-500/30 rounded-lg p-3 mb-3">
+                    <div className="text-center">
+                      <div className="text-yellow-400 font-bold text-sm">Week {kingdom.week}</div>
+                      <div className="text-purple-200 text-xs">Unlocks {kingdom.unlockDate}</div>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full opacity-50 cursor-not-allowed" 
+                    disabled
+                  >
+                    Coming Week {kingdom.week}
+                  </Button>
+                </div>
               </div>
             ))}
           </div>

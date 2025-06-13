@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { X, Star, Gift } from 'lucide-react';
+import { X, Star, Gift, Gem } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { subscribeEmail } from '../../utils/api';
@@ -214,26 +214,30 @@ const AnimatedCardBackground = () => {
           
           {/* Enhanced Call to Action with Early Access Elemental Focus */}
           <motion.div
-            className="bg-yellow-500/10 border border-yellow-500/30 rounded-xl p-4 lg:p-6 -mt-3 max-w-xl mx-auto"
+            className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border-2 border-yellow-500/60 rounded-xl p-4 lg:p-6 -mt-3 max-w-xl mx-auto shadow-2xl shadow-yellow-500/30 hover:shadow-yellow-500/40 transition-all duration-300 hover:scale-105"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
           >
             <div className="flex items-center justify-center mb-3">
-              <Star className="w-4 h-4 text-yellow-400 mr-2" />
-              <span className="text-yellow-400 font-bold text-sm lg:text-base">LIMITED EARLY ACCESS ELEMENTAL SPOTS</span>
+              <Gift className="w-6 h-6 text-yellow-400 mr-2" />
+              <span className="text-yellow-400 font-bold text-md lg:text-base">Free Early Access</span>
             </div>
             <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4">
-              Be One of the First <span className="text-yellow-400">500</span> Elementals
+              Be One of the First <span className="text-yellow-400">500</span> Sign-Ups
             </h2>
             <div className="flex items-center justify-center space-x-4 text-sm text-purple-200 mb-4">
               <div className="flex items-center">
-                <Gift className="w-4 h-4 mr-1" />
-                <span>Free Giveaways</span>
-              </div>
+                  <Gift className="w-4 h-4 mr-1" />
+                  <span>Free Giveaways</span>
+                </div>
+              <div className="flex items-center">
+                  <Gem className="w-4 h-4 mr-1" />
+                  <span>Kickstarter Notifications</span>
+                </div>
               <div className="flex items-center">
                 <Star className="w-4 h-4 mr-1" />
-                <span>OG Status</span>
+                <span>Discord Role</span>
               </div>
             </div>
             
@@ -253,7 +257,7 @@ const AnimatedCardBackground = () => {
                   className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-6 lg:px-10 py-3 lg:py-4 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
                   disabled={loading}
                 >
-                  {loading ? 'Securing Your Spot...' : 'Become an Early Access Elemental'}
+                  {loading ? 'Securing Your Spot...' : 'Sign-Up Now'}
                 </Button>
               </form>
             </div>

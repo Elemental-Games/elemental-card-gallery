@@ -1,37 +1,15 @@
 import { motion } from 'framer-motion';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { Helmet } from 'react-helmet-async';
 import EmailSignup from '../components/EmailSignup';
 import { useState, useEffect } from 'react';
-import { Clock, Users, Star, Zap, Gift, Crown, Trophy } from 'lucide-react';
+import { Clock, Users, Zap, CheckCircle, Crown, Star, Gift } from 'lucide-react';
 import { createClient } from '@supabase/supabase-js';
 
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
 const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-const SocialCard = ({ platform, icon, memberCount, link }) => {
-  return (
-    <a 
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="relative group"
-    >
-      <div className="absolute inset-0 bg-purple-500/20 blur-[50px] rounded-full group-hover:bg-purple-500/30 transition-colors duration-300" />
-      <div className="relative bg-purple-950/70 p-6 rounded-lg border border-purple-500/30 
-        hover:border-purple-500/50 transition-all duration-300 group">
-        <div className="flex flex-col items-center text-center">
-          <div className="mb-4 text-yellow-400 group-hover:text-yellow-300 transition-colors">
-            {icon}
-          </div>
-          <h3 className="text-xl font-semibold mb-2">{platform}</h3>
-          <p className="text-purple-200">{memberCount} members</p>
-        </div>
-      </div>
-    </a>
-  );
-};
+
 
 const JoinNowPage = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
@@ -60,9 +38,9 @@ const JoinNowPage = () => {
     return () => clearInterval(interval);
   }, []);
 
-  // Countdown to Launch Date Reveal (July 26, 2025)
+  // Countdown to Launch Date Reveal (August 4, 2025)
   useEffect(() => {
-    const targetDate = new Date('2025-07-26T12:00:00Z');
+    const targetDate = new Date('2025-08-04T12:00:00Z');
     
     const updateTimer = () => {
       const now = new Date();
@@ -90,14 +68,14 @@ const JoinNowPage = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-[#1A103C]"
+      className="min-h-screen bg-[#1A103C] relative overflow-hidden"
     >
       <Helmet>
-        <title>Claim Your Elekin Early Access - Limited Early Access Elemental Spots</title>
-        <meta name="description" content="Join the exclusive first 500 Early Access Elementals of Elekin TCG. Get OG Discord status, preview pack, and early launch access. Limited spots available." />
-        <meta name="keywords" content="Elekin early access, Early Access Elemental, TCG pre-launch, exclusive preview, OG Discord status" />
-        <meta property="og:title" content="Elekin TCG - Exclusive Early Access Elemental Access" />
-        <meta property="og:description" content="Claim your spot among the elite first 500 Early Access Elementals. Limited time before launch date reveal!" />
+        <title>Join Elekin TCG - Free Early Access</title>
+        <meta name="description" content="Get free early access to Elekin TCG. Join 500 exclusive early supporters and be first to know our launch date!" />
+        <meta name="keywords" content="Elekin early access, free signup, TCG community, Discord access" />
+        <meta property="og:title" content="Elekin TCG - Free Early Access" />
+        <meta property="og:description" content="Get free early access to Elekin TCG. Join 500 exclusive early supporters!" />
         <meta property="og:type" content="website" />
         <link rel="canonical" href="https://elementalgames.gg/join-now" />
         
@@ -112,7 +90,7 @@ const JoinNowPage = () => {
                 "name": "Can the average person pick up and play Elekin?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Yes! That&apos;s what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elekin."
+                  "text": "Yes! That's what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elekin."
                 }
               },
               {
@@ -120,7 +98,7 @@ const JoinNowPage = () => {
                 "name": "What makes Elekin unique?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent&apos;s attacks. This is a system that&apos;s never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience."
+                  "text": "Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent's attacks. This is a system that's never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience."
                 }
               },
               {
@@ -144,7 +122,7 @@ const JoinNowPage = () => {
                 "name": "Will there be opportunities to interact with the creator?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Of course! You can attend our live streams on TikTok and ask our creators any questions during their weekly Q&A sessions. Also, you can join our discord and shoot some messages out there as they&apos;re quite active."
+                  "text": "Of course! You can attend our live streams on TikTok and ask our creators any questions during their weekly Q&A sessions. Also, you can join our discord and shoot some messages out there as they're quite active."
                 }
               }
             ]
@@ -152,20 +130,71 @@ const JoinNowPage = () => {
         `}</script>
       </Helmet>
 
-      {/* HERO SECTION */}
-      <section className="container mx-auto px-4 py-16 lg:py-24">
-        <div className="max-w-4xl mx-auto text-center">
-          {/* Exclusive Badge */}
-          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-6">
-            <Crown className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-yellow-300 font-semibold">EARLY ACCESS ELEMENTAL STATUS</span>
-          </div>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <motion.div
+          className="absolute top-20 left-10 w-32 h-32 bg-purple-500/10 rounded-full blur-xl"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+        />
+        <motion.div
+          className="absolute top-40 right-20 w-24 h-24 bg-yellow-500/10 rounded-full blur-xl"
+          animate={{
+            y: [0, 20, 0],
+            scale: [1, 0.9, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1
+          }}
+        />
+        <motion.div
+          className="absolute bottom-20 left-1/4 w-40 h-40 bg-blue-500/10 rounded-full blur-xl"
+          animate={{
+            x: [0, 30, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 2
+          }}
+        />
+      </div>
 
-          {/* Main Headline */}
-          <h1 className="text-4xl lg:text-6xl font-bold mb-6">
-            Secure Your Spot
-            <br />
-            Among the Top <span className="text-yellow-400">500</span>
+      {/* Main Content */}
+      <div className="relative z-10 -mt-20 container mx-auto px-4 py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto text-center">
+          
+          {/* Floating Badge */}
+          <motion.div
+            initial={{ y: -50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-3 mb-8"
+          >
+            <Crown className="w-5 h-5 text-yellow-400 mr-2" />
+            <span className="text-yellow-300 font-bold text-lg">FREE EARLY ACCESS</span>
+          </motion.div>
+
+          {/* Main Headline with Animation */}
+          <motion.h1
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="text-5xl lg:text-7xl font-bold mb-6 leading-tight"
+          >
+            Join the Email List
             <br />
             <motion.span 
               className="bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent bg-[length:200%_100%]"
@@ -178,251 +207,160 @@ const JoinNowPage = () => {
                 ease: "easeInOut"
               }}
             >
-              Early Access Elementals
+              {signupCount}/500
             </motion.span>
-          </h1>
+          </motion.h1>
 
-          {/* Urgency Subheadline */}
-          <p className="text-xl lg:text-2xl text-purple-200 mb-8">
-            Be part of the <span className="text-yellow-400 font-bold">exclusive Early Access Elemental community</span> and unlock 
-            <span className="text-white font-semibold"> OG status, free giveaways,</span> and launch day privileges
-          </p>
+          {/* Subheadline */}
+          <motion.p
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+            className="text-xl lg:text-2xl text-purple-200 mb-12 max-w-3xl -mt-5 mx-auto"
+          >
+            Be one of the <span className="text-yellow-400 font-bold">first 500</span> to sign-up and get <span className="text-yellow-400 font-bold">free early access</span> to Elekin TCG, 
+            launch notifications, giveaways, and exclusive Discord perks.
+          </motion.p>
 
-          {/* Countdown Timer */}
-          <div className="bg-red-950/30 border border-red-500/50 rounded-xl p-6 mb-8 max-w-md mx-auto">
-            <div className="flex items-center justify-center mb-3">
-              <Clock className="w-5 h-5 text-red-400 mr-2" />
-              <span className="text-red-400 font-semibold">LAUNCH DATE REVEAL IN</span>
-            </div>
-            <div className="grid grid-cols-3 gap-4 text-center">
-              <div>
-                <div className="text-2xl font-bold text-white">{timeLeft.days}</div>
-                <div className="text-sm text-red-300">Days</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">{timeLeft.hours}</div>
-                <div className="text-sm text-red-300">Hours</div>
-              </div>
-              <div>
-                <div className="text-2xl font-bold text-white">{timeLeft.minutes}</div>
-                <div className="text-sm text-red-300">Minutes</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* MAIN SIGNUP SECTION */}
-      <section className="container mx-auto px-4 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
-          
-          {/* LEFT: Benefits & Value Prop */}
-          <div className="space-y-8">
-            <div>
-              <h2 className="text-3xl font-bold mb-6 flex items-center">
-                <Gift className="w-16 h-16 text-yellow-400 mr-3" />
-                Your Early Access Elemental Benefits
-              </h2>
-              
-              <div className="space-y-6">
-                <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-yellow-500/20 p-3 rounded-lg">
-                      <Crown className="w-6 h-6 text-yellow-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">OG Elemental Status</h3>
-                      <p className="text-purple-300">Exclusive Early Access Elemental Discord role, special privileges & access that new elementals will never get</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-yellow-500/20 p-3 rounded-lg">
-                      <Gift className="w-6 h-6 text-yellow-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">Exclusive Giveaway Access</h3>
-                      <p className="text-purple-300">Free booster pack giveaways, starter deck opportunities, limited edition cards & exclusive merchandise</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-                  <div className="flex items-start space-x-4">
-                    <div className="bg-yellow-500/20 p-3 rounded-lg">
-                      <Trophy className="w-6 h-6 text-yellow-400" />
-                    </div>
-                    <div>
-                      <h3 className="font-bold text-lg mb-2">Launch Day VIP Treatment</h3>
-                      <p className="text-purple-300">First to know launch date, priority ordering access, and exclusive Early Bird pricing opportunities</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Progress Tracker */}
-            <div className="bg-green-950/30 border border-green-500/30 rounded-lg p-6">
-              <h3 className="font-bold text-lg mb-4 flex items-center">
-                <Users className="w-5 h-5 text-green-400 mr-2" />
-                Early Access Elementals Secured
-              </h3>
-              <div className="space-y-4">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-purple-300">Elementals Secured</span>
-                  <span className="text-sm text-yellow-400 font-bold">{signupCount}/500</span>
-                </div>
-                <div className="w-full bg-purple-800/30 rounded-full h-3">
-                  <div 
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-3 rounded-full transition-all duration-500"
-                    style={{ width: `${Math.min((signupCount / 500) * 100, 100)}%` }}
-                  ></div>
-                </div>
-                <p className="text-xs text-center text-green-300">
-                  {spotsRemaining > 0 ? `${spotsRemaining} Early Access Elemental spots remaining!` : 'All Early Access Elemental spots claimed!'}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT: Email Signup Form */}
-          <div className="bg-purple-950/70 p-8 rounded-xl border border-purple-500/30">
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold mb-4">Secure Your Early Access Elemental Status</h2>
-              <p className="text-purple-200">Join the exclusive first 500 elementals with one simple step</p>
-            </div>
+          {/* Main Signup Form */}
+          <motion.div
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+            className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/30 rounded-2xl p-8 mb-12 max-w-lg mx-auto shadow-[0_0_50px_rgba(234,179,8,0.2)] -mt-5"
+          >
+            <h2 className="text-2xl font-bold mb-6 flex items-center justify-center">
+              <Zap className="w-6 h-6 text-yellow-400 mr-2" />
+              Claim Your Spot Now
+            </h2>
             
-            <div className="space-y-6">
-              {/* Email Signup */}
-              <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-6">
-                <h3 className="font-bold text-lg mb-4 text-center flex items-center justify-center">
-                  <Zap className="w-5 h-5 text-yellow-400 mr-2" />
-                  Early Access Elemental Access
-                </h3>
-                <EmailSignup 
-                  buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg"
-                  buttonText="Become an Early Access Elemental"
-                />
-                <p className="text-sm text-purple-300 text-center mt-3">
-                  Instant confirmation + Discord invite with OG elemental role
-                </p>
-              </div>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="mt-8 pt-6 border-t border-purple-500/30">
-              <div className="flex items-center justify-center space-x-6 text-sm text-purple-300">
-                <div className="flex items-center">
-                  <Star className="w-4 h-4 mr-1" />
-                  <span>No Spam</span>
-                </div>
-                <div className="flex items-center">
-                  <Crown className="w-4 h-4 mr-1" />
-                  <span>Exclusive Benefits</span>
-                </div>
-                <div className="flex items-center">
-                  <Zap className="w-4 h-4 mr-1" />
-                  <span>Instant Access</span>
-                </div>
-              </div>
-              
-              <div className="text-center mt-4">
-                <p className="text-xs text-purple-400">
-                  By joining, you&apos;ll receive exclusive Early Access Elemental emails and Discord access
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <div className="container mx-auto px-4 py-8">
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Join Our Community</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <SocialCard 
-              platform="Discord"
-              icon={
-                <svg width="32" height="32" viewBox="0 0 127.14 96.36" className="fill-current text-white">
-                  <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-                </svg>
-              }
-              memberCount="1,300+"
-              link="https://discord.gg/PVrgZBmcMq"
-            />
-            <SocialCard 
-              platform="TikTok"
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 448 512" className="fill-current text-white">
-                  <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
-                </svg>
-              }
-              memberCount="10"
-              link="https://www.tiktok.com/@elekin_tcg"
-            />
-            <SocialCard 
-              platform="Instagram"
-              icon={
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 448 512" className="fill-current text-white">
-                  <path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/>
-                </svg>
-              }
-              memberCount="15"
-              link="https://instagram.com/elekin_TCG"
-            />
-          </div>
-        </section>
-
-        <section className="mb-12">
-          <h2 className="text-3xl font-bold mb-6">Frequently Asked Questions</h2>
-          <Accordion type="single" collapsible className="space-y-2">
-            <AccordionItem value="item-1">
-              <AccordionTrigger>Can the average person pick up and play Elekin?</AccordionTrigger>
-              <AccordionContent>
-                Yes! That&apos;s what makes our game so unique is that it has a very simplified gameplay and battle mechanic that simply...just makes sense! This allows for newcomers to easily pick-up and play Elekin.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-2">
-              <AccordionTrigger>What makes Elekin unique?</AccordionTrigger>
-              <AccordionContent>
-                Besides our On-Card Technology in the form of a unique QR code, in-game we have a Shield system that protects you from your opponent&apos;s attacks. This is a system that&apos;s never before seen in the TCG world. Lastly, our battling mechanic of using Strength for damage and health and Agility for attack speed, blocking capabilities, and dodging slower attacks is ideal for a new and refreshing gameplay experience.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-3">
-              <AccordionTrigger>How long does a typical game take?</AccordionTrigger>
-              <AccordionContent>
-                The average game takes 20-25 minutes.
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-4">
-              <AccordionTrigger>How can I participate in playtests?</AccordionTrigger>
-              <AccordionContent>
-                Join our community in Discord, attend our live streams on TikTok, or write our support team an email requesting to participate (Discord, TikTok, and email link).
-              </AccordionContent>
-            </AccordionItem>
-            <AccordionItem value="item-5">
-              <AccordionTrigger>Will there be opportunities to interact with the creator?</AccordionTrigger>
-              <AccordionContent>
-                Of course! You can attend our live streams on TikTok and ask our creators any questions during their weekly Q&A sessions. Also, you can join our discord and shoot some messages out there as they&apos;re quite active.
-              </AccordionContent>
-            </AccordionItem>
-          </Accordion>
-        </section>
-
-        {/* Final CTA */}
-        <div className="text-center">
-          <div className="max-w-md mx-auto bg-purple-950/70 p-6 rounded-lg border border-yellow-500/30">
-            <h3 className="text-xl font-semibold mb-4 text-center">Don&apos;t Miss Your Chance!</h3>
-            <p className="text-purple-300 mb-4 text-sm">
-              Only {spotsRemaining} Early Access Elemental spots remaining
-            </p>
             <EmailSignup 
-              buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-3"
-              buttonText="Become an Early Access Elemental"
+              buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(234,179,8,0.5)] hover:shadow-[0_0_40px_rgba(234,179,8,0.7)]"
+              buttonText="Get Free Early Access →"
             />
+            
+            <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-purple-300">
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                <span>Early Bird Pricing</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                <span>Giveaways</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                <span>Exclusive Perks</span>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Progress Bar and Countdown Side-by-Side */}
+          <div className="grid md:grid-cols-2 gap-6 mb-12 max-w-4xl mx-auto">
+            {/* Progress Bar with Animation */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1 }}
+              className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6"
+            >
+              <div className="flex items-center justify-center mb-4">
+                <Users className="w-5 h-5 text-green-400 mr-2" />
+                <span className="text-green-400 font-semibold">
+                  {signupCount}/500 SPOTS CLAIMED
+                </span>
+              </div>
+              <div className="w-full bg-purple-800/30 rounded-full h-4 mb-3">
+                <motion.div 
+                  className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-4 rounded-full"
+                  initial={{ width: 0 }}
+                  animate={{ width: `${Math.min((signupCount / 500) * 100, 100)}%` }}
+                  transition={{ duration: 1.5, delay: 1.2 }}
+                />
+              </div>
+              <p className="text-yellow-400 font-bold text-center">
+                {spotsRemaining > 0 ? `${spotsRemaining} spots remaining!` : 'All spots claimed!'}
+              </p>
+            </motion.div>
+
+            {/* Countdown Timer */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="bg-red-950/30 border border-red-500/50 rounded-xl p-6"
+            >
+              <div className="flex items-center justify-center mb-4">
+                <Clock className="w-5 h-5 text-red-400 mr-2" />
+                <span className="text-red-400 font-semibold">LAUNCH DATE REVEAL IN</span>
+              </div>
+              <div className="grid grid-cols-3 gap-4 text-center">
+                <div>
+                  <motion.div 
+                    className="text-3xl font-bold text-white"
+                    key={timeLeft.days}
+                    initial={{ scale: 1.2 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {timeLeft.days}
+                  </motion.div>
+                  <div className="text-sm text-red-300">Days</div>
+                </div>
+                <div>
+                  <motion.div 
+                    className="text-3xl font-bold text-white"
+                    key={timeLeft.hours}
+                    initial={{ scale: 1.2 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {timeLeft.hours}
+                  </motion.div>
+                  <div className="text-sm text-red-300">Hours</div>
+                </div>
+                <div>
+                  <motion.div 
+                    className="text-3xl font-bold text-white"
+                    key={timeLeft.minutes}
+                    initial={{ scale: 1.2 }}
+                    animate={{ scale: 1 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {timeLeft.minutes}
+                  </motion.div>
+                  <div className="text-sm text-red-300">Minutes</div>
+                </div>
+              </div>
+            </motion.div>
           </div>
+
+          {/* What You Get - Simple 3-Point List */}
+          <motion.div
+            initial={{ y: 30, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+            className="grid md:grid-cols-3 gap-6 mb-12"
+          >
+            <div className="bg-purple-950/30 border border-purple-500/20 rounded-lg p-6">
+              <Gift className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
+              <h3 className="font-bold text-lg mb-2">Free Giveaways</h3>
+              <p className="text-purple-300 text-sm">Exclusive and additional entries into Elekin giveaways</p>
+            </div>
+            <div className="bg-purple-950/30 border border-purple-500/20 rounded-lg p-6">
+              <Star className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
+              <h3 className="font-bold text-lg mb-2">Launch Day Priority</h3>
+              <p className="text-purple-300 text-sm">First to know launch date and get early bird pricing</p>
+            </div>
+            <div className="bg-purple-950/30 border border-purple-500/20 rounded-lg p-6">
+              <Crown className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
+              <h3 className="font-bold text-lg mb-2">Discord VIP Role</h3>
+              <p className="text-purple-300 text-sm">Exclusive early supporter role that new members can't get</p>
+            </div>
+          </motion.div>
+
+
+
         </div>
       </div>
     </motion.div>

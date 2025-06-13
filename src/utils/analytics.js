@@ -3,17 +3,17 @@ import { track } from '@vercel/analytics';
 
 // Campaign configuration
 export const CAMPAIGN_CONFIG = {
-  // Campaign runs from June 16 - July 26, 2025 (6 weeks)
-  startDate: new Date('2025-06-16'), // June 16, 2025
+  // Campaign runs from June 23 - August 4, 2025 (6 weeks)
+  startDate: new Date('2025-06-23'), // June 23, 2025
   weeks: [
-    { week: 1, kingdom: 'grivoss', unlockDate: new Date('2025-06-16') },
-    { week: 2, kingdom: 'zalos', unlockDate: new Date('2025-06-23') },
-    { week: 3, kingdom: 'evermere', unlockDate: new Date('2025-06-30') },
-    { week: 4, kingdom: 'scarto', unlockDate: new Date('2025-07-07') },
-    { week: 5, kingdom: 'tsunareth', unlockDate: new Date('2025-07-14') },
-    { week: 6, kingdom: 'dragons', unlockDate: new Date('2025-07-21') }
+    { week: 1, kingdom: 'grivoss', unlockDate: new Date('2025-06-23') },
+    { week: 2, kingdom: 'zalos', unlockDate: new Date('2025-06-30') },
+    { week: 3, kingdom: 'evermere', unlockDate: new Date('2025-07-07') },
+    { week: 4, kingdom: 'scarto', unlockDate: new Date('2025-07-14') },
+    { week: 5, kingdom: 'tsunareth', unlockDate: new Date('2025-07-21') },
+    { week: 6, kingdom: 'dragons', unlockDate: new Date('2025-07-28') }
   ],
-  endDate: new Date('2025-07-26') // Campaign end date (July 26, 2025)
+  endDate: new Date('2025-08-04') // Campaign end date (August 4, 2025)
 };
 
 // Development override for testing different unlock states

@@ -28,12 +28,12 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/Games_Logo.png" 
-                alt="Elemental Games Logo" 
+                src="/LogoClear.png" 
+                alt="Elekin TCG Logo" 
                 className="h-20 w-20 mr-6"
               />
               <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
-                Elemental Games
+                Elekin TCG
               </span>
             </Link>
             
@@ -57,8 +57,8 @@ const Header = () => {
           <div className="md:hidden flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/Games_Logo.png" 
-                alt="Elemental Games Logo" 
+                src="/LogoClear.png" 
+                alt="Elekin TCG Logo" 
                 className="h-20 w-20"
               />
             </Link>

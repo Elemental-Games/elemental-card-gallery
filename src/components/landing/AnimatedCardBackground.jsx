@@ -171,8 +171,8 @@ const AnimatedCardBackground = () => {
         {cards.length > 0 && (
           <>
             {createRow(1, 120, 2, 0)}
-            {createRow(-1, 100, 32, 12)}
-            {createRow(1, 110, 62, 25)}
+            {createRow(-1, 100, 34, 12)}
+            {createRow(1, 110, 66, 25)}
           </>
         )}
       </div>
@@ -194,10 +194,10 @@ const AnimatedCardBackground = () => {
         }}
       >
         <div className="max-w-3xl mx-auto">
-          <motion.img
-            src="/LogoClear.png"
-            alt="Elekin: Masters of Kinbrold Logo"
-            className="w-64 md:w-80 lg:w-96 mx-auto -mb-20 -mt-10"
+                      <motion.img
+              src="/Elekin_Kinbrold_Icon.png"
+              alt="Elekin: Masters of Kinbrold Logo"
+              className="w-96 md:w-[28rem] lg:w-[32rem] h-auto mx-auto -mb-10 -mt-24"
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
@@ -214,47 +214,47 @@ const AnimatedCardBackground = () => {
           
           {/* Enhanced Call to Action with Early Access Elemental Focus */}
           <motion.div
-            className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border-2 border-yellow-500/60 rounded-xl p-4 lg:p-6 -mt-3 max-w-xl mx-auto shadow-2xl shadow-yellow-500/30 hover:shadow-yellow-500/40 transition-all duration-300 hover:scale-105"
+            className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border-2 border-yellow-500/60 rounded-xl p-3 lg:p-4 -mt-3 max-w-lg mx-auto shadow-2xl shadow-yellow-500/30 hover:shadow-yellow-500/40 transition-all duration-300 hover:scale-105"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex items-center justify-center mb-3">
-              <Gift className="w-6 h-6 text-yellow-400 mr-2" />
-              <span className="text-yellow-400 font-bold text-md lg:text-base">Free Early Access</span>
+            <div className="flex items-center justify-center mb-2">
+              <Gift className="w-5 h-5 text-yellow-400 mr-2" />
+              <span className="text-yellow-400 font-bold text-sm lg:text-base">Free Early Access</span>
             </div>
-            <h2 className="text-xl md:text-2xl lg:text-3xl font-bold text-white mb-4">
+            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3">
               Be One of the First <span className="text-yellow-400">500</span> Sign-Ups
             </h2>
-            <div className="flex items-center justify-center space-x-4 text-sm text-purple-200 mb-4">
+            <div className="flex items-center justify-center space-x-3 text-xs text-purple-200 mb-3">
               <div className="flex items-center">
-                  <Gift className="w-4 h-4 mr-1" />
+                  <Gift className="w-3 h-3 mr-1" />
                   <span>Free Giveaways</span>
                 </div>
               <div className="flex items-center">
-                  <Gem className="w-4 h-4 mr-1" />
+                  <Gem className="w-3 h-3 mr-1" />
                   <span>Kickstarter Notifications</span>
                 </div>
               <div className="flex items-center">
-                <Star className="w-4 h-4 mr-1" />
+                <Star className="w-3 h-3 mr-1" />
                 <span>Discord Role</span>
               </div>
             </div>
             
             {/* Enhanced CTA Button */}
             <div className="pointer-events-auto">
-              <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <form onSubmit={handleEmailSubmit} className="space-y-3">
                 <Input
                   type="email"
                   placeholder="Enter your email here"
-                  className="w-full bg-purple-900/50 border-yellow-500/50 text-white placeholder-purple-300 py-3 text-center font-semibold"
+                  className="w-full bg-purple-900/50 border-yellow-500/50 text-white placeholder-purple-300 py-2 text-center font-semibold text-sm"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
                 />
                 <Button
                   type="submit"
-                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-6 lg:px-10 py-3 lg:py-4 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
+                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-base px-4 lg:px-6 py-2 lg:py-3 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
                   disabled={loading}
                 >
                   {loading ? 'Securing Your Spot...' : 'Sign-Up Now'}

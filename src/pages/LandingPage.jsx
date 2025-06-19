@@ -196,7 +196,7 @@ const LandingPage = () => {
         <meta name="description" content="Get free early access to Elekin: Masters of Kinbrold. Join our Discord community for exclusive updates and be first to know our launch date!" />
         <meta property="og:title" content="Elekin TCG - Free Early Access" />
         <meta property="og:description" content="Sign up for FREE for early access to Elekin TCG. Get exclusive updates and Discord access!" />
-        <meta property="og:image" content="/LogoClear.png" />
+        <meta property="og:image" content="/Elekin_Kinbrold.png" />
       </Helmet>
       
       <AnimatedCardBackground />
@@ -477,9 +477,9 @@ const LandingPage = () => {
           <div className="mb-12 text-center">
             <div className="flex flex-col lg:flex-row items-center justify-center mb-6 space-y-4 lg:space-y-0 lg:space-x-4">
               <img 
-                src="/LogoClear.png" 
+                src="/Elekin_Kinbrold.png" 
                 alt="Elekin Logo" 
-                className="w-32 lg:w-48 h-auto"
+                className="w-64 lg:w-96 h-auto -mb-2 -mr-5 -mt-10"
               />
               <h2 className="text-3xl lg:text-5xl font-bold">Why TCG Players Choose Elekin</h2>
             </div>

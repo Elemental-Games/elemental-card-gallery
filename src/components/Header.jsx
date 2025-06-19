@@ -28,13 +28,10 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/LogoClear.png" 
+                src="/Elekin.png" 
                 alt="Elekin TCG Logo" 
-                className="h-20 w-20 mr-6"
+                className="h-28 w-auto mr-6 ml-6 -mb-6 -mt-5"
               />
-              <span className="text-white text-2xl font-bold font-heading hover:text-accent transition-colors duration-200">
-                Elekin TCG
-              </span>
             </Link>
             
             <div className="flex items-center space-x-6">
@@ -57,9 +54,9 @@ const Header = () => {
           <div className="md:hidden flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/LogoClear.png" 
+                src="/Elekin.png" 
                 alt="Elekin TCG Logo" 
-                className="h-20 w-20"
+                className="h-20 w-auto"
               />
             </Link>
 

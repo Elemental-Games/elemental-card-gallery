@@ -165,40 +165,40 @@ const CardGalleryPage = () => {
           <div className="max-w-5xl mx-auto mb-12">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
               <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <span className="text-lg text-purple-300">Pre-Kickstarter Campaign Progress</span>
-                  <span className="text-xl text-yellow-400 font-bold">Week 0 of 6</span>
-                </div>
-                <div className="w-full bg-purple-800/30 rounded-full h-4 mb-4">
-                  <div 
-                    className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-4 rounded-full transition-all duration-500"
-                    style={{ width: '0%' }}
-                  ></div>
-                </div>
-                <p className="text-base text-center text-purple-300">
-                  <span className="text-yellow-400 font-bold">0 cards revealed</span> • 
-                  <span className="text-white font-semibold"> more coming at launch!</span>
-                </p>
+              <div className="flex items-center justify-between mb-4">
+                <span className="text-lg text-purple-300">Pre-Kickstarter Campaign Progress</span>
+                <span className="text-xl text-yellow-400 font-bold">Week 0 of 6</span>
               </div>
+              <div className="w-full bg-purple-800/30 rounded-full h-4 mb-4">
+                <div 
+                  className="bg-gradient-to-r from-yellow-500 to-yellow-400 h-4 rounded-full transition-all duration-500"
+                  style={{ width: '0%' }}
+                ></div>
+              </div>
+              <p className="text-base text-center text-purple-300">
+                <span className="text-yellow-400 font-bold">0 cards revealed</span> • 
+                  <span className="text-white font-semibold"> more coming at launch!</span>
+              </p>
+          </div>
 
-              {/* Next Reveal Countdown */}
+          {/* Next Reveal Countdown */}
               <div className="bg-purple-950/70 border border-purple-500/30 rounded-xl p-8 text-center">
-                <div className="flex items-center justify-center mb-6">
-                  <Clock className="w-6 h-6 text-yellow-400 mr-3" />
-                  <span className="text-yellow-400 font-semibold text-xl">NEXT REVEAL IN</span>
-                </div>
-                <div className="grid grid-cols-3 gap-6 text-center">
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.days}</div>
-                    <div className="text-sm text-purple-300">Days</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.hours}</div>
-                    <div className="text-sm text-purple-300">Hours</div>
-                  </div>
-                  <div>
-                    <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.minutes}</div>
-                    <div className="text-sm text-purple-300">Minutes</div>
+            <div className="flex items-center justify-center mb-6">
+              <Clock className="w-6 h-6 text-yellow-400 mr-3" />
+              <span className="text-yellow-400 font-semibold text-xl">NEXT REVEAL IN</span>
+            </div>
+            <div className="grid grid-cols-3 gap-6 text-center">
+              <div>
+                <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.days}</div>
+                <div className="text-sm text-purple-300">Days</div>
+              </div>
+              <div>
+                <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.hours}</div>
+                <div className="text-sm text-purple-300">Hours</div>
+              </div>
+              <div>
+                <div className="text-3xl lg:text-4xl font-bold text-white">{timeLeft.minutes}</div>
+                <div className="text-sm text-purple-300">Minutes</div>
                   </div>
                 </div>
               </div>
@@ -221,7 +221,7 @@ const CardGalleryPage = () => {
                     {/* Card back pattern */}
                     <div className="absolute inset-0 bg-gradient-to-br from-purple-800/30 to-purple-900/50"></div>
                     <div className="absolute inset-0 opacity-20">
-                      <div className="w-full h-full bg-[url('/LogoClear.png')] bg-center bg-no-repeat bg-contain opacity-30"></div>
+                      <div className="w-full h-full bg-[url('/Elekin.png')] bg-center bg-no-repeat bg-contain opacity-30"></div>
                     </div>
                     
                     <div className="relative z-10 text-center group-hover:opacity-0 transition-opacity duration-300">

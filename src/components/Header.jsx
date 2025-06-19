@@ -28,7 +28,7 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/Elekin.png" 
+                src="/Icon_FINAL.png" 
                 alt="Elekin TCG Logo" 
                 className="h-28 w-auto mr-6 ml-6 -mb-6 -mt-5"
               />

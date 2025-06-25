@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { HomeIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
-import CardsPage from "./pages/CardsPage.jsx";
+import CardGalleryPage from "./pages/CardGalleryPage.jsx";
 import KinbroldPage from "./pages/KinbroldPage.jsx";
 import AboutUsPage from "./pages/AboutUsPage.jsx";
 import JoinNowPage from "./pages/JoinNowPage.jsx";
@@ -22,23 +22,23 @@ export const navItems = [
     page: <LandingPage />,
   },
   {
-    title: "Elekin",
+    title: "Elekin TCG",
     to: "/elekin",
     icon: <GamepadIcon className="h-4 w-4" />,
     page: <ElekinPage />,
     subPages: [
-      {
-        title: "Cards",
-        to: "/cards",
-        icon: <LayoutGridIcon className="h-4 w-4" />,
-        page: <CardsPage />,
-      },
       {
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,
       }
     ]
+  },
+  {
+    title: "Card Reveals",
+    to: "/cards/campaign",
+    icon: <LayoutGridIcon className="h-4 w-4" />,
+    page: <CardGalleryPage />,
   },
   { 
     title: "Lore", 

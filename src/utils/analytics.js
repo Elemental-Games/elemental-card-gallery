@@ -22,10 +22,10 @@ const DEV_OVERRIDES = {
   UNLOCK_ALL: import.meta.env.DEV && false,
   
   // Override specific week for testing (1-6)
-  FORCE_WEEK: import.meta.env.DEV ? null : null,
+  FORCE_WEEK: import.meta.env.DEV ? 1 : null,
   
   // Override specific kingdoms for testing
-  FORCE_UNLOCKED: import.meta.env.DEV ? [] : []
+  FORCE_UNLOCKED: import.meta.env.DEV ? ['grivoss'] : ['grivoss']
 };
 
 // Get current campaign week and unlock status

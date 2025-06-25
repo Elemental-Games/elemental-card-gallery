@@ -26,8 +26,8 @@ import {
 // MARKETING CAMPAIGN CONFIGURATION
 // Set regions to true to unlock them, false to lock them
 const UNLOCKED_REGIONS = {
-  // Main Kingdoms - All locked for now
-  grivoss: false,
+  // Main Kingdoms - Grivoss now unlocked!
+  grivoss: true,
   zalos: false, 
   evermere: false,
   scarto: false,

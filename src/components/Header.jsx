@@ -28,25 +28,53 @@ const Header = () => {
           <div className="hidden md:flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/Elekin_Icon.png" 
+                src="/Elekin.png" 
                 alt="Elekin TCG Logo" 
                 className="h-28 w-auto mr-6 ml-6 -mb-6 -mt-5"
               />
             </Link>
             
             <div className="flex items-center space-x-6">
-              <ul className="flex space-x-6">
-                {navItems.map((item) => (
-                  <li key={item.title}>
-                    <Link 
-                      to={item.to} 
-                      className="text-white hover:text-accent transition-colors duration-200 font-sans"
-                    >
-                      {item.title}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+              <NavigationMenu>
+                <NavigationMenuList className="flex space-x-6">
+                  {navItems.map((item) => (
+                    <NavigationMenuItem key={item.title}>
+                      {item.subPages ? (
+                        <>
+                          <NavigationMenuTrigger className="text-white hover:text-accent transition-colors duration-200 font-sans bg-transparent hover:bg-white/10 px-3 py-2 rounded">
+                            <Link 
+                              to={item.to}
+                              className="text-white hover:text-accent transition-colors duration-200 font-sans mr-2"
+                            >
+                              {item.title}
+                            </Link>
+                          </NavigationMenuTrigger>
+                          <NavigationMenuContent>
+                            <div className="w-48 bg-darkPurple/95 backdrop-blur-sm p-2 rounded-lg border border-purple-500/30">
+                              {item.subPages.map((subItem) => (
+                                <Link 
+                                  key={subItem.title}
+                                  to={subItem.to} 
+                                  className="block py-2 px-4 text-white hover:text-accent hover:bg-white/10 transition-colors duration-200 font-sans rounded"
+                                >
+                                  {subItem.title}
+                                </Link>
+                              ))}
+                            </div>
+                          </NavigationMenuContent>
+                        </>
+                      ) : (
+                        <Link 
+                          to={item.to} 
+                          className="text-white hover:text-accent transition-colors duration-200 font-sans px-3 py-2 rounded hover:bg-white/10"
+                        >
+                          {item.title}
+                        </Link>
+                      )}
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
             </div>
           </div>
 
@@ -54,7 +82,7 @@ const Header = () => {
           <div className="md:hidden flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img 
-                src="/Elekin_Icon.png" 
+                src="/Elekin.png" 
                 alt="Elekin TCG Logo" 
                 className="h-20 w-auto"
               />
@@ -69,13 +97,27 @@ const Header = () => {
                   <NavigationMenuContent>
                     <div className="w-[calc(100vw-6rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg ml-[-1rem]">
                       {navItems.map((item) => (
-                        <Link 
-                          key={item.title}
-                          to={item.to} 
-                          className="block py-2 px-4 text-white hover:text-accent transition-colors duration-200 font-sans"
-                        >
-                          {item.title}
-                        </Link>
+                        <div key={item.title}>
+                          <Link 
+                            to={item.to} 
+                            className="block py-2 px-4 text-white hover:text-accent transition-colors duration-200 font-sans"
+                          >
+                            {item.title}
+                          </Link>
+                          {item.subPages && (
+                            <div className="ml-4 border-l border-purple-500/30">
+                              {item.subPages.map((subItem) => (
+                                <Link 
+                                  key={subItem.title}
+                                  to={subItem.to} 
+                                  className="block py-1 px-4 text-purple-200 hover:text-accent transition-colors duration-200 font-sans text-sm"
+                                >
+                                  {subItem.title}
+                                </Link>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </NavigationMenuContent>

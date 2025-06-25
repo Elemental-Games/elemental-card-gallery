@@ -111,12 +111,15 @@ const KinbroldPage = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
             {kingdoms.map((kingdom) => {
+              const isUnlocked = isKingdomUnlocked(kingdom.name);
               return (
                 <Button
                   key={kingdom.name}
                   onClick={() => handleKingdomClick(kingdom)}
-                  disabled={true}
-                  className={`bg-transparent border-2 w-full h-24 font-bold flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 relative text-white opacity-60 cursor-not-allowed`}
+                  disabled={!isUnlocked}
+                  className={`bg-transparent border-2 w-full h-24 font-bold flex flex-col items-center justify-center transition-all duration-300 hover:scale-105 relative text-white ${
+                    isUnlocked ? 'opacity-100 cursor-pointer hover:brightness-110' : 'opacity-60 cursor-not-allowed'
+                  }`}
                   style={{
                     borderColor: kingdom.name === 'Grivoss' ? '#10b981' :
                                 kingdom.name === 'Zalos' ? '#9ca3af' :
@@ -133,13 +136,15 @@ const KinbroldPage = () => {
                   <span className="text-lg">{kingdom.name}</span>
                   <span className="text-sm opacity-80">{kingdom.description}</span>
                   
-                  <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded backdrop-blur-sm">
-                    <div className="text-center">
-                      <div className="text-yellow-400 text-xs mb-1">🔒</div>
-                      <div className="text-yellow-400 text-xs font-semibold">Week {kingdom.week}</div>
-                      <div className="text-yellow-300 text-xs opacity-80">Locked</div>
+                  {!isUnlocked && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/50 rounded backdrop-blur-sm">
+                      <div className="text-center">
+                        <div className="text-yellow-400 text-xs mb-1">🔒</div>
+                        <div className="text-yellow-400 text-xs font-semibold">Week {kingdom.week}</div>
+                        <div className="text-yellow-300 text-xs opacity-80">Locked</div>
+                      </div>
                     </div>
-                  </div>
+                  )}
                 </Button>
               );
             })}

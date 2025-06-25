@@ -91,8 +91,8 @@ const CardGalleryPage = () => {
                   <h3 className="text-green-400 font-bold text-xl">Week 1: Grivoss</h3>
                 </div>
                 <p className="text-green-200 text-base mb-2">Earth Kingdom & Earth Creatures</p>
-                <p className="text-purple-300 text-sm mb-2">Grivoss Area • 4 Earth Creatures • 1 Elementalist</p>
-                <div className="text-sm text-green-400 mt-2 font-semibold">5 cards revealed</div>
+                <p className="text-purple-300 text-sm mb-2">Grivoss Area • 3 Earth Creatures • 1 Elementalist</p>
+                <div className="text-sm text-green-400 mt-2 font-semibold">4 cards revealed</div>
               </div>
               
               <div className="bg-gradient-to-br from-gray-600/30 to-gray-800/50 border-2 border-gray-400/50 rounded-xl p-6 text-center
@@ -102,8 +102,8 @@ const CardGalleryPage = () => {
                   <h3 className="text-gray-300 font-bold text-xl">Week 2: Zalos</h3>
                 </div>
                 <p className="text-gray-200 text-base mb-2">Air Kingdom & Air Creatures</p>
-                <p className="text-purple-300 text-sm mb-2">Zalos Area • 4 Air Creatures • 1 Elementalist</p>
-                <div className="text-sm text-gray-300 mt-2 font-semibold">5 cards revealed</div>
+                <p className="text-purple-300 text-sm mb-2">Zalos Area • 3 Air Creatures • 1 Elementalist</p>
+                <div className="text-sm text-gray-300 mt-2 font-semibold">4 cards revealed</div>
               </div>
               
               <div className="bg-gradient-to-br from-purple-700/30 to-purple-900/50 border-2 border-purple-400/50 rounded-xl p-6 text-center
@@ -124,8 +124,8 @@ const CardGalleryPage = () => {
                   <h3 className="text-red-400 font-bold text-xl">Week 4: Scarto</h3>
                 </div>
                 <p className="text-red-200 text-base mb-2">Fire Kingdom & Fire Creatures</p>
-                <p className="text-purple-300 text-sm mb-2">Scarto Area • 4 Fire Creatures • 1 Elementalist</p>
-                <div className="text-sm text-red-400 mt-2 font-semibold">5 cards revealed</div>
+                <p className="text-purple-300 text-sm mb-2">Scarto Area • 3 Fire Creatures • 1 Elementalist</p>
+                <div className="text-sm text-red-400 mt-2 font-semibold">4 cards revealed</div>
               </div>
               
               <div className="bg-gradient-to-br from-blue-800/30 to-blue-900/50 border-2 border-blue-500/50 rounded-xl p-6 text-center
@@ -135,8 +135,8 @@ const CardGalleryPage = () => {
                   <h3 className="text-blue-400 font-bold text-xl">Week 5: Tsunareth</h3>
                 </div>
                 <p className="text-blue-200 text-base mb-2">Water Kingdom & Water Creatures</p>
-                <p className="text-purple-300 text-sm mb-2">Tsunareth Area • 4 Water Creatures • 1 Elementalist</p>
-                <div className="text-sm text-blue-400 mt-2 font-semibold">5 cards revealed</div>
+                <p className="text-purple-300 text-sm mb-2">Tsunareth Area • 3 Water Creatures • 1 Elementalist</p>
+                <div className="text-sm text-blue-400 mt-2 font-semibold">4 cards revealed</div>
               </div>
               
               <div className="bg-gradient-to-br from-yellow-700/30 to-orange-800/50 border-2 border-yellow-500/50 rounded-xl p-6 text-center
@@ -153,8 +153,8 @@ const CardGalleryPage = () => {
             
             <div className="text-center mt-8">
               <p className="text-purple-300 text-base">
-                <span className="text-yellow-400 font-semibold">33 total preview cards</span> • 
-                <span className="text-white"> 20 Creatures • 6 Dragons • 4 Elementalists • 3 Shields • 2 Runes • 2 Counters</span>
+                <span className="text-yellow-400 font-semibold">29 total preview cards</span> • 
+                <span className="text-white"> 16 Creatures • 6 Dragons • 4 Elementalists • 3 Shields • 2 Runes • 2 Counters</span>
                 <span className="text-yellow-400 font-semibold"><br></br>11 areas unlocked</span> • 
                 <span className="text-white"> 5 Kingdoms • 6 Sub-Regions</span>
               </p>

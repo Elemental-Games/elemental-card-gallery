@@ -41,6 +41,7 @@ import AboutUsPage from "./pages/AboutUsPage";
 import JoinNowPage from './pages/JoinNowPage';
 import LegalPage from './pages/LegalPage';
 import UnsubscribePage from './pages/UnsubscribePage';
+import EmailPreviewPage from './pages/EmailPreviewPage';
 
 const queryClient = new QueryClient();
 
@@ -153,6 +154,7 @@ const App = () => (
                       <Route path="/join-now" element={<JoinNowPage />} />
                       <Route path="/legal" element={<LegalPage />} />
                       <Route path="/unsubscribe" element={<UnsubscribePage />} />
+                      <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
                     </Routes>
                   </main>
                   <Footer />

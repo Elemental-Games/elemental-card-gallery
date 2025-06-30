@@ -13,40 +13,40 @@ const CardGrid = ({ cards }) => {
         const { marketingPath } = getCardImagePath(card);
         
         return (
-          <motion.div
-            key={card.id}
-            whileHover={{ scale: 1.05 }}
-            onClick={() => navigate(`/cards/${card.id}`)}
-          >
-            <Card className="p-4 cursor-pointer">
-              <img 
+        <motion.div
+          key={card.id}
+          whileHover={{ scale: 1.05 }}
+          onClick={() => navigate(`/cards/${card.id}`)}
+        >
+          <Card className="p-4 cursor-pointer">
+            <img 
                 src={marketingPath}
-                alt={card.name} 
+              alt={card.name} 
                 className={`w-full h-48 object-contain mb-2 ${
                   ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
                     ? 'transform rotate-90' 
                     : ''
                 }`}
                 onError={createCardImageErrorHandler(card)}
-              />
-              <h3 className="font-semibold text-lg">{card.name}</h3>
+            />
+            <h3 className="font-semibold text-lg">{card.name}</h3>
+            <p className="text-sm text-gray-600">
+              {card.element} | {card.type} | {
+                card.rarity === 'C' ? 'Common' :
+                card.rarity === 'U' ? 'Uncommon' :
+                card.rarity.trim() === 'R' ? 'Rare' :
+                card.rarity === 'E' ? 'Epic' :
+                card.rarity === 'L' ? 'Legendary' :
+                card.rarity
+              }
+            </p>
+            {card.type === 'Creature' && (
               <p className="text-sm text-gray-600">
-                {card.element} | {card.type} | {
-                  card.rarity === 'C' ? 'Common' :
-                  card.rarity === 'U' ? 'Uncommon' :
-                  card.rarity.trim() === 'R' ? 'Rare' :
-                  card.rarity === 'E' ? 'Epic' :
-                  card.rarity === 'L' ? 'Legendary' :
-                  card.rarity
-                }
+                STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
               </p>
-              {card.type === 'Creature' && (
-                <p className="text-sm text-gray-600">
-                  STR: {card.strength || 'N/A'} | AGI: {card.agility || 'N/A'}
-                </p>
-              )}
-            </Card>
-          </motion.div>
+            )}
+          </Card>
+        </motion.div>
         );
       })}
     </div>

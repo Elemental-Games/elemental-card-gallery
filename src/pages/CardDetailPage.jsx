@@ -299,15 +299,15 @@ const CardDetailPage = () => {
               <div className="mb-6">
                 <h3 className="text-lg font-semibold text-purple-300 mb-2">Card Fact</h3>
                 <p className="text-purple-200 leading-relaxed">{card.cardFact}</p>
-              </div>
-            )}
-            
+        </div>
+      )}
+
             {card.loreDescription && (
               <div>
                 <h3 className="text-lg font-semibold text-purple-300 mb-2">Lore Description</h3>
                 <p className="text-purple-200 leading-relaxed">{card.loreDescription}</p>
-              </div>
-            )}
+        </div>
+      )}
           </div>
         </div>
       )}

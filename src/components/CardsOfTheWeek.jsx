@@ -307,60 +307,60 @@ const CardsOfTheWeek = () => {
                 style={{ maxWidth: "240px" }}
               >
                 <Link to={`/cards/${card.id}`} className="block">
-                  <div className="relative overflow-hidden rounded-xl bg-purple-950/40 border border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300">
-                    <div className="w-full aspect-[5/7] relative">
-                      {card.status === 'available' ? (
-                        <>
-                          <img 
+                <div className="relative overflow-hidden rounded-xl bg-purple-950/40 border border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300">
+                  <div className="w-full aspect-[5/7] relative">
+                    {card.status === 'available' ? (
+                      <>
+                        <img 
                             src={getCardImagePath(card).marketingPath}
-                            alt={card.name}
+                          alt={card.name}
                             className={`w-full h-full object-contain ${
                               ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
                                 ? 'transform rotate-90' 
                                 : ''
                             }`}
                             onError={createCardImageErrorHandler(card)}
-                          />
-                          <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                        />
+                        <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
                             RELEASED
-                          </div>
-                          {/* Hover info overlay */}
-                          <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div className="text-center p-4">
-                              <div className="text-yellow-400 font-bold text-lg">{card.name}</div>
+                        </div>
+                        {/* Hover info overlay */}
+                        <div className="absolute inset-0 bg-black/80 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="text-center p-4">
+                            <div className="text-yellow-400 font-bold text-lg">{card.name}</div>
                               <div className="text-purple-200 text-sm mb-2">{card.element} Type</div>
-                              <div className="text-purple-300 text-xs">{card.description}</div>
-                            </div>
+                            <div className="text-purple-300 text-xs">{card.description}</div>
                           </div>
-                        </>
-                      ) : (
-                        <>
-                          <img 
-                            src="/Card_Back.png" 
-                            alt="Card Back"
-                            className="w-full h-full object-contain"
-                          />
-                          {/* Coming Soon Overlay */}
-                          <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                            <div className="text-center">
-                              <div className="text-4xl mb-2">🔒</div>
-                              <div className="text-yellow-400 font-bold text-lg">{card.name}</div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <img 
+                          src="/Card_Back.png" 
+                          alt="Card Back"
+                          className="w-full h-full object-contain"
+                        />
+                        {/* Coming Soon Overlay */}
+                        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                          <div className="text-center">
+                            <div className="text-4xl mb-2">🔒</div>
+                            <div className="text-yellow-400 font-bold text-lg">{card.name}</div>
                               <div className="text-purple-200 text-sm">{card.displayDate}</div>
-                            </div>
                           </div>
-                        </>
-                      )}
-                    </div>
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold text-white mb-2">{card.name}</h3>
-                      <div className="flex justify-between text-sm">
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  <div className="p-4">
+                    <h3 className="text-lg font-bold text-white mb-2">{card.name}</h3>
+                    <div className="flex justify-between text-sm">
                         <span className="text-purple-300">{card.element} Type</span>
-                        <span className={`font-bold ${card.status === 'available' ? 'text-green-400' : 'text-orange-400'}`}>
-                          {card.status === 'available' ? 'Available Now!' : 'Coming Soon'}
-                        </span>
-                      </div>
+                      <span className={`font-bold ${card.status === 'available' ? 'text-green-400' : 'text-orange-400'}`}>
+                        {card.status === 'available' ? 'Available Now!' : 'Coming Soon'}
+                      </span>
                     </div>
                   </div>
+                </div>
                 </Link>
               </motion.div>
             );

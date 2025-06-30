@@ -5,9 +5,9 @@ const GrivossPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-green-800/10 to-green-800/30">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/kingdoms/grivoss_realm.png" 
+          src="/images/kingdom-headers/grivoss-header.webp" 
           alt="Vast Kingdom of Grivoss" 
           className="w-full h-full object-cover"
         />
@@ -34,6 +34,9 @@ const GrivossPage = () => {
             we've become stewards of every terrain - the verdant forests, life-giving rivers, mysterious caverns, and 
             even the challenging badlands. Our cities blend seamlessly with nature, built both among the treetops and 
             within the earth itself.
+          </p>
+          <p className="text-xs text-gray-400 italic mt-4">
+            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
           </p>
         </Card>
 

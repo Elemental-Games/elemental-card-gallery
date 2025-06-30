@@ -5,9 +5,9 @@ const ZalosPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/kingdoms/zalos_citadels.png" 
+          src="/images/kingdom-headers/zalos-header.webp" 
           alt="Zalos Citadels" 
           className="w-full h-full object-cover"
         />
@@ -20,7 +20,7 @@ const ZalosPage = () => {
       {/* Welcome Statement */}
       <div className="container mx-auto py-12 text-center">
         <h2 className="text-xl text-purple-200">
-          <span className="font-bold">Welcome to Zalos,</span> jewel of the skies and home of the Air Elementals. Under the guidance of Galea the Air Elementalist, 
+          <span className="font-bold">Welcome to Zalos,</span> jewel of the skies and home of Galea, the Air Elementalist. Under the guidance of Galea, 
           our kingdom has soared to unprecedented heights – quite literally!
         </h2>
       </div>
@@ -31,8 +31,11 @@ const ZalosPage = () => {
           <h2 className="text-2xl font-heading mb-4 text-yellow-400">Our Noble Heritage</h2>
           <p className="text-lg">
             When Galea first established our kingdom, she chose the highest peaks of Kinbrold to build our home. 
-            Through mastery of air magic, our ancestors learned to lift entire islands into the sky, creating the 
+            Through her mastery of air, she in accordance with our ancestors, learned to lift entire islands into the sky, creating the 
             floating kingdom we call home today.
+          </p>
+          <p className="text-xs text-gray-400 italic mt-4">
+            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
           </p>
         </Card>
 
@@ -42,11 +45,11 @@ const ZalosPage = () => {
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Life Among the Clouds</h2>
             <p className="text-lg">
               Life in Zalos embraces our element in every way. Our cities float on massive islands held aloft by 
-              ancient air magic, connected by bridges woven from concentrated wind. The legendary Sky Knights patrol 
+               air, connected by bridges woven from concentrated wind. The infamous Sky Knights patrol 
               our domain on wind gliders, maintaining peace and order throughout our aerial realm.
             </p>
             <p className="text-lg mt-4">
-              Our architecture reflects our philosophy: open, free, and ever-reaching upward. Crystal spires pierce 
+              Our architecture reflects our philosophy: open, free, and ever-reaching upward. Our spires pierce 
               the clouds, while wind-powered elevators carry citizens between levels. Every building features meditation 
               platforms where one can commune with the winds and practice the art of air manipulation.
             </p>

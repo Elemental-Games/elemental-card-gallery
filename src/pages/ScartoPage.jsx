@@ -5,9 +5,9 @@ const ScartoPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-red-800/10 to-red-800/30">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/kingdoms/scarto_volcanic.png" 
+          src="/images/kingdom-headers/scarto-header.webp" 
           alt="Volcanic Scarto" 
           className="w-full h-full object-cover"
         />
@@ -33,6 +33,9 @@ const ScartoPage = () => {
             When Osao claimed this volcanic realm, many thought it uninhabitable. Through mastery of fire magic and sheer will, 
             we transformed these molten peaks into a thriving civilization. Our cities rise from the heat, protected by advanced 
             cooling systems and powered by the endless energy of the earth's core.
+          </p>
+          <p className="text-xs text-gray-400 italic mt-4">
+            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
           </p>
         </Card>
 

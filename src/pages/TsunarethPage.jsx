@@ -5,9 +5,9 @@ const TsunarethPage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-800/10 to-blue-800/30">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/kingdoms/tsunareth_dome.png" 
+          src="/images/kingdom-headers/tsunareth-header.webp" 
           alt="Tsunareth Crystal City" 
           className="w-full h-full object-cover"
         />
@@ -32,6 +32,9 @@ const TsunarethPage = () => {
           <p className="text-lg">
             When Mek founded our kingdom, they recognized the power in adaptability. Our civilization spans three tiers - surface harbors for commerce, 
             mid-level coral cities for daily life, and the sacred depths where our most ancient secrets dwell.
+          </p>
+          <p className="text-xs text-gray-400 italic mt-4">
+            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
           </p>
         </Card>
 

@@ -35,6 +35,9 @@ const EvermerePage = () => {
               The streets buzz with the energy of multiple elements, while citizens from all kingdoms 
               come together in celebration of their shared heritage.
             </p>
+            <p className="text-xs text-gray-400 italic mt-4">
+              The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
+            </p>
           </Card>
           <img 
             src="/kingdoms/evermere_life.png" 

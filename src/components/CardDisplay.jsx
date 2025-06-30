@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AlertCircle } from "lucide-react";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtils';
 
 const CardDisplay = ({ card, variant = 'default', className = '' }) => {
   const [isFlipped, setIsFlipped] = useState(false);
@@ -42,13 +43,20 @@ const CardDisplay = ({ card, variant = 'default', className = '' }) => {
     );
   }
 
+  // Get the best image path for this card
+  const { marketingPath } = getCardImagePath(card);
+
   const cardContent = (
     <>
       <img 
-        src={`/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`}
+        src={marketingPath}
         alt={card.name} 
-        className={`${imageClasses[variant]} ${className}`}
-        onError={handleImageError}
+        className={`${imageClasses[variant]} ${className} ${
+          ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
+            ? 'transform rotate-90' 
+            : ''
+        }`}
+        onError={createCardImageErrorHandler(card)}
       />
       {variant === 'default' && (
         <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-2">

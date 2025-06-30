@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link, useLocation } from 'react-router-dom';
-import { motion } from 'framer-motion';
 import CardDetailSidebar from '@/components/CardDetailSidebar';
+import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtils';
 
 const CardDetailPage = () => {
   const [card, setCard] = useState(null);
@@ -80,6 +80,9 @@ const CardDetailPage = () => {
     );
   }
 
+  // Get the best image path for this card
+  const { marketingPath } = getCardImagePath(card);
+
   return (
     <div className="container mx-auto px-4 py-8">
       <Link 
@@ -93,17 +96,14 @@ const CardDetailPage = () => {
         <div className="flex justify-center">
           <div className={`relative ${card.type === 'Shield' ? 'w-full pt-[100%]' : ''}`}>
             <img
-              src={card.webpPath}
+              src={marketingPath}
               alt={card.name}
               className={`rounded-lg shadow-lg ${
                 card.type === 'Shield' 
                   ? 'absolute top-0 left-0 w-full h-full object-contain'
                   : 'max-w-md w-full'
               }`}
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = card.imagePath || `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
-              }}
+              onError={createCardImageErrorHandler(card)}
             />
           </div>
         </div>
@@ -246,12 +246,17 @@ const CardDetailPage = () => {
               <h2 className="text-2xl font-bold text-yellow-400 mb-4">Synergy Cards</h2>
               <div className="flex flex-wrap gap-4">
                 {card.synergies.map((synergy) => {
-                  let id = synergy.id || synergy;
-                  let name = synergy.name || id;
-                  let imgPath = `/images/cards/new/${id.replace(/-/g, ' ')}.webp`;
+                  const synergyCard = { id: synergy.id || synergy };
+                  const { marketingPath: synergyMarketingPath } = getCardImagePath(synergyCard);
+                  
                   return (
-                    <div key={id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard({ id })}>
-                      <img src={imgPath} alt={name} className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950" />
+                    <div key={synergyCard.id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard(synergyCard)}>
+                      <img 
+                        src={synergyMarketingPath} 
+                        alt={synergy.name || synergyCard.id} 
+                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950"
+                        onError={createCardImageErrorHandler(synergyCard)}
+                      />
                     </div>
                   );
                 })}
@@ -264,12 +269,17 @@ const CardDetailPage = () => {
               <h2 className="text-2xl font-bold text-yellow-400 mb-4">Counter Cards</h2>
               <div className="flex flex-wrap gap-4">
                 {card.counters.map((counter) => {
-                  let id = counter.id || counter;
-                  let name = counter.name || id;
-                  let imgPath = `/images/cards/new/${id.replace(/-/g, ' ')}.webp`;
+                  const counterCard = { id: counter.id || counter };
+                  const { marketingPath: counterMarketingPath } = getCardImagePath(counterCard);
+                  
                   return (
-                    <div key={id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard({ id })}>
-                      <img src={imgPath} alt={name} className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950" />
+                    <div key={counterCard.id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard(counterCard)}>
+                      <img 
+                        src={counterMarketingPath} 
+                        alt={counter.name || counterCard.id} 
+                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950"
+                        onError={createCardImageErrorHandler(counterCard)}
+                      />
                     </div>
                   );
                 })}
@@ -280,67 +290,24 @@ const CardDetailPage = () => {
       ) : null}
 
       {/* Lore section */}
-      {(card.loreDescription || card.cardFact) && (
+      {(card.cardFact || card.loreDescription) && (
         <div className="max-w-6xl mx-auto mt-8">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="bg-purple-950/70 p-6 rounded-lg border border-purple-500/30"
-          >
-            <h2 className="text-2xl font-bold text-yellow-400 mb-4">{card.name} in the World of Kinbrold</h2>
+          <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-8">
+            <h2 className="text-2xl font-bold text-yellow-400 mb-6 text-center">Card Lore</h2>
             
-            <div className="space-y-6">
-              {card.loreDescription && (
+            {card.cardFact && (
+              <div className="mb-6">
+                <h3 className="text-lg font-semibold text-purple-300 mb-2">Card Fact</h3>
+                <p className="text-purple-200 leading-relaxed">{card.cardFact}</p>
+              </div>
+            )}
+            
+            {card.loreDescription && (
               <div>
-                <h3 className="text-xl font-semibold text-purple-300 mb-2">Backstory</h3>
-                <p className="text-white leading-relaxed">
-                    {card.loreDescription}
-                  </p>
-        </div>
-      )}
-
-              {card.cardFact && (
-              <div>
-                <h3 className="text-xl font-semibold text-purple-300 mb-2">Card Fact</h3>
-                <p className="text-white leading-relaxed">
-                    {card.cardFact}
-                </p>
-        </div>
-      )}
-            </div>
-          </motion.div>
-        </div>
-      )}
-
-      {/* News Section with YouTube Thumbnails at the bottom */}
-      {Array.isArray(card.news) && card.news.length > 0 && (
-        <div className="max-w-6xl mx-auto mt-8">
-          <h2 className="text-2xl font-bold text-yellow-400 mb-4">News</h2>
-          <div className="flex flex-wrap gap-4">
-            {card.news.map((item) => {
-              let url = typeof item === 'string' ? item : (item && typeof item === 'object' && typeof item.link === 'string' ? item.link : null);
-              let title = (item && typeof item === 'object' && item.title) ? item.title : url;
-              let videoId = null;
-              let isYouTube = false;
-              if (typeof url === 'string' && url.includes('youtube.com/watch?v=')) {
-                isYouTube = true;
-                videoId = url.split('v=')[1]?.split('&')[0];
-              }
-              if (isYouTube && videoId) {
-                return (
-                  <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="block w-40 aspect-square rounded overflow-hidden border-2 border-yellow-400 hover:scale-105 transition-transform">
-                    <img src={`https://img.youtube.com/vi/${videoId}/hqdefault.jpg`} alt={title} className="w-full h-full object-cover" />
-                  </a>
-                );
-              }
-              // Fallback for non-YouTube links
-              return (
-                <a key={url} href={url} target="_blank" rel="noopener noreferrer" className="block w-40 aspect-square rounded overflow-hidden border-2 border-yellow-400 flex items-center justify-center bg-purple-900 text-yellow-400">
-                  <span className="text-center px-2">{title}</span>
-                </a>
-              );
-            })}
+                <h3 className="text-lg font-semibold text-purple-300 mb-2">Lore Description</h3>
+                <p className="text-purple-200 leading-relaxed">{card.loreDescription}</p>
+              </div>
+            )}
           </div>
         </div>
       )}

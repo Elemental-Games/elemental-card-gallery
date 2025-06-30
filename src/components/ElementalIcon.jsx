@@ -1,20 +1,20 @@
-import React from 'react';
+
 
 const ElementalIcon = ({ element, className }) => {
   const getIconPath = (element) => {
     switch (element.toLowerCase()) {
       case 'air':
       case 'zalos':
-        return '/icons/Air.png';
+        return '/images/cards/new-marketing/air silver.webp';
       case 'water':
       case 'tsunareth':
-        return '/icons/Water.png';
+        return '/images/cards/new-marketing/water silver.webp';
       case 'fire':
       case 'scarto':
-        return '/icons/Fire.png';
+        return '/images/cards/new-marketing/fire silver.webp';
       case 'earth':
       case 'grivoss':
-        return '/icons/Earth.png';
+        return '/images/cards/new-marketing/earth silver.webp';
       case 'frost':
       case 'frozen_ridge':
         return '/icons/Frost.png';

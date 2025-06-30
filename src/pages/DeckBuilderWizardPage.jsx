@@ -7,10 +7,10 @@ import { toast } from 'sonner';
 import CardGallery from '@/components/DeckBuilder/CardGallery';
 
 const ELEMENTS = [
-  { id: 'Air', name: 'Air', icon: '/icons/Air.png' },
-  { id: 'Water', name: 'Water', icon: '/icons/Water.png' },
-  { id: 'Fire', name: 'Fire', icon: '/icons/Fire.png' },
-  { id: 'Earth', name: 'Earth', icon: '/icons/Earth.png' }
+  { id: 'Air', name: 'Air', icon: '/images/cards/new-marketing/air silver.webp' },
+  { id: 'Water', name: 'Water', icon: '/images/cards/new-marketing/water silver.webp' },
+  { id: 'Fire', name: 'Fire', icon: '/images/cards/new-marketing/fire silver.webp' },
+  { id: 'Earth', name: 'Earth', icon: '/images/cards/new-marketing/earth silver.webp' }
 ];
 
 const COMBINATIONS = {

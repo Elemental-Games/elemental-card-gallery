@@ -54,22 +54,22 @@ const HowToPlayPage = () => {
   const elementalIcons = {
     air: {
       name: "Air",
-      image: "/icons/Air.png",
+      image: "/images/cards/new-marketing/air silver.webp",
       description: "Swift and evasive"
     },
     water: {
       name: "Water",
-      image: "/icons/Water.png",
+      image: "/images/cards/new-marketing/water silver.webp",
       description: "Fluid and adaptive"
     },
     fire: {
       name: "Fire",
-      image: "/icons/Fire.png",
+      image: "/images/cards/new-marketing/fire silver.webp",
       description: "Powerful and aggressive"
     },
     earth: {
       name: "Earth",
-      image: "/icons/Earth.png",
+      image: "/images/cards/new-marketing/earth silver.webp",
       description: "Sturdy and defensive"
     }
   };
@@ -473,7 +473,7 @@ const HowToPlayPage = () => {
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="bg-purple-950/40 p-4 rounded-lg">
                           <div className="flex items-center mb-2">
-                            <img src="/icons/Air.png" alt="Air Icon" className="w-22 h-24 mr-2" />
+                            <img src="/images/cards/new-marketing/air silver.webp" alt="Air Icon" className="w-22 h-24 mr-2" />
                             <h4 className="text-xl font-bold text-white">Air</h4>
                           </div>
                           <ul className="list-disc list-inside text-base">
@@ -485,7 +485,7 @@ const HowToPlayPage = () => {
                         
                         <div className="bg-purple-950/40 p-4 rounded-lg">
                           <div className="flex items-center mb-2">
-                            <img src="/icons/Water.png" alt="Water Icon" className="w-22 h-24 mr-2" />
+                            <img src="/images/cards/new-marketing/water silver.webp" alt="Water Icon" className="w-22 h-24 mr-2" />
                             <h4 className="text-xl font-bold text-white">Water</h4>
                           </div>
                           <ul className="list-disc list-inside text-base">
@@ -497,7 +497,7 @@ const HowToPlayPage = () => {
                         
                         <div className="bg-purple-950/40 p-4 rounded-lg">
                           <div className="flex items-center mb-2">
-                            <img src="/icons/Fire.png" alt="Fire Icon" className="w-22 h-24 mr-2" />
+                            <img src="/images/cards/new-marketing/fire silver.webp" alt="Fire Icon" className="w-22 h-24 mr-2" />
                             <h4 className="text-xl font-bold text-white">Fire</h4>
                           </div>
                           <ul className="list-disc list-inside text-base">
@@ -509,7 +509,7 @@ const HowToPlayPage = () => {
                         
                         <div className="bg-purple-950/40 p-4 rounded-lg">
                           <div className="flex items-center mb-2">
-                            <img src="/icons/Earth.png" alt="Earth Icon" className="w-22 h-24 mr-2" />
+                            <img src="/images/cards/new-marketing/earth silver.webp" alt="Earth Icon" className="w-22 h-24 mr-2" />
                             <h4 className="text-xl font-bold text-white">Earth</h4>
                           </div>
                           <ul className="list-disc list-inside text-base">

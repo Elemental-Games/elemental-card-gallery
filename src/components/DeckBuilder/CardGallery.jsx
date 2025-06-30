@@ -12,6 +12,7 @@ import {
   DialogDescription,
   DialogFooter,
 } from "@/components/ui/dialog";
+import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtils';
 
 const CardGallery = ({ cards = [], onCardSelect, selectedCards = [], maxPerElement = 12, step, combination }) => {
   const [filteredCards, setFilteredCards] = useState([]);
@@ -266,13 +267,14 @@ const CardGallery = ({ cards = [], onCardSelect, selectedCards = [], maxPerEleme
           >
             <div className="relative aspect-[2/3] w-full">
               <img 
-                src={`/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`} 
+                src={getCardImagePath(card).marketingPath} 
                 alt={card.name} 
-                className="w-full h-full object-contain rounded-lg"
-                onError={(e) => {
-                  e.target.onerror = null;
-                  e.target.src = `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
-                }}
+                className={`w-full h-full object-contain rounded-lg ${
+                  ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
+                    ? 'transform rotate-90' 
+                    : ''
+                }`}
+                onError={createCardImageErrorHandler(card)}
               />
               
               <div className="absolute top-2 left-2 bg-purple-900/80 text-white px-3 py-1.5 rounded-full text-lg font-bold min-w-[2rem] text-center">

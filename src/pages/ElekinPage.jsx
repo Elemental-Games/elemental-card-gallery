@@ -22,28 +22,28 @@ const ElekinPage = () => {
   const elements = [
     { 
       name: 'Air', 
-      icon: '/icons/Air.png',
+      icon: '/images/cards/new-marketing/air silver.webp',
       description: 'Swift and evasive',
       glowColor: 'shadow-[0_0_20px_rgba(148,163,184,0.8)]', // slate-400 glow
       borderColor: 'border-slate-400'
     },
     { 
       name: 'Water', 
-      icon: '/icons/Water.png',
+      icon: '/images/cards/new-marketing/water silver.webp',
       description: 'Fluid and adaptive',
       glowColor: 'shadow-[0_0_20px_rgba(37,99,235,0.8)]', // blue-600 glow
       borderColor: 'border-blue-500'
     },
     { 
       name: 'Fire', 
-      icon: '/icons/Fire.png',
+      icon: '/images/cards/new-marketing/fire silver.webp',
       description: 'Aggressive and destructive',
       glowColor: 'shadow-[0_0_20px_rgba(239,68,68,0.8)]', // red-500 glow
       borderColor: 'border-red-500'
     },
     { 
       name: 'Earth', 
-      icon: '/icons/Earth.png',
+      icon: '/images/cards/new-marketing/earth silver.webp',
       description: 'Strong and defensive',
       glowColor: 'shadow-[0_0_20px_rgba(22,163,74,0.8)]', // green-600 glow
       borderColor: 'border-green-500'
@@ -155,14 +155,14 @@ const ElekinPage = () => {
                   whileHover={{ scale: 1.05, y: -5 }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
-                  <div className="w-48 h-48 -mt-5 -mb-10 flex items-center justify-center">
+                  <div className="w-32 h-32 -mt-5 -mb-10 flex items-center justify-center">
                     <img 
                       src={element.icon} 
                       alt={`${element.name} Element`}
-                      className="w-full h-full object-contain"
+                      className="w-full h-full object-contain mb-7 mt-2"
                     />
                   </div>
-                  <h3 className="text-xl font-bold text-white mb-2 text-center">{element.name}</h3>
+                  <h3 className="text-xl font-bold text-white mb-2 mt-9 text-center">{element.name}</h3>
                   <p className="text-white/90 text-sm text-center">{element.description}</p>
                   
                   {/* Hover effect overlay */}

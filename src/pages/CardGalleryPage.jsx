@@ -3,9 +3,239 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Clock, Gift, Star, Mail } from 'lucide-react';
 import SubscribeButton from '@/components/SubscribeButton';
+import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtils';
 
 const CardGalleryPage = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
+
+  // Helper function to determine if card is available (today or earlier)
+  const isCardAvailable = (dateString) => {
+    const today = new Date();
+    // Use 2025 for upcoming marketing cards, 2024 for already released cards
+    const year = dateString.includes('May') ? 2024 : 2025;
+    const targetDate = new Date(dateString + ', ' + year);
+    return targetDate <= today;
+  };
+
+  // Helper function to determine if a date is tomorrow
+  const isTomorrow = (dateString) => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(today.getDate() + 1);
+    
+    // Use 2025 for upcoming marketing cards, 2024 for already released cards
+    const year = dateString.includes('May') ? 2024 : 2025;
+    const targetDate = new Date(dateString + ', ' + year);
+    
+    return targetDate.toDateString() === tomorrow.toDateString();
+  };
+
+  // Helper function to format release date
+  const formatReleaseDate = (dateString) => {
+    if (isTomorrow(dateString)) {
+      return 'Releasing Tomorrow';
+    }
+    
+    // Add ordinal suffix for display
+    const addOrdinalSuffix = (dateStr) => {
+      // Extract the day number from the date string
+      const dayMatch = dateStr.match(/(\w+)\s+(\d+)/);
+      if (dayMatch) {
+        const month = dayMatch[1];
+        const day = parseInt(dayMatch[2]);
+        
+        const getOrdinal = (n) => {
+          const s = ["th", "st", "nd", "rd"];
+          const v = n % 100;
+          return n + (s[(v - 20) % 10] || s[v] || s[0]);
+        };
+        
+        return `${month} ${getOrdinal(day)}`;
+      }
+      return dateStr;
+    };
+    
+    return addOrdinalSuffix(dateString);
+  };
+
+  // Currently released cards (already available)
+  const releasedCards = [
+    { 
+      id: 'nimblefoot', 
+      name: 'Nimblefoot', 
+      element: 'Earth',
+      releaseDate: 'May 1' // Set to past date to show as released
+    },
+    { 
+      id: 'tuskhammer', 
+      name: 'Tuskhammer', 
+      element: 'Earth',
+      releaseDate: 'May 2' // Set to past date to show as released
+    },
+    { 
+      id: 'terra', 
+      name: 'Terra', 
+      element: 'Earth',
+      releaseDate: 'May 3' // Set to past date to show as released
+    }
+  ];
+
+  // Full card reveal schedule (upcoming cards)
+  const upcomingMarketingCards = [
+    { 
+      id: 'swoop', 
+      name: 'Swoop', 
+      element: 'Air',
+      releaseDate: 'July 1'
+    },
+    { 
+      id: 'dumoles', 
+      name: 'Dumoles', 
+      element: 'Earth',
+      releaseDate: 'July 2'
+    },
+    { 
+      id: 'nimbus', 
+      name: 'Nimbus', 
+      element: 'Air',
+      releaseDate: 'July 3'
+    },
+    { 
+      id: 'galea', 
+      name: 'Galea', 
+      element: 'Water',
+      releaseDate: 'July 4'
+    },
+    { 
+      id: 'balon', 
+      name: 'Balon', 
+      element: 'Fire',
+      releaseDate: 'July 5'
+    },
+    { 
+      id: 'lifebound-armour', 
+      name: 'Lifebound Armour', 
+      element: 'Earth',
+      releaseDate: 'July 8'
+    },
+    { 
+      id: 'rapid-recovery', 
+      name: 'Rapid Recovery', 
+      element: 'Water',
+      releaseDate: 'July 9'
+    },
+    { 
+      id: 'essence-exchange', 
+      name: 'Essence Exchange', 
+      element: 'Special',
+      releaseDate: 'July 10'
+    },
+    { 
+      id: 'revival-rain', 
+      name: 'Revival Rain', 
+      element: 'Water',
+      releaseDate: 'July 11'
+    },
+    { 
+      id: 'guardians-sanctuary', 
+      name: "Guardian's Sanctuary", 
+      element: 'Earth',
+      releaseDate: 'July 12'
+    },
+    { 
+      id: 'draconic-shield', 
+      name: 'Draconic Shield', 
+      element: 'Fire',
+      releaseDate: 'July 12'
+    },
+    { 
+      id: 'celestial-fortress', 
+      name: 'Celestial Fortress', 
+      element: 'Air',
+      releaseDate: 'July 12'
+    },
+    { 
+      id: 'ember-flicker', 
+      name: 'Ember Flicker', 
+      element: 'Fire',
+      releaseDate: 'July 15'
+    },
+    { 
+      id: 'lavrok', 
+      name: 'Lavrok', 
+      element: 'Fire',
+      releaseDate: 'July 16'
+    },
+    { 
+      id: 'ignus', 
+      name: 'Ignus', 
+      element: 'Fire',
+      releaseDate: 'July 17'
+    },
+    { 
+      id: 'osao', 
+      name: 'Osao', 
+      element: 'Earth',
+      releaseDate: 'July 18'
+    },
+    { 
+      id: 'aqua-dart', 
+      name: 'Aqua Dart', 
+      element: 'Water',
+      releaseDate: 'July 21'
+    },
+    { 
+      id: 'malletin', 
+      name: 'Malletin', 
+      element: 'Earth',
+      releaseDate: 'July 22'
+    },
+    { 
+      id: 'torrent', 
+      name: 'Torrent', 
+      element: 'Water',
+      releaseDate: 'July 23'
+    },
+    { 
+      id: 'mek', 
+      name: 'Mek', 
+      element: 'Earth',
+      releaseDate: 'July 24'
+    }
+  ];
+
+  // Combine all cards and add status
+  const allMarketingCards = [...releasedCards, ...upcomingMarketingCards];
+
+  // Add status based on release date
+  const cardsWithStatus = allMarketingCards.map(card => ({
+    ...card,
+    status: isCardAvailable(card.releaseDate) ? 'available' : 'upcoming',
+    displayDate: formatReleaseDate(card.releaseDate)
+  }));
+
+  // Sort cards: released cards first, then upcoming cards by release date
+  const sortedCards = cardsWithStatus.sort((a, b) => {
+    if (a.status === 'available' && b.status === 'upcoming') return -1;
+    if (a.status === 'upcoming' && b.status === 'available') return 1;
+    
+    // If both have same status, sort by release date
+    const yearA = a.releaseDate.includes('May') ? 2024 : 2025;
+    const yearB = b.releaseDate.includes('May') ? 2024 : 2025;
+    const dateA = new Date(a.releaseDate + ', ' + yearA);
+    const dateB = new Date(b.releaseDate + ', ' + yearB);
+    return dateA - dateB;
+  });
+
+  // Calculate collection progress
+  const availableCards = sortedCards.filter(card => card.status === 'available');
+  
+  // Total cards to be released before launch: 29 (3 already released + 20 upcoming + 6 more)
+  const totalCardsBeforeLaunch = 29;
+  const cardsLeftToRelease = totalCardsBeforeLaunch - availableCards.length;
+
+  // For display, show first 6 cards (prioritizing released cards first)
+  const marketingCards = sortedCards.slice(0, 6);
 
   // Countdown to first card reveal (June 23rd, 2025) and subsequent weekly reveals
   useEffect(() => {
@@ -45,13 +275,7 @@ const CardGalleryPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  // Placeholder card data
-  const cardPlaceholders = [
-    { id: 1, week: 'Week 1', status: 'coming-soon' },
-    { id: 2, week: 'Week 1', status: 'coming-soon' },
-    { id: 3, week: 'Week 1', status: 'coming-soon' },
-    { id: 4, week: 'Week 1', status: 'coming-soon' }
-  ];
+  const [showFullCollection, setShowFullCollection] = useState(false);
 
   return (
     <>
@@ -87,7 +311,7 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-green-800/30 to-green-900/50 border-2 border-green-500/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(34,197,94,0.4)] hover:shadow-[0_0_40px_rgba(34,197,94,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <img src="/icons/Earth.png" alt="Earth" className="w-18 h-20" />
+                  <img src="/images/cards/new-marketing/earth silver.webp" alt="Earth" className="w-14 h-12 mr-3" />
                   <h3 className="text-green-400 font-bold text-xl">Week 1: Grivoss</h3>
                 </div>
                 <p className="text-green-200 text-base mb-2">Earth Kingdom & Earth Creatures</p>
@@ -98,7 +322,7 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-gray-600/30 to-gray-800/50 border-2 border-gray-400/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(156,163,175,0.4)] hover:shadow-[0_0_40px_rgba(156,163,175,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <img src="/icons/Air.png" alt="Air" className="w-18 h-20" />
+                  <img src="/images/cards/new-marketing/air silver.webp" alt="Air" className="w-14 h-12 mr-3" />
                   <h3 className="text-gray-300 font-bold text-xl">Week 2: Zalos</h3>
                 </div>
                 <p className="text-gray-200 text-base mb-2">Air Kingdom & Air Creatures</p>
@@ -109,8 +333,8 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-purple-700/30 to-purple-900/50 border-2 border-purple-400/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(168,85,247,0.4)] hover:shadow-[0_0_40px_rgba(168,85,247,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <img src="/icons/Rune.png" alt="Rune" className="w-8 h-13 mr-2" />
-                  <h3 className="text-purple-400 font-bold text-xl">Week 3: Evermere</h3>
+                  <img src="/icons/Rune.png" alt="Rune" className="w-8 h-13 mr-2 -mb-5" />
+                  <h3 className="text-purple-400 font-bold text-xl -mb-5">Week 3: Evermere</h3>
                 </div>
                 <p className="text-purple-200 text-base mb-2 mt-8">Central Kingdom & Non-Creatures</p>
                 <p className="text-purple-300 text-sm mb-2">Evermere Area • 2 Runes • 2 Counters • 3 Shields</p>
@@ -120,7 +344,7 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-red-800/30 to-red-900/50 border-2 border-red-500/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(239,68,68,0.4)] hover:shadow-[0_0_40px_rgba(239,68,68,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <img src="/icons/Fire.png" alt="Fire" className="w-18 h-20" />
+                  <img src="/images/cards/new-marketing/fire silver.webp" alt="Fire" className="w-14 h-12 mr-3" />
                   <h3 className="text-red-400 font-bold text-xl">Week 4: Scarto</h3>
                 </div>
                 <p className="text-red-200 text-base mb-2">Fire Kingdom & Fire Creatures</p>
@@ -131,7 +355,7 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-blue-800/30 to-blue-900/50 border-2 border-blue-500/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(59,130,246,0.4)] hover:shadow-[0_0_40px_rgba(59,130,246,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <img src="/icons/Water.png" alt="Water" className="w-18 h-20" />
+                  <img src="/images/cards/new-marketing/water silver.webp" alt="Water" className="w-14 h-12 mr-3" />
                   <h3 className="text-blue-400 font-bold text-xl">Week 5: Tsunareth</h3>
                 </div>
                 <p className="text-blue-200 text-base mb-2">Water Kingdom & Water Creatures</p>
@@ -142,8 +366,8 @@ const CardGalleryPage = () => {
               <div className="bg-gradient-to-br from-yellow-700/30 to-orange-800/50 border-2 border-yellow-500/50 rounded-xl p-6 text-center
                               shadow-[0_0_25px_rgba(234,179,8,0.4)] hover:shadow-[0_0_40px_rgba(234,179,8,0.6)] transition-all duration-300 hover:scale-105">
                 <div className="flex items-center justify-center mb-3">
-                  <span className="text-5xl mr-2 mt-3">🐉</span>
-                  <h3 className="text-yellow-400 font-bold text-xl mt-3">Week 6: Dragons</h3>
+                  <span className="text-5xl mr-2 mt-3 -mb-5">🐉</span>
+                  <h3 className="text-yellow-400 font-bold text-xl mt-3 -mb-5">Week 6: Dragons</h3>
                 </div>
                 <p className="text-yellow-200 text-base mb-2 mt-7">Kinbrold Sub-Regions & Dragons</p>
                 <p className="text-purple-300 text-sm mb-2">6 Sub-Regions • 6 Dragon Cards</p>
@@ -154,7 +378,7 @@ const CardGalleryPage = () => {
             <div className="text-center mt-8">
               <p className="text-purple-300 text-base">
                 <span className="text-yellow-400 font-semibold">29 total preview cards</span> • 
-                <span className="text-white"> 16 Creatures • 6 Dragons • 4 Elementalists • 3 Shields • 2 Runes • 2 Counters</span>
+                <span className="text-white"> 12 Creatures • 6 Dragons • 4 Elementalists • 3 Shields • 2 Runes • 2 Counters</span>
                 <span className="text-yellow-400 font-semibold"><br></br>11 areas unlocked</span> • 
                 <span className="text-white"> 5 Kingdoms • 6 Sub-Regions</span>
               </p>
@@ -205,40 +429,137 @@ const CardGalleryPage = () => {
             </div>
           </div>
 
-          {/* Card Placeholders Grid */}
-          <div className="max-w-4xl mx-auto mb-12">
-            <h2 className="text-2xl font-bold mb-6 text-center">Preview Collection</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {cardPlaceholders.map((placeholder) => (
+          {/* Preview Collection */}
+          <div className="max-w-5xl mx-auto mb-12">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-bold text-center flex-1">🎉 Released Preview Collection</h2>
+              <button
+                onClick={() => setShowFullCollection(!showFullCollection)}
+                className="bg-purple-700 hover:bg-purple-600 text-white px-4 py-2 rounded-lg border border-purple-500/50 transition-all duration-300"
+              >
+                {showFullCollection ? 'Show Preview Only' : 'Show Full Collection'}
+              </button>
+            </div>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              {marketingCards.map((card) => (
                 <motion.div
-                  key={placeholder.id}
+                  key={card.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: placeholder.id * 0.1 }}
+                  transition={{ delay: card.id * 0.1 }}
                   className="relative group"
                 >
-                  <div className="bg-purple-900/50 border border-purple-500/30 rounded-lg p-4 aspect-[2.5/3.5] flex flex-col items-center justify-center relative overflow-hidden">
-                    {/* Card back pattern */}
-                    <div className="absolute inset-0 bg-gradient-to-br from-purple-800/30 to-purple-900/50"></div>
-                    <div className="absolute inset-0 opacity-20">
-                      <div className="w-full h-full bg-[url('/Elekin.png')] bg-center bg-no-repeat bg-contain opacity-30"></div>
-                    </div>
-                    
-                    <div className="relative z-10 text-center group-hover:opacity-0 transition-opacity duration-300">
-                      <div className="text-yellow-400 font-bold text-lg mb-2">{placeholder.week}</div>
-                      <div className="text-purple-300 text-sm">Coming Soon</div>
-                    </div>
-
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                      <div className="text-center text-white p-4">
-                        <Gift className="w-8 h-8 mx-auto mb-2 text-yellow-400" />
-                        <p className="text-sm">Revealed to Early Access Elementals First</p>
-                      </div>
-                    </div>
+                  <div className="bg-purple-900/50 border border-purple-500/30 rounded-lg p-2 aspect-[2.5/3.5] relative overflow-hidden hover:border-yellow-500/50 transition-all duration-300">
+                    {card.status === 'available' ? (
+                      <>
+                        {/* Available card - show actual image */}
+                        <img 
+                          src={getCardImagePath(card).marketingPath}
+                          alt={card.name}
+                          className={`w-full h-full object-contain rounded-lg ${
+                            ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
+                              ? 'transform rotate-90' 
+                              : ''
+                          }`}
+                          onError={createCardImageErrorHandler(card)}
+                        />
+                        <div className="absolute top-2 right-2 bg-green-500 text-white text-xs px-2 py-1 rounded-full font-bold">
+                          RELEASED
+                        </div>
+                        <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-white p-2 rounded-b-lg">
+                          <div className="text-sm font-bold text-center">{card.name}</div>
+                          <div className="text-xs text-purple-300 text-center">{card.element} Element</div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        {/* Upcoming card - show card back with countdown */}
+                        <img 
+                          src="/Card_Back.png" 
+                          alt="Card Back"
+                          className="w-full h-full object-contain rounded-lg"
+                        />
+                        <div className="absolute inset-0 bg-black/70 flex items-center justify-center">
+                          <div className="text-center p-2">
+                            <div className="text-yellow-400 font-bold text-sm mb-1">{card.name}</div>
+                            <div className="text-orange-400 text-xs mb-2">🔒 Coming Soon</div>
+                            <div className="text-purple-200 text-xs">{card.displayDate}</div>
+                          </div>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </motion.div>
               ))}
+              
+              {showFullCollection && (
+                <>
+                  {/* Show remaining upcoming cards with names and dates */}
+                  {sortedCards.slice(6).map((card, index) => (
+                    <motion.div
+                      key={card.id}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (6 + index) * 0.1 }}
+                      className="relative group"
+                    >
+                      <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-2 aspect-[2.5/3.5] relative overflow-hidden">
+                        <img 
+                          src="/Card_Back.png" 
+                          alt="Card Back"
+                          className="w-full h-full object-contain rounded-lg opacity-50"
+                        />
+                        <div className="absolute inset-0 bg-black/60 flex items-center justify-center">
+                          <div className="text-center p-2">
+                            <div className="text-yellow-400 font-bold text-xs mb-1">{card.name}</div>
+                            <div className="text-orange-400 text-xs mb-1">🔒 Coming Soon</div>
+                            <div className="text-purple-200 text-xs">{card.displayDate}</div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                  
+                  {/* Fill remaining slots with placeholder cards if needed */}
+                  {sortedCards.length < 12 && [...Array(12 - sortedCards.length)].map((_, index) => (
+                    <motion.div
+                      key={`placeholder-${index}`}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: (sortedCards.length + index) * 0.1 }}
+                      className="relative group"
+                    >
+                      <div className="bg-purple-900/20 border border-purple-500/10 rounded-lg p-2 aspect-[2.5/3.5] relative overflow-hidden">
+                        <img 
+                          src="/Card_Back.png" 
+                          alt="Card Back"
+                          className="w-full h-full object-contain rounded-lg opacity-30"
+                        />
+                        <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                          <div className="text-center p-2">
+                            <div className="text-purple-400 text-xs">More Coming</div>
+                            <div className="text-purple-400 text-xs">at Launch!</div>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+                  ))}
+                </>
+              )}
+            </div>
+            
+            <div className="text-center mt-6">
+              <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-4 inline-block">
+                <div className="text-lg font-bold text-yellow-400 mb-2">
+                  📊 Collection Progress
+                </div>
+                <div className="text-sm text-purple-200">
+                  <span className="text-green-400 font-bold">{availableCards.length} Cards Released Now</span> • 
+                  <span className="text-orange-400"> {cardsLeftToRelease} More Coming Before Launch</span> • 
+                  <span className="text-purple-300"> 155+ More at Launch</span>
+                </div>
+              </div>
             </div>
           </div>
 

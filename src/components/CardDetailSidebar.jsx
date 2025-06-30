@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { useEffect, useState } from 'react';
-import { getOptimizedCardImage, handleImageError } from '@/utils/imageUtils';
+import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtils';
 
 const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
   const [card, setCard] = useState(null);
@@ -34,10 +34,8 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
 
   if (!card) return null;
 
-  // Generate the original image path
-  const originalImagePath = card.webpPath || `/images/cards/new/${card.id.replace(/-/g, ' ')}.webp`;
-  // Get the optimized image path for large size
-  const optimizedImagePath = getOptimizedCardImage(originalImagePath, 'large');
+  // Get the best image path for this card, prioritizing new-marketing folder
+  const { marketingPath } = getCardImagePath(card);
 
   return (
     <AnimatePresence>
@@ -76,10 +74,14 @@ const CardDetailSidebar = ({ card: initialCard, isOpen, onClose }) => {
             <div className="flex justify-center mb-6">
               <div className="w-[300px]">
                 <img
-                  src={optimizedImagePath}
+                  src={marketingPath}
                   alt={card.name}
-                  className="rounded-lg shadow-lg w-full"
-                  onError={handleImageError}
+                  className={`w-full h-auto object-contain ${
+                    ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
+                      ? 'transform rotate-90' 
+                      : ''
+                  }`}
+                  onError={createCardImageErrorHandler(card)}
                 />
               </div>
             </div>

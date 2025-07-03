@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,50 +10,46 @@ import KeyFeatures from '../components/KeyFeatures';
 import ElementalTransition from '../components/ElementalTransition';
 import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
-import { createClient } from '@supabase/supabase-js';
 import { subscribeEmail } from '../utils/api';
 import { toast } from 'sonner';
 import confetti from 'canvas-confetti';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+import { getCampaignStatus } from '../utils/analytics';
 
 const LandingPage = () => {
+  const navigate = useNavigate();
   const [transitionElement, setTransitionElement] = useState(null);
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
   const [showExitIntent, setShowExitIntent] = useState(false);
   const [hasTriggeredExitIntent, setHasTriggeredExitIntent] = useState(false);
-  const [signupCount, setSignupCount] = useState(15);
-  const [spotsRemaining, setSpotsRemaining] = useState(485);
-  const [showStickyBar, setShowStickyBar] = useState(true);
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
   const [exitIntentSuccess, setExitIntentSuccess] = useState(false);
-  const [contentGatedSuccess, setContentGatedSuccess] = useState(false);
 
-  // Fetch current signup count
+  const [campaignStatus, setCampaignStatus] = useState({ unlockedKingdoms: [], nextUnlock: null, week: 0 });
+
+  // Initialize campaign status and update periodically
   useEffect(() => {
-    const fetchSignupCount = async () => {
-      try {
-        const { count, error } = await supabase
-          .from('subscribers')
-          .select('*', { count: 'exact', head: true });
-        
-        if (!error) {
-          setSignupCount(count || 0);
-        }
-      } catch (err) {
-        console.error('Error fetching signup count:', err);
-      }
+    const updateCampaignStatus = () => {
+      const status = getCampaignStatus();
+      console.log('Campaign Status Update:', {
+        currentDate: new Date().toISOString(),
+        week: status.week,
+        unlockedKingdoms: status.unlockedKingdoms,
+        nextUnlock: status.nextUnlock
+      });
+      setCampaignStatus(status);
     };
-
-    fetchSignupCount();
     
-    // Update count every 30 seconds
-    const interval = setInterval(fetchSignupCount, 30000);
+    // Initial update
+    updateCampaignStatus();
+    
+    // Update every 5 minutes to catch new unlocks
+    const interval = setInterval(updateCampaignStatus, 5 * 60 * 1000);
+    
     return () => clearInterval(interval);
   }, []);
+
+  // Note: Removed signup count tracking for landing page simplicity
 
   // Exit intent detection
   useEffect(() => {
@@ -91,44 +87,72 @@ const LandingPage = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const kingdoms = [
-    { 
-      name: 'Grivoss', 
+  // Dynamic kingdoms based on campaign schedule
+  const KINGDOM_SCHEDULE = [
+    {
+      id: 'grivoss',
+      name: 'Grivoss',
       element: 'Earth',
-      color: 'bg-green-300', 
+      color: 'bg-green-300',
       hoverColor: 'hover:bg-green-400',
       description: 'Mountain fortresses carved from living stone. The Grivoss people are builders, miners, and warriors who never back down from a fight.',
-      week: 1,
-      unlockDate: 'June 23, 2025'
+      path: '/kinbrold/grivoss',
+      unlockDate: new Date('2025-06-23T00:00:00'),
+      week: 1
     },
-    { 
-      name: 'Zalos', 
+    {
+      id: 'zalos',
+      name: 'Zalos',
       element: 'Air',
-      color: 'bg-gray-300', 
+      color: 'bg-gray-300',
       hoverColor: 'hover:bg-gray-400',
       description: 'Sky cities that float among the clouds. Home to brilliant inventors, wind-riders, and scholars who study the ancient arts.',
-      week: 2,
-      unlockDate: 'June 30, 2025'
+      path: '/kinbrold/zalos',
+      unlockDate: new Date('2025-06-30T00:00:00'),
+      week: 2
     },
-    { 
-      name: 'Scarto', 
+    {
+      id: 'scarto',
+      name: 'Scarto',
       element: 'Fire',
-      color: 'bg-red-300', 
+      color: 'bg-red-300',
       hoverColor: 'hover:bg-red-400',
       description: 'Volcanic cities built inside active craters. Fierce warriors and master smiths who forge weapons in eternal fire.',
-      week: 4,
-      unlockDate: 'July 14, 2025'
+      path: '/kinbrold/scarto',
+      unlockDate: new Date('2025-07-14T00:00:00'),
+      week: 4
     },
-    { 
-      name: 'Tsunareth', 
+    {
+      id: 'tsunareth',
+      name: 'Tsunareth',
       element: 'Water',
-      color: 'bg-blue-300', 
+      color: 'bg-blue-300',
       hoverColor: 'hover:bg-blue-400',
       description: 'Riverside cities accompanied by the tides. Wise healers and sea-riders who command the tides and ocean storms.',
-      week: 5,
-      unlockDate: 'July 21, 2025'
+      path: '/kinbrold/tsunareth',
+      unlockDate: new Date('2025-07-21T00:00:00'),
+      week: 5
     }
   ];
+
+  // Helper functions
+  const isKingdomUnlocked = (kingdomId) => {
+    return campaignStatus.unlockedKingdoms.includes(kingdomId);
+  };
+
+  const formatDate = (date) => {
+    return new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric'
+    }).format(date);
+  };
+
+  const handleKingdomClick = (kingdom) => {
+    if (isKingdomUnlocked(kingdom.id)) {
+      navigate(kingdom.path);
+    }
+  };
 
   const handleEmailSubmit = async (e) => {
     e.preventDefault();
@@ -149,10 +173,6 @@ const LandingPage = () => {
         });
         setEmail('');
         setExitIntentSuccess(true);
-        setContentGatedSuccess(true);
-        // Update local count
-        setSignupCount(prev => prev + 1);
-        setSpotsRemaining(prev => prev - 1);
       } else {
         toast.error(result.message || 'Failed to subscribe');
       }
@@ -171,11 +191,7 @@ const LandingPage = () => {
     setExitIntentSuccess(false);
   };
 
-  // Discord link handler for content-gated section
-  const handleDiscordJoinFromContentGated = () => {
-    window.open('https://discord.gg/PVrgZBmcMq', '_blank', 'noopener,noreferrer');
-    setContentGatedSuccess(false);
-  };
+
 
   if (transitionElement) {
     return (
@@ -200,6 +216,50 @@ const LandingPage = () => {
       </Helmet>
       
       <AnimatedCardBackground />
+      {/* Game Overview Section - Updated */}
+      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
+        <div className="max-w-7xl mx-auto">
+          {/* Title and Introduction */}
+          <div className="mb-12 text-center">
+            <div className="flex flex-col lg:flex-row items-center justify-center mb-6 space-y-4 lg:space-y-0 lg:space-x-4">
+              <img 
+                src="/Elekin_Kinbrold.png" 
+                alt="Elekin Logo" 
+                className="w-64 lg:w-96 h-auto -mb-2 -mr-5 -mt-10"
+              />
+              <h2 className="text-3xl lg:text-5xl font-bold">Why TCG Players Choose Elekin</h2>
+            </div>
+            <p className="text-lg text-purple-200 max-w-3xl mx-auto">
+              Revolutionary mechanics that reward strategic thinking. Perfect for competitive Magic, Pokemon, and Yu-Gi-Oh players seeking the next evolution in TCG design.
+            </p>
+          </div>
+          
+                     {/* Features in full width */}
+           <div className="w-full">
+             <KeyFeatures />
+           </div>
+           
+           {/* Learn About Game CTA */}
+           <motion.div
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ delay: 1.0 }}
+             className="mt-8 flex justify-center"
+           >
+             <Link to="/elekin">
+               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-6 
+                               shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)]
+                               transition-all duration-300 hover:scale-105 cursor-pointer">
+                 <button className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 
+                                    text-purple-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg 
+                                    transition-all duration-300 hover:scale-105">
+                   Learn About the Game
+                 </button>
+               </div>
+             </Link>
+           </motion.div>
+         </div>
+       </section>
       
       {/* EXIT INTENT POPUP - UPDATED WITH DIRECT EMAIL SIGNUP */}
       <AnimatePresence>
@@ -241,7 +301,7 @@ const LandingPage = () => {
 
                     <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
                       <p className="text-white mb-4">
-                        You're now signed up for <span className="text-yellow-400 font-bold">free early access</span>!
+                        You&apos;re now signed up for <span className="text-yellow-400 font-bold">free early access</span>!
                       </p>
                       <p className="text-purple-200 text-sm mb-4">
                         Check your inbox for your welcome email with Discord access details.
@@ -379,7 +439,7 @@ const LandingPage = () => {
           {/* Subheadline */}
           <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
             Sign up for <span className="text-yellow-400 font-bold">FREE</span> to be notified of our 
-            <span className="text-white font-semibold"> Kickstarter launch</span> and get an exclusive Discord role + entries to win free packs, decks & merch
+            <span className="text-white font-semibold"> Kickstarter launch</span>, get an exclusive role, and an additional entry for all giveaways such as free packs, decks & merch
           </p>
 
           {/* Countdown Timer - BIGGER FONTS */}
@@ -422,26 +482,39 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* PRIMARY CTA BUTTONS */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <SubscribeButton 
-              size="lg"
-              className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200"
-              showIcon={false}
-            >
-              <ArrowRight className="mr-2 w-5 h-5" />
-              Get Free Early Access
-            </SubscribeButton>
-            <Link to="/elekin">
-              <Button 
-                variant="outline"
+          {/* EMAIL SIGNUP FORM */}
+          <div className="max-w-2xl mx-auto mb-6">
+            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <Input
+                type="email"
+                placeholder="Enter your email for free early access"
+                className="flex-1 bg-purple-900/50 border-2 border-yellow-500/50 text-white placeholder-purple-300 py-6 px-6 text-lg font-medium rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Button
+                type="submit"
                 size="lg"
-                className="border-2 border-purple-400 text-white hover:bg-purple-400/20 hover:text-yellow-400 font-semibold text-lg px-8 py-6 rounded-xl"
+                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200 whitespace-nowrap"
+                disabled={loading}
               >
-                Learn About the Game
+                {loading ? (
+                  <div className="flex items-center">
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
+                    Signing Up...
+                  </div>
+                ) : (
+                  <div className="flex items-center">
+                    <ArrowRight className="mr-2 w-5 h-5" />
+                    Get Free Access
+                  </div>
+                )}
               </Button>
-            </Link>
+            </form>
           </div>
+
+
 
           {/* Value Proposition Bullets */}
           <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
@@ -470,140 +543,6 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Game Overview Section - Updated */}
-      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          {/* Title and Introduction */}
-          <div className="mb-12 text-center">
-            <div className="flex flex-col lg:flex-row items-center justify-center mb-6 space-y-4 lg:space-y-0 lg:space-x-4">
-              <img 
-                src="/Elekin_Kinbrold.png" 
-                alt="Elekin Logo" 
-                className="w-64 lg:w-96 h-auto -mb-2 -mr-5 -mt-10"
-              />
-              <h2 className="text-3xl lg:text-5xl font-bold">Why TCG Players Choose Elekin</h2>
-            </div>
-            <p className="text-lg text-purple-200 max-w-3xl mx-auto">
-              Revolutionary mechanics that reward strategic thinking. Perfect for competitive Magic, Pokemon, and Yu-Gi-Oh players seeking the next evolution in TCG design.
-            </p>
-          </div>
-          
-          {/* Features in full width */}
-          <div className="w-full">
-            <KeyFeatures />
-          </div>
-        </div>
-      </section>
-
-      {/* CONTENT-GATED STRATEGY SECTION */}
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <div className="max-w-4xl mx-auto">
-          <div className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/60 rounded-xl p-8 text-center shadow-2xl shadow-yellow-500/20 hover:shadow-yellow-500/30 transition-all duration-300">
-            {contentGatedSuccess ? (
-              // SUCCESS STATE - Thank you message with Discord link
-              <>
-                <div className="mb-6">
-                  <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-green-400">
-                    Welcome! You're Signed Up! 🎉
-                  </h2>
-                  <p className="text-xl text-green-300 mb-6">
-                    Your free early access is confirmed!
-                  </p>
-                </div>
-
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
-                  <p className="text-white mb-4">
-                    Check your inbox for your welcome email with Discord access details.
-                  </p>
-                  <p className="text-purple-200 text-sm">
-                    Next step: Join our Discord community to get exclusive updates!
-                  </p>
-                </div>
-
-                <Button
-                  onClick={handleDiscordJoinFromContentGated}
-                  className="w-full max-w-md bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-xl px-12 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200 mb-4"
-                >
-                  Join Discord & Claim Your Exclusive Role →
-                </Button>
-
-                <button 
-                  onClick={() => setContentGatedSuccess(false)}
-                  className="bg-purple-800/50 hover:bg-purple-700/50 text-purple-200 hover:text-white border border-purple-500/30 font-medium py-3 px-6 rounded-lg transition-all duration-200"
-                >
-                  Continue exploring
-                </button>
-              </>
-            ) : (
-              // ORIGINAL CONTENT STATE
-              <>
-                <div className="mb-6">
-                  <div className="bg-yellow-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Gift className="w-8 h-8 text-yellow-400" />
-                  </div>
-                  <h2 className="text-3xl lg:text-4xl font-bold mb-4">
-                    Get <span className="text-yellow-400">Free Early Access</span>
-                  </h2>
-                  <p className="text-xl text-purple-200 mb-6">
-                    Join our Discord community for exclusive updates and behind-the-scenes content!
-                  </p>
-                </div>
-
-                <div className="bg-purple-900/30 rounded-lg p-6 border border-purple-500/20 mb-8 max-w-md mx-auto">
-                  <h3 className="font-bold text-lg mb-3 text-yellow-400 text-center">Free Perks:</h3>
-                  <div className="text-left space-y-2 text-sm text-purple-200">
-                    <div className="flex items-center">
-                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                      <span>Kickstarter launch notifications</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                      <span>Exclusive discord role</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                      <span>Additional giveaway entries</span>
-                    </div>
-                    <div className="flex items-center">
-                      <Gift className="w-4 h-4 text-yellow-400 mr-2" />
-                      <span>Early-bird kickstarter rewards</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Direct Email Subscription Form */}
-                <form onSubmit={handleEmailSubmit} className="space-y-4 max-w-md mx-auto">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email here"
-                    className="w-full bg-purple-900/50 border-yellow-500/50 text-white placeholder-purple-300 py-4 text-center font-semibold text-lg"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <Button
-                    type="submit"
-                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-xl px-12 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200"
-                    disabled={loading}
-                  >
-                    {loading ? 'Signing You Up...' : 'Get Free Early Access'}
-                  </Button>
-                </form>
-
-                <p className="text-sm text-purple-400 mt-4">
-                  Join our growing community of TCG players
-                </p>
-              </>
-            )}
-          </div>
-        </div>
-      </section>
-
       {/* Cards of the Week Section */}
       <div className="container mx-auto px-4 py-12">
         <div className="bg-purple-800 bg-opacity-40 rounded-xl p-6 mb-20">
@@ -612,17 +551,22 @@ const LandingPage = () => {
           </div>
         </div>
 
-        <section className="mb-16">
-          <Link to="/kinbrold">
-            <h2 className="text-4xl font-bold mb-8 text-center items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
-              Explore the World of Kinbrold
-            </h2>
-          </Link>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {kingdoms.map((kingdom) => (
+            {/* EXPLORE THE WORLD OF KINBROLD - FIRST SECTION */}
+      <section className="container mx-auto px-4 py-16 relative z-10">
+        <Link to="/kinbrold">
+          <h2 className="text-4xl font-bold mb-8 text-center items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
+            Explore the World of Kinbrold
+          </h2>
+        </Link>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
+          {KINGDOM_SCHEDULE.map((kingdom) => {
+            const isUnlocked = isKingdomUnlocked(kingdom.id);
+            return (
               <div 
                 key={kingdom.name} 
-                className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} flex flex-col justify-between relative`}
+                className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} flex flex-col justify-between relative cursor-pointer`}
+                onClick={() => handleKingdomClick(kingdom)}
               >
                 <div>
                   <img 
@@ -640,22 +584,25 @@ const LandingPage = () => {
                   <div className="bg-purple-900/50 border border-purple-500/30 rounded-lg p-3 mb-3">
                     <div className="text-center">
                       <div className="text-yellow-400 font-bold text-sm">Week {kingdom.week}</div>
-                      <div className="text-purple-200 text-xs">Unlocks {kingdom.unlockDate}</div>
+                      <div className="text-purple-200 text-xs">
+                        {isUnlocked ? 'Unlocked!' : `Unlocks ${formatDate(kingdom.unlockDate)}`}
+                      </div>
                     </div>
                   </div>
                   
                   <Button 
                     variant="outline" 
-                    className="w-full opacity-50 cursor-not-allowed" 
-                    disabled
+                    className={`w-full ${isUnlocked ? 'bg-green-600/20 border-green-500 text-green-300 hover:bg-green-600/30' : 'opacity-50 cursor-not-allowed'}`}
+                    disabled={!isUnlocked}
                   >
-                    Coming Week {kingdom.week}
+                    {isUnlocked ? `Explore ${kingdom.name}` : `Coming Week ${kingdom.week}`}
                   </Button>
                 </div>
               </div>
-            ))}
-          </div>
-        </section>
+            );
+          })}
+        </div>
+      </section>
 
         {/* Explore More Section */}
         <section className="container mx-auto px-4 py-16 text-center">

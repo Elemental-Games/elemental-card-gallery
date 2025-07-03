@@ -21,11 +21,11 @@ const DEV_OVERRIDES = {
   // Set to true to enable all kingdoms for testing
   UNLOCK_ALL: import.meta.env.DEV && false,
   
-  // Override specific week for testing (1-6)
-  FORCE_WEEK: import.meta.env.DEV ? 1 : null,
+  // Override specific week for testing (1-6) - DISABLED to allow natural progression
+  FORCE_WEEK: null,
   
   // Override specific kingdoms for testing
-  FORCE_UNLOCKED: import.meta.env.DEV ? ['grivoss'] : ['grivoss']
+  FORCE_UNLOCKED: import.meta.env.DEV ? [] : []
 };
 
 // Get current campaign week and unlock status

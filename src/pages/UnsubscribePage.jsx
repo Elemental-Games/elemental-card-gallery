@@ -102,7 +102,7 @@ const UnsubscribePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-purple-950/80 to-blue-950/80 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         {/* Back to Home Link */}
         <div className="mb-6">
@@ -111,7 +111,7 @@ const UnsubscribePage = () => {
             className="inline-flex items-center text-blue-300 hover:text-blue-200 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
-            Back to Elemental Masters
+            Back to Elemental Games
           </Link>
         </div>
 
@@ -124,7 +124,7 @@ const UnsubscribePage = () => {
               Email Preferences
             </CardTitle>
             <CardDescription className="text-blue-200">
-              Manage your Elemental Masters email subscription
+              Manage your Elemental Games email subscription
             </CardDescription>
           </CardHeader>
 
@@ -204,7 +204,7 @@ const UnsubscribePage = () => {
 
                 <div className="text-center">
                   <p className="text-sm text-blue-200 mb-2">
-                    This will stop all future emails from Elemental Masters.
+                    This will stop all future emails from Elemental Games.
                   </p>
                   <p className="text-xs text-gray-400">
                                          We&apos;re sorry to see you go! You can resubscribe anytime.
@@ -228,7 +228,7 @@ const UnsubscribePage = () => {
             <div className="border-t border-white/20 pt-4">
               <div className="text-center">
                 <p className="text-xs text-gray-400 mb-3">
-                  Stay connected with Elemental Masters:
+                  Stay connected with Elemental Games:
                 </p>
                 <div className="flex justify-center space-x-4">
                   <a 

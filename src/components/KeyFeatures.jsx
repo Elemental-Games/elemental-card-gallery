@@ -72,20 +72,20 @@ const KeyFeatures = () => {
         ))}
       </div>
 
-      {/* QR Code Feature - Special Callout */}
+            {/* QR Code Feature - Special Callout */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.8 }}
-                 className="mt-8 bg-gradient-to-r from-yellow-500/15 to-purple-500/15 border-2 border-yellow-500/60 rounded-xl p-6
-                    shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)]
-                    transition-all duration-300 hover:scale-105"
+        className="mt-8 bg-gradient-to-r from-yellow-500/15 to-purple-500/15 border-2 border-yellow-500/60 rounded-xl p-6
+                   shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)]
+                   transition-all duration-300 hover:scale-105"
       >
         <div className="flex items-center justify-center mb-4">
           <div className="bg-yellow-500/20 p-3 rounded-lg mr-4">
             <QrCode className="w-8 h-8 text-yellow-400" />
           </div>
-                     <h3 className="text-2xl font-bold text-yellow-400">Interactive Card Technology</h3>
+          <h3 className="text-2xl font-bold text-yellow-400">Interactive Card Technology</h3>
         </div>
         <p className="text-center text-purple-200 text-lg">
           <span className="text-yellow-400 font-semibold">Every card features a unique QR code</span> - 

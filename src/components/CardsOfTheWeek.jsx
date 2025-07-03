@@ -58,6 +58,12 @@ const CardsOfTheWeek = () => {
     return targetDate <= today;
   };
 
+  // Helper function to parse date strings into Date objects for sorting
+  const parseCardDate = (dateString) => {
+    const year = dateString.includes('May') ? 2024 : 2025;
+    return new Date(dateString + ', ' + year);
+  };
+
   // Currently released cards (already available)
   const releasedCards = [
     { 
@@ -227,28 +233,50 @@ const CardsOfTheWeek = () => {
     }
   ];
 
-  // Combine all cards and add status
-  const allCards = [...releasedCards, ...upcomingMarketingCards].map(card => ({
+  // Combine all cards for the full dataset
+  const allCardsData = [...releasedCards, ...upcomingMarketingCards];
+
+  // Dynamic Cards of the Week logic - shows latest 3 revealed + 1 upcoming
+  const getDynamicCardsOfTheWeek = () => {
+    const today = new Date();
+    
+    // Get all available cards (released today or earlier)
+    const availableCards = allCardsData.filter(card => {
+      const cardDate = parseCardDate(card.releaseDate);
+      return cardDate <= today;
+    }).sort((a, b) => parseCardDate(b.releaseDate) - parseCardDate(a.releaseDate)); // Sort by date descending (most recent first)
+
+    // Get upcoming cards (not yet released)
+    const upcomingCards = allCardsData.filter(card => {
+      const cardDate = parseCardDate(card.releaseDate);
+      return cardDate > today;
+    }).sort((a, b) => parseCardDate(a.releaseDate) - parseCardDate(b.releaseDate)); // Sort by date ascending (earliest first)
+
+    // Take the latest 3 revealed cards and sort them chronologically (oldest to newest)
+    const latestThreeRevealed = availableCards.slice(0, 3).reverse(); // Reverse to get oldest to newest
+    const nextUpcoming = upcomingCards.slice(0, 1);
+
+    return [...latestThreeRevealed, ...nextUpcoming];
+  };
+
+  // Get the dynamic cards for this week
+  const dynamicCards = getDynamicCardsOfTheWeek();
+
+  // Add status and display formatting to the selected cards
+  const displayCards = dynamicCards.map(card => ({
     ...card,
     status: isCardAvailable(card.releaseDate) ? 'available' : 'upcoming',
     displayDate: formatReleaseDate(card.releaseDate)
   }));
 
-  // Sort cards: released cards first, then upcoming cards by release date
-  const sortedCards = allCards.sort((a, b) => {
-    if (a.status === 'available' && b.status === 'upcoming') return -1;
-    if (a.status === 'upcoming' && b.status === 'available') return 1;
-    
-    // If both have same status, sort by release date
-    const yearA = a.releaseDate.includes('May') ? 2024 : 2025;
-    const yearB = b.releaseDate.includes('May') ? 2024 : 2025;
-    const dateA = new Date(a.releaseDate + ', ' + yearA);
-    const dateB = new Date(b.releaseDate + ', ' + yearB);
-    return dateA - dateB;
-  });
-
-  // Show only the first 4 cards for the "Cards of the Week" display
-  const displayCards = sortedCards.slice(0, 4);
+  // Calculate stats for the status message
+  const availableCount = allCardsData.filter(card => isCardAvailable(card.releaseDate)).length;
+  const nextCardRaw = allCardsData.filter(card => !isCardAvailable(card.releaseDate))
+    .sort((a, b) => parseCardDate(a.releaseDate) - parseCardDate(b.releaseDate))[0];
+  const nextCard = nextCardRaw ? {
+    ...nextCardRaw,
+    displayDate: formatReleaseDate(nextCardRaw.releaseDate)
+  } : null;
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -278,8 +306,7 @@ const CardsOfTheWeek = () => {
     }
   };
 
-  const availableCount = sortedCards.filter(card => card.status === 'available').length;
-  const nextCard = sortedCards.find(card => card.status === 'upcoming');
+
 
   return (
     <>

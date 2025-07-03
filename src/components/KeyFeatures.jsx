@@ -9,10 +9,10 @@ const features = [
     highlight: '2 Players'
   },
   {
-    title: 'Quick 20-30 Minute Games',
+    title: 'Quick 25-40 Minute Games',
     description: 'Fast-paced matches that fit into any schedule. Strategic depth without the time commitment of longer TCGs.',
     icon: <Clock className="w-8 h-8 text-purple-400" />,
-    highlight: '20-30 Min'
+    highlight: '25-40 Min'
   },
   {
     title: 'Essence Currency System',
@@ -88,8 +88,7 @@ const KeyFeatures = () => {
           <h3 className="text-2xl font-bold text-yellow-400">Interactive Card Technology</h3>
         </div>
         <p className="text-center text-purple-200 text-lg">
-          <span className="text-yellow-400 font-semibold">Every card features a unique QR code</span> - 
-          scan for instant access to detailed stats, lore, strategies, and deck-building tips.
+          <span className="text-yellow-400 font-semibold">Every card features a unique QR code</span> that links to detailed stats, lore, strategies, and deck-building tips. Future updates will include community decks, counters, and synergies!
         </p>
       </motion.div>
     </div>

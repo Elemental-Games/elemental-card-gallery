@@ -247,13 +247,13 @@ const LandingPage = () => {
              className="mt-8 flex justify-center"
            >
              <Link to="/elekin">
-               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-6 
+               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-6 mb-10
                                shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)]
                                transition-all duration-300 hover:scale-105 cursor-pointer">
                  <button className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 
                                     text-purple-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg 
                                     transition-all duration-300 hover:scale-105">
-                   Learn About the Game
+                   Learn More About Elekin
                  </button>
                </div>
              </Link>

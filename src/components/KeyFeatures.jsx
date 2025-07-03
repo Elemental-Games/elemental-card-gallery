@@ -88,7 +88,7 @@ const KeyFeatures = () => {
           <h3 className="text-2xl font-bold text-yellow-400">Interactive Card Technology</h3>
         </div>
         <p className="text-center text-purple-200 text-lg">
-          <span className="text-yellow-400 font-semibold">Every card features a unique QR code</span> that links to detailed stats, lore, strategies, and deck-building tips. Future updates will include community decks, counters, and synergies!
+          <span className="text-yellow-400 font-semibold">Scan any card's QR code</span> to see its detailed stats, abilities,lore, strategies, and deck-building tips. Future updates will include community decks, counters, and synergies!
         </p>
       </motion.div>
     </div>

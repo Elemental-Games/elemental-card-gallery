@@ -331,11 +331,11 @@ const JoinNowPage = () => {
               initial={{ scale: 0.9, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="bg-red-950/30 border border-red-500/50 rounded-xl p-6"
+              className="bg-purple-950/30 border border-purple-500/50 rounded-xl p-6 shadow-[0_0_25px_rgba(168,85,247,0.3)]"
             >
               <div className="flex items-center justify-center mb-4">
-                <Clock className="w-5 h-5 text-red-400 mr-2" />
-                <span className="text-red-400 font-semibold">LAUNCH DATE REVEAL IN</span>
+                <Clock className="w-5 h-5 text-purple-400 mr-2" />
+                <span className="text-purple-400 font-semibold">LAUNCH DATE REVEAL IN</span>
               </div>
               <div className="grid grid-cols-3 gap-4 text-center">
                 <div>
@@ -348,7 +348,7 @@ const JoinNowPage = () => {
                   >
                     {timeLeft.days}
                   </motion.div>
-                  <div className="text-sm text-red-300">Days</div>
+                  <div className="text-sm text-purple-300">Days</div>
                 </div>
                 <div>
                   <motion.div 
@@ -360,7 +360,7 @@ const JoinNowPage = () => {
                   >
                     {timeLeft.hours}
                   </motion.div>
-                  <div className="text-sm text-red-300">Hours</div>
+                  <div className="text-sm text-purple-300">Hours</div>
                 </div>
                 <div>
                   <motion.div 
@@ -372,7 +372,7 @@ const JoinNowPage = () => {
                   >
                     {timeLeft.minutes}
                   </motion.div>
-                  <div className="text-sm text-red-300">Minutes</div>
+                  <div className="text-sm text-purple-300">Minutes</div>
                 </div>
               </div>
             </motion.div>

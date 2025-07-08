@@ -132,7 +132,7 @@ const Header = () => {
                       <div className="pt-4 border-t border-purple-500/30">
                         <Link 
                           to="/kickstarter" 
-                          className="block py-3 px-4 text-center bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition-colors duration-200"
+                          className="block py-2 px-4 text-green-400 hover:text-green-300 font-bold transition-colors duration-200"
                         >
                           Kickstarter
                         </Link>

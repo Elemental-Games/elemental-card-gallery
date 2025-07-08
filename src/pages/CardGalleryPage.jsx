@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Clock, Gift, Star, Mail } from 'lucide-react';
@@ -7,13 +7,38 @@ import { getCardImagePath, createCardImageErrorHandler } from '@/utils/imageUtil
 
 const CardGalleryPage = () => {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0 });
+  const [lastUpdateTime, setLastUpdateTime] = useState(Date.now());
 
   // Helper function to determine if card is available (today or earlier)
   const isCardAvailable = (dateString) => {
     const today = new Date();
-    // Use 2025 for upcoming marketing cards, 2024 for already released cards
-    const year = dateString.includes('May') ? 2024 : 2025;
+    today.setHours(0, 0, 0, 0);
+    
+    const currentYear = today.getFullYear();
+    
+    // For cards with "May" dates, use 2024 (already released)
+    if (dateString.includes('May')) {
+      const targetDate = new Date(dateString + ', 2024');
+      targetDate.setHours(0, 0, 0, 0);
+      return targetDate <= today;
+    }
+    
+    // For July dates, determine year based on current date
+    let year = currentYear;
+    const testDate = new Date(dateString + ', ' + currentYear);
+    testDate.setHours(0, 0, 0, 0);
+    
+    // If the date in current year is more than 6 months away, use next year
+    const sixMonthsFromNow = new Date(today);
+    sixMonthsFromNow.setMonth(today.getMonth() + 6);
+    
+    if (testDate > sixMonthsFromNow) {
+      year = currentYear + 1;
+    }
+    
     const targetDate = new Date(dateString + ', ' + year);
+    targetDate.setHours(0, 0, 0, 0);
+    
     return targetDate <= today;
   };
 
@@ -23,10 +48,27 @@ const CardGalleryPage = () => {
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
     
-    // Use 2025 for upcoming marketing cards, 2024 for already released cards
-    const year = dateString.includes('May') ? 2024 : 2025;
-    const targetDate = new Date(dateString + ', ' + year);
+    const currentYear = today.getFullYear();
     
+    // For cards with "May" dates, use 2024 (already released)
+    if (dateString.includes('May')) {
+      const targetDate = new Date(dateString + ', 2024');
+      return targetDate.toDateString() === tomorrow.toDateString();
+    }
+    
+    // For July dates, determine year based on current date
+    let year = currentYear;
+    const testDate = new Date(dateString + ', ' + currentYear);
+    
+    // If the date in current year is more than 6 months away, use next year
+    const sixMonthsFromNow = new Date(today);
+    sixMonthsFromNow.setMonth(today.getMonth() + 6);
+    
+    if (testDate > sixMonthsFromNow) {
+      year = currentYear + 1;
+    }
+    
+    const targetDate = new Date(dateString + ', ' + year);
     return targetDate.toDateString() === tomorrow.toDateString();
   };
 
@@ -77,11 +119,7 @@ const CardGalleryPage = () => {
       name: 'Terra', 
       element: 'Earth',
       releaseDate: 'May 3' // Set to past date to show as released
-    }
-  ];
-
-  // Full card reveal schedule (upcoming cards)
-  const upcomingMarketingCards = [
+    },
     { 
       id: 'swoop', 
       name: 'Swoop', 
@@ -111,7 +149,11 @@ const CardGalleryPage = () => {
       name: 'Balon', 
       element: 'Fire',
       releaseDate: 'July 5'
-    },
+    }
+  ];
+
+  // Full card reveal schedule (upcoming cards)
+  const upcomingMarketingCards = [
     { 
       id: 'lifebound-armour', 
       name: 'Lifebound Armour', 
@@ -207,35 +249,55 @@ const CardGalleryPage = () => {
   // Combine all cards and add status
   const allMarketingCards = [...releasedCards, ...upcomingMarketingCards];
 
-  // Add status based on release date
-  const cardsWithStatus = allMarketingCards.map(card => ({
-    ...card,
-    status: isCardAvailable(card.releaseDate) ? 'available' : 'upcoming',
-    displayDate: formatReleaseDate(card.releaseDate)
-  }));
+  // Add status based on release date - recalculate when lastUpdateTime changes
+  const cardsWithStatus = useMemo(() => {
+    return allMarketingCards.map(card => {
+      // Force certain cards to be available regardless of date logic
+      if (card.id === 'galea' || card.id === 'balon') {
+        return {
+          ...card,
+          status: 'available',
+          displayDate: formatReleaseDate(card.releaseDate)
+        };
+      }
+      
+      const isAvailable = isCardAvailable(card.releaseDate);
+      
+      return {
+        ...card,
+        status: isAvailable ? 'available' : 'upcoming',
+        displayDate: formatReleaseDate(card.releaseDate)
+      };
+    });
+  }, [lastUpdateTime, allMarketingCards]);
 
   // Sort cards: released cards first, then upcoming cards by release date
-  const sortedCards = cardsWithStatus.sort((a, b) => {
-    if (a.status === 'available' && b.status === 'upcoming') return -1;
-    if (a.status === 'upcoming' && b.status === 'available') return 1;
-    
-    // If both have same status, sort by release date
-    const yearA = a.releaseDate.includes('May') ? 2024 : 2025;
-    const yearB = b.releaseDate.includes('May') ? 2024 : 2025;
-    const dateA = new Date(a.releaseDate + ', ' + yearA);
-    const dateB = new Date(b.releaseDate + ', ' + yearB);
-    return dateA - dateB;
-  });
+  const sortedCards = useMemo(() => {
+    return cardsWithStatus.sort((a, b) => {
+      if (a.status === 'available' && b.status === 'upcoming') return -1;
+      if (a.status === 'upcoming' && b.status === 'available') return 1;
+      
+      // If both have same status, sort by release date
+      const currentYear = new Date().getFullYear();
+      const dateA = new Date(a.releaseDate + ', ' + currentYear);
+      const dateB = new Date(b.releaseDate + ', ' + currentYear);
+      return dateA - dateB;
+    });
+  }, [cardsWithStatus]);
 
   // Calculate collection progress
-  const availableCards = sortedCards.filter(card => card.status === 'available');
+  const availableCards = useMemo(() => {
+    return sortedCards.filter(card => card.status === 'available');
+  }, [sortedCards]);
   
   // Total cards to be released before launch: 29 (3 already released + 20 upcoming + 6 more)
   const totalCardsBeforeLaunch = 29;
   const cardsLeftToRelease = totalCardsBeforeLaunch - availableCards.length;
 
   // For display, show first 6 cards (prioritizing released cards first)
-  const marketingCards = sortedCards.slice(0, 6);
+  const marketingCards = useMemo(() => {
+    return sortedCards.slice(0, 6);
+  }, [sortedCards]);
 
   // Countdown to first card reveal (June 23rd, 2025) and subsequent weekly reveals
   useEffect(() => {
@@ -274,6 +336,20 @@ const CardGalleryPage = () => {
     const timer = setInterval(updateTimer, 60000);
     return () => clearInterval(timer);
   }, []);
+
+  // Force re-render when cards should be revealed
+  useEffect(() => {
+    const checkForCardUpdates = () => {
+      const now = Date.now();
+      // Check every hour if any cards should be revealed
+      if (now - lastUpdateTime > 60 * 60 * 1000) { // 1 hour
+        setLastUpdateTime(now);
+      }
+    };
+
+    const interval = setInterval(checkForCardUpdates, 60 * 1000); // Check every minute
+    return () => clearInterval(interval);
+  }, [lastUpdateTime]);
 
   const [showFullCollection, setShowFullCollection] = useState(false);
 
@@ -469,7 +545,6 @@ const CardGalleryPage = () => {
                         </div>
                         <div className="absolute bottom-0 left-0 right-0 bg-black/80 text-white p-2 rounded-b-lg">
                           <div className="text-sm font-bold text-center">{card.name}</div>
-                          <div className="text-xs text-purple-300 text-center">{card.element} Element</div>
                         </div>
                       </>
                     ) : (

@@ -75,6 +75,14 @@ const Header = () => {
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
+              
+              {/* Kickstarter Button */}
+              <Link 
+                to="/kickstarter" 
+                className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
+              >
+                Kickstarter
+              </Link>
             </div>
           </div>
 
@@ -119,6 +127,16 @@ const Header = () => {
                           )}
                         </div>
                       ))}
+                      
+                      {/* Kickstarter Link for Mobile */}
+                      <div className="pt-4 border-t border-purple-500/30">
+                        <Link 
+                          to="/kickstarter" 
+                          className="block py-3 px-4 text-center bg-green-600 hover:bg-green-500 text-white font-bold rounded-lg transition-colors duration-200"
+                        >
+                          Kickstarter
+                        </Link>
+                      </div>
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>

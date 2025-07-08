@@ -222,37 +222,80 @@ const JoinNowPage = () => {
             launch notifications, giveaways, and exclusive Discord perks.
           </motion.p>
 
-          {/* Main Signup Form */}
+          {/* Main Signup Form - 2 Ways to Support */}
           <motion.div
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
-            className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/30 rounded-2xl p-8 mb-12 max-w-lg mx-auto shadow-[0_0_50px_rgba(234,179,8,0.2)] -mt-5"
+            className="mb-12 max-w-4xl mx-auto -mt-5"
           >
-            <h2 className="text-2xl font-bold mb-6 flex items-center justify-center">
-              <Zap className="w-6 h-6 text-yellow-400 mr-2" />
-              Claim Your Spot Now
+            {/* Section Header */}
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              <span className="text-yellow-400">2 Ways to Support Us</span>
             </h2>
             
-            <EmailSignup 
-              buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(234,179,8,0.5)] hover:shadow-[0_0_40px_rgba(234,179,8,0.7)]"
-              buttonText="Get Free Early Access →"
-            />
-            
-            <div className="flex items-center justify-center space-x-6 mt-6 text-sm text-purple-300">
-              <div className="flex items-center">
-                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
-                <span>Early Bird Pricing</span>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Email Signup */}
+              <div className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(234,179,8,0.2)]">
+                <h3 className="text-2xl font-bold mb-4 flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-yellow-400 mr-2" />
+                  Join Email List
+                </h3>
+                <p className="text-purple-200 text-sm mb-6 text-center">
+                  Get early access, giveaways, and launch notifications
+                </p>
+                
+                <EmailSignup 
+                  buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(234,179,8,0.5)] hover:shadow-[0_0_40px_rgba(234,179,8,0.7)]"
+                  buttonText="Get Free Early Access →"
+                />
+                
+                <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-purple-300">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Early Bird Pricing</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                    <span>VIP Discord Role</span>
+                  </div>
+                </div>
               </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
-                <span>Giveaways</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
-                <span>Exclusive Perks</span>
+
+              {/* Kickstarter Support */}
+              <div className="bg-gradient-to-br from-green-950/70 to-emerald-950/70 border-2 border-green-500/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(34,197,94,0.2)]">
+                <h3 className="text-2xl font-bold mb-4 flex items-center justify-center">
+                  <Star className="w-6 h-6 text-green-400 mr-2" />
+                  Back on Kickstarter
+                </h3>
+                <p className="text-green-200 text-sm mb-6 text-center">
+                  Help us reach our funding goal and bring Elekin to life
+                </p>
+                
+                <a
+                  href="/kickstarter"
+                  className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(34,197,94,0.5)] hover:shadow-[0_0_40px_rgba(34,197,94,0.7)] flex items-center justify-center"
+                >
+                  Support Our Campaign 🚀
+                </a>
+                
+                <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-green-300">
+                  <div className="flex items-center">
+                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Physical Cards</span>
+                  </div>
+                  <div className="flex items-center">
+                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Exclusive Rewards</span>
+                  </div>
+                </div>
               </div>
             </div>
+            
+            {/* Supporting Text */}
+            <p className="text-center text-purple-300 mt-6 text-sm">
+              Choose one or both! Every form of support helps us reach our goal of bringing Elekin TCG to players worldwide.
+            </p>
           </motion.div>
 
           {/* Progress Bar and Countdown Side-by-Side */}
@@ -355,7 +398,7 @@ const JoinNowPage = () => {
             <div className="bg-purple-950/30 border border-purple-500/20 rounded-lg p-6">
               <Crown className="w-8 h-8 text-yellow-400 mx-auto mb-3" />
               <h3 className="font-bold text-lg mb-2">Discord VIP Role</h3>
-              <p className="text-purple-300 text-sm">Exclusive early supporter role that new members can't get</p>
+              <p className="text-purple-300 text-sm">Exclusive early supporter role that new members cannot get</p>
             </div>
           </motion.div>
 

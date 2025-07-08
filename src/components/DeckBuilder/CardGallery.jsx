@@ -300,7 +300,7 @@ const CardGallery = ({ cards = [], onCardSelect, selectedCards = [], maxPerEleme
               <p className="font-semibold text-white text-base truncate">{card.name}</p>
               <p className="text-xs text-purple-300">
                 {!(card.type === 'Rune' || card.type === 'Counter' || card.type === 'Shield')
-                  ? `${card.element} • ${card.type}`
+                  ? `${card.type}`
                   : `${card.type}`}
               </p>
               {card.type === 'Shield' && (

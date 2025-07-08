@@ -31,7 +31,7 @@ const CardGrid = ({ cards }) => {
             />
             <h3 className="font-semibold text-lg">{card.name}</h3>
             <p className="text-sm text-gray-600">
-              {card.element} | {card.type} | {
+              {card.type} | {
                 card.rarity === 'C' ? 'Common' :
                 card.rarity === 'U' ? 'Uncommon' :
                 card.rarity.trim() === 'R' ? 'Rare' :

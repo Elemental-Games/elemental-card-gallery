@@ -1,11 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AirKingdomEmail from '../components/emails/AirKingdomEmail';
+import DiscordGiveawayEmail from '../components/emails/DiscordGiveawayEmail';
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 
 const EmailPreviewPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // 'air-kingdom' or 'discord-giveaway'
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState('');
+  const [loginError, setLoginError] = useState('');
 
   // Initialize theme from localStorage or default to light
   useEffect(() => {
@@ -30,26 +35,43 @@ const EmailPreviewPage = () => {
     setIsDarkMode(!isDarkMode);
   };
 
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (password === 'diorio1') {
+      setIsAuthenticated(true);
+      setLoginError('');
+    } else {
+      setLoginError('Incorrect password. Please try again.');
+      setPassword('');
+    }
+  };
+
   const handleSendTest = async () => {
-    const confirmed = window.confirm('Send a test email to mark@elementalgames.gg?');
+    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 'Air Kingdom';
+    const confirmed = window.confirm(`Send a test ${emailType} email to mark@elementalgames.gg?`);
     if (!confirmed) return;
 
     try {
-      const response = await fetch('http://localhost:3001/api/send-marketing-email', {
+      const endpoint = selectedEmail === 'discord-giveaway' 
+        ? 'http://localhost:3001/api/send-discord-giveaway-email'
+        : 'http://localhost:3001/api/send-marketing-email';
+        
+      const body = selectedEmail === 'discord-giveaway'
+        ? { testEmail: true, email: 'mark@elementalgames.gg' }
+        : { email: 'mark@elementalgames.gg', testEmail: true };
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          email: 'mark@elementalgames.gg',
-          testEmail: true
-        }),
+        body: JSON.stringify(body),
       });
 
       const result = await response.json();
       
       if (response.ok) {
-        alert(`✅ Test email sent successfully to mark@elementalgames.gg!\n\nCheck your inbox in a few seconds.`);
+        alert(`✅ Test ${emailType} email sent successfully to mark@elementalgames.gg!\n\nCheck your inbox in a few seconds.`);
       } else {
         alert(`❌ Failed to send test email: ${result.message}`);
       }
@@ -59,25 +81,31 @@ const EmailPreviewPage = () => {
   };
 
   const handleSendToSubscribers = async () => {
-    const confirmed = window.confirm('This will send the Air Kingdom email to ALL subscribers in your database.\n\nAre you sure you want to proceed with the campaign?');
+    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 'Air Kingdom';
+    const confirmed = window.confirm(`This will send the ${emailType} email to ALL subscribers in your database.\n\nAre you sure you want to proceed with the campaign?`);
     if (!confirmed) return;
 
     try {
-      const response = await fetch('http://localhost:3001/api/send-marketing-email', {
+      const endpoint = selectedEmail === 'discord-giveaway' 
+        ? 'http://localhost:3001/api/send-discord-giveaway-email'
+        : 'http://localhost:3001/api/send-marketing-email';
+        
+      const body = selectedEmail === 'discord-giveaway'
+        ? { sendToAll: true }
+        : { sendToAll: true, testEmail: false };
+
+      const response = await fetch(endpoint, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          sendToAll: true,
-          testEmail: false
-        }),
+        body: JSON.stringify(body),
       });
 
       const result = await response.json();
       
       if (response.ok) {
-        alert(`✅ Campaign email sent to all subscribers!\n\nTotal emails sent: ${result.emailsSent || 'Unknown'}\n\nCheck your analytics dashboard for delivery metrics.`);
+        alert(`✅ ${emailType} campaign email sent to all subscribers!\n\nTotal emails sent: ${result.emailsSent || 'Unknown'}\n\nCheck your analytics dashboard for delivery metrics.`);
       } else {
         alert(`❌ Failed to send campaign: ${result.message}`);
       }
@@ -86,11 +114,81 @@ const EmailPreviewPage = () => {
     }
   };
 
+  // Show login form if not authenticated
+  if (!isAuthenticated) {
+    return (
+      <div className={`min-h-screen flex items-center justify-center transition-colors duration-200 ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-100'}`}>
+        <Helmet>
+          <title>Admin Login - Email Preview | Elekin TCG</title>
+          <meta name="description" content="Admin access to email preview system" />
+        </Helmet>
+        
+        <div className={`w-full max-w-md p-8 rounded-lg shadow-lg transition-colors duration-200 ${
+          isDarkMode ? 'bg-gray-800' : 'bg-white'
+        }`}>
+          <div className="text-center mb-6">
+            <h1 className={`text-2xl font-bold transition-colors duration-200 ${
+              isDarkMode ? 'text-white' : 'text-gray-900'
+            }`}>
+              🔐 Admin Access
+            </h1>
+            <p className={`mt-2 text-sm transition-colors duration-200 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>
+              Enter password to access email preview system
+            </p>
+          </div>
+          
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter admin password"
+                className={`w-full px-4 py-3 rounded-lg border transition-colors duration-200 font-sans ${
+                  isDarkMode 
+                    ? 'bg-gray-700 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500' 
+                    : 'bg-white border-gray-300 text-gray-900 placeholder-gray-500 focus:border-blue-500'
+                } focus:outline-none focus:ring-2 focus:ring-blue-500/20`}
+                required
+              />
+            </div>
+            
+            {loginError && (
+              <div className="p-3 rounded-lg bg-red-100 border border-red-300 text-red-700 text-sm">
+                {loginError}
+              </div>
+            )}
+            
+            <button
+              type="submit"
+              className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-lg transition-colors duration-200"
+            >
+              Access Admin Panel
+            </button>
+          </form>
+          
+          <div className="mt-6 text-center">
+            <button
+              onClick={toggleTheme}
+              className={`text-sm transition-colors duration-200 ${
+                isDarkMode ? 'text-gray-400 hover:text-gray-300' : 'text-gray-500 hover:text-gray-700'
+              }`}
+            >
+              {isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode'}
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className={`min-h-screen transition-colors duration-200 ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-100'}`}>
+    <div className={`min-h-screen transition-colors duration-200 font-sans ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-100'}`}>
       <Helmet>
-        <title>Email Preview - Air Kingdom | Elekin TCG</title>
-        <meta name="description" content="Preview the Air Kingdom marketing email" />
+        <title>Email Preview - Admin Panel | Elekin TCG</title>
+        <meta name="description" content="Admin email preview and campaign management system" />
       </Helmet>
 
       {/* Admin Controls */}
@@ -107,10 +205,49 @@ const EmailPreviewPage = () => {
             <p className={`text-sm transition-colors duration-200 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
-              Air Kingdom Week - The Air Kingdom Rises 💨
+              {selectedEmail === 'discord-giveaway' 
+                ? '🎁 Discord Giveaway - First Ever Discord Community Event' 
+                : 'Air Kingdom Week - The Air Kingdom Rises 💨'
+              }
             </p>
           </div>
           <div className="flex items-center space-x-3">
+            {/* Email Type Selector */}
+            <div className="flex border rounded-lg overflow-hidden">
+              <Button
+                variant={selectedEmail === 'air-kingdom' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedEmail('air-kingdom')}
+                className={`rounded-none transition-colors duration-200 ${
+                  selectedEmail === 'air-kingdom'
+                    ? isDarkMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-blue-600 text-white'
+                    : isDarkMode
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                💨 Air Kingdom
+              </Button>
+              <Button
+                variant={selectedEmail === 'discord-giveaway' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedEmail('discord-giveaway')}
+                className={`rounded-none transition-colors duration-200 ${
+                  selectedEmail === 'discord-giveaway'
+                    ? isDarkMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-blue-600 text-white'
+                    : isDarkMode
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                🎁 Discord Giveaway
+              </Button>
+            </div>
+            
             {/* Theme Toggle */}
             <Button
               variant="outline"
@@ -123,6 +260,20 @@ const EmailPreviewPage = () => {
               }`}
             >
               {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </Button>
+            
+            {/* Logout Button */}
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setIsAuthenticated(false)}
+              className={`border transition-colors duration-200 ${
+                isDarkMode 
+                  ? 'border-red-600 text-red-400 hover:bg-red-900/20 hover:text-red-300' 
+                  : 'border-red-600 text-red-600 hover:bg-red-50'
+              }`}
+            >
+              🔓 Logout
             </Button>
             
             <Button 
@@ -200,19 +351,25 @@ const EmailPreviewPage = () => {
               <div className={`text-lg font-medium transition-colors duration-200 ${
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>
-                Zalos, The Air Kingdom, Rises 💨
+                {selectedEmail === 'discord-giveaway' 
+                  ? '🎁 FIRST Discord Giveaway at 12PM EST - Join Now!'
+                  : 'Zalos, The Air Kingdom, Rises 💨'
+                }
               </div>
               <div className={`mt-2 text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-400' : 'text-gray-500'
               }`}>
-                Preview text: Galea&apos;s domain opens its gates. Three air creatures await their reveal.
+                Preview text: {selectedEmail === 'discord-giveaway'
+                  ? 'Join our Discord community for your chance to win exclusive Elekin TCG prizes!'
+                  : "Galea's domain opens its gates. Three air creatures await their reveal."
+                }
               </div>
             </div>
           </div>
 
           {/* Actual Email Component */}
           <div className="mx-4 shadow-xl rounded-lg overflow-hidden">
-            <AirKingdomEmail />
+            {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : <AirKingdomEmail />}
           </div>
 
           {/* Email Analytics Preview */}

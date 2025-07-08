@@ -295,7 +295,7 @@ const LandingPage = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h2 className="text-3xl font-bold mb-2 text-green-400">Welcome! You're In!</h2>
+                      <h2 className="text-3xl font-bold mb-2 text-green-400">Welcome! You&apos;re In!</h2>
                       <p className="text-xl text-green-300 font-semibold">Your free early access is confirmed!</p>
                     </div>
 
@@ -482,63 +482,108 @@ const LandingPage = () => {
             </div>
           </div>
 
-          {/* EMAIL SIGNUP FORM */}
-          <div className="max-w-2xl mx-auto mb-6">
-            <form onSubmit={handleEmailSubmit} className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <Input
-                type="email"
-                placeholder="Enter your email for free early access"
-                className="flex-1 bg-purple-900/50 border-2 border-yellow-500/50 text-white placeholder-purple-300 py-6 px-6 text-lg font-medium rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-              />
-              <Button
-                type="submit"
-                size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-lg px-8 py-6 rounded-xl shadow-2xl hover:scale-105 transition-all duration-200 whitespace-nowrap"
-                disabled={loading}
-              >
-                {loading ? (
+          {/* 2 WAYS TO SUPPORT US - DUAL CTA */}
+          <div className="max-w-5xl mx-auto mb-12">
+            <h2 className="text-3xl font-bold mb-8 text-center">
+              <span className="text-yellow-400">2 Ways to Support Us</span>
+            </h2>
+            
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Email Signup */}
+              <div className="bg-gradient-to-br from-purple-950/70 to-blue-950/70 border-2 border-yellow-500/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(234,179,8,0.2)]">
+                <h3 className="text-2xl font-bold mb-4 flex items-center justify-center">
+                  <Zap className="w-6 h-6 text-yellow-400 mr-2" />
+                  Join Email List
+                </h3>
+                <p className="text-purple-200 text-sm mb-6 text-center">
+                  Get early access, giveaways, and launch notifications
+                </p>
+                
+                <form onSubmit={handleEmailSubmit} className="space-y-4">
+                  <Input
+                    type="email"
+                    placeholder="Enter your email for free early access"
+                    className="w-full bg-purple-900/50 border-2 border-yellow-500/50 text-white placeholder-purple-300 py-4 px-4 text-lg font-medium rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    required
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-xl shadow-2xl hover:scale-105 transition-all duration-200"
+                    disabled={loading}
+                  >
+                    {loading ? (
+                      <div className="flex items-center justify-center">
+                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
+                        Signing Up...
+                      </div>
+                    ) : (
+                      <div className="flex items-center justify-center">
+                        <ArrowRight className="mr-2 w-5 h-5" />
+                        Get Free Access
+                      </div>
+                    )}
+                  </Button>
+                </form>
+                
+                <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-purple-300">
                   <div className="flex items-center">
-                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
-                    Signing Up...
+                    <Star className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Discord Role</span>
                   </div>
-                ) : (
                   <div className="flex items-center">
-                    <ArrowRight className="mr-2 w-5 h-5" />
-                    Get Free Access
+                    <Gift className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Giveaway Entries</span>
                   </div>
-                )}
-              </Button>
-            </form>
-          </div>
-
-
-
-          {/* Value Proposition Bullets */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto mb-16">
-            <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-              <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Star className="w-6 h-6 text-yellow-400" />
+                </div>
               </div>
-              <h3 className="font-bold text-lg mb-2">Exclusive Discord Role</h3>
-              <p className="text-purple-300 text-sm">Claim your special role and join our growing community</p>
-            </div>
-            <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-              <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Clock className="w-6 h-6 text-yellow-400" />
+
+              {/* Kickstarter Support */}
+              <div className="bg-gradient-to-br from-green-950/70 to-emerald-950/70 border-2 border-green-500/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(34,197,94,0.2)]">
+                <h3 className="text-2xl font-bold mb-4 flex items-center justify-center">
+                  <Star className="w-6 h-6 text-green-400 mr-2" />
+                  Back on Kickstarter
+                </h3>
+                <p className="text-green-200 text-sm mb-6 text-center">
+                  Help us reach our funding goal and bring Elekin to life
+                </p>
+                
+                <div className="space-y-4">
+                  <div className="bg-green-900/20 border border-green-500/30 rounded-lg p-4">
+                    <div className="text-center">
+                      <div className="text-green-300 font-bold text-lg mb-2">Pre-Launch Page Live!</div>
+                      <p className="text-green-200 text-sm">
+                        Follow our campaign to be notified when we launch
+                      </p>
+                    </div>
+                  </div>
+                  
+                  <a
+                    href="/kickstarter"
+                    className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 text-lg rounded-xl shadow-2xl hover:scale-105 transition-all duration-200 flex items-center justify-center"
+                  >
+                    Support Our Campaign 🚀
+                  </a>
+                </div>
+                
+                <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-green-300">
+                  <div className="flex items-center">
+                    <Gift className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Physical Cards</span>
+                  </div>
+                  <div className="flex items-center">
+                    <Star className="w-4 h-4 mr-1 text-green-400" />
+                    <span>Exclusive Rewards</span>
+                  </div>
+                </div>
               </div>
-              <h3 className="font-bold text-lg mb-2">Kickstarter Updates</h3>
-              <p className="text-purple-300 text-sm">Be notified when our campaign launches and development news</p>
             </div>
-            <div className="bg-purple-950/50 border border-purple-500/30 rounded-lg p-6">
-              <div className="bg-yellow-500/20 w-12 h-12 rounded-lg flex items-center justify-center mx-auto mb-4">
-                <Gift className="w-6 h-6 text-yellow-400" />
-              </div>
-              <h3 className="font-bold text-lg mb-2">Giveaway Entries</h3>
-              <p className="text-purple-300 text-sm">Win free packs, starter decks, merch and more prizes</p>
-            </div>
+            
+            {/* Supporting Text */}
+            <p className="text-center text-purple-300 mt-6 text-sm">
+              Choose one or both! Every form of support helps us reach our goal of bringing Elekin TCG to players worldwide.
+            </p>
           </div>
         </div>
       </section>

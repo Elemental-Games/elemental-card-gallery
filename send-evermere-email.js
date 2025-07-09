@@ -4,12 +4,13 @@ const emailHtml = require('./src/emails/evermereTemplate');
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-async function sendEvermereEmail() {
+async function sendEvermereEmail(options = {}) {
+  const { testEmail, email } = options;
   try {
-    // Use imported HTML template string
+    const to = testEmail && email ? [email] : ['subscribers@elementalgames.gg']; // Replace with your subscriber list
     const { data, error } = await resend.emails.send({
       from: 'Elemental Games <noreply@elementalgames.gg>',
-      to: ['subscribers@elementalgames.gg'], // Replace with your subscriber list
+      to,
       subject: 'Evermere, The Central Kingdom, Awakens 🏰',
       html: emailHtml,
     });
@@ -30,4 +31,5 @@ if (require.main === module) {
   sendEvermereEmail();
 }
 
-module.exports = sendEvermereEmail; 
+module.exports = sendEvermereEmail;
+module.exports.default = sendEvermereEmail; 

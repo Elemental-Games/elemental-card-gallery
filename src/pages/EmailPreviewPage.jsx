@@ -101,9 +101,8 @@ const EmailPreviewPage = () => {
         endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
         body = { sendToAll: true };
       } else if (selectedEmail === 'evermere') {
-        // For now, we'll alert that Evermere email send is not implemented yet
-        alert('🚧 Evermere email campaign sending not implemented yet!\n\nYou can view the preview above.');
-        return;
+        endpoint = '/api/send-evermere-email';
+        body = {};
       } else {
         endpoint = 'http://localhost:3001/api/send-marketing-email';
         body = { sendToAll: true, testEmail: false };
@@ -120,7 +119,7 @@ const EmailPreviewPage = () => {
       const result = await response.json();
       
       if (response.ok) {
-        alert(`✅ ${emailType} campaign email sent to all subscribers!\n\nTotal emails sent: ${result.emailsSent || 'Unknown'}\n\nCheck your analytics dashboard for delivery metrics.`);
+        alert(`✅ ${emailType} campaign email sent to all subscribers!\n\n${result.message || ''}`);
       } else {
         alert(`❌ Failed to send campaign: ${result.message}`);
       }

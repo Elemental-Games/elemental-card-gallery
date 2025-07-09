@@ -244,19 +244,19 @@ const JoinNowPage = () => {
                 <p className="text-purple-200 text-sm mb-6 text-center">
                   Get early access, giveaways, and launch notifications
                 </p>
-                
-                <EmailSignup 
-                  buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(234,179,8,0.5)] hover:shadow-[0_0_40px_rgba(234,179,8,0.7)]"
-                  buttonText="Get Free Early Access →"
-                />
-                
+            
+            <EmailSignup 
+              buttonClassName="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(234,179,8,0.5)] hover:shadow-[0_0_40px_rgba(234,179,8,0.7)]"
+              buttonText="Get Free Early Access →"
+            />
+            
                 <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-purple-300">
-                  <div className="flex items-center">
-                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
-                    <span>Early Bird Pricing</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+                <span>Early Bird Pricing</span>
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
                     <span>VIP Discord Role</span>
                   </div>
                 </div>
@@ -283,9 +283,9 @@ const JoinNowPage = () => {
                   <div className="flex items-center">
                     <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
                     <span>Physical Cards</span>
-                  </div>
-                  <div className="flex items-center">
-                    <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
+              </div>
+              <div className="flex items-center">
+                <CheckCircle className="w-4 h-4 mr-1 text-green-400" />
                     <span>Exclusive Rewards</span>
                   </div>
                 </div>

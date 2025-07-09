@@ -1,17 +1,17 @@
-import React from 'react';
+
 import { Card } from "@/components/ui/card";
 
 const EvermerePage = () => {
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
       {/* Hero Section */}
-      <section className="relative h-[50vh] overflow-hidden">
+      <section className="relative h-[60vh] overflow-hidden">
         <img 
-          src="/kingdoms/evermere_art.png" 
-          alt="Evermere Kingdom" 
+          src="/Evermere - street.jpg" 
+          alt="Evermere Streets" 
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-black/30 flex flex-col items-center justify-center">
+        <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center">
           <h1 className="text-4xl md:text-6xl font-heading text-white mb-2">Evermere: The Central Kingdom</h1>
           <p className="text-xl md:text-2xl font-heading text-white italic">Where All Elements Unite</p>
         </div>
@@ -24,6 +24,43 @@ const EvermerePage = () => {
           As the seat of balance and unity, it serves as a meeting ground for elementalists from all corners of the realm.
         </h2>
       </div>
+
+      {/* Card Crafting Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="max-w-6xl mx-auto">
+          <div className="bg-purple-950/30 rounded-xl border border-purple-500/30 overflow-hidden">
+            <div className="flex flex-col lg:flex-row">
+              <div className="lg:w-1/2">
+                <img 
+                  src="/Evermere_-_card_crafting-min.jpg" 
+                  alt="Card Crafting in Evermere"
+                  className="w-full h-64 lg:h-full object-cover"
+                />
+              </div>
+              <div className="lg:w-1/2 p-8">
+                <h3 className="text-3xl font-bold text-yellow-400 mb-4">
+                  The Art of Card Crafting
+                </h3>
+                <p className="text-purple-200 mb-6 leading-relaxed">
+                  In the heart of Evermere, master artisans blend elemental essence with fallen 
+                  creature remains to forge the powerful cards used in Elemental Masters. This 
+                  ancient craft requires perfect balance between life and death energies.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center text-purple-200">
+                    <span className="text-2xl mr-3">🏺</span>
+                    <span>Cards forged from essence and memory</span>
+                  </div>
+                  <div className="flex items-center text-purple-200">
+                    <span className="text-2xl mr-3">🔮</span>
+                    <span>Master craftsmen channel elemental forces</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className="container mx-auto py-8 space-y-8">
         {/* Life in Evermere */}

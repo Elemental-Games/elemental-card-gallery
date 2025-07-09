@@ -255,9 +255,9 @@ const CardGalleryPage = () => {
       // Force certain cards to be available regardless of date logic
       if (card.id === 'galea' || card.id === 'balon') {
         return {
-          ...card,
+    ...card,
           status: 'available',
-          displayDate: formatReleaseDate(card.releaseDate)
+    displayDate: formatReleaseDate(card.releaseDate)
         };
       }
       
@@ -274,15 +274,15 @@ const CardGalleryPage = () => {
   // Sort cards: released cards first, then upcoming cards by release date
   const sortedCards = useMemo(() => {
     return cardsWithStatus.sort((a, b) => {
-      if (a.status === 'available' && b.status === 'upcoming') return -1;
-      if (a.status === 'upcoming' && b.status === 'available') return 1;
-      
-      // If both have same status, sort by release date
+    if (a.status === 'available' && b.status === 'upcoming') return -1;
+    if (a.status === 'upcoming' && b.status === 'available') return 1;
+    
+    // If both have same status, sort by release date
       const currentYear = new Date().getFullYear();
       const dateA = new Date(a.releaseDate + ', ' + currentYear);
       const dateB = new Date(b.releaseDate + ', ' + currentYear);
-      return dateA - dateB;
-    });
+    return dateA - dateB;
+  });
   }, [cardsWithStatus]);
 
   // Calculate collection progress

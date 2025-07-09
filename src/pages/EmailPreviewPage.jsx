@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import AirKingdomEmail from '../components/emails/AirKingdomEmail';
 import DiscordGiveawayEmail from '../components/emails/DiscordGiveawayEmail';
+import EvermereEmail from '../components/emails/EvermereEmail';
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 
 const EmailPreviewPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // 'air-kingdom' or 'discord-giveaway'
+  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // 'air-kingdom', 'discord-giveaway', or 'evermere'
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -47,18 +48,25 @@ const EmailPreviewPage = () => {
   };
 
   const handleSendTest = async () => {
-    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 'Air Kingdom';
+    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
+                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 'Air Kingdom';
     const confirmed = window.confirm(`Send a test ${emailType} email to mark@elementalgames.gg?`);
     if (!confirmed) return;
 
     try {
-      const endpoint = selectedEmail === 'discord-giveaway' 
-        ? 'http://localhost:3001/api/send-discord-giveaway-email'
-        : 'http://localhost:3001/api/send-marketing-email';
-        
-      const body = selectedEmail === 'discord-giveaway'
-        ? { testEmail: true, email: 'mark@elementalgames.gg' }
-        : { email: 'mark@elementalgames.gg', testEmail: true };
+      let endpoint, body;
+      
+      if (selectedEmail === 'discord-giveaway') {
+        endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
+        body = { testEmail: true, email: 'mark@elementalgames.gg' };
+      } else if (selectedEmail === 'evermere') {
+        // For now, we'll alert that Evermere email send is not implemented yet
+        alert('🚧 Evermere email sending not implemented yet!\n\nYou can view the preview above.');
+        return;
+      } else {
+        endpoint = 'http://localhost:3001/api/send-marketing-email';
+        body = { email: 'mark@elementalgames.gg', testEmail: true };
+      }
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -81,18 +89,25 @@ const EmailPreviewPage = () => {
   };
 
   const handleSendToSubscribers = async () => {
-    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 'Air Kingdom';
+    const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
+                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 'Air Kingdom';
     const confirmed = window.confirm(`This will send the ${emailType} email to ALL subscribers in your database.\n\nAre you sure you want to proceed with the campaign?`);
     if (!confirmed) return;
 
     try {
-      const endpoint = selectedEmail === 'discord-giveaway' 
-        ? 'http://localhost:3001/api/send-discord-giveaway-email'
-        : 'http://localhost:3001/api/send-marketing-email';
-        
-      const body = selectedEmail === 'discord-giveaway'
-        ? { sendToAll: true }
-        : { sendToAll: true, testEmail: false };
+      let endpoint, body;
+      
+      if (selectedEmail === 'discord-giveaway') {
+        endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
+        body = { sendToAll: true };
+      } else if (selectedEmail === 'evermere') {
+        // For now, we'll alert that Evermere email send is not implemented yet
+        alert('🚧 Evermere email campaign sending not implemented yet!\n\nYou can view the preview above.');
+        return;
+      } else {
+        endpoint = 'http://localhost:3001/api/send-marketing-email';
+        body = { sendToAll: true, testEmail: false };
+      }
 
       const response = await fetch(endpoint, {
         method: 'POST',
@@ -207,7 +222,9 @@ const EmailPreviewPage = () => {
             }`}>
               {selectedEmail === 'discord-giveaway' 
                 ? '🎁 Discord Giveaway - First Ever Discord Community Event' 
-                : 'Air Kingdom Week - The Air Kingdom Rises 💨'
+                : selectedEmail === 'evermere'
+                  ? '🏰 Central Kingdom Week - Where Life Meets Death'
+                  : 'Air Kingdom Week - The Air Kingdom Rises 💨'
               }
             </p>
           </div>
@@ -229,6 +246,22 @@ const EmailPreviewPage = () => {
                 }`}
               >
                 💨 Air Kingdom
+              </Button>
+              <Button
+                variant={selectedEmail === 'evermere' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedEmail('evermere')}
+                className={`rounded-none transition-colors duration-200 ${
+                  selectedEmail === 'evermere'
+                    ? isDarkMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-blue-600 text-white'
+                    : isDarkMode
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                🏰 Evermere
               </Button>
               <Button
                 variant={selectedEmail === 'discord-giveaway' ? 'default' : 'outline'}
@@ -333,7 +366,9 @@ const EmailPreviewPage = () => {
             <div className={`p-4 rounded-lg shadow text-center transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
-              <div className="text-2xl font-bold text-orange-600">3</div>
+              <div className="text-2xl font-bold text-orange-600">
+                {selectedEmail === 'discord-giveaway' ? '0' : '3'}
+              </div>
               <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>Cards Featured</div>
@@ -353,7 +388,9 @@ const EmailPreviewPage = () => {
               }`}>
                 {selectedEmail === 'discord-giveaway' 
                   ? '🎁 FIRST Discord Giveaway at 12PM EST - Join Now!'
-                  : 'Zalos, The Air Kingdom, Rises 💨'
+                  : selectedEmail === 'evermere'
+                    ? 'Evermere, The Central Kingdom, Awakens 🏰'
+                    : 'Zalos, The Air Kingdom, Rises 💨'
                 }
               </div>
               <div className={`mt-2 text-sm transition-colors duration-200 ${
@@ -361,7 +398,9 @@ const EmailPreviewPage = () => {
               }`}>
                 Preview text: {selectedEmail === 'discord-giveaway'
                   ? 'Join our Discord community for your chance to win exclusive Elekin TCG prizes!'
-                  : "Galea's domain opens its gates. Three air creatures await their reveal."
+                  : selectedEmail === 'evermere'
+                    ? 'The Central Kingdom unveils its sacred secrets. Three powers of rebirth await.'
+                    : "Galea's domain opens its gates. Three air creatures await their reveal."
                 }
               </div>
             </div>
@@ -369,7 +408,9 @@ const EmailPreviewPage = () => {
 
           {/* Actual Email Component */}
           <div className="mx-4 shadow-xl rounded-lg overflow-hidden">
-            {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : <AirKingdomEmail />}
+            {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : 
+             selectedEmail === 'evermere' ? <EvermereEmail /> : 
+             <AirKingdomEmail />}
           </div>
 
           {/* Email Analytics Preview */}

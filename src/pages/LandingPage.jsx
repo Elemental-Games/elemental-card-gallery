@@ -500,32 +500,32 @@ const LandingPage = () => {
                 </p>
                 
                 <form onSubmit={handleEmailSubmit} className="space-y-4">
-                  <Input
-                    type="email"
-                    placeholder="Enter your email for free early access"
+              <Input
+                type="email"
+                placeholder="Enter your email for free early access"
                     className="w-full bg-purple-900/50 border-2 border-yellow-500/50 text-white placeholder-purple-300 py-4 px-4 text-lg font-medium rounded-xl focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    required
-                  />
-                  <Button
-                    type="submit"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Button
+                type="submit"
                     className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-xl shadow-2xl hover:scale-105 transition-all duration-200"
-                    disabled={loading}
-                  >
-                    {loading ? (
+                disabled={loading}
+              >
+                {loading ? (
                       <div className="flex items-center justify-center">
-                        <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
-                        Signing Up...
-                      </div>
-                    ) : (
+                    <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
+                    Signing Up...
+                  </div>
+                ) : (
                       <div className="flex items-center justify-center">
-                        <ArrowRight className="mr-2 w-5 h-5" />
-                        Get Free Access
-                      </div>
-                    )}
-                  </Button>
-                </form>
+                    <ArrowRight className="mr-2 w-5 h-5" />
+                    Get Free Access
+                  </div>
+                )}
+              </Button>
+            </form>
                 
                 <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-purple-300">
                   <div className="flex items-center">
@@ -537,7 +537,7 @@ const LandingPage = () => {
                     <span>Giveaway Entries</span>
                   </div>
                 </div>
-              </div>
+          </div>
 
               {/* Kickstarter Support */}
               <div className="bg-gradient-to-br from-green-950/70 to-emerald-950/70 border-2 border-green-500/30 rounded-2xl p-8 shadow-[0_0_50px_rgba(34,197,94,0.2)]">
@@ -565,18 +565,18 @@ const LandingPage = () => {
                   >
                     Support Our Campaign 🚀
                   </a>
-                </div>
+              </div>
                 
                 <div className="flex items-center justify-center space-x-4 mt-4 text-sm text-green-300">
                   <div className="flex items-center">
                     <Gift className="w-4 h-4 mr-1 text-green-400" />
                     <span>Physical Cards</span>
-                  </div>
+            </div>
                   <div className="flex items-center">
                     <Star className="w-4 h-4 mr-1 text-green-400" />
                     <span>Exclusive Rewards</span>
-                  </div>
-                </div>
+              </div>
+            </div>
               </div>
             </div>
             

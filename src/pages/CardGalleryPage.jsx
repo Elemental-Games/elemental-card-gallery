@@ -16,27 +16,8 @@ const CardGalleryPage = () => {
     
     const currentYear = today.getFullYear();
     
-    // For cards with "May" dates, use 2024 (already released)
-    if (dateString.includes('May')) {
-      const targetDate = new Date(dateString + ', 2024');
-      targetDate.setHours(0, 0, 0, 0);
-      return targetDate <= today;
-    }
-    
-    // For July dates, determine year based on current date
-    let year = currentYear;
-    const testDate = new Date(dateString + ', ' + currentYear);
-    testDate.setHours(0, 0, 0, 0);
-    
-    // If the date in current year is more than 6 months away, use next year
-    const sixMonthsFromNow = new Date(today);
-    sixMonthsFromNow.setMonth(today.getMonth() + 6);
-    
-    if (testDate > sixMonthsFromNow) {
-      year = currentYear + 1;
-    }
-    
-    const targetDate = new Date(dateString + ', ' + year);
+    // All cards use current year for proper daily updates
+    const targetDate = new Date(dateString + ', ' + currentYear);
     targetDate.setHours(0, 0, 0, 0);
     
     return targetDate <= today;
@@ -50,25 +31,8 @@ const CardGalleryPage = () => {
     
     const currentYear = today.getFullYear();
     
-    // For cards with "May" dates, use 2024 (already released)
-    if (dateString.includes('May')) {
-      const targetDate = new Date(dateString + ', 2024');
-      return targetDate.toDateString() === tomorrow.toDateString();
-    }
-    
-    // For July dates, determine year based on current date
-    let year = currentYear;
-    const testDate = new Date(dateString + ', ' + currentYear);
-    
-    // If the date in current year is more than 6 months away, use next year
-    const sixMonthsFromNow = new Date(today);
-    sixMonthsFromNow.setMonth(today.getMonth() + 6);
-    
-    if (testDate > sixMonthsFromNow) {
-      year = currentYear + 1;
-    }
-    
-    const targetDate = new Date(dateString + ', ' + year);
+    // All cards use current year for proper daily updates
+    const targetDate = new Date(dateString + ', ' + currentYear);
     return targetDate.toDateString() === tomorrow.toDateString();
   };
 
@@ -100,55 +64,55 @@ const CardGalleryPage = () => {
     return addOrdinalSuffix(dateString);
   };
 
-  // Currently released cards (already available)
+  // Daily card release schedule starting January 13, 2025
   const releasedCards = [
     { 
       id: 'nimblefoot', 
       name: 'Nimblefoot', 
       element: 'Earth',
-      releaseDate: 'May 1' // Set to past date to show as released
+      releaseDate: 'January 13'
     },
     { 
       id: 'tuskhammer', 
       name: 'Tuskhammer', 
       element: 'Earth',
-      releaseDate: 'May 2' // Set to past date to show as released
+      releaseDate: 'January 14'
     },
     { 
       id: 'terra', 
       name: 'Terra', 
       element: 'Earth',
-      releaseDate: 'May 3' // Set to past date to show as released
+      releaseDate: 'January 15'
     },
     { 
       id: 'swoop', 
       name: 'Swoop', 
       element: 'Air',
-      releaseDate: 'July 1'
+      releaseDate: 'January 16'
     },
     { 
       id: 'dumoles', 
       name: 'Dumoles', 
       element: 'Earth',
-      releaseDate: 'July 2'
+      releaseDate: 'January 17'
     },
     { 
       id: 'nimbus', 
       name: 'Nimbus', 
       element: 'Air',
-      releaseDate: 'July 3'
+      releaseDate: 'January 18'
     },
     { 
       id: 'galea', 
       name: 'Galea', 
       element: 'Water',
-      releaseDate: 'July 4'
+      releaseDate: 'January 19'
     },
     { 
       id: 'balon', 
       name: 'Balon', 
       element: 'Fire',
-      releaseDate: 'July 5'
+      releaseDate: 'January 20'
     }
   ];
 
@@ -158,91 +122,91 @@ const CardGalleryPage = () => {
       id: 'lifebound-armour', 
       name: 'Lifebound Armour', 
       element: 'Earth',
-      releaseDate: 'July 8'
+      releaseDate: 'January 21'
     },
     { 
       id: 'rapid-recovery', 
       name: 'Rapid Recovery', 
       element: 'Water',
-      releaseDate: 'July 9'
+      releaseDate: 'January 22'
     },
     { 
       id: 'essence-exchange', 
       name: 'Essence Exchange', 
       element: 'Special',
-      releaseDate: 'July 10'
+      releaseDate: 'January 23'
     },
     { 
       id: 'revival-rain', 
       name: 'Revival Rain', 
       element: 'Water',
-      releaseDate: 'July 11'
+      releaseDate: 'January 24'
     },
     { 
       id: 'guardians-sanctuary', 
       name: "Guardian's Sanctuary", 
       element: 'Earth',
-      releaseDate: 'July 12'
+      releaseDate: 'January 25'
     },
     { 
       id: 'draconic-shield', 
       name: 'Draconic Shield', 
       element: 'Fire',
-      releaseDate: 'July 12'
+      releaseDate: 'January 26'
     },
     { 
       id: 'celestial-fortress', 
       name: 'Celestial Fortress', 
       element: 'Air',
-      releaseDate: 'July 12'
+      releaseDate: 'January 27'
     },
     { 
       id: 'ember-flicker', 
       name: 'Ember Flicker', 
       element: 'Fire',
-      releaseDate: 'July 15'
+      releaseDate: 'January 28'
     },
     { 
       id: 'lavrok', 
       name: 'Lavrok', 
       element: 'Fire',
-      releaseDate: 'July 16'
+      releaseDate: 'January 29'
     },
     { 
       id: 'ignus', 
       name: 'Ignus', 
       element: 'Fire',
-      releaseDate: 'July 17'
+      releaseDate: 'January 30'
     },
     { 
       id: 'osao', 
       name: 'Osao', 
       element: 'Earth',
-      releaseDate: 'July 18'
+      releaseDate: 'January 31'
     },
     { 
       id: 'aqua-dart', 
       name: 'Aqua Dart', 
       element: 'Water',
-      releaseDate: 'July 21'
+      releaseDate: 'February 1'
     },
     { 
       id: 'malletin', 
       name: 'Malletin', 
       element: 'Earth',
-      releaseDate: 'July 22'
+      releaseDate: 'February 2'
     },
     { 
       id: 'torrent', 
       name: 'Torrent', 
       element: 'Water',
-      releaseDate: 'July 23'
+      releaseDate: 'February 3'
     },
     { 
       id: 'mek', 
       name: 'Mek', 
       element: 'Earth',
-      releaseDate: 'July 24'
+      releaseDate: 'February 4'
     }
   ];
 
@@ -252,15 +216,6 @@ const CardGalleryPage = () => {
   // Add status based on release date - recalculate when lastUpdateTime changes
   const cardsWithStatus = useMemo(() => {
     return allMarketingCards.map(card => {
-      // Force certain cards to be available regardless of date logic
-      if (card.id === 'galea' || card.id === 'balon') {
-        return {
-    ...card,
-          status: 'available',
-    displayDate: formatReleaseDate(card.releaseDate)
-        };
-      }
-      
       const isAvailable = isCardAvailable(card.releaseDate);
       
       return {

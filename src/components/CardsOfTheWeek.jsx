@@ -131,35 +131,35 @@ const CardsOfTheWeek = () => {
       name: 'Lifebound Armour', 
       element: 'Rune',
       description: 'Protective armor that grows stronger with life force.',
-      releaseDate: 'July 8'
+      releaseDate: 'July 7'
     },
     { 
       id: 'rapid-recovery', 
       name: 'Rapid Recovery', 
       element: 'Counter',
       description: 'A healing spell that restores health quickly.',
-      releaseDate: 'July 9'
+      releaseDate: 'July 8'
     },
     { 
       id: 'essence-exchange', 
       name: 'Essence Exchange', 
       element: 'Rune',
       description: 'A powerful spell that manipulates essence flow.',
-      releaseDate: 'July 10'
+      releaseDate: 'July 9'
     },
     { 
       id: 'revival-rain', 
       name: 'Revival Rain', 
       element: 'Counter',
       description: 'A restorative rain that brings life back to the battlefield.',
-      releaseDate: 'July 11'
+      releaseDate: 'July 10'
     },
     { 
       id: 'guardians-sanctuary', 
       name: "Guardian's Sanctuary", 
       element: 'Shield',
       description: 'A protective shield that guards against attacks.',
-      releaseDate: 'July 12'
+      releaseDate: 'July 11'
     },
     { 
       id: 'draconic-shield', 
@@ -173,7 +173,7 @@ const CardsOfTheWeek = () => {
       name: 'Celestial Fortress', 
       element: 'Shield',
       description: 'A heavenly fortification that protects from above.',
-      releaseDate: 'July 12'
+      releaseDate: 'July 13'
     },
     { 
       id: 'ember-flicker', 
@@ -343,7 +343,7 @@ const CardsOfTheWeek = () => {
                           alt={card.name}
                             className={`w-full h-full object-contain ${
                               ['guardians-sanctuary', 'draconic-shield', 'celestial-fortress'].includes(card.id) 
-                                ? 'transform rotate-90' 
+                                ? 'transform rotate-90 scale-125' 
                                 : ''
                             }`}
                             onError={createCardImageErrorHandler(card)}
@@ -383,7 +383,7 @@ const CardsOfTheWeek = () => {
                     <div className="flex justify-between text-sm">
                         <span className="text-purple-300">{card.element} Type</span>
                       <span className={`font-bold ${card.status === 'available' ? 'text-green-400' : 'text-orange-400'}`}>
-                        {card.status === 'available' ? 'Available Now!' : 'Coming Soon'}
+                        {card.status === 'available' ? 'Available Now!' : (card.displayDate === 'Releasing Tomorrow' ? 'Coming Tomorrow' : 'Coming Soon')}
                       </span>
                     </div>
                   </div>

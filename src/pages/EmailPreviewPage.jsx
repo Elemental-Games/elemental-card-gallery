@@ -3,6 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import AirKingdomEmail from '../components/emails/AirKingdomEmail';
 import DiscordGiveawayEmail from '../components/emails/DiscordGiveawayEmail';
 import EvermereEmail from '../components/emails/EvermereEmail';
+import ScartoEmail from '../components/emails/ScartoEmail';
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 
@@ -49,7 +50,8 @@ const EmailPreviewPage = () => {
 
   const handleSendTest = async () => {
     const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
-                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 'Air Kingdom';
+                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 
+                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' : 'Air Kingdom';
     const confirmed = window.confirm(`Send a test ${emailType} email to mark@elementalgames.gg?`);
     if (!confirmed) return;
 
@@ -62,6 +64,10 @@ const EmailPreviewPage = () => {
       } else if (selectedEmail === 'evermere') {
         // For now, we'll alert that Evermere email send is not implemented yet
         alert('🚧 Evermere email sending not implemented yet!\n\nYou can view the preview above.');
+        return;
+      } else if (selectedEmail === 'scarto') {
+        // For now, we'll alert that Scarto email send is not implemented yet
+        alert('🚧 Scarto email sending not implemented yet!\n\nYou can view the preview above.');
         return;
       } else {
         endpoint = 'http://localhost:3001/api/send-marketing-email';
@@ -90,7 +96,8 @@ const EmailPreviewPage = () => {
 
   const handleSendToSubscribers = async () => {
     const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
-                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 'Air Kingdom';
+                     selectedEmail === 'evermere' ? 'Evermere Kingdom' : 
+                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' : 'Air Kingdom';
     const confirmed = window.confirm(`This will send the ${emailType} email to ALL subscribers in your database.\n\nAre you sure you want to proceed with the campaign?`);
     if (!confirmed) return;
 
@@ -103,6 +110,10 @@ const EmailPreviewPage = () => {
       } else if (selectedEmail === 'evermere') {
         endpoint = '/api/send-evermere-email';
         body = {};
+      } else if (selectedEmail === 'scarto') {
+        // For now, we'll alert that Scarto email send is not implemented yet
+        alert('🚧 Scarto email sending not implemented yet!\n\nYou can view the preview above.');
+        return;
       } else {
         endpoint = 'http://localhost:3001/api/send-marketing-email';
         body = { sendToAll: true, testEmail: false };
@@ -223,7 +234,9 @@ const EmailPreviewPage = () => {
                 ? '🎁 Discord Giveaway - First Ever Discord Community Event' 
                 : selectedEmail === 'evermere'
                   ? '🏰 Central Kingdom Week - Where Life Meets Death'
-                  : 'Air Kingdom Week - The Air Kingdom Rises 💨'
+                  : selectedEmail === 'scarto'
+                    ? '🔥 Fire Kingdom Week - The Fire Kingdom Ignites'
+                    : 'Air Kingdom Week - The Air Kingdom Rises 💨'
               }
             </p>
           </div>
@@ -261,6 +274,22 @@ const EmailPreviewPage = () => {
                 }`}
               >
                 🏰 Evermere
+              </Button>
+              <Button
+                variant={selectedEmail === 'scarto' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedEmail('scarto')}
+                className={`rounded-none transition-colors duration-200 ${
+                  selectedEmail === 'scarto'
+                    ? isDarkMode
+                      ? 'bg-blue-600 text-white'
+                      : 'bg-blue-600 text-white'
+                    : isDarkMode
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                🔥 Scarto
               </Button>
               <Button
                 variant={selectedEmail === 'discord-giveaway' ? 'default' : 'outline'}
@@ -389,7 +418,9 @@ const EmailPreviewPage = () => {
                   ? '🎁 FIRST Discord Giveaway at 12PM EST - Join Now!'
                   : selectedEmail === 'evermere'
                     ? 'Evermere, The Central Kingdom, Awakens 🏰'
-                    : 'Zalos, The Air Kingdom, Rises 💨'
+                    : selectedEmail === 'scarto'
+                      ? 'Scarto, The Fire Kingdom, Ignites 🔥'
+                      : 'Zalos, The Air Kingdom, Rises 💨'
                 }
               </div>
               <div className={`mt-2 text-sm transition-colors duration-200 ${
@@ -399,7 +430,9 @@ const EmailPreviewPage = () => {
                   ? 'Join our Discord community for your chance to win exclusive Elekin TCG prizes!'
                   : selectedEmail === 'evermere'
                     ? 'The Central Kingdom unveils its sacred secrets. Three powers of rebirth await.'
-                    : "Galea's domain opens its gates. Three air creatures await their reveal."
+                    : selectedEmail === 'scarto'
+                      ? "Osao's volcanic realm opens its gates. Three fire creatures await their reveal."
+                      : "Galea's domain opens its gates. Three air creatures await their reveal."
                 }
               </div>
             </div>
@@ -409,6 +442,7 @@ const EmailPreviewPage = () => {
           <div className="mx-4 shadow-xl rounded-lg overflow-hidden">
             {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : 
              selectedEmail === 'evermere' ? <EvermereEmail /> : 
+             selectedEmail === 'scarto' ? <ScartoEmail /> :
              <AirKingdomEmail />}
           </div>
 

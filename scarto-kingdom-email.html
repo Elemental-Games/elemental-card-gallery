@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scarto, The Fire Kingdom, Ignites 🔥</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: #ffffff;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .header img {
+            height: 120px;
+            margin-bottom: 10px;
+        }
+        .hero {
+            background-image: url('https://elementalgames.gg/images/kingdom-headers/scarto-header.webp');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+        .hero h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .hero h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+        }
+        .hero p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .welcome {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .welcome h3 {
+            color: #dc2626;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+        .elementalist-card {
+            display: flex;
+            align-items: center;
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .elementalist-card img {
+            width: 200px;
+            height: auto;
+            object-fit: contain;
+            margin-left: 32px;
+        }
+        .elementalist-info {
+            padding: 20px;
+            flex: 1;
+        }
+        .elementalist-info h4 {
+            color: #dc2626;
+            font-size: 20px;
+            margin-bottom: 15px;
+        }
+        .abilities {
+            background: #fef2f2;
+            border-left: 4px solid #dc2626;
+            padding: 15px;
+            margin-top: 15px;
+        }
+        .abilities p {
+            margin: 5px 0;
+            font-size: 14px;
+            color: #7f1d1d;
+        }
+        .card-showcase {
+            margin: 40px 0;
+            text-align: center;
+        }
+        .card-showcase h4 {
+            font-size: 22px;
+            color: #374151;
+            margin-bottom: 25px;
+        }
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .card-item {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        .card-item:hover {
+            transform: translateY(-2px);
+        }
+        .card-item img {
+            width: 100%;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .card-item h5 {
+            color: #dc2626;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        .card-item p {
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .release-date {
+            background: linear-gradient(135deg, #dc2626, #ea580c);
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        .giveaway {
+            background: linear-gradient(135deg, #fef3c7, #fed7aa);
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+            text-align: center;
+        }
+        .giveaway h4 {
+            color: #ea580c;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .prizes {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .prize {
+            background: white;
+            padding: 15px;
+            border-radius: 6px;
+            border: 1px solid #f59e0b;
+        }
+        .prize-emoji {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .cta-button {
+            background: #dc2626;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .cta-button:hover {
+            background: #b91c1c;
+        }
+        .cta-button.kickstarter {
+            background: #16a34a;
+        }
+        .cta-button.kickstarter:hover {
+            background: #15803d;
+        }
+        .lore-section {
+            background: linear-gradient(135deg, #fef2f2, #fed7d7);
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        .lore-section h4 {
+            color: #dc2626;
+            font-size: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .lore-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .lore-item h5 {
+            color: #374151;
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .lore-item p {
+            font-size: 14px;
+            color: #4b5563;
+            line-height: 1.5;
+        }
+        .button-group {
+            text-align: center;
+            margin: 30px 0;
+        }
+        .button-group .cta-button {
+            margin: 0 10px 10px 0;
+        }
+        .social-links {
+            text-align: center;
+            padding: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+        .social-links a {
+            color: #dc2626;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+        }
+        .social-links a:hover {
+            color: #b91c1c;
+        }
+        .footer {
+            background: #f3f4f6;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .footer a {
+            color: #dc2626;
+            text-decoration: none;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <img src="https://elementalgames.gg/Elekin_Kinbrold_Icon.png" alt="Elekin Kinbrold">
+            <p style="font-size: 14px; margin: 0; opacity: 0.9;">Weekly Kingdom Reveal</p>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="hero">
+            <div class="hero-content">
+                <h1>FORGE YOUR DESTINY.</h1>
+                <h2>IGNITE THE BATTLEFIELD.</h2>
+                <p>Osao's volcanic realm opens its gates. Three fire creatures await their reveal.</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Welcome Message -->
+            <div class="welcome">
+                <h3>The Fire Kingdom Ignites 🔥</h3>
+                <p>Deep within the volcanic peaks, where molten earth meets blazing sky, Osao's kingdom thrives with untamed power. This week, three fire creatures and the Fire Elementalist join the eternal flame.</p>
+            </div>
+
+            <!-- Osao Spotlight -->
+            <div class="elementalist-card">
+                <img src="https://elementalgames.gg/images/cards/new-marketing/osao-r.webp" alt="Osao, Fire Elementalist">
+                <div class="elementalist-info">
+                    <h4>Meet Osao, Fire Elementalist</h4>
+                    <p>Master of the volcanic kingdom, Osao commands the very essence of fire itself. His passion burns eternal, and his strategic mind forges victory from the crucible of battle.</p>
+                    <div class="abilities">
+                        <p>🔥 <strong>Elemental Mastery:</strong> Control volcanic forces and molten energy</p>
+                        <p>⚒️ <strong>Kingdom Power:</strong> Command forge-cities and volcanic strongholds</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card Showcase -->
+            <div class="card-showcase">
+                <h4>New Fire Creatures This Week</h4>
+                <div class="card-grid">
+                    <div class="card-item">
+                        <img src="https://elementalgames.gg/images/cards/new-marketing/ember%20flicker-r.webp" alt="Ember Flicker">
+                        <h5>Ember Flicker</h5>
+                        <p>A spark of untamed fire</p>
+                        <div class="release-date">🔥 July 15th, 2025</div>
+                    </div>
+                    <div class="card-item">
+                        <img src="https://elementalgames.gg/images/cards/new-marketing/ignus-r.webp" alt="Ignus">
+                        <h5>Ignus</h5>
+                        <p>The mighty Fire Titan</p>
+                        <div class="release-date">🔥 July 16th, 2025</div>
+                    </div>
+                    <div class="card-item">
+                        <img src="https://elementalgames.gg/images/cards/new-marketing/lavrok-r.webp" alt="Lavrok">
+                        <h5>Lavrok</h5>
+                        <p>Volcanic predator of the depths</p>
+                        <div class="release-date">🔥 July 17th, 2025</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kickstarter Support Section -->
+            <div class="giveaway">
+                <h4>🚀 Support Our Kickstarter Campaign</h4>
+                <p style="font-size: 16px; color: #4b5563; margin-bottom: 20px;">
+                    Help bring the Fire Kingdom to life! Your support makes Elekin TCG possible.
+                </p>
+                <div class="prizes">
+                    <div class="prize">
+                        <div class="prize-emoji">⚔️</div>
+                        <h5>Exclusive Rewards</h5>
+                        <p>Get <strong>early access</strong> to cards and <strong>exclusive promo items</strong> only available to backers!</p>
+                    </div>
+                    <div class="prize">
+                        <div class="prize-emoji">🔥</div>
+                        <h5>Shape the Game</h5>
+                        <p>Be part of the <strong>development process</strong> and help us create the ultimate TCG experience!</p>
+                    </div>
+                </div>
+                <div style="background: #dc2626; color: white; padding: 15px; border-radius: 6px;">
+                    <p style="margin: 0 0 15px 0; font-weight: bold;">Ready to Join the Fire Kingdom?</p>
+                    <a href="https://elementalgames.gg/kickstarter" class="cta-button kickstarter" style="padding: 12px 32px; font-size: 16px;">
+                        🚀 Back Our Kickstarter
+                    </a>
+                    <p style="margin: 15px 0 0 0; font-size: 12px; opacity: 0.9;">
+                        Every pledge helps us forge the future of Elekin TCG!
+                    </p>
+                </div>
+            </div>
+
+            <!-- Lore Section -->
+            <div class="lore-section">
+                <h4>⚒️ The Forges of Scarto</h4>
+                <div class="lore-grid">
+                    <div class="lore-item">
+                        <h5>Volcanic Mastery</h5>
+                        <p>In Scarto's volcanic depths, master blacksmiths harness molten earth to forge the finest weapons and armor in all of Kinbrold. Their legendary cooling systems allow comfortable living amid blazing temperatures.</p>
+                    </div>
+                    <div class="lore-item">
+                        <h5>Philosophy of Fire</h5>
+                        <p>Scarto's inhabitants believe that mastering fire means mastering oneself. Their philosophy teaches that true power comes from passion tempered by wisdom, burning bright without being consumed.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Call to Action -->
+            <div class="button-group">
+                <a href="https://elementalgames.gg/kinbrold/scarto" class="cta-button">Explore the Fire Kingdom</a>
+                <a href="https://elementalgames.gg/cards" class="cta-button" style="background: #ea580c;">View All Cards</a>
+                <a href="https://discord.gg/elemental" class="cta-button" style="background: #f59e0b;">Join Discord</a>
+            </div>
+        </div>
+
+        <!-- Social Links -->
+        <div class="social-links">
+            <a href="https://discord.gg/elemental">Discord</a>
+            <a href="https://twitter.com/elementalgames">Twitter</a>
+            <a href="https://instagram.com/elementalgames">Instagram</a>
+            <a href="https://tiktok.com/@elementalgames">TikTok</a>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p style="margin: 0 0 10px;">Next week: The Water Kingdom of Tsunareth rises...</p>
+            <p style="margin: 0;">You received this email because you subscribed to Elekin TCG updates.</p>
+            <a href="https://elementalgames.gg/unsubscribe?email=SUBSCRIBER_EMAIL">Unsubscribe</a>
+        </div>
+    </div>
+</body>
+</html> 

@@ -14,11 +14,21 @@ const CardGalleryPage = () => {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
     
-    const currentYear = today.getFullYear();
-    
-    // All cards use current year for proper daily updates
-    const targetDate = new Date(dateString + ', ' + currentYear);
+    // For campaign cards, use 2025 as the target year
+    const targetYear = 2025;
+    const targetDate = new Date(dateString + ', ' + targetYear);
     targetDate.setHours(0, 0, 0, 0);
+    
+    // Since today is July 14th, 2025, show the first 3 cards (July 11, 12, 13) as released
+    const july11 = new Date('July 11, 2025');
+    const july12 = new Date('July 12, 2025');
+    const july13 = new Date('July 13, 2025');
+    
+    if (targetDate.getTime() === july11.getTime() || 
+        targetDate.getTime() === july12.getTime() || 
+        targetDate.getTime() === july13.getTime()) {
+      return true;
+    }
     
     return targetDate <= today;
   };
@@ -29,10 +39,9 @@ const CardGalleryPage = () => {
     const tomorrow = new Date(today);
     tomorrow.setDate(today.getDate() + 1);
     
-    const currentYear = today.getFullYear();
-    
-    // All cards use current year for proper daily updates
-    const targetDate = new Date(dateString + ', ' + currentYear);
+    // For campaign cards, use 2025 as the target year
+    const targetYear = 2025;
+    const targetDate = new Date(dateString + ', ' + targetYear);
     return targetDate.toDateString() === tomorrow.toDateString();
   };
 
@@ -113,101 +122,90 @@ const CardGalleryPage = () => {
       name: 'Balon', 
       element: 'Fire',
       releaseDate: 'January 20'
-    }
-  ];
-
-  // Full card reveal schedule (upcoming cards)
-  const upcomingMarketingCards = [
+    },
     { 
       id: 'lifebound-armour', 
       name: 'Lifebound Armour', 
       element: 'Earth',
-      releaseDate: 'January 21'
+      releaseDate: 'July 7'
     },
     { 
       id: 'rapid-recovery', 
       name: 'Rapid Recovery', 
       element: 'Water',
-      releaseDate: 'January 22'
+      releaseDate: 'July 8'
     },
     { 
       id: 'essence-exchange', 
       name: 'Essence Exchange', 
       element: 'Special',
-      releaseDate: 'January 23'
+      releaseDate: 'July 9'
     },
     { 
       id: 'revival-rain', 
       name: 'Revival Rain', 
       element: 'Water',
-      releaseDate: 'January 24'
+      releaseDate: 'July 10'
     },
     { 
       id: 'guardians-sanctuary', 
       name: "Guardian's Sanctuary", 
       element: 'Earth',
-      releaseDate: 'January 25'
+      releaseDate: 'July 11'
     },
     { 
       id: 'draconic-shield', 
       name: 'Draconic Shield', 
       element: 'Fire',
-      releaseDate: 'January 26'
+      releaseDate: 'July 12'
     },
     { 
       id: 'celestial-fortress', 
       name: 'Celestial Fortress', 
       element: 'Air',
-      releaseDate: 'January 27'
+      releaseDate: 'July 13'
     },
     { 
       id: 'ember-flicker', 
       name: 'Ember Flicker', 
       element: 'Fire',
-      releaseDate: 'January 28'
+      releaseDate: 'July 15'
     },
     { 
       id: 'lavrok', 
       name: 'Lavrok', 
       element: 'Fire',
-      releaseDate: 'January 29'
+      releaseDate: 'July 16'
     },
     { 
       id: 'ignus', 
       name: 'Ignus', 
       element: 'Fire',
-      releaseDate: 'January 30'
+      releaseDate: 'July 17'
     },
     { 
       id: 'osao', 
       name: 'Osao', 
-      element: 'Earth',
-      releaseDate: 'January 31'
+      element: 'Fire',
+      releaseDate: 'July 18'
     },
     { 
       id: 'aqua-dart', 
       name: 'Aqua Dart', 
       element: 'Water',
-      releaseDate: 'February 1'
+      releaseDate: 'July 21'
     },
     { 
       id: 'malletin', 
       name: 'Malletin', 
       element: 'Earth',
-      releaseDate: 'February 2'
-    },
-    { 
-      id: 'torrent', 
-      name: 'Torrent', 
-      element: 'Water',
-      releaseDate: 'February 3'
-    },
-    { 
-      id: 'mek', 
-      name: 'Mek', 
-      element: 'Earth',
-      releaseDate: 'February 4'
+      releaseDate: 'July 22'
     }
+  ];
+
+  // Full card reveal schedule (upcoming cards)
+  const upcomingMarketingCards = [
+    // All cards moved to releasedCards array
   ];
 
   // Combine all cards and add status
@@ -233,9 +231,9 @@ const CardGalleryPage = () => {
     if (a.status === 'upcoming' && b.status === 'available') return 1;
     
     // If both have same status, sort by release date
-      const currentYear = new Date().getFullYear();
-      const dateA = new Date(a.releaseDate + ', ' + currentYear);
-      const dateB = new Date(b.releaseDate + ', ' + currentYear);
+      const targetYear = 2025;
+      const dateA = new Date(a.releaseDate + ', ' + targetYear);
+      const dateB = new Date(b.releaseDate + ', ' + targetYear);
     return dateA - dateB;
   });
   }, [cardsWithStatus]);
@@ -249,9 +247,9 @@ const CardGalleryPage = () => {
   const totalCardsBeforeLaunch = 29;
   const cardsLeftToRelease = totalCardsBeforeLaunch - availableCards.length;
 
-  // For display, show first 6 cards (prioritizing released cards first)
+  // For display, show first 12 cards (prioritizing released cards first)
   const marketingCards = useMemo(() => {
-    return sortedCards.slice(0, 6);
+    return sortedCards.slice(0, 12);
   }, [sortedCards]);
 
   // Countdown to first card reveal (June 23rd, 2025) and subsequent weekly reveals
@@ -472,7 +470,7 @@ const CardGalleryPage = () => {
               </button>
             </div>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
               {marketingCards.map((card) => (
                 <motion.div
                   key={card.id}
@@ -526,12 +524,12 @@ const CardGalleryPage = () => {
               {showFullCollection && (
                 <>
                   {/* Show remaining upcoming cards with names and dates */}
-                  {sortedCards.slice(6).map((card, index) => (
+                  {sortedCards.slice(12).map((card, index) => (
                     <motion.div
                       key={card.id}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: (6 + index) * 0.1 }}
+                      transition={{ delay: (12 + index) * 0.1 }}
                       className="relative group"
                     >
                       <div className="bg-purple-900/30 border border-purple-500/20 rounded-lg p-2 aspect-[2.5/3.5] relative overflow-hidden">
@@ -552,7 +550,7 @@ const CardGalleryPage = () => {
                   ))}
                   
                   {/* Fill remaining slots with placeholder cards if needed */}
-                  {sortedCards.length < 12 && [...Array(12 - sortedCards.length)].map((_, index) => (
+                  {sortedCards.length < 18 && [...Array(18 - sortedCards.length)].map((_, index) => (
                     <motion.div
                       key={`placeholder-${index}`}
                       initial={{ opacity: 0, y: 20 }}

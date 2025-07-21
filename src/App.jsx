@@ -44,6 +44,7 @@ import UnsubscribePage from './pages/UnsubscribePage';
 import EmailPreviewPage from './pages/EmailPreviewPage';
 import CardRevealPage from './pages/CardRevealPage';
 import KickstarterPage from './pages/KickstarterPage';
+import VipKickstarterEmailPage from './pages/VipKickstarterEmailPage';
 
 const queryClient = new QueryClient();
 
@@ -159,6 +160,7 @@ const App = () => (
                       <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
                       <Route path="/admin/card-reveal" element={<CardRevealPage />} />
                       <Route path="/kickstarter" element={<KickstarterPage />} />
+                      <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
                     </Routes>
                   </main>
                   <Footer />

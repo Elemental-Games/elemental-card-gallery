@@ -9,7 +9,7 @@ import { Moon, Sun } from "lucide-react";
 
 const EmailPreviewPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // 'air-kingdom', 'discord-giveaway', or 'evermere'
+  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // Reverted back to air-kingdom default
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -62,11 +62,9 @@ const EmailPreviewPage = () => {
         endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
         body = { testEmail: true, email: 'mark@elementalgames.gg' };
       } else if (selectedEmail === 'evermere') {
-        // For now, we'll alert that Evermere email send is not implemented yet
         alert('🚧 Evermere email sending not implemented yet!\n\nYou can view the preview above.');
         return;
       } else if (selectedEmail === 'scarto') {
-        // For now, we'll alert that Scarto email send is not implemented yet
         alert('🚧 Scarto email sending not implemented yet!\n\nYou can view the preview above.');
         return;
       } else {
@@ -111,7 +109,6 @@ const EmailPreviewPage = () => {
         endpoint = '/api/send-evermere-email';
         body = {};
       } else if (selectedEmail === 'scarto') {
-        // For now, we'll alert that Scarto email send is not implemented yet
         alert('🚧 Scarto email sending not implemented yet!\n\nYou can view the preview above.');
         return;
       } else {
@@ -220,14 +217,15 @@ const EmailPreviewPage = () => {
       <div className={`shadow-sm border-b p-4 transition-colors duration-200 ${
         isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
       }`}>
-        <div className="max-w-4xl mx-auto flex justify-between items-center">
-          <div>
+        <div className="max-w-4xl mx-auto">
+          {/* Title and Description */}
+          <div className="mb-4">
             <h1 className={`text-2xl font-bold transition-colors duration-200 ${
               isDarkMode ? 'text-white' : 'text-gray-900'
             }`}>
               Email Campaign Preview
             </h1>
-            <p className={`text-sm transition-colors duration-200 ${
+            <p className={`text-sm mt-1 transition-colors duration-200 ${
               isDarkMode ? 'text-gray-300' : 'text-gray-600'
             }`}>
               {selectedEmail === 'discord-giveaway' 
@@ -240,137 +238,136 @@ const EmailPreviewPage = () => {
               }
             </p>
           </div>
-          <div className="flex items-center space-x-3">
+
+          {/* Controls Row */}
+          <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
             {/* Email Type Selector */}
-            <div className="flex border rounded-lg overflow-hidden">
+            <div className="flex flex-wrap gap-2">
               <Button
                 variant={selectedEmail === 'air-kingdom' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedEmail('air-kingdom')}
-                className={`rounded-none transition-colors duration-200 ${
+                className={`transition-colors duration-200 ${
                   selectedEmail === 'air-kingdom'
-                    ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-600 text-white'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : isDarkMode
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'
                       : 'border-gray-300 text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 💨 Air Kingdom
               </Button>
+              
               <Button
                 variant={selectedEmail === 'evermere' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedEmail('evermere')}
-                className={`rounded-none transition-colors duration-200 ${
+                className={`transition-colors duration-200 ${
                   selectedEmail === 'evermere'
-                    ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-600 text-white'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : isDarkMode
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'
                       : 'border-gray-300 text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 🏰 Evermere
               </Button>
+              
               <Button
                 variant={selectedEmail === 'scarto' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedEmail('scarto')}
-                className={`rounded-none transition-colors duration-200 ${
+                className={`transition-colors duration-200 ${
                   selectedEmail === 'scarto'
-                    ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-600 text-white'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : isDarkMode
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'
                       : 'border-gray-300 text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 🔥 Scarto
               </Button>
+              
               <Button
                 variant={selectedEmail === 'discord-giveaway' ? 'default' : 'outline'}
                 size="sm"
                 onClick={() => setSelectedEmail('discord-giveaway')}
-                className={`rounded-none transition-colors duration-200 ${
+                className={`transition-colors duration-200 ${
                   selectedEmail === 'discord-giveaway'
-                    ? isDarkMode
-                      ? 'bg-blue-600 text-white'
-                      : 'bg-blue-600 text-white'
+                    ? 'bg-blue-600 text-white hover:bg-blue-700'
                     : isDarkMode
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700'
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'
                       : 'border-gray-300 text-gray-600 hover:bg-gray-50'
                 }`}
               >
                 🎁 Discord Giveaway
               </Button>
             </div>
-            
-            {/* Theme Toggle */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleTheme}
-              className={`border transition-colors duration-200 ${
-                isDarkMode 
-                  ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white' 
-                  : 'border-gray-300 text-gray-600 hover:bg-gray-50'
-              }`}
-            >
-              {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
-            </Button>
-            
-            {/* Logout Button */}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setIsAuthenticated(false)}
-              className={`border transition-colors duration-200 ${
-                isDarkMode 
-                  ? 'border-red-600 text-red-400 hover:bg-red-900/20 hover:text-red-300' 
-                  : 'border-red-600 text-red-600 hover:bg-red-50'
-              }`}
-            >
-              🔓 Logout
-            </Button>
-            
-            <Button 
-              variant="outline" 
-              onClick={handleSendTest}
-              className={`transition-colors duration-200 ${
-                isDarkMode
-                  ? 'border-blue-500 text-blue-400 hover:bg-blue-900/20'
-                  : 'border-blue-600 text-blue-600 hover:bg-blue-50'
-              }`}
-            >
-              Send Test Email
-            </Button>
-            <Button 
-              onClick={handleSendToSubscribers}
-              className={`transition-colors duration-200 ${
-                isDarkMode
-                  ? 'bg-blue-600 hover:bg-blue-700 text-white'
-                  : 'bg-blue-600 hover:bg-blue-700 text-white'
-              }`}
-            >
-              Send to Subscribers
-            </Button>
+
+            {/* Admin Actions */}
+            <div className="flex flex-wrap items-center gap-2">
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={toggleTheme}
+                className={`border transition-colors duration-200 ${
+                  isDarkMode 
+                    ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white' 
+                    : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                {isDarkMode ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </Button>
+              
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsAuthenticated(false)}
+                className={`border transition-colors duration-200 ${
+                  isDarkMode 
+                    ? 'border-red-600 text-red-400 hover:bg-red-900/20 hover:text-red-300' 
+                    : 'border-red-600 text-red-600 hover:bg-red-50'
+                }`}
+              >
+                🔓 Logout
+              </Button>
+              
+              <Button 
+                variant="outline" 
+                onClick={handleSendTest}
+                className={`transition-colors duration-200 ${
+                  isDarkMode
+                    ? 'border-blue-500 text-blue-400 hover:bg-blue-900/20'
+                    : 'border-blue-600 text-blue-600 hover:bg-blue-50'
+                }`}
+              >
+                Send Test Email
+              </Button>
+              
+              <Button 
+                onClick={handleSendToSubscribers}
+                className={`transition-colors duration-200 ${
+                  isDarkMode
+                    ? 'bg-blue-600 hover:bg-blue-700 text-white'
+                    : 'bg-blue-600 hover:bg-blue-700 text-white'
+                }`}
+              >
+                Send to Subscribers
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Email Preview */}
       <div className="py-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-4xl mx-auto px-4">
           {/* Email Stats */}
-          <div className="mb-6 grid grid-cols-1 md:grid-cols-4 gap-4 px-4">
+          <div className="mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
             <div className={`p-4 rounded-lg shadow text-center transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
-              <div className="text-2xl font-bold text-blue-600">2,847</div>
+              <div className="text-2xl font-bold text-blue-600 mb-1">2,847</div>
               <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>Subscribers</div>
@@ -378,7 +375,7 @@ const EmailPreviewPage = () => {
             <div className={`p-4 rounded-lg shadow text-center transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
-              <div className="text-2xl font-bold text-green-600">23.4%</div>
+              <div className="text-2xl font-bold text-green-600 mb-1">23.4%</div>
               <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>Open Rate</div>
@@ -386,7 +383,7 @@ const EmailPreviewPage = () => {
             <div className={`p-4 rounded-lg shadow text-center transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
-              <div className="text-2xl font-bold text-purple-600">8.7%</div>
+              <div className="text-2xl font-bold text-purple-600 mb-1">8.7%</div>
               <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>Click Rate</div>
@@ -394,7 +391,7 @@ const EmailPreviewPage = () => {
             <div className={`p-4 rounded-lg shadow text-center transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
-              <div className="text-2xl font-bold text-orange-600">
+              <div className="text-2xl font-bold text-orange-600 mb-1">
                 {selectedEmail === 'discord-giveaway' ? '0' : '3'}
               </div>
               <div className={`text-sm transition-colors duration-200 ${
@@ -404,14 +401,14 @@ const EmailPreviewPage = () => {
           </div>
 
           {/* Email Subject Line Preview */}
-          <div className="mb-6 mx-4">
+          <div className="mb-6">
             <div className={`p-4 rounded-lg shadow transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
               <h3 className={`font-semibold mb-2 transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-200' : 'text-gray-700'
               }`}>Subject Line:</h3>
-              <div className={`text-lg font-medium transition-colors duration-200 ${
+              <div className={`text-lg font-medium mb-2 transition-colors duration-200 ${
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>
                 {selectedEmail === 'discord-giveaway' 
@@ -423,7 +420,7 @@ const EmailPreviewPage = () => {
                       : 'Zalos, The Air Kingdom, Rises 💨'
                 }
               </div>
-              <div className={`mt-2 text-sm transition-colors duration-200 ${
+              <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-400' : 'text-gray-500'
               }`}>
                 Preview text: {selectedEmail === 'discord-giveaway'
@@ -439,7 +436,7 @@ const EmailPreviewPage = () => {
           </div>
 
           {/* Actual Email Component */}
-          <div className="mx-4 shadow-xl rounded-lg overflow-hidden">
+          <div className="mb-8 shadow-xl rounded-lg overflow-hidden">
             {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : 
              selectedEmail === 'evermere' ? <EvermereEmail /> : 
              selectedEmail === 'scarto' ? <ScartoEmail /> :
@@ -447,7 +444,7 @@ const EmailPreviewPage = () => {
           </div>
 
           {/* Email Analytics Preview */}
-          <div className="mt-8 mx-4">
+          <div>
             <div className={`p-6 rounded-lg shadow transition-colors duration-200 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>

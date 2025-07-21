@@ -235,23 +235,125 @@ const HowToPlayPage = () => {
             <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
               Master the elements and become a legendary card master in the world of Kinbrold
             </p>
-            <div className="flex justify-center gap-6">
-              <a 
-                href="/elekin/rulebook"
-                className="inline-flex items-center justify-center gap-2 bg-purple-600 hover:bg-purple-500 text-white 
-                  font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
-              >
-                <Book className="w-6 h-6" />
-                View Rulebook
-              </a>
-              <button 
-                onClick={() => setShowDownloadModal(true)}
-                className="inline-flex items-center justify-center gap-2 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
-                  font-bold px-8 py-6 rounded-lg transition-colors text-lg h-[72px] min-w-[240px]"
-              >
-                <Download className="w-6 h-6" />
-                Download via Email
-              </button>
+
+          </motion.div>
+
+          {/* Floating Download Button */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 1.2 }}
+            className="fixed bottom-6 right-6 z-50"
+          >
+            <button 
+              onClick={() => setShowDownloadModal(true)}
+              className="inline-flex items-center justify-center gap-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
+                font-semibold px-3 py-2 rounded-lg transition-all text-sm shadow-lg hover:shadow-xl hover:scale-105
+                border border-yellow-400 hover:border-yellow-300"
+            >
+              <Download className="w-4 h-4" />
+              Rulebook
+            </button>
+          </motion.div>
+
+          {/* Video Tutorials Section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold text-yellow-400 mb-3">YouTube Tutorials</h2>
+              <p className="text-lg text-purple-200 max-w-2xl mx-auto">
+                Watch our video tutorials or scroll down for the quick-play reference guide
+              </p>
+            </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+              {/* Quick Overview Video */}
+              <div className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 group">
+                <h3 className="text-xl font-bold text-yellow-400 mb-4 text-center">Quick Overview</h3>
+                <div className="aspect-video bg-purple-950/50 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/2cx9x_DTFIQ?enablejsapi=1&mute=1"
+                    title="Elekin TCG - Quick Overview"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg transition-transform group-hover:scale-105"
+                    onMouseEnter={(e) => {
+                      const iframe = e.target;
+                      const currentSrc = iframe.src;
+                      if (!currentSrc.includes('autoplay=1')) {
+                        iframe.src = currentSrc + '&autoplay=1';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      const iframe = e.target;
+                      iframe.src = iframe.src.replace('&autoplay=1', '');
+                    }}
+                  ></iframe>
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                </div>
+                <p className="text-purple-200 text-sm text-center">
+                  Get a quick overview of Elekin TCG fundamentals and gameplay
+                </p>
+                <div className="text-center mt-3">
+                  <a 
+                    href="https://www.youtube.com/watch?v=2cx9x_DTFIQ&t=4s" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-yellow-400 hover:text-yellow-300 text-sm underline"
+                  >
+                    Watch on YouTube
+                  </a>
+                </div>
+              </div>
+
+              {/* Battle Mechanics Video */}
+              <div className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 group">
+                <h3 className="text-xl font-bold text-yellow-400 mb-4 text-center">Battle Mechanics</h3>
+                <div className="aspect-video bg-purple-950/50 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/pwEw9pSUT9M?enablejsapi=1&mute=1"
+                    title="Elekin TCG - Battle Mechanics"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg transition-transform group-hover:scale-105"
+                    onMouseEnter={(e) => {
+                      const iframe = e.target;
+                      const currentSrc = iframe.src;
+                      if (!currentSrc.includes('autoplay=1')) {
+                        iframe.src = currentSrc + '&autoplay=1';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      const iframe = e.target;
+                      iframe.src = iframe.src.replace('&autoplay=1', '');
+                    }}
+                  ></iframe>
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                </div>
+                <p className="text-purple-200 text-sm text-center">
+                  Learn the strategic combat system with attacks, blocks, and dodges
+                </p>
+                <div className="text-center mt-3">
+                  <a 
+                    href="https://www.youtube.com/watch?v=pwEw9pSUT9M" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-yellow-400 hover:text-yellow-300 text-sm underline"
+                  >
+                    Watch on YouTube
+                  </a>
+                </div>
+              </div>
             </div>
           </motion.div>
 
@@ -408,7 +510,7 @@ const HowToPlayPage = () => {
                                     <ul className="list-disc list-inside space-y-2 text-base">
                                       <li><span className="font-semibold">Shield Health:</span> Damage shield can take before breaking</li>
                                       <li><span className="font-semibold">Shield Tier:</span> I, II, or III</li>
-                                      <li><span className="font-semibold">Card Abilities:</span> Choose 1 effect to trigger when broken and end opponent's battle phase</li>
+                                      <li><span className="font-semibold">Card Abilities:</span> Choose 1 effect to trigger when broken and end opponent&apos;s battle phase</li>
                                     </ul>
                                   </div>
                                 </div>
@@ -452,7 +554,7 @@ const HowToPlayPage = () => {
                             <li>Creatures without an action are Exhausted and turned horizontal</li>
                             <li>Choose attacks one-by-one and not all at once during Battle Phase</li>
                             <li>Higher agility creature strikes first</li>
-                            <li>Creatures can block attacks from slower opponent's creatures, if they have an action available</li>
+                            <li>Creatures can block attacks from slower opponent&apos;s creatures, if they have an action available</li>
                             <li>Faster creatures can dodge, if they have an action available</li>
                             <li>When shields break, the battle phase ends and the controller chooses 1 of the 2 effects to activate</li>
                           </ul>

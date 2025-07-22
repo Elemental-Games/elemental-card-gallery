@@ -68,6 +68,14 @@ const AboutUsPage = () => {
       link: "https://www.artstation.com/lozanski"
     },
     {
+      name: "Scarlett Roberts",
+      role: "Editor & Graphic Designer",
+      specialty: "Content editing and visual design",
+      notableWork: ["Rulebook Design", "Marketing Materials", "Brand Guidelines", "Website Graphics"],
+      imagePlaceholder: "/artists/scarlett-roberts.jpg",
+      link: "https://www.scarlettedits.com/"
+    },
+    {
       name: "Julianna Draga",
       role: "Environment Concept Artist",
       specialty: "Kingdom landscapes and design",
@@ -98,7 +106,7 @@ const AboutUsPage = () => {
               Meet the Elekin Team
             </h1>
             <p className="text-xl lg:text-2xl text-purple-200 max-w-3xl mx-auto">
-              One founder and two talented artists working together to bring Elekin TCG and the world of Kinbrold to life
+              One developer and three talented artists and editors working together to bring Elekin TCG and the world of Kinbrold to life
             </p>
           </div>
         </section>
@@ -161,11 +169,11 @@ const AboutUsPage = () => {
                 <h3 className="text-2xl font-semibold text-white mb-4">Building Elekin From the Ground Up</h3>
                 
                 <p>
-                  Hey there! I&apos;m Mark, and I&apos;ve been building Elekin and the foundations of Elemental Games since the beginning of 2020. Like many founders, I've learned to wear numerous hats throughout my journey. I graduated college with a Bachelor's degree in Electrical & Computer Engineering, then found a job as a Software Engineer while developing the basis of Elemental Games. I've now transitioned into a full-time game designer, developer, marketer, and community manager here at Elemental Games. What started out as a passion project with my buddies back in college has become my full-time position, and I'm going to ensure it's success no matter what.
+                  Hey there! I&apos;m Mark, and I&apos;ve been building Elekin and the foundations of Elemental Games since the beginning of 2020. Like many founders, I&apos;ve learned to wear numerous hats throughout my journey. I graduated college with a Bachelor&apos;s degree in Electrical & Computer Engineering, then found a job as a Software Engineer while developing the basis of Elemental Games. I&apos;ve now transitioned into a full-time game designer, developer, marketer, and community manager here at Elemental Games. What started out as a passion project with my buddies back in college has become my full-time position, and I&apos;m going to ensure it&apos;s success no matter what.
                 </p>
                 
                 <p>
-                  My obsession with TCGs such as Pokemon, Yugioh, and Magic coupled with the elemental storyline of Avatar: The Last Airbender has been a driving force behind my passion for creating Elekin and the world of Kinbrold. The game of Elekin is more than just a TCG with unique mechanics, it's a story about the elemental world of Kinbrold and the constant grind to become a Master within it.
+                  My obsession with TCGs such as Pokemon, Yugioh, and Magic coupled with the elemental storyline of Avatar: The Last Airbender has been a driving force behind my passion for creating Elekin and the world of Kinbrold. The game of Elekin is more than just a TCG with unique mechanics, it&apos;s a story about the elemental world of Kinbrold and the constant grind to become a Master within it.
                 </p>
                 
                 <p>
@@ -190,10 +198,10 @@ const AboutUsPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-white mb-4" style={{textShadow: '0 0 20px rgba(255,255,255,0.8), 0 0 40px rgba(255,255,255,0.6)'}}>Core Creative Team</h2>
-            <p className="text-xl text-purple-200">Professional artists bringing the world of Kinbrold to life</p>
+            <p className="text-xl text-purple-200">Professional artists and editors bringing the world of Kinbrold to life</p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 gap-12 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-12 max-w-6xl mx-auto">
             {coreTeam.map((artist, index) => (
               <motion.div
                 key={artist.name}
@@ -201,6 +209,7 @@ const AboutUsPage = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: index * 0.3 }}
                 viewport={{ once: true }}
+                className={index === 2 ? "md:col-span-2 xl:col-span-1 md:justify-self-center xl:justify-self-auto" : ""}
               >
                 <Card className="p-4 bg-purple-800/20 border-2 border-purple-400/30 hover:border-purple-300/50 transition-all duration-300 h-full shadow-[0_0_20px_rgba(168,85,247,0.2)] hover:shadow-[0_0_30px_rgba(168,85,247,0.4)]">
                   <div className="space-y-3 text-center">
@@ -234,7 +243,7 @@ const AboutUsPage = () => {
                           className="inline-flex items-center text-base text-blue-400 hover:text-blue-300 transition-colors -mb-5"
                         >
                           <ExternalLink className="w-4 h-4 mr-2" />
-                          ArtStation Portfolio
+                          {artist.name === 'Scarlett Roberts' ? 'Professional Portfolio' : 'ArtStation Portfolio'}
                         </a>
                       )}
                     </div>

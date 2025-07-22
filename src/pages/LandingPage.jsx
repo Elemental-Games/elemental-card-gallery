@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Book, LayoutGrid, Map, Clock, Zap, ArrowRight, Star, X, Gift, Gem } from 'lucide-react';
+import { Book, LayoutGrid, Map, Clock, Zap, ArrowRight, Star, X, Gift, Gem, PlayCircle, Users } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import KeyFeatures from '../components/KeyFeatures';
@@ -239,24 +239,64 @@ const LandingPage = () => {
              <KeyFeatures />
            </div>
            
-           {/* Learn About Game CTA */}
+           {/* Three Button CTA Section */}
            <motion.div
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ delay: 1.0 }}
-             className="mt-8 flex justify-center"
+             className="mt-8 flex flex-col lg:flex-row justify-center gap-6 mb-10"
            >
-             <Link to="/elekin">
-               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-6 mb-10
-                               shadow-[0_0_30px_rgba(234,179,8,0.4)] hover:shadow-[0_0_50px_rgba(234,179,8,0.6)]
+             {/* YouTube Videos Button */}
+             <a
+               href="https://www.youtube.com/@elemental-games"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="group"
+             >
+               <div className="bg-gradient-to-br from-red-950/70 to-red-900/50 border-2 border-red-500/60 rounded-xl p-4
+                               shadow-[0_0_20px_rgba(239,68,68,0.4)] hover:shadow-[0_0_35px_rgba(239,68,68,0.6)]
+                               transition-all duration-300 hover:scale-105 cursor-pointer">
+                 <button className="bg-gradient-to-r from-red-500 to-red-400 hover:from-red-400 hover:to-red-300 
+                                    text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
+                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                   <PlayCircle className="w-5 h-5" />
+                   Check Out Our YouTube Videos
+                 </button>
+               </div>
+             </a>
+
+             {/* Learn More About Elekin Button */}
+             <Link to="/elekin" className="group">
+               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-4
+                               shadow-[0_0_20px_rgba(234,179,8,0.4)] hover:shadow-[0_0_35px_rgba(234,179,8,0.6)]
                                transition-all duration-300 hover:scale-105 cursor-pointer">
                  <button className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 
-                                    text-purple-900 font-bold text-lg px-8 py-4 rounded-xl shadow-lg 
-                                    transition-all duration-300 hover:scale-105">
+                                    text-purple-900 font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
+                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                   <Book className="w-5 h-5" />
                    Learn More About Elekin
                  </button>
                </div>
              </Link>
+
+             {/* Join Discord Button */}
+             <a
+               href="https://discord.gg/PVrgZBmcMq"
+               target="_blank"
+               rel="noopener noreferrer"
+               className="group"
+             >
+               <div className="bg-gradient-to-br from-indigo-950/70 to-indigo-900/50 border-2 border-indigo-500/60 rounded-xl p-4
+                               shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]
+                               transition-all duration-300 hover:scale-105 cursor-pointer">
+                 <button className="bg-gradient-to-r from-indigo-500 to-indigo-400 hover:from-indigo-400 hover:to-indigo-300 
+                                    text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
+                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                   <Users className="w-5 h-5" />
+                   Join Us On Discord
+                 </button>
+               </div>
+             </a>
            </motion.div>
          </div>
        </section>

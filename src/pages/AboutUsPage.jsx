@@ -71,7 +71,7 @@ const AboutUsPage = () => {
       name: "Scarlett Roberts",
       role: "Editor & Graphic Designer",
       specialty: "Content editing and visual design",
-      notableWork: ["Rulebook Design", "Marketing Materials", "Brand Guidelines", "Website Graphics"],
+      notableWork: ["Kickstarter Visuals", "Product Design", "Website Graphics", "Marketing Materials"],
       imagePlaceholder: "/artists/scarlett-roberts.jpg",
       link: "https://www.scarlettedits.com/"
     },
@@ -177,7 +177,7 @@ const AboutUsPage = () => {
                 </p>
                 
                 <p>
-                  Every single card, rune, counter, shield, character, ability, and rule has been CAREFULLY designed and purposefully planted. We've tested countless strategies throughout our beta-testing, but I'm most excited to see what you, the community, can come up with when we launch Elekin! I&apos;m collaborating with two incredible artists who believe in the vision as much as I do. We&apos;re small, we&apos;re focused, and we&apos;re creating something amazing.
+                  Every single card, rune, counter, shield, character, ability, and rule has been CAREFULLY designed and purposefully planted. We&apos;ve tested countless strategies throughout our beta-testing, but I&apos;m most excited to see what you, the community, can come up with when we launch Elekin! I&apos;m collaborating with two incredible artists who believe in the vision as much as I do. We&apos;re small, we&apos;re focused, and we&apos;re creating something amazing.
                 </p>
                 
                 <p>
@@ -324,7 +324,7 @@ const AboutUsPage = () => {
             
             <div className="space-y-6 text-gray-300 mb-8">
               <p className="text-lg">
-                Elekin is more than our creation—it's a community effort. Join our Discord, sign up for Early Access, and become part of the story we're telling together.
+                Elekin is more than our creation—it&apos;s a community effort. Join our Discord, sign up for Early Access, and become part of the story we&apos;re telling together.
               </p>
               
               <p className="text-lg">

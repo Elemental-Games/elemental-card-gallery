@@ -248,7 +248,7 @@ const LandingPage = () => {
            >
              {/* YouTube Videos Button */}
              <a
-               href="https://www.youtube.com/@elemental-games"
+               href="https://www.youtube.com/@elekintcg"
                target="_blank"
                rel="noopener noreferrer"
                className="group"

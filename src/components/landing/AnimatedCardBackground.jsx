@@ -214,7 +214,7 @@ const AnimatedCardBackground = () => {
           
           {/* Enhanced Call to Action with Early Access Elemental Focus */}
           <motion.div
-            className="bg-gradient-to-br from-yellow-400/20 to-purple-500/10 border-2 border-yellow-400/70 rounded-xl p-4 lg:p-6 -mt-3 max-w-lg mx-auto shadow-2xl shadow-yellow-400/40 hover:shadow-yellow-400/50 transition-all duration-300 hover:scale-105"
+            className="bg-gradient-to-br from-yellow-400/75 to-purple-500/75 border-2 border-yellow-400/90 rounded-xl p-4 lg:p-6 -mt-3 max-w-lg mx-auto shadow-2xl shadow-yellow-400/90 hover:shadow-yellow-400/80 transition-all duration-300 hover:scale-105"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}

@@ -263,12 +263,6 @@ const HowToPlayPage = () => {
             transition={{ duration: 0.6 }}
             className="mb-16"
           >
-            <div className="text-center mb-8">
-              <h2 className="text-3xl font-bold text-yellow-400 mb-3">YouTube Tutorials</h2>
-              <p className="text-lg text-purple-200 max-w-2xl mx-auto">
-                Watch our video tutorials or scroll down for the quick-play reference guide
-              </p>
-            </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {/* Quick Overview Video */}

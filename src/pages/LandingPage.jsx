@@ -260,7 +260,7 @@ const LandingPage = () => {
                                     text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
                                     transition-all duration-300 hover:scale-105 flex items-center gap-2">
                    <PlayCircle className="w-5 h-5" />
-                   Check Out Our YouTube Videos
+                   YouTube
                  </button>
                </div>
              </a>
@@ -274,7 +274,7 @@ const LandingPage = () => {
                                     text-purple-900 font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
                                     transition-all duration-300 hover:scale-105 flex items-center gap-2">
                    <Book className="w-5 h-5" />
-                   Learn More About Elekin
+                   Learn More
                  </button>
                </div>
              </Link>
@@ -293,7 +293,7 @@ const LandingPage = () => {
                                     text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
                                     transition-all duration-300 hover:scale-105 flex items-center gap-2">
                    <Users className="w-5 h-5" />
-                   Join Us On Discord
+                   Discord
                  </button>
                </div>
              </a>

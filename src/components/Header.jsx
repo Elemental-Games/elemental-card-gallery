@@ -76,12 +76,12 @@ const Header = () => {
                 </NavigationMenuList>
               </NavigationMenu>
               
-              {/* Kickstarter Button */}
+              {/* Shop Button */}
               <Link 
-                to="/kickstarter" 
-                className="bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
+                to="/shop" 
+                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
               >
-                Kickstarter
+                Shop
               </Link>
             </div>
           </div>
@@ -128,13 +128,13 @@ const Header = () => {
                         </div>
                       ))}
                       
-                      {/* Kickstarter Link for Mobile */}
+                      {/* Shop Link for Mobile */}
                       <div className="pt-4 border-t border-purple-500/30">
                         <Link 
-                          to="/kickstarter" 
-                          className="block py-2 px-4 text-green-400 hover:text-green-300 font-bold transition-colors duration-200"
+                          to="/shop" 
+                          className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
                         >
-                          Kickstarter
+                          Shop
                         </Link>
                       </div>
                     </div>

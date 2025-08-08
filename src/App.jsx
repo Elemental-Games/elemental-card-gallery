@@ -45,6 +45,8 @@ import EmailPreviewPage from './pages/EmailPreviewPage';
 import CardRevealPage from './pages/CardRevealPage';
 import KickstarterPage from './pages/KickstarterPage';
 import VipKickstarterEmailPage from './pages/VipKickstarterEmailPage';
+import ShopPage from './pages/ShopPage';
+import PostPurchasePage from './pages/PostPurchasePage';
 
 const queryClient = new QueryClient();
 
@@ -108,6 +110,8 @@ const App = () => (
                   <main className="flex-grow w-full">
                     <Routes>
                       <Route path="/" element={<LandingPage />} />
+                      <Route path="/shop" element={<ShopPage />} />
+                      <Route path="/post-purchase" element={<PostPurchasePage />} />
                       <Route path="/login" element={<AuthPage />} />
                       <Route path="/auth/callback" element={<AuthCallbackPage />} />
                       <Route path="/profile" element={

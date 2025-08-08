@@ -481,7 +481,35 @@ const LandingPage = () => {
             Sign up for <span className="text-yellow-400 font-bold">FREE</span> to be notified of our 
             <span className="text-white font-semibold"> Kickstarter launch</span>, get an exclusive role, and an additional entry for all giveaways such as free packs, decks & merch
           </p>
-
+ 
+          {/* PRE-ORDER ANNOUNCEMENT SECTION */}
+          <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           transition={{ delay: 0.4 }}
+           className="my-12"
+          >
+           <div className="bg-gradient-to-br from-yellow-500/20 via-transparent to-yellow-500/20 border-2 border-yellow-400 rounded-2xl p-8 max-w-4xl mx-auto shadow-[0_0_40px_rgba(234,179,8,0.3)]">
+             <div className="text-center">
+               <h2 className="text-4xl lg:text-5xl font-bold mb-4 bg-gradient-to-r from-yellow-300 to-white bg-clip-text text-transparent">
+                 Pre-Orders Are Now Live!
+               </h2>
+               <p className="text-lg text-purple-200 mb-6">
+                 Secure your Demo Day decks and get a chance to win big with our pre-order wheel spin!
+               </p>
+               <Link to="/shop">
+                 <Button
+                   size="lg"
+                   className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 px-8 text-xl rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
+                 >
+                   <Star className="mr-2 h-5 w-5" />
+                   Pre-Order Now & Spin to Win!
+                 </Button>
+               </Link>
+             </div>
+           </div>
+          </motion.div>
+ 
           {/* Countdown Timer - BIGGER FONTS */}
           <div className="bg-purple-950/70 border border-purple-500/30 rounded-xl p-8 mb-8 max-w-lg mx-auto">
             <div className="flex items-center justify-center mb-6">

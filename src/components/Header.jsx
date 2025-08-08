@@ -81,7 +81,7 @@ const Header = () => {
                 to="/shop" 
                 className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
               >
-                Shop
+                Pre-Order
               </Link>
             </div>
           </div>

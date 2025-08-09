@@ -1,74 +1,45 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const TermsOfService = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="container mx-auto px-4 py-8"
-    >
-      <h1 className="text-4xl font-bold mb-6">Terms of Service</h1>
-      <p className="mb-4">Last Updated: January 6, 2025</p>
+    <div className="bg-[#1A103C] text-white min-h-screen">
+      <Helmet>
+        <title>Terms of Service - Elekin TCG</title>
+        <meta name="description" content="Read the terms of service for Elekin TCG." />
+      </Helmet>
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-8 text-center">Terms of Service</h1>
+          <div className="space-y-6 text-purple-200">
+            <p>Last updated: August 08, 2025</p>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">1. Acceptance of Terms</h2>
-        <p>By accessing and using this service, you agree to be bound by these Terms of Service ("Terms"). If you do not agree to these Terms, please do not use the service.</p>
-      </section>
+            <h2 className="text-2xl font-bold text-yellow-400">1. Overview</h2>
+            <p>This website is operated by Elemental Games LLC. Throughout the site, the terms “we”, “us” and “our” refer to Elemental Games LLC. By visiting our site and/ or purchasing something from us, you engage in our “Service” and agree to be bound by the following terms and conditions.</p>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">2. Description of Service</h2>
-        <p>We provide a digital card game platform and related services (the "Service"). We reserve the right to modify, suspend, or discontinue the Service at any time without notice.</p>
-      </section>
+            <h2 className="text-2xl font-bold text-yellow-400">2. Online Store Terms</h2>
+            <p>By agreeing to these Terms of Service, you represent that you are at least the age of majority in your state or province of residence. You may not use our products for any illegal or unauthorized purpose.</p>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">3. User Accounts</h2>
-        <h3 className="text-xl font-semibold mt-3 mb-2">3.1 Registration</h3>
-        <p>You may need to create an account to use certain features of the Service. You agree to provide accurate, current, and complete information during registration.</p>
-        <h3 className="text-xl font-semibold mt-3 mb-2">3.2 Account Security</h3>
-        <p>You are responsible for maintaining the confidentiality of your account credentials and for all activities that occur under your account.</p>
-      </section>
+            <h2 className="text-2xl font-bold text-yellow-400">3. General Conditions</h2>
+            <p>We reserve the right to refuse service to anyone for any reason at any time. You understand that your content (not including credit card information), may be transferred unencrypted and involve transmissions over various networks.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">4. Products or Services</h2>
+            <p>Certain products or services may be available exclusively online through the website. We have made every effort to display as accurately as possible the colors and images of our products. We cannot guarantee that your computer monitor&apos;s display of any color will be accurate.</p>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">4. User Conduct</h2>
-        <p>You agree not to:</p>
-        <ul className="list-disc list-inside ml-4">
-          <li>Use the Service for any illegal purpose</li>
-          <li>Violate any applicable laws or regulations</li>
-          <li>Interfere with or disrupt the Service</li>
-          <li>Attempt to gain unauthorized access to the Service</li>
-          <li>Transmit any viruses or harmful code</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">5. Intellectual Property</h2>
-        <h3 className="text-xl font-semibold mt-3 mb-2">5.1 Our Rights</h3>
-        <p>The Service and its original content, features, and functionality are owned by us and are protected by international copyright, trademark, and other intellectual property laws.</p>
-        <h3 className="text-xl font-semibold mt-3 mb-2">5.2 User Content</h3>
-        <p>You retain ownership of any content you submit to the Service. By submitting content, you grant us a worldwide, non-exclusive, royalty-free license to use, reproduce, modify, and distribute your content.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">6. Limitation of Liability</h2>
-        <p>To the maximum extent permitted by law, we shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of the Service.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">7. Termination</h2>
-        <p>We may terminate or suspend your account and access to the Service immediately, without notice, for any breach of these Terms.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">8. Changes to Terms</h2>
-        <p>We reserve the right to modify these Terms at any time. We will notify users of any material changes via email or through the Service.</p>
-      </section>
-
-      <div className="mt-8 text-center">
-        <p>Need support? Contact us at: <a href="mailto:contact@elementalgames.gg" className="text-blue-500 hover:underline">contact@elementalgames.gg</a></p>
+            <h2 className="text-2xl font-bold text-yellow-400">5. Intellectual Property</h2>
+            <p>All content on this site, including but not limited to text, graphics, logos, images, and software, is the property of Elemental Games LLC or its content suppliers and protected by international copyright laws. Applying for a trademark for &quot;Elekin&quot; is in progress.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">6. Governing Law</h2>
+            <p>These Terms of Service and any separate agreements whereby we provide you Services shall be governed by and construed in accordance with the laws of the United States.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">7. Changes to Terms of Service</h2>
+            <p>You can review the most current version of the Terms of Service at any time at this page. We reserve the right, at our sole discretion, to update, change or replace any part of these Terms of Service by posting updates and changes to our website.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">8. Contact Information</h2>
+            <p>Questions about the Terms of Service should be sent to us at <a href="mailto:mark@elementalgames.gg" className="text-yellow-400 underline">mark@elementalgames.gg</a>.</p>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

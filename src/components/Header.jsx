@@ -1,42 +1,41 @@
-import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import { Link, useLocation } from 'react-router-dom';
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Menu } from "lucide-react";
-import { navItems } from '../nav-items';
+} from '@/components/ui/navigation-menu';
+import { navItems } from '@/nav-items';
+import { Button } from '@/components/ui/button';
+import { Menu, ShoppingCart } from 'lucide-react';
+import { useCart } from '@/hooks/useCart';
 
 const Header = () => {
+  const { toggleCart, items } = useCart();
+  const location = useLocation();
+  const isShopPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product');
+
+  const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
+  const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
   return (
     <>
-      <Helmet>
-        <title>Elekin - Trading Card Game</title>
-        <meta name="description" content="Navigate through the world of Kinbrold. Access game rules, card gallery, and join our community." />
-        <meta name="keywords" content="trading card game, TCG, Elekin, card game, fantasy game, elemental powers, strategy game" />
-        <meta property="og:title" content="Elekin - Trading Card Game" />
-        <meta property="og:description" content="Master the elements in this exciting trading card game. Collect cards, build decks, and battle for supremacy!" />
-        <meta property="og:type" content="website" />
-        <link rel="canonical" href="https://elementalgames.gg" />
-      </Helmet>
-      <nav className="bg-darkPurple/30 backdrop-blur-sm p-4 sticky top-0 z-50 w-full">
+      <nav className="bg-darkPurple/80 backdrop-blur-sm sticky top-0 z-40 w-full border-b border-purple-500/30">
         <div className="container mx-auto">
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-between">
+          <div className="hidden md:flex items-center justify-between h-20">
             <Link to="/" className="flex items-center">
               <img 
                 src="/Elekin.png" 
                 alt="Elekin TCG Logo" 
-                className="h-28 w-auto mr-6 ml-6 -mb-6 -mt-5"
+                className="h-24 w-auto"
               />
             </Link>
             
-            <div className="flex items-center space-x-6">
+            <div className="flex items-center space-x-4">
               <NavigationMenu>
-                <NavigationMenuList className="flex space-x-6">
+                <NavigationMenuList>
                   {navItems.map((item) => (
                     <NavigationMenuItem key={item.title}>
                       {item.subPages ? (
@@ -76,13 +75,32 @@ const Header = () => {
                 </NavigationMenuList>
               </NavigationMenu>
               
-              {/* Shop Button */}
-              <Link 
-                to="/shop" 
-                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
-              >
-                Pre-Order
-              </Link>
+              {isShopPage ? (
+                <div className="flex items-center gap-4">
+                  {items.length > 0 && (
+                    <div className="text-right cursor-pointer" onClick={toggleCart}>
+                      <p className="font-bold text-white">{totalItems} Item{totalItems > 1 ? 's' : ''}</p>
+                      <p className="text-sm text-yellow-400">${subtotal.toFixed(2)}</p>
+                    </div>
+                  )}
+                  <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
+                    <ShoppingCart className="h-6 w-6 text-white" />
+                    {items.length > 0 && (
+                      <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                      </span>
+                    )}
+                  </Button>
+                </div>
+              ) : (
+                <Link 
+                  to="/shop" 
+                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
+                >
+                  Shop
+                </Link>
+              )}
             </div>
           </div>
 
@@ -128,18 +146,32 @@ const Header = () => {
                         </div>
                       ))}
                       
-                      {/* Shop Link for Mobile */}
-                      <div className="pt-4 border-t border-purple-500/30">
-                        <Link 
-                          to="/shop" 
-                          className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
-                        >
-                          Shop
-                        </Link>
-                      </div>
+                      {!isShopPage && (
+                        <div className="pt-4 border-t border-purple-500/30">
+                          <Link 
+                            to="/shop" 
+                            className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
+                          >
+                            Shop
+                          </Link>
+                        </div>
+                      )}
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
+                {isShopPage && (
+                  <NavigationMenuItem>
+                    <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
+                      <ShoppingCart className="h-6 w-6 text-white" />
+                      {items.length > 0 && (
+                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                        </span>
+                      )}
+                    </Button>
+                  </NavigationMenuItem>
+                )}
               </NavigationMenuList>
             </NavigationMenu>
           </div>

@@ -1,17 +1,12 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { X, Star, Gift, Gem } from 'lucide-react';
-import { Input } from '@/components/ui/input';
+import { X, Star } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { subscribeEmail } from '../../utils/api';
-import { toast } from 'sonner';
-import confetti from 'canvas-confetti';
 
 const AnimatedCardBackground = () => {
   const [cards, setCards] = useState([]);
   const [showComingSoon, setShowComingSoon] = useState(false);
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // Create array of card backs only - no revealed cards yet
@@ -27,35 +22,6 @@ const AnimatedCardBackground = () => {
 
   const handleCardClick = () => {
     setShowComingSoon(true);
-  };
-
-  const handleEmailSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      toast.error('Please enter a valid email address');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const result = await subscribeEmail(email);
-      if (result.success) {
-        toast.success('Welcome to the Early Access Elementals!');
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-        setEmail('');
-      } else {
-        toast.error(result.message || 'Failed to subscribe');
-      }
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast.error('Failed to subscribe. Please try again.');
-    } finally {
-      setLoading(false);
-    }
   };
 
   const createRow = (direction, speed, yOffset, startPosition = 0) => {
@@ -204,7 +170,7 @@ const AnimatedCardBackground = () => {
           />
           
           <motion.p 
-            className="text-base md:text-lg text-purple-200 mb-6 mt-10 max-w-xl mx-auto"
+            className="text-base md:text-lg text-purple-200 mb-8 mt-10 max-w-xl mx-auto"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.6 }}
@@ -212,55 +178,19 @@ const AnimatedCardBackground = () => {
             Build your deck, play with friends, and become a master in the world of Kinbrold
           </motion.p>
           
-          {/* Enhanced Call to Action with Early Access Elemental Focus */}
           <motion.div
-            className="bg-gradient-to-br from-yellow-400/75 to-purple-500/75 border-2 border-yellow-400/90 rounded-xl p-4 lg:p-6 -mt-3 max-w-lg mx-auto shadow-2xl shadow-yellow-400/90 hover:shadow-yellow-400/80 transition-all duration-300 hover:scale-105"
+            className="pointer-events-auto"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
           >
-            <div className="flex items-center justify-center mb-2">
-              <Gift className="w-5 h-5 text-yellow-400 mr-2" />
-              <span className="text-yellow-400 font-bold text-sm lg:text-base">Free Early Access</span>
-            </div>
-            <h2 className="text-lg md:text-xl lg:text-2xl font-bold text-white mb-3">
-              Be One of the First <span className="text-yellow-400">500</span> Sign-Ups
-            </h2>
-            <div className="flex items-center justify-center space-x-3 text-xs text-purple-200 mb-3">
-              <div className="flex items-center">
-                  <Gift className="w-3 h-3 mr-1" />
-                  <span>Free Giveaways</span>
+            <Link to="/shop">
+              <button className="animated-gradient-border">
+                <div className="bg-[#1A103C] hover:bg-purple-900/80 rounded-lg px-10 py-5 transition-colors">
+                  <span className="text-2xl font-bold text-white">Pre-Order Now</span>
                 </div>
-              <div className="flex items-center">
-                  <Gem className="w-3 h-3 mr-1" />
-                  <span>Kickstarter Notifications</span>
-                </div>
-              <div className="flex items-center">
-                <Star className="w-3 h-3 mr-1" />
-                <span>Discord Role</span>
-              </div>
-            </div>
-            
-            {/* Enhanced CTA Button */}
-            <div className="pointer-events-auto">
-              <form onSubmit={handleEmailSubmit} className="space-y-3">
-                <Input
-                  type="email"
-                  placeholder="Enter your email here"
-                  className="w-full bg-purple-900/50 border-yellow-400/50 text-white placeholder-purple-300 py-2 text-center font-semibold text-sm"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Button
-                  type="submit"
-                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold text-base px-4 lg:px-6 py-2 lg:py-3 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300"
-                  disabled={loading}
-                >
-                  {loading ? 'Securing Your Spot...' : 'Sign-Up Now'}
-                </Button>
-              </form>
-            </div>
+              </button>
+            </Link>
           </motion.div>
         </div>
       </motion.div>

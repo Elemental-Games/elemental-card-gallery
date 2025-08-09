@@ -3,7 +3,6 @@ import {
   Info as InfoIcon,
   UserPlus as UserPlusIcon,
   Gamepad as GamepadIcon,
-  LayoutGrid as LayoutGridIcon
 } from "lucide-react";
 import { HomeIcon } from "lucide-react";
 import LandingPage from "./pages/LandingPage.jsx";
@@ -31,14 +30,13 @@ export const navItems = [
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,
+      },
+      {
+        title: "Cards",
+        to: "/cards",
+        page: <CardGalleryPage />,
       }
     ]
-  },
-  {
-    title: "Card Reveals",
-    to: "/cards/campaign",
-    icon: <LayoutGridIcon className="h-4 w-4" />,
-    page: <CardGalleryPage />,
   },
   { 
     title: "Lore", 

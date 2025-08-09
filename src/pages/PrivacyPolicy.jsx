@@ -1,83 +1,51 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet-async';
 
 const PrivacyPolicy = () => {
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="container mx-auto px-4 py-8"
-    >
-      <h1 className="text-4xl font-bold mb-6">Privacy Policy</h1>
-      <p className="mb-4">Last Updated: January 6, 2025</p>
+    <div className="bg-[#1A103C] text-white min-h-screen">
+      <Helmet>
+        <title>Privacy Policy - Elekin TCG</title>
+        <meta name="description" content="Read the privacy policy for Elekin TCG." />
+      </Helmet>
+      <div className="container mx-auto px-4 py-16">
+        <div className="max-w-4xl mx-auto">
+          <h1 className="text-4xl font-bold mb-8 text-center">Privacy Policy</h1>
+          <div className="space-y-6 text-purple-200">
+            <p>Last updated: August 08, 2025</p>
+            <p>This Privacy Policy describes how Elemental Games LLC (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) collects, uses, and discloses your personal information when you visit, use our services, or make a purchase from elementalgames.gg (the &quot;Site&quot;) or otherwise communicate with us (collectively, the &quot;Services&quot;).</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">Information We Collect</h2>
+            <p>When you use our Services, we may collect personal information about you from a variety of sources. This includes information you provide to us directly, information we collect automatically, and information we obtain from third parties.</p>
+            <ul>
+                <li><strong>Information You Provide Directly:</strong> This includes your name, shipping and billing address, email address, phone number, and payment information.</li>
+                <li><strong>Information We Collect Automatically:</strong> We use cookies and similar technologies to collect information about your device and how you interact with our Site. This may include your IP address, browser type, and operating system.</li>
+                <li><strong>Information from Third Parties:</strong> We may receive information from third parties, such as Shopify, to supplement the information we collect.</li>
+            </ul>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">1. Information We Collect</h2>
-        <p>We collect information that you provide directly to us, including when you:</p>
-        <ul className="list-disc pl-6 mt-2 space-y-2">
-          <li>Create an account</li>
-          <li>Make a purchase</li>
-          <li>Sign up for our newsletter</li>
-          <li>Contact our support team</li>
-        </ul>
-      </section>
+            <h2 className="text-2xl font-bold text-yellow-400">How We Use Your Information</h2>
+            <p>We use your personal information to provide and improve our Services, including to:</p>
+            <ul>
+                <li>Process your orders and payments.</li>
+                <li>Communicate with you about your orders and our Services.</li>
+                <li>Screen our orders for potential risk or fraud.</li>
+                <li>Provide you with information or advertising relating to our products or services.</li>
+            </ul>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">2. How We Use Your Information</h2>
-        <p>We use the information we collect to:</p>
-        <ul className="list-disc pl-6 mt-2 space-y-2">
-          <li>Provide and maintain our services</li>
-          <li>Process your transactions</li>
-          <li>Send you updates and marketing communications</li>
-          <li>Improve our services</li>
-        </ul>
-      </section>
+            <h2 className="text-2xl font-bold text-yellow-400">Sharing Your Information</h2>
+            <p>We share your personal information with third-party service providers to help us provide our Services. For example, we use Shopify to power our online store. We may also share your information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.</p>
 
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">3. Information Sharing</h2>
-        <p>We do not sell your personal information. We may share your information with:</p>
-        <ul className="list-disc pl-6 mt-2 space-y-2">
-          <li>Service providers who assist in our operations</li>
-          <li>Legal authorities when required by law</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">4. Data Security</h2>
-        <p>We implement appropriate security measures to protect your personal information.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">5. Your Rights</h2>
-        <p>You have the right to:</p>
-        <ul className="list-disc pl-6 mt-2 space-y-2">
-          <li>Access your personal information</li>
-          <li>Correct inaccurate information</li>
-          <li>Request deletion of your information</li>
-          <li>Opt-out of marketing communications</li>
-        </ul>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">6. Children's Privacy</h2>
-        <p>The Service is not intended for children under 13. We do not knowingly collect personal information from children under 13.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">7. International Data Transfers</h2>
-        <p>Your information may be transferred to and processed in countries other than your country of residence. These countries may have different data protection laws.</p>
-      </section>
-
-      <section className="mb-6">
-        <h2 className="text-2xl font-semibold mb-2">8. Changes to Privacy Policy</h2>
-        <p>We may update this Privacy Policy from time to time. We will notify you of any material changes by posting the new Privacy Policy on this page and updating the "Last Updated" date.</p>
-      </section>
-
-      <div className="mt-8 text-center">
-        <p>Questions about our privacy practices? Contact us at: <a href="mailto:contact@elementalgames.gg" className="text-yellow-400 hover:text-yellow-300 transition-colors">contact@elementalgames.gg</a></p>
+            <h2 className="text-2xl font-bold text-yellow-400">Your Rights</h2>
+            <p>Depending on where you live, you may have certain rights regarding your personal information, such as the right to access, correct, or delete your data. To exercise these rights, please contact us at <a href="mailto:mark@elementalgames.gg" className="text-yellow-400 underline">mark@elementalgames.gg</a>.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time in order to reflect, for example, changes to our practices or for other operational, legal, or regulatory reasons.</p>
+            
+            <h2 className="text-2xl font-bold text-yellow-400">Contact Us</h2>
+            <p>For more information about our privacy practices, if you have questions, or if you would like to make a complaint, please contact us by e-mail at <a href="mailto:mark@elementalgames.gg" className="text-yellow-400 underline">mark@elementalgames.gg</a>.</p>
+          </div>
+        </div>
       </div>
-    </motion.div>
+    </div>
   );
 };
 

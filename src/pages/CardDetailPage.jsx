@@ -86,10 +86,10 @@ const CardDetailPage = () => {
   return (
     <div className="container mx-auto px-4 py-8">
       <Link 
-        to="/cards/campaign"
+        to="/cards"
         className="inline-block mb-8 px-4 py-2 bg-purple-600/50 text-white rounded-lg hover:bg-purple-500/50"
       >
-        ← Campaign Page
+        ← Back to Gallery
       </Link>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">

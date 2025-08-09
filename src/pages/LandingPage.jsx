@@ -117,7 +117,7 @@ const LandingPage = () => {
              initial={{ opacity: 0, y: 20 }}
              animate={{ opacity: 1, y: 0 }}
              transition={{ delay: 1.0 }}
-             className="mt-8 flex flex-col lg:flex-row justify-center gap-6 mb-10"
+             className="mt-8 flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6 mb-10"
            >
              {/* YouTube Videos Button */}
              <a

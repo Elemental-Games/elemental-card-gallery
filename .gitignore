@@ -31,3 +31,17 @@ dist-ssr
 *.json
 
 FirebaseSDK.js
+
+# production
+/dist
+build
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+*.json
+.env
+
+# vercel
+.vercel

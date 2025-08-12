@@ -18,7 +18,7 @@ Your server is missing the Resend API key. Add this to your `.env` file:
 
 ```bash
 # Add your Resend API key (get it from resend.com/api-keys)
-RESEND_API_KEY=re_your_api_key_here
+RESEND_API_KEY=your_resend_api_key
 
 # Your existing Supabase variables should already be there:
 VITE_SUPABASE_URL=your_supabase_url

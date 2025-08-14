@@ -4,18 +4,31 @@ const Footer = () => {
   return (
     <footer className="bg-darkPurple/80 backdrop-blur-sm border-t border-purple-500/30">
       <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="text-lg font-bold text-white mb-4">Elekin TCG</h3>
-            <p className="text-purple-300">A new era of trading card games. Join the community and become a Master Elementalist.</p>
+            <h3 className="text-lg font-bold text-white mb-4">Elekin</h3>
+            <ul className="space-y-2">
+              <li><Link to="/cards/campaign" className="text-purple-300 hover:text-yellow-400">Card Gallery</Link></li>
+              <li><Link to="/elekin/how-to-play" className="text-purple-300 hover:text-yellow-400">How to Play</Link></li>
+              <li><Link to="/cards/deck-builder" className="text-purple-300 hover:text-yellow-400">Deck Builder</Link></li>
+              <li><Link to="/kinbrold" className="text-purple-300 hover:text-yellow-400">Lore</Link></li>
+            </ul>
           </div>
           <div>
-            <h3 className="text-lg font-bold text-white mb-4">Quick Links</h3>
+            <h3 className="text-lg font-bold text-white mb-4">Community</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-purple-300 hover:text-yellow-400">About Us</Link></li>
-              <li><Link to="/shop" className="text-purple-300 hover:text-yellow-400">Shop</Link></li>
-              <li><Link to="/elekin/how-to-play" className="text-purple-300 hover:text-yellow-400">How to Play</Link></li>
-              <li><Link to="/kinbrold" className="text-purple-300 hover:text-yellow-400">Lore</Link></li>
+              <li><Link to="/join-now" className="text-purple-300 hover:text-yellow-400">Join Now</Link></li>
+              <li><a href="https://discord.gg/qXNWh4dMve" className="text-purple-300 hover:text-yellow-400">Discord</a></li>
+              <li><a href="https://www.youtube.com/@ElekinTCG" className="text-purple-300 hover:text-yellow-400">YouTube</a></li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="text-lg font-bold text-white mb-4">Shop</h3>
+            <ul className="space-y-2">
+              <li><Link to="/shop" className="text-purple-300 hover:text-yellow-400">Pre-Order</Link></li>
+              <li><Link to="/shipping-policy" className="text-purple-300 hover:text-yellow-400">Shipping</Link></li>
+              <li><Link to="/return-policy" className="text-purple-300 hover:text-yellow-400">Returns</Link></li>
             </ul>
           </div>
           <div>
@@ -23,8 +36,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/privacy-policy" className="text-purple-300 hover:text-yellow-400">Privacy Policy</Link></li>
               <li><Link to="/terms-of-service" className="text-purple-300 hover:text-yellow-400">Terms of Service</Link></li>
-              <li><Link to="/shipping-policy" className="text-purple-300 hover:text-yellow-400">Shipping Policy</Link></li>
-              <li><Link to="/return-policy" className="text-purple-300 hover:text-yellow-400">Return Policy</Link></li>
+              <li><Link to="/legal" className="text-purple-300 hover:text-yellow-400">Legal Info</Link></li>
             </ul>
           </div>
         </div>

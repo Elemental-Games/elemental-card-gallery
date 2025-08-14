@@ -237,7 +237,7 @@ const ElekinPage = () => {
               </Link>
 
               {/* Card Reveal Campaign */}
-              <Link to="/cards/campaign">
+              <Link to="/cards">
                 <motion.div
                   className="group relative bg-transparent p-8 rounded-xl border-2 border-purple-400 hover:border-yellow-400 transition-all duration-300 h-full shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
                   whileHover={{ scale: 1.02, y: -5 }}

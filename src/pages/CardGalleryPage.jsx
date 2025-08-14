@@ -19,6 +19,15 @@ const CardGalleryPage = () => {
   const [cards, setCards] = useState([]);
   const [filteredCards, setFilteredCards] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    searchQuery: '',
+    element: 'all',
+    type: 'all',
+    sort: 'asc',
+  });
+
+  const nonElementalTypes = ['Rune', 'Counter', 'Shield'];
+  const isElementFilterDisabled = nonElementalTypes.includes(filters.type);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -27,7 +36,6 @@ const CardGalleryPage = () => {
         const data = await response.json();
         const publiclyVisibleCards = data.cards.filter(card => allowedCardIds.includes(card.id));
         setCards(publiclyVisibleCards);
-        setFilteredCards(publiclyVisibleCards);
       } catch (error) {
         console.error("Failed to fetch cards:", error);
       } finally {
@@ -38,7 +46,7 @@ const CardGalleryPage = () => {
     fetchCards();
   }, []);
 
-  const handleFilterChange = (filters) => {
+  useEffect(() => {
     let filtered = cards;
 
     if (filters.searchQuery) {
@@ -53,15 +61,34 @@ const CardGalleryPage = () => {
 
     if (filters.type !== 'all') {
       filtered = filtered.filter(card => card.type === filters.type);
-      }
-      
-    if (filters.sort === 'asc') {
-      filtered.sort((a, b) => a.cardNumber - b.cardNumber);
-    } else {
-      filtered.sort((a, b) => b.cardNumber - a.cardNumber);
     }
+      
+    const sorted = [...filtered].sort((a, b) => {
+      if (filters.sort === 'asc') {
+        return a.cardNumber - b.cardNumber;
+      } else {
+        return b.cardNumber - a.cardNumber;
+      }
+    });
 
-    setFilteredCards(filtered);
+    setFilteredCards(sorted);
+  }, [filters, cards]);
+
+  const handleFilterChange = (newFilters) => {
+    let updatedFilters = { ...newFilters };
+    if (nonElementalTypes.includes(updatedFilters.type)) {
+      updatedFilters.element = 'all';
+    }
+    setFilters(updatedFilters);
+  };
+
+  const handleReset = () => {
+    setFilters({
+      searchQuery: '',
+      element: 'all',
+      type: 'all',
+      sort: 'asc',
+    });
   };
 
   if (loading) {
@@ -76,7 +103,12 @@ const CardGalleryPage = () => {
       </Helmet>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-white">Card Gallery</h1>
-        <FilterOptions onFilterChange={handleFilterChange} />
+        <FilterOptions 
+          filters={filters}
+          onFilterChange={handleFilterChange} 
+          isElementFilterDisabled={isElementFilterDisabled} 
+          onReset={handleReset} 
+        />
         <CardGrid cards={filteredCards} isLoading={loading} />
       </div>
     </>

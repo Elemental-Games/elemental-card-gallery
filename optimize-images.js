@@ -1,4 +1,4 @@
-import fs from 'fs';
+import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'url';
@@ -6,79 +6,53 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const sourceDir = path.join(__dirname, 'public', 'images', 'cards', 'new');
-const optimizedDir = path.join(__dirname, 'public', 'images', 'cards', 'optimized');
+const cardsDir = path.join(__dirname, 'public', 'images', 'cards', 'new');
+const MAX_FILE_SIZE_MB = 1;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
-// Ensure the optimized directory exists
-if (!fs.existsSync(optimizedDir)) {
-  fs.mkdirSync(optimizedDir, { recursive: true });
-}
-
-// Configuration for different image sizes
-const configs = [
-  {
-    name: 'large', // For card detail views
-    width: 800,
-    quality: 80
-  },
-  {
-    name: 'thumbnail', // For card thumbnails in galleries
-    width: 400,
-    quality: 80
-  }
-];
-
-// Get all image files from the source directory
-const imageFiles = fs.readdirSync(sourceDir)
-  .filter(file => {
-    const extension = path.extname(file).toLowerCase();
-    return ['.webp', '.jpg', '.jpeg', '.png'].includes(extension);
-  });
-
-// Function to optimize an image
-async function optimizeImage(file) {
-  const sourcePath = path.join(sourceDir, file);
-  const fileExt = path.extname(file);
-  const fileName = path.basename(file, fileExt);
-  
+async function processNewCards() {
   try {
-    const image = sharp(sourcePath);
-    const metadata = await image.metadata();
-    
-    for (const config of configs) {
-      const outputPath = path.join(optimizedDir, `${fileName}-${config.name}${fileExt}`);
+    const files = await fs.readdir(cardsDir);
+    const pngFiles = files.filter(file => path.extname(file).toLowerCase() === '.png');
+
+    console.log(`Found ${pngFiles.length} PNG files to process.`);
+
+    for (const file of pngFiles) {
+      const filePath = path.join(cardsDir, file);
+      const fileName = path.basename(file, path.extname(file));
+      const webpPath = path.join(cardsDir, `${fileName}.webp`);
+
+      // Optimize PNG
+      console.log(`Optimizing ${file}...`);
+      const originalBuffer = await fs.readFile(filePath);
+      let pngBuffer = await sharp(originalBuffer)
+        .png({ quality: 90, compressionLevel: 9 })
+        .toBuffer();
+
+      if (pngBuffer.length > MAX_FILE_SIZE_BYTES) {
+        console.log(`${file} is still too large, resizing...`);
+        pngBuffer = await sharp(pngBuffer)
+          .resize({ width: 1000 }) // Resize if still too large
+          .png({ quality: 85, compressionLevel: 9 })
+          .toBuffer();
+      }
       
-      await image
-        .resize({ 
-          width: config.width,
-          height: Math.round(config.width * (metadata.height / metadata.width)),
-          fit: 'inside'
-        })
-        .webp({ quality: config.quality })
-        .toFile(outputPath.replace(fileExt, '.webp'));
-      
-      console.log(`Optimized: ${fileName}-${config.name}.webp`);
+      await fs.writeFile(filePath, pngBuffer);
+      const stats = await fs.stat(filePath);
+      console.log(`Optimized ${file}, new size: ${(stats.size / 1024 / 1024).toFixed(2)} MB`);
+
+      // Create WebP
+      console.log(`Creating WebP for ${fileName}...`);
+      await sharp(filePath)
+        .webp({ quality: 80 })
+        .toFile(webpPath);
+      console.log(`Created ${fileName}.webp`);
     }
+
+    console.log('All new cards have been processed.');
   } catch (error) {
-    console.error(`Error optimizing ${file}:`, error);
+    console.error('An error occurred during card processing:', error);
   }
 }
 
-// Process all images
-async function processImages() {
-  console.log(`Found ${imageFiles.length} images to optimize...`);
-  
-  // Process images in batches to avoid overwhelming system resources
-  const batchSize = 5;
-  for (let i = 0; i < imageFiles.length; i += batchSize) {
-    const batch = imageFiles.slice(i, i + batchSize);
-    await Promise.all(batch.map(file => optimizeImage(file)));
-    console.log(`Processed batch ${Math.floor(i / batchSize) + 1} of ${Math.ceil(imageFiles.length / batchSize)}`);
-  }
-  
-  console.log('Optimization complete!');
-}
-
-processImages().catch(err => {
-  console.error('Error processing images:', err);
-}); 
+processNewCards(); 

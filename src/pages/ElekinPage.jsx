@@ -246,13 +246,13 @@ const ElekinPage = () => {
                   transition={{ delay: 1.1 }}
                 >
                   <Calendar className="w-16 h-16 text-yellow-400 mb-6 group-hover:scale-110 transition-transform" />
-                  <h3 className="text-2xl font-bold text-white mb-4">Card Reveal Campaign</h3>
+                  <h3 className="text-2xl font-bold text-white mb-4">View Card Gallery</h3>
                   <p className="text-purple-200 mb-6">
-                    Follow our 6-week journey as we unveil new cards every week leading to launch.
+                    Explore all released cards from the Pre-Launch Demo Day Edition.
                   </p>
                   <div className="flex text-2xl items-center text-yellow-400 font-semibold group-hover:text-yellow-300">
                     <Gamepad2 className="w-8 h-8 mr-2" />
-                    View Campaign
+                    View Gallery
                   </div>
                 </motion.div>
               </Link>

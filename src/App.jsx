@@ -106,79 +106,79 @@ const App = () => (
           <TooltipProvider>
             <AuthProvider>
               <CartProvider>
-                <Toaster />
-                <SpeedInsights />
-                <BrowserRouter>
-                  <ScrollToTop />
+              <Toaster />
+              <SpeedInsights />
+              <BrowserRouter>
+                <ScrollToTop />
                   <CartSidebar />
-                  <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
-                    <Header />
-                    <main className="flex-grow w-full">
-                      <Routes>
-                        <Route path="/" element={<LandingPage />} />
+                <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
+                  <Header />
+                  <main className="flex-grow w-full">
+                    <Routes>
+                      <Route path="/" element={<LandingPage />} />
                         <Route path="/shop" element={<ShopPage />} />
                         <Route path="/product/:id" element={<ProductDetailPage />} />
                         <Route path="/post-purchase" element={<PostPurchasePage />} />
-                        <Route path="/login" element={<AuthPage />} />
-                        <Route path="/auth/callback" element={<AuthCallbackPage />} />
-                        <Route path="/profile" element={
-                          <ProtectedRoute>
-                            <ProfilePage />
-                          </ProtectedRoute>
-                        } />
-                        {renderRoutes(navItems)}
-                        <Route path="/cards/gallery" element={<CardGalleryComingSoon />} />
-                        <Route path="/cards/campaign" element={<CardGalleryPage />} />
-                        <Route path="/cards/deck-builder" element={
-                          <ProtectedRoute>
-                            <DeckBuilderPage />
-                          </ProtectedRoute>
-                        } />
-                        <Route path="/cards/deck-builder/manual" element={
-                          <ProtectedRoute>
-                            <ManualDeckBuilderPage />
-                          </ProtectedRoute>
-                        } />
-                        <Route path="/cards/deck-builder/wizard" element={
-                          <ProtectedRoute>
-                            <DeckBuilderWizardPage />
-                          </ProtectedRoute>
-                        } />
-                        <Route path="/cards/:id" element={<CardDetailPage />} />
-                        <Route path="/kinbrold/evermere" element={<EvermerePage />} />
-                        <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
-                        <Route path="/kinbrold/scarto" element={<ScartoPage />} />
-                        <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
-                        <Route path="/kinbrold/zalos" element={<ZalosPage />} />
-                        <Route path="/donate" element={<DonatePage />} />
-                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                        <Route path="/terms-of-service" element={<TermsOfService />} />
+                      <Route path="/login" element={<AuthPage />} />
+                      <Route path="/auth/callback" element={<AuthCallbackPage />} />
+                      <Route path="/profile" element={
+                        <ProtectedRoute>
+                          <ProfilePage />
+                        </ProtectedRoute>
+                      } />
+                      {renderRoutes(navItems)}
+                      <Route path="/cards/gallery" element={<CardGalleryComingSoon />} />
+                      <Route path="/cards/campaign" element={<CardGalleryPage />} />
+                      <Route path="/cards/deck-builder" element={
+                        <ProtectedRoute>
+                          <DeckBuilderPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/deck-builder/manual" element={
+                        <ProtectedRoute>
+                          <ManualDeckBuilderPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/deck-builder/wizard" element={
+                        <ProtectedRoute>
+                          <DeckBuilderWizardPage />
+                        </ProtectedRoute>
+                      } />
+                      <Route path="/cards/:id" element={<CardDetailPage />} />
+                      <Route path="/kinbrold/evermere" element={<EvermerePage />} />
+                      <Route path="/kinbrold/grivoss" element={<GrivossPage />} />
+                      <Route path="/kinbrold/scarto" element={<ScartoPage />} />
+                      <Route path="/kinbrold/tsunareth" element={<TsunarethPage />} />
+                      <Route path="/kinbrold/zalos" element={<ZalosPage />} />
+                      <Route path="/donate" element={<DonatePage />} />
+                      <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                      <Route path="/terms-of-service" element={<TermsOfService />} />
                         <Route path="/return-policy" element={<ReturnPolicyPage />} />
                         <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
                         <Route path="/cards" element={<CardGalleryPage />} />
-                        <Route path="/elekin" element={<ElekinPage />} />
-                        {/*
-                        <Route path="/elekin/online" element={
-                          <ProtectedRoute>
-                            <ElekinOnlinePage />
-                          </ProtectedRoute>
-                        } />
-                        */}
-                        <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
-                        <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
-                        <Route path="/kinbrold" element={<KinbroldPage />} />
-                        <Route path="/about" element={<AboutUsPage />} />
-                        <Route path="/join-now" element={<JoinNowPage />} />
-                        <Route path="/legal" element={<LegalPage />} />
-                        <Route path="/unsubscribe" element={<UnsubscribePage />} />
-                        <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
-                        <Route path="/kickstarter" element={<KickstarterPage />} />
-                        <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
-                      </Routes>
-                    </main>
-                    <Footer />
-                  </div>
-                </BrowserRouter>
+                      <Route path="/elekin" element={<ElekinPage />} />
+                      {/*
+                      <Route path="/elekin/online" element={
+                        <ProtectedRoute>
+                          <ElekinOnlinePage />
+                        </ProtectedRoute>
+                      } />
+                      */}
+                      <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
+                      <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
+                      <Route path="/kinbrold" element={<KinbroldPage />} />
+                      <Route path="/about" element={<AboutUsPage />} />
+                      <Route path="/join-now" element={<JoinNowPage />} />
+                      <Route path="/legal" element={<LegalPage />} />
+                      <Route path="/unsubscribe" element={<UnsubscribePage />} />
+                      <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
+                      <Route path="/kickstarter" element={<KickstarterPage />} />
+                      <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
+                    </Routes>
+                  </main>
+                  <Footer />
+                </div>
+              </BrowserRouter>
               </CartProvider>
             </AuthProvider>
           </TooltipProvider>

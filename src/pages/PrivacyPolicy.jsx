@@ -20,7 +20,7 @@ const PrivacyPolicy = () => {
                 <li><strong>Information You Provide Directly:</strong> This includes your name, shipping and billing address, email address, phone number, and payment information.</li>
                 <li><strong>Information We Collect Automatically:</strong> We use cookies and similar technologies to collect information about your device and how you interact with our Site. This may include your IP address, browser type, and operating system.</li>
                 <li><strong>Information from Third Parties:</strong> We may receive information from third parties, such as Shopify, to supplement the information we collect.</li>
-            </ul>
+        </ul>
 
             <h2 className="text-2xl font-bold text-yellow-400">How We Use Your Information</h2>
             <p>We use your personal information to provide and improve our Services, including to:</p>
@@ -29,7 +29,7 @@ const PrivacyPolicy = () => {
                 <li>Communicate with you about your orders and our Services.</li>
                 <li>Screen our orders for potential risk or fraud.</li>
                 <li>Provide you with information or advertising relating to our products or services.</li>
-            </ul>
+        </ul>
 
             <h2 className="text-2xl font-bold text-yellow-400">Sharing Your Information</h2>
             <p>We share your personal information with third-party service providers to help us provide our Services. For example, we use Shopify to power our online store. We may also share your information to comply with applicable laws and regulations, to respond to a subpoena, search warrant or other lawful request for information we receive, or to otherwise protect our rights.</p>

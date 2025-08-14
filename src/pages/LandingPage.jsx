@@ -349,16 +349,16 @@ const LandingPage = () => {
 
           <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
             Secure your Demo Day Edition decks, boosters, and game mats. Every pre-order comes with a chance to win exclusive prizes!
-          </p>
-          
+                </p>
+                
           <Link to="/shop">
-            <Button
+              <Button
               size="lg"
               className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 px-8 text-xl rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
             >
               <Star className="mr-2 h-5 w-5" />
               Shop Now & Spin to Win!
-            </Button>
+              </Button>
           </Link>
         </div>
       </section>
@@ -369,8 +369,8 @@ const LandingPage = () => {
           <div className="max-w-5xl mx-auto">
             <CardsOfTheWeek />
           </div>
+          </div>
         </div>
-      </div>
 
       {/* EXPLORE THE WORLD OF KINBROLD */}
       <section className="container mx-auto px-4 py-16 relative z-10">
@@ -400,50 +400,50 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* Explore More Section */}
-      <section className="container mx-auto px-4 py-16 text-center">
-        <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {/* Explore More Section */}
+        <section className="container mx-auto px-4 py-16 text-center">
+          <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           <Link to="/shop">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-            >
-              <LayoutGrid className="mr-3 h-8 w-8" />
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <LayoutGrid className="mr-3 h-8 w-8" />
               View Shop
-            </Button>
-          </Link>
-          <Link to="/elekin/how-to-play">
-            <Button 
-              variant="outline" 
-              size="lg" 
+              </Button>
+            </Link>
+            <Link to="/elekin/how-to-play">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Book className="mr-3 h-8 w-8" />
+                View Rulebook
+              </Button>
+            </Link>
+            <Link to="/kinbrold">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              >
+                <Map className="mr-3 h-8 w-8" />
+                Explore Lore
+              </Button>
+            </Link>
+            <SubscribeButton 
+              variant="outline"
+              size="lg"
               className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
+              iconClassName="mr-3 h-8 w-8"
             >
-              <Book className="mr-3 h-8 w-8" />
-              View Rulebook
-            </Button>
-          </Link>
-          <Link to="/kinbrold">
-            <Button 
-              variant="outline" 
-              size="lg" 
-              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-            >
-              <Map className="mr-3 h-8 w-8" />
-              Explore Lore
-            </Button>
-          </Link>
-          <SubscribeButton 
-            variant="outline"
-            size="lg"
-            className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-            iconClassName="mr-3 h-8 w-8"
-          >
-            Join Email List
-          </SubscribeButton>
-        </div>
-      </section>
+              Join Email List
+            </SubscribeButton>
+          </div>
+        </section>
     </div>
   );
 };

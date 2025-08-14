@@ -30,11 +30,11 @@ export const navItems = [
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,
-      },
-      {
+  },
+  {
         title: "Cards",
         to: "/cards",
-        page: <CardGalleryPage />,
+    page: <CardGalleryPage />,
       }
     ]
   },

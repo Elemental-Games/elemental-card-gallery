@@ -94,12 +94,12 @@ const Header = () => {
                   </Button>
                 </div>
               ) : (
-                <Link 
+              <Link 
                   to="/shop" 
                   className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
-                >
+              >
                   Shop
-                </Link>
+              </Link>
               )}
             </div>
           </div>
@@ -147,14 +147,14 @@ const Header = () => {
                       ))}
                       
                       {!isShopPage && (
-                        <div className="pt-4 border-t border-purple-500/30">
-                          <Link 
+                      <div className="pt-4 border-t border-purple-500/30">
+                        <Link 
                             to="/shop" 
                             className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
-                          >
+                        >
                             Shop
-                          </Link>
-                        </div>
+                        </Link>
+                      </div>
                       )}
                     </div>
                   </NavigationMenuContent>

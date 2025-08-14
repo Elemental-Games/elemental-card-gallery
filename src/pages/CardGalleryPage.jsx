@@ -53,8 +53,8 @@ const CardGalleryPage = () => {
 
     if (filters.type !== 'all') {
       filtered = filtered.filter(card => card.type === filters.type);
-    }
-
+      }
+      
     if (filters.sort === 'asc') {
       filtered.sort((a, b) => a.cardNumber - b.cardNumber);
     } else {

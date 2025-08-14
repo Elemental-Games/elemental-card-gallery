@@ -34,9 +34,9 @@ const features = [
   },
   {
     title: 'Runes & Counters',
-    description: 'Nostalgic spell and trap mechanics inspired by Yu-Gi-Oh! Simple yet strategic cards that can help mount a comeback or stay on top.',
+    description: 'Support card mechanics allow for boosts, counters, equipments, and more throughout gameplay! Simple yet strategic cards that can help mount a comeback or stay on top.',
     icon: <Zap className="w-8 h-8 text-purple-400" />,
-    highlight: 'Yu-Gi-Oh Style'
+    highlight: 'Support Card Mechanics'
   }
 ];
 

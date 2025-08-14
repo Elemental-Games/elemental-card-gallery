@@ -103,7 +103,7 @@ const LandingPage = () => {
               <h2 className="text-3xl lg:text-5xl font-bold">Why TCG Players Choose Elekin</h2>
             </div>
             <p className="text-lg text-purple-200 max-w-3xl mx-auto">
-              Revolutionary mechanics that reward strategic thinking. Perfect for competitive Magic, Pokemon, and Yu-Gi-Oh players seeking the next evolution in TCG design.
+              Revolutionary mechanics that reward strategic thinking. Perfect for new and veteran TCG players seeking the next best TCG to hit the market.
             </p>
           </div>
           

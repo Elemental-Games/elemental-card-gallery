@@ -1,5 +1,11 @@
-const domain = import.meta.env.VITE_SHOPIFY_STORE_DOMAIN;
-const storefrontAccessToken = import.meta.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
+// Check if we're in a browser environment (Vite) or Node.js environment
+const domain = typeof window !== 'undefined' 
+  ? import.meta.env.VITE_SHOPIFY_STORE_DOMAIN 
+  : process.env.VITE_SHOPIFY_STORE_DOMAIN;
+
+const storefrontAccessToken = typeof window !== 'undefined' 
+  ? import.meta.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN 
+  : process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 
 async function ShopifyData(query) {
   const URL = `https://${domain}/api/2023-01/graphql.json`;
@@ -76,6 +82,28 @@ export async function createCheckout(id, quantity) {
     mutation {
       checkoutCreate(input: {
         lineItems: [{ variantId: "${id}", quantity: ${quantity} }]
+      }) {
+        checkout {
+          id
+          webUrl
+        }
+      }
+    }`;
+
+  const response = await ShopifyData(query);
+
+  const checkout = response.data.checkoutCreate.checkout ? response.data.checkoutCreate.checkout : [];
+
+  return checkout;
+}
+
+export async function createCheckoutWithItems(items) {
+  const lineItems = items.map(item => `{ variantId: "${item.variantId}", quantity: ${item.quantity} }`).join(', ');
+  
+  const query = `
+    mutation {
+      checkoutCreate(input: {
+        lineItems: [${lineItems}]
       }) {
         checkout {
           id

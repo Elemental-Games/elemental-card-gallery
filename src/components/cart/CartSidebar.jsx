@@ -1,11 +1,55 @@
 import { useCart } from '@/hooks/useCart';
 import { Button } from '@/components/ui/button';
 import { X, Plus, Minus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 
 const CartSidebar = () => {
   const { isOpen, toggleCart, items, updateQuantity, removeFromCart } = useCart();
+  const [isCheckingOut, setIsCheckingOut] = useState(false);
+  const { toast } = useToast();
 
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+  const handleCheckout = async () => {
+    if (items.length === 0) return;
+
+    setIsCheckingOut(true);
+    
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: items.map(item => ({
+            variantId: item.variantId,
+            quantity: item.quantity
+          }))
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Shopify checkout
+      window.location.href = data.checkoutUrl;
+      
+    } catch (error) {
+      console.error('Checkout error:', error);
+      toast({
+        variant: "destructive",
+        title: "Checkout Error",
+        description: error.message || "Failed to start checkout process.",
+      });
+    } finally {
+      setIsCheckingOut(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -54,8 +98,13 @@ const CartSidebar = () => {
             <p className="text-lg font-semibold">Subtotal</p>
             <p className="text-xl font-bold text-yellow-400">${subtotal.toFixed(2)}</p>
           </div>
-          <Button size="lg" className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold">
-            Checkout
+          <Button 
+            size="lg" 
+            className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold disabled:opacity-50" 
+            onClick={handleCheckout}
+            disabled={items.length === 0 || isCheckingOut}
+          >
+            {isCheckingOut ? 'Processing...' : 'Checkout'}
           </Button>
         </div>
       </div>

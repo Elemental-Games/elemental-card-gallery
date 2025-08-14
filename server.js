@@ -3,6 +3,7 @@ import cors from 'cors';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { supabase } from './server-supabase.js';
+import { createCheckoutWithItems } from './src/lib/shopify.js';
 
 dotenv.config();
 
@@ -1385,6 +1386,44 @@ app.post('/api/send-discord-giveaway-email', async (req, res) => {
     res.status(500).json({ 
       message: 'Error sending email campaign', 
       error: error.message
+    });
+  }
+});
+
+// Shopify Checkout endpoint
+app.post('/api/create-checkout-session', async (req, res) => {
+  try {
+    const { items } = req.body;
+
+    if (!items || items.length === 0) {
+      return res.status(400).json({ error: 'No items provided' });
+    }
+
+    // Validate that all items have variantId
+    for (const item of items) {
+      if (!item.variantId) {
+        return res.status(400).json({ error: 'All items must have a variantId' });
+      }
+    }
+
+    // Import the server-specific shopify function
+    const { createCheckoutWithItems } = await import('./src/lib/shopify-server.js');
+    const checkout = await createCheckoutWithItems(items);
+
+    if (!checkout || !checkout.webUrl) {
+      return res.status(500).json({ error: 'Failed to create checkout session' });
+    }
+
+    res.json({
+      checkoutUrl: checkout.webUrl,
+      checkoutId: checkout.id
+    });
+
+  } catch (error) {
+    console.error('Checkout session error:', error);
+    res.status(500).json({ 
+      error: 'Failed to create checkout session', 
+      details: error.message 
     });
   }
 });

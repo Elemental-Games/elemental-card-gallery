@@ -50,8 +50,38 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
   const toggleCart = () => dispatch({ type: 'TOGGLE_CART' });
 
+  const buyNow = async (product) => {
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          items: [{
+            variantId: product.variantId,
+            quantity: 1
+          }]
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Shopify checkout
+      window.location.href = data.checkoutUrl;
+      
+    } catch (error) {
+      console.error('Buy now error:', error);
+      throw error; // Re-throw so calling component can handle it
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeFromCart, updateQuantity, toggleCart }}>
+    <CartContext.Provider value={{ ...state, addToCart, removeFromCart, updateQuantity, toggleCart, buyNow }}>
       {children}
     </CartContext.Provider>
   );

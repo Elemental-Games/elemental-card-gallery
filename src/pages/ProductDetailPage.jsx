@@ -3,6 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import AddToCartButton from '@/components/cart/AddToCartButton';
+import { useState } from 'react';
+import { useToast } from '@/components/ui/use-toast';
 
 // This would typically come from an API, but we're using the local list for now
 const products = [
@@ -11,7 +13,7 @@ const products = [
       title: 'Booster Pack',
       price: 5,
       oldPrice: 6,
-      image: '/images/products/packdemo1.png',
+      image: '/images/products/demopack1.png',
       description: `Unleash the power of Kinbrold with Demo Day Edition Booster Packs!
 
 Each pack contains 6 cards from the exclusive Demo Day Edition set - your chance to pull legendary Dragons and Elementalists before the official launch.
@@ -25,7 +27,7 @@ What's Inside:
 Perfect for competitive players and collectors seeking the best and rarest cards in Elekin before anyone else.
 
 Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/1',
+      variantId: 'gid://shopify/ProductVariant/9589326676208',
     },
     {
       id: 'prod_2',
@@ -45,7 +47,7 @@ What's Included:
 Perfect for new players or anyone wanting to master the Crystal element's defensive strategies and shield restoration powers.
 
 Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/2',
+      variantId: 'gid://shopify/ProductVariant/9589325398256',
     },
     {
       id: 'prod_3',
@@ -65,7 +67,7 @@ What's Included:
 Perfect for new players or anyone wanting to master the Lightning element's devastating combo potential.
 
 Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/3',
+      variantId: 'gid://shopify/ProductVariant/9589321892080',
     },
     {
       id: 'prod_4',
@@ -76,7 +78,7 @@ Ages 10+`,
       description: `Play on an official Elekin Game Mat
 - This product comes with 6 clear tokens and 3 purple "10" tokens for essence and shield tracking on your mat
 - Rubberized bottom and colored stitched edges`,
-      variantId: 'gid://shopify/ProductVariant/4',
+      variantId: 'gid://shopify/ProductVariant/9600666566896',
     },
     {
       id: 'prod_5',
@@ -87,14 +89,31 @@ Ages 10+`,
       description: `Play on an official Elekin Game Mat
 - This product comes with 6 clear tokens and 3 purple "10" tokens for essence and shield tracking on your mat
 - Rubberized bottom and colored stitched edges`,
-      variantId: 'gid://shopify/ProductVariant/5',
+      variantId: 'gid://shopify/ProductVariant/9600667648240',
     },
   ];
   
 const ProductDetailPage = () => {
   const { id } = useParams();
-  const { addToCart, toggleCart } = useCart();
+  const { addToCart, buyNow } = useCart();
+  const [isBuying, setIsBuying] = useState(false);
+  const { toast } = useToast();
   const product = products.find(p => p.id === id);
+
+  const handleBuyNow = async () => {
+    setIsBuying(true);
+    try {
+      await buyNow(product);
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Purchase Error",
+        description: error.message || "Failed to start checkout process.",
+      });
+    } finally {
+      setIsBuying(false);
+    }
+  };
 
   if (!product) {
     return <div>Product not found</div>;
@@ -120,12 +139,6 @@ const ProductDetailPage = () => {
                   <p className="text-xl text-gray-400 line-through">${product.oldPrice}</p>
                 </div>
                 <p className="text-lg text-purple-200 mb-8 whitespace-pre-wrap">{product.description}</p>
-                <div className="flex items-center gap-4">
-                  <AddToCartButton product={product} />
-                  <Button size="lg" variant="outline" onClick={toggleCart}>
-                    Buy Now
-                  </Button>
-                </div>
                 <div className="mt-8 text-sm text-purple-300">
                   <p>Shipping calculated at checkout. Ships September 2025.</p>
                   <p>30-day return policy. <Link to="/return-policy" className="underline hover:text-yellow-400">Read more</Link>.</p>
@@ -134,6 +147,20 @@ const ProductDetailPage = () => {
             </div>
           </div>
           <div className="hidden lg:block">
+            <div className="mb-8">
+              <div className="flex flex-col gap-4">
+                <AddToCartButton product={product} />
+                <Button 
+                  size="lg" 
+                  variant="outline" 
+                  onClick={handleBuyNow}
+                  disabled={isBuying}
+                  className="disabled:opacity-50"
+                >
+                  {isBuying ? 'Processing...' : 'Buy Now'}
+                </Button>
+              </div>
+            </div>
             <h2 className="text-2xl font-bold mb-4">Why not add...</h2>
             <div className="space-y-4">
               {products.filter(p => p.id !== id).slice(0, 3).map(p => (
@@ -149,6 +176,20 @@ const ProductDetailPage = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+        <div className="mt-8 lg:hidden">
+          <div className="flex items-center gap-4 justify-center mb-8">
+            <AddToCartButton product={product} />
+            <Button 
+              size="lg" 
+              variant="outline" 
+              onClick={handleBuyNow}
+              disabled={isBuying}
+              className="disabled:opacity-50"
+            >
+              {isBuying ? 'Processing...' : 'Buy Now'}
+            </Button>
           </div>
         </div>
         <div className="mt-16 lg:hidden">

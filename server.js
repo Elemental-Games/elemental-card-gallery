@@ -1441,6 +1441,66 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
+// Create discount code and email via Resend (local dev mirror of Vercel route)
+app.post('/api/spin-claim', async (req, res) => {
+  try {
+    const { email, percent } = req.body || {};
+    if (!email || !percent) {
+      return res.status(400).json({ error: 'email and percent are required' });
+    }
+
+    const generateCode = (prefix = 'ELEKIN') => `${prefix}-${Math.random().toString(36).slice(2,8).toUpperCase()}`;
+    const code = generateCode(`SPIN${Math.round(Number(percent) * 100)}`);
+
+    const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
+    const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
+
+    const mutation = `
+      mutation {
+        discountCodeBasicCreate(basicCodeDiscount: {
+          title: "${code}",
+          code: "${code}",
+          startsAt: "${new Date().toISOString()}",
+          customerSelection: { allCustomers: true },
+          usageLimit: 1,
+          appliesOncePerCustomer: true,
+          value: { percentage: ${Number(percent)} },
+          combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
+        }) {
+          userErrors { field message }
+        }
+      }
+    `;
+
+    const adminResp = await fetch(`https://${domain}/admin/api/2024-04/graphql.json`, {
+      method: 'POST',
+      headers: {
+        'X-Shopify-Access-Token': adminAccessToken,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ query: mutation }),
+    }).then(r => r.json());
+
+    const errs = adminResp?.data?.discountCodeBasicCreate?.userErrors || [];
+    if (errs.length) {
+      return res.status(500).json({ error: errs.map(e => e.message).join(', ') });
+    }
+
+    const resend = new Resend(process.env.RESEND_API_KEY);
+    await resend.emails.send({
+      from: 'Elemental Games <mark@elementalgames.gg>',
+      to: email,
+      subject: `Your Elekin Spin Reward Code (${Math.round(Number(percent)*100)}% off)`,
+      html: `<p>Congrats! Here is your unique promo code:</p><p style="font-size:24px;font-weight:bold;">${code}</p><p>Applies up to $25 off. One use per customer.</p>`
+    });
+
+    res.json({ code });
+  } catch (err) {
+    console.error('spin-claim (express) error:', err);
+    res.status(500).json({ error: String(err?.message || err) });
+  }
+});
+
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);

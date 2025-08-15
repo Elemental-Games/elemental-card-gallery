@@ -75,32 +75,33 @@ const Header = () => {
                 </NavigationMenuList>
               </NavigationMenu>
               
-              {isShopPage ? (
-                <div className="flex items-center gap-4">
-                  {items.length > 0 && (
-                    <div className="text-right cursor-pointer" onClick={toggleCart}>
-                      <p className="font-bold text-white">{totalItems} Item{totalItems > 1 ? 's' : ''}</p>
-                      <p className="text-sm text-yellow-400">${subtotal.toFixed(2)}</p>
-                    </div>
-                  )}
-                  <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
-                    <ShoppingCart className="h-6 w-6 text-white" />
-                    {items.length > 0 && (
-                      <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
-                      </span>
-                    )}
-                  </Button>
-                </div>
-              ) : (
-              <Link 
+              <div className="flex items-center gap-4">
+                <Link 
                   to="/shop" 
                   className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
-              >
+                >
                   Shop
-              </Link>
-              )}
+                </Link>
+                {isShopPage && (
+                  <>
+                    {items.length > 0 && (
+                      <div className="text-right cursor-pointer" onClick={toggleCart}>
+                        <p className="font-bold text-white">{totalItems} Item{totalItems > 1 ? 's' : ''}</p>
+                        <p className="text-sm text-yellow-400">${subtotal.toFixed(2)}</p>
+                      </div>
+                    )}
+                    <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
+                      <ShoppingCart className="h-6 w-6 text-white" />
+                      {items.length > 0 && (
+                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                        </span>
+                      )}
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
 
@@ -146,16 +147,14 @@ const Header = () => {
                         </div>
                       ))}
                       
-                      {!isShopPage && (
                       <div className="pt-4 border-t border-purple-500/30">
                         <Link 
-                            to="/shop" 
-                            className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
+                          to="/shop" 
+                          className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
                         >
-                            Shop
+                          Shop
                         </Link>
                       </div>
-                      )}
                     </div>
                   </NavigationMenuContent>
                 </NavigationMenuItem>

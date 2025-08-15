@@ -51,6 +51,7 @@ import PostPurchasePage from './pages/PostPurchasePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
+import WheelOfFortune from './components/pre-order/WheelOfFortune.jsx';
 
 const queryClient = new QueryClient();
 
@@ -174,6 +175,8 @@ const App = () => (
                       <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
                       <Route path="/kickstarter" element={<KickstarterPage />} />
                       <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
+                      {/* Temporary test route for the reward wheel */}
+                      <Route path="/wheel-test" element={<WheelOfFortune />} />
                     </Routes>
                   </main>
                   <Footer />

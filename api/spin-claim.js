@@ -3,14 +3,15 @@ import { Resend } from 'resend';
 
 dotenv.config();
 
-const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
+const storefrontDomain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
+const adminDomain = process.env.SHOPIFY_ADMIN_DOMAIN || storefrontDomain;
 const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 const apiVersion = '2024-04';
 
-const resend = new Resend(process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY);
+const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 
 async function shopifyAdminRequest(query) {
-  const URL = `https://${domain}/admin/api/${apiVersion}/graphql.json`;
+  const URL = `https://${adminDomain}/admin/api/${apiVersion}/graphql.json`;
   const res = await fetch(URL, {
     method: 'POST',
     headers: {
@@ -46,7 +47,6 @@ export default async function handler(req, res) {
     if (!email || !percent) return res.status(400).json({ error: 'email and percent are required' });
 
     const code = generateCode(`SPIN${Math.round(percent * 100)}`);
-    const pct = Math.round(percent * 100); // integer percent 10,20,50
 
     const mutation = `
       mutation {
@@ -54,10 +54,10 @@ export default async function handler(req, res) {
           title: "${code}",
           code: "${code}",
           startsAt: "${new Date().toISOString()}",
-          customerSelection: { allCustomers: true },
+          customerSelection: { all: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          customerGets: { items: { all: true }, value: { percentage: ${pct} } },
+          customerGets: { items: { all: true }, value: { percentage: ${percent} } },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           codeDiscountNode { id }
@@ -68,14 +68,27 @@ export default async function handler(req, res) {
 
     const adminResp = await shopifyAdminRequest(mutation);
     const errors = adminResp?.data?.discountCodeBasicCreate?.userErrors || [];
+    if (adminResp?.errors) return res.status(500).json({ error: JSON.stringify(adminResp.errors) });
     if (errors.length) return res.status(500).json({ error: errors.map(e => e.message).join(', ') });
 
     // Send via Resend
     await resend.emails.send({
       from: 'Elemental Games <mark@elementalgames.gg>',
       to: email,
-      subject: `Your Elekin Spin Reward Code (${Math.round(percent*100)}% off)`,
-      html: `<p>Congrats! Here is your unique promo code:</p><p style="font-size:24px;font-weight:bold;">${code}</p><p>Applies up to $25 off. One use per customer.</p>`
+      subject: `🎁 Your Elekin TCG Prize Wheel Code!`,
+      html: `
+        <div style="font-family: sans-serif; text-align: center; padding: 20px; color: #333;">
+          <h1 style="color: #8A2BE2;">You Won a Discount!</h1>
+          <p>Congratulations! Here is your unique, one-time-use promo code:</p>
+          <p style="font-size: 24px; font-weight: bold; color: #8A2BE2; margin: 20px 0;">${code}</p>
+          <p>This code is good for <strong>${Math.round(percent * 100)}% off</strong> your next purchase (up to $25 off).</p>
+          <a href="https://www.elementalgames.gg/shop" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f59e0b; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit the Shop</a>
+          <p>Thank you for your support!</p>
+          <br>
+          <p><em>- The Elekin Team</em></p>
+          <img src="https://elementalgames.gg/Games_Logo.png" alt="Elekin Logo" style="width: 150px; margin-top: 20px;">
+        </div>
+      `
     });
 
     return res.status(200).json({ code });

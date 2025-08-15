@@ -23,7 +23,7 @@ const PostPurchasePage = () => {
 
       try {
         const order = await verifyOrder(orderId);
-        if (order && order.fullyPaid && parseFloat(order.totalPrice.amount) >= 15) {
+        if (order && order.fullyPaid && parseFloat(order.totalPrice.amount) >= 25) {
           setOrderVerified(true);
         } else {
           setError('This order is not eligible for a prize.');

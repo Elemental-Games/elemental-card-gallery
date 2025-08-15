@@ -8,38 +8,41 @@ const PURPLE_DARK = '#2a0e35';
 const PURPLE_LIGHT = '#5a2380';
 
 const PRIZES = [
-  { option: 'Free Pack', type: 'free', weight: 5 },
-  { option: '10% Off', type: 'discount', percent: 0.10, weight: 60 },
-  { option: 'Free Game Mat', type: 'free', weight: 1 },
-  { option: '2 Free Packs', type: 'free', weight: 1 },
-  { option: '20% Off', type: 'discount', percent: 0.20, weight: 30 },
-  { option: 'Free Deck', type: 'free', weight: 1 },
-  { option: '50% Off', type: 'discount', percent: 0.50, weight: 1 },
-  { option: '3 Free Packs', type: 'free', weight: 1 },
+  { option: 'Free Pack', type: 'free', weight: 19 },
+  { option: '15% Off', type: 'discount', percent: 0.15, weight: 75 },
+  { option: 'Free Game Mat', type: 'free', weight: 0.5 },
+  { option: '2 Free Packs', type: 'free', weight: 2 },
+  { option: '20% Off', type: 'discount', percent: 0.20, weight: 5 },
+  { option: 'Free Deck', type: 'free', weight: 0.5 }, // Changed from 'Free Structure Deck'
 ];
 
-function pickWeightedIndex(weights) {
-  const total = weights.reduce((a, b) => a + b, 0);
-  const r = Math.random() * total;
-  let acc = 0;
-  for (let i = 0; i < weights.length; i += 1) {
-    acc += weights[i];
-    if (r < acc) return i;
+const totalWeight = PRIZES.reduce((sum, p) => sum + p.weight, 0);
+
+function pickWeightedIndex() {
+  const rand = Math.random() * totalWeight;
+  let accumulatedWeight = 0;
+  for (let i = 0; i < PRIZES.length; i++) {
+    accumulatedWeight += PRIZES[i].weight;
+    if (rand < accumulatedWeight) {
+      return i;
+    }
   }
-  return weights.length - 1;
+  return PRIZES.length - 1; // fallback
 }
 
 function getFreePrizeNote(option) {
-  if (option === 'Free Game Mat') {
-    return 'You will receive Dumoles or Guardian\'s Sanctuary — chosen at random unless you email mark@elementalgames.gg with a specific request.';
+  switch (option) {
+    case 'Free Pack':
+    case '2 Free Packs':
+    case '3 Free Packs':
+      return 'Your free pack(s) will be added to your pre-order shipment. Thank you!';
+    case 'Free Game Mat':
+      return 'Your free Game Mat will be added to your pre-order shipment. Thank you!';
+    case 'Free Deck':
+      return 'Your free Starter Deck will be added to your pre-order shipment. Thank you!';
+    default:
+      return 'Your free prize will be added to your pre-order shipment. Thank you!';
   }
-  if (option === 'Free Deck') {
-    return 'You will receive a Structure Deck (Lightning or Crystal) — chosen at random unless you email mark@elementalgames.gg with a specific request.';
-  }
-  if (option === 'Free Pack' || option === '2 Free Packs' || option === '3 Free Packs') {
-    return 'Free pack(s) will be added to your pre-order when we pack your shipment.';
-  }
-  return 'We will add your free item(s) to your pre-order when packing.';
 }
 
 const WheelOfFortune = () => {
@@ -51,29 +54,52 @@ const WheelOfFortune = () => {
   const [discountCode, setDiscountCode] = useState(null);
   const [sending, setSending] = useState(false);
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
   const handleSpinClick = () => {
-    if (!mustSpin) {
-      const idx = pickWeightedIndex(PRIZES.map(p => p.weight));
-      setPrizeNumber(idx);
+    if (!spinning) {
+      const newPrizeNumber = pickWeightedIndex();
+      setPrizeNumber(newPrizeNumber);
       setMustSpin(true);
       setSpinning(true);
     }
   };
 
   const handlePrizeClaim = async () => {
-    if (!(prizeWon && prizeWon.type === 'discount' && prizeWon.percent && email)) return;
+    if (!prizeWon || !email) return;
+
+    setSending(true);
+    setError(null);
+    setSuccessMessage(null);
+
     try {
-      setSending(true);
-      setError(null);
-      const resp = await fetch('/api/spin-claim', {
+      const base = import.meta.env.DEV ? 'http://localhost:3001' : '';
+      let endpoint = '';
+      let payload = {};
+
+      if (prizeWon.type === 'discount') {
+        endpoint = `${base}/api/spin-claim`;
+        payload = { email, percent: prizeWon.percent };
+      } else if (prizeWon.type === 'free') {
+        endpoint = `${base}/api/record-winner`;
+        payload = { email, prize: prizeWon.option };
+      }
+
+      const resp = await fetch(endpoint, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, percent: prizeWon.percent })
+        body: JSON.stringify(payload)
       });
       const data = await resp.json();
-      if (!resp.ok) throw new Error(data.error || 'Failed to generate code');
-      setDiscountCode(data.code || 'CHECK EMAIL');
+      if (!resp.ok) throw new Error(data.error || 'Request failed');
+      
+      if (prizeWon.type === 'discount') {
+        setDiscountCode(data.code || 'CHECK EMAIL');
+        setSuccessMessage('Success! Your discount code has been sent to your email.');
+      } else {
+        setSuccessMessage('Success! Your prize has been recorded and will be added to your order.');
+      }
+
     } catch (e) {
       setError(e.message);
     } finally {
@@ -81,78 +107,46 @@ const WheelOfFortune = () => {
     }
   };
 
-  if (discountCode) {
-    return (
-      <div className="text-center p-8 bg-purple-900/50 rounded-lg">
-        <h2 className="text-3xl font-bold text-yellow-400 mb-4">Congratulations!</h2>
-        <p className="text-lg text-white mb-2">Your unique promo code has been emailed.</p>
-        <p className="text-sm text-purple-200">Applies up to $25 off. One use per customer.</p>
-        <p className="text-xs text-purple-300 mt-2">Code preview: {discountCode}</p>
-      </div>
-    );
-  }
-
   if (prizeWon) {
-    if (prizeWon.type === 'discount') {
+    if (successMessage) {
       return (
         <div className="text-center p-8 bg-purple-900/50 rounded-lg">
-          <h2 className="text-3xl font-bold text-yellow-400 mb-4">You Won: {prizeWon.option}!</h2>
-          <p className="text-lg text-white mb-1">Enter your email to receive your unique promo code:</p>
-          <p className="text-xs text-purple-200 mb-4">Promo applies up to $25 off. One use per customer.</p>
-          <div className="mx-auto w-full max-w-md">
-            <Input
-              type="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="mb-3"
-            />
-          </div>
-          {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
-          <Button onClick={handlePrizeClaim} disabled={sending} className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold">
-            {sending ? 'Sending...' : 'Get My Code'}
-          </Button>
+          <h2 className="text-3xl font-bold text-yellow-400 mb-4">🎉 Congratulations! 🎉</h2>
+          <p className="text-lg text-white mb-4">{successMessage}</p>
+          {prizeWon.type === 'discount' && discountCode &&
+            <p className="text-xl text-white">Your code is: <strong className="text-yellow-400">{discountCode}</strong></p>
+          }
         </div>
       );
     }
-    // Free prize flow: ask for order email and record winner
+
+    const isDiscount = prizeWon.type === 'discount';
+    const title = `You Won: ${prizeWon.option}!`;
+    const promptText = isDiscount 
+      ? 'Enter your email to receive your unique promo code:'
+      : 'Enter the email you used for your order to claim your prize:';
+    const subText = isDiscount
+      ? 'Promo applies up to $25 off. One use per customer.'
+      : getFreePrizeNote(prizeWon.option);
+    const buttonText = isDiscount ? 'Get My Code' : 'Claim My Prize';
+
     return (
       <div className="text-center p-8 bg-purple-900/50 rounded-lg">
-        <h2 className="text-3xl font-bold text-yellow-400 mb-2">You Won: {prizeWon.option}!</h2>
-        <p className="text-sm text-purple-200 mb-4">{getFreePrizeNote(prizeWon.option)}</p>
+        <h2 className="text-3xl font-bold text-yellow-400 mb-4">{title}</h2>
+        <p className="text-lg text-white mb-1">{promptText}</p>
+        <p className="text-xs text-purple-200 mb-4">{subText}</p>
         <div className="mx-auto w-full max-w-md">
-          <Input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Enter the email used on your order"
-            className="mb-3"
+          <Input 
+            type="email" 
+            value={email} 
+            onChange={(e) => setEmail(e.target.value)} 
+            placeholder="Enter your email" 
+            className="mb-3" 
           />
         </div>
         {error && <p className="text-red-400 text-sm mb-3">{error}</p>}
-        <Button
-          onClick={async () => {
-            try {
-              setSending(true);
-              setError(null);
-              const resp = await fetch('/api/record-winner', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ email, prize: prizeWon.option })
-              });
-              const data = await resp.json();
-              if (!resp.ok) throw new Error(data.error || 'Failed to record winner');
-              setDiscountCode('RECORDED');
-            } catch (e) {
-              setError(e.message);
-            } finally {
-              setSending(false);
-            }
-          }}
-          disabled={sending}
-          className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
-        >
-          {sending ? 'Saving...' : 'Save Winner Email'}
+        <Button onClick={handlePrizeClaim} disabled={sending} className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold">
+          {sending ? 'Processing...' : buttonText}
         </Button>
       </div>
     );

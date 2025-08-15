@@ -7,7 +7,7 @@ import { supabase } from './server-supabase.js';
 dotenv.config();
 
 const app = express();
-const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 const SITE_URL = process.env.SITE_URL || 'http://localhost:3000';
 const isProd = process.env.NODE_ENV === 'production';
 
@@ -36,7 +36,6 @@ app.post('/api/subscribe', async (req, res) => {
   }
 
   try {
-    const resend = new Resend(RESEND_API_KEY);
     const { email } = req.body;
 
     const data = await resend.emails.send({
@@ -62,7 +61,6 @@ app.post('/api/download-rulebook', async (req, res) => {
   }
 
   try {
-    const resend = new Resend(RESEND_API_KEY);
     const { email } = req.body;
 
     // Create unsubscribe token
@@ -191,8 +189,7 @@ app.post('/api/send-marketing-email', async (req, res) => {
   }
 
   try {
-    console.log('API Key status:', RESEND_API_KEY ? `Found (${RESEND_API_KEY.substring(0, 8)}...)` : 'Missing');
-    const resend = new Resend(RESEND_API_KEY);
+    console.log('API Key status:', process.env.VITE_RESEND_API_KEY ? `Found (${process.env.VITE_RESEND_API_KEY.substring(0, 8)}...)` : 'Missing');
 
     // If sending to all subscribers, fetch from database
     if (sendToAll) {
@@ -1087,8 +1084,7 @@ app.post('/api/send-discord-giveaway-email', async (req, res) => {
   console.log('Discord giveaway email endpoint hit');
   
   try {
-    console.log('API Key status:', RESEND_API_KEY ? `Found (${RESEND_API_KEY.substring(0, 8)}...)` : 'Missing');
-    const resend = new Resend(RESEND_API_KEY);
+    console.log('API Key status:', process.env.VITE_RESEND_API_KEY ? `Found (${process.env.VITE_RESEND_API_KEY.substring(0, 8)}...)` : 'Missing');
 
     // Fetch all active subscribers from database
     console.log('Fetching all active subscribers from database...');
@@ -1455,17 +1451,17 @@ app.post('/api/spin-claim', async (req, res) => {
     const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
     const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 
-    const percentNumber = Math.round(Number(percent) * 100);
+    const adminDomain = process.env.SHOPIFY_ADMIN_DOMAIN || process.env.VITE_SHOPIFY_ADMIN_DOMAIN || domain;
     const mutation = `
       mutation {
         discountCodeBasicCreate(basicCodeDiscount: {
           title: "${code}",
           code: "${code}",
           startsAt: "${new Date().toISOString()}",
-          customerSelection: { allCustomers: true },
+          customerSelection: { all: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          customerGets: { items: { all: true }, value: { percentage: ${percentNumber} } },
+          customerGets: { items: { all: true }, value: { percentage: ${percent} } },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           userErrors { field message }
@@ -1473,7 +1469,7 @@ app.post('/api/spin-claim', async (req, res) => {
       }
     `;
 
-    const adminResp = await fetch(`https://${domain}/admin/api/2024-04/graphql.json`, {
+    const adminResp = await fetch(`https://${adminDomain}/admin/api/2024-04/graphql.json`, {
       method: 'POST',
       headers: {
         'X-Shopify-Access-Token': adminAccessToken,
@@ -1482,22 +1478,90 @@ app.post('/api/spin-claim', async (req, res) => {
       body: JSON.stringify({ query: mutation }),
     }).then(r => r.json());
 
+    if (adminResp && adminResp.errors) {
+      console.error('Shopify GraphQL errors:', adminResp.errors);
+      const errText = Array.isArray(adminResp.errors)
+        ? adminResp.errors.map(e => e.message || String(e)).join(', ')
+        : JSON.stringify(adminResp.errors);
+      return res.status(500).json({ error: errText });
+    }
     const errs = adminResp?.data?.discountCodeBasicCreate?.userErrors || [];
     if (errs.length) {
+      console.error('Shopify discount userErrors:', errs);
       return res.status(500).json({ error: errs.map(e => e.message).join(', ') });
     }
+    if (!adminResp?.data?.discountCodeBasicCreate) {
+      console.error('Shopify response missing discountCodeBasicCreate:', adminResp);
+      return res.status(500).json({ error: 'Failed to create discount code' });
+    }
 
-    const resend = new Resend(process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY);
     await resend.emails.send({
       from: 'Elemental Games <mark@elementalgames.gg>',
       to: email,
-      subject: `Your Elekin Spin Reward Code (${Math.round(Number(percent)*100)}% off)`,
-      html: `<p>Congrats! Here is your unique promo code:</p><p style="font-size:24px;font-weight:bold;">${code}</p><p>Applies up to $25 off. One use per customer.</p>`
+      subject: `🎁 Your Elekin TCG Prize Wheel Code!`,
+      html: `
+        <div style="font-family: sans-serif; text-align: center; padding: 20px; color: #333;">
+          <h1 style="color: #8A2BE2;">You Won a Discount!</h1>
+          <p>Congratulations! Here is your unique, one-time-use promo code:</p>
+          <p style="font-size: 24px; font-weight: bold; color: #8A2BE2; margin: 20px 0;">${code}</p>
+          <p>This code is good for <strong>${Math.round(Number(percent)*100)}% off</strong> your next purchase (up to $25 off).</p>
+          <a href="https://www.elementalgames.gg/shop" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f59e0b; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit the Shop</a>
+          <p>Thank you for your support!</p>
+          <br>
+          <p><em>- The Elemental Games Team</em></p>
+          <img src="https://elementalgames.gg/Elekin_Kinbrold_Icon.png" alt="Elekin Logo" style="width: 150px; margin-top: 20px;">
+        </div>
+      `
     });
 
     res.json({ code });
   } catch (err) {
     console.error('spin-claim (express) error:', err);
+    res.status(500).json({ error: String(err?.message || err) });
+  }
+});
+
+// Record a free prize winner to Supabase
+app.post('/api/record-winner', async (req, res) => {
+  try {
+    const { email, prize, notes } = req.body || {};
+    if (!email || !prize) {
+      return res.status(400).json({ error: 'email and prize are required' });
+    }
+
+    const { data, error } = await supabase
+      .from('Winners')
+      .insert({ email, prize, source: 'wheel', notes: notes || null })
+      .select('*')
+      .single();
+
+    if (error) {
+      console.error('Supabase insert error:', error);
+      return res.status(500).json({ error: error.message });
+    }
+
+    // Send confirmation email
+    await resend.emails.send({
+      from: 'Elemental Games <mark@elementalgames.gg>',
+      to: email,
+      subject: `🎁 Elekin TCG: Congratulations on winning a ${prize}!`,
+      html: `
+        <div style="font-family: sans-serif; text-align: center; padding: 20px; color: #333;">
+          <h1 style="color: #8A2BE2;">Congratulations!</h1>
+          <p>You won a <strong>${prize}</strong> from the Elekin prize wheel!</p>
+          <p>We've recorded your prize, and it will be automatically added to your pre-order shipment in September 2025.</p>
+          <p>Thank you again for your support. We can't wait for you to get your Elekin cards!</p>
+          <a href="https://www.elementalgames.gg/shop" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f59e0b; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit the Shop</a>
+          <br>
+          <p><em>- The Elemental Games Team</em></p>
+          <img src="https://elementalgames.gg/Elekin_Kinbrold_Icon.png" alt="Elekin Logo" style="width: 150px; margin-top: 20px;">
+        </div>
+      `
+    });
+
+    res.json({ success: true, winner: data });
+  } catch (err) {
+    console.error('record-winner (express) error:', err);
     res.status(500).json({ error: String(err?.message || err) });
   }
 });

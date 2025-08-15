@@ -1,0 +1,21 @@
+name = "Wheel Redirect"
+handle = "wheel-redirect"
+
+# Checkout UI extension
+type = "ui_extension"
+
+api_version = "2024-07"
+
+[extension_points]
+# Render on both Thank You and Order Status pages
+points = [
+  "purchase.thank-you.block.render",
+  "purchase.order-status.block.render"
+]
+
+[build]
+# Entry point for the extension UI code
+command = "npm run build"
+
+[ui]
+surface = "checkout" 

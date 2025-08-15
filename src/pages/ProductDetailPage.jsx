@@ -28,6 +28,7 @@ Perfect for competitive players and collectors seeking the best and rarest cards
 
 Ages 10+`,
       variantId: 'gid://shopify/ProductVariant/47888806904048',
+      handle: 'booster-pack-demo-day-edition',
     },
     {
       id: 'prod_2',
@@ -46,8 +47,9 @@ What's Included:
 
 Perfect for new players or anyone wanting to master the Crystal element's defensive strategies and shield restoration powers.
 
-Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/9589325398256',
+  Ages 10+`,
+      variantId: 'gid://shopify/ProductVariant/47888803004656',
+      handle: 'crystal-starter-deck',
     },
     {
       id: 'prod_3',
@@ -67,7 +69,8 @@ What's Included:
 Perfect for new players or anyone wanting to master the Lightning element's devastating combo potential.
 
 Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/9589321892080',
+      variantId: 'gid://shopify/ProductVariant/47888788717808',
+      handle: 'lightning-starter-deck',
     },
     {
       id: 'prod_4',
@@ -78,7 +81,8 @@ Ages 10+`,
       description: `Play on an official Elekin Game Mat
 - This product comes with 6 clear tokens and 3 purple "10" tokens for essence and shield tracking on your mat
 - Rubberized bottom and colored stitched edges`,
-      variantId: 'gid://shopify/ProductVariant/9600666566896',
+      variantId: 'gid://shopify/ProductVariant/47917101121776',
+      handle: 'dumoles-game-mat-token-set',
     },
     {
       id: 'prod_5',
@@ -89,7 +93,8 @@ Ages 10+`,
       description: `Play on an official Elekin Game Mat
 - This product comes with 6 clear tokens and 3 purple "10" tokens for essence and shield tracking on your mat
 - Rubberized bottom and colored stitched edges`,
-      variantId: 'gid://shopify/ProductVariant/9600667648240',
+      variantId: 'gid://shopify/ProductVariant/47917102432496',
+      handle: 'guardians-sanctuary-game-mat-token-set',
     },
   ];
   

@@ -48,7 +48,8 @@ export async function createCheckoutWithItems(items) {
     input: {
       lines: items.map(item => ({
         merchandiseId: item.variantId,
-        quantity: item.quantity
+        quantity: item.quantity,
+        ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {})
       }))
     }
   };
@@ -80,4 +81,71 @@ export async function createCheckoutWithItems(items) {
     id: cart.id,
     webUrl: cart.checkoutUrl
   };
+}
+
+export async function getVariantIdByHandle(handle) {
+  const query = `
+    query productByHandle($handle: String!) {
+      product(handle: $handle) {
+        id
+        title
+        variants(first: 1) {
+          nodes {
+            id
+            availableForSale
+          }
+        }
+      }
+    }
+  `;
+
+  const variables = { handle };
+  const response = await ShopifyData({ query, variables });
+
+  if (response.errors) {
+    console.error('Shopify API errors:', response.errors);
+    throw new Error('Shopify API returned errors.');
+  }
+
+  const product = response?.data?.product;
+  if (!product || !product.variants?.nodes?.length) {
+    throw new Error(`Product with handle '${handle}' not found or has no variants`);
+  }
+
+  const variant = product.variants.nodes[0];
+  return { variantId: variant.id, availableForSale: !!variant.availableForSale };
+}
+
+export async function getVariantAndSellingPlanByHandle(handle) {
+  const query = `
+    query productWithPlans($handle: String!) {
+      product(handle: $handle) {
+        id
+        title
+        variants(first: 1) { nodes { id availableForSale } }
+        sellingPlanGroups(first: 10) {
+          nodes {
+            sellingPlans(first: 10) { nodes { id name } }
+          }
+        }
+      }
+    }
+  `;
+  const variables = { handle };
+  const response = await ShopifyData({ query, variables });
+
+  if (response.errors) {
+    console.error('Shopify API errors:', response.errors);
+    throw new Error('Shopify API returned errors.');
+  }
+
+  const product = response?.data?.product;
+  if (!product || !product.variants?.nodes?.length) {
+    throw new Error(`Product with handle '${handle}' not found or has no variants`);
+  }
+
+  const variantId = product.variants.nodes[0].id;
+  // pick first available selling plan if exists (used for pre-orders/deferred purchases)
+  const sellingPlanId = product.sellingPlanGroups?.nodes?.[0]?.sellingPlans?.nodes?.[0]?.id || null;
+  return { variantId, sellingPlanId };
 } 

@@ -25,6 +25,7 @@ const CartSidebar = () => {
         body: JSON.stringify({
           items: items.map(item => ({
             variantId: item.variantId,
+            handle: item.handle,
             quantity: item.quantity
           }))
         }),

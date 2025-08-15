@@ -1406,8 +1406,21 @@ app.post('/api/create-checkout-session', async (req, res) => {
     }
 
     // Import the server-specific shopify function
-    const { createCheckoutWithItems } = await import('./src/lib/shopify-server.js');
-    const checkout = await createCheckoutWithItems(items);
+    const { createCheckoutWithItems, getVariantIdByHandle, getVariantAndSellingPlanByHandle } = await import('./src/lib/shopify-server.js');
+
+    // Resolve any items that only provided a handle
+    const resolvedItems = [];
+    for (const item of items) {
+      if (item.handle) {
+        // Always resolve from handle to ensure correctness with selling plans
+        const result = await getVariantAndSellingPlanByHandle(item.handle);
+        resolvedItems.push({ variantId: result.variantId, sellingPlanId: result.sellingPlanId, quantity: item.quantity || 1 });
+      } else {
+        resolvedItems.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
+      }
+    }
+
+    const checkout = await createCheckoutWithItems(resolvedItems);
 
     if (!checkout || !checkout.webUrl) {
       return res.status(500).json({ error: 'Failed to create checkout session' });

@@ -14,6 +14,7 @@ const products = [
       oldPrice: 6,
       image: '/images/products/demopack1.png',
       variantId: 'gid://shopify/ProductVariant/47888806904048',
+      handle: 'booster-pack-demo-day-edition',
     },
     {
       id: 'prod_2',
@@ -21,7 +22,8 @@ const products = [
       price: 20,
       oldPrice: 25,
       image: '/images/products/crystaldemo1.png',
-      variantId: 'gid://shopify/ProductVariant/9589325398256',
+      variantId: 'gid://shopify/ProductVariant/47888803004656',
+      handle: 'crystal-starter-deck',
     },
     {
       id: 'prod_3',
@@ -29,7 +31,8 @@ const products = [
       price: 20,
       oldPrice: 25,
       image: '/images/products/lightningdemo1.png',
-      variantId: 'gid://shopify/ProductVariant/9589321892080',
+      variantId: 'gid://shopify/ProductVariant/47888788717808',
+      handle: 'lightning-starter-deck',
     },
     {
       id: 'prod_4',
@@ -37,7 +40,8 @@ const products = [
       price: 25,
       oldPrice: 32,
       image: '/images/products/dumoledemo1.png',
-      variantId: 'gid://shopify/ProductVariant/9600666566896',
+      variantId: 'gid://shopify/ProductVariant/47917101121776',
+      handle: 'dumoles-game-mat-token-set',
     },
     {
       id: 'prod_5',
@@ -45,7 +49,8 @@ const products = [
       price: 25,
       oldPrice: 32,
       image: '/images/products/guardiandemo1.png',
-      variantId: 'gid://shopify/ProductVariant/9600667648240',
+      variantId: 'gid://shopify/ProductVariant/47917102432496',
+      handle: 'guardians-sanctuary-game-mat-token-set',
     },
   ];
 

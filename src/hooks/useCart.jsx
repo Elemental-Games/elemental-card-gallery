@@ -60,6 +60,7 @@ export const CartProvider = ({ children }) => {
         body: JSON.stringify({
           items: [{
             variantId: product.variantId,
+            handle: product.handle,
             quantity: 1
           }]
         }),

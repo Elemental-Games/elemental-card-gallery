@@ -63,12 +63,24 @@ async function createCheckoutWithItems(items) {
     },
   };
   const response = await shopifyRequest({ query, variables });
+  console.log('Shopify cartCreate response:', JSON.stringify(response));
   if (response.errors) throw new Error(JSON.stringify(response.errors));
   const errors = response.data?.cartCreate?.userErrors || [];
   if (errors.length) throw new Error(errors.map((e) => e.message).join(', '));
   const cart = response.data?.cartCreate?.cart;
   if (!cart?.checkoutUrl) throw new Error('No checkoutUrl in response');
   return cart;
+}
+
+async function getBody(req) {
+  if (req.body) return req.body;
+  const chunks = [];
+  for await (const chunk of req) chunks.push(chunk);
+  try {
+    return JSON.parse(Buffer.concat(chunks).toString('utf8'));
+  } catch {
+    return {};
+  }
 }
 
 export default async function handler(req, res) {
@@ -81,7 +93,10 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { items } = req.body || {};
+    const body = await getBody(req);
+    const { items } = body || {};
+    console.log('Incoming checkout items:', JSON.stringify(items));
+
     if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'No items provided' });
     }
@@ -89,15 +104,17 @@ export default async function handler(req, res) {
     // Resolve from handle when present (ensures correct variant and selling plan)
     const resolved = [];
     for (const item of items) {
-      if (item.handle) {
+      if (item.variantId) {
+        resolved.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
+      } else if (item.handle) {
         const { variantId, sellingPlanId } = await getVariantAndSellingPlanByHandle(item.handle);
         resolved.push({ variantId, sellingPlanId, quantity: item.quantity || 1 });
-      } else if (item.variantId) {
-        resolved.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
       } else {
         return res.status(400).json({ error: 'Each item must include either handle or variantId' });
       }
     }
+
+    console.log('Resolved checkout items:', JSON.stringify(resolved));
 
     const cart = await createCheckoutWithItems(resolved);
     return res.status(200).json({ checkoutUrl: cart.checkoutUrl, checkoutId: cart.id });

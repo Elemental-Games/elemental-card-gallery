@@ -7,7 +7,7 @@ const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
 const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 const apiVersion = '2024-04';
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY);
 
 async function shopifyAdminRequest(query) {
   const URL = `https://${domain}/admin/api/${apiVersion}/graphql.json`;
@@ -46,6 +46,7 @@ export default async function handler(req, res) {
     if (!email || !percent) return res.status(400).json({ error: 'email and percent are required' });
 
     const code = generateCode(`SPIN${Math.round(percent * 100)}`);
+    const pct = Math.round(percent * 100); // integer percent 10,20,50
 
     const mutation = `
       mutation {
@@ -56,7 +57,7 @@ export default async function handler(req, res) {
           customerSelection: { allCustomers: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          value: { percentage: ${percent} },
+          customerGets: { items: { all: true }, value: { percentage: ${pct} } },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           codeDiscountNode { id }

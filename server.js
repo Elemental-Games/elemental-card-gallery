@@ -1455,6 +1455,7 @@ app.post('/api/spin-claim', async (req, res) => {
     const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
     const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 
+    const percentNumber = Math.round(Number(percent) * 100);
     const mutation = `
       mutation {
         discountCodeBasicCreate(basicCodeDiscount: {
@@ -1464,7 +1465,7 @@ app.post('/api/spin-claim', async (req, res) => {
           customerSelection: { allCustomers: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          value: { percentage: ${Number(percent)} },
+          customerGets: { items: { all: true }, value: { percentage: ${percentNumber} } },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           userErrors { field message }
@@ -1486,7 +1487,7 @@ app.post('/api/spin-claim', async (req, res) => {
       return res.status(500).json({ error: errs.map(e => e.message).join(', ') });
     }
 
-    const resend = new Resend(process.env.RESEND_API_KEY);
+    const resend = new Resend(process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY);
     await resend.emails.send({
       from: 'Elemental Games <mark@elementalgames.gg>',
       to: email,

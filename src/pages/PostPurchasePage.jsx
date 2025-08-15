@@ -75,7 +75,7 @@ const PostPurchasePage = () => {
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl lg:text-7xl font-bold mb-4">Thank You For Your Order!</h1>
           <p className="text-xl lg:text-2xl text-purple-200 mb-8">
-            As a special thank you, you&apos;ve earned a spin on our Wheel of Fortune!
+            As a special thank you, you&apos;ve earned a spin on our Prize Wheel!
           </p>
         </div>
 
@@ -86,9 +86,7 @@ const PostPurchasePage = () => {
         ) : (
           <div className="text-center mt-12">
             <h2 className="text-3xl font-bold text-yellow-400">Sorry!</h2>
-            <p className="text-lg text-white">
-              This order is not eligible for a spin on the Wheel of Fortune.
-            </p>
+            <p className="text-lg text-white">This order is not eligible for a spin on the Prize Wheel.</p>
           </div>
         )}
       </div>

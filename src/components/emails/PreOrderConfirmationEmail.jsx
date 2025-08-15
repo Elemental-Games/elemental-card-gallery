@@ -45,7 +45,7 @@ const PreOrderConfirmationEmail = () => {
             🎁 Your Wheel Spin Reward! 🎁
           </h4>
           <p className="text-lg text-gray-700 mb-6">
-            As a thank you for your pre-order, you&apos;ve earned a spin on our Wheel of Fortune! Click the button below to claim your prize.
+            As a thank you for your pre-order, you&apos;ve earned a spin on our Prize Wheel! Click the button below to claim your prize.
           </p>
           <Button className="bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800 text-white font-bold py-3 px-8 rounded-lg text-lg shadow-lg transform hover:scale-105 transition-all">
               Spin the Wheel!

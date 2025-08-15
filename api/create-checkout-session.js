@@ -6,9 +6,8 @@ const domain = process.env.VITE_SHOPIFY_STORE_DOMAIN;
 const storefrontAccessToken = process.env.VITE_SHOPIFY_STOREFRONT_ACCESS_TOKEN;
 const apiVersion = '2024-04';
 
-async function ShopifyData(payload) {
+async function shopifyRequest(payload) {
   const URL = `https://${domain}/api/${apiVersion}/graphql.json`;
-
   const options = {
     method: 'POST',
     headers: {
@@ -17,115 +16,93 @@ async function ShopifyData(payload) {
     },
     body: JSON.stringify(payload),
   };
+  const res = await fetch(URL, options);
+  return res.json();
+}
 
-  try {
-    const data = await fetch(URL, options).then(response => {
-      return response.json()
-    })
-    return data
-  } catch (error) {
-    throw new Error("Products not fetched");
+async function getVariantAndSellingPlanByHandle(handle) {
+  const query = `
+    query productWithPlans($handle: String!) {
+      product(handle: $handle) {
+        id
+        variants(first: 1) { nodes { id availableForSale } }
+        sellingPlanGroups(first: 10) {
+          nodes { sellingPlans(first: 10) { nodes { id name } } }
+        }
+      }
+    }
+  `;
+  const variables = { handle };
+  const response = await shopifyRequest({ query, variables });
+  if (response.errors) throw new Error(JSON.stringify(response.errors));
+  const product = response?.data?.product;
+  if (!product || !product.variants?.nodes?.length) {
+    throw new Error(`Product '${handle}' not found or has no variants`);
   }
+  const variantId = product.variants.nodes[0].id;
+  const sellingPlanId = product.sellingPlanGroups?.nodes?.[0]?.sellingPlans?.nodes?.[0]?.id || null;
+  return { variantId, sellingPlanId };
 }
 
 async function createCheckoutWithItems(items) {
   const query = `
-    mutation checkoutCreate($input: CheckoutCreateInput!) {
-      checkoutCreate(input: $input) {
-        checkout {
-          id
-          webUrl
-        }
-        checkoutUserErrors {
-          field
-          message
-        }
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart { id checkoutUrl }
+        userErrors { field message }
       }
-    }`;
-  
+    }
+  `;
   const variables = {
     input: {
-      lineItems: items.map(item => ({
-        variantId: item.variantId,
-        quantity: item.quantity
-      }))
-    }
+      lines: items.map((item) => ({
+        merchandiseId: item.variantId,
+        quantity: item.quantity || 1,
+        ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {}),
+      })),
+    },
   };
-
-  const response = await ShopifyData({ query, variables });
-
-  console.log('Full response from Shopify:', JSON.stringify(response, null, 2));
-
-  if (response.errors) {
-    console.error('Shopify API errors:', response.errors);
-    throw new Error('Shopify API returned errors.');
-  }
-
-  if (!response.data) {
-    console.error('No data in Shopify response:', response);
-    throw new Error('Invalid response from Shopify API.');
-  }
-
-  if (response.data.checkoutCreate.checkoutUserErrors.length > 0) {
-    console.error('Shopify checkout user errors:', response.data.checkoutCreate.checkoutUserErrors);
-    const errorMessage = response.data.checkoutCreate.checkoutUserErrors.map(e => e.message).join(', ');
-    throw new Error(`Failed to create checkout: ${errorMessage}`);
-  }
-
-  const checkout = response.data.checkoutCreate.checkout;
-  return checkout;
+  const response = await shopifyRequest({ query, variables });
+  if (response.errors) throw new Error(JSON.stringify(response.errors));
+  const errors = response.data?.cartCreate?.userErrors || [];
+  if (errors.length) throw new Error(errors.map((e) => e.message).join(', '));
+  const cart = response.data?.cartCreate?.cart;
+  if (!cart?.checkoutUrl) throw new Error('No checkoutUrl in response');
+  return cart;
 }
 
 export default async function handler(req, res) {
-  // Set CORS headers
+  // CORS
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
-  );
-
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
-
-  if (req.method !== 'POST') {
-    res.setHeader('Allow', ['POST']);
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { items } = req.body;
-
-    if (!items || items.length === 0) {
+    const { items } = req.body || {};
+    if (!items || !Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ error: 'No items provided' });
     }
 
+    // Resolve from handle when present (ensures correct variant and selling plan)
+    const resolved = [];
     for (const item of items) {
-      if (!item.variantId) {
-        return res.status(400).json({ error: 'All items must have a variantId' });
+      if (item.handle) {
+        const { variantId, sellingPlanId } = await getVariantAndSellingPlanByHandle(item.handle);
+        resolved.push({ variantId, sellingPlanId, quantity: item.quantity || 1 });
+      } else if (item.variantId) {
+        resolved.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
+      } else {
+        return res.status(400).json({ error: 'Each item must include either handle or variantId' });
       }
     }
 
-    const checkout = await createCheckoutWithItems(items);
-
-    if (!checkout || !checkout.webUrl) {
-      return res.status(500).json({ error: 'Failed to create checkout session' });
-    }
-
-    res.status(200).json({
-      checkoutUrl: checkout.webUrl,
-      checkoutId: checkout.id
-    });
-
-  } catch (error) {
-    console.error('Checkout session error:', error);
-    res.status(500).json({
-      error: 'Failed to create checkout session',
-      details: error.message
-    });
+    const cart = await createCheckoutWithItems(resolved);
+    return res.status(200).json({ checkoutUrl: cart.checkoutUrl, checkoutId: cart.id });
+  } catch (err) {
+    console.error('Checkout session error:', err);
+    return res.status(500).json({ error: 'Failed to create checkout session', details: String(err?.message || err) });
   }
 } 

@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import WheelOfFortune from '@/components/pre-order/WheelOfFortune';
-import { verifyOrder } from '@/lib/shopify-admin';
 
 const PostPurchasePage = () => {
   const [orderVerified, setOrderVerified] = useState(false);
@@ -22,8 +21,14 @@ const PostPurchasePage = () => {
       }
 
       try {
-        const order = await verifyOrder(orderId);
-        if (order && order.fullyPaid && parseFloat(order.totalPrice.amount) >= 25) {
+        const response = await fetch(`/api/verify-order?order_id=${encodeURIComponent(orderId)}`);
+        const data = await response.json();
+        
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to verify order');
+        }
+        
+        if (data.success && data.eligible) {
           setOrderVerified(true);
         } else {
           setError('This order is not eligible for a prize.');

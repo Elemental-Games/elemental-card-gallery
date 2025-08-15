@@ -21,7 +21,8 @@ const PostPurchasePage = () => {
       }
 
       try {
-        const response = await fetch(`/api/verify-order?order_id=${encodeURIComponent(orderId)}`);
+        const endpoint = `/api/verify-order?order_id=${encodeURIComponent(orderId)}`;
+        const response = await fetch(endpoint);
         const data = await response.json();
         
         if (!response.ok) {
@@ -31,10 +32,10 @@ const PostPurchasePage = () => {
         if (data.success && data.eligible) {
           setOrderVerified(true);
         } else {
-          setError('This order is not eligible for a prize.');
+          setError(`This order (${orderId}) is not eligible for a prize.`);
         }
       } catch (err) {
-        setError('Failed to verify your order.');
+        setError(`Failed to verify your order (${orderId}).`);
         console.error(err);
       } finally {
         setLoading(false);

@@ -3,7 +3,8 @@ import cors from 'cors';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { supabase } from './server-supabase.js';
-import { verifyOrder } from './src/lib/shopify-server.js';
+import crypto from 'crypto';
+// verifyOrder no longer used; verification handled via Supabase
 
 dotenv.config();
 
@@ -1569,34 +1570,82 @@ app.post('/api/record-winner', async (req, res) => {
 
 // Verify order endpoint for post-purchase page
 app.get('/api/verify-order', async (req, res) => {
-  try {
-    const { order_id } = req.query;
-    
-    if (!order_id) {
-      return res.status(400).json({ error: 'Order ID is required' });
-    }
+	try {
+		const { order_id } = req.query;
+		if (!order_id) {
+			return res.status(400).json({ error: 'Order ID is required' });
+		}
 
-    const order = await verifyOrder(order_id);
-    
-    if (!order) {
-      return res.status(404).json({ error: 'Order not found' });
-    }
+		const isUuid = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(order_id);
 
-    const isEligible = order.fullyPaid && parseFloat(order.totalPrice.amount) >= 25;
-    
-    res.json({
-      success: true,
-      eligible: isEligible,
-      order: {
-        id: order.id,
-        totalPrice: order.totalPrice,
-        fullyPaid: order.fullyPaid
-      }
-    });
-  } catch (error) {
-    console.error('Error verifying order:', error);
-    res.status(500).json({ error: 'Failed to verify order' });
-  }
+		let query = supabase.from('wheel_spins').select('id').limit(1);
+		if (isUuid) {
+			query = query.eq('id', order_id);
+		} else {
+			query = query.eq('shopify_order_id', order_id);
+		}
+		const { data, error } = await query;
+
+		if (error) {
+			console.error('Supabase error verifying order:', error);
+			return res.status(500).json({ error: 'Failed to verify order' });
+		}
+
+		const exists = Array.isArray(data) && data.length > 0;
+		return res.json({ success: true, eligible: exists });
+	} catch (error) {
+		console.error('Error verifying order:', error);
+		res.status(500).json({ error: 'Failed to verify order' });
+	}
+});
+
+// Webhook to record eligible orders into wheel_spins
+app.post('/api/shopify-order-webhook', express.raw({ type: 'application/json' }), async (req, res) => {
+	try {
+		const hmacHeader = req.get('X-Shopify-Hmac-Sha256');
+		const webhookSecret = process.env.SHOPIFY_WEBHOOK_SECRET || '';
+		const rawBody = req.body; // Buffer
+
+		// Validate HMAC if secret is set
+		if (webhookSecret) {
+			const digest = crypto
+				.createHmac('sha256', webhookSecret)
+				.update(rawBody, 'utf8')
+				.digest('base64');
+			if (digest !== hmacHeader) {
+				return res.status(401).send('Invalid HMAC');
+			}
+		}
+
+		const payload = JSON.parse(rawBody.toString('utf8'));
+		const orderId = String(payload.id); // numeric string
+		const totalPrice = Number(payload.total_price);
+		const currency = payload.currency;
+
+		// Only record $25+ orders (assumes USD)
+		const isEligible = totalPrice >= 25;
+		if (!isEligible) {
+			return res.status(200).json({ recorded: false, reason: 'below_threshold' });
+		}
+
+		// Upsert by shopify_order_id to avoid duplicates
+		const { error } = await supabase
+			.from('wheel_spins')
+			.upsert(
+				{ shopify_order_id: orderId, source: 'shopify' },
+				{ onConflict: 'shopify_order_id' }
+			);
+
+		if (error) {
+			console.error('Supabase insert error (wheel_spins):', error);
+			return res.status(500).json({ error: 'Failed to record order' });
+		}
+
+		return res.status(200).json({ recorded: true, shopify_order_id: orderId, totalPrice, currency });
+	} catch (e) {
+		console.error('Webhook error:', e);
+		return res.status(500).json({ error: 'Webhook error' });
+	}
 });
 
 const PORT = process.env.PORT || 3001;

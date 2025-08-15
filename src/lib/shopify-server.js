@@ -31,13 +31,13 @@ async function ShopifyData(payload) {
 
 export async function createCheckoutWithItems(items) {
   const query = `
-    mutation checkoutCreate($input: CheckoutCreateInput!) {
-      checkoutCreate(input: $input) {
-        checkout {
+    mutation cartCreate($input: CartInput!) {
+      cartCreate(input: $input) {
+        cart {
           id
-          webUrl
+          checkoutUrl
         }
-        checkoutUserErrors {
+        userErrors {
           field
           message
         }
@@ -46,8 +46,8 @@ export async function createCheckoutWithItems(items) {
   
   const variables = {
     input: {
-      lineItems: items.map(item => ({
-        variantId: item.variantId,
+      lines: items.map(item => ({
+        merchandiseId: item.variantId,
         quantity: item.quantity
       }))
     }
@@ -67,13 +67,17 @@ export async function createCheckoutWithItems(items) {
     throw new Error('Invalid response from Shopify API.');
   }
 
-  if (response.data.checkoutCreate.checkoutUserErrors.length > 0) {
-    console.error('Shopify checkout user errors:', response.data.checkoutCreate.checkoutUserErrors);
-    const errorMessage = response.data.checkoutCreate.checkoutUserErrors.map(e => e.message).join(', ');
-    throw new Error(`Failed to create checkout: ${errorMessage}`);
+  if (response.data.cartCreate.userErrors.length > 0) {
+    console.error('Shopify cart user errors:', response.data.cartCreate.userErrors);
+    const errorMessage = response.data.cartCreate.userErrors.map(e => e.message).join(', ');
+    throw new Error(`Failed to create cart: ${errorMessage}`);
   }
 
-  const checkout = response.data.checkoutCreate.checkout;
-
-  return checkout;
+  const cart = response.data.cartCreate.cart;
+  
+  // Return in the same format as before
+  return {
+    id: cart.id,
+    webUrl: cart.checkoutUrl
+  };
 } 

@@ -13,7 +13,7 @@ const products = [
       price: 5,
       oldPrice: 6,
       image: '/images/products/demopack1.png',
-      variantId: 'gid://shopify/ProductVariant/9589326676208',
+      variantId: 'gid://shopify/ProductVariant/47888806904048',
     },
     {
       id: 'prod_2',

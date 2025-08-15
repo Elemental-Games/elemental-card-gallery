@@ -27,7 +27,7 @@ What's Inside:
 Perfect for competitive players and collectors seeking the best and rarest cards in Elekin before anyone else.
 
 Ages 10+`,
-      variantId: 'gid://shopify/ProductVariant/9589326676208',
+      variantId: 'gid://shopify/ProductVariant/47888806904048',
     },
     {
       id: 'prod_2',

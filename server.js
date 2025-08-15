@@ -3,7 +3,6 @@ import cors from 'cors';
 import { Resend } from 'resend';
 import dotenv from 'dotenv';
 import { supabase } from './server-supabase.js';
-import { createCheckoutWithItems } from './src/lib/shopify.js';
 
 dotenv.config();
 
@@ -16,7 +15,7 @@ const isProd = process.env.NODE_ENV === 'production';
 const corsOptions = {
   origin: isProd 
     ? ['https://elementalgames.gg', 'https://www.elementalgames.gg']
-    : ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000', 'http://localhost:8082'],
+    : ['http://localhost:5173', 'http://127.0.0.1:5173', 'http://localhost:3000', 'http://localhost:8081', 'http://localhost:8080'],
   methods: ['GET', 'POST', 'OPTIONS'],
   credentials: true,
 };

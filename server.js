@@ -1411,12 +1411,13 @@ app.post('/api/create-checkout-session', async (req, res) => {
     // Resolve any items that only provided a handle
     const resolvedItems = [];
     for (const item of items) {
-      if (item.handle) {
-        // Always resolve from handle to ensure correctness with selling plans
+      if (item.variantId) {
+        resolvedItems.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
+      } else if (item.handle) {
         const result = await getVariantAndSellingPlanByHandle(item.handle);
         resolvedItems.push({ variantId: result.variantId, sellingPlanId: result.sellingPlanId, quantity: item.quantity || 1 });
       } else {
-        resolvedItems.push({ variantId: item.variantId, sellingPlanId: item.sellingPlanId, quantity: item.quantity || 1 });
+        throw new Error('Each item must include either variantId or handle');
       }
     }
 

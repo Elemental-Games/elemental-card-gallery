@@ -57,6 +57,7 @@ const products = [
 const ShopPage = () => {
   const { addToCart } = useCart();
   const [sparks, setSparks] = useState([]);
+  const [showCurtain, setShowCurtain] = useState(true);
 
   // Generate sparkling particles on page load
   useEffect(() => {
@@ -77,12 +78,38 @@ const ShopPage = () => {
     generateSparks();
   }, []);
 
+  // Remove curtain overlay after animation completes
+  useEffect(() => {
+    if (!showCurtain) return;
+    const timer = setTimeout(() => setShowCurtain(false), 1200);
+    return () => clearTimeout(timer);
+  }, [showCurtain]);
+
   return (
     <div className="bg-[#1A103C] text-white min-h-screen relative overflow-hidden">
       <Helmet>
         <title>Shop - Elekin TCG</title>
         <meta name="description" content="Shop for the latest Elekin TCG products and get exclusive rewards." />
       </Helmet>
+
+      {/* Curtain Opening Overlay */}
+      {showCurtain && (
+        <div className="absolute inset-0 z-50 pointer-events-none">
+          <motion.div
+            initial={{ x: 0 }}
+            animate={{ x: '-100%' }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+            className="absolute left-0 top-0 h-full w-1/2 bg-[#1A103C] border-r-2 border-yellow-400 shadow-[inset_-10px_0_30px_rgba(0,0,0,0.4)]"
+          />
+          <motion.div
+            initial={{ x: 0 }}
+            animate={{ x: '100%' }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+            className="absolute right-0 top-0 h-full w-1/2 bg-[#1A103C] border-l-2 border-yellow-400 shadow-[inset_10px_0_30px_rgba(0,0,0,0.4)]"
+          />
+
+        </div>
+      )}
 
       {/* Sparkling Animation */}
       <div className="absolute inset-0 pointer-events-none">

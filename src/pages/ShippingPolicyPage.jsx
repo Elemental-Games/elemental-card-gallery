@@ -14,7 +14,7 @@ const ShippingPolicyPage = () => {
             <p>Last updated: August 08, 2025</p>
 
             <h2 className="text-2xl font-bold text-yellow-400">Pre-Order Information</h2>
-            <p>All items available in our shop are currently for pre-order. We expect to have all products in hand and ready to ship within 4 weeks. The estimated delivery for all pre-orders is September 2025. We will notify you via email when your order has shipped.</p>
+            <p>All items available in our shop are currently for pre-order. We expect to have all products in hand and ready to ship within 4 weeks. The estimated delivery for all pre-orders is October 2025. We will notify you via email when your order has shipped.</p>
 
             <h2 className="text-2xl font-bold text-yellow-400">Order Processing Time</h2>
             <p>Once products are in stock, all orders are processed within 1 business day (excluding weekends and holidays) after receiving your order confirmation email. You will receive another notification when your order has shipped.</p>

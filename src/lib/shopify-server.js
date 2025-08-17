@@ -47,14 +47,14 @@ export async function createCheckoutWithItems(items) {
   const variables = {
     input: {
       attributes: [
-        { key: 'preorder_notice', value: 'Pre-order: Ships September 2025' }
+        { key: 'preorder_notice', value: 'Pre-order: Ships October 2025' }
       ],
       lines: items.map(item => ({
         merchandiseId: item.variantId,
         quantity: item.quantity,
         ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {}),
         attributes: [
-          { key: 'preorder_notice', value: 'Pre-order: Ships September 2025' }
+          { key: 'preorder_notice', value: 'Pre-order: Ships October 2025' }
         ]
       }))
     }

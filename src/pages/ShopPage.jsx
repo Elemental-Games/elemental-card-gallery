@@ -125,7 +125,7 @@ const ShopPage = () => {
             <div className="flex items-center justify-center gap-2 mb-4">
               <Truck className="w-5 h-5 text-purple-200" />
               <p className="text-lg text-purple-200">
-                Shipping begins in September 2025
+                Shipping begins in October 2025
               </p>
             </div>
             <div className="bg-purple-900/50 rounded-lg p-4 inline-block">

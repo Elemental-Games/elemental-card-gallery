@@ -48,7 +48,7 @@ export default async function handler(req, res) {
         <div style="font-family: sans-serif; text-align: center; padding: 20px; color: #333;">
           <h1 style="color: #8A2BE2;">Congratulations!</h1>
           <p>You won a <strong>${prize}</strong> from the Elekin prize wheel!</p>
-          <p>We've recorded your prize, and it will be automatically added to your pre-order shipment in September 2025.</p>
+          <p>We've recorded your prize, and it will be automatically added to your pre-order shipment in October 2025.</p>
           <p>Thank you again for your support. We can't wait for you to get your Elekin cards!</p>
           <a href="https://www.elementalgames.gg/shop" style="display: inline-block; margin-top: 20px; padding: 12px 24px; background-color: #f59e0b; color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">Visit the Shop</a>
           <br>

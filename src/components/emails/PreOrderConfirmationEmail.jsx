@@ -57,7 +57,7 @@ const PreOrderConfirmationEmail = () => {
             What&apos;s Next?
           </h3>
           <p className="text-lg text-gray-700 leading-relaxed">
-            Your pre-ordered items are expected to ship in <strong>September 2025</strong>. We&apos;ll keep you updated on our progress and let you know as soon as your order is on its way.
+            Your pre-ordered items are expected to ship in <strong>October 2025</strong>. We&apos;ll keep you updated on our progress and let you know as soon as your order is on its way.
           </p>
         </div>
 

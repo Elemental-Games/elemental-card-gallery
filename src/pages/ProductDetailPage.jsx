@@ -145,7 +145,7 @@ const ProductDetailPage = () => {
                 </div>
                 <p className="text-lg text-purple-200 mb-8 whitespace-pre-wrap">{product.description}</p>
                 <div className="mt-8 text-sm text-purple-300">
-                  <p>Shipping calculated at checkout. Ships September 2025.</p>
+                  <p>Shipping calculated at checkout. Ships October 2025.</p>
                   <p>30-day return policy. <Link to="/return-policy" className="underline hover:text-yellow-400">Read more</Link>.</p>
                 </div>
               </div>

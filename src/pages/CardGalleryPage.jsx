@@ -12,7 +12,13 @@ const allowedCardIds = [
   'aeris', 'archen', 'binding-coils', 'brumaul', 'crag', 'direct-assault', 
   'draconic-adaptability', 'driplets', 'essence-amplifier', 'essence-generation', 
   'fire-bugs', 'khorn', 'night-vox', 'passive-aggressive', 'piddip', 
-  'power-surge', 'pyro-mites', 'skerodact', 'stawid', 'twill', 'unbreakable'
+  'power-surge', 'pyro-mites', 'skerodact', 'stawid', 'twill', 'unbreakable',
+  // Newly visible cards
+  'eldritch',
+  // Shields
+  'mystic-ward', 'mythical-barrier', 'titans-shield', 'radiant-buckler',
+  'spectral-shield', 'elemental-shield', 'draconic-shield', 'guardians-sanctuary',
+  'celestial-fortress'
 ];
 
 const CardGalleryPage = () => {

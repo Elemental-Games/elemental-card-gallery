@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import CardDetailSidebar from './CardDetailSidebar';
 
 const cards = [
-  { id: 'aqua-dart', name: 'Aqua Dart', image: '/images/cards/new-marketing/aqua dart-r.webp' },
+  { id: 'aqua-dart', name: 'Aqua Dart', image: '/images/cards/new/aqua dart.webp' },
   { id: 'nimblefoot', name: 'Nimblefoot', image: '/images/cards/new/nimblefoot.webp' },
   { id: 'ember-flicker', name: 'Ember Flicker', image: '/images/cards/new/ember flicker.webp' },
   { id: 'swoop', name: 'Swoop', image: '/images/cards/new/swoop.webp' },

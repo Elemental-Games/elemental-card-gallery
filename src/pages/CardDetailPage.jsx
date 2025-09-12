@@ -82,6 +82,15 @@ const CardDetailPage = () => {
 
   // Get the best image path for this card
   const { marketingPath } = getCardImagePath(card);
+  const dragonCostBreakdown = {
+    Frost: ['Air', 'Water'],
+    Crystal: ['Earth', 'Water'],
+    Lava: ['Earth', 'Fire'],
+    Sand: ['Air', 'Earth'],
+    Poison: ['Fire', 'Water'],
+    Lightning: ['Air', 'Fire']
+  };
+  const isDragon = typeof card.name === 'string' && card.name.includes('Dragon');
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -94,15 +103,11 @@ const CardDetailPage = () => {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
         <div className="flex justify-center">
-          <div className={`relative ${card.type === 'Shield' ? 'w-full pt-[100%]' : ''}`}>
+          <div className="relative w-full">
             <img
               src={marketingPath}
               alt={card.name}
-              className={`rounded-lg shadow-lg ${
-                card.type === 'Shield' 
-                  ? 'absolute top-0 left-0 w-full h-full object-contain'
-                  : 'max-w-md w-full'
-              }`}
+              className={`rounded-lg shadow-lg ${card.type === 'Shield' ? 'w-full h-auto object-contain' : 'max-w-md w-full h-auto'}`}
               onError={createCardImageErrorHandler(card)}
             />
           </div>
@@ -134,7 +139,7 @@ const CardDetailPage = () => {
             {card.type === 'Rune' && (
               <div>
                 <h2 className="text-purple-300 font-medium">Rune Type</h2>
-                <p className="text-white">{card.runeType}</p>
+                <p className="text-white">{card.rune || card.runeType}</p>
               </div>
             )}
 
@@ -182,10 +187,10 @@ const CardDetailPage = () => {
             </div>
           )}
 
-          {card.type === 'Rune' && (
+          {card.type === 'Rune' && (card.effect || card.ability) && (
             <div>
               <h2 className="text-purple-300 font-medium mb-2">Effect</h2>
-              <p className="text-white">{card.effect}</p>
+              <p className="text-white">{card.effect || (typeof card.ability === 'string' ? card.ability : '')}</p>
             </div>
           )}
 
@@ -215,11 +220,28 @@ const CardDetailPage = () => {
                 </div>
               )}
 
+              {card.specialAbility && (
+                <div className="mb-6">
+                  <h2 className="text-purple-300 font-medium mb-2">Enhanced Ability</h2>
+                  <p className="text-white">
+                    {card.specialAbility.name}
+                    {card.specialAbility.cost && card.specialAbility.cost.amount != null && dragonCostBreakdown[card.element] ? (
+                      <> - Cost: {card.specialAbility.cost.amount} {dragonCostBreakdown[card.element][0]}/{dragonCostBreakdown[card.element][1]} Essence</>
+                    ) : null}
+                  </p>
+                  <p className="text-purple-200 text-sm mt-1">{card.specialAbility.description}</p>
+                </div>
+              )}
+
+
               {card.essence && (
                 <div className="mb-6">
                   <h2 className="text-purple-300 font-medium mb-2">Essence</h2>
-                  {card.essence.cost && (
+                  {!isDragon && card.essence.cost && (
                     <p className="text-white">Cost: {card.essence.cost.amount} {card.essence.cost.element}</p>
+                  )}
+                  {isDragon && dragonCostBreakdown[card.element] && (
+                    <p className="text-white">Cost: 5 {dragonCostBreakdown[card.element][0]} + 5 {dragonCostBreakdown[card.element][1]}</p>
                   )}
                   {card.essence.generation && (
                     <p className="text-white">Generation: {card.essence.generation.amount} {card.essence.generation.element}</p>
@@ -227,6 +249,27 @@ const CardDetailPage = () => {
                 </div>
               )}
             </>
+          )}
+
+          {card.proTip && (
+            <div className="mt-6 mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-yellow-400 mb-1">Pro Tip</h3>
+              <p className="text-yellow-100">{card.proTip}</p>
+            </div>
+          )}
+
+          {card.clarification && (
+            <div className="mt-6 mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-yellow-400 mb-1">Clarification</h3>
+              <p className="text-yellow-100">{card.clarification}</p>
+            </div>
+          )}
+
+          {card.note && (
+            <div className="mt-6 mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
+              <h3 className="text-lg font-semibold text-yellow-400 mb-1">Note</h3>
+              <p className="text-yellow-100">{card.note}</p>
+            </div>
           )}
 
           {card.quote && (

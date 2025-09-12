@@ -33,11 +33,11 @@ const LazyCard = ({ card }) => {
   return (
     <Link to={`/cards/${card.id}`} className="group" ref={placeholderRef}>
       {isVisible ? (
-        <div className="aspect-[5/7] w-full rounded-lg overflow-hidden transform transition-transform duration-300 group-hover:scale-105">
+        <div className="w-full rounded-lg overflow-hidden transform transition-transform duration-300 group-hover:scale-105">
           <img
             src={card.imagePath}
             alt={card.name}
-            className="w-full h-full object-cover"
+            className={`w-full ${card.type === 'Shield' ? 'h-auto object-contain' : 'h-full object-cover'} `}
             loading="lazy"
           />
         </div>
@@ -51,7 +51,7 @@ const LazyCard = ({ card }) => {
 const CardGrid = ({ cards, isLoading }) => {
   if (isLoading) {
     return (
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-center">
         {Array.from({ length: 10 }).map((_, index) => (
           <CardPlaceholder key={index} />
         ))}
@@ -60,7 +60,7 @@ const CardGrid = ({ cards, isLoading }) => {
   }
 
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 items-center">
       {cards.map(card => (
         <LazyCard key={card.id} card={card} />
       ))}

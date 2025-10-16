@@ -97,9 +97,6 @@ const KinbroldPage = () => {
         <section className="w-full bg-background/95 backdrop-blur-sm p-8">
           <div className="max-w-6xl mx-auto mb-6">
             <h2 className="text-2xl font-bold text-center mb-2">Elemental Kingdoms</h2>
-            <p className="text-center text-gray-400">
-              5/5 Kingdoms Revealed
-            </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
@@ -140,12 +137,12 @@ const KinbroldPage = () => {
         <Dialog open={!!selectedElementalist} onOpenChange={() => setSelectedElementalist(null)}>
           <DialogContent className="sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] w-full">
             <DialogHeader>
-              <DialogTitle>{selectedElementalist?.name}</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-center text-2xl font-bold mb-4">{selectedElementalist?.name}</DialogTitle>
+              <DialogDescription as="div" className="flex justify-center">
                 <img 
                   src={selectedElementalist?.image} 
                   alt={selectedElementalist?.name}
-                  className="w-full h-auto rounded-lg mt-4 object-contain max-h-[70vh]"
+                  className="w-full h-auto rounded-lg object-contain max-h-[70vh]"
                 />
               </DialogDescription>
             </DialogHeader>

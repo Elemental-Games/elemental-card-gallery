@@ -1,32 +1,32 @@
 export const dragonInfo = {
-  frost_dragon1: {
+  eldritch: {
     name: "Eldritch | The Frost Dragon",
     description: "A majestic dragon of ice and frost, dwelling in the Frozen Ridge.",
-    image: "/tour/Frost_Dragon.jpeg"
+    image: "/images/dragons/eldritch0.webp"
   },
-  lightning_dragon1: {
+  veton: {
     name: "Veton | The Lightning Dragon",
     description: "A powerful dragon of storms and lightning, residing atop Shroud Peak.",
-    image: "/tour/Lightning_Dragon1.jpeg"
+    image: "/images/dragons/veton0.webp"
   },
-  lava_dragon1: {
+  zoryn: {
     name: "Zoryn | The Lava Dragon",
     description: "A fierce dragon of molten rock and fire, making its home in Mount Surya.",
-    image: "/tour/Lava_Dragon1.jpeg"
+    image: "/images/dragons/zoryn0.webp"
   },
-  crystal_dragon1: {
+  diamoria: {
     name: "Diamoria | The Crystal Dragon",
     description: "A mystical dragon of shimmering crystals, hidden within the Gleaming Grotto.",
-    image: "/tour/Crystal_Dragon1.jpeg"
+    image: "/images/dragons/diamoria0.webp"
   },
-  poison_dragon1: {
+  noxilus: {
     name: "Noxilus | The Poison Dragon",
     description: "A cunning dragon of toxins and venom, lurking in the shadows of Noxwood.",
-    image: "/tour/Poison_Dragon1.jpeg"
+    image: "/images/dragons/noxilus0.webp"
   },
-  sand_dragon1: {
+  aridus: {
     name: "Aridus | The Sand Dragon",
     description: "An ancient dragon of shifting sands, roaming the vast Arid Sands.",
-    image: "/tour/Sand_Dragon1.jpeg"
+    image: "/images/dragons/aridus0.webp"
   }
 };

@@ -51,6 +51,8 @@ import PostPurchasePage from './pages/PostPurchasePage';
 import ProductDetailPage from './pages/ProductDetailPage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
+import InvestorPitchPage from './pages/InvestorPitchPage';
+import PasswordProtectedRoute from './components/PasswordProtectedRoute';
 
 const queryClient = new QueryClient();
 
@@ -173,6 +175,11 @@ const App = () => (
                       <Route path="/unsubscribe" element={<UnsubscribePage />} />
                       <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
                       <Route path="/kickstarter" element={<KickstarterPage />} />
+                      <Route path="/invest" element={
+                        <PasswordProtectedRoute password={import.meta.env.VITE_INVESTOR_PASSWORD}>
+                          <InvestorPitchPage />
+                        </PasswordProtectedRoute>
+                      } />
                       <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
                     </Routes>
                   </main>

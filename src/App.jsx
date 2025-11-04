@@ -53,6 +53,7 @@ import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import InvestorPitchPage from './pages/InvestorPitchPage';
 import PasswordProtectedRoute from './components/PasswordProtectedRoute';
+import TCGLanding from './pages/TCGLanding';
 
 const queryClient = new QueryClient();
 
@@ -181,6 +182,7 @@ const App = () => (
                         </PasswordProtectedRoute>
                       } />
                       <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
+                      <Route path="/tcg" element={<TCGLanding />} />
                     </Routes>
                   </main>
                   <Footer />

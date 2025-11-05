@@ -4,7 +4,7 @@ import { CreatureCard, SpellCard, RuneCard, CounterCard, ShieldCard, Card } from
 // A single list of all cards, addressable by ID.
 
 const Driplets: CreatureCard = { id: "driplets", name: "Driplets", element: "water", cost: 0, attack: 1, health: 1, strength: 80, agility: 70, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/driplets.webp" };
-const AquaDart: CreatureCard = { id: "aqua_dart", name: "Aqua Dart", element: "water", cost: 0, attack: 2, health: 1, strength: 80, agility: 70, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/aqua dart.webp", essenceGeneration: 2 };
+const AquaDart: CreatureCard = { id: "aqua_dart", name: "Aqua Dart", element: "water", cost: 0, attack: 2, health: 1, strength: 65, agility: 60, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/aqua dart.webp", essenceGeneration: 2 };
 const Piddip: CreatureCard = { id: "piddip", name: "Piddip", element: "water", cost: 0, attack: 2, health: 2, strength: 60, agility: 65, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/piddip.webp" };
 const Glurb: CreatureCard = { id: "glurb", name: "Glurb", element: "water", cost: 0, attack: 1, health: 3, strength: 82, agility: 55, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/glurb.webp" };
 const Shelt: CreatureCard = { id: "shelt", name: "Shelt", element: "water", cost: 3, attack: 2, health: 4, strength: 95, agility: 55, rarity: "uncommon", cardType: "creature" };
@@ -32,7 +32,7 @@ const Archen: CreatureCard = { id: "archen", name: "Archen", element: "fire", co
 const NightVox: CreatureCard = { id: "night_vox", name: "Night Vox", element: "fire", cost: 0, attack: 1, health: 3, strength: 95, agility: 30, rarity: "uncommon", cardType: "creature", imagePath: "/images/cards/new/night vox.webp" };
 
 const Glint: CreatureCard = { id: "glint", name: "Glint", element: "air", cost: 0, attack: 2, health: 1, strength: 80, agility: 70, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/glint.webp" };
-const Swoop: CreatureCard = { id: "swoop", name: "Swoop", element: "air", cost: 0, attack: 2, health: 2, strength: 78, agility: 73, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/swoop.webp" };
+const Swoop: CreatureCard = { id: "swoop", name: "Swoop", element: "air", cost: 0, attack: 2, health: 2, strength: 70, agility: 55, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/swoop.webp", essenceGeneration: 2 };
 const Stawid: CreatureCard = { id: "stawid", name: "Stawid", element: "air", cost: 0, attack: 3, health: 1, strength: 85, agility: 40, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/stawid.webp" };
 const Dumoles: CreatureCard = { id: "dumoles", name: "Dumoles", element: "air", cost: 1, attack: 3, health: 3, strength: 75, agility: 100, rarity: "common", cardType: "creature", imagePath: "/images/cards/new/dumoles.webp" };
 const Skerodact: CreatureCard = { id: "skerodact", name: "Skerodact", element: "air", cost: 2, attack: 4, health: 3, strength: 130, agility: 45, rarity: "uncommon", cardType: "creature", imagePath: "/images/cards/new/skerodact.webp" };

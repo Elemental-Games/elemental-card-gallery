@@ -144,6 +144,16 @@ export interface GameState {
     requiredElements: Element[];
     dragonId: string;
   };
+  
+  // Pending defense response (when AI attacks player creature)
+  pendingDefenseResponse?: {
+    attackerId: string;
+    defenderId: string;
+    canDodge: boolean;
+    potentialBlockers: Array<{ instanceId: string; name: string; agility: number }>;
+    isExhaustedTarget: boolean; // True if attacking exhausted creature
+    isShieldAttack?: boolean; // True if attacking shield
+  };
 }
 
 // Deck Definition

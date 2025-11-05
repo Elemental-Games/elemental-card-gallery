@@ -15,6 +15,8 @@ const allowedCardIds = [
   'power-surge', 'pyro-mites', 'skerodact', 'stawid', 'twill', 'unbreakable',
   // Newly visible cards
   'eldritch',
+  // Missing cards
+  'aqua-dart', 'swoop', 'ember-flicker', 'nimblefoot',
   // Shields
   'mystic-ward', 'mythical-barrier', 'titans-shield', 'radiant-buckler',
   'spectral-shield', 'elemental-shield', 'draconic-shield', 'guardians-sanctuary',

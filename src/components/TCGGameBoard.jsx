@@ -46,6 +46,7 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
     playerShields: storePlayerShields,
     aiShields: storeAiShields,
     aiPhaseMessage,
+    pendingDefenseResponse,
     initializeGame,
     drawCard,
     nextPhase,
@@ -220,16 +221,18 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
               // Check for potential blockers
               const potentialBlockers = result.potentialBlockers || [];
               
-              // AI decision logic: prefer blocking if beneficial, otherwise defend
+              // AI decision logic: Dodge if possible, otherwise defend
               let defenseType = "defend";
               let blockerId = undefined;
               
+              // Check if defender can dodge (higher agility and has action)
+              if (defenderAgility > attackerAgility && defender.hasAction && !defender.exhausted) {
+                // Defender can and should dodge
+                defenseType = "dodge";
+              }
               // Try to find a good blocker (AI prefers protecting weaker creatures)
-              if (potentialBlockers.length > 0) {
+              else if (potentialBlockers.length > 0) {
                 // For now, AI will always defend (can improve logic later)
-                defenseType = "defend";
-              } else if (defenderAgility > attackerAgility) {
-                // Can dodge, but AI will defend for now (can improve logic later)
                 defenseType = "defend";
               }
               
@@ -263,13 +266,30 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
                   setPhaseMessage(message);
                 }
                 setTimeout(() => setPhaseMessage(""), 3000);
+                setBattleMode(null); // Clear battle mode after successful defense resolution
+              } else if (defenseResult && defenseResult.error) {
+                // Handle defense response error
+                setErrorMessage(defenseResult.error);
+                setTimeout(() => setErrorMessage(""), 3000);
+                // Don't clear battleMode on error - let user try again
+              } else {
+                // Unexpected error
+                setErrorMessage("Failed to resolve defense response");
+                setTimeout(() => setErrorMessage(""), 3000);
               }
+            } else {
+              // Defender not found
+              setErrorMessage("Defender not found");
+              setTimeout(() => setErrorMessage(""), 3000);
             }
           } else if (result.exhaustedTarget) {
             setPhaseMessage(`Attacked exhausted creature! Dealt ${result.damage} damage`);
             setTimeout(() => setPhaseMessage(""), 2000);
+            setBattleMode(null);
+          } else {
+            // Attack succeeded without requiring response (e.g., shield or face attack)
+            setBattleMode(null);
           }
-          setBattleMode(null);
         } else if (result.error) {
           setErrorMessage(result.error);
           setTimeout(() => setErrorMessage(""), 3000);
@@ -510,6 +530,13 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
       setDefenseResponseMode(null);
     }
   }, [currentPhase]);
+  
+  // Watch for pending defense response from AI attacks
+  useEffect(() => {
+    if (pendingDefenseResponse && currentTurn === "ai" && currentPhase === "battle") {
+      setDefenseResponseMode(pendingDefenseResponse);
+    }
+  }, [pendingDefenseResponse, currentTurn, currentPhase]);
 
   const getZoneHighlight = (zoneType, index = null) => {
     // Battle Phase: Highlight valid targets (opponent creatures, shields, or face)
@@ -1166,10 +1193,10 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
                   Back
                 </button>
               </>
-            )}
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* Defense Response Overlay */}
       {defenseResponseMode && (
@@ -1179,46 +1206,107 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
               ⚔️ Defense Response
             </h2>
             <p className="text-white text-lg mb-6 text-center">
-              Your creature is being attacked! Choose a response:
+              {defenseResponseMode.isShieldAttack
+                ? "Your shield is being attacked! Choose a response:"
+                : defenseResponseMode.isExhaustedTarget 
+                ? "Your exhausted creature is being attacked! Choose a response:"
+                : "Your creature is being attacked! Choose a response:"}
             </p>
             
-            <div className="space-y-4 mb-6">
-              {/* Defend option - always available */}
-              <button
-                onClick={() => {
-                  const result = handleDefenseResponse(
-                    defenseResponseMode.defenderId,
-                    "defend",
-                    defenseResponseMode.attackerId,
-                    undefined,
-                    true
-                  );
-                  if (result && result.success) {
-                    let message = "Combat resolved! ";
-                    if (result.attackerDestroyed && result.defenderDestroyed) {
-                      message += "Both creatures destroyed!";
-                    } else if (result.attackerDestroyed) {
-                      message += `Attacker destroyed! Defender survived with ${result.defenderHealth} HP.`;
-                    } else if (result.defenderDestroyed) {
-                      message += `Defender destroyed! Attacker survived with ${result.attackerHealth} HP.`;
-                    } else {
-                      message += `Attacker: ${result.attackerHealth} HP, Defender: ${result.defenderHealth} HP.`;
-                    }
-                    setPhaseMessage(message);
-                    setTimeout(() => setPhaseMessage(""), 3000);
-                    setDefenseResponseMode(null);
-                  } else if (result && result.error) {
-                    setErrorMessage(result.error);
-                    setTimeout(() => setErrorMessage(""), 3000);
-                  }
-                }}
-                className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-all"
-              >
-                🛡️ Defend (Engage in combat)
-              </button>
+            {/* Display attacker and defender cards */}
+            {(() => {
+              const attacker = aiBoard.find(c => c.instanceId === defenseResponseMode.attackerId);
+              const defender = defenseResponseMode.isShieldAttack 
+                ? storePlayerShields.find(s => s.id === defenseResponseMode.defenderId)
+                : playerBoard.find(c => c.instanceId === defenseResponseMode.defenderId);
               
-              {/* Dodge option - only if agility allows */}
-              {defenseResponseMode.canDodge && (
+              return (
+                <div className="flex justify-center items-center gap-6 mb-6">
+                  {/* Attacker (AI's creature) */}
+                  {attacker && (
+                    <div className="flex flex-col items-center">
+                      <p className="text-white text-sm mb-2 font-semibold">Attacker (AI)</p>
+                      <div className="transform rotate-180">
+                        <Card card={attacker} />
+                      </div>
+                      <div className="mt-2 text-white text-xs text-center">
+                        <div>Strength: {attacker.strength || attacker.attack}</div>
+                        <div>Agility: {attacker.agility || 0}</div>
+                        <div>HP: {attacker.currentHealth || attacker.strength || attacker.attack}</div>
+                      </div>
+                    </div>
+                  )}
+                  
+                  {/* VS indicator */}
+                  <div className="text-yellow-400 text-2xl font-bold">VS</div>
+                  
+                  {/* Defender (Player's creature or shield) */}
+                  {defender && (
+                    <div className="flex flex-col items-center">
+                      <p className="text-white text-sm mb-2 font-semibold">
+                        {defenseResponseMode.isShieldAttack ? "Shield (You)" : "Defender (You)"}
+                      </p>
+                      {defenseResponseMode.isShieldAttack ? (
+                        <div className="w-24 h-32 bg-gradient-to-br from-purple-800 to-purple-900 rounded-lg border-2 border-purple-500 flex flex-col items-center justify-center p-2">
+                          <div className="text-white text-xs font-bold mb-1">{defender.name}</div>
+                          <div className="text-white text-xs">Tier {defender.tier}</div>
+                          <div className="text-white text-sm font-bold mt-2">HP: {defender.currentHealth}</div>
+                        </div>
+                      ) : (
+                        <Card card={defender} />
+                      )}
+                      {!defenseResponseMode.isShieldAttack && (
+                        <div className="mt-2 text-white text-xs text-center">
+                          <div>Strength: {defender.strength || defender.attack}</div>
+                          <div>Agility: {defender.agility || 0}</div>
+                          <div>HP: {defender.currentHealth || defender.strength || defender.attack}</div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })()}
+            
+            <div className="space-y-4 mb-6">
+              {/* Defend option - only if not exhausted target and not shield attack */}
+              {!defenseResponseMode.isExhaustedTarget && !defenseResponseMode.isShieldAttack && (
+                <button
+                  onClick={() => {
+                    const result = handleDefenseResponse(
+                      defenseResponseMode.defenderId,
+                      "defend",
+                      defenseResponseMode.attackerId,
+                      undefined,
+                      true
+                    );
+                    if (result && result.success) {
+                      let message = "Combat resolved! ";
+                      if (result.attackerDestroyed && result.defenderDestroyed) {
+                        message += "Both creatures destroyed!";
+                      } else if (result.attackerDestroyed) {
+                        message += `Attacker destroyed! Defender survived with ${result.defenderHealth} HP.`;
+                      } else if (result.defenderDestroyed) {
+                        message += `Defender destroyed! Attacker survived with ${result.attackerHealth} HP.`;
+                      } else {
+                        message += `Attacker: ${result.attackerHealth} HP, Defender: ${result.defenderHealth} HP.`;
+                      }
+                      setPhaseMessage(message);
+                      setTimeout(() => setPhaseMessage(""), 3000);
+                      setDefenseResponseMode(null);
+                    } else if (result && result.error) {
+                      setErrorMessage(result.error);
+                      setTimeout(() => setErrorMessage(""), 3000);
+                    }
+                  }}
+                  className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-all"
+                >
+                  🛡️ Defend (Engage in combat)
+                </button>
+              )}
+              
+              {/* Dodge option - only if agility allows and not exhausted */}
+              {defenseResponseMode.canDodge && !defenseResponseMode.isExhaustedTarget && (
                 <button
                   onClick={() => {
                     const result = handleDefenseResponse(
@@ -1243,6 +1331,38 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
                 </button>
               )}
               
+              {/* "Do nothing" option for exhausted targets and shield attacks */}
+              {(defenseResponseMode.isExhaustedTarget || defenseResponseMode.isShieldAttack) && (
+                <button
+                  onClick={() => {
+                    const result = handleDefenseResponse(
+                      defenseResponseMode.defenderId,
+                      "none",
+                      defenseResponseMode.attackerId,
+                      undefined,
+                      true
+                    );
+                    if (result && result.success) {
+                      if (result.shieldHit) {
+                        setPhaseMessage(`Shield hit! ${result.damage} damage dealt. ${result.destroyed ? "Shield destroyed!" : ""}`);
+                      } else {
+                        setPhaseMessage(`Attack hit! ${result.damage} damage dealt.`);
+                      }
+                      setTimeout(() => setPhaseMessage(""), 2000);
+                      setDefenseResponseMode(null);
+                    } else if (result && result.error) {
+                      setErrorMessage(result.error);
+                      setTimeout(() => setErrorMessage(""), 3000);
+                    }
+                  }}
+                  className="w-full py-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold text-lg transition-all"
+                >
+                  {defenseResponseMode.isShieldAttack 
+                    ? "⚔️ Do Nothing (Let attack hit shield)"
+                    : "⚔️ Do Nothing (Let attack hit exhausted creature)"}
+                </button>
+              )}
+              
               {/* Block options - if blockers available */}
               {defenseResponseMode.potentialBlockers && defenseResponseMode.potentialBlockers.length > 0 && (
                 <div className="space-y-2">
@@ -1260,24 +1380,24 @@ export default function GameBoard({ playerDeck = "crystal", playerGoesFirst = tr
                             blocker.instanceId,
                             true
                           );
-                          if (result && result.success) {
-                            setPhaseMessage(`${blocker.name} blocked! ${result.blockerDestroyed ? "Blocker destroyed!" : `Blocker took ${result.damage} damage`}`);
-                            setTimeout(() => setPhaseMessage(""), 2000);
-                            setDefenseResponseMode(null);
-                          } else if (result && result.error) {
-                            setErrorMessage(result.error);
-                            setTimeout(() => setErrorMessage(""), 3000);
-                          }
-                        }}
-                        className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-all"
-                      >
-                        🛡️ Block with {blocker.name} (Agility: {blocker.agility})
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
+                        if (result && result.success) {
+                          setPhaseMessage(`${blocker.name} blocked! ${result.blockerDestroyed ? "Blocker destroyed!" : `Blocker took ${result.damage} damage`}${result.shieldProtected ? " Shield protected!" : ""}`);
+                          setTimeout(() => setPhaseMessage(""), 2000);
+                          setDefenseResponseMode(null);
+                        } else if (result && result.error) {
+                          setErrorMessage(result.error);
+                          setTimeout(() => setErrorMessage(""), 3000);
+                        }
+                      }}
+                      className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-all"
+                    >
+                      🛡️ Block with {blocker.name} (Agility: {blocker.agility}){defenseResponseMode.isShieldAttack ? " - Protect Shield" : ""}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
             
             <button
               onClick={() => {

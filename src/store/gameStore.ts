@@ -545,6 +545,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
     
     if (!targetCreature) return { success: false, error: "Creature not found" };
     
+    // Check if creature already has equipment - only one equipment allowed at a time
+    if (targetCreature.equippedCards && targetCreature.equippedCards.length > 0) {
+      return { success: false, error: "This creature already has equipment. Only one equipment can be attached at a time." };
+    }
+    
     // Remove rune from the rune/counter zone (it's being moved to the creature)
     const newRuneCounterZone = [...runeCounterZone];
     if (runeZoneIndex !== undefined) {
@@ -842,6 +847,35 @@ export const useGameStore = create<GameStore>((set, get) => ({
         return { success: false, error: "Shield not found" };
       }
       
+      // Find potential blockers (creatures with action and higher agility than attacker)
+      const attackerAgility = attacker.agility || 0;
+      const potentialBlockers = opponentBoard.filter(c => 
+        c.hasAction && 
+        !c.exhausted &&
+        (c.agility || 0) > attackerAgility
+      );
+      
+      // If AI is attacking player's shield and there are potential blockers, allow blocking
+      if (!isPlayer && potentialBlockers.length > 0) {
+        // Set pending defense response to allow player to choose to block
+        set({
+          pendingDefenseResponse: {
+            attackerId,
+            defenderId: targetId, // Shield ID
+            canDodge: false, // Can't dodge shield attacks
+            potentialBlockers: potentialBlockers.map(c => ({
+              instanceId: c.instanceId,
+              name: c.name,
+              agility: c.agility || 0,
+            })),
+            isExhaustedTarget: false,
+            isShieldAttack: true, // Mark as shield attack
+          }
+        });
+        return { success: true, requiresResponse: true, isShieldAttack: true };
+      }
+      
+      // No blockers (or player attacking), proceed with direct shield attack
       const damage = attacker.strength || attacker.attack;
       const newHealth = targetShield.currentHealth - damage;
       
@@ -898,8 +932,39 @@ export const useGameStore = create<GameStore>((set, get) => ({
         return { success: false, error: "Target creature not found" };
       }
       
-      // Check if defender is exhausted (no blocker needed, just attack)
-      if (defender.exhausted || !defender.hasAction) {
+      // Check if defender is exhausted
+      const isExhausted = defender.exhausted || !defender.hasAction;
+      
+      // Find potential blockers (creatures with action and higher agility than attacker)
+      const attackerAgility = attacker.agility || 0;
+      const potentialBlockers = opponentBoard.filter(c => 
+        c.instanceId !== targetId && 
+        c.hasAction && 
+        !c.exhausted &&
+        (c.agility || 0) > attackerAgility
+      );
+      
+      // If AI is attacking player's exhausted creature and there are potential blockers, allow blocking
+      if (isExhausted && !isPlayer && potentialBlockers.length > 0) {
+        // Set pending defense response to allow player to choose to block
+        set({
+          pendingDefenseResponse: {
+            attackerId,
+            defenderId: targetId,
+            canDodge: false, // Can't dodge exhausted creatures
+            potentialBlockers: potentialBlockers.map(c => ({
+              instanceId: c.instanceId,
+              name: c.name,
+              agility: c.agility || 0,
+            })),
+            isExhaustedTarget: true,
+          }
+        });
+        return { success: true, requiresResponse: true, exhaustedTarget: true };
+      }
+      
+      // If exhausted and no blockers (or player attacking), proceed with direct attack
+      if (isExhausted) {
         const damage = attacker.strength || attacker.attack;
         const newHealth = defender.currentHealth - damage;
         
@@ -935,16 +1000,24 @@ export const useGameStore = create<GameStore>((set, get) => ({
       }
       
       // Defender has action - requires response
-      const attackerAgility = attacker.agility || 0;
       const defenderAgility = defender.agility || 0;
       
-      // Find potential blockers (creatures with action and higher agility than attacker)
-      const potentialBlockers = opponentBoard.filter(c => 
-        c.instanceId !== targetId && 
-        c.hasAction && 
-        !c.exhausted &&
-        (c.agility || 0) > attackerAgility
-      );
+      // If AI is attacking player creature, set pending defense response
+      if (!isPlayer) {
+        set({
+          pendingDefenseResponse: {
+            attackerId,
+            defenderId: targetId,
+            canDodge: defenderAgility > attackerAgility,
+            potentialBlockers: potentialBlockers.map(c => ({
+              instanceId: c.instanceId,
+              name: c.name,
+              agility: c.agility || 0,
+            })),
+            isExhaustedTarget: false,
+          }
+        });
+      }
       
       return {
         success: true,
@@ -976,6 +1049,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       return { success: false, error: "Creature not found" };
     }
     
+    // Clear pending defense response
+    set({ pendingDefenseResponse: undefined });
+    
     // Handle dodge
     if (responseType === "dodge") {
       const attackerAgility = attacker.agility || 0;
@@ -983,6 +1059,11 @@ export const useGameStore = create<GameStore>((set, get) => ({
       
       if (defenderAgility <= attackerAgility) {
         return { success: false, error: "Cannot dodge - attacker has equal or higher agility" };
+      }
+      
+      // Check that defender has an action
+      if (!defender.hasAction || defender.exhausted) {
+        return { success: false, error: "Defender does not have an action to dodge" };
       }
       
       // Both become exhausted, no damage
@@ -1024,7 +1105,47 @@ export const useGameStore = create<GameStore>((set, get) => ({
         return { success: false, error: "Blocker agility must be higher than attacker" };
       }
       
-      // Blocker steps in - attacker deals strength damage to blocker
+      // Check if this is a shield attack
+      const state = get();
+      const isShieldAttack = state.pendingDefenseResponse?.isShieldAttack || false;
+      
+      if (isShieldAttack) {
+        // Shield blocking: blocker takes damage, shield is protected
+        const damage = attacker.strength || attacker.attack;
+        const newBlockerHealth = blocker.currentHealth - damage;
+        
+        // Exhaust both attacker and blocker
+        const newAttackerBoard = attackerBoard.map(c =>
+          c.instanceId === attackerId ? { ...c, hasAction: false, exhausted: true } : c
+        );
+        
+        let newDefenderBoard = [...defenderBoard];
+        if (newBlockerHealth <= 0) {
+          // Blocker destroyed
+          newDefenderBoard = newDefenderBoard.filter(c => c.instanceId !== blockerId);
+          if (isPlayer) {
+            set({ aiBoard: newAttackerBoard, playerBoard: newDefenderBoard, playerDiscard: [...state.playerDiscard, blocker as unknown as Card] });
+          } else {
+            set({ playerBoard: newAttackerBoard, aiBoard: newDefenderBoard, aiDiscard: [...state.aiDiscard, blocker as unknown as Card] });
+          }
+        } else {
+          // Update blocker health and exhaust
+          newDefenderBoard = newDefenderBoard.map(c =>
+            c.instanceId === blockerId 
+              ? { ...c, currentHealth: newBlockerHealth, hasAction: false, exhausted: true }
+              : c
+          );
+          if (isPlayer) {
+            set({ aiBoard: newAttackerBoard, playerBoard: newDefenderBoard });
+          } else {
+            set({ playerBoard: newAttackerBoard, aiBoard: newDefenderBoard });
+          }
+        }
+        
+        return { success: true, blocked: true, damage, blockerDestroyed: newBlockerHealth <= 0, shieldProtected: true };
+      }
+      
+      // Creature blocking: blocker steps in - attacker deals strength damage to blocker
       const damage = attacker.strength || attacker.attack;
       const newBlockerHealth = blocker.currentHealth - damage;
       
@@ -1061,6 +1182,102 @@ export const useGameStore = create<GameStore>((set, get) => ({
     
     // Handle defend (or none defaults to defend if can't dodge)
     if (responseType === "defend" || responseType === "none") {
+      // Check if this is a shield attack
+      const state = get();
+      const isShieldAttack = state.pendingDefenseResponse?.isShieldAttack || false;
+      
+      if (isShieldAttack && responseType === "none") {
+        // Let shield attack proceed - shield takes damage
+        const targetShield = (isPlayer ? state.aiShields : state.playerShields).find(s => s.id === defenderId);
+        if (!targetShield) {
+          return { success: false, error: "Shield not found" };
+        }
+        
+        const damage = attacker.strength || attacker.attack;
+        const newHealth = targetShield.currentHealth - damage;
+        
+        // Exhaust attacker
+        const newAttackerBoard = attackerBoard.map(c => 
+          c.instanceId === attackerId 
+            ? { ...c, hasAction: false, exhausted: true }
+            : c
+        );
+        
+        let newOpponentShields = [...(isPlayer ? state.aiShields : state.playerShields)];
+        if (newHealth <= 0) {
+          // Shield destroyed
+          newOpponentShields = newOpponentShields.filter(s => s.id !== defenderId);
+        } else {
+          // Update shield health and reveal
+          const shieldIndex = newOpponentShields.findIndex(s => s.id === defenderId);
+          let updatedShield = {
+            ...targetShield,
+            currentHealth: newHealth,
+            faceDown: false,
+          };
+          
+          // Check if shield should drop to next tier (if damage >= 150)
+          if (damage >= 150) {
+            if (targetShield.currentTier === 3) {
+              updatedShield.currentTier = 2;
+              updatedShield.currentHealth = Math.min(newHealth, targetShield.maxHealthByTier[2]);
+            } else if (targetShield.currentTier === 2) {
+              updatedShield.currentTier = 1;
+              updatedShield.currentHealth = Math.min(newHealth, targetShield.maxHealthByTier[1]);
+            }
+          }
+          
+          newOpponentShields[shieldIndex] = updatedShield;
+        }
+        
+        if (isPlayer) {
+          set({ aiBoard: newAttackerBoard, aiShields: newOpponentShields });
+        } else {
+          set({ playerBoard: newAttackerBoard, playerShields: newOpponentShields });
+        }
+        
+        return { success: true, damage, destroyed: newHealth <= 0, shieldHit: true };
+      }
+      
+      // Check if defender is exhausted - if so, "none" means let attack proceed without blocking
+      const isExhausted = defender.exhausted || !defender.hasAction;
+      if (isExhausted && responseType === "none") {
+        // Let the attack proceed - attacker deals damage to exhausted defender
+        const damage = attacker.strength || attacker.attack;
+        const newHealth = defender.currentHealth - damage;
+        
+        // Exhaust attacker
+        const newAttackerBoard = attackerBoard.map(c => 
+          c.instanceId === attackerId 
+            ? { ...c, hasAction: false, exhausted: true }
+            : c
+        );
+        
+        let newDefenderBoard = [...defenderBoard];
+        if (newHealth <= 0) {
+          // Defender destroyed
+          newDefenderBoard = newDefenderBoard.filter(c => c.instanceId !== defenderId);
+          if (isPlayer) {
+            set({ playerBoard: newAttackerBoard, aiBoard: newDefenderBoard, aiDiscard: [...state.aiDiscard, defender as unknown as Card] });
+          } else {
+            set({ aiBoard: newAttackerBoard, playerBoard: newDefenderBoard, playerDiscard: [...state.playerDiscard, defender as unknown as Card] });
+          }
+        } else {
+          // Update defender health
+          newDefenderBoard = newDefenderBoard.map(c =>
+            c.instanceId === defenderId ? { ...c, currentHealth: newHealth } : c
+          );
+          if (isPlayer) {
+            set({ playerBoard: newAttackerBoard, aiBoard: newDefenderBoard });
+          } else {
+            set({ aiBoard: newAttackerBoard, playerBoard: newDefenderBoard });
+          }
+        }
+        
+        return { success: true, damage, exhaustedTarget: true };
+      }
+      
+      // Normal defend - resolve combat
       return get().resolveCombat(attackerId, defenderId, isPlayer);
     }
     
@@ -1314,16 +1531,38 @@ export const useGameStore = create<GameStore>((set, get) => ({
       nextTurn === "ai" ? { ...c, canAttack: true } : c
     );
 
-    // Restore shields to max health for their current tier during end phase
+    // Restore shields based on tier and health thresholds during end phase
     const restoreShields = (shields: BoardShield[]): BoardShield[] => {
       return shields.map(shield => {
-        const maxHealthForCurrentTier = shield.maxHealthByTier[shield.currentTier];
+        // Skip shields that are broken (health <= 0)
+        if (shield.currentHealth <= 0) {
+          return shield;
+        }
+
+        const tier = shield.tier; // Base tier of the shield
         
-        // Restore to max health for current tier (don't change tier, just restore health)
-        if (shield.currentHealth < maxHealthForCurrentTier) {
-          return { ...shield, currentHealth: maxHealthForCurrentTier };
+        if (tier === 1) {
+          // Tier 1 shields: Always restore to 150 HP if not broken
+          return { ...shield, currentHealth: 150, currentTier: 1 };
+        } else if (tier === 2) {
+          // Tier 2 shields: Restore to 300 if >= 151, else restore to 150
+          if (shield.currentHealth >= 151) {
+            return { ...shield, currentHealth: 300, currentTier: 2 };
+          } else {
+            return { ...shield, currentHealth: 150, currentTier: 1 };
+          }
+        } else if (tier === 3) {
+          // Tier 3 shields: Restore based on health thresholds
+          if (shield.currentHealth >= 301) {
+            return { ...shield, currentHealth: 450, currentTier: 3 };
+          } else if (shield.currentHealth >= 151) {
+            return { ...shield, currentHealth: 300, currentTier: 2 };
+          } else {
+            return { ...shield, currentHealth: 150, currentTier: 1 };
+          }
         }
         
+        // Fallback: return shield unchanged
         return shield;
       });
     };

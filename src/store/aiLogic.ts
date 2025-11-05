@@ -396,6 +396,59 @@ export const aiBattlePhase = async (
       continue; // Skip if attacker was destroyed or no longer has action
     }
     
+    // Helper function to check if AI can kill a creature this turn
+    const canKillCreatureThisTurn = (
+      attacker: BoardCreature,
+      defender: BoardCreature,
+      remainingAttackers: BoardCreature[],
+      aiHand: Card[]
+    ): boolean => {
+      const attackerStrength = attacker.strength || attacker.attack || 0;
+      const attackerAgility = attacker.agility || 0;
+      const defenderAgility = defender.agility || 0;
+      const defenderStrength = defender.strength || defender.attack || 0;
+      
+      // Calculate defender health after this attack
+      let defenderHealthAfterAttack = defender.currentHealth;
+      
+      if (attackerAgility > defenderAgility) {
+        // Attacker goes first - defender takes damage immediately
+        defenderHealthAfterAttack -= attackerStrength;
+      } else {
+        // Defender goes first - attacker might die before dealing damage
+        const attackerHealthAfterDefenderAttack = (attacker.currentHealth || attackerStrength) - defenderStrength;
+        if (attackerHealthAfterDefenderAttack <= 0) {
+          // Attacker dies before dealing damage, can't kill defender
+          return false;
+        }
+        // Attacker survives and deals damage
+        defenderHealthAfterAttack -= attackerStrength;
+      }
+      
+      // If defender dies from this attack alone, we can kill it
+      if (defenderHealthAfterAttack <= 0) {
+        return true;
+      }
+      
+      // Check if we have follow-up attacks that can finish it
+      const remainingDamage = remainingAttackers
+        .filter(a => a.instanceId !== attacker.instanceId && a.hasAction && !a.exhausted)
+        .map(a => a.strength || a.attack || 0)
+        .reduce((sum, damage) => sum + damage, 0);
+      
+      if (remainingDamage >= defenderHealthAfterAttack) {
+        return true;
+      }
+      
+      // Check if we have Direct Assault (50 damage) that can finish it
+      const hasDirectAssault = aiHand.some(c => c.id === "direct_assault");
+      if (hasDirectAssault && (remainingDamage + 50) >= defenderHealthAfterAttack) {
+        return true;
+      }
+      
+      return false;
+    };
+    
     // Determine best target: weakest creature, weakest shield, or face
     let bestTarget: { id: string; type: "creature" | "shield" | "face"; name?: string } | null = null;
     
@@ -403,9 +456,23 @@ export const aiBattlePhase = async (
     if (freshPlayerShields.length === 0) {
       bestTarget = { id: "face", type: "face", name: "face" };
     } else {
-      // Prefer attacking weakest creature first
-      const weakestCreature = freshPlayerBoard
-        .filter(c => c.currentHealth > 0)
+      // Find remaining attackers (excluding current one)
+      const remainingAttackers = currentState.aiBoard.filter(
+        c => c.hasAction && !c.exhausted && c.instanceId !== freshAttacker.instanceId
+      );
+      
+      // Find creatures we can kill this turn
+      const killableCreatures = freshPlayerBoard.filter(defender => {
+        return canKillCreatureThisTurn(
+          freshAttacker,
+          defender,
+          remainingAttackers,
+          currentState.aiHand
+        );
+      });
+      
+      // Prefer attacking killable creatures first
+      const weakestKillableCreature = killableCreatures
         .sort((a, b) => a.currentHealth - b.currentHealth)[0];
       
       // Or weakest shield
@@ -413,125 +480,92 @@ export const aiBattlePhase = async (
         .filter(s => s.currentHealth > 0)
         .sort((a, b) => a.currentHealth - b.currentHealth)[0];
       
-      if (weakestCreature && weakestShield) {
-        // Attack whichever is weaker
-        bestTarget = weakestCreature.currentHealth <= weakestShield.currentHealth
-          ? { id: weakestCreature.instanceId, type: "creature", name: weakestCreature.name }
-          : { id: weakestShield.id, type: "shield", name: weakestShield.name };
-      } else if (weakestCreature) {
-        bestTarget = { id: weakestCreature.instanceId, type: "creature", name: weakestCreature.name };
+      if (weakestKillableCreature && weakestShield) {
+        // Prefer killable creature over shield
+        bestTarget = { 
+          id: weakestKillableCreature.instanceId, 
+          type: "creature", 
+          name: weakestKillableCreature.name 
+        };
+      } else if (weakestKillableCreature) {
+        bestTarget = { 
+          id: weakestKillableCreature.instanceId, 
+          type: "creature", 
+          name: weakestKillableCreature.name 
+        };
       } else if (weakestShield) {
+        // Only attack shield if no killable creatures
         bestTarget = { id: weakestShield.id, type: "shield", name: weakestShield.name };
+      } else {
+        // No valid targets, skip this attacker
+        continue;
       }
     }
     
-    if (bestTarget) {
-      // Verify target still exists before attacking
-      let targetStillExists = false;
-      if (bestTarget.type === "face") {
-        targetStillExists = true; // Face always exists
-      } else if (bestTarget.type === "creature") {
-        targetStillExists = freshPlayerBoard.some(c => c.instanceId === bestTarget.id && c.currentHealth > 0);
-      } else if (bestTarget.type === "shield") {
-        targetStillExists = freshPlayerShields.some(s => s.id === bestTarget.id && s.currentHealth > 0);
-      }
-      
-      if (!targetStillExists) {
-        // Target was destroyed, skip this attacker
-        continue;
-      }
-      
-      // Announce the attack
-      const targetName = bestTarget.type === "face" ? "you directly" : bestTarget.name;
-      actions.setAIPhaseMessage(`AI's ${freshAttacker.name} attacks ${targetName}!`);
-      await delay(1500);
-      
-      const result = actions.initiateAttack(freshAttacker.instanceId, bestTarget.id, bestTarget.type, false);
-      
-      if (result && result.success) {
-        // Handle defense response if needed
-        if (result.requiresResponse && bestTarget.type === "creature") {
-          await delay(1000);
-          
-          // Get fresh state to find defender
-          const freshState = getState();
-          const defender = freshState.playerBoard.find(c => c.instanceId === result.defenderId);
-          if (defender) {
-            const attackerAgility = freshAttacker.agility || 0;
-            const defenderAgility = defender.agility || 0;
-            
-            // Show defense response message
-            actions.setAIPhaseMessage(`Your ${defender.name} defends against the attack!`);
-            await delay(1000);
-            
-            // Dodge if defender has higher agility
-            if (defenderAgility > attackerAgility) {
-              // AI might dodge, but for now we'll defend
-              const defenseResult = actions.handleDefenseResponse(
-                result.defenderId,
-                "defend",
-                result.attackerId,
-                undefined,
-                false
-              );
-              
-              if (defenseResult && defenseResult.success) {
-                if (defenseResult.attackerDestroyed && defenseResult.defenderDestroyed) {
-                  actions.setAIPhaseMessage(`Both creatures destroyed!`);
-                } else if (defenseResult.attackerDestroyed) {
-                  actions.setAIPhaseMessage(`AI's ${freshAttacker.name} destroyed! Your ${defender.name} survives.`);
-                } else if (defenseResult.defenderDestroyed) {
-                  actions.setAIPhaseMessage(`Your ${defender.name} destroyed! AI's ${freshAttacker.name} survives.`);
-                } else {
-                  actions.setAIPhaseMessage(`Combat: ${freshAttacker.name} (${defenseResult.attackerHealth} HP) vs ${defender.name} (${defenseResult.defenderHealth} HP)`);
-                }
-                await delay(2000);
-              }
-            } else {
-              // Must defend
-              const defenseResult = actions.handleDefenseResponse(
-                result.defenderId,
-                "defend",
-                result.attackerId,
-                undefined,
-                false
-              );
-              
-              if (defenseResult && defenseResult.success) {
-                if (defenseResult.attackerDestroyed && defenseResult.defenderDestroyed) {
-                  actions.setAIPhaseMessage(`Both creatures destroyed!`);
-                } else if (defenseResult.attackerDestroyed) {
-                  actions.setAIPhaseMessage(`AI's ${freshAttacker.name} destroyed! Your ${defender.name} survives.`);
-                } else if (defenseResult.defenderDestroyed) {
-                  actions.setAIPhaseMessage(`Your ${defender.name} destroyed! AI's ${freshAttacker.name} survives.`);
-                } else {
-                  actions.setAIPhaseMessage(`Combat: ${freshAttacker.name} (${defenseResult.attackerHealth} HP) vs ${defender.name} (${defenseResult.defenderHealth} HP)`);
-                }
-                await delay(2000);
-              }
-            }
-          }
-        } else if (result.exhaustedTarget) {
-          actions.setAIPhaseMessage(`Attacked exhausted creature! Dealt ${result.damage} damage.`);
-          await delay(1500);
+      if (bestTarget) {
+        // Verify target still exists before attacking
+        let targetStillExists = false;
+        if (bestTarget.type === "face") {
+          targetStillExists = true; // Face always exists
+        } else if (bestTarget.type === "creature") {
+          targetStillExists = freshPlayerBoard.some(c => c.instanceId === bestTarget.id && c.currentHealth > 0);
         } else if (bestTarget.type === "shield") {
-          if (result.destroyed) {
-            actions.setAIPhaseMessage(`Shield destroyed!`);
-          } else {
-            actions.setAIPhaseMessage(`Shield took ${result.damage} damage!`);
+          targetStillExists = freshPlayerShields.some(s => s.id === bestTarget.id && s.currentHealth > 0);
+        }
+        
+        if (!targetStillExists) {
+          // Target was destroyed, skip this attacker
+          continue;
+        }
+        
+        // Announce the attack
+        const targetName = bestTarget.type === "face" ? "you directly" : bestTarget.name;
+        actions.setAIPhaseMessage(`AI's ${freshAttacker.name} attacks ${targetName}!`);
+        await delay(1500);
+        
+        const result = actions.initiateAttack(freshAttacker.instanceId, bestTarget.id, bestTarget.type, false);
+        
+        if (result && result.success) {
+          // Handle defense response if needed
+          if (result.requiresResponse) {
+            // Wait for player's defense response to be resolved
+            // Poll until pendingDefenseResponse is cleared (player made their choice)
+            let waitCount = 0;
+            const maxWaitTime = 300000; // 5 minutes max wait (should never happen, but safety)
+            while (getState().pendingDefenseResponse && waitCount < maxWaitTime) {
+              await delay(100); // Check every 100ms
+              waitCount += 100;
+            }
+            
+            // Clear the message after player's choice
+            actions.setAIPhaseMessage(null);
+            await delay(500);
+            
+            // Continue to next attacker (the actual resolution happened in handleDefenseResponse)
+            continue;
+          } else if (result.exhaustedTarget) {
+            actions.setAIPhaseMessage(`Attacked exhausted creature! Dealt ${result.damage} damage.`);
+            await delay(1500);
+          } else if (bestTarget.type === "shield") {
+            if (result.destroyed) {
+              actions.setAIPhaseMessage(`Shield destroyed!`);
+            } else {
+              actions.setAIPhaseMessage(`Shield took ${result.damage} damage!`);
+            }
+            await delay(1500);
+          } else if (bestTarget.type === "face") {
+            actions.setAIPhaseMessage(`Direct attack! Dealt ${result.damage} damage!`);
+            await delay(1500);
           }
-          await delay(1500);
-        } else if (bestTarget.type === "face") {
-          actions.setAIPhaseMessage(`Direct attack! Dealt ${result.damage} damage!`);
-          await delay(1500);
+        }
+        
+        // Clear message before next attack (only if not waiting for response)
+        if (!result.requiresResponse) {
+          actions.setAIPhaseMessage(null);
+          await delay(300);
         }
       }
-      
-      // Clear message before next attack
-      actions.setAIPhaseMessage(null);
-      await delay(300);
     }
-  }
   
   return true;
 };

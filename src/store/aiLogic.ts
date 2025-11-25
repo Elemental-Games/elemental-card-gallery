@@ -96,6 +96,7 @@ export const aiMainPhase1 = async (
     swapEssence: (fromElement: string, toElement: string, amount: number, isPlayer: boolean, runeZoneIndex?: number) => any;
     discardRuneFromZone: (isPlayer: boolean, runeZoneIndex: number) => void;
     summonDragonByTribute: (dragonCardIndex: number, tributeInstanceIds: string[]) => void;
+    activateCreatureAbility: (creatureInstanceId: string, abilityId: string) => any;
   },
   delay: (ms: number) => Promise<void>
 ): Promise<boolean> => {
@@ -352,6 +353,21 @@ export const aiMainPhase1 = async (
     }
   }
   
+  // Use Ember Flicker's ability if available
+  const currentState = getState();
+  const emberFlicker = currentState.aiBoard.find(c => 
+    c.id === "ember_flicker" && 
+    !c.hasActivatedAbilityThisTurn &&
+    c.abilities?.some(a => a.id === "combustion" && a.trigger === "activated")
+  );
+  
+  if (emberFlicker && actions.activateCreatureAbility) {
+    const result = actions.activateCreatureAbility(emberFlicker.instanceId, "combustion");
+    if (result?.success) {
+      await delay(800);
+    }
+  }
+  
   return true;
 };
 
@@ -360,7 +376,7 @@ export const aiBattlePhase = async (
   getState: () => GameState,
   actions: {
     initiateAttack: (attackerId: string, targetId: string, targetType: "creature" | "shield" | "face", isPlayer: boolean) => any;
-    handleDefenseResponse: (defenderId: string, responseType: "defend" | "dodge" | "block" | "none", attackerId: string, blockerId?: string, isPlayer: boolean) => any;
+    handleDefenseResponse: (defenderId: string, responseType: "defend" | "dodge" | "block" | "none", attackerId: string, isPlayer: boolean, blockerId?: string) => any;
     setAIPhaseMessage: (message: string | null) => void;
   },
   delay: (ms: number) => Promise<void>
@@ -401,7 +417,8 @@ export const aiBattlePhase = async (
       attacker: BoardCreature,
       defender: BoardCreature,
       remainingAttackers: BoardCreature[],
-      aiHand: Card[]
+      aiHand: Card[],
+      allowSupport: boolean
     ): boolean => {
       const attackerStrength = attacker.strength || attacker.attack || 0;
       const attackerAgility = attacker.agility || 0;
@@ -430,6 +447,11 @@ export const aiBattlePhase = async (
         return true;
       }
       
+      if (!allowSupport) {
+        // With only one creature on board, don't rely on follow-up or spells
+        return false;
+      }
+      
       // Check if we have follow-up attacks that can finish it
       const remainingDamage = remainingAttackers
         .filter(a => a.instanceId !== attacker.instanceId && a.hasAction && !a.exhausted)
@@ -452,7 +474,7 @@ export const aiBattlePhase = async (
     // Determine best target: weakest creature, weakest shield, or face
     let bestTarget: { id: string; type: "creature" | "shield" | "face"; name?: string } | null = null;
     
-    // If no shields, can attack face
+    // If no shields, can attack face directly
     if (freshPlayerShields.length === 0) {
       bestTarget = { id: "face", type: "face", name: "face" };
     } else {
@@ -460,14 +482,22 @@ export const aiBattlePhase = async (
       const remainingAttackers = currentState.aiBoard.filter(
         c => c.hasAction && !c.exhausted && c.instanceId !== freshAttacker.instanceId
       );
+      const totalAiCreatures = currentState.aiBoard.filter(c => c.currentHealth > 0).length;
+      const allowSupport = totalAiCreatures > 1;
       
-      // Find creatures we can kill this turn
+      // Find creatures we can kill this turn (excluding untargetable ones)
+      const currentTurnNumber = currentState.turnNumber;
       const killableCreatures = freshPlayerBoard.filter(defender => {
+        // Skip untargetable creatures
+        if (defender.untargetableUntilTurn && currentTurnNumber < defender.untargetableUntilTurn) {
+          return false;
+        }
         return canKillCreatureThisTurn(
           freshAttacker,
           defender,
           remainingAttackers,
-          currentState.aiHand
+          currentState.aiHand,
+          allowSupport
         );
       });
       
@@ -503,18 +533,24 @@ export const aiBattlePhase = async (
     }
     
       if (bestTarget) {
-        // Verify target still exists before attacking
+        // Verify target still exists and is targetable before attacking
         let targetStillExists = false;
+        let isTargetable = true;
         if (bestTarget.type === "face") {
           targetStillExists = true; // Face always exists
         } else if (bestTarget.type === "creature") {
-          targetStillExists = freshPlayerBoard.some(c => c.instanceId === bestTarget.id && c.currentHealth > 0);
+          const targetCreature = freshPlayerBoard.find(c => c.instanceId === bestTarget.id && c.currentHealth > 0);
+          targetStillExists = !!targetCreature;
+          // Check if creature is untargetable
+          if (targetCreature && targetCreature.untargetableUntilTurn && currentState.turnNumber < targetCreature.untargetableUntilTurn) {
+            isTargetable = false;
+          }
         } else if (bestTarget.type === "shield") {
           targetStillExists = freshPlayerShields.some(s => s.id === bestTarget.id && s.currentHealth > 0);
         }
         
-        if (!targetStillExists) {
-          // Target was destroyed, skip this attacker
+        if (!targetStillExists || !isTargetable) {
+          // Target was destroyed or is untargetable, skip this attacker
           continue;
         }
         
@@ -576,6 +612,7 @@ export const aiMainPhase2 = async (
   actions: {
     playCard: (cardIndex: number, isPlayer: boolean, zoneType?: string, zoneIndex?: number) => any;
     dealDamageToTarget: (targetId: string, targetType: "creature" | "shield", damage: number, isPlayer: boolean, runeZoneIndex?: number) => any;
+    activateCreatureAbility: (creatureInstanceId: string, abilityId: string) => any;
   },
   delay: (ms: number) => Promise<void>
 ): Promise<boolean> => {

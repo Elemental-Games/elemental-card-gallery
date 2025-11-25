@@ -44,7 +44,7 @@ export default function Card({ card, isHand = false, onClick, disabled = false, 
 
   return (
     <>
-      <div
+    <div
         onClick={(e) => {
           // Only handle click if onClick prop is provided
           if (onClick) {
@@ -58,18 +58,18 @@ export default function Card({ card, isHand = false, onClick, disabled = false, 
         style={!onClick ? { pointerEvents: 'none' } : {}}
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        className={`
-          relative w-24 h-32 rounded-lg overflow-hidden cursor-pointer
+      className={`
+        relative w-24 h-32 rounded-lg overflow-hidden cursor-pointer
           transition-all duration-200
-          ${isHand ? "shadow-lg" : "shadow-md"}
+        ${isHand ? "shadow-lg" : "shadow-md"}
           ${!isHand && card.exhausted ? "transform rotate-90" : (!isHand && isOpponent && !card.exhausted) ? "transform rotate-180" : ""}
-        `}
-      >
+      `}
+    >
         {/* Card Image */}
         {!imageError && (
-          <img 
+        <img 
             src={getImagePath()} 
-            alt={card.name}
+          alt={card.name}
             className="w-full h-full object-cover pointer-events-none"
             onError={() => setImageError(true)}
           />
@@ -82,7 +82,7 @@ export default function Card({ card, isHand = false, onClick, disabled = false, 
           </div>
         )}
       </div>
-      
+
       {/* Local Hover Preview (For Board Cards) - Only if no equipment */}
               {!isHand && isHovered && !disableHover && !card.equippedCards && (
         <div className="fixed inset-0 z-[10000] flex items-center justify-center pointer-events-none">

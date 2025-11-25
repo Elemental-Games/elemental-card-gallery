@@ -19,13 +19,60 @@ export interface BaseCard {
   };
 }
 
+export type AbilityTriggerType = "onSummon" | "passive" | "activated" | "onDestroy" | "hand";
+
+export interface CreatureAbility {
+  id: string;
+  name: string;
+  trigger: AbilityTriggerType;
+  description?: string;
+}
+
+export type AbilityOptionType = "creature" | "shield" | "rune" | "element" | "card" | "confirm";
+
+export interface AbilityOption {
+  id: string;
+  label: string;
+  type: AbilityOptionType;
+  metadata?: any;
+}
+
+export interface BattleLogEntry {
+  id: string;
+  controller: "player" | "ai" | "system";
+  message: string;
+  timestamp: number;
+  type?: "ability" | "attack" | "defense" | "system";
+}
+
+export interface PendingAbilityPrompt {
+  controller: "player" | "ai";
+  sourceInstanceId: string;
+  abilityId: string;
+  message: string;
+  options: AbilityOption[];
+  selectionMode: "single" | "multiple" | "none";
+  allowSkip?: boolean;
+  stage?: string;
+  context?: any;
+}
+
+export interface AbilityContext {
+  controller: "player" | "ai";
+  sourceInstanceId?: string;
+  sourceCardId: string;
+  abilityId: string;
+  stage?: string;
+  data?: Record<string, any>;
+}
+
 export interface CreatureCard extends BaseCard {
   cardType: "creature";
   attack: number; // Legacy field, use strength instead
   health: number; // Legacy field, use strength instead
   strength: number; // Both health (max) and damage dealt
   agility: number; // Speed/turn order in combat (higher = attacks first)
-  abilities?: string[];
+  abilities?: CreatureAbility[];
   imagePath?: string;
   essenceGeneration?: number; // How much essence this creature generates per turn (default: 1)
 }
@@ -71,6 +118,13 @@ export interface BoardCreature extends CreatureCard {
   isBlocking?: boolean;
   equippedCards?: RuneCard[]; // Equipment rune cards attached to this creature
   exhausted?: boolean; // Visual state - true if horizontal/rotated (no action)
+  hasActivatedAbilityThisTurn?: boolean;
+  temporaryStrengthBonus?: number;
+  doubleStrikeUntilEndOfTurn?: boolean;
+  pierceUntilEndOfTurn?: boolean;
+  cannotBeBlocked?: boolean;
+  untargetableUntilTurn?: number;
+  abilityContext?: Record<string, any>;
 }
 
 // Essence Pool
@@ -94,6 +148,7 @@ export interface GameState {
   playerMaxMana: number;
   aiMana: number;
   aiMaxMana: number;
+  turnCycle?: number;
   currentTurn: "player" | "ai";
   currentPhase: Phase;
   turnNumber: number;
@@ -153,7 +208,12 @@ export interface GameState {
     potentialBlockers: Array<{ instanceId: string; name: string; agility: number }>;
     isExhaustedTarget: boolean; // True if attacking exhausted creature
     isShieldAttack?: boolean; // True if attacking shield
+    originalShieldId?: string; // Tracks original shield target when blockers intervene
   };
+  
+  pendingAbilityPrompt?: PendingAbilityPrompt;
+  activeAbilityContext?: AbilityContext;
+  battleLog: BattleLogEntry[];
 }
 
 // Deck Definition

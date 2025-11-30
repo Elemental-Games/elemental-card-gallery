@@ -8,11 +8,11 @@ const PURPLE_DARK = '#2a0e35';
 const PURPLE_LIGHT = '#5a2380';
 
 const PRIZES = [
-  { option: 'Free Pack', type: 'free', weight: 19 },
-  { option: '15% Off', type: 'discount', percent: 0.15, weight: 75 },
+  { option: 'Free Pack', type: 'free', weight: 4 },
+  { option: '15% Off', type: 'discount', percent: 0.15, weight: 92 },
   { option: 'Free Game Mat', type: 'free', weight: 0.5 },
-  { option: '2 Free Packs', type: 'free', weight: 2 },
-  { option: '20% Off', type: 'discount', percent: 0.20, weight: 5 },
+  { option: '2 Free Packs', type: 'free', weight: 1 },
+  { option: '20% Off', type: 'discount', percent: 0.20, weight: 2 },
   { option: 'Free Deck', type: 'free', weight: 0.5 }, // Changed from 'Free Structure Deck'
 ];
 
@@ -35,13 +35,13 @@ function getFreePrizeNote(option) {
     case 'Free Pack':
     case '2 Free Packs':
     case '3 Free Packs':
-      return 'Your free pack(s) will be added to your pre-order shipment. Thank you!';
+      return 'Your free pack(s) will be added to your order. Thank you!';
     case 'Free Game Mat':
-      return 'Your free Game Mat will be added to your pre-order shipment. Thank you!';
+      return 'Your free Game Mat will be added to your order. Thank you!';
     case 'Free Deck':
-      return 'Your free Starter Deck will be added to your pre-order shipment. Thank you!';
+      return 'Your free Starter Deck will be added to your order. Thank you!';
     default:
-      return 'Your free prize will be added to your pre-order shipment. Thank you!';
+      return 'Your free prize will be added to your order. Thank you!';
   }
 }
 

@@ -46,16 +46,10 @@ export async function createCheckoutWithItems(items) {
   
   const variables = {
     input: {
-      attributes: [
-        { key: 'preorder_notice', value: 'Pre-order: Ships October 2025' }
-      ],
       lines: items.map(item => ({
         merchandiseId: item.variantId,
         quantity: item.quantity,
-        ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {}),
-        attributes: [
-          { key: 'preorder_notice', value: 'Pre-order: Ships October 2025' }
-        ]
+        ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {})
       }))
     }
   };
@@ -151,7 +145,7 @@ export async function getVariantAndSellingPlanByHandle(handle) {
   }
 
   const variantId = product.variants.nodes[0].id;
-  // pick first available selling plan if exists (used for pre-orders/deferred purchases)
+  // pick first available selling plan if exists
   const sellingPlanId = product.sellingPlanGroups?.nodes?.[0]?.sellingPlans?.nodes?.[0]?.id || null;
   return { variantId, sellingPlanId };
 } 

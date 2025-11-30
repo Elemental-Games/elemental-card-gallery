@@ -462,16 +462,26 @@ const HowToPlayPage = () => {
                           </ul>
                         </div>
                         
-                        <div>
-                          <h4 className="text-xl font-bold text-white mb-3">2. Turn Structure</h4>
-                          <ol className="list-decimal list-inside space-y-2 text-lg">
-                            <li><span className="font-semibold">Draw Phase:</span> Draw one card</li>
-                            <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures</li>
-                            <li><span className="font-semibold">Main Phase 1:</span> Summon creatures and play cards</li>
-                            <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures</li>
-                            <li><span className="font-semibold">Main Phase 2:</span> Play additional cards</li>
-                            <li><span className="font-semibold">End Phase:</span> Shields regenerate, cleanup effects</li>
-                          </ol>
+                        <div className="flex flex-col md:flex-row gap-6">
+                          <div className="flex-1">
+                            <h4 className="text-xl font-bold text-white mb-3">2. Turn Structure</h4>
+                            <ol className="list-decimal list-inside space-y-2 text-lg">
+                              <li><span className="font-semibold">Draw Phase:</span> Draw one card</li>
+                              <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures</li>
+                              <li><span className="font-semibold">Main Phase 1:</span> Summon creatures and play cards</li>
+                              <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures</li>
+                              <li><span className="font-semibold">Main Phase 2:</span> Play additional cards</li>
+                              <li><span className="font-semibold">End Phase:</span> Shields regenerate, cleanup effects</li>
+                            </ol>
+                          </div>
+                          <div className="md:w-64 flex-shrink-0">
+                            <div className="bg-yellow-500/10 border-2 border-yellow-500/50 rounded-lg p-4 h-fit">
+                              <h5 className="text-lg font-bold text-yellow-400 mb-2">First Turn Exceptions</h5>
+                              <p className="text-sm text-white">
+                                On the <span className="font-semibold text-yellow-400">very first turn</span> of the game, skip your <span className="font-semibold">Draw Phase</span> and <span className="font-semibold">Battle Phase</span>.
+                              </p>
+                            </div>
+                          </div>
                         </div>
                         
                         <div>

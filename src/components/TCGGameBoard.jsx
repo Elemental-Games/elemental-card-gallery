@@ -1518,11 +1518,11 @@ function DefenseOverlay({
             : "Your creature is being attacked! Choose a response:"}
         </p>
 
-        <div className="flex justify-center items-center gap-6 mb-6">
+        <div className="flex justify-center items-center gap-6 mb-6 pointer-events-none">
           {attacker && (
             <div className="flex flex-col items-center">
               <p className="text-white text-sm mb-2 font-semibold">Attacker (AI)</p>
-              <div className="transform rotate-180">
+              <div className="transform rotate-180 pointer-events-none">
                 <Card card={attacker} />
               </div>
               <div className="mt-2 text-white text-xs text-center">
@@ -1545,7 +1545,9 @@ function DefenseOverlay({
                   <div className="text-white text-sm font-bold mt-2">HP: {defender.currentHealth}</div>
                 </div>
               ) : (
-                <Card card={defender} />
+                <div className="pointer-events-none">
+                  <Card card={defender} />
+                </div>
               )}
               {!defenseResponseMode.isShieldAttack && (
                 <div className="mt-2 text-white text-xs text-center">
@@ -1558,11 +1560,11 @@ function DefenseOverlay({
           )}
         </div>
 
-        <div className="space-y-4 mb-6">
+        <div className="space-y-4 mb-6 pointer-events-auto">
           {!defenseResponseMode.isExhaustedTarget && !defenseResponseMode.isShieldAttack && (
             <button
               onClick={() => execute("defend")}
-              className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-all"
+              className="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold text-lg transition-all cursor-pointer"
             >
               🛡️ Defend (Engage in combat)
             </button>
@@ -1571,7 +1573,7 @@ function DefenseOverlay({
           {canDodge && (
             <button
               onClick={() => execute("dodge")}
-              className="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-lg transition-all"
+              className="w-full py-4 bg-green-600 hover:bg-green-700 text-white rounded-lg font-bold text-lg transition-all cursor-pointer"
             >
               💨 Dodge (Attack misses, both exhausted)
             </button>
@@ -1580,7 +1582,7 @@ function DefenseOverlay({
           {(defenseResponseMode.isExhaustedTarget || defenseResponseMode.isShieldAttack) && (
             <button
               onClick={() => execute("none")}
-              className="w-full py-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold text-lg transition-all"
+              className="w-full py-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold text-lg transition-all cursor-pointer"
             >
               {defenseResponseMode.isShieldAttack ? "⚔️ Do Nothing (Let attack hit shield)" : "⚔️ Do Nothing (Let attack hit exhausted creature)"}
             </button>
@@ -1593,7 +1595,7 @@ function DefenseOverlay({
                 <button
                   key={blocker.instanceId}
                   onClick={() => execute("block", blocker.instanceId)}
-                  className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-all"
+                  className="w-full py-3 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-bold transition-all cursor-pointer"
                 >
                   🛡️ Block with {blocker.name} (Agility: {blocker.agility}){defenseResponseMode.isShieldAttack ? " - Protect Shield" : ""}
                 </button>
@@ -1602,12 +1604,14 @@ function DefenseOverlay({
           )}
         </div>
 
-        <button
-          onClick={() => execute("defend")}
-          className="w-full py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold"
-        >
-          Cancel (Default: Defend)
-        </button>
+        <div className="pointer-events-auto">
+          <button
+            onClick={() => execute("defend")}
+            className="w-full py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold cursor-pointer"
+          >
+            Cancel (Default: Defend)
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -68,7 +68,7 @@ const PostPurchasePage = () => {
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
         <title>Thank You & Spin to Win! - Elekin TCG</title>
-        <meta name="description" content="Thank you for your pre-order! Spin the wheel to win an exclusive prize." />
+        <meta name="description" content="Thank you for your order! Spin the wheel to win an exclusive prize." />
       </Helmet>
 
       <div className="container mx-auto px-4 py-16">

@@ -12,6 +12,7 @@ import AboutUsPage from "./pages/AboutUsPage.jsx";
 import JoinNowPage from "./pages/JoinNowPage.jsx";
 import ElekinPage from "./pages/ElekinPage.jsx";
 import HowToPlayPage from "./pages/HowToPlayPage.jsx";
+import TCGLanding from "./pages/TCGLanding.jsx";
 
 export const navItems = [
   {
@@ -30,11 +31,16 @@ export const navItems = [
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,
-  },
-  {
+      },
+      {
         title: "Cards",
         to: "/cards",
-    page: <CardGalleryPage />,
+        page: <CardGalleryPage />,
+      },
+      {
+        title: "Online Beta",
+        to: "/tcg",
+        page: <TCGLanding />,
       }
     ]
   },

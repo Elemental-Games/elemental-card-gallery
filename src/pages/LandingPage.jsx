@@ -2,16 +2,12 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Book, LayoutGrid, Map, Star, X, Gift, PlayCircle, Users, Clock } from 'lucide-react';
+import { Book, LayoutGrid, Map, Star, X, Gift, PlayCircle, Users, ShoppingBag } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import KeyFeatures from '../components/KeyFeatures';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
-import { subscribeEmail } from '../utils/api';
-import { toast } from 'sonner';
-import confetti from 'canvas-confetti';
 
 const kingdoms = [
   { name: 'Grivoss', element: 'Earth', description: 'Mountain fortresses carved from living stone.', color: 'bg-green-300', hoverColor: 'hover:bg-green-400', path: '/kinbrold/grivoss', icon: 'images/cards/new-marketing/earth silver.webp' },
@@ -23,8 +19,6 @@ const kingdoms = [
 const LandingPage = () => {
   const [showExitIntent, setShowExitIntent] = useState(false);
   const [hasTriggeredExitIntent, setHasTriggeredExitIntent] = useState(false);
-  const [email, setEmail] = useState('');
-  const [loading, setLoading] = useState(false);
   const [exitIntentSuccess, setExitIntentSuccess] = useState(false);
 
   // Exit intent detection
@@ -40,36 +34,6 @@ const LandingPage = () => {
     return () => document.removeEventListener('mouseleave', handleMouseLeave);
   }, [hasTriggeredExitIntent]);
 
-  const handleEmailSubmit = async (e) => {
-    e.preventDefault();
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      toast.error('Please enter a valid email address');
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const result = await subscribeEmail(email);
-      if (result.success) {
-        toast.success('Welcome to the Elementals!');
-        confetti({
-          particleCount: 100,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-        setEmail('');
-        setExitIntentSuccess(true);
-      } else {
-        toast.error(result.message || 'Failed to subscribe');
-      }
-    } catch (error) {
-      console.error('Subscription error:', error);
-      toast.error('Failed to subscribe. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // Discord link handler for exit intent popup
   const handleDiscordJoinFromExitIntent = () => {
     window.open('https://discord.gg/PVrgZBmcMq', '_blank', 'noopener,noreferrer');
@@ -80,10 +44,10 @@ const LandingPage = () => {
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
-        <title>Elekin TCG - Pre-Orders Now Open</title>
-        <meta name="description" content="Pre-order the Demo Day Edition of Elekin TCG. Secure your decks, boosters, and game mats today!" />
-        <meta property="og:title" content="Elekin TCG - Pre-Orders Now Open" />
-        <meta property="og:description" content="Pre-order the Demo Day Edition of Elekin TCG. Secure your decks, boosters, and game mats today!" />
+        <title>Elekin TCG - Shop Now</title>
+        <meta name="description" content="Shop the Demo Day Edition of Elekin TCG. Get your decks, boosters, and game mats today!" />
+        <meta property="og:title" content="Elekin TCG - Shop Now" />
+        <meta property="og:description" content="Shop the Demo Day Edition of Elekin TCG. Get your decks, boosters, and game mats today!" />
         <meta property="og:image" content="/Elekin_Kinbrold.png" />
       </Helmet>
       
@@ -236,70 +200,56 @@ const LandingPage = () => {
                     </button>
                   </>
                 ) : (
-                  // ORIGINAL SIGNUP STATE
+                  // DEMO DAY EDITION SHOP STATE
                   <>
                     <div className="mb-6">
-                      <div className="bg-red-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Clock className="w-8 h-8 text-red-400" />
+                      <div className="bg-yellow-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <ShoppingBag className="w-8 h-8 text-yellow-400" />
                       </div>
-                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Get Free Early Access</h2>
-                      <p className="text-base lg:text-lg text-purple-200 font-medium">Be notified of our Kickstarter launch + exclusive Discord role & giveaway entries!</p>
+                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Demo Day Edition Available Now!</h2>
+                      <p className="text-base lg:text-lg text-purple-200 font-medium">Limited edition products while supplies last!</p>
                     </div>
 
-                                         <div className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border border-yellow-500/40 rounded-xl p-4 mb-4">
-                       <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get (Free):</h3>
-                       <div className="space-y-2">
+                    <div className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border border-yellow-500/40 rounded-xl p-4 mb-4">
+                      <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get:</h3>
+                      <div className="space-y-2">
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
-                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Exclusive Discord role to claim</span>
+                          <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Exclusive Demo Day Edition products</span>
                         </div>
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Kickstarter launch notifications</span>
+                          <span className="text-white font-medium">Free shipping on orders $50+</span>
+                        </div>
+                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                          <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
+                          <span className="text-white font-medium">Bonus wheel spin on orders $25+</span>
                         </div>
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Giveaway entries for free packs & merch</span>
-                        </div>
-                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
-                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Game development updates</span>
+                          <span className="text-white font-medium">Win free packs, mats, decks, or discounts</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* DIRECT EMAIL SIGNUP FORM */}
-                    <form onSubmit={handleEmailSubmit} className="space-y-4">
-                      <div>
-                        <Input
-                          type="email"
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter your email here"
-                          className="w-full bg-gradient-to-r from-purple-900/70 to-purple-800/70 border-2 border-yellow-500/60 text-white placeholder-purple-300 py-5 text-lg text-center font-medium rounded-xl shadow-lg focus:border-yellow-400 focus:ring-2 focus:ring-yellow-400/30"
-                          required
-                        />
-                      </div>
+                    {/* SHOP NOW BUTTON */}
+                    <Link to="/shop" onClick={() => setShowExitIntent(false)}>
                       <Button
-                        type="submit"
-                        disabled={loading}
                         className="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
                       >
-                        {loading ? (
-                          <div className="flex items-center justify-center">
-                            <div className="animate-spin rounded-full h-5 w-5 border-2 border-purple-900 border-t-transparent mr-2"></div>
-                            Signing You Up...
-                          </div>
-                        ) : (
-                          <div className="flex items-center justify-center">
-                            <Gift className="w-5 h-5 mr-2" />
-                            Get Free Early Access
-                          </div>
-                        )}
+                        <div className="flex items-center justify-center">
+                          <ShoppingBag className="w-5 h-5 mr-2" />
+                          Shop Demo Day Edition
+                        </div>
                       </Button>
-                    </form>
+                    </Link>
 
-
+                    <button 
+                      onClick={() => setShowExitIntent(false)}
+                      className="w-full text-purple-300 hover:text-white text-sm mt-3 transition-colors"
+                    >
+                      Maybe later
+                    </button>
                   </>
                 )}
               </div>
@@ -326,7 +276,7 @@ const LandingPage = () => {
         <div className="max-w-6xl mx-auto text-center -mt-20">
           <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-6">
             <Star className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-yellow-300 font-semibold">PRE-ORDERS NOW OPEN</span>
+            <span className="text-yellow-300 font-semibold">SHOP NOW</span>
           </div>
 
           <h1 className="text-5xl lg:text-7xl font-bold mb-6">
@@ -343,12 +293,12 @@ const LandingPage = () => {
                 ease: "easeInOut"
               }}
             >
-              Pre-Order Elekin TCG Today
+              Buy Elekin TCG Today
             </motion.span>
           </h1>
 
           <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
-            Secure your Demo Day Edition decks, boosters, and game mats. Every pre-order comes with a chance to win exclusive prizes!
+            Get your Demo Day Edition decks, boosters, and game mats. Every $25+ order comes with a chance to win exclusive prizes!
                 </p>
                 
           <Link to="/shop">
@@ -357,7 +307,7 @@ const LandingPage = () => {
               className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 px-8 text-xl rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
             >
               <Star className="mr-2 h-5 w-5" />
-              Shop Now & Spin to Win!
+              Buy Now
               </Button>
           </Link>
         </div>

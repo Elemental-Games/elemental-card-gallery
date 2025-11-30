@@ -187,7 +187,7 @@ const AnimatedCardBackground = () => {
             <Link to="/shop">
               <button className="animated-gradient-border">
                 <div className="bg-[#1A103C] hover:bg-purple-900/80 rounded-lg px-10 py-5 transition-colors">
-                  <span className="text-2xl font-bold text-white">Pre-Order Now</span>
+                  <span className="text-2xl font-bold text-white">Buy Now</span>
                 </div>
               </button>
             </Link>

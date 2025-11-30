@@ -136,7 +136,7 @@ const ShopPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Pre-Order Banner */}
+        {/* Promotions Banner */}
         <motion.div 
           className="max-w-4xl mx-auto mb-8"
           initial={{ opacity: 0, y: -20 }}
@@ -144,18 +144,12 @@ const ShopPage = () => {
           transition={{ duration: 0.6 }}
         >
           <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/50 rounded-lg p-6 text-center">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <Gift className="w-6 h-6 text-yellow-400" />
-              <h2 className="text-2xl font-bold text-yellow-400">Pre-Orders Live Now!</h2>
-              <Gift className="w-6 h-6 text-yellow-400" />
-            </div>
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Truck className="w-5 h-5 text-purple-200" />
-              <p className="text-lg text-purple-200">
-                Shipping begins in October 2025
-              </p>
+              <Truck className="w-6 h-6 text-yellow-400" />
+              <h2 className="text-2xl font-bold text-yellow-400">Free Shipping on Orders $50+</h2>
+              <Truck className="w-6 h-6 text-yellow-400" />
             </div>
-            <div className="bg-purple-900/50 rounded-lg p-4 inline-block">
+            <div className="bg-purple-900/50 rounded-lg p-4 inline-block mt-4">
               <p className="text-lg font-semibold text-white mb-2">
                 🎯 <span className="text-yellow-400">Bonus Wheel Spin</span> with every $25+ order!
               </p>
@@ -176,7 +170,7 @@ const ShopPage = () => {
             Elekin TCG Shop
           </h1>
           <p className="text-xl lg:text-2xl text-purple-200">
-            The official place to get your Elekin TCG gear.
+            Limited Demo Day Edition products available while supplies last!
           </p>
         </motion.div>
 

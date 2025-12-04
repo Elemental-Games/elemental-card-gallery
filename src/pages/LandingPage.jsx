@@ -280,7 +280,7 @@ const LandingPage = () => {
           </div>
 
           <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-            The Adventure Begins
+            Begin Your Journey
             <br />
             <motion.span 
               className="bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent bg-[length:200%_100%]"

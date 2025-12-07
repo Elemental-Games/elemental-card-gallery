@@ -90,8 +90,15 @@ export const CartProvider = ({ children }) => {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Open Shopify checkout in new tab
-      window.open(data.checkoutUrl, '_blank');
+      // Open Shopify checkout - use same window on mobile, new tab on desktop
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        // On mobile, open in same window (better UX)
+        window.location.href = data.checkoutUrl;
+      } else {
+        // On desktop, open in new tab
+        window.open(data.checkoutUrl, '_blank');
+      }
       
     } catch (error) {
       console.error('Buy now error:', error);
@@ -154,8 +161,15 @@ export const CartProvider = ({ children }) => {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Open Shopify checkout in new tab
-      window.open(data.checkoutUrl, '_blank');
+      // Open Shopify checkout - use same window on mobile, new tab on desktop
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile) {
+        // On mobile, open in same window (better UX)
+        window.location.href = data.checkoutUrl;
+      } else {
+        // On desktop, open in new tab
+        window.open(data.checkoutUrl, '_blank');
+      }
       
     } catch (error) {
       console.error('Buy bundle now error:', error);

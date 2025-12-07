@@ -200,10 +200,19 @@ const ShopPage = () => {
               Special holiday pricing - Save up to $30 on curated bundles!
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {bundles.map((bundle, index) => (
-              <BundleCard key={bundle.id} bundle={bundle} index={index} />
-            ))}
+          <div className="space-y-6 lg:space-y-8 mb-12 max-w-6xl mx-auto">
+            {/* 2-Player bundle full width on top */}
+            {bundles.length > 3 && (
+              <div className="max-w-2xl mx-auto">
+                <BundleCard key={bundles[3].id} bundle={bundles[3]} index={0} />
+              </div>
+            )}
+            {/* Other 3 bundles in a row */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+              {bundles.slice(0, 3).map((bundle, index) => (
+                <BundleCard key={bundle.id} bundle={bundle} index={index + 1} />
+              ))}
+            </div>
           </div>
         </motion.div>
 

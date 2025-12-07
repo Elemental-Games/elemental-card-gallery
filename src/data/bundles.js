@@ -74,8 +74,8 @@ Save $10 when you buy this bundle!
 
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
-    variantId: 'gid://shopify/ProductVariant/48403801080048',
-    handle: 'dumoles-holiday-bundle',
+    variantId: 'gid://shopify/ProductVariant/48403837419760',
+    handle: 'dumoles-holiday-bundle-1',
     // Fallback: individual items (used for cart display and if variantId not available)
     items: [
       { ...PRODUCTS.dumolesMat, quantity: 1 },
@@ -106,7 +106,7 @@ Save $10 when you buy this bundle!
 
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
-    variantId: 'gid://shopify/ProductVariant/48403814875376',
+    variantId: 'gid://shopify/ProductVariant/48403842007280',
     handle: 'guardian-holiday-bundle',
     // Fallback: individual items (used for cart display and if variantId not available)
     items: [
@@ -131,7 +131,7 @@ Perfect for collectors and competitive players looking to expand their collectio
 
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
-    variantId: 'gid://shopify/ProductVariant/48403820478704',
+    variantId: 'gid://shopify/ProductVariant/48404181221616',
     handle: 'holiday-pack-bundle',
     // Fallback: individual items (used for cart display and if variantId not available)
     items: [
@@ -165,8 +165,8 @@ Save $30 when you buy this bundle! Perfect for friends, couples, or anyone who w
 
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
-    // NOTE: Update price in Shopify to $90.00 (currently shows $50)
-    variantId: 'gid://shopify/ProductVariant/48403821953264',
+    // NOTE: Update price in Shopify to $90.00 (currently shows $100)
+    variantId: 'gid://shopify/ProductVariant/48404295483632',
     handle: '2-player-holiday-bundle',
     // Fallback: individual items (used for cart display and if variantId not available)
     items: [

@@ -1439,6 +1439,14 @@ app.post('/api/create-checkout-session', async (req, res) => {
   }
 });
 
+// Bundle product IDs to exclude from all discount codes
+const BUNDLE_PRODUCT_IDS = [
+  'gid://shopify/Product/9762924658928', // Dumoles Holiday Bundle
+  'gid://shopify/Product/9762925576432', // Guardian Holiday Bundle
+  'gid://shopify/Product/9762931081456', // Holiday Pack Bundle
+  'gid://shopify/Product/9762933014768', // 2-Player Holiday Bundle
+];
+
 // Create discount code and email via Resend (local dev mirror of Vercel route)
 app.post('/api/spin-claim', async (req, res) => {
   try {
@@ -1454,6 +1462,10 @@ app.post('/api/spin-claim', async (req, res) => {
     const adminAccessToken = process.env.VITE_SHOPIFY_ADMIN_ACCESS_TOKEN;
 
     const adminDomain = process.env.SHOPIFY_ADMIN_DOMAIN || process.env.VITE_SHOPIFY_ADMIN_DOMAIN || domain;
+    
+    // Build excluded products array for GraphQL
+    const excludedProducts = BUNDLE_PRODUCT_IDS.map(id => `"${id}"`).join(', ');
+    
     const mutation = `
       mutation {
         discountCodeBasicCreate(basicCodeDiscount: {
@@ -1463,7 +1475,15 @@ app.post('/api/spin-claim', async (req, res) => {
           customerSelection: { all: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          customerGets: { items: { all: true }, value: { percentage: ${percent} } },
+          customerGets: {
+            items: {
+              all: true,
+              excludedProducts: {
+                products: [${excludedProducts}]
+              }
+            },
+            value: { percentage: ${percent} }
+          },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           userErrors { field message }

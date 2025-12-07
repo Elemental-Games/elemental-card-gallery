@@ -10,6 +10,14 @@ const apiVersion = '2024-04';
 
 const resend = new Resend(process.env.VITE_RESEND_API_KEY);
 
+// Bundle product IDs to exclude from all discount codes
+const BUNDLE_PRODUCT_IDS = [
+  'gid://shopify/Product/9762924658928', // Dumoles Holiday Bundle
+  'gid://shopify/Product/9762925576432', // Guardian Holiday Bundle
+  'gid://shopify/Product/9762931081456', // Holiday Pack Bundle
+  'gid://shopify/Product/9762933014768', // 2-Player Holiday Bundle
+];
+
 async function shopifyAdminRequest(query) {
   const URL = `https://${adminDomain}/admin/api/${apiVersion}/graphql.json`;
   const res = await fetch(URL, {
@@ -48,6 +56,9 @@ export default async function handler(req, res) {
 
     const code = generateCode(`SPIN${Math.round(percent * 100)}`);
 
+    // Build excluded products array for GraphQL
+    const excludedProducts = BUNDLE_PRODUCT_IDS.map(id => `"${id}"`).join(', ');
+    
     const mutation = `
       mutation {
         discountCodeBasicCreate(basicCodeDiscount: {
@@ -57,7 +68,15 @@ export default async function handler(req, res) {
           customerSelection: { all: true },
           usageLimit: 1,
           appliesOncePerCustomer: true,
-          customerGets: { items: { all: true }, value: { percentage: ${percent} } },
+          customerGets: {
+            items: {
+              all: true,
+              excludedProducts: {
+                products: [${excludedProducts}]
+              }
+            },
+            value: { percentage: ${percent} }
+          },
           combinesWith: { orderDiscounts: true, productDiscounts: true, shippingDiscounts: true }
         }) {
           codeDiscountNode { id }

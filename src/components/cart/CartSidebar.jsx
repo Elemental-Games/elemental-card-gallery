@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { X, Plus, Minus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import { bundles } from '@/data/bundles';
 
 const CartSidebar = () => {
   const { isOpen, toggleCart, items, updateQuantity, removeFromCart } = useCart();
@@ -17,17 +18,121 @@ const CartSidebar = () => {
     setIsCheckingOut(true);
     
     try {
+      // Detect bundles in cart and replace individual items with bundle variantIds
+      const checkoutItems = [];
+      
+      // Group items by bundleId
+      const itemsByBundle = {};
+      const nonBundleItems = [];
+      
+      items.forEach(item => {
+        if (item.bundleId && item.bundleVariantId) {
+          if (!itemsByBundle[item.bundleId]) {
+            itemsByBundle[item.bundleId] = [];
+          }
+          itemsByBundle[item.bundleId].push(item);
+        } else {
+          nonBundleItems.push(item);
+        }
+      });
+      
+      // Process each bundle type
+      Object.keys(itemsByBundle).forEach(bundleId => {
+        const bundle = bundles.find(b => b.id === bundleId);
+        if (!bundle || !bundle.variantId) {
+          // Invalid bundle, add items individually
+          nonBundleItems.push(...itemsByBundle[bundleId]);
+          return;
+        }
+        
+        const bundleItems = itemsByBundle[bundleId];
+        
+        // Count quantities per product ID in cart
+        const cartQuantities = new Map();
+        bundleItems.forEach(item => {
+          const qty = cartQuantities.get(item.id) || 0;
+          cartQuantities.set(item.id, qty + (item.quantity || 1));
+        });
+        
+        // Count required quantities per product ID in bundle
+        const bundleQuantities = new Map();
+        bundle.items.forEach(bundleItem => {
+          const qty = bundleQuantities.get(bundleItem.id) || 0;
+          bundleQuantities.set(bundleItem.id, qty + (bundleItem.quantity || 1));
+        });
+        
+        // Check if we have enough items to form at least one bundle
+        let canFormBundle = true;
+        for (const [productId, requiredQty] of bundleQuantities.entries()) {
+          const availableQty = cartQuantities.get(productId) || 0;
+          if (availableQty < requiredQty) {
+            canFormBundle = false;
+            break;
+          }
+        }
+        
+        if (canFormBundle) {
+          // Calculate how many complete bundles we can form
+          let bundleCount = Infinity;
+          for (const [productId, requiredQty] of bundleQuantities.entries()) {
+            const availableQty = cartQuantities.get(productId) || 0;
+            const possibleBundles = Math.floor(availableQty / requiredQty);
+            bundleCount = Math.min(bundleCount, possibleBundles);
+          }
+          
+          if (bundleCount > 0) {
+            checkoutItems.push({
+              variantId: bundle.variantId,
+              handle: bundle.handle,
+              quantity: bundleCount
+            });
+            
+            // Subtract used quantities and add remaining items
+            for (const [productId, requiredQty] of bundleQuantities.entries()) {
+              const usedQty = requiredQty * bundleCount;
+              const availableQty = cartQuantities.get(productId) || 0;
+              const remainingQty = availableQty - usedQty;
+              
+              if (remainingQty > 0) {
+                // Find the original item and add remaining quantity
+                const originalItem = bundleItems.find(item => item.id === productId);
+                if (originalItem) {
+                  nonBundleItems.push({
+                    ...originalItem,
+                    quantity: remainingQty,
+                    bundleId: undefined, // Remove bundle metadata
+                    bundleVariantId: undefined,
+                    bundleHandle: undefined,
+                  });
+                }
+              }
+            }
+          } else {
+            // Can't form bundle, add items individually
+            nonBundleItems.push(...bundleItems);
+          }
+        } else {
+          // Can't form bundle, add items individually
+          nonBundleItems.push(...bundleItems);
+        }
+      });
+      
+      // Add non-bundle items
+      nonBundleItems.forEach(item => {
+        checkoutItems.push({
+          variantId: item.variantId,
+          handle: item.handle,
+          quantity: item.quantity
+        });
+      });
+      
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          items: items.map(item => ({
-            variantId: item.variantId,
-            handle: item.handle,
-            quantity: item.quantity
-          }))
+          items: checkoutItems
         }),
       });
 

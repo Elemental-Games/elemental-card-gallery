@@ -50,15 +50,19 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
   const toggleCart = () => dispatch({ type: 'TOGGLE_CART' });
 
-  // Add bundle to cart - adds individual items to local cart (for "Add to Cart" button)
+  // Add bundle to cart - adds individual items to local cart with bundle metadata
   const addBundleToCart = async (bundle) => {
-    // Add individual items to local cart
-    // Note: For Shopify bundle products, we add the individual items to maintain cart functionality
-    // The bundle pricing is handled when they checkout via Shopify
+    // Add individual items to local cart with bundleId metadata
+    // This allows us to detect bundles during checkout and use bundle variantId
     if (bundle.items && Array.isArray(bundle.items)) {
       bundle.items.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
-          addToCart(item);
+          addToCart({
+            ...item,
+            bundleId: bundle.id, // Store bundle ID for detection
+            bundleVariantId: bundle.variantId, // Store bundle variantId for checkout
+            bundleHandle: bundle.handle, // Store bundle handle for checkout
+          });
         }
       });
     }

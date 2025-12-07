@@ -50,41 +50,11 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
   const toggleCart = () => dispatch({ type: 'TOGGLE_CART' });
 
-  // Add bundle to cart - uses bundle product if available, otherwise adds individual items
+  // Add bundle to cart - adds individual items to local cart (for "Add to Cart" button)
   const addBundleToCart = async (bundle) => {
-    // If bundle has a variantId (Shopify bundle product), redirect to checkout for correct pricing
-    if (bundle.variantId) {
-      try {
-        const response = await fetch('/api/create-checkout-session', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            items: [{
-              variantId: bundle.variantId,
-              handle: bundle.handle,
-              quantity: 1
-            }]
-          }),
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-          throw new Error(data.error || 'Failed to create checkout session');
-        }
-
-        // Redirect to Shopify checkout with bundle product
-        window.location.href = data.checkoutUrl;
-        return;
-      } catch (error) {
-        console.error('Bundle checkout error:', error);
-        // Fall through to add individual items as fallback
-      }
-    }
-
-    // Fallback: add individual items if no variantId or checkout failed
+    // Add individual items to local cart
+    // Note: For Shopify bundle products, we add the individual items to maintain cart functionality
+    // The bundle pricing is handled when they checkout via Shopify
     if (bundle.items && Array.isArray(bundle.items)) {
       bundle.items.forEach(item => {
         for (let i = 0; i < item.quantity; i++) {
@@ -116,8 +86,8 @@ export const CartProvider = ({ children }) => {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Redirect to Shopify checkout
-      window.location.href = data.checkoutUrl;
+      // Open Shopify checkout in new tab
+      window.open(data.checkoutUrl, '_blank');
       
     } catch (error) {
       console.error('Buy now error:', error);
@@ -150,8 +120,8 @@ export const CartProvider = ({ children }) => {
           throw new Error(data.error || 'Failed to create checkout session');
         }
 
-        // Redirect to Shopify checkout
-        window.location.href = data.checkoutUrl;
+        // Open Shopify checkout in new tab
+        window.open(data.checkoutUrl, '_blank');
         return;
       }
 
@@ -180,8 +150,8 @@ export const CartProvider = ({ children }) => {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Redirect to Shopify checkout
-      window.location.href = data.checkoutUrl;
+      // Open Shopify checkout in new tab
+      window.open(data.checkoutUrl, '_blank');
       
     } catch (error) {
       console.error('Buy bundle now error:', error);

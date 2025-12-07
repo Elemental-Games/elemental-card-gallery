@@ -14,7 +14,7 @@ import { useCart } from '@/hooks/useCart';
 const Header = () => {
   const { toggleCart, items } = useCart();
   const location = useLocation();
-  const isShopPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product');
+  const isShopPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product') || location.pathname.startsWith('/bundle');
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);

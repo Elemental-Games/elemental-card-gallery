@@ -37,8 +37,8 @@ const CartSidebar = () => {
         throw new Error(data.error || 'Failed to create checkout session');
       }
 
-      // Redirect to Shopify checkout
-      window.location.href = data.checkoutUrl;
+      // Open Shopify checkout in new tab
+      window.open(data.checkoutUrl, '_blank');
       
     } catch (error) {
       console.error('Checkout error:', error);

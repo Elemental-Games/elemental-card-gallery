@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import AddToCartButton from '@/components/cart/AddToCartButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
 
 // This would typically come from an API, but we're using the local list for now
@@ -13,7 +13,12 @@ const products = [
       title: 'Booster Pack',
       price: 5,
       oldPrice: 6,
-      image: '/images/products/demopack1.png',
+      image: '/images/products/in-person/x-1pack.png',
+      secondaryImages: [
+        '/images/products/in-person/x-3packs.png',
+        '/images/products/in-person/x-5packs.png',
+        '/images/products/demopack1.png', // Original pack image last
+      ],
       description: `Unleash the power of Kinbrold with Demo Day Edition Booster Packs!
 
 Each pack contains 6 cards from the exclusive Demo Day Edition set - your chance to pull legendary Dragons and Elementalists before the official launch.
@@ -102,8 +107,16 @@ const ProductDetailPage = () => {
   const { id } = useParams();
   const { addToCart, buyNow } = useCart();
   const [isBuying, setIsBuying] = useState(false);
+  const [currentImage, setCurrentImage] = useState(null);
   const { toast } = useToast();
   const product = products.find(p => p.id === id);
+  
+  // Set initial image when product loads
+  useEffect(() => {
+    if (product) {
+      setCurrentImage(product.image);
+    }
+  }, [product]);
 
   const handleBuyNow = async () => {
     setIsBuying(true);
@@ -135,7 +148,50 @@ const ProductDetailPage = () => {
           <div className="lg:col-span-2">
             <div className="grid md:grid-cols-2 gap-8">
               <div>
-                <img src={product.image} alt={product.title} className="rounded-lg shadow-lg" />
+                <div className={`rounded-lg shadow-lg mb-4 overflow-hidden ${
+                  product.title.toLowerCase().includes('deck') 
+                    ? 'bg-purple-800/20 flex items-center justify-center' 
+                    : ''
+                }`}>
+                  <img 
+                    src={currentImage || product.image} 
+                    alt={product.title} 
+                    className={`w-full ${
+                      product.title.toLowerCase().includes('deck') 
+                        ? 'object-contain max-h-[500px]' 
+                        : 'object-cover'
+                    }`}
+                  />
+                </div>
+                {product.secondaryImages && product.secondaryImages.length > 0 && (
+                  <div className="grid grid-cols-3 gap-2">
+                    {[product.image, ...product.secondaryImages].map((img, idx) => (
+                      <div 
+                        key={idx}
+                        className={`rounded-lg shadow-md cursor-pointer transition-all overflow-hidden ${
+                          product.title.toLowerCase().includes('deck') 
+                            ? 'bg-purple-800/20 flex items-center justify-center' 
+                            : ''
+                        } ${
+                          (currentImage || product.image) === img 
+                            ? 'ring-2 ring-yellow-400 opacity-100' 
+                            : 'hover:opacity-80 opacity-70'
+                        }`}
+                        onClick={() => setCurrentImage(img)}
+                      >
+                        <img 
+                          src={img} 
+                          alt={`${product.title} view ${idx + 1}`} 
+                          className={`w-full ${
+                            product.title.toLowerCase().includes('deck') 
+                              ? 'object-contain h-20' 
+                              : 'object-cover h-20'
+                          }`}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
               <div>
                 <h1 className="text-4xl font-bold mb-4">{product.title}</h1>
@@ -145,7 +201,7 @@ const ProductDetailPage = () => {
                 </div>
                 <p className="text-lg text-purple-200 mb-8 whitespace-pre-wrap">{product.description}</p>
                 <div className="mt-8 text-sm text-purple-300">
-                  <p>Shipping calculated at checkout. Ships October 2025.</p>
+                  <p>Shipping calculated at checkout. Ships in 3-5 business days.</p>
                   <p>30-day return policy. <Link to="/return-policy" className="underline hover:text-yellow-400">Read more</Link>.</p>
                 </div>
               </div>

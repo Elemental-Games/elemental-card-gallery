@@ -50,6 +50,17 @@ export const CartProvider = ({ children }) => {
   const updateQuantity = (id, quantity) => dispatch({ type: 'UPDATE_QUANTITY', payload: { id, quantity } });
   const toggleCart = () => dispatch({ type: 'TOGGLE_CART' });
 
+  // Add bundle to cart - adds all bundle items
+  const addBundleToCart = (bundle) => {
+    if (bundle.items && Array.isArray(bundle.items)) {
+      bundle.items.forEach(item => {
+        for (let i = 0; i < item.quantity; i++) {
+          addToCart(item);
+        }
+      });
+    }
+  };
+
   const buyNow = async (product) => {
     try {
       const response = await fetch('/api/create-checkout-session', {
@@ -81,8 +92,72 @@ export const CartProvider = ({ children }) => {
     }
   };
 
+  // Buy bundle now - creates checkout with bundle product or individual items
+  const buyBundleNow = async (bundle) => {
+    try {
+      // If bundle has a variantId (Shopify bundle product), use that
+      if (bundle.variantId) {
+        const response = await fetch('/api/create-checkout-session', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            items: [{
+              variantId: bundle.variantId,
+              handle: bundle.handle,
+              quantity: 1
+            }]
+          }),
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || 'Failed to create checkout session');
+        }
+
+        // Redirect to Shopify checkout
+        window.location.href = data.checkoutUrl;
+        return;
+      }
+
+      // Fallback: use individual items if no variantId
+      if (!bundle.items || !Array.isArray(bundle.items)) {
+        throw new Error('Invalid bundle configuration');
+      }
+
+      const items = bundle.items.map(item => ({
+        variantId: item.variantId,
+        handle: item.handle,
+        quantity: item.quantity || 1
+      }));
+
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to create checkout session');
+      }
+
+      // Redirect to Shopify checkout
+      window.location.href = data.checkoutUrl;
+      
+    } catch (error) {
+      console.error('Buy bundle now error:', error);
+      throw error;
+    }
+  };
+
   return (
-    <CartContext.Provider value={{ ...state, addToCart, removeFromCart, updateQuantity, toggleCart, buyNow }}>
+    <CartContext.Provider value={{ ...state, addToCart, removeFromCart, updateQuantity, toggleCart, buyNow, addBundleToCart, buyBundleNow }}>
       {children}
     </CartContext.Provider>
   );

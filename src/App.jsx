@@ -49,6 +49,7 @@ import VipKickstarterEmailPage from './pages/VipKickstarterEmailPage';
 import ShopPage from './pages/ShopPage';
 import PostPurchasePage from './pages/PostPurchasePage';
 import ProductDetailPage from './pages/ProductDetailPage';
+import BundleDetailPage from './pages/BundleDetailPage';
 import ReturnPolicyPage from './pages/ReturnPolicyPage';
 import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import InvestorPitchPage from './pages/InvestorPitchPage';
@@ -121,6 +122,7 @@ const App = () => (
                       <Route path="/" element={<LandingPage />} />
                         <Route path="/shop" element={<ShopPage />} />
                         <Route path="/product/:id" element={<ProductDetailPage />} />
+                        <Route path="/bundle/:id" element={<BundleDetailPage />} />
                         <Route path="/post-purchase" element={<PostPurchasePage />} />
                       <Route path="/login" element={<AuthPage />} />
                       <Route path="/auth/callback" element={<AuthCallbackPage />} />

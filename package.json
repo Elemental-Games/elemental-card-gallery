@@ -10,7 +10,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "node server.js",
-    "convert-cards": "node convert-excel-to-json.js"
+    "convert-cards": "node convert-excel-to-json.js",
+    "create-bundle-images": "node scripts/create-bundle-images.js"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.658.1",

@@ -11,7 +11,7 @@ const ReturnPolicyPage = () => {
         <div className="max-w-4xl mx-auto">
           <h1 className="text-4xl font-bold mb-8 text-center">Return & Refund Policy</h1>
           <div className="space-y-6 text-purple-200">
-            <p>Last updated: August 08, 2025</p>
+            <p>Last updated: December 7, 2025</p>
 
             <h2 className="text-2xl font-bold text-yellow-400">30-Day Return Policy</h2>
             <p>We have a 30-day return policy, which means you have 30 days after receiving your item to request a return.</p>

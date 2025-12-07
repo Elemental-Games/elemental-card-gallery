@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Truck, Gift } from 'lucide-react';
+import { Sparkles, Truck, Gift, ChevronLeft, ChevronRight } from 'lucide-react';
+import BundleCard from '@/components/bundles/BundleCard';
+import { bundles } from '@/data/bundles';
 
 const products = [
     {
@@ -12,7 +14,12 @@ const products = [
       title: 'Booster Pack',
       price: 5,
       oldPrice: 6,
-      image: '/images/products/demopack1.png',
+      image: '/images/products/in-person/x-1pack.png',
+      secondaryImages: [
+        '/images/products/in-person/x-3packs.png',
+        '/images/products/in-person/x-5packs.png',
+        '/images/products/demopack1.png', // Original pack image last
+      ],
       variantId: 'gid://shopify/ProductVariant/47888806904048',
       handle: 'booster-pack-demo-day-edition',
     },
@@ -174,37 +181,150 @@ const ShopPage = () => {
           </p>
         </motion.div>
 
+        {/* Holiday Bundles Section */}
+        <motion.div 
+          className="mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+        >
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Gift className="w-8 h-8 text-yellow-400" />
+              <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
+                Holiday Bundles
+              </h2>
+              <Gift className="w-8 h-8 text-yellow-400" />
+            </div>
+            <p className="text-xl text-purple-200">
+              Special holiday pricing - Save up to $30 on curated bundles!
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            {bundles.map((bundle, index) => (
+              <BundleCard key={bundle.id} bundle={bundle} index={index} />
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Individual Products Section */}
+        <motion.div 
+          className="mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+        >
+          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-8 bg-gradient-to-r from-purple-400 via-yellow-400 to-purple-400 bg-clip-text text-transparent">
+            Individual Products
+          </h2>
+        </motion.div>
+
         <motion.div 
           className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          transition={{ duration: 1, delay: 0.6 }}
         >
-          {products.map((product, index) => (
-            <motion.div 
-              key={product.id} 
-              className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-            >
-              <Link to={`/product/${product.id}`}>
-                <img src={product.image} alt={product.title} className="rounded-lg mb-4 h-64 object-cover mx-auto" />
-                <h2 className="text-2xl font-bold mb-2 flex-grow">{product.title}</h2>
-              </Link>
-              <div className="flex justify-center items-center gap-4 mb-4">
-                <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
-                <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>
-              </div>
-              <Button
-                size="lg"
-                className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
-                onClick={() => addToCart(product)}
+          {products.map((product, index) => {
+            const ProductImageCarousel = ({ product }) => {
+              const [currentImageIndex, setCurrentImageIndex] = useState(0);
+              const allImages = product.secondaryImages 
+                ? [product.image, ...product.secondaryImages]
+                : [product.image];
+              
+              const nextImage = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setCurrentImageIndex((prev) => (prev + 1) % allImages.length);
+              };
+              
+              const prevImage = (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                setCurrentImageIndex((prev) => (prev === 0 ? allImages.length - 1 : prev - 1));
+              };
+              
+              return (
+                <div className="relative group">
+                  <Link to={`/product/${product.id}`} className="block">
+                    <div className="relative overflow-hidden rounded-lg mb-4 h-64 flex items-center justify-center bg-purple-800/20">
+                      <motion.img 
+                        key={currentImageIndex}
+                        src={allImages[currentImageIndex]} 
+                        alt={`${product.title} - Image ${currentImageIndex + 1}`}
+                        className={`w-full h-full mx-auto ${
+                          product.title.toLowerCase().includes('deck') 
+                            ? 'object-contain' 
+                            : 'object-cover'
+                        }`}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      {allImages.length > 1 && (
+                        <>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute left-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white"
+                            onClick={prevImage}
+                          >
+                            <ChevronLeft className="h-5 w-5" />
+                          </Button>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            className="absolute right-2 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity bg-black/30 hover:bg-black/50 text-white"
+                            onClick={nextImage}
+                          >
+                            <ChevronRight className="h-5 w-5" />
+                          </Button>
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                            {allImages.map((_, idx) => (
+                              <div
+                                key={idx}
+                                className={`h-1.5 rounded-full transition-all ${
+                                  idx === currentImageIndex 
+                                    ? 'w-6 bg-yellow-400' 
+                                    : 'w-1.5 bg-white/50'
+                                }`}
+                              />
+                            ))}
+                          </div>
+                        </>
+                      )}
+                    </div>
+                  </Link>
+                </div>
+              );
+            };
+            
+            return (
+              <motion.div 
+                key={product.id} 
+                className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
               >
-                Add to Cart
-              </Button>
-            </motion.div>
-          ))}
+                <ProductImageCarousel product={product} />
+                <Link to={`/product/${product.id}`}>
+                  <h2 className="text-2xl font-bold mb-2 flex-grow">{product.title}</h2>
+                </Link>
+                <div className="flex justify-center items-center gap-4 mb-4">
+                  <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
+                  <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>
+                </div>
+                <Button
+                  size="lg"
+                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Cart
+                </Button>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </div>

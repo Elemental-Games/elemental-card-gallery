@@ -94,7 +94,7 @@ export const CartProvider = ({ children }) => {
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
         // On mobile, open in same window (better UX)
-        window.location.href = data.checkoutUrl;
+      window.location.href = data.checkoutUrl;
       } else {
         // On desktop, open in new tab
         window.open(data.checkoutUrl, '_blank');

@@ -58,7 +58,7 @@ export default async function handler(req, res) {
 
     // Build excluded products array for GraphQL
     const excludedProducts = BUNDLE_PRODUCT_IDS.map(id => `"${id}"`).join(', ');
-    
+
     const mutation = `
       mutation {
         discountCodeBasicCreate(basicCodeDiscount: {

@@ -4,12 +4,13 @@ import AirKingdomEmail from '../components/emails/AirKingdomEmail';
 import DiscordGiveawayEmail from '../components/emails/DiscordGiveawayEmail';
 import EvermereEmail from '../components/emails/EvermereEmail';
 import ScartoEmail from '../components/emails/ScartoEmail';
+import HolidayBundlesEmail from '../components/emails/HolidayBundlesEmail';
 import { Button } from "@/components/ui/button";
 import { Moon, Sun } from "lucide-react";
 
 const EmailPreviewPage = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const [selectedEmail, setSelectedEmail] = useState('air-kingdom'); // Reverted back to air-kingdom default
+  const [selectedEmail, setSelectedEmail] = useState('holiday-bundles'); // Default to holiday bundles
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
@@ -51,7 +52,8 @@ const EmailPreviewPage = () => {
   const handleSendTest = async () => {
     const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
                      selectedEmail === 'evermere' ? 'Evermere Kingdom' : 
-                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' : 'Air Kingdom';
+                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' :
+                     selectedEmail === 'holiday-bundles' ? 'Holiday Bundles' : 'Air Kingdom';
     const confirmed = window.confirm(`Send a test ${emailType} email to mark@elementalgames.gg?`);
     if (!confirmed) return;
 
@@ -60,6 +62,9 @@ const EmailPreviewPage = () => {
       
       if (selectedEmail === 'discord-giveaway') {
         endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
+        body = { testEmail: true, email: 'mark@elementalgames.gg' };
+      } else if (selectedEmail === 'holiday-bundles') {
+        endpoint = '/api/send-holiday-bundles-email';
         body = { testEmail: true, email: 'mark@elementalgames.gg' };
       } else if (selectedEmail === 'evermere') {
         alert('🚧 Evermere email sending not implemented yet!\n\nYou can view the preview above.');
@@ -95,7 +100,8 @@ const EmailPreviewPage = () => {
   const handleSendToSubscribers = async () => {
     const emailType = selectedEmail === 'discord-giveaway' ? 'Discord giveaway' : 
                      selectedEmail === 'evermere' ? 'Evermere Kingdom' : 
-                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' : 'Air Kingdom';
+                     selectedEmail === 'scarto' ? 'Scarto Fire Kingdom' :
+                     selectedEmail === 'holiday-bundles' ? 'Holiday Bundles' : 'Air Kingdom';
     const confirmed = window.confirm(`This will send the ${emailType} email to ALL subscribers in your database.\n\nAre you sure you want to proceed with the campaign?`);
     if (!confirmed) return;
 
@@ -104,6 +110,9 @@ const EmailPreviewPage = () => {
       
       if (selectedEmail === 'discord-giveaway') {
         endpoint = 'http://localhost:3001/api/send-discord-giveaway-email';
+        body = { sendToAll: true };
+      } else if (selectedEmail === 'holiday-bundles') {
+        endpoint = '/api/send-holiday-bundles-email';
         body = { sendToAll: true };
       } else if (selectedEmail === 'evermere') {
         endpoint = '/api/send-evermere-email';
@@ -230,11 +239,13 @@ const EmailPreviewPage = () => {
             }`}>
               {selectedEmail === 'discord-giveaway' 
                 ? '🎁 Discord Giveaway - First Ever Discord Community Event' 
-                : selectedEmail === 'evermere'
-                  ? '🏰 Central Kingdom Week - Where Life Meets Death'
-                  : selectedEmail === 'scarto'
-                    ? '🔥 Fire Kingdom Week - The Fire Kingdom Ignites'
-                    : 'Air Kingdom Week - The Air Kingdom Rises 💨'
+                : selectedEmail === 'holiday-bundles'
+                  ? '🎁 Holiday Bundles - Save Up to $30 on Curated Bundles!'
+                  : selectedEmail === 'evermere'
+                    ? '🏰 Central Kingdom Week - Where Life Meets Death'
+                    : selectedEmail === 'scarto'
+                      ? '🔥 Fire Kingdom Week - The Fire Kingdom Ignites'
+                      : 'Air Kingdom Week - The Air Kingdom Rises 💨'
               }
             </p>
           </div>
@@ -243,6 +254,21 @@ const EmailPreviewPage = () => {
           <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
             {/* Email Type Selector */}
             <div className="flex flex-wrap gap-2">
+              <Button
+                variant={selectedEmail === 'holiday-bundles' ? 'default' : 'outline'}
+                size="sm"
+                onClick={() => setSelectedEmail('holiday-bundles')}
+                className={`transition-colors duration-200 ${
+                  selectedEmail === 'holiday-bundles'
+                    ? 'bg-purple-600 text-white hover:bg-purple-700'
+                    : isDarkMode
+                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700 hover:text-white'
+                      : 'border-gray-300 text-gray-600 hover:bg-gray-50'
+                }`}
+              >
+                🎁 Holiday Bundles
+              </Button>
+              
               <Button
                 variant={selectedEmail === 'air-kingdom' ? 'default' : 'outline'}
                 size="sm"
@@ -411,25 +437,29 @@ const EmailPreviewPage = () => {
               <div className={`text-lg font-medium mb-2 transition-colors duration-200 ${
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>
-                {selectedEmail === 'discord-giveaway' 
-                  ? '🎁 FIRST Discord Giveaway at 12PM EST - Join Now!'
-                  : selectedEmail === 'evermere'
-                    ? 'Evermere, The Central Kingdom, Awakens 🏰'
-                    : selectedEmail === 'scarto'
-                      ? 'Scarto, The Fire Kingdom, Ignites 🔥'
-                      : 'Zalos, The Air Kingdom, Rises 💨'
+                {selectedEmail === 'holiday-bundles'
+                  ? '🎁 Holiday Bundles - Save Up to $30!'
+                  : selectedEmail === 'discord-giveaway' 
+                    ? '🎁 FIRST Discord Giveaway at 12PM EST - Join Now!'
+                    : selectedEmail === 'evermere'
+                      ? 'Evermere, The Central Kingdom, Awakens 🏰'
+                      : selectedEmail === 'scarto'
+                        ? 'Scarto, The Fire Kingdom, Ignites 🔥'
+                        : 'Zalos, The Air Kingdom, Rises 💨'
                 }
               </div>
               <div className={`text-sm transition-colors duration-200 ${
                 isDarkMode ? 'text-gray-400' : 'text-gray-500'
               }`}>
-                Preview text: {selectedEmail === 'discord-giveaway'
-                  ? 'Join our Discord community for your chance to win exclusive Elekin TCG prizes!'
-                  : selectedEmail === 'evermere'
-                    ? 'The Central Kingdom unveils its sacred secrets. Three powers of rebirth await.'
-                    : selectedEmail === 'scarto'
-                      ? "Osao's volcanic realm opens its gates. Three fire creatures await their reveal."
-                      : "Galea's domain opens its gates. Three air creatures await their reveal."
+                Preview text: {selectedEmail === 'holiday-bundles'
+                  ? 'Perfect gifts for TCG players! Everything you need to start playing Elekin TCG - now at special holiday pricing!'
+                  : selectedEmail === 'discord-giveaway'
+                    ? 'Join our Discord community for your chance to win exclusive Elekin TCG prizes!'
+                    : selectedEmail === 'evermere'
+                      ? 'The Central Kingdom unveils its sacred secrets. Three powers of rebirth await.'
+                      : selectedEmail === 'scarto'
+                        ? "Osao's volcanic realm opens its gates. Three fire creatures await their reveal."
+                        : "Galea's domain opens its gates. Three air creatures await their reveal."
                 }
               </div>
             </div>
@@ -437,7 +467,8 @@ const EmailPreviewPage = () => {
 
           {/* Actual Email Component */}
           <div className="mb-8 shadow-xl rounded-lg overflow-hidden">
-            {selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : 
+            {selectedEmail === 'holiday-bundles' ? <HolidayBundlesEmail /> :
+             selectedEmail === 'discord-giveaway' ? <DiscordGiveawayEmail /> : 
              selectedEmail === 'evermere' ? <EvermereEmail /> : 
              selectedEmail === 'scarto' ? <ScartoEmail /> :
              <AirKingdomEmail />}

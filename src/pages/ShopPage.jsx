@@ -309,29 +309,29 @@ const ShopPage = () => {
             };
             
             return (
-              <motion.div 
-                key={product.id} 
-                className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-              >
+            <motion.div 
+              key={product.id} 
+              className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+            >
                 <ProductImageCarousel product={product} />
-                <Link to={`/product/${product.id}`}>
-                  <h2 className="text-2xl font-bold mb-2 flex-grow">{product.title}</h2>
-                </Link>
-                <div className="flex justify-center items-center gap-4 mb-4">
-                  <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
-                  <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>
-                </div>
-                <Button
-                  size="lg"
-                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
-                  onClick={() => addToCart(product)}
-                >
-                  Add to Cart
-                </Button>
-              </motion.div>
+              <Link to={`/product/${product.id}`}>
+                <h2 className="text-2xl font-bold mb-2 flex-grow">{product.title}</h2>
+              </Link>
+              <div className="flex justify-center items-center gap-4 mb-4">
+                <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
+                <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>
+              </div>
+              <Button
+                size="lg"
+                className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
+                onClick={() => addToCart(product)}
+              >
+                Add to Cart
+              </Button>
+            </motion.div>
             );
           })}
         </motion.div>

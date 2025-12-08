@@ -249,7 +249,7 @@ const CartSidebar = () => {
       const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
       if (isMobile) {
         // On mobile, open in same window (better UX)
-        window.location.href = data.checkoutUrl;
+      window.location.href = data.checkoutUrl;
       } else {
         // On desktop, open in new tab
         window.open(data.checkoutUrl, '_blank');
@@ -368,13 +368,13 @@ const CartSidebar = () => {
                 return displayItems.map((displayItem) => (
                   <div key={displayItem.id} className="flex items-center gap-4 bg-purple-800/50 p-4 rounded-lg">
                     <img src={displayItem.image} alt={displayItem.title} className="h-20 w-20 rounded-md object-cover" />
-                    <div className="flex-grow">
+                  <div className="flex-grow">
                       <p className="font-semibold">{displayItem.title}</p>
                       {displayItem.isBundle && (
                         <p className="text-xs text-purple-300 mb-1">Bundle</p>
                       )}
                       <p className="text-yellow-400">${displayItem.price.toFixed(2)}</p>
-                      <div className="flex items-center gap-2 mt-2">
+                    <div className="flex items-center gap-2 mt-2">
                         <Button variant="outline" size="icon" onClick={() => {
                           if (displayItem.isBundle) {
                             // Remove entire bundle
@@ -395,8 +395,8 @@ const CartSidebar = () => {
                             updateQuantity(displayItem.id, displayItem.quantity - 1);
                           }
                         }}>
-                          <Minus className="h-4 w-4" />
-                        </Button>
+                        <Minus className="h-4 w-4" />
+                      </Button>
                         <span>{displayItem.quantity}</span>
                         <Button variant="outline" size="icon" onClick={() => {
                           if (displayItem.isBundle) {
@@ -423,10 +423,10 @@ const CartSidebar = () => {
                             updateQuantity(displayItem.id, displayItem.quantity + 1);
                           }
                         }}>
-                          <Plus className="h-4 w-4" />
-                        </Button>
-                      </div>
+                        <Plus className="h-4 w-4" />
+                      </Button>
                     </div>
+                  </div>
                     <Button variant="ghost" size="icon" onClick={() => {
                       if (displayItem.isBundle) {
                         // Remove entire bundle
@@ -447,9 +447,9 @@ const CartSidebar = () => {
                         removeFromCart(displayItem.id);
                       }
                     }}>
-                      <Trash2 className="h-5 w-5 text-red-500" />
-                    </Button>
-                  </div>
+                    <Trash2 className="h-5 w-5 text-red-500" />
+                  </Button>
+                </div>
                 ));
               })()}
             </div>

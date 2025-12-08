@@ -68,8 +68,8 @@ export async function createDiscountCode(title, value, usageLimit) {
           usageLimit: ${usageLimit},
           appliesOncePerCustomer: true,
           customerGets: {
-            value: {
-              percentage: ${value}
+          value: {
+            percentage: ${value}
             },
             items: {
               all: true,

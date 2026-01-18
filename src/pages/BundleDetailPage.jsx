@@ -89,6 +89,13 @@ const BundleDetailPage = () => {
             <span className="text-yellow-400 font-bold text-lg uppercase">Holiday Bundle</span>
             <Gift className="w-6 h-6 text-yellow-400" />
           </div>
+          {bundle.tier && (
+            <div className="text-center mb-8">
+              <span className="inline-block text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full bg-black/30 border border-yellow-400/30 text-yellow-200">
+                {bundle.tier}
+              </span>
+            </div>
+          )}
 
           {/* Main Content - 2 Column Layout */}
           <div className="grid lg:grid-cols-2 gap-12 mb-12">

@@ -12,6 +12,7 @@ import { navItems } from "./nav-items";
 import { AuthProvider } from "./hooks/useAuth";
 import { CartProvider } from "./hooks/useCart";
 import { useEffect } from "react";
+import { readAttributionFromSearch, storeAttribution } from "@/lib/attribution";
 import CardGalleryPage from "./pages/CardGalleryPage";
 import CardGalleryComingSoon from "./pages/CardGalleryComingSoon";
 import CardDetailPage from "./pages/CardDetailPage";
@@ -32,6 +33,7 @@ import CartSidebar from "./components/cart/CartSidebar";
 // import ElekinOnlinePage from "./pages/ElekinOnlinePage";
 import ElekinRulebook from "./pages/ElekinRulebook";
 import HowToPlayPage from "./pages/HowToPlayPage";
+import HowToPlayInteractiveDemoPage from "./pages/HowToPlayInteractiveDemoPage";
 import KinbroldPage from "./pages/KinbroldPage";
 import { SessionContextProvider } from '@supabase/auth-helpers-react';
 import AuthPage from './pages/AuthPage';
@@ -79,6 +81,15 @@ const ScrollToTop = () => {
   return null;
 };
 
+const AttributionCapture = () => {
+  const location = useLocation();
+  useEffect(() => {
+    const attrib = readAttributionFromSearch(location.search);
+    storeAttribution(attrib);
+  }, [location.search]);
+  return null;
+};
+
 const renderRoutes = (items) => {
   return items.map((item) => {
     const routes = [
@@ -114,6 +125,7 @@ const App = () => (
               <SpeedInsights />
               <BrowserRouter>
                 <ScrollToTop />
+                <AttributionCapture />
                   <CartSidebar />
                 <div className="flex flex-col min-h-[100dvh] w-full bg-background text-foreground">
                   <Header />
@@ -171,6 +183,7 @@ const App = () => (
                       */}
                       <Route path="/elekin/rulebook" element={<ElekinRulebook />} />
                       <Route path="/elekin/how-to-play" element={<HowToPlayPage />} />
+                      <Route path="/elekin/how-to-play/interactive-demo" element={<HowToPlayInteractiveDemoPage />} />
                       <Route path="/kinbrold" element={<KinbroldPage />} />
                       <Route path="/about" element={<AboutUsPage />} />
                       <Route path="/join-now" element={<JoinNowPage />} />

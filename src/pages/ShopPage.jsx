@@ -4,9 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Truck, Gift, ChevronLeft, ChevronRight } from 'lucide-react';
-import BundleCard from '@/components/bundles/BundleCard';
-import { bundles } from '@/data/bundles';
+import { Sparkles, Truck, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const products = [
     {
@@ -179,41 +177,6 @@ const ShopPage = () => {
           <p className="text-xl lg:text-2xl text-purple-200">
             Limited Demo Day Edition products available while supplies last!
           </p>
-        </motion.div>
-
-        {/* Holiday Bundles Section */}
-        <motion.div 
-          className="mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-        >
-          <div className="text-center mb-8">
-            <div className="flex items-center justify-center gap-3 mb-4">
-              <Gift className="w-8 h-8 text-yellow-400" />
-              <h2 className="text-4xl lg:text-5xl font-bold bg-gradient-to-r from-yellow-400 via-orange-400 to-yellow-400 bg-clip-text text-transparent">
-                Holiday Bundles
-              </h2>
-              <Gift className="w-8 h-8 text-yellow-400" />
-            </div>
-            <p className="text-xl text-purple-200">
-              Special holiday pricing - Save up to $30 on curated bundles!
-            </p>
-          </div>
-          <div className="space-y-6 lg:space-y-8 mb-12 max-w-6xl mx-auto">
-            {/* 2-Player bundle full width on top */}
-            {bundles.length > 3 && (
-              <div className="max-w-2xl mx-auto">
-                <BundleCard key={bundles[3].id} bundle={bundles[3]} index={0} />
-              </div>
-            )}
-            {/* Other 3 bundles in a row */}
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-              {bundles.slice(0, 3).map((bundle, index) => (
-                <BundleCard key={bundle.id} bundle={bundle} index={index + 1} />
-              ))}
-            </div>
-          </div>
         </motion.div>
 
         {/* Individual Products Section */}

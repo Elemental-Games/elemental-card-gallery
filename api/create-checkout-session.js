@@ -44,7 +44,7 @@ async function getVariantAndSellingPlanByHandle(handle) {
   return { variantId, sellingPlanId };
 }
 
-async function createCheckoutWithItems(items) {
+async function createCheckoutWithItems(items, attribution) {
   const query = `
     mutation cartCreate($input: CartInput!) {
       cartCreate(input: $input) {
@@ -53,6 +53,17 @@ async function createCheckoutWithItems(items) {
       }
     }
   `;
+  const attributes = [];
+  if (attribution && typeof attribution === 'object') {
+    for (const [key, value] of Object.entries(attribution)) {
+      if (!key || value == null) continue;
+      const k = String(key).slice(0, 255);
+      const v = String(value).slice(0, 255);
+      if (!k || !v) continue;
+      attributes.push({ key: k, value: v });
+    }
+  }
+
   const variables = {
     input: {
       lines: items.map((item) => ({
@@ -60,6 +71,7 @@ async function createCheckoutWithItems(items) {
         quantity: item.quantity || 1,
         ...(item.sellingPlanId ? { sellingPlanId: item.sellingPlanId } : {}),
       })),
+      ...(attributes.length ? { attributes } : {}),
     },
   };
   const response = await shopifyRequest({ query, variables });
@@ -94,7 +106,7 @@ export default async function handler(req, res) {
 
   try {
     const body = await getBody(req);
-    const { items } = body || {};
+    const { items, attribution } = body || {};
     console.log('Incoming checkout items:', JSON.stringify(items));
 
     if (!items || !Array.isArray(items) || items.length === 0) {
@@ -116,7 +128,7 @@ export default async function handler(req, res) {
 
     console.log('Resolved checkout items:', JSON.stringify(resolved));
 
-    const cart = await createCheckoutWithItems(resolved);
+    const cart = await createCheckoutWithItems(resolved, attribution);
     return res.status(200).json({ checkoutUrl: cart.checkoutUrl, checkoutId: cart.id });
   } catch (err) {
     console.error('Checkout session error:', err);

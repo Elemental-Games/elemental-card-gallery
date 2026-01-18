@@ -10,6 +10,7 @@ import { navItems } from '@/nav-items';
 import { Button } from '@/components/ui/button';
 import { Menu, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
+import TrackedLink from '@/components/TrackedLink';
 
 const Header = () => {
   const { toggleCart, items } = useCart();
@@ -76,12 +77,12 @@ const Header = () => {
               </NavigationMenu>
               
               <div className="flex items-center gap-4">
-                <Link 
+                <TrackedLink 
                   to="/shop" 
                   className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
                 >
                   Shop
-                </Link>
+                </TrackedLink>
                 {isShopPage && (
                   <>
                     {items.length > 0 && (
@@ -148,12 +149,12 @@ const Header = () => {
                       ))}
                       
                       <div className="pt-4 border-t border-purple-500/30">
-                        <Link 
+                        <TrackedLink 
                           to="/shop" 
                           className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
                         >
                           Shop
-                        </Link>
+                        </TrackedLink>
                       </div>
                     </div>
                   </NavigationMenuContent>

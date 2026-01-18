@@ -8,6 +8,8 @@ import KeyFeatures from '../components/KeyFeatures';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
+import TrackedLink from '@/components/TrackedLink';
+import { HOLIDAY_BUNDLE_PROMO } from '@/data/bundles';
 
 const kingdoms = [
   { name: 'Grivoss', element: 'Earth', description: 'Mountain fortresses carved from living stone.', color: 'bg-green-300', hoverColor: 'hover:bg-green-400', path: '/kinbrold/grivoss', icon: 'images/cards/new-marketing/earth silver.webp' },
@@ -233,16 +235,16 @@ const LandingPage = () => {
                     </div>
 
                     {/* SHOP NOW BUTTON */}
-                    <Link to="/shop" onClick={() => setShowExitIntent(false)}>
+                    <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath} onClick={() => setShowExitIntent(false)}>
                       <Button
                         className="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
                       >
                         <div className="flex items-center justify-center">
                           <ShoppingBag className="w-5 h-5 mr-2" />
-                          Shop Demo Day Edition
+                          Shop Holiday Bundles
                         </div>
                       </Button>
-                    </Link>
+                    </TrackedLink>
 
                     <button 
                       onClick={() => setShowExitIntent(false)}
@@ -301,7 +303,7 @@ const LandingPage = () => {
             Get your Demo Day Edition decks, boosters, and game mats. Every $25+ order comes with a chance to win exclusive prizes!
                 </p>
                 
-          <Link to="/shop">
+          <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
               <Button
               size="lg"
               className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 px-8 text-xl rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
@@ -309,7 +311,7 @@ const LandingPage = () => {
               <Star className="mr-2 h-5 w-5" />
               Buy Now
               </Button>
-          </Link>
+          </TrackedLink>
         </div>
       </section>
 
@@ -354,16 +356,16 @@ const LandingPage = () => {
         <section className="container mx-auto px-4 py-16 text-center">
           <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <Link to="/shop">
+          <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
               <Button 
                 variant="outline" 
                 size="lg" 
                 className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               >
                 <LayoutGrid className="mr-3 h-8 w-8" />
-              View Shop
+              Shop Holiday Bundles
               </Button>
-            </Link>
+            </TrackedLink>
             <Link to="/elekin/how-to-play">
               <Button 
                 variant="outline" 

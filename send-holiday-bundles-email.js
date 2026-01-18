@@ -121,7 +121,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 25px auto 0;">
                                             <tr>
                                                 <td style="padding: 15px 40px; background-color: #ffffff; border-radius: 8px;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_2player?utm_source=email&utm_medium=holiday&utm_campaign=bundles" 
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_2player?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=main_cta" 
                                                        style="color: #8A2BE2; text-decoration: none; font-size: 18px; font-weight: bold; display: block;">
                                                         Shop 2-Player Bundle →
                                                     </a>
@@ -147,7 +147,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td style="padding: 0; background-color: #2d1b4e;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_dumoles?utm_source=email&utm_medium=holiday&utm_campaign=bundles" style="display: block; text-decoration: none;">
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_dumoles?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=starter_dumoles" style="display: block; text-decoration: none;">
                                                         <img src="https://elementalgames.gg/images/products/in-person/x-12image.jpg" alt="Dumoles Holiday Bundle" width="600" border="0" style="width: 100%; max-width: 600px; height: auto; display: block; border: 0; outline: none; background-color: #2d1b4e; -ms-interpolation-mode: bicubic;">
                                                     </a>
                                                 </td>
@@ -180,7 +180,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td style="padding: 12px 30px; background-color: #f59e0b; border-radius: 6px;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_dumoles?utm_source=email&utm_medium=holiday&utm_campaign=bundles" 
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_dumoles?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=starter_dumoles_cta" 
                                                        style="color: #1A103C; text-decoration: none; font-size: 16px; font-weight: bold; display: block;">
                                                         Shop Now →
                                                     </a>
@@ -199,7 +199,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                             <tr>
                                                 <td style="padding: 0; background-color: #2d1b4e;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_guardian?utm_source=email&utm_medium=holiday&utm_campaign=bundles" style="display: block; text-decoration: none;">
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_guardian?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=starter_guardian" style="display: block; text-decoration: none;">
                                                         <img src="https://elementalgames.gg/images/products/in-person/x-11image.jpg" alt="Guardian Holiday Bundle" width="600" border="0" style="width: 100%; max-width: 600px; height: auto; display: block; border: 0; outline: none; background-color: #2d1b4e; -ms-interpolation-mode: bicubic;">
                                                     </a>
                                                 </td>
@@ -232,7 +232,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td style="padding: 12px 30px; background-color: #f59e0b; border-radius: 6px;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_guardian?utm_source=email&utm_medium=holiday&utm_campaign=bundles" 
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_guardian?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=starter_guardian_cta" 
                                                        style="color: #1A103C; text-decoration: none; font-size: 16px; font-weight: bold; display: block;">
                                                         Shop Now →
                                                     </a>
@@ -275,7 +275,7 @@ function getHolidayBundlesEmailHTML() {
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td style="padding: 12px 30px; background-color: #f59e0b; border-radius: 6px;">
-                                                    <a href="https://elementalgames.gg/bundle/bundle_packs?utm_source=email&utm_medium=holiday&utm_campaign=bundles" 
+                                                    <a href="https://www.elementalgames.gg/bundle/bundle_packs?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=packs_cta" 
                                                        style="color: #1A103C; text-decoration: none; font-size: 16px; font-weight: bold; display: block;">
                                                         Shop Now →
                                                     </a>
@@ -294,9 +294,9 @@ function getHolidayBundlesEmailHTML() {
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                                 <tr>
                                     <td style="padding: 18px 50px; background: linear-gradient(135deg, #8A2BE2 0%, #f59e0b 100%); border-radius: 8px;">
-                                        <a href="https://elementalgames.gg/shop?utm_source=email&utm_medium=holiday&utm_campaign=bundles" 
+                                        <a href="https://www.elementalgames.gg/bundle/bundle_2player?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=bottom_cta" 
                                            style="color: #ffffff; text-decoration: none; font-size: 20px; font-weight: bold; display: block;">
-                                            View All Holiday Bundles →
+                                            Shop the 2-Player Holiday Bundle →
                                         </a>
                                     </td>
                                 </tr>
@@ -374,7 +374,7 @@ What's Included:
 - Lightning Starter Deck
 - 6 Booster Packs (3 for each player)
 
-Shop: https://elementalgames.gg/bundle/bundle_2player
+Shop: https://www.elementalgames.gg/bundle/bundle_2player?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=text_main
 
 STARTER BUNDLES - $50 Each (Regular: $60) - Save $10!
 
@@ -383,26 +383,26 @@ Perfect starter bundle for Crystal players!
 - Dumoles Game Mat & Token Set
 - 3 Booster Packs
 - Crystal Starter Deck
-Shop: https://elementalgames.gg/bundle/bundle_dumoles
+Shop: https://www.elementalgames.gg/bundle/bundle_dumoles?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=text_dumoles
 
 Guardian Holiday Bundle
 Perfect starter bundle for Lightning players!
 - Guardian's Sanctuary Game Mat & Token Set
 - 3 Booster Packs
 - Lightning Starter Deck
-Shop: https://elementalgames.gg/bundle/bundle_guardian
+Shop: https://www.elementalgames.gg/bundle/bundle_guardian?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=text_guardian
 
 Holiday Pack Bundle
 Stock up on cards - 12 packs for the price of 10!
 - 12 Booster Packs (Demo Day Edition)
 - That's 2 packs FREE!
-Shop: https://elementalgames.gg/bundle/bundle_packs
+Shop: https://www.elementalgames.gg/bundle/bundle_packs?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=text_packs
 
 ⚠️ Important: Bundles are already discounted and cannot be combined with other discount codes or promotions.
 
 🚚 Fast Shipping: Ships in 3-5 business days • 30-day return policy
 
-View All Bundles: https://elementalgames.gg/shop
+Primary Bundle: https://www.elementalgames.gg/bundle/bundle_2player?utm_source=email&utm_medium=newsletter&utm_campaign=holiday_bundles_2025_12&utm_content=text_bottom
 
 Follow Us:
 Discord: https://discord.gg/PVrgZBmcMq

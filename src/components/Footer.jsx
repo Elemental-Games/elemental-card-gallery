@@ -1,4 +1,6 @@
 import { Link } from 'react-router-dom';
+import TrackedLink from '@/components/TrackedLink';
+import { HOLIDAY_BUNDLE_PROMO } from '@/data/bundles';
 
 const Footer = () => {
   return (
@@ -26,7 +28,7 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-bold text-white mb-4">Shop</h3>
             <ul className="space-y-2">
-              <li><Link to="/shop" className="text-purple-300 hover:text-yellow-400">Pre-Order</Link></li>
+              <li><TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath} className="text-purple-300 hover:text-yellow-400">Shop Holiday Bundles</TrackedLink></li>
               <li><Link to="/shipping-policy" className="text-purple-300 hover:text-yellow-400">Shipping</Link></li>
               <li><Link to="/return-policy" className="text-purple-300 hover:text-yellow-400">Returns</Link></li>
             </ul>

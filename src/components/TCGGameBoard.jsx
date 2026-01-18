@@ -19,7 +19,7 @@ const phaseNames = {
   end: "End Phase",
 };
 
-export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst = true }) {
+export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst = true, tutorialMode = false }) {
   const {
     gameStatus,
     playerHealth,
@@ -111,11 +111,12 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
   }, [gameInitialized, gameStatus, initializeGame, playerDeck, aiDeckType, playerGoesFirst]);
 
   useEffect(() => {
+    if (tutorialMode) return;
     if (currentTurn === "ai" && gameStatus === "playing") {
       const timer = setTimeout(() => aiTurn(), 500);
       return () => clearTimeout(timer);
     }
-  }, [currentTurn, currentPhase, gameStatus, aiTurn]);
+  }, [currentTurn, currentPhase, gameStatus, aiTurn, tutorialMode]);
 
   useEffect(() => {
     setAbilitySelections([]);
@@ -577,8 +578,11 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     );
   }
 
-  const renderEssenceColumn = (essence, label) => (
-    <div className="w-full flex flex-col items-center gap-2 bg-black/30 rounded-2xl border border-white/10 px-3 py-4 text-center">
+  const renderEssenceColumn = (essence, label, tutorialId) => (
+    <div
+      className="w-full flex flex-col items-center gap-2 bg-black/30 rounded-2xl border border-white/10 px-3 py-4 text-center"
+      {...(tutorialId ? { 'data-tutorial-id': tutorialId } : {})}
+    >
       <div className="text-xs font-semibold text-white/70 uppercase tracking-wide">{label}</div>
       {Object.entries(essence).map(([element, value]) => (
         <div key={element} className="flex items-center justify-between w-full bg-black/40 rounded-lg px-3 py-1.5">
@@ -589,10 +593,10 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     </div>
   );
 
-  const renderDeckStack = ({ deck, discard, label, highlightOnDraw, onDeckClick, badgeColor = "bg-blue-600" }) => (
+  const renderDeckStack = ({ deck, discard, label, highlightOnDraw, onDeckClick, badgeColor = "bg-blue-600", tutorialId }) => (
     <div className="w-32 flex flex-col gap-3 items-center mx-auto">
       <div className="text-xs text-white/60 font-semibold uppercase tracking-wide">{label}</div>
-      <div className="relative cursor-pointer" onClick={onDeckClick}>
+      <div className="relative cursor-pointer" onClick={onDeckClick} {...(tutorialId ? { 'data-tutorial-id': tutorialId } : {})}>
         <img src="/Card_Back.png" alt={`${label} Deck`} className={`w-24 h-32 object-cover rounded shadow-lg ${highlightOnDraw ? "ring-4 ring-yellow-400 shadow-yellow-300/40" : ""}`} />
         <div className={`absolute -bottom-2 -right-2 ${badgeColor} text-white text-sm font-bold px-2 py-1 rounded-full`}>{deck.length}</div>
       </div>
@@ -820,15 +824,15 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-white/70">HP:</span>
-            <span className="text-xl font-bold text-green-400">{aiHealth}/500</span>
+            <span className="text-xl font-bold text-green-400" data-tutorial-id="aiHealth">{aiHealth}/500</span>
           </div>
         </div>
       </div>
 
       <div className="flex-1 flex overflow-hidden">
         <aside className="w-44 bg-black/35 border-r border-white/10 px-5 py-6 flex flex-col gap-6">
-          {renderEssenceColumn(aiEssence, "AI Essence")}
-          {renderEssenceColumn(playerEssence, "Your Essence")}
+          {renderEssenceColumn(aiEssence, "AI Essence", "aiEssence")}
+          {renderEssenceColumn(playerEssence, "Your Essence", "playerEssence")}
         </aside>
 
         <main className="flex-1 overflow-y-auto px-6 py-6">
@@ -836,6 +840,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
             <div className="flex items-start gap-6">
               <div className="flex-1 flex flex-col gap-4">
                 <div className={`bg-purple-900/20 rounded-2xl border border-purple-500/30 p-3 transition-all duration-300 ${getZoneHighlight("opponentShield")}`}>
+                  <div data-tutorial-id="opponentShieldZone" />
                   <div className="text-xs text-purple-300 font-semibold mb-2 uppercase">Shield Zone</div>
                   {aiShields.length > 0 ? (
                     <div className="flex gap-3 justify-center">
@@ -932,6 +937,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                   className={`bg-orange-900/20 rounded-2xl border border-orange-500/30 p-3 transition-all duration-300 ${
                     !targetingMode && !dragonTributeMode ? "cursor-pointer" : ""
                   } ${getZoneHighlight("creature")}`}
+                  data-tutorial-id="playerCreatureZone"
                   onClick={() => {
                     if (currentPhase === "battle" && battleMode) return;
                     if (!targetingMode && !dragonTributeMode) {
@@ -983,7 +989,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                   </div>
                 </div>
 
-                <div className={`bg-purple-900/20 rounded-2xl border border-purple-500/30 p-3 transition-all duration-300 ${getZoneHighlight("shield")}`}>
+                <div className={`bg-purple-900/20 rounded-2xl border border-purple-500/30 p-3 transition-all duration-300 ${getZoneHighlight("shield")}`} data-tutorial-id="playerShieldZone">
                   <div className="text-xs text-purple-300 font-semibold mb-2 uppercase">Shield Zone</div>
                   {playerShields.length > 0 ? (
                     <div className="flex gap-3 justify-center">
@@ -1029,15 +1035,17 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
               highlightOnDraw: false,
               onDeckClick: () => {},
               badgeColor: "bg-blue-600",
+              tutorialId: "aiDeck",
             })}
 
-            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl px-3 py-3 shadow-xl mx-auto w-full max-w-[180px]">
+            <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl px-3 py-3 shadow-xl mx-auto w-full max-w-[180px]" data-tutorial-id="turnControls">
               <div className="text-sm uppercase tracking-wide text-white/80 font-semibold text-center">{currentTurn === "player" ? "Your Turn" : "AI Turn"}</div>
               <div className="text-xs text-white/70 text-center mt-1">Turn {turnNumber} • {phaseNames[currentPhase]}</div>
               <button
                 className="mt-3 w-full py-2 rounded-xl bg-white/20 hover:bg-white/30 text-sm font-bold transition"
                 onClick={currentTurn === "player" ? (currentPhase === "draw" ? handleDeckClick : nextPhase) : undefined}
                 disabled={currentTurn !== "player"}
+                data-tutorial-id="phaseButton"
               >
                 {currentTurn === "player" ? (currentPhase === "draw" ? "Draw" : `${nextPhaseLabel} →`) : "Waiting"}
               </button>
@@ -1055,6 +1063,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
               highlightOnDraw: currentTurn === "player" && currentPhase === "draw",
               onDeckClick: handleDeckClick,
               badgeColor: "bg-orange-500",
+              tutorialId: "playerDeck",
             })}
 
             <div>
@@ -1141,7 +1150,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         <div className="flex items-center gap-6">
           <div className="flex items-center gap-2">
             <span className="text-sm text-white/70">HP:</span>
-            <span className="text-xl font-bold text-green-400">{playerHealth}/500</span>
+            <span className="text-xl font-bold text-green-400" data-tutorial-id="playerHealth">{playerHealth}/500</span>
           </div>
           <div className="flex items-center gap-2">
             <span className="text-sm text-white/70">Hand:</span>
@@ -1323,7 +1332,7 @@ function ShieldCard({ shield, isPlayer, onClick, highlight }) {
 
 function HandOverlay({ playerHand, selectedCardIndex, setHoveredCard, handleCardSelect, activateHandAbility }) {
   return (
-    <div className="pointer-events-none fixed left-0 right-0 bottom-0 z-[800]">
+    <div className="pointer-events-none fixed left-0 right-0 bottom-0 z-[800]" data-tutorial-id="hand">
       <div className="mx-auto max-w-5xl px-4">
         <div className="group relative">
           <div className="pointer-events-auto transform transition-all duration-200 ease-out translate-y-[60%] group-hover:translate-y-0 opacity-20 group-hover:opacity-100 bg-black/80 border border-orange-500/40 rounded-t-2xl shadow-2xl backdrop-blur-lg">

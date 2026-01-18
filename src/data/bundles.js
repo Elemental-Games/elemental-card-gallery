@@ -51,10 +51,28 @@ export const PRODUCTS = {
 };
 
 // Bundle definitions
+export const HOLIDAY_BUNDLE_PROMO = {
+  // Hard deadline inside the 30-day sprint window
+  // Note: this is purely a marketing message unless you also update Shopify pricing after this date.
+  deadlineISO: '2026-01-01T23:59:59-08:00',
+  headline: 'Holiday pricing ends Jan 1',
+  bonusBullets: [
+    'Free Shipping on Orders $50+',
+    'Bonus Wheel Spin with every $25+ order',
+    'Free digital rulebook + quick reference (instant access)',
+  ],
+  guarantee: '',
+  rulebookPdfPath: '/data/TCG%20Rulebook.pdf',
+  rulebookPagePath: '/elekin/rulebook',
+  // Single primary sales CTA destination for marketing (ads, emails, bio links)
+  primaryCtaPath: '/bundle/bundle_2player',
+};
+
 export const bundles = [
   {
     id: 'bundle_dumoles',
     title: 'Dumoles Holiday Bundle',
+    tier: 'Tier 1 — Starter',
     price: 50, // Regular price would be $60 (25+15+20), saving $10
     oldPrice: 60,
     image: '/images/products/in-person/x-12image.png',
@@ -72,6 +90,10 @@ What's Included:
 
 Save $10 when you buy this bundle!
 
+Holiday bonus:
+- Free digital rulebook + quick reference (instant access)
+- Bonus Wheel Spin with every $25+ order
+
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
     variantId: 'gid://shopify/ProductVariant/48403837419760',
@@ -87,6 +109,7 @@ Note: Bundles are already discounted and cannot be combined with other discount 
   {
     id: 'bundle_guardian',
     title: 'Guardian Holiday Bundle',
+    tier: 'Tier 1 — Starter',
     price: 50, // Regular price would be $60 (25+15+20), saving $10
     oldPrice: 60,
     image: '/images/products/in-person/x-11image.png',
@@ -104,6 +127,10 @@ What's Included:
 
 Save $10 when you buy this bundle!
 
+Holiday bonus:
+- Free digital rulebook + quick reference (instant access)
+- Bonus Wheel Spin with every $25+ order
+
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
     variantId: 'gid://shopify/ProductVariant/48403842007280',
@@ -119,6 +146,7 @@ Note: Bundles are already discounted and cannot be combined with other discount 
   {
     id: 'bundle_packs',
     title: 'Holiday Pack Bundle',
+    tier: 'Tier 2 — Packs',
     price: 50, // Regular price would be $60 (12 packs × $5), saving $10
     oldPrice: 60,
     image: '/images/products/in-person/x-12packs.png',
@@ -128,6 +156,10 @@ What's Included:
 - 12 Booster Packs (Demo Day Edition)
 
 Perfect for collectors and competitive players looking to expand their collection.
+
+Holiday bonus:
+- Free digital rulebook + quick reference (instant access)
+- Bonus Wheel Spin with every $25+ order
 
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
@@ -142,6 +174,7 @@ Note: Bundles are already discounted and cannot be combined with other discount 
   {
     id: 'bundle_2player',
     title: '2 Player Holiday Bundle',
+    tier: 'Tier 3 — 2 Player',
     price: 90, // Regular price would be $120 (50+50+20), saving $30
     oldPrice: 120,
     image: '/images/products/in-person/x-13image.png',
@@ -163,9 +196,13 @@ What's Included:
 
 Save $30 when you buy this bundle! Perfect for friends, couples, or anyone who wants to experience both elemental paths.
 
+Holiday bonus:
+- Free digital rulebook + quick reference (instant access)
+- Bonus Wheel Spin with every $25+ order
+
 Note: Bundles are already discounted and cannot be combined with other discount codes or promotions.`,
     // Shopify bundle product variant ID (preferred - uses bundle pricing)
-    // NOTE: Update price in Shopify to $90.00 (currently shows $100)
+    // NOTE: Ensure Shopify pricing matches this bundle.price after the holiday deadline.
     variantId: 'gid://shopify/ProductVariant/48404295483632',
     handle: '2-player-holiday-bundle',
     // Fallback: individual items (used for cart display and if variantId not available)

@@ -36,6 +36,14 @@ const BundleCard = ({ bundle, index = 0 }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
     >
+      {/* Tier label (marketing) */}
+      {bundle.tier && (
+        <div className="mb-3">
+          <span className="inline-block text-xs font-bold tracking-wide uppercase px-3 py-1 rounded-full bg-black/30 border border-yellow-400/30 text-yellow-200">
+            {bundle.tier}
+          </span>
+        </div>
+      )}
       {/* Bundle Badge */}
       <div className="flex items-center justify-center gap-2 mb-2">
         <Gift className="w-5 h-5 text-yellow-400" />

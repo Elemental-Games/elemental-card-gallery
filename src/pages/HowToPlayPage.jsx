@@ -3,7 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText } from 'lucide-react';
 import { Tabs, TabsContent } from "@/components/ui/tabs";
+import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RulebookDownloadModal from '@/components/RulebookDownloadModal';
+import TrackedLink from '@/components/TrackedLink';
 
 const HowToPlayPage = () => {
   const [activeTab, setActiveTab] = useState('quickstart');
@@ -158,7 +160,7 @@ const HowToPlayPage = () => {
         <meta property="og:title" content="How To Play Elekin TCG - Game Rules & Instructions" />
         <meta property="og:description" content="Master the Elekin Trading Card Game with our easy-to-follow rules and guides. Learn gameplay mechanics, card types, and winning strategies." />
         <meta property="og:type" content="article" />
-        <link rel="canonical" href="https://elementalgames.gg/how-to-play" />
+        <link rel="canonical" href="https://www.elementalgames.gg/elekin/how-to-play" />
 
         {/* HowTo structured data */}
         <script type="application/ld+json">{`
@@ -187,35 +189,35 @@ const HowToPlayPage = () => {
                 "@type": "HowToStep",
                 "name": "Prepare Your Deck",
                 "text": "Build a deck of 40 cards, including Elementalist cards, Element cards, and Action cards.",
-                "url": "https://elementalgames.gg/how-to-play#deck-building",
+                    "url": "https://www.elementalgames.gg/elekin/how-to-play#quickstart",
                 "image": "https://elementalgames.gg/images/how-to-play/deck-building.jpg"
               },
               {
                 "@type": "HowToStep",
                 "name": "Setup The Game",
                 "text": "Each player draws 5 cards. Determine who goes first randomly.",
-                "url": "https://elementalgames.gg/how-to-play#game-setup",
+                    "url": "https://www.elementalgames.gg/elekin/how-to-play#quickstart",
                 "image": "https://elementalgames.gg/images/how-to-play/game-setup.jpg"
               },
               {
                 "@type": "HowToStep",
                 "name": "Play Elements",
                 "text": "Place element cards to generate resources for playing other cards.",
-                "url": "https://elementalgames.gg/how-to-play#playing-elements",
+                    "url": "https://www.elementalgames.gg/elekin/how-to-play#essence",
                 "image": "https://elementalgames.gg/images/how-to-play/elements.jpg"
               },
               {
                 "@type": "HowToStep",
                 "name": "Summon Creatures",
                 "text": "Use element resources to play creature cards to attack and defend.",
-                "url": "https://elementalgames.gg/how-to-play#creatures",
+                    "url": "https://www.elementalgames.gg/elekin/how-to-play#cards",
                 "image": "https://elementalgames.gg/images/how-to-play/creatures.jpg"
               },
               {
                 "@type": "HowToStep",
                 "name": "Attack and Defend",
                 "text": "Use your creatures to attack the opponent and defend against their attacks.",
-                "url": "https://elementalgames.gg/how-to-play#combat",
+                    "url": "https://www.elementalgames.gg/elekin/how-to-play#combat",
                 "image": "https://elementalgames.gg/images/how-to-play/combat.jpg"
               }
             ]
@@ -235,6 +237,20 @@ const HowToPlayPage = () => {
             <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
               Master the elements and become a legendary card master in the world of Kinbrold
             </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
+              <TrackedLink
+                to="/elekin/how-to-play/interactive-demo"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold transition-colors"
+              >
+                Try Interactive Demo →
+              </TrackedLink>
+              <button
+                onClick={() => setShowDownloadModal(true)}
+                className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-purple-900/40 hover:bg-purple-800/50 text-white font-semibold border border-purple-500/30 transition-colors"
+              >
+                Download Rulebook
+              </button>
+            </div>
 
           </motion.div>
 
@@ -446,13 +462,32 @@ const HowToPlayPage = () => {
               className="md:w-3/4"
             >
               <Tabs value={activeTab} className="w-full" onValueChange={setActiveTab}>
+                {/* Mobile tab selector (keeps navigation obvious) */}
+                <div className="md:hidden">
+                  <TabsList className="grid grid-cols-2 gap-2 bg-purple-950/50 border border-purple-500/30 p-2 rounded-lg">
+                    {quickLinks.map((link) => (
+                      <TabsTrigger
+                        key={link.tab}
+                        value={link.tab}
+                        className="data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900"
+                      >
+                        {link.title}
+                      </TabsTrigger>
+                    ))}
+                  </TabsList>
+                </div>
 
                 <TabsContent value="quickstart" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Quick Start Guide</h2>
+                  <h2 id="quickstart" className="text-2xl font-bold mb-4 text-white">Quick Start Guide</h2>
                   <div className="space-y-6 text-purple-200">
                     <div className="bg-purple-950/60 p-6 rounded-lg border border-yellow-500/30">
                       <h3 className="text-2xl font-semibold text-yellow-400 mb-4">Learn Elekin TCG in 5 Minutes</h3>
                       <div className="space-y-6">
+                        <div className="bg-black/25 border border-purple-500/30 rounded-lg p-4">
+                          <p className="text-base sm:text-lg text-purple-100">
+                            If you can follow the steps below, you can <span className="font-semibold text-white">set up and play your first game</span>. If you get stuck, use the right sidebar (or tabs on mobile) to jump to the exact rule.
+                          </p>
+                        </div>
                         <div>
                           <h4 className="text-xl font-bold text-white mb-3">1. Game Setup</h4>
                           <ul className="list-disc list-inside space-y-2 text-lg">
@@ -468,20 +503,35 @@ const HowToPlayPage = () => {
                             <ol className="list-decimal list-inside space-y-2 text-lg">
                               <li><span className="font-semibold">Draw Phase:</span> Draw one card</li>
                               <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures</li>
-                              <li><span className="font-semibold">Main Phase 1:</span> Summon creatures and play cards</li>
+                              <li><span className="font-semibold">Main Phase 1:</span> Refresh actions, summon creatures, and play cards</li>
                               <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures</li>
                               <li><span className="font-semibold">Main Phase 2:</span> Play additional cards</li>
-                              <li><span className="font-semibold">End Phase:</span> Shields regenerate, cleanup effects</li>
+                              <li><span className="font-semibold">End Phase:</span> Discard down to 7 cards, then pass the turn</li>
                             </ol>
                           </div>
                           <div className="md:w-64 flex-shrink-0">
                             <div className="bg-yellow-500/10 border-2 border-yellow-500/50 rounded-lg p-4 h-fit">
                               <h5 className="text-lg font-bold text-yellow-400 mb-2">First Turn Exceptions</h5>
                               <p className="text-sm text-white">
-                                On the <span className="font-semibold text-yellow-400">very first turn</span> of the game, skip your <span className="font-semibold">Draw Phase</span> and <span className="font-semibold">Battle Phase</span>.
+                                The <span className="font-semibold text-yellow-400">first player</span> skips their <span className="font-semibold">Draw Phase</span> and cannot attack on their first turn.
                               </p>
                             </div>
                           </div>
+                        </div>
+
+                        <div className="bg-purple-950/40 p-5 rounded-lg border border-purple-500/30">
+                          <h4 className="text-xl font-bold text-white mb-3">First Two Turns (Practical Walkthrough)</h4>
+                          <ol className="list-decimal list-inside space-y-3 text-lg">
+                            <li>
+                              <span className="font-semibold text-white">Turn 1 (first player):</span> Skip draw → summon a low/zero‑cost creature → (optional) play a rune/counter → end turn.
+                            </li>
+                            <li>
+                              <span className="font-semibold text-white">Turn 2:</span> Draw → generate essence from your creatures → summon a stronger creature using essence → you may battle if you have actions available.
+                            </li>
+                          </ol>
+                          <p className="mt-3 text-sm text-purple-200">
+                            New-player tip: if you’re wondering “how do I generate essence if I start with 0?”, the answer is: you get an early creature onto the field first, then it generates essence each turn.
+                          </p>
                         </div>
                         
                         <div>
@@ -653,7 +703,7 @@ const HowToPlayPage = () => {
                       <ol className="list-decimal list-inside space-y-2">
                         <li><span className="font-semibold">Draw Phase:</span> Draw one card</li>
                         <li><span className="font-semibold">Generation Phase:</span> Generate essence from your creatures on the field</li>
-                        <li><span className="font-semibold">Main Phase 1:</span> Refresh the action of all creatures on the field, normal summon up to 1 creature, use creature effects,and play/place runes and counters</li>
+                        <li><span className="font-semibold">Main Phase 1:</span> Refresh actions, summon up to 1 creature, use creature effects, and play/place runes and counters</li>
                         <li><span className="font-semibold">Battle Phase:</span> Attack with your creatures by choosing one at a time and finishing the battle with each creature before moving on to the next</li>
                         <li><span className="font-semibold">Main Phase 2:</span> Use creature effects and play/place additional runes and counters</li>
                         <li><span className="font-semibold">End Phase:</span> Discard down to 7 cards, then pass the turn to your opponent</li>
@@ -764,12 +814,12 @@ const HowToPlayPage = () => {
                             <p className="font-semibold mb-2">Defender Battle Options:</p>
                             <div className="bg-purple-900/30 p-6 rounded-lg space-y-6">
                               <div>
-                                <h5 className="text-yellow-400 mb-3">Option 1: No Dodge</h5>
+                                <h5 className="text-yellow-400 mb-3">Option 1: Defend (battle)</h5>
                                 <ol className="list-decimal list-inside space-y-2">
-                                  <li>Aqua Dart attacks first (65 Agility {'>'} 60 Agility)</li>
-                                  <li>Deals 65 damage to Ember Flicker</li>
+                                  <li>Aqua Dart strikes first (60 Agility {'>'} 35 Agility)</li>
+                                  <li>Deals 65 damage to Ember Flicker (Aqua Dart Strength)</li>
                                   <li>Ember Flicker survives (25 HP remaining)</li>
-                                  <li>Ember Flicker counter-attacks for 90 damage</li>
+                                  <li>Ember Flicker counter-attacks for 90 damage (Ember Flicker Strength)</li>
                                   <li>Aqua Dart is destroyed</li>
                                   <li>Ember Flicker is exhausted and turned horizontal</li>
                                 </ol>

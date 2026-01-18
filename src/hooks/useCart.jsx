@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react';
+import { loadAttribution } from '@/lib/attribution';
 
 const CartContext = createContext();
 
@@ -76,6 +77,7 @@ export const CartProvider = ({ children }) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
+          attribution: loadAttribution(),
           items: [{
             variantId: product.variantId,
             handle: product.handle,
@@ -117,6 +119,7 @@ export const CartProvider = ({ children }) => {
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
+            attribution: loadAttribution(),
             items: [{
               variantId: bundle.variantId,
               handle: bundle.handle,
@@ -152,7 +155,7 @@ export const CartProvider = ({ children }) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ items }),
+        body: JSON.stringify({ attribution: loadAttribution(), items }),
       });
 
       const data = await response.json();

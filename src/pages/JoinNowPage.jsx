@@ -256,7 +256,7 @@ const JoinNowPage = () => {
                 </p>
                 
                 <a
-                  href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg"
+                  href="https://www.kickstarter.com/projects/elemental-games/elekin"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-full bg-green-600 hover:bg-green-500 text-white font-bold py-4 text-lg rounded-lg transition-all duration-300 hover:scale-105 shadow-[0_0_25px_rgba(34,197,94,0.5)] hover:shadow-[0_0_40px_rgba(34,197,94,0.7)] flex items-center justify-center"

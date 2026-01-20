@@ -9,7 +9,6 @@ import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import TrackedLink from '@/components/TrackedLink';
-import { HOLIDAY_BUNDLE_PROMO } from '@/data/bundles';
 import KickstarterCountdown from '@/components/KickstarterCountdown';
 import SignupForm from '@/components/auth/SignupForm';
 
@@ -380,7 +379,7 @@ const LandingPage = () => {
         <section className="container mx-auto px-4 py-16 text-center">
           <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
+          <TrackedLink to="/shop">
               <Button 
                 variant="outline" 
                 size="lg" 

@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import TrackedLink from '@/components/TrackedLink';
-import { HOLIDAY_BUNDLE_PROMO } from '@/data/bundles';
 
 const Footer = () => {
   return (
@@ -12,7 +10,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/cards/campaign" className="text-purple-300 hover:text-yellow-400">Card Gallery</Link></li>
               <li><Link to="/elekin/how-to-play" className="text-purple-300 hover:text-yellow-400">How to Play</Link></li>
-              <li><Link to="/cards/deck-builder" className="text-purple-300 hover:text-yellow-400">Deck Builder</Link></li>
+              <li><Link to="/tcg" className="text-purple-300 hover:text-yellow-400">Pre-Launch Beta</Link></li>
               <li><Link to="/kinbrold" className="text-purple-300 hover:text-yellow-400">Lore</Link></li>
             </ul>
           </div>

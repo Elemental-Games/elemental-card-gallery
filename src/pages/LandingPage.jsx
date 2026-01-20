@@ -324,14 +324,14 @@ const LandingPage = () => {
           </div>
 
           {/* Secondary CTA - Shop Now */}
-          <div className="mt-6">
-            <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
+          <div className="mt-8">
+            <TrackedLink to="/shop">
               <Button
                 variant="outline"
                 size="lg"
-                className="bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 font-semibold py-3 px-6 text-lg rounded-xl"
+                className="bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 font-semibold py-5 px-8 text-xl lg:text-2xl rounded-xl"
               >
-                <ShoppingBag className="mr-2 h-5 w-5" />
+                <ShoppingBag className="mr-3 h-6 w-6 lg:h-7 lg:w-7" />
                 Shop Demo Day Edition
               </Button>
             </TrackedLink>

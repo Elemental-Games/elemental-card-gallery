@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText } from 'lucide-react';
+import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText, CircleDot } from 'lucide-react';
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RulebookDownloadModal from '@/components/RulebookDownloadModal';
@@ -18,6 +18,7 @@ const HowToPlayPage = () => {
     { title: 'Combat', tab: 'combat', icon: Sword },
     { title: 'Shield Mechanics', tab: 'shields', icon: Shield },
     { title: 'Card Types', tab: 'cards', icon: Wand },
+    { title: 'Runes & Counters', tab: 'runes', icon: CircleDot },
     { title: 'Advanced', tab: 'advanced', icon: Book },
     { title: 'Glossary', tab: 'glossary', icon: BookText },
   ];
@@ -795,6 +796,42 @@ const HowToPlayPage = () => {
                     </div>
 
                     <div>
+                      <h3 className="text-xl font-semibold text-yellow-400 mb-2">Combat Actions</h3>
+                      <div className="bg-purple-950/50 p-6 rounded-lg space-y-4">
+                        <div>
+                          <h4 className="font-semibold text-yellow-300 mb-2">Attack</h4>
+                          <ul className="list-disc list-inside space-y-1 text-purple-200">
+                            <li>Declare an attack against an opposing target (creature, shield, or opponent if no shields remain)</li>
+                            <li>You must declare and resolve an attack with a creature before moving on to the next creature's action</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-yellow-300 mb-2">Block</h4>
+                          <ul className="list-disc list-inside space-y-1 text-purple-200">
+                            <li>Use a creature to intercept an incoming attack, redirecting the attack to the blocking creature</li>
+                            <li>The blocking creature must have a higher agility than the attacker</li>
+                            <li>The blocking creature does not attack back</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-yellow-300 mb-2">Dodge</h4>
+                          <ul className="list-disc list-inside space-y-1 text-purple-200">
+                            <li>Use a creature to completely avoid an attack (only if the dodging creature has higher agility than the attacker)</li>
+                            <li>Both creatures lose their action and become Exhausted, but no damage is dealt</li>
+                            <li>This option is only available if the targeted creature has a higher agility than the attacker and an available action</li>
+                          </ul>
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-yellow-300 mb-2">Defend</h4>
+                          <ul className="list-disc list-inside space-y-1 text-purple-200">
+                            <li>Use a creature to defend against an attack, engaging in full combat with the attacker</li>
+                            <li>The defending creature engages in combat with the attacker, dealing damage equal to its strength at the speed of its agility</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Combat Example</h3>
                       <div className="bg-purple-950/50 p-6 rounded-lg">
                         <h4 className="font-bold text-yellow-400 mb-4">Battle Scenario</h4>
@@ -862,10 +899,11 @@ const HowToPlayPage = () => {
                       <h3 className="text-xl font-semibold text-yellow-400 mb-2">Shield Mechanics</h3>
                       <ul className="list-disc list-inside space-y-2">
                         <li>Start with 3 shields face-down (one of each tier in any order)</li>
-                        <li>Regenerate to the next highest tier threshold</li>
-                        <li>Remains face-up when damaged</li>
+                        <li>Regenerate to the next highest tier threshold during each End Phase</li>
+                        <li>Becomes and remains face-up when damaged or per card effect</li>
                         <li>Cannot be replaced when broken</li>
-                        <li>Choose one of two effects when broken and end current battle phase</li>
+                        <li>Choose one of two effects when broken</li>
+                        <li>Battle Phase ends when a shield is broken</li>
                       </ul>
         </div>
         
@@ -978,9 +1016,9 @@ const HowToPlayPage = () => {
                                   <p className="font-semibold mb-2">Example: Eldritch the Frost Dragon</p>
                               <ul className="list-disc list-inside space-y-1">
                                     <li>Elements: Air + Water (Frost)</li>
-                                    <li>Stats: 185/110</li>
+                                    <li>Stats: 180/110</li>
                                     <li>Frostbite: When this card is summoned, Freezes all creatures your opponent controls for 1 full turn.</li>
-                                    <li>Glacial Roar (Costs 2 Air or Water Essence): Freeze 1 creature on the field for 1 full turn.</li>
+                                    <li>Glacial Roar (Costs 2 Air/Water Essence in any combination): Freeze 1 creature on the field for 1 full turn.</li>
                               </ul>
                             </div>
                               </div>
@@ -1001,7 +1039,7 @@ const HowToPlayPage = () => {
                                     <li>Unique character cards that are the strongest of their respective element</li>
                                     <li>Each has an affinity for their primary element</li>
                                     <li>Have additional abilities that cost essence</li>
-                                    <li>Remain in the command zone, not played to the field</li>
+                                    <li>Played in the creature zone</li>
                                     <li>Limited to 1 copy per deck</li>
                                   </ul>
                                 </div>
@@ -1009,7 +1047,7 @@ const HowToPlayPage = () => {
                                   <p className="font-semibold mb-2">Example: Balon | The Earth Elementalist</p>
                               <ul className="list-disc list-inside space-y-1">
                                     <li>Element: Earth</li>
-                                    <li>Sink Hole: Destroy 1 Earth creature you control to destroy 1 card on the field.</li>
+                                    <li>Sink Hole: Destroy 1 creature you control to destroy deal direct damage to the opponent equal to the creature's strength.</li>
                                     <li>Tremor (Costs 4 Earth Essence): Exhaust all creatures your opponent controls.</li>
                               </ul>
                             </div>
@@ -1033,6 +1071,128 @@ const HowToPlayPage = () => {
                       <h4 className="text-lg font-semibold text-yellow-400 mb-2">Pro Tip: Card Synergies</h4>
                       <p className="text-base">
                         Build your deck with card synergies in mind. Pair creatures with runes that enhance their abilities, and include counters that protect your key combos. Elementalists are most effective with of their matching element in your deck.
+                      </p>
+                    </div>
+                  </div>
+                </TabsContent>
+
+                <TabsContent value="runes" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
+                  <h2 className="text-2xl font-bold mb-4 text-white">Runes & Counters</h2>
+                  <div className="space-y-8 text-purple-200">
+                    <div>
+                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Runes Overview</h3>
+                      <p className="mb-4">
+                        Runes are a card type that provides on-going or one-time effects to creatures and overall gameplay. Runes are played in the Rune/Counter Zone on your turn and resolved instantly. There are three types of runes, each of which are played face-up during your Main Phase 1 or 2. All Runes may be placed face-down and stored in your Rune/Counter Zone until activation.
+                      </p>
+                      
+                      <div className="space-y-0">
+                        <div className="bg-purple-950/50 p-6 rounded-lg flex flex-col md:flex-row gap-6 items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-yellow-300 mb-3">Normal Runes</h4>
+                            <ul className="list-disc list-inside space-y-2">
+                              <li>Activate their effects immediately when placed</li>
+                              <li>Effect on the card resolves, then sends itself to the Discard Pile after resoliving</li>
+                              <li>These effects provide one-time effects to help you gain an edge during your turn</li>
+                            </ul>
+                          </div>
+                          <div className="flex-shrink-0 w-full md:w-48 lg:w-56">
+                            <img 
+                              src="/images/cards/new/essence exchange.webp" 
+                              alt="Essence Exchange - Normal Rune Example"
+                              className="w-full h-auto rounded-lg shadow-lg"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="border-t border-purple-500/30 my-0"></div>
+
+                        <div className="bg-purple-950/50 p-6 rounded-lg flex flex-col md:flex-row gap-6 items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-yellow-300 mb-3">Instant Runes</h4>
+                            <ul className="list-disc list-inside space-y-2">
+                              <li>Can be placed at any time, even during your opponent&apos;s turn</li>
+                              <li>This may be played from your hand or the Rune/Counter Zone</li>
+                              <li>Activate their effects immediately when placed</li>
+                              <li>Provide one-time effects or temporary advantages</li>
+                              <li>Perfect for responding to your opponent&apos;s actions or gaining an edge during a Battle Phase</li>
+                              <li>This is the only Rune type that can be played during any Phase of either player's turn</li>
+                            </ul>
+                          </div>
+                          <div className="flex-shrink-0 w-full md:w-48 lg:w-56">
+                            <img 
+                              src="/images/cards/new/direct assault.webp" 
+                              alt="Direct Assault - Instant Rune Example"
+                              className="w-full h-auto rounded-lg shadow-lg"
+                            />
+                          </div>
+                        </div>
+
+                        <div className="border-t border-purple-500/30 my-0"></div>
+
+                        <div className="bg-purple-950/50 p-6 rounded-lg flex flex-col md:flex-row gap-6 items-start">
+                          <div className="flex-1">
+                            <h4 className="font-semibold text-yellow-300 mb-3">Equipment Runes</h4>
+                            <ul className="list-disc list-inside space-y-2">
+                              <li>Equip this card to a creature after resolving it in the Rune/Counter Zone</li>
+                              <li>You may place this on any creature you or your opponent controls at any time</li>
+                              <li>Only one Equipment Rune can be equipped to a creature at a time</li>
+                              <li>The Equipment Rune remains on the creature until removed by effect or the creature leaves the battlefield. This equipment goes to the Discard Pile with the creature if the equipped creature is destroyed.</li>
+                              <li>Provide stat boosts or abilities to the equipped creature</li>
+                              <li>Often provide the most powerful and lasting effects</li>
+                            </ul>
+                          </div>
+                          <div className="flex-shrink-0 w-full md:w-48 lg:w-56">
+                            <img 
+                              src="/images/cards/new/lifebound armour.webp" 
+                              alt="Lifebound Armour - Equipment Rune Example"
+                              className="w-full h-auto rounded-lg shadow-lg"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="border-t-2 border-yellow-500/50 my-6"></div>
+
+                    <div>
+                      <h3 className="text-xl font-semibold text-yellow-400 mb-4">Counters</h3>
+                      <div className="bg-purple-950/50 p-6 rounded-lg flex flex-col md:flex-row gap-6 items-start">
+                        <div className="flex-1">
+                          <p className="mb-4">
+                            Counters are special cards that can be placed on creatures or other targets to provide reactive effects. They have unique timing rules that make them strategic defensive tools.
+                          </p>
+                          <div className="bg-yellow-500/20 p-4 rounded-lg border border-yellow-500/40 mb-4">
+                            <h4 className="font-semibold text-yellow-300 mb-2">Important: Counter Placement Rules</h4>
+                            <ul className="list-disc list-inside space-y-2">
+                              <li><span className="font-semibold">Counters must be placed during your turn</span> - You cannot place counters during your opponent&apos;s turn</li>
+                              <li><span className="font-semibold">Counters activate on your opponent&apos;s turn</span> - When the trigger condition is met, the counter&apos;s effect activates</li>
+                              <li>This creates a strategic factor where you must anticipate your opponent&apos;s actions and prepare counters in advance</li>
+                              <li>Counters are sent to the Discard Pile after their effect resolves (unless otherwise specified)</li>
+                            </ul>
+                          </div>
+                          <div className="space-y-3">
+                            <h4 className="font-semibold text-yellow-300 mb-2">Counter Strategy Tips</h4>
+                            <ul className="list-disc list-inside space-y-2">
+                              <li>Save room in your Rune/Counter Zone for counters, but keep in mind that you can only have 5 cards in your Rune/Counter Zone at a time</li>
+                              <li>Use counters to interrupt your opponent&apos;s combos or powerful attacks</li>
+                              <li>Consider your opponent&apos;s likely actions when deciding where to place counters</li>
+                            </ul>
+                          </div>
+                        </div>
+                        <div className="flex-shrink-0 w-full md:w-48 lg:w-56">
+                          <img 
+                            src="/images/cards/new/revival rain.webp" 
+                            alt="Revival Rain - Counter Example"
+                            className="w-full h-auto rounded-lg shadow-lg"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="bg-yellow-500/20 p-6 rounded-lg border border-yellow-500/40">
+                      <h4 className="text-lg font-semibold text-yellow-400 mb-2">Pro Tip: Rune & Counter Synergy</h4>
+                      <p className="text-base">
+                        Combine runes and counters for powerful defensive strategies. Place equipment runes on your creatures during your turn, then use counters to protect them from your opponent&apos;s removal or attacks. Instant runes can be used reactively alongside counters to create layered defenses.
                       </p>
                     </div>
                   </div>
@@ -1142,7 +1302,7 @@ const HowToPlayPage = () => {
                 </TabsContent>
 
                 <TabsContent value="glossary" className="bg-purple-900/30 p-4 sm:p-5 rounded-lg border border-purple-500/30 mt-4">
-                  <h2 className="text-2xl font-bold mb-4 text-white">Glossary of Terms</h2>
+                  <h2 className="text-2xl font-bold mb-4 text-white">Glossary of Key Words</h2>
                   <div className="space-y-6 text-purple-200">
                     <p className="text-lg">This glossary provides definitions for common terms used in Elekin TCG.</p>
                     
@@ -1157,7 +1317,7 @@ const HowToPlayPage = () => {
                             </div>
                             <div>
                               <p className="font-semibold">Agility</p>
-                              <p className="text-sm">The second stat on a creature card that determines attack order, dodge capability, and movement speed.</p>
+                              <p className="text-sm">The second stat on a creature card that determines attack order, dodge capability, and blocking speed.</p>
                             </div>
                             <div>
                               <p className="font-semibold">Attack</p>
@@ -1171,7 +1331,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Block</p>
-                              <p className="text-sm">Using a creature to defend against an opponent's attack. Costs 1 action point.</p>
+                              <p className="text-sm">Using a creature to defend against an opponent's attack. Blocking creature must use an action and cannot fight back.</p>
                             </div>
                           </div>
                         </div>
@@ -1184,12 +1344,8 @@ const HowToPlayPage = () => {
                               <p className="text-sm">A sequence of card effects and responses that resolves in reverse order (last in, first out).</p>
                             </div>
                             <div>
-                              <p className="font-semibold">Combinational Element</p>
-                              <p className="text-sm">One of six hybrid elements formed by combining two primary elements (e.g., Frost = Air + Water).</p>
-                            </div>
-                            <div>
                               <p className="font-semibold">Counter Card</p>
-                              <p className="text-sm">A card type that can be played outside your turn to negate or respond to opponent's actions.</p>
+                              <p className="text-sm">A card that is placed in the Rune/Counter Zone on your turn, but only can be played when the trigger condition is met during your opponent's turn.</p>
                             </div>
                           </div>
                         </div>
@@ -1198,12 +1354,16 @@ const HowToPlayPage = () => {
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">D</h3>
                           <div className="space-y-4">
                             <div>
-                              <p className="font-semibold">Dodge</p>
-                              <p className="text-sm">An action that allows a creature to avoid an attack completely, thus Exhausting both creatures (the attacker and creature dodging.</p>
+                              <p className="font-semibold">Defend</p>
+                              <p className="text-sm">An action that allows a creature to defend against an attack. Defending creature use an action to fight back against the attacker.</p>
                             </div>
                             <div>
-                              <p className="font-semibold">Dragon</p>
-                              <p className="text-sm">A powerful combinational element creature type with high stats and unique abilities.</p>
+                              <p className="font-semibold">Dodge</p>
+                              <p className="text-sm">An action that allows a creature to avoid an attack completely, thus Exhausting both creatures (the attacker and creature dodging).</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold">Double Strike</p>
+                              <p className="text-sm">A creature with double strike can attack twice the same target twice in a single turn. The second strike will always occur at a lower agility than the target.</p>
                             </div>
                           </div>
                         </div>
@@ -1213,7 +1373,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Essence</p>
-                              <p className="text-sm">The primary resource used to summon creatures and activate abilities. Comes in four elemental types (Air, Water, Fire, Earth).</p>
+                              <p className="text-sm">The primary resource used to summon creatures and activate enhanced abilities. Comes in four elemental types (Air, Water, Fire, Earth).</p>
                             </div>
                           </div>
                         </div>
@@ -1233,7 +1393,7 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Mulligan</p>
-                              <p className="text-sm">The opportunity to redraw your starting hand with 1 less card from before (up to 2 times) before the game begins.</p>
+                              <p className="text-sm">The opportunity to shuffle you starting hand back into your deck, then redraw your starting hand with 1 less card from before (up to 2 times) before the game begins.</p>
                             </div>
                           </div>
                         </div>
@@ -1241,6 +1401,10 @@ const HowToPlayPage = () => {
                         <div>
                           <h3 className="text-xl font-semibold text-yellow-400 mb-2">P</h3>
                           <div className="space-y-4">
+                          <div>
+                              <p className="font-semibold">Pierce</p>
+                              <p className="text-sm">A creature with pierce deals the overflow damage to the next line of defense. If the initial target was a creature, then the overflow damage will hit a shield or the opponent directly if no shields remain. If the initial target was a shield, then the overflow damage will hit the opponent directly.</p>
+                            </div>
                             <div>
                               <p className="font-semibold">Position</p>
                               <p className="text-sm">A vertical position indicates an available action, and a horizontal position indicates an exhausted creature (no available action).</p>
@@ -1253,11 +1417,11 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                           <div>
                               <p className="font-semibold">Refresh</p>
-                              <p className="text-sm">Allows a creature to gain its action back after being Exhausted.</p>
+                              <p className="text-sm">Allows a creature to gain its action back after being Exhausted. Turning the creature from horizontal to vertical.</p>
                             </div>
                             <div>
                               <p className="font-semibold">Rune</p>
-                              <p className="text-sm">A card type that provides ongoing effects or one-time effects to creatures and gameplay.</p>
+                              <p className="text-sm">A card type that provides on-going or one-time effects to creatures and gameplay. Runes are played in the Rune/Counter Zone on your turn and resolved instantly.</p>
                             </div>
                           </div>
                         </div>
@@ -1267,11 +1431,15 @@ const HowToPlayPage = () => {
                           <div className="space-y-4">
                             <div>
                               <p className="font-semibold">Shield</p>
-                              <p className="text-sm">A protective barrier with a health value that regenerates each turn and triggers effects when broken.</p>
+                              <p className="text-sm">A protective barrier with a health value that regenerates to the next highest or current tier during each End Phase. Shields trigger one of two of effects when broken and end the current Battle Phase.</p>
+                            </div>
+                            <div>
+                              <p className="font-semibold">Steal</p>
+                              <p className="text-sm">A creature with steal will choose 1 element from your opponent's essence pool, then lower that element by 1 and gain you 1 essence of the chosen element.</p>
                             </div>
                             <div>
                               <p className="font-semibold">Strength</p>
-                              <p className="text-sm">The first stat on a creature card that determines both attack power and health points.</p>
+                              <p className="text-sm">The first stat on a creature card that determines both attack power and health points. These points are split into two different values when battling. For instance, if a creature with 100 Strength takes 60 damage prior to attacking, its Health goes down to 40, but then it will still attack for 100 Damage.</p>
                             </div>
                           </div>
                         </div>
@@ -1282,10 +1450,6 @@ const HowToPlayPage = () => {
                             <div>
                               <p className="font-semibold">Tier</p>
                               <p className="text-sm">The level of a shield (1-3), which determines its maximum health and regeneration threshold.</p>
-                            </div>
-                            <div>
-                              <p className="font-semibold">Turn Structure</p>
-                              <p className="text-sm">The sequence of six phases that make up a player's turn.</p>
                             </div>
                           </div>
                         </div>

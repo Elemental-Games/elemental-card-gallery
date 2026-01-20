@@ -174,6 +174,7 @@ const App = () => (
                         <Route path="/shipping-policy" element={<ShippingPolicyPage />} />
                         <Route path="/cards" element={<CardGalleryPage />} />
                       <Route path="/elekin" element={<ElekinPage />} />
+                      <Route path="/elekin/overview" element={<ElekinPage />} />
                       {/*
                       <Route path="/elekin/online" element={
                         <ProtectedRoute>

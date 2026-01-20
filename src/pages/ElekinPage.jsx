@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -11,6 +11,8 @@ import { CheckCircle, Info as InfoIcon } from 'lucide-react';
 import CardDetailSidebar from '@/components/CardDetailSidebar';
 
 const ElekinPage = () => {
+  const location = useLocation();
+  
   // State for email subscription
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -18,6 +20,11 @@ const ElekinPage = () => {
   const [confirmationEmail, setConfirmationEmail] = useState('');
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+
+  // If on /elekin (not /elekin/overview), redirect to overview
+  if (location.pathname === '/elekin') {
+    return <Navigate to="/elekin/overview" replace />;
+  }
 
   const elements = [
     { 

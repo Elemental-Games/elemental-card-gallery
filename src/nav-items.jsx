@@ -28,6 +28,11 @@ export const navItems = [
     page: <ElekinPage />,
     subPages: [
       {
+        title: "Overview",
+        to: "/elekin/overview",
+        page: <ElekinPage />,
+      },
+      {
         title: "How to Play",
         to: "/elekin/how-to-play",
         page: <HowToPlayPage />,

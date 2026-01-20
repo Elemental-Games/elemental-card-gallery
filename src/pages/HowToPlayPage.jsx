@@ -523,14 +523,20 @@ const HowToPlayPage = () => {
                           <h4 className="text-xl font-bold text-white mb-3">First Two Turns (Practical Walkthrough)</h4>
                           <ol className="list-decimal list-inside space-y-3 text-lg">
                             <li>
-                              <span className="font-semibold text-white">Turn 1 (first player):</span> Skip draw → summon a low/zero‑cost creature → (optional) play a rune/counter → end turn.
+                              <span className="font-semibold text-white">Turn 1 (Player 1):</span> Skip draw → Skip Generation due to no creatures → Summon a zero‑cost creature → (optional) play a rune or place a counter → end turn.
                             </li>
                             <li>
-                              <span className="font-semibold text-white">Turn 2:</span> Draw → generate essence from your creatures → summon a stronger creature using essence → you may battle if you have actions available.
+                              <span className="font-semibold text-white">Turn 2 (Player 2):</span> Draw → Skip Generation due to no creatures → Summon a zero‑cost creature → (optional) play a rune or place a counter → you may battle and target your opponent's creature or any shield → end turn.
+                            </li>
+                            <li>
+                              <span className="font-semibold text-white">Turn 3 (Player 1):</span> Draw → Generate essence from your creatures → Summon a low/zero‑cost creature → (optional) play a rune or place a counter → you may battle → end turn.
+                            </li>
+                            <li>
+                              <span className="font-semibold text-white">Turn 4 (Player 2):</span> Draw → Generate essence from your creatures → Summon a low/zero‑cost creature → (optional) play a rune or place a counter → you may battle → end turn.
                             </li>
                           </ol>
                           <p className="mt-3 text-sm text-purple-200">
-                            New-player tip: if you’re wondering “how do I generate essence if I start with 0?”, the answer is: you get an early creature onto the field first, then it generates essence each turn.
+                            New-player tip: If you’re wondering “How do I generate essence if I start with 0?”, The answer is: you get an early creature onto the field first, then it generates essence each turn it survives.
                           </p>
                         </div>
                         

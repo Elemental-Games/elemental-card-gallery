@@ -20,7 +20,7 @@ const Footer = () => {
             <h3 className="text-lg font-bold text-white mb-4">Community</h3>
             <ul className="space-y-2">
               <li><Link to="/about" className="text-purple-300 hover:text-yellow-400">About Us</Link></li>
-              <li><Link to="/join-now" className="text-purple-300 hover:text-yellow-400">Join Now</Link></li>
+              <li><Link to="/join-now" className="text-purple-300 hover:text-yellow-400">Kickstarter</Link></li>
               <li><a href="https://discord.gg/qXNWh4dMve" className="text-purple-300 hover:text-yellow-400">Discord</a></li>
               <li><a href="https://www.youtube.com/@ElekinTCG" className="text-purple-300 hover:text-yellow-400">YouTube</a></li>
             </ul>

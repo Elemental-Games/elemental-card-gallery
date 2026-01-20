@@ -157,7 +157,7 @@ function getVipKickstarterEmailHTML() {
             </div>
             
             <div style="text-align: center;">
-                <a href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
+                <a href="https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
                     🚀 FOLLOW KICKSTARTER NOW
                 </a>
             </div>
@@ -179,7 +179,7 @@ function getVipKickstarterEmailHTML() {
             <p><strong>Ready to claim your VIP rewards?</strong></p>
             
             <div style="text-align: center; margin: 30px 0;">
-                <a href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
+                <a href="https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
                     👑 FOLLOW & CLAIM VIP STATUS
                 </a>
             </div>
@@ -219,7 +219,7 @@ Before we announce our Kickstarter to 50,000+ people, you get first access to in
 ⏰ TIME SENSITIVE: These VIP rewards are only available to followers who join before our public announcement. Once we hit 500 followers, these exclusive benefits end forever.
 
 FOLLOW KICKSTARTER NOW:
-https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=vip_email&utm_medium=email&utm_campaign=early_access
+https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=vip_email&utm_medium=email&utm_campaign=early_access
 
 Why follow now?
 - You'll be notified the moment we launch

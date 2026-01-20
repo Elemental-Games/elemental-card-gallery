@@ -97,7 +97,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center w-full pr-6">
                 <Mail className="mr-2 h-5 w-5 text-yellow-400" />
-                Get Free Early Access
+                Get Kickstarter Launch Notifications
               </h2>
               <button 
                 onClick={closeModal}
@@ -112,10 +112,10 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-green-400 mb-2">Welcome! You're Signed Up!</h3>
                 <p className="text-purple-200 mb-6">
-                  You'll now be notified of our <span className="text-yellow-400 font-bold">Kickstarter launch</span>! 
-                  <br />Your free early access is confirmed.
+                  You'll now be notified when our <span className="text-yellow-400 font-bold">Kickstarter launches on February 17, 2026</span>! 
+                  <br />Early bird pricing and exclusive rewards await.
                   <br /><span className="text-sm mt-2 block opacity-80">
-                    Check your inbox for your welcome email with Discord access details.
+                    Check your inbox for your welcome email with launch details and Discord access.
                   </span>
                 </p>
                 <div className="space-y-3">
@@ -135,31 +135,37 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Early Access Elemental Benefits */}
+                {/* Kickstarter Benefits */}
                 <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-4">
-                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get (Free):</h3>
+                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get:</h3>
                   <div className="space-y-2 text-sm text-purple-200">
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Exclusive Discord role to claim</span>
+                      <span>Early bird pricing (20-30% off)</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Kickstarter launch notifications</span>
+                      <span>Exclusive launch day rewards</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Giveaway entries for free packs & merch</span>
+                      <span>First access to Kickstarter page</span>
                     </div>
                     <div className="flex items-center">
                       <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Game development updates</span>
+                      <span>VIP status in community</span>
+                    </div>
+                    <div className="flex items-center">
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Exclusive Discord role</span>
                     </div>
                   </div>
                 </div>
                 
                 <p className="text-purple-200 mb-4 text-center">
-                  <span className="text-yellow-400 font-semibold">Free signup:</span> Be one of the first 500 sign-ups for our Kickstarter launch notifications!
+                  <span className="text-yellow-400 font-semibold">Launch Date:</span> February 17, 2026
+                  <br />
+                  <span className="text-sm opacity-80">Be among the first to know when we go live!</span>
                 </p>
                 
                 <div className="space-y-2">
@@ -195,7 +201,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                     disabled={loading}
                   >
-                    {loading ? 'Signing You Up...' : 'Get Free Early Access'}
+                    {loading ? 'Signing You Up...' : 'Get Launch Notifications'}
                   </Button>
                 </div>
               </form>

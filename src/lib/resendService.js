@@ -261,7 +261,7 @@ export class ResendEmailService {
         
         <p style="font-size: 18px; margin-bottom: 25px; color: #111827;">Our Kickstarter launches in <strong>14 days</strong>, and as one of our most loyal supporters, you get to follow it before anyone else knows it exists.</p>
         
-        <a href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=email&utm_medium=vip&utm_campaign=early_access&utm_content=main_cta" class="cta-button">
+        <a href="https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=email&utm_medium=vip&utm_campaign=early_access&utm_content=main_cta" class="cta-button">
             🚀 FOLLOW KICKSTARTER NOW
         </a>
         
@@ -308,7 +308,7 @@ We just released our Pre-Launch Kickstarter page, and we'd love for you to suppo
 Our Kickstarter launches in 14 days, and as one of our most loyal supporters, you get to follow it before anyone else knows it exists.
 
 🚀 FOLLOW KICKSTARTER NOW
-[Your Kickstarter Link Here]
+https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=email&utm_medium=vip&utm_campaign=early_access&utm_content=main_cta
 
 You're one of only 122 people getting this email.
 

@@ -37,7 +37,7 @@ const Header = () => {
             <div className="flex items-center space-x-4">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {navItems.map((item) => (
+                  {navItems.filter(item => item.title !== 'Kickstarter').map((item) => (
                     <NavigationMenuItem key={item.title}>
                       {item.subPages ? (
                         <>
@@ -77,12 +77,23 @@ const Header = () => {
               </NavigationMenu>
               
               <div className="flex items-center gap-4">
+                {/* Shop Button - Between nav and Kickstarter */}
                 <TrackedLink 
                   to="/shop" 
                   className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
                 >
                   Shop
                 </TrackedLink>
+                
+                {/* Kickstarter Button - Right Side in Green */}
+                {navItems.find(item => item.title === 'Kickstarter') && (
+                  <Link 
+                    to={navItems.find(item => item.title === 'Kickstarter').to} 
+                    className="bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                  >
+                    Kickstarter
+                  </Link>
+                )}
                 {isShopPage && (
                   <>
                     {items.length > 0 && (
@@ -124,7 +135,7 @@ const Header = () => {
                   </NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <div className="w-[calc(100vw-6rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg ml-[-1rem]">
-                      {navItems.map((item) => (
+                      {navItems.filter(item => item.title !== 'Kickstarter').map((item) => (
                         <div key={item.title}>
                           <Link 
                             to={item.to} 
@@ -148,13 +159,21 @@ const Header = () => {
                         </div>
                       ))}
                       
-                      <div className="pt-4 border-t border-purple-500/30">
+                      <div className="pt-4 border-t border-purple-500/30 space-y-2">
                         <TrackedLink 
                           to="/shop" 
                           className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
                         >
                           Shop
                         </TrackedLink>
+                        {navItems.find(item => item.title === 'Kickstarter') && (
+                          <Link 
+                            to={navItems.find(item => item.title === 'Kickstarter').to} 
+                            className="block py-2 px-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-center"
+                          >
+                            Kickstarter
+                          </Link>
+                        )}
                       </div>
                     </div>
                   </NavigationMenuContent>

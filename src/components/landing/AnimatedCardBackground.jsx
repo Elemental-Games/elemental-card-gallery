@@ -1,12 +1,14 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
-import { X, Star } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { X, LayoutGrid } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import SignupForm from '@/components/auth/SignupForm';
 
 const AnimatedCardBackground = () => {
   const [cards, setCards] = useState([]);
   const [showComingSoon, setShowComingSoon] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Create array of card backs only - no revealed cards yet
@@ -149,8 +151,7 @@ const AnimatedCardBackground = () => {
       
       {/* Content Container - shifted up positioning */}
       <motion.div 
-        className="relative z-20 flex flex-col items-center justify-center h-full text-center px-4 pointer-events-none"
-        style={{ marginTop: '-2rem' }}
+        className="relative z-20 flex flex-col items-center justify-start h-full text-center px-4 pointer-events-none -pt-48 pb-8"
         initial={{ opacity: 0, y: 50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ 
@@ -159,38 +160,38 @@ const AnimatedCardBackground = () => {
           ease: "easeOut"
         }}
       >
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-4xl mx-auto">
                       <motion.img
               src="/Elekin_Kinbrold_Icon.png"
               alt="Elekin: Masters of Kinbrold Logo"
-              className="w-96 md:w-[28rem] lg:w-[32rem] h-auto mx-auto -mb-10 -mt-24"
+              className="w-[28rem] md:w-[36rem] lg:w-[38rem] h-auto mx-auto -mb-10"
             initial={{ opacity: 0, y: 30, scale: 0.9 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ delay: 1.2, duration: 0.8, ease: "easeOut" }}
           />
           
           <motion.p 
-            className="text-base md:text-lg text-purple-200 mb-8 mt-10 max-w-xl mx-auto"
+            className="text-lg md:text-xl lg:text-2xl text-purple-200 mt-8 max-w-2xl mx-auto"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.6 }}
           >
-            Build your deck, play with friends, and become a master in the world of Kinbrold
+            Kickstarter Launch: February 17, 2026
+            <br />
+            Get Early Access + Exclusive Rewards
           </motion.p>
           
+          {/* Email Signup Form */}
           <motion.div
-            className="pointer-events-auto"
+            className="pointer-events-auto max-w-lg mx-auto mt-8"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
-            transition={{ delay: 1.8, duration: 0.8, ease: "easeOut" }}
+            transition={{ delay: 1.7, duration: 0.8, ease: "easeOut" }}
           >
-            <Link to="/shop">
-              <button className="animated-gradient-border">
-                <div className="bg-[#1A103C] hover:bg-purple-900/80 rounded-lg px-10 py-5 transition-colors">
-                  <span className="text-2xl font-bold text-white">Buy Now</span>
-                </div>
-              </button>
-            </Link>
+            <SignupForm 
+              buttonClassName="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-7 text-xl w-full"
+              source="animated_background_hero"
+            />
           </motion.div>
         </div>
       </motion.div>
@@ -221,25 +222,28 @@ const AnimatedCardBackground = () => {
               </button>
               
               <div className="bg-yellow-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-yellow-400" />
+                <LayoutGrid className="w-8 h-8 text-yellow-400" />
               </div>
               
-              <h3 className="text-2xl font-bold mb-4 text-white">Card Details Coming Soon!</h3>
+              <h3 className="text-2xl font-bold mb-4 text-white">Explore the Card Gallery</h3>
               <p className="text-purple-200 mb-6">
-                This card will be revealed to <span className="text-yellow-400 font-bold">Early Access Elementals first</span>! 
-                Join our exclusive community to see cards before anyone else.
+                Would you like to browse our collection of cards and discover all the amazing creatures and spells in Elekin?
               </p>
               
               <Button
-                className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 rounded-lg"
-                onClick={() => setShowComingSoon(false)}
+                className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 rounded-lg mb-3"
+                onClick={() => {
+                  setShowComingSoon(false);
+                  navigate('/cards');
+                }}
               >
-                Subscribe
+                <LayoutGrid className="w-5 h-5 mr-2" />
+                Go to Card Gallery
               </Button>
               
               <button
                 onClick={() => setShowComingSoon(false)}
-                className="w-full text-purple-400 hover:text-white text-sm mt-3 transition-colors"
+                className="w-full text-purple-400 hover:text-white text-sm transition-colors"
               >
                 Maybe later
               </button>

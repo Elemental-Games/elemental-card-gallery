@@ -1,17 +1,16 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import confetti from 'canvas-confetti';
 import { CheckCircle } from 'lucide-react';
 import { subscribeEmail } from '../../utils/api';
+import { trackEmailSignup } from '../../utils/analytics';
 
-const SignupForm = ({ buttonClassName }) => {
+const SignupForm = ({ buttonClassName, onSuccess, source = 'signup_form', inputSize = 'default' }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(false);
-  const navigate = useNavigate();
 
   const shootConfetti = () => {
     confetti({
@@ -34,8 +33,16 @@ const SignupForm = ({ buttonClassName }) => {
         toast.success(result.message || 'Successfully subscribed to our mailing list!');
         setSuccess(true);
         
+        // Track email signup
+        trackEmailSignup(source, { email });
+        
         // Store email in localStorage to pre-fill it on the login page
         localStorage.setItem('signupEmail', email);
+        
+        // Call onSuccess callback if provided
+        if (onSuccess) {
+          onSuccess();
+        }
       } else {
         if (result.message && result.message.includes('already subscribed')) {
           toast.info("You're already on our mailing list!");
@@ -52,10 +59,6 @@ const SignupForm = ({ buttonClassName }) => {
     }
   };
 
-  const goToSignUp = () => {
-    navigate('/login', { state: { mode: 'signup' } });
-  };
-
   if (success) {
     return (
       <div className="text-center py-4">
@@ -68,30 +71,38 @@ const SignupForm = ({ buttonClassName }) => {
           </span>
         </p>
         <div className="space-y-3">
-          <Button 
-            onClick={goToSignUp}
-            className={`w-full bg-yellow-500 hover:bg-yellow-400 text-yellow-400 font-semibold py-6 text-md ${buttonClassName}`}
+          <a
+            href="https://www.kickstarter.com/projects/elemental-games/elekin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block"
           >
-            Create an Account for More Early Benefits
-          </Button>
+            <Button 
+              className={`w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md ${buttonClassName}`}
+            >
+              🔔 Follow us on Kickstarter!
+            </Button>
+          </a>
         </div>
       </div>
     );
   }
 
+  const isLarge = inputSize === 'large';
+  
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 w-full max-w-md mx-auto">
+    <form onSubmit={handleSubmit} className={`space-y-4 w-full ${isLarge ? 'max-w-2xl' : 'max-w-md'} mx-auto`}>
       <Input
         type="email"
         placeholder="Enter your email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         required
-        className="w-full border-2 border-yellow-500 py-6 text-medium"
+        className={`w-full border-2 border-yellow-500 ${isLarge ? 'py-8 text-xl' : 'py-6 text-medium'}`}
       />
       <Button 
         type="submit" 
-        className={`w-full py-6 text-medium font-semibold ${buttonClassName}`} 
+        className={`w-full ${isLarge ? 'py-8 text-xl' : 'py-6 text-medium'} font-semibold ${buttonClassName}`} 
         disabled={isLoading}
       >
         {isLoading ? "Processing..." : "Sign Up"}

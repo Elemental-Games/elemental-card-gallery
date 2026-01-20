@@ -4,7 +4,9 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Sparkles, Truck, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Sparkles, Truck, ChevronLeft, ChevronRight, AlertTriangle, Clock } from 'lucide-react';
+import SubscribeButton from '@/components/SubscribeButton';
+import KickstarterCountdown from '@/components/KickstarterCountdown';
 
 const products = [
     {
@@ -141,18 +143,40 @@ const ShopPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
+        {/* Scarcity Alert Banner */}
+        <motion.div 
+          className="max-w-4xl mx-auto mb-6"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-2 border-red-500/50 rounded-lg p-6 text-center">
+            <div className="flex items-center justify-center gap-3 mb-3">
+              <AlertTriangle className="w-6 h-6 text-red-400" />
+              <h2 className="text-2xl lg:text-3xl font-bold text-red-400">⚠️ Demo Day Edition Ends February 17th</h2>
+              <AlertTriangle className="w-6 h-6 text-red-400" />
+            </div>
+            <p className="text-lg font-semibold text-white mb-2">
+              These exclusive products will <span className="text-red-400 font-bold">disappear forever</span> when our Kickstarter launches!
+            </p>
+            <p className="text-purple-200">
+              Stock is limited and will not be restocked. Get yours before they're gone!
+            </p>
+          </div>
+        </motion.div>
+
         {/* Promotions Banner */}
         <motion.div 
           className="max-w-4xl mx-auto mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border border-yellow-500/50 rounded-lg p-6 text-center">
+          <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/50 rounded-lg p-6 text-center">
             <div className="flex items-center justify-center gap-2 mb-4">
-              <Truck className="w-6 h-6 text-yellow-400" />
-              <h2 className="text-2xl font-bold text-yellow-400">Free Shipping on Orders $50+</h2>
-              <Truck className="w-6 h-6 text-yellow-400" />
+              <Truck className="w-6 h-6 text-purple-400" />
+              <h2 className="text-2xl font-bold text-purple-400">Free Shipping on Orders $50+</h2>
+              <Truck className="w-6 h-6 text-purple-400" />
             </div>
             <div className="bg-purple-900/50 rounded-lg p-4 inline-block mt-4">
               <p className="text-lg font-semibold text-white mb-2">
@@ -175,7 +199,7 @@ const ShopPage = () => {
             Elekin TCG Shop
           </h1>
           <p className="text-xl lg:text-2xl text-purple-200">
-            Limited Demo Day Edition products available while supplies last!
+            Limited Demo Day Edition products - <span className="text-red-400 font-bold">Only available until February 17th!</span>
           </p>
         </motion.div>
 
@@ -274,15 +298,29 @@ const ShopPage = () => {
             return (
             <motion.div 
               key={product.id} 
-              className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105"
+              className="bg-purple-900/50 rounded-lg p-6 flex flex-col text-center shadow-lg hover:shadow-yellow-400/20 transition-all duration-300 hover:transform hover:scale-105 relative"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
             >
+              {/* Limited Edition Badge */}
+              <div className="absolute top-3 right-3 bg-red-500/90 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 z-10">
+                <Clock className="w-3 h-3" />
+                Ends Feb 17
+              </div>
+              
                 <ProductImageCarousel product={product} />
               <Link to={`/product/${product.id}`}>
                 <h2 className="text-2xl font-bold mb-2 flex-grow">{product.title}</h2>
               </Link>
+              
+              {/* Demo Day Edition Badge */}
+              <div className="mb-2">
+                <span className="inline-block bg-yellow-500/20 border border-yellow-500/50 text-yellow-400 px-3 py-1 rounded-full text-xs font-semibold">
+                  Demo Day Edition
+                </span>
+              </div>
+              
               <div className="flex justify-center items-center gap-4 mb-4">
                 <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
                 <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>

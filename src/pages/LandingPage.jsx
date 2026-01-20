@@ -10,6 +10,8 @@ import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import TrackedLink from '@/components/TrackedLink';
 import { HOLIDAY_BUNDLE_PROMO } from '@/data/bundles';
+import KickstarterCountdown from '@/components/KickstarterCountdown';
+import SignupForm from '@/components/auth/SignupForm';
 
 const kingdoms = [
   { name: 'Grivoss', element: 'Earth', description: 'Mountain fortresses carved from living stone.', color: 'bg-green-300', hoverColor: 'hover:bg-green-400', path: '/kinbrold/grivoss', icon: 'images/cards/new-marketing/earth silver.webp' },
@@ -43,13 +45,18 @@ const LandingPage = () => {
     setExitIntentSuccess(false);
   };
 
+  // Handle email signup success in exit intent
+  const handleExitIntentEmailSuccess = () => {
+    setExitIntentSuccess(true);
+  };
+
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
-        <title>Elekin TCG - Shop Now</title>
-        <meta name="description" content="Shop the Demo Day Edition of Elekin TCG. Get your decks, boosters, and game mats today!" />
-        <meta property="og:title" content="Elekin TCG - Shop Now" />
-        <meta property="og:description" content="Shop the Demo Day Edition of Elekin TCG. Get your decks, boosters, and game mats today!" />
+        <title>Elekin TCG - Kickstarter Launch February 17, 2026</title>
+        <meta name="description" content="Get notified for our Kickstarter launch! Early bird pricing + exclusive rewards. Launching February 17, 2026." />
+        <meta property="og:title" content="Elekin TCG - Kickstarter Launch February 17, 2026" />
+        <meta property="og:description" content="Get notified for our Kickstarter launch! Early bird pricing + exclusive rewards. Launching February 17, 2026." />
         <meta property="og:image" content="/Elekin_Kinbrold.png" />
       </Helmet>
       
@@ -166,7 +173,7 @@ const LandingPage = () => {
 
               <div className="text-center">
                 {exitIntentSuccess ? (
-                  // SUCCESS STATE - Thank you message with Discord link
+                  // SUCCESS STATE - Thank you message
                   <>
                     <div className="mb-6">
                       <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -174,16 +181,16 @@ const LandingPage = () => {
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                         </svg>
                       </div>
-                      <h2 className="text-3xl font-bold mb-2 text-green-400">Welcome! You&apos;re In!</h2>
-                      <p className="text-xl text-green-300 font-semibold">Your free early access is confirmed!</p>
+                      <h2 className="text-3xl font-bold mb-2 text-green-400">You&apos;re Signed Up!</h2>
+                      <p className="text-xl text-green-300 font-semibold">Kickstarter launch notifications confirmed!</p>
                     </div>
 
                     <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
                       <p className="text-white mb-4">
-                        You&apos;re now signed up for <span className="text-yellow-400 font-bold">free early access</span>!
+                        You&apos;ll be notified when our <span className="text-yellow-400 font-bold">Kickstarter launches on February 17, 2026</span>!
                       </p>
                       <p className="text-purple-200 text-sm mb-4">
-                        Check your inbox for your welcome email with Discord access details.
+                        Check your inbox for your welcome email with early bird pricing details and exclusive rewards.
                       </p>
                     </div>
 
@@ -191,7 +198,7 @@ const LandingPage = () => {
                       onClick={handleDiscordJoinFromExitIntent}
                       className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg shadow-lg mb-4"
                     >
-                      Join Discord & Claim Your Exclusive Role →
+                      Join Discord Community →
                     </Button>
 
                     <button 
@@ -202,14 +209,19 @@ const LandingPage = () => {
                     </button>
                   </>
                 ) : (
-                  // DEMO DAY EDITION SHOP STATE
+                  // KICKSTARTER FOCUSED STATE
                   <>
                     <div className="mb-6">
                       <div className="bg-yellow-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <ShoppingBag className="w-8 h-8 text-yellow-400" />
+                        <Star className="w-8 h-8 text-yellow-400" />
                       </div>
-                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Demo Day Edition Available Now!</h2>
-                      <p className="text-base lg:text-lg text-purple-200 font-medium">Limited edition products while supplies last!</p>
+                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Don&apos;t Miss Our Kickstarter Launch!</h2>
+                      <p className="text-base lg:text-lg text-purple-200 font-medium">Get notified for early bird pricing + exclusive rewards</p>
+                    </div>
+
+                    {/* Countdown in popup */}
+                    <div className="mb-6">
+                      <KickstarterCountdown showLabel={false} />
                     </div>
 
                     <div className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border border-yellow-500/40 rounded-xl p-4 mb-4">
@@ -217,34 +229,29 @@ const LandingPage = () => {
                       <div className="space-y-2">
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Exclusive Demo Day Edition products</span>
+                          <span className="text-white font-medium">Early bird pricing (20-30% off)</span>
                         </div>
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Free shipping on orders $50+</span>
+                          <span className="text-white font-medium">Exclusive launch day rewards</span>
                         </div>
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Bonus wheel spin on orders $25+</span>
+                          <span className="text-white font-medium">First access to Kickstarter page</span>
                         </div>
                         <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Win free packs, mats, decks, or discounts</span>
+                          <span className="text-white font-medium">VIP status in community</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* SHOP NOW BUTTON */}
-                    <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath} onClick={() => setShowExitIntent(false)}>
-                      <Button
-                        className="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
-                      >
-                        <div className="flex items-center justify-center">
-                          <ShoppingBag className="w-5 h-5 mr-2" />
-                          Shop Holiday Bundles
-                        </div>
-                      </Button>
-                    </TrackedLink>
+                    {/* EMAIL CAPTURE FORM */}
+                    <SignupForm 
+                      buttonClassName="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
+                      onSuccess={handleExitIntentEmailSuccess}
+                      source="exit_intent_popup"
+                    />
 
                     <button 
                       onClick={() => setShowExitIntent(false)}
@@ -273,16 +280,16 @@ const LandingPage = () => {
 
 
       
-      {/* HERO SECTION - UPDATED */}
+      {/* HERO SECTION - KICKSTARTER FOCUSED */}
       <section className="container mx-auto px-4 py-16 lg:py-24 relative z-10 -mb-20">
         <div className="max-w-6xl mx-auto text-center -mt-20">
           <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-6">
             <Star className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-yellow-300 font-semibold">SHOP NOW</span>
+            <span className="text-yellow-300 font-semibold">KICKSTARTER LAUNCH</span>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-bold mb-6">
-            Begin Your Journey
+          <h1 className="text-5xl lg:text-7xl font-bold mb-4">
+            Kickstarter Launch:
             <br />
             <motion.span 
               className="bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent bg-[length:200%_100%]"
@@ -295,23 +302,40 @@ const LandingPage = () => {
                 ease: "easeInOut"
               }}
             >
-              Buy Elekin TCG Today
+              February 17, 2026
             </motion.span>
           </h1>
 
-          <p className="text-xl lg:text-2xl text-purple-200 mb-8 max-w-4xl mx-auto">
-            Get your Demo Day Edition decks, boosters, and game mats. Every $25+ order comes with a chance to win exclusive prizes!
-                </p>
-                
-          <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
+          <p className="text-xl lg:text-2xl text-purple-200 mb-6 max-w-4xl mx-auto">
+            Get Early Access + Exclusive Rewards
+          </p>
+
+          {/* Countdown Timer */}
+          <div className="mb-8 flex justify-center">
+            <KickstarterCountdown showLabel={false} />
+          </div>
+
+          {/* Email Capture Form - Primary CTA */}
+          <div className="max-w-md mx-auto mb-8">
+            <SignupForm 
+              buttonClassName="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-6 text-lg" 
+              source="kickstarter_landing_hero"
+            />
+          </div>
+
+          {/* Secondary CTA - Shop Now */}
+          <div className="mt-6">
+            <TrackedLink to={HOLIDAY_BUNDLE_PROMO.primaryCtaPath}>
               <Button
-              size="lg"
-              className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 px-8 text-xl rounded-xl shadow-lg transform hover:scale-105 transition-all duration-300"
-            >
-              <Star className="mr-2 h-5 w-5" />
-              Buy Now
+                variant="outline"
+                size="lg"
+                className="bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 font-semibold py-3 px-6 text-lg rounded-xl"
+              >
+                <ShoppingBag className="mr-2 h-5 w-5" />
+                Shop Demo Day Edition
               </Button>
-          </TrackedLink>
+            </TrackedLink>
+          </div>
         </div>
       </section>
 
@@ -363,7 +387,7 @@ const LandingPage = () => {
                 className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
               >
                 <LayoutGrid className="mr-3 h-8 w-8" />
-              Shop Holiday Bundles
+              Shop Demo Day Products
               </Button>
             </TrackedLink>
             <Link to="/elekin/how-to-play">

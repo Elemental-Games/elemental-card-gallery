@@ -57,8 +57,8 @@ export const navItems = [
     page: <AboutUsPage /> 
   },
   { 
-    title: "Join Now", 
-    to: "/join", 
+    title: "Kickstarter", 
+    to: "/join-now", 
     icon: <UserPlusIcon className="h-4 w-4" />, 
     page: <JoinNowPage /> 
   },

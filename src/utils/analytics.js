@@ -153,8 +153,52 @@ export const trackPageView = (pageName) => {
 // Track newsletter/marketing funnel
 export const trackEmailSignup = (source, context = {}) => {
   trackMapEvent('email_signup', {
-    source, // 'map_unlock', 'kingdom_page', 'general'
+    source, // 'map_unlock', 'kingdom_page', 'general', 'kickstarter_landing', 'exit_intent', 'sticky_bar'
     ...context
+  });
+  
+  // Also track with gtag if available
+  if (window.gtag) {
+    window.gtag('event', 'email_signup', {
+      event_category: 'conversion',
+      event_label: source,
+      value: 1,
+      ...context
+    });
+  }
+};
+
+// Track Kickstarter-specific events
+export const trackKickstarterPageView = () => {
+  track('kickstarter_page_view', {
+    page: 'kickstarter_preview',
+    timestamp: new Date().toISOString()
+  });
+  
+  if (window.gtag) {
+    window.gtag('event', 'page_view', {
+      page_title: 'Kickstarter Preview',
+      page_location: window.location.href
+    });
+  }
+};
+
+export const trackKickstarterNotifyClick = () => {
+  track('kickstarter_notify_click', {
+    timestamp: new Date().toISOString()
+  });
+  
+  if (window.gtag) {
+    window.gtag('event', 'kickstarter_notify_click', {
+      event_category: 'conversion',
+      value: 1
+    });
+  }
+};
+
+export const trackCountdownView = () => {
+  track('kickstarter_countdown_view', {
+    timestamp: new Date().toISOString()
   });
 };
 

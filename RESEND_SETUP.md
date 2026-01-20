@@ -240,7 +240,7 @@ Want me to help you set up the image hosting or modify any specific elements?
             </div>
             
             <div style="text-align: center;">
-                <a href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
+                <a href="https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
                     🚀 FOLLOW KICKSTARTER NOW
                 </a>
             </div>
@@ -268,7 +268,7 @@ Want me to help you set up the image hosting or modify any specific elements?
             <p style="font-size: 18px; font-weight: bold; text-align: center;">Ready to claim your VIP rewards?</p>
             
             <div style="text-align: center; margin: 35px 0;">
-                <a href="https://www.kickstarter.com/projects/markdiorio/elekin-tcg?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
+                <a href="https://www.kickstarter.com/projects/elemental-games/elekin?utm_source=vip_email&utm_medium=email&utm_campaign=early_access" class="cta-button">
                     👑 FOLLOW & CLAIM VIP STATUS
                 </a>
             </div>

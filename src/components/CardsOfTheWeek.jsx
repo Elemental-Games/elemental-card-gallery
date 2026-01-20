@@ -3,10 +3,10 @@ import { motion } from 'framer-motion';
 import CardDetailSidebar from './CardDetailSidebar';
 
 const cards = [
-  { id: 'aqua-dart', name: 'Aqua Dart', image: '/images/cards/new/aqua dart.webp' },
-  { id: 'nimblefoot', name: 'Nimblefoot', image: '/images/cards/new/nimblefoot.webp' },
-  { id: 'ember-flicker', name: 'Ember Flicker', image: '/images/cards/new/ember flicker.webp' },
-  { id: 'swoop', name: 'Swoop', image: '/images/cards/new/swoop.webp' },
+  { id: 'malletin', name: 'Malletin', image: '/images/cards/new/malletin.webp' },
+  { id: 'ivy-mantis', name: 'Ivy Mantis', image: '/images/cards/new/ivy mantis.webp' },
+  { id: 'blazorn', name: 'Blazorn', image: '/images/cards/new/blazorn.webp' },
+  { id: 'glint', name: 'Glint', image: '/images/cards/new/glint.webp' },
 ];
 
 const Card = ({ card, onCardClick }) => {

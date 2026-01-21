@@ -3,10 +3,8 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Sparkles, Truck, ChevronLeft, ChevronRight, AlertTriangle, Clock } from 'lucide-react';
-import SubscribeButton from '@/components/SubscribeButton';
-import KickstarterCountdown from '@/components/KickstarterCountdown';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Sparkles, Truck, ChevronLeft, ChevronRight, Clock, X } from 'lucide-react';
 
 const products = [
     {
@@ -65,6 +63,7 @@ const ShopPage = () => {
   const { addToCart } = useCart();
   const [sparks, setSparks] = useState([]);
   const [showCurtain, setShowCurtain] = useState(true);
+  const [showPromoBanner, setShowPromoBanner] = useState(true);
 
   // Generate sparkling particles on page load
   useEffect(() => {
@@ -91,6 +90,19 @@ const ShopPage = () => {
     const timer = setTimeout(() => setShowCurtain(false), 1200);
     return () => clearTimeout(timer);
   }, [showCurtain]);
+
+  // Check if promo banner was dismissed
+  useEffect(() => {
+    const dismissed = localStorage.getItem('shopPromoBannerDismissed');
+    if (dismissed) {
+      setShowPromoBanner(false);
+    }
+  }, []);
+
+  const handleDismissPromoBanner = () => {
+    setShowPromoBanner(false);
+    localStorage.setItem('shopPromoBannerDismissed', 'true');
+  };
 
   return (
     <div className="bg-[#1A103C] text-white min-h-screen relative overflow-hidden">
@@ -150,44 +162,20 @@ const ShopPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-gradient-to-r from-red-500/20 to-orange-500/20 border-2 border-red-500/50 rounded-lg p-6 text-center">
+          <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 rounded-lg p-6 text-center">
             <div className="flex items-center justify-center gap-3 mb-3">
-              <AlertTriangle className="w-6 h-6 text-red-400" />
-              <h2 className="text-2xl lg:text-3xl font-bold text-red-400">⚠️ Demo Day Edition Ends February 17th</h2>
-              <AlertTriangle className="w-6 h-6 text-red-400" />
+              <Clock className="w-5 h-5 text-yellow-400" />
+              <h2 className="text-xl lg:text-2xl font-bold text-yellow-400">Demo Day Edition Ends February 17th</h2>
             </div>
-            <p className="text-lg font-semibold text-white mb-2">
-              These exclusive products will <span className="text-red-400 font-bold">disappear forever</span> when our Kickstarter launches!
+            <p className="text-base font-medium text-white mb-2">
+              These exclusive products will be replaced when our Kickstarter launches on February 17th.
             </p>
-            <p className="text-purple-200">
-              Stock is limited and will not be restocked. Get yours before they're gone!
+            <p className="text-purple-200 text-sm">
+              Limited availability - get yours while supplies last!
             </p>
           </div>
         </motion.div>
 
-        {/* Promotions Banner */}
-        <motion.div 
-          className="max-w-4xl mx-auto mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          <div className="bg-gradient-to-r from-purple-500/20 to-blue-500/20 border border-purple-500/50 rounded-lg p-6 text-center">
-            <div className="flex items-center justify-center gap-2 mb-4">
-              <Truck className="w-6 h-6 text-purple-400" />
-              <h2 className="text-2xl font-bold text-purple-400">Free Shipping on Orders $50+</h2>
-              <Truck className="w-6 h-6 text-purple-400" />
-            </div>
-            <div className="bg-purple-900/50 rounded-lg p-4 inline-block mt-4">
-              <p className="text-lg font-semibold text-white mb-2">
-                🎯 <span className="text-yellow-400">Bonus Wheel Spin</span> with every $25+ order!
-              </p>
-              <p className="text-purple-200">
-                Win free packs, mats, decks, or discounts on your next purchase
-              </p>
-            </div>
-          </div>
-        </motion.div>
 
         <motion.div 
           className="max-w-4xl mx-auto text-center mb-12"
@@ -337,6 +325,42 @@ const ShopPage = () => {
           })}
         </motion.div>
       </div>
+
+      {/* Sticky Promotions Banner at Bottom */}
+      <AnimatePresence>
+        {showPromoBanner && (
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-purple-500/95 to-blue-500/95 border-t border-purple-500/50 backdrop-blur-sm"
+          >
+          <div className="container mx-auto px-4 py-3">
+            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative">
+              <button
+                onClick={handleDismissPromoBanner}
+                className="absolute top-0 right-0 md:right-4 text-purple-200 hover:text-white transition-colors p-1"
+                aria-label="Close promotions banner"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="flex items-center gap-2">
+                <Truck className="w-5 h-5 text-purple-200" />
+                <span className="text-base md:text-lg font-semibold text-purple-200">Free Shipping on Orders $50+</span>
+              </div>
+              <div className="hidden md:block w-px h-6 bg-purple-400/50"></div>
+              <div className="flex items-center gap-2">
+                <span className="text-lg">🎯</span>
+                <span className="text-base md:text-lg font-semibold text-white">
+                  <span className="text-yellow-400">Bonus Wheel Spin</span> with every $25+ order!
+                </span>
+              </div>
+            </div>
+          </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

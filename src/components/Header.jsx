@@ -167,12 +167,14 @@ const Header = () => {
                           Shop
                         </TrackedLink>
                         {navItems.find(item => item.title === 'Kickstarter') && (
-                          <Link 
-                            to={navItems.find(item => item.title === 'Kickstarter').to} 
-                            className="block py-2 px-4 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-center"
-                          >
-                            Kickstarter
-                          </Link>
+                          <div className="flex justify-start">
+                            <Link 
+                              to={navItems.find(item => item.title === 'Kickstarter').to} 
+                              className="inline-block py-1.5 px-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-s whitespace-nowrap ml-1"
+                            >
+                              Kickstarter
+                            </Link>
+                          </div>
                         )}
                       </div>
                     </div>

@@ -86,14 +86,14 @@ const Header = () => {
                 </TrackedLink>
                 
                 {/* Kickstarter Button - Right Side in Green */}
-                {navItems.find(item => item.title === 'Kickstarter') && (
-                  <Link 
-                    to={navItems.find(item => item.title === 'Kickstarter').to} 
-                    className="bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
-                  >
-                    Kickstarter
-                  </Link>
-                )}
+                <a 
+                  href="https://www.kickstarter.com/projects/elemental-games/elekin" 
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                >
+                  Kickstarter
+                </a>
                 {isShopPage && (
                   <>
                     {items.length > 0 && (
@@ -166,16 +166,16 @@ const Header = () => {
                         >
                           Shop
                         </TrackedLink>
-                        {navItems.find(item => item.title === 'Kickstarter') && (
-                          <div className="flex justify-start">
-                            <Link 
-                              to={navItems.find(item => item.title === 'Kickstarter').to} 
-                              className="inline-block py-1.5 px-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-s whitespace-nowrap ml-1"
-                            >
-                              Kickstarter
-                            </Link>
-                          </div>
-                        )}
+                        <div className="flex justify-start">
+                          <a 
+                            href="https://www.kickstarter.com/projects/elemental-games/elekin" 
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-block py-1.5 px-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-s whitespace-nowrap ml-1"
+                          >
+                            Kickstarter
+                          </a>
+                        </div>
                       </div>
                     </div>
                   </NavigationMenuContent>

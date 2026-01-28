@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Truck, ChevronLeft, ChevronRight, Clock, X } from 'lucide-react';
+import { Sparkles, Truck, ChevronLeft, ChevronRight, Clock, X, Store, Mail } from 'lucide-react';
 
 const products = [
     {
@@ -323,6 +323,37 @@ const ShopPage = () => {
             </motion.div>
             );
           })}
+        </motion.div>
+
+        {/* Wholesale Pricing Section */}
+        <motion.div 
+          className="max-w-4xl mx-auto mt-16 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.8 }}
+        >
+          <div className="bg-gradient-to-r from-purple-900/50 to-blue-900/50 border-2 border-purple-500/50 rounded-lg p-8 text-center">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <Store className="w-8 h-8 text-yellow-400" />
+              <h2 className="text-2xl lg:text-3xl font-bold text-yellow-400">Local Game Store Wholesale Pricing</h2>
+            </div>
+            <p className="text-lg text-purple-200 mb-6 max-w-2xl mx-auto">
+              Are you a Local Game Store interested in carrying Elekin TCG products? 
+              We offer competitive wholesale pricing for retailers.
+            </p>
+            <div className="flex items-center justify-center gap-2">
+              <Mail className="w-5 h-5 text-purple-300" />
+              <a 
+                href="mailto:mark@elementalgames.gg?subject=Wholesale Pricing Inquiry"
+                className="text-xl font-semibold text-yellow-400 hover:text-yellow-300 transition-colors underline"
+              >
+                mark@elementalgames.gg
+              </a>
+            </div>
+            <p className="text-sm text-purple-300 mt-4">
+              Please reach out to learn more about our wholesale program and pricing options.
+            </p>
+          </div>
         </motion.div>
       </div>
 

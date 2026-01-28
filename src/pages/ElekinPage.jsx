@@ -210,7 +210,7 @@ const ElekinPage = () => {
         </section>
 
         {/* Interactive Navigation Hub */}
-        <section className="container mx-auto px-4 py-12">
+        <section className="container mx-auto px-4 py-12 -mt-24">
           <div className="max-w-6xl mx-auto">
             <motion.h2 
               className="text-3xl lg:text-4xl font-bold text-center mb-12 text-yellow-400"
@@ -273,9 +273,9 @@ const ElekinPage = () => {
                 transition={{ delay: 1.2 }}
               >
                 <Users className="w-16 h-16 text-yellow-400 mb-6 group-hover:scale-110 transition-transform" />
-                <h3 className="text-2xl font-bold text-white mb-4">Join Early Access</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">Join Our Community</h3>
                 <p className="text-purple-200 mb-6">
-                  Become an Early Access Elemental and get first access to reveals, updates, and community perks.
+                  Join our community and get first access to products, updates, and community perks.
                 </p>
                 
                 <form onSubmit={handleSubmit} className="space-y-3">
@@ -297,93 +297,6 @@ const ElekinPage = () => {
                 </form>
               </motion.div>
             </div>
-          </div>
-        </section>
-
-        {/* Featured Cards Section - Secondary */}
-        <section className="container mx-auto px-4 py-16">
-          <div className="max-w-6xl mx-auto">
-            <motion.div 
-              className="text-center mb-12"
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.3 }}
-            >
-              <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-yellow-400">Featured Card Previews</h2>
-              <p className="text-xl text-purple-200 max-w-3xl mx-auto">
-                Card reveals begin June 23rd! Follow our campaign to see strategic cards as they&apos;re unveiled weekly.
-              </p>
-            </motion.div>
-
-            <motion.div 
-              className="grid grid-cols-2 lg:grid-cols-4 gap-6"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.4 }}
-            >
-              {[1,2,3,4].map((placeholder) => {
-                // Updated schedule: Week 1-3 in June, Week 4-6 in July
-                const weekDates = [
-                  { date: 23, month: 'June' },   // Week 1: June 23
-                  { date: 30, month: 'June' },   // Week 2: June 30  
-                  { date: 7, month: 'July' },    // Week 3: July 7
-                  { date: 14, month: 'July' },   // Week 4: July 14
-                  { date: 21, month: 'July' },   // Week 5: July 21
-                  { date: 28, month: 'July' }    // Week 6: July 28
-                ];
-                const revealInfo = weekDates[placeholder - 1];
-                
-                return (
-                <motion.div 
-                  key={placeholder}
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 1.5 + placeholder * 0.1 }}
-                  className="group cursor-pointer"
-                >
-                  <div className="relative overflow-hidden rounded-xl bg-purple-950/40 border border-purple-500/30 hover:border-yellow-500/50 transition-all duration-300">
-                    <div className="w-full aspect-[5/7] relative">
-                      <img 
-                        src="/Card_Back.png" 
-                        alt="Card Back"
-                        className="w-full h-full object-contain"
-                      />
-                      {/* Coming Soon Overlay */}
-                      <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-                        <div className="text-center">
-                          <div className="text-4xl mb-2">🔒</div>
-                          <div className="text-yellow-400 font-bold text-lg">Coming Soon</div>
-                          <div className="text-purple-200 text-sm">{revealInfo.month} {revealInfo.date}</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="p-4">
-                      <h3 className="text-lg font-bold text-white mb-2">Week {placeholder} Cards</h3>
-                      <div className="flex justify-between text-sm">
-                        <span className="text-purple-300">Reveals {revealInfo.month} {revealInfo.date}</span>
-                        <span className="text-yellow-400">4 Cards</span>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-                );
-              })}
-            </motion.div>
-
-            <motion.div 
-              className="text-center mt-12"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1.8 }}
-            >
-              <Link 
-                to="/cards/campaign"
-                className="inline-flex items-center px-8 py-4 bg-transparent border-2 border-purple-400 hover:border-yellow-400 text-white font-semibold rounded-xl transition-all duration-300 hover:scale-105 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)]"
-              >
-                <Calendar className="w-5 h-5 mr-3" />
-                See Full Campaign Timeline
-              </Link>
-            </motion.div>
           </div>
         </section>
 

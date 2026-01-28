@@ -19,7 +19,7 @@ const Footer = () => {
             <ul className="space-y-2">
               <li><Link to="/about" className="text-purple-300 hover:text-yellow-400">About Us</Link></li>
               <li><Link to="/join-now" className="text-purple-300 hover:text-yellow-400">Kickstarter</Link></li>
-              <li><a href="https://discord.gg/qXNWh4dMve" className="text-purple-300 hover:text-yellow-400">Discord</a></li>
+              <li><a href="https://discord.gg/QyNDMYprCg" className="text-purple-300 hover:text-yellow-400">Discord</a></li>
               <li><a href="https://www.youtube.com/@ElekinTCG" className="text-purple-300 hover:text-yellow-400">YouTube</a></li>
             </ul>
           </div>

@@ -3158,6 +3158,7 @@
       },
       "trigger": "When your opponent declares an attack:",
       "effect": "Prevent all damage to your shields for one turn.",
+      "clarification": "When your opponent declares an attack on your shield",
       "synergies": [],
       "counters": [],
       "news": []

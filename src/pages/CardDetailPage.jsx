@@ -259,9 +259,19 @@ const CardDetailPage = () => {
           )}
 
           {card.clarification && (
-            <div className="mt-6 mb-6 bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4">
-              <h3 className="text-lg font-semibold text-yellow-400 mb-1">Clarification</h3>
-              <p className="text-yellow-100">{card.clarification}</p>
+            <div className={`mt-6 mb-6 rounded-lg p-4 ${
+              card.id === 'unbreakable' 
+                ? 'bg-orange-600/20 border border-orange-600/40' 
+                : 'bg-yellow-500/10 border border-yellow-500/30'
+            }`}>
+              <h3 className={`text-lg font-semibold mb-1 ${
+                card.id === 'unbreakable' 
+                  ? 'text-orange-600' 
+                  : 'text-yellow-400'
+              }`}>Clarification</h3>
+              <p className={card.id === 'unbreakable' ? 'text-orange-200' : 'text-yellow-100'}>
+                {card.clarification}
+              </p>
             </div>
           )}
 

@@ -2,8 +2,8 @@ import { Link, useLocation, Navigate } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Book, X, Zap, Users, Gamepad2, Calendar, PlayCircle, Shield, Star } from 'lucide-react';
-import { useState } from 'react';
+import { Book, X, Zap, Users, Gamepad2, Calendar, PlayCircle, Shield, Star, MapPin, Store, Trophy, ExternalLink } from 'lucide-react';
+import { useState, useEffect } from 'react';
 import { Input } from '@/components/ui/input';
 import { subscribeEmail } from '@/utils/api';
 import confetti from 'canvas-confetti';
@@ -20,6 +20,18 @@ const ElekinPage = () => {
   const [confirmationEmail, setConfirmationEmail] = useState('');
   const [alreadySubscribed, setAlreadySubscribed] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+
+  // Scroll to section if hash is present
+  useEffect(() => {
+    if (location.hash === '#where-to-find-elekin') {
+      setTimeout(() => {
+        const element = document.getElementById('where-to-find-elekin');
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    }
+  }, [location.hash]);
 
   // If on /elekin (not /elekin/overview), redirect to overview
   if (location.pathname === '/elekin') {
@@ -204,6 +216,193 @@ const ElekinPage = () => {
                 <Star className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-white mb-3">Elemental Essence</h3>
                 <p className="text-purple-200">Generate essence from your creatures, store it, and use it to activate stronger abilities and summon more powerful creatures</p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Where to Find Elekin Section */}
+        <section id="where-to-find-elekin" className="container mx-auto px-4 py-16 -mt-20">
+          <div className="max-w-6xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center mb-12"
+            >
+              <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-4">
+                <Store className="w-5 h-5 text-yellow-400 mr-2" />
+                <span className="text-yellow-300 font-semibold">NOW IN STORES</span>
+              </div>
+              <h2 className="text-4xl lg:text-5xl font-bold text-yellow-400 mb-4">
+                Where to Find Elekin
+              </h2>
+              <p className="text-xl text-purple-200 max-w-3xl mx-auto">
+                Elekin is now available at select game stores across the US. Visit these locations to pick up your deck, join demo days, and compete in tournaments!
+              </p>
+            </motion.div>
+
+            {/* Store Locations */}
+            <div className="mb-12">
+              {/* Top 3 stores */}
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
+                {[
+                  { name: 'Mulligan Games', location: 'Warminster, PA', url: 'https://www.instagram.com/mulligangames/?hl=en', inStock: true },
+                  { name: 'Noble Knight Games', location: 'Fitchburg, WI', url: 'https://www.nobleknight.com/', inStock: true },
+                  { name: "Frank's Card Shop", location: 'Sicklerville, NJ', url: 'https://frankscardshopnj.com', inStock: true }
+                ].map((store, index) => (
+                  <motion.a
+                    key={store.name}
+                    href={store.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: index * 0.1 }}
+                    className="bg-transparent p-6 rounded-xl border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)] hover:border-yellow-400 transition-all duration-300 cursor-pointer group relative"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="bg-yellow-500/20 p-3 rounded-lg group-hover:bg-yellow-500/30 transition-colors">
+                        <Store className="w-6 h-6 text-yellow-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">{store.name}</h3>
+                          <ExternalLink className="w-4 h-4 text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <div className="flex items-center text-purple-200 mb-2">
+                          <MapPin className="w-4 h-4 mr-2 text-purple-300" />
+                          <span>{store.location}</span>
+                        </div>
+                        {store.inStock && (
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="relative flex items-center justify-center">
+                              <div className="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                              <div className="w-3 h-3 bg-green-400 rounded-full absolute animate-ping opacity-75"></div>
+                            </div>
+                            <span className="text-xs font-semibold text-green-400">In Stock</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+              
+              {/* Bottom 2 stores - centered */}
+              <div className="flex justify-center gap-6">
+                {[
+                  { name: "Gamer's Heaven", location: 'Phoenixville, PA', url: 'https://pxv.gamersheaven.com/', comingSoon: true },
+                  { name: 'Alternate Universes', location: '3 Locations in PA', url: 'https://alternateu.com/', comingSoon: true }
+                ].map((store, index) => (
+                  <motion.a
+                    key={store.name}
+                    href={store.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: (index + 3) * 0.1 }}
+                    className="bg-transparent p-6 rounded-xl border-2 border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.4)] hover:shadow-[0_0_25px_rgba(234,179,8,0.6)] hover:border-yellow-400 transition-all duration-300 cursor-pointer group w-full max-w-sm"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="bg-yellow-500/20 p-3 rounded-lg group-hover:bg-yellow-500/30 transition-colors">
+                        <Store className="w-6 h-6 text-yellow-400" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-2">
+                          <h3 className="text-xl font-bold text-white group-hover:text-yellow-400 transition-colors">{store.name}</h3>
+                          <ExternalLink className="w-4 h-4 text-purple-300 opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </div>
+                        <div className="flex items-center text-purple-200 mb-2">
+                          <MapPin className="w-4 h-4 mr-2 text-purple-300" />
+                          <span>{store.location}</span>
+                        </div>
+                        {store.comingSoon && (
+                          <div className="flex items-center gap-2 mt-1">
+                            <div className="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                            <span className="text-xs font-semibold text-yellow-400">Coming Soon</span>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </motion.a>
+                ))}
+              </div>
+            </div>
+
+            {/* Demo Days & Tournament Info */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            >
+              {/* Demo Days Card */}
+              <div className="bg-gradient-to-br from-blue-500/20 to-purple-500/20 p-8 rounded-xl border-2 border-blue-400/50 shadow-[0_0_20px_rgba(59,130,246,0.3)]">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-blue-500/30 p-3 rounded-lg">
+                    <Calendar className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">Demo Days</h3>
+                </div>
+                <p className="text-purple-200 mb-6">
+                  Join us for demo days at our partner stores! Learn how to play, try out different decks, and meet other Elekin players.
+                </p>
+                <div className="space-y-3">
+                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-white font-semibold">Feb 3rd</p>
+                        <p className="text-purple-200 text-sm">Gamer&apos;s Heaven - Phoenixville, PA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-white font-semibold">Feb 6th</p>
+                        <p className="text-purple-200 text-sm">Alternate Universes - Blue Bell, PA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-white font-semibold">Feb 7th</p>
+                        <p className="text-purple-200 text-sm">Mulligan Games - Warminster, PA</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tournament Card */}
+              <div className="bg-gradient-to-br from-yellow-500/20 to-orange-500/20 p-8 rounded-xl border-2 border-yellow-400/50 shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+                <div className="flex items-center gap-4 mb-4">
+                  <div className="bg-yellow-500/30 p-3 rounded-lg">
+                    <Trophy className="w-8 h-8 text-yellow-400" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white">1st Demo Tournament</h3>
+                </div>
+                <p className="text-purple-200 mb-6">
+                  Compete against other players in our first official tournament! Show off your skills and compete for prizes.
+                </p>
+                <div className="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+                  <div className="flex items-start gap-2">
+                    <Trophy className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-white font-bold text-lg mb-1">Feb 13th</p>
+                      <p className="text-purple-200">Mulligan Games - Warminster, PA</p>
+                      <p className="text-purple-300 text-sm mt-2">
+                        Tournament details and registration information available at the store.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </motion.div>
           </div>

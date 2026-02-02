@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
-import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText, CircleDot } from 'lucide-react';
+import { Download, Sword, Sparkles, Shield, Scroll, Wand, Lightbulb, Book, BookText, CircleDot, ChevronDown } from 'lucide-react';
 import { Tabs, TabsContent } from "@/components/ui/tabs";
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
 import RulebookDownloadModal from '@/components/RulebookDownloadModal';
 import TrackedLink from '@/components/TrackedLink';
 
@@ -376,7 +384,7 @@ const HowToPlayPage = () => {
             className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16"
           >
             <motion.div 
-              className="bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
+              className="bg-purple-900/30 p-3 md:p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
               whileHover={{ scale: 1.05 }}
               onClick={() => {
                 setActiveTab('essence');
@@ -387,22 +395,24 @@ const HowToPlayPage = () => {
                 initial={{ rotate: 0 }}
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                className="absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
+                className="hidden md:block absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
               >
                 <Sparkles className="w-full h-full text-yellow-400" />
               </motion.div>
-              <Sparkles className="w-12 h-12 text-yellow-500 mb-4 group-hover:text-yellow-400 transition-colors" />
-              <h2 className="text-2xl font-bold mb-4 text-white">Essence Tracking</h2>
-              <p className="text-purple-200">
+              <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-4">
+                <Sparkles className="w-8 h-8 md:w-16 md:h-16 text-yellow-500 flex-shrink-0 group-hover:text-yellow-400 transition-colors" />
+                <h2 className="text-lg md:text-3xl font-bold text-white">Essence Tracking</h2>
+              </div>
+              <p className="hidden md:block text-purple-200">
                 Generate and manage elemental essence to summon creatures and activate powerful abilities.
               </p>
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="hidden md:block absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
             </div>
             </motion.div>
 
             <motion.div 
-              className="bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
+              className="bg-purple-900/30 p-3 md:p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
               whileHover={{ scale: 1.05 }}
               onClick={() => {
                 setActiveTab('combat');
@@ -413,22 +423,24 @@ const HowToPlayPage = () => {
                 initial={{ rotate: -45, y: 20 }}
                 animate={{ rotate: 45, y: -20 }}
                 transition={{ duration: 1.5, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
+                className="hidden md:block absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
               >
                 <Sword className="w-full h-full text-yellow-400" />
               </motion.div>
-              <Sword className="w-12 h-12 text-yellow-500 mb-4 group-hover:text-yellow-400 transition-colors" />
-              <h2 className="text-2xl font-bold mb-4 text-white">Combat System</h2>
-              <p className="text-purple-200">
+              <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-4">
+                <Sword className="w-8 h-8 md:w-16 md:h-16 text-yellow-500 flex-shrink-0 group-hover:text-yellow-400 transition-colors" />
+                <h2 className="text-lg md:text-3xl font-bold text-white">Combat System</h2>
+              </div>
+              <p className="hidden md:block text-purple-200">
                 Strategic battles using creature stats, abilities, and tactical positioning.
               </p>
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="hidden md:block absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
             </div>
             </motion.div>
 
             <motion.div 
-              className="bg-purple-900/30 p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
+              className="bg-purple-900/30 p-3 md:p-8 rounded-lg border border-purple-500/30 cursor-pointer transition-all hover:bg-purple-800/40 hover:border-yellow-500/50 hover:scale-105 hover:shadow-[0_0_15px_rgba(234,179,8,0.3)] relative group"
               whileHover={{ scale: 1.05 }}
               onClick={() => {
                 setActiveTab('shields');
@@ -439,16 +451,18 @@ const HowToPlayPage = () => {
                 initial={{ scale: 0.8 }}
                 animate={{ scale: 1.2 }}
                 transition={{ duration: 2, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }}
-                className="absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
+                className="hidden md:block absolute -top-4 -right-4 w-20 h-20 opacity-0 group-hover:opacity-30 transition-opacity"
               >
                 <Shield className="w-full h-full text-yellow-400" />
               </motion.div>
-              <Shield className="w-12 h-12 text-yellow-500 mb-4 group-hover:text-yellow-400 transition-colors" />
-              <h2 className="text-2xl font-bold mb-4 text-white">Shield Mechanics</h2>
-              <p className="text-purple-200">
+              <div className="flex items-center gap-3 md:gap-4 mb-2 md:mb-4">
+                <Shield className="w-8 h-8 md:w-16 md:h-16 text-yellow-500 flex-shrink-0 group-hover:text-yellow-400 transition-colors" />
+                <h2 className="text-lg md:text-3xl font-bold text-white">Shield Mechanics</h2>
+              </div>
+              <p className="hidden md:block text-purple-200">
                 Protect yourself with powerful shields that provide unique effects when broken.
               </p>
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="hidden md:block absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
                 <span className="text-yellow-500 font-semibold text-sm">Click to learn more</span>
             </div>
             </motion.div>
@@ -463,9 +477,51 @@ const HowToPlayPage = () => {
               className="md:w-3/4"
             >
               <Tabs value={activeTab} className="w-full" onValueChange={setActiveTab}>
-                {/* Mobile tab selector (keeps navigation obvious) */}
-                <div className="md:hidden">
-                  <TabsList className="grid grid-cols-2 gap-2 bg-purple-950/50 border border-purple-500/30 p-2 rounded-lg">
+                {/* Mobile-friendly dropdown navigation */}
+                <div className="md:hidden mb-4">
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        className="w-full justify-between bg-purple-950/50 border-purple-500/30 text-white hover:bg-purple-900/50 h-12 text-base"
+                      >
+                        <div className="flex items-center gap-2">
+                          {(() => {
+                            const Icon = quickLinks.find(link => link.tab === activeTab)?.icon || Lightbulb;
+                            return <Icon className="w-5 h-5" />;
+                          })()}
+                          <span>{quickLinks.find(link => link.tab === activeTab)?.title || 'Quick Start'}</span>
+                        </div>
+                        <ChevronDown className="ml-2 h-5 w-5" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent className="w-[calc(100vw-2rem)] bg-purple-950/95 backdrop-blur-sm border-purple-500/30 max-h-[70vh] overflow-y-auto">
+                      <DropdownMenuGroup>
+                        {quickLinks.map((link) => {
+                          const Icon = link.icon;
+                          return (
+                            <DropdownMenuItem
+                              key={link.tab}
+                              onClick={() => setActiveTab(link.tab)}
+                              className={`flex items-center gap-3 px-4 py-3 text-base cursor-pointer ${
+                                activeTab === link.tab
+                                  ? 'bg-yellow-500/20 text-yellow-400 font-semibold'
+                                  : 'text-purple-200 hover:bg-purple-800/50 hover:text-white'
+                              }`}
+                            >
+                              <Icon className="w-5 h-5 flex-shrink-0" />
+                              <span>{link.title}</span>
+                            </DropdownMenuItem>
+                          );
+                        })}
+                      </DropdownMenuGroup>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+
+                {/* Desktop tabs */}
+                <div className="hidden md:block">
+                  <TabsList className="grid grid-cols-2 lg:grid-cols-3 gap-2 bg-purple-950/50 border border-purple-500/30 p-2 rounded-lg">
                     {quickLinks.map((link) => (
                       <TabsTrigger
                         key={link.tab}

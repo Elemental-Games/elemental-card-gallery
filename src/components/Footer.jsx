@@ -20,7 +20,7 @@ const Footer = () => {
               <li><Link to="/about" className="text-purple-300 hover:text-yellow-400">About Us</Link></li>
               <li><Link to="/join-now" className="text-purple-300 hover:text-yellow-400">Kickstarter</Link></li>
               <li><a href="https://discord.gg/QyNDMYprCg" className="text-purple-300 hover:text-yellow-400">Discord</a></li>
-              <li><a href="https://www.youtube.com/@ElekinTCG" className="text-purple-300 hover:text-yellow-400">YouTube</a></li>
+              <li><a href="https://www.instagram.com/elekin_tcg" target="_blank" rel="noopener noreferrer" className="text-purple-300 hover:text-yellow-400">Instagram</a></li>
             </ul>
           </div>
           <div>

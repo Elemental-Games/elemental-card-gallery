@@ -155,27 +155,26 @@ const ShopPage = () => {
       </div>
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Scarcity Alert Banner */}
+
+        {/* Available in Stores Link */}
         <motion.div 
           className="max-w-4xl mx-auto mb-6"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
         >
-          <div className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 border-2 border-yellow-500/50 rounded-lg p-6 text-center">
-            <div className="flex items-center justify-center gap-3 mb-3">
-              <Clock className="w-5 h-5 text-yellow-400" />
-              <h2 className="text-xl lg:text-2xl font-bold text-yellow-400">Demo Day Edition Ends February 17th</h2>
+          <Link to="/elekin/overview#where-to-find-elekin">
+            <div className="bg-gradient-to-r from-green-500/20 via-yellow-500/20 to-purple-500/20 border-2 border-yellow-500/50 rounded-xl p-6 text-center hover:border-yellow-400 transition-all duration-300 cursor-pointer group">
+              <div className="flex items-center justify-center gap-3 mb-2">
+                <Store className="w-6 h-6 text-yellow-400 group-hover:scale-110 transition-transform" />
+                <h3 className="text-xl lg:text-2xl font-bold text-yellow-400">Elekin Available in Stores</h3>
+              </div>
+              <p className="text-purple-200 text-sm md:text-base">
+                Find Elekin at 3 locations across the US. View store locations, demo days, and tournament info →
+              </p>
             </div>
-            <p className="text-base font-medium text-white mb-2">
-              These exclusive products will be replaced when our Kickstarter launches on February 17th.
-            </p>
-            <p className="text-purple-200 text-sm">
-              Limited availability - get yours while supplies last!
-            </p>
-          </div>
+          </Link>
         </motion.div>
-
 
         <motion.div 
           className="max-w-4xl mx-auto text-center mb-12"

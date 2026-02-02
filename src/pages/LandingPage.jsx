@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
-import { Book, LayoutGrid, Map, Star, X, Gift, PlayCircle, Users, ShoppingBag } from 'lucide-react';
+import { Book, LayoutGrid, Map, Star, X, Gift, Users, ShoppingBag, MapPin, Store } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import KeyFeatures from '../components/KeyFeatures';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
@@ -338,6 +338,41 @@ const LandingPage = () => {
             </TrackedLink>
           </div>
         </div>
+      </section>
+
+      {/* ELEKIN IN STORES BANNER */}
+      <section className="container mx-auto px-4 py-8 relative z-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="max-w-6xl mx-auto"
+        >
+          <div className="bg-gradient-to-r from-green-500/20 via-yellow-500/20 to-purple-500/20 border-2 border-yellow-500/50 rounded-xl p-6 lg:p-8 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
+              <div className="flex-1 text-center lg:text-left">
+                <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
+                  <Store className="w-6 h-6 text-yellow-400" />
+                  <h2 className="text-2xl lg:text-3xl font-bold text-yellow-400">Elekin Now Available in Stores!</h2>
+                </div>
+                <p className="text-lg text-white mb-2">
+                  Find Elekin TCG at <span className="text-yellow-400 font-semibold">5 locations</span> across the US, with demo days and tournaments happening now!
+                </p>
+                <p className="text-purple-200 text-sm">
+                  Visit our partner stores to try Elekin, join demo days, and compete in upcoming tournaments.
+                </p>
+              </div>
+              <Link to="/elekin/overview#where-to-find-elekin" className="flex-shrink-0">
+                <Button
+                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-6 py-3 text-lg rounded-xl shadow-lg hover:scale-105 transition-all"
+                >
+                  <MapPin className="mr-2 h-5 w-5" />
+                  Find Stores
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Cards of the Week Section */}

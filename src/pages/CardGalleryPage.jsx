@@ -111,6 +111,22 @@ const CardGalleryPage = () => {
       </Helmet>
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-center mb-8 text-white">Card Gallery</h1>
+        
+        {/* Demo Day Edition Info Banner */}
+        <div className="bg-gradient-to-r from-yellow-500/20 via-purple-500/20 to-yellow-500/20 border-2 border-yellow-500/50 rounded-xl p-4 md:p-6 mb-8 max-w-4xl mx-auto">
+          <div className="text-center">
+            <p className="text-sm md:text-base text-purple-200 mb-2">
+              These are just <span className="text-yellow-400 font-semibold">60 out of 175 cards</span> launching in our <span className="text-yellow-400 font-semibold">1st set</span>.
+            </p>
+            <p className="text-sm md:text-base text-purple-200 mb-2">
+              These 60 cards are the only ones available in our <span className="text-yellow-400 font-semibold">Demo Day Edition</span> products.
+            </p>
+            <p className="text-sm md:text-base text-purple-200">
+              The full <span className="text-yellow-400 font-semibold">175 card collection</span> will be released upon <span className="text-yellow-400 font-semibold">Kickstarter completion</span>.
+            </p>
+          </div>
+        </div>
+        
         <FilterOptions 
           filters={filters}
           onFilterChange={handleFilterChange} 

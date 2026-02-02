@@ -269,9 +269,10 @@ const CardDetailPage = () => {
                   ? 'text-orange-600' 
                   : 'text-yellow-400'
               }`}>Clarification</h3>
-              <p className={card.id === 'unbreakable' ? 'text-orange-200' : 'text-yellow-100'}>
-                {card.clarification}
-              </p>
+              <p 
+                className={card.id === 'unbreakable' ? 'text-orange-200' : 'text-yellow-100'}
+                dangerouslySetInnerHTML={{ __html: card.clarification }}
+              />
             </div>
           )}
 

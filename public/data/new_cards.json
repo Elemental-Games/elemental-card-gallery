@@ -3158,7 +3158,7 @@
       },
       "trigger": "When your opponent declares an attack:",
       "effect": "Prevent all damage to your shields for one turn.",
-      "clarification": "When your opponent declares an attack on your shield",
+      "clarification": "The current trigger condition has a wording error. The correct trigger condition is:<br/><br/><strong>When your opponent declares an attack on your shield</strong>",
       "synergies": [],
       "counters": [],
       "news": []

@@ -20,6 +20,16 @@ const PostPurchasePage = () => {
         return;
       }
 
+      // Fire Google conversion tracking
+      if (window.gtag) {
+        window.gtag('event', 'conversion', {
+          'send_to': 'AW-17926438374/3U6dCM2ZvPEbEOb7_uNC',
+          'value': 1.0,
+          'currency': 'USD',
+          'transaction_id': orderId
+        });
+      }
+
       try {
         const endpoint = `/api/verify-order?order_id=${encodeURIComponent(orderId)}`;
         const response = await fetch(endpoint);

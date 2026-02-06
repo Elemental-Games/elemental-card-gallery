@@ -244,7 +244,7 @@ const HowToPlayPage = () => {
           >
             <h1 className="text-5xl font-bold text-yellow-400 mb-4">How to Play Elekin</h1>
             <p className="text-xl text-purple-200 mb-8 max-w-2xl mx-auto">
-              Master the elements and become a legendary card master in the world of Kinbrold
+              Rise through the ranks and become a Master Elementalist in the world of Kinbrold
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mt-6">
               <TrackedLink

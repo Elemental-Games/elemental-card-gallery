@@ -289,7 +289,7 @@ const HowToPlayPage = () => {
             className="mb-16"
           >
             
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
               {/* Quick Overview Video */}
               <div className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 group">
                 <h3 className="text-xl font-bold text-yellow-400 mb-4 text-center">Quick Overview</h3>
@@ -365,6 +365,48 @@ const HowToPlayPage = () => {
                 <div className="text-center mt-3">
                   <a 
                     href="https://www.youtube.com/watch?v=pwEw9pSUT9M" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-yellow-400 hover:text-yellow-300 text-sm underline"
+                  >
+                    Watch on YouTube
+                  </a>
+                </div>
+              </div>
+
+              {/* Third Video */}
+              <div className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30 group">
+                <h3 className="text-xl font-bold text-yellow-400 mb-4 text-center">Full Tutorial</h3>
+                <div className="aspect-video bg-purple-950/50 rounded-lg mb-4 flex items-center justify-center relative overflow-hidden">
+                  <iframe
+                    width="100%"
+                    height="100%"
+                    src="https://www.youtube.com/embed/tIeOLRIZzhA?enablejsapi=1&mute=1"
+                    title="Elekin TCG - Gameplay Tutorial"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    className="rounded-lg transition-transform group-hover:scale-105"
+                    onMouseEnter={(e) => {
+                      const iframe = e.target;
+                      const currentSrc = iframe.src;
+                      if (!currentSrc.includes('autoplay=1')) {
+                        iframe.src = currentSrc + '&autoplay=1';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      const iframe = e.target;
+                      iframe.src = iframe.src.replace('&autoplay=1', '');
+                    }}
+                  ></iframe>
+                  <div className="absolute inset-0 bg-gradient-to-t from-purple-900/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"></div>
+                </div>
+                <p className="text-purple-200 text-sm text-center">
+                  Learn how to play Elekin TCG with this comprehensive gameplay tutorial
+                </p>
+                <div className="text-center mt-3">
+                  <a 
+                    href="https://www.youtube.com/watch?v=tIeOLRIZzhA" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-yellow-400 hover:text-yellow-300 text-sm underline"

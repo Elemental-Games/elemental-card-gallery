@@ -291,57 +291,116 @@ const CardDetailPage = () => {
         </div>
       </div>
 
-      {/* Synergy and Counter Cards Section (side-by-side, with images) */}
-      {(Array.isArray(card.synergies) && card.synergies.length > 0) || (Array.isArray(card.counters) && card.counters.length > 0) ? (
-        <div className="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-          {/* Synergy Cards */}
-          {Array.isArray(card.synergies) && card.synergies.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-bold text-yellow-400 mb-4">Synergy Cards</h2>
+      {/* Strategy Sections: Best Decks, Synergies, Counters, Combos */}
+      <div className="max-w-6xl mx-auto mt-8 space-y-8">
+        <h2 className="text-2xl font-bold text-yellow-400 mb-6">Strategy</h2>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {/* Best Decks */}
+          <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6">
+            <h3 className="text-xl font-bold text-yellow-400 mb-4">Best Decks</h3>
+            {Array.isArray(card.bestDecks) && card.bestDecks.length > 0 ? (
+              <ul className="space-y-2">
+                {card.bestDecks.map((deck, idx) => {
+                  const name = typeof deck === 'object' ? (deck.name || deck.id) : deck;
+                  const link = typeof deck === 'object' ? deck.link : null;
+                  return (
+                    <li key={typeof deck === 'object' ? (deck.id || idx) : idx}>
+                      {link ? (
+                        <Link to={link} className="text-purple-200 hover:text-yellow-400 transition-colors">
+                          {name}
+                        </Link>
+                      ) : (
+                        <span className="text-purple-200">{name}</span>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            ) : (
+              <p className="text-purple-400 text-sm italic">No decks added yet. Check back after the successful conclusion of our Kickstarter.</p>
+            )}
+          </div>
+
+          {/* Synergies */}
+          <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6">
+            <h3 className="text-xl font-bold text-yellow-400 mb-4">Synergies</h3>
+            {Array.isArray(card.synergies) && card.synergies.length > 0 ? (
               <div className="flex flex-wrap gap-4">
                 {card.synergies.map((synergy) => {
                   const synergyCard = { id: synergy.id || synergy };
                   const { marketingPath: synergyMarketingPath } = getCardImagePath(synergyCard);
-                  
                   return (
-                    <div key={synergyCard.id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard(synergyCard)}>
-                      <img 
-                        src={synergyMarketingPath} 
-                        alt={synergy.name || synergyCard.id} 
-                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950"
+                    <div key={synergyCard.id} className="flex flex-col items-center w-24 cursor-pointer group" onClick={() => setSidebarCard(synergyCard)}>
+                      <img
+                        src={synergyMarketingPath}
+                        alt={synergy.name || synergyCard.id}
+                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950 group-hover:border-yellow-400 transition-colors"
                         onError={createCardImageErrorHandler(synergyCard)}
                       />
+                      <span className="text-xs text-purple-300 group-hover:text-yellow-400 transition-colors">{synergy.name || synergyCard.id}</span>
                     </div>
                   );
                 })}
               </div>
-            </div>
-          )}
-          {/* Counter Cards */}
-          {Array.isArray(card.counters) && card.counters.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-bold text-yellow-400 mb-4">Counter Cards</h2>
+            ) : (
+              <p className="text-purple-400 text-sm italic">No synergies added yet. Check back after the successful conclusion of our Kickstarter.</p>
+            )}
+          </div>
+
+          {/* Counters */}
+          <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6">
+            <h3 className="text-xl font-bold text-yellow-400 mb-4">Counters</h3>
+            {Array.isArray(card.counters) && card.counters.length > 0 ? (
               <div className="flex flex-wrap gap-4">
                 {card.counters.map((counter) => {
                   const counterCard = { id: counter.id || counter };
                   const { marketingPath: counterMarketingPath } = getCardImagePath(counterCard);
-                  
                   return (
-                    <div key={counterCard.id} className="flex flex-col items-center w-24 cursor-pointer" onClick={() => setSidebarCard(counterCard)}>
-                      <img 
-                        src={counterMarketingPath} 
-                        alt={counter.name || counterCard.id} 
-                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950"
+                    <div key={counterCard.id} className="flex flex-col items-center w-24 cursor-pointer group" onClick={() => setSidebarCard(counterCard)}>
+                      <img
+                        src={counterMarketingPath}
+                        alt={counter.name || counterCard.id}
+                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950 group-hover:border-yellow-400 transition-colors"
                         onError={createCardImageErrorHandler(counterCard)}
                       />
+                      <span className="text-xs text-purple-300 group-hover:text-yellow-400 transition-colors">{counter.name || counterCard.id}</span>
                     </div>
                   );
                 })}
               </div>
-            </div>
-          )}
+            ) : (
+              <p className="text-purple-400 text-sm italic">No counters added yet. Check back after the successful conclusion of our Kickstarter.</p>
+            )}
+          </div>
+
+          {/* Combos */}
+          <div className="bg-purple-950/50 border border-purple-500/30 rounded-xl p-6">
+            <h3 className="text-xl font-bold text-yellow-400 mb-4">Combos</h3>
+            {Array.isArray(card.combos) && card.combos.length > 0 ? (
+              <div className="flex flex-wrap gap-4">
+                {card.combos.map((combo) => {
+                  const comboCard = { id: combo.id || combo };
+                  const { marketingPath: comboMarketingPath } = getCardImagePath(comboCard);
+                  return (
+                    <div key={comboCard.id} className="flex flex-col items-center w-24 cursor-pointer group" onClick={() => setSidebarCard(comboCard)}>
+                      <img
+                        src={comboMarketingPath}
+                        alt={combo.name || comboCard.id}
+                        className="w-full rounded mb-2 border-2 border-purple-400 bg-purple-950 group-hover:border-yellow-400 transition-colors"
+                        onError={createCardImageErrorHandler(comboCard)}
+                      />
+                      <span className="text-xs text-purple-300 group-hover:text-yellow-400 transition-colors">{combo.name || comboCard.id}</span>
+                    </div>
+                  );
+                })}
+              </div>
+            ) : (
+              <p className="text-purple-400 text-sm italic">No combos added yet. Check back after the successful conclusion of our Kickstarter.</p>
+            )}
+          </div>
         </div>
-      ) : null}
+      </div>
 
       {/* Lore section */}
       {(card.cardFact || card.loreDescription) && (

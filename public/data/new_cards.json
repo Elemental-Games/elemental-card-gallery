@@ -1705,8 +1705,10 @@
       },
       "cardFact": "When threatened they igniting twigs with their touch before flicking them at predators with surprising accuracy.",
       "loreDescription": "Charming panda-like creature with white and dark rusty-red fur. Ember Flickers meticulously gather twigs and forest debris, arranging them in precise patterns before setting them ablaze. Their methodical clearing of forest floors prevents larger wildfires from spreading through Kinbrold's regions. When danger approaches, they don't flee—instead, they ignite collected materials and flick burning debris at threats with remarkable precision.",
+      "bestDecks": ["Lightning Starter Deck", "Lava Starter Deck", "Poison Starter Deck"],
       "synergies": [],
       "counters": [],
+      "combos": [{"id": "direct-assault", "name": "Direct Assault"}],
       "news": []
     },
     {

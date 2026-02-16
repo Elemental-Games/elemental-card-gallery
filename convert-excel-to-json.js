@@ -124,9 +124,11 @@ const processedData = {
       }
     }
 
-    // Add synergies, counters, and news as empty arrays for now
+    // Add synergies, counters, combos, bestDecks, and news as empty arrays for now
     processedCard.synergies = [];
     processedCard.counters = [];
+    processedCard.combos = [];
+    processedCard.bestDecks = [];
     processedCard.news = [];
 
     return processedCard;

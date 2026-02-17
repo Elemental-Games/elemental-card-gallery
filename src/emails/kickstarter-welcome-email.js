@@ -33,18 +33,18 @@ export const getKickstarterWelcomeEmailHTML = (email) => {
                                 Thank you for signing up! You're now on our exclusive list for <strong style="color: #fbbf24;">Kickstarter launch notifications</strong>.
                             </p>
 
-                            <div style="background: rgba(251, 191, 36, 0.1); border: 2px solid #fbbf24; border-radius: 8px; padding: 20px; margin: 30px 0;">
-                                <h3 style="margin: 0 0 15px; color: #fbbf24; font-size: 20px;">🚀 Launch Date: February 17, 2026</h3>
+                            <div style="background: rgba(34, 197, 94, 0.1); border: 2px solid #22c55e; border-radius: 8px; padding: 20px; margin: 30px 0;">
+                                <h3 style="margin: 0 0 15px; color: #22c55e; font-size: 20px;">🚀 We're Live on Kickstarter!</h3>
                                 <p style="margin: 0; font-size: 16px; color: #e5e7eb;">
-                                    We'll notify you the moment our Kickstarter goes live, so you can secure early bird pricing and exclusive rewards!
+                                    Our Kickstarter campaign is live right now! Back us to help fund Elekin's first set and unlock stretch goal rewards for every backer.
                                 </p>
                             </div>
 
-                            <h3 style="margin: 30px 0 15px; color: #fbbf24; font-size: 20px;">What You'll Get:</h3>
+                            <h3 style="margin: 30px 0 15px; color: #fbbf24; font-size: 20px;">Why Back Us:</h3>
                             <ul style="margin: 0 0 30px; padding-left: 20px; color: #e5e7eb; font-size: 16px; line-height: 1.8;">
-                                <li><strong style="color: #fbbf24;">Early bird pricing</strong> - 20-30% off launch day prices</li>
-                                <li><strong style="color: #fbbf24;">Exclusive rewards</strong> - Limited edition cards and items</li>
-                                <li><strong style="color: #fbbf24;">First access</strong> - Be among the first to back our campaign</li>
+                                <li><strong style="color: #fbbf24;">Alt art promo card</strong> - Every backer receives one</li>
+                                <li><strong style="color: #fbbf24;">Stretch goals</strong> - Free items unlock as we hit milestones</li>
+                                <li><strong style="color: #fbbf24;">Fund the dream</strong> - Help us manufacture and finish our first set</li>
                                 <li><strong style="color: #fbbf24;">VIP status</strong> - Special Discord role and community perks</li>
                             </ul>
 
@@ -52,12 +52,12 @@ export const getKickstarterWelcomeEmailHTML = (email) => {
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
                                     <td align="center" style="padding: 20px 0;">
-                                        <p style="margin: 0 0 15px; font-size: 16px; color: #e5e7eb; font-weight: bold;">Help us build momentum before launch:</p>
+                                        <p style="margin: 0 0 15px; font-size: 16px; color: #e5e7eb; font-weight: bold;">Back us now and help bring Elekin to life:</p>
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: 0 auto;">
                                             <tr>
                                                 <td style="padding: 0 10px;">
-                                                    <a href="https://www.kickstarter.com/projects/elemental-games/elekin" style="display: inline-block; background: linear-gradient(90deg, #fbbf24 0%, #f59e0b 100%); color: #1A103C; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 16px; text-align: center;">
-                                                        🔔 Notify Me on Kickstarter
+                                                    <a href="https://www.kickstarter.com/projects/elemental-games/elekin" style="display: inline-block; background: linear-gradient(90deg, #22c55e 0%, #16a34a 100%); color: #ffffff; text-decoration: none; padding: 15px 30px; border-radius: 8px; font-weight: bold; font-size: 16px; text-align: center;">
+                                                        Back on Kickstarter →
                                                     </a>
                                                 </td>
                                                 <td style="padding: 0 10px;">
@@ -104,21 +104,21 @@ export const getKickstarterWelcomeEmailText = (email) => {
   return `
 Welcome to Elekin TCG!
 
-Thank you for signing up! You're now on our exclusive list for Kickstarter launch notifications.
+Thank you for signing up! You'll get updates on our live Kickstarter campaign.
 
-🚀 Launch Date: February 17, 2026
+🚀 We're Live on Kickstarter!
 
-We'll notify you the moment our Kickstarter goes live, so you can secure early bird pricing and exclusive rewards!
+Our campaign is live right now! Back us to help fund Elekin's first set and unlock stretch goal rewards for every backer.
 
-What You'll Get:
-- Early bird pricing - 20-30% off launch day prices
-- Exclusive rewards - Limited edition cards and items
-- First access - Be among the first to back our campaign
+Why Back Us:
+- Alt art promo card - Every backer receives one
+- Stretch goals - Free items unlock as we hit milestones
+- Fund the dream - Help us manufacture and finish our first set
 - VIP status - Special Discord role and community perks
 
-View our Kickstarter preview: https://elementalgames.gg/kickstarter
+Back us on Kickstarter: https://www.kickstarter.com/projects/elemental-games/elekin
 
-In the meantime, check out our website and join our Discord community!
+Check out our website and join our Discord community!
 
 Unsubscribe: ${process.env.SITE_URL || 'https://elementalgames.gg'}/unsubscribe?token=${Buffer.from(email).toString('base64')}
   `;

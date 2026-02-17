@@ -3,9 +3,36 @@ import TCGGameBoard from "../components/TCGGameBoard";
 import TCGDeckSelection from "../components/TCGDeckSelection";
 import TCGTurnOrder from "../components/TCGTurnOrder";
 
+function BetaNoticeModal({ onClose }) {
+  return (
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center p-6 z-50">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-yellow-500/50 rounded-2xl shadow-2xl shadow-yellow-500/10 max-w-lg w-full p-8 text-center">
+        <div className="text-5xl mb-4">⚠️</div>
+        <h2 className="text-2xl font-bold text-yellow-400 mb-4">Beta Version</h2>
+        <p className="text-lg text-slate-200 mb-6 leading-relaxed">
+          This online game was designed solely for <span className="text-yellow-400 font-semibold">beta-testing combat mechanics</span> and is intentionally incomplete.
+        </p>
+        <p className="text-lg text-slate-200 mb-8 leading-relaxed">
+          However, this is a great tool for learning Elekin&apos;s <span className="text-cyan-400 font-semibold">resource and combat systems</span>!
+        </p>
+        <button
+          onClick={onClose}
+          className="px-10 py-4 bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-slate-900 font-bold text-lg rounded-xl transition-all hover:scale-105 shadow-lg"
+        >
+          Got It — Let Me Play!
+        </button>
+      </div>
+    </div>
+  );
+}
+
 function TCGWelcome({ onEnter }) {
+  const [showBetaNotice, setShowBetaNotice] = useState(true);
+
   return (
     <div className="w-full h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white flex items-center justify-center p-6">
+      {showBetaNotice && <BetaNoticeModal onClose={() => setShowBetaNotice(false)} />}
+
       <div className="max-w-4xl mx-auto text-center space-y-8">
         {/* Title */}
         <div className="space-y-4">

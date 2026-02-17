@@ -93,7 +93,7 @@ const ShopPage = () => {
 
   // Check if promo banner was dismissed
   useEffect(() => {
-    const dismissed = localStorage.getItem('shopPromoBannerDismissed');
+    const dismissed = localStorage.getItem('shopKickstarterBannerDismissed');
     if (dismissed) {
       setShowPromoBanner(false);
     }
@@ -101,7 +101,7 @@ const ShopPage = () => {
 
   const handleDismissPromoBanner = () => {
     setShowPromoBanner(false);
-    localStorage.setItem('shopPromoBannerDismissed', 'true');
+    localStorage.setItem('shopKickstarterBannerDismissed', 'true');
   };
 
   return (
@@ -186,7 +186,7 @@ const ShopPage = () => {
             Elekin TCG Shop
           </h1>
           <p className="text-xl lg:text-2xl text-purple-200">
-            Limited Demo Day Edition products - <span className="text-red-400 font-bold">Only available until February 17th!</span>
+            Limited Demo Day Edition products - <span className="text-red-400 font-bold">Limited quantities available!</span>
           </p>
         </motion.div>
 
@@ -293,7 +293,7 @@ const ShopPage = () => {
               {/* Limited Edition Badge */}
               <div className="absolute top-3 right-3 bg-red-500/90 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 z-10">
                 <Clock className="w-3 h-3" />
-                Ends Feb 17
+                Ending Soon
               </div>
               
                 <ProductImageCarousel product={product} />
@@ -356,7 +356,7 @@ const ShopPage = () => {
         </motion.div>
       </div>
 
-      {/* Sticky Promotions Banner at Bottom */}
+      {/* Sticky Kickstarter Banner at Bottom */}
       <AnimatePresence>
         {showPromoBanner && (
           <motion.div 
@@ -364,28 +364,32 @@ const ShopPage = () => {
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-purple-500/95 to-blue-500/95 border-t border-purple-500/50 backdrop-blur-sm"
+            className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-green-600/95 to-emerald-600/95 border-t border-green-400/50 backdrop-blur-sm"
           >
           <div className="container mx-auto px-4 py-3">
             <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative">
               <button
                 onClick={handleDismissPromoBanner}
-                className="absolute top-0 right-0 md:right-4 text-purple-200 hover:text-white transition-colors p-1"
-                aria-label="Close promotions banner"
+                className="absolute top-0 right-0 md:right-4 text-green-200 hover:text-white transition-colors p-1"
+                aria-label="Close banner"
               >
                 <X className="w-5 h-5" />
               </button>
               <div className="flex items-center gap-2">
-                <Truck className="w-5 h-5 text-purple-200" />
-                <span className="text-base md:text-lg font-semibold text-purple-200">Free Shipping on Orders $50+</span>
-              </div>
-              <div className="hidden md:block w-px h-6 bg-purple-400/50"></div>
-              <div className="flex items-center gap-2">
-                <span className="text-lg">🎯</span>
+                <span className="text-lg">🚀</span>
                 <span className="text-base md:text-lg font-semibold text-white">
-                  <span className="text-yellow-400">Bonus Wheel Spin</span> with every $25+ order!
+                  Our Kickstarter is live! Help us fund Elekin&apos;s first set.
                 </span>
               </div>
+              <a
+                href="https://www.kickstarter.com/projects/elemental-games/elekin"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Button className="bg-white hover:bg-gray-100 text-green-700 font-bold px-6 py-1.5 text-sm rounded-lg whitespace-nowrap">
+                  Back Us on Kickstarter →
+                </Button>
+              </a>
             </div>
           </div>
           </motion.div>

@@ -2,15 +2,16 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
-import { Book, LayoutGrid, Map, Star, X, Gift, Users, ShoppingBag, MapPin, Store } from 'lucide-react';
+import { Book, LayoutGrid, Map, Star, X, Gift, Users, MapPin, Store } from 'lucide-react';
 import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
 import KeyFeatures from '../components/KeyFeatures';
 import CardsOfTheWeek from '../components/CardsOfTheWeek';
 import SubscribeButton from '@/components/SubscribeButton';
 import { motion, AnimatePresence } from 'framer-motion';
 import TrackedLink from '@/components/TrackedLink';
-import KickstarterCountdown from '@/components/KickstarterCountdown';
+import KickstarterProgress from '@/components/KickstarterProgress';
 import SignupForm from '@/components/auth/SignupForm';
+import { kickstarterConfig } from '@/config/kickstarter';
 
 const kingdoms = [
   { name: 'Grivoss', element: 'Earth', description: 'Mountain fortresses carved from living stone.', color: 'bg-green-300', hoverColor: 'hover:bg-green-400', path: '/kinbrold/grivoss', icon: 'images/cards/new-marketing/earth silver.webp' },
@@ -52,10 +53,10 @@ const LandingPage = () => {
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
-        <title>Elekin TCG - Kickstarter Launch February 17, 2026</title>
-        <meta name="description" content="Get notified for our Kickstarter launch! Early bird pricing + exclusive rewards. Launching February 17, 2026." />
-        <meta property="og:title" content="Elekin TCG - Kickstarter Launch February 17, 2026" />
-        <meta property="og:description" content="Get notified for our Kickstarter launch! Early bird pricing + exclusive rewards. Launching February 17, 2026." />
+        <title>Elekin TCG - Live on Kickstarter Now</title>
+        <meta name="description" content="Elekin TCG is live on Kickstarter! Back us now to help bring the next great trading card game to life. Stretch goals unlock free items for all backers." />
+        <meta property="og:title" content="Elekin TCG - Live on Kickstarter Now" />
+        <meta property="og:description" content="Elekin TCG is live on Kickstarter! Back us now to help bring the next great trading card game to life. Stretch goals unlock free items for all backers." />
         <meta property="og:image" content="/Elekin_Kinbrold.png" />
       </Helmet>
       
@@ -162,7 +163,7 @@ const LandingPage = () => {
               initial={{ scale: 0.9, opacity: 0, y: 50 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 50 }}
-              className="bg-gradient-to-br from-red-950 to-purple-950 border-2 border-yellow-500 rounded-xl shadow-2xl max-w-md w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto"
+              className="bg-gradient-to-br from-green-950 to-emerald-950 border-2 border-green-500 rounded-xl shadow-2xl shadow-green-500/20 max-w-md w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto"
               onClick={(e) => e.stopPropagation()}
             >
               <button 
@@ -183,80 +184,101 @@ const LandingPage = () => {
                         </svg>
                       </div>
                       <h2 className="text-3xl font-bold mb-2 text-green-400">You&apos;re Signed Up!</h2>
-                      <p className="text-xl text-green-300 font-semibold">Kickstarter launch notifications confirmed!</p>
+                      <p className="text-xl text-green-300 font-semibold">Campaign updates confirmed!</p>
                     </div>
 
-                    <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-6 mb-6">
+                    <div className="bg-green-500/10 border border-green-400/40 rounded-lg p-6 mb-6">
                       <p className="text-white mb-4">
-                        You&apos;ll be notified when our <span className="text-yellow-400 font-bold">Kickstarter launches on February 17, 2026</span>!
+                        We&apos;ll keep you posted on campaign exclusives, stretch goals, and more.
                       </p>
-                      <p className="text-purple-200 text-sm mb-4">
-                        Check your inbox for your welcome email with early bird pricing details and exclusive rewards.
+                      <p className="text-green-200 text-sm mb-4">
+                        Don&apos;t forget — our Kickstarter is live! Back now to help us reach our goal.
                       </p>
                     </div>
+
+                    <a
+                      href="https://www.kickstarter.com/projects/elemental-games/elekin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full mb-3"
+                      onClick={() => setShowExitIntent(false)}
+                    >
+                      <Button className="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-4 text-lg rounded-lg shadow-lg border border-green-400/50">
+                        Back on Kickstarter →
+                      </Button>
+                    </a>
 
                     <Button
                       onClick={handleDiscordJoinFromExitIntent}
-                      className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-4 text-lg rounded-lg shadow-lg mb-4"
+                      className="w-full bg-green-900/50 hover:bg-green-800/50 text-green-200 hover:text-white border border-green-500/40 font-medium py-4 text-lg rounded-lg mb-4"
                     >
                       Join Discord Community →
                     </Button>
 
                     <button 
                       onClick={() => {setShowExitIntent(false); setExitIntentSuccess(false);}}
-                      className="w-full bg-purple-800/50 hover:bg-purple-700/50 text-purple-200 hover:text-white border border-purple-500/30 font-medium py-3 px-6 rounded-lg transition-all duration-200"
+                      className="w-full text-green-300 hover:text-white text-sm transition-colors"
                     >
                       Continue exploring
                     </button>
                   </>
                 ) : (
-                  // KICKSTARTER FOCUSED STATE
+                  // KICKSTARTER LIVE STATE
                   <>
                     <div className="mb-6">
-                      <div className="bg-yellow-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                      <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                         <Star className="w-8 h-8 text-yellow-400" />
                       </div>
-                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-yellow-400 to-purple-400 bg-clip-text text-transparent">Don&apos;t Miss Our Kickstarter Launch!</h2>
-                      <p className="text-base lg:text-lg text-purple-200 font-medium">Get notified for early bird pricing + exclusive rewards</p>
+                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">We&apos;re Live on Kickstarter!</h2>
+                      <p className="text-base lg:text-lg text-green-200 font-medium">Help bring Elekin to life — every pledge gets us closer</p>
                     </div>
 
-                    {/* Countdown in popup */}
-                    <div className="mb-6">
-                      <KickstarterCountdown showLabel={false} />
-                    </div>
-
-                    <div className="bg-gradient-to-br from-yellow-500/15 to-purple-500/10 border border-yellow-500/40 rounded-xl p-4 mb-4">
-                      <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get:</h3>
+                    <div className="bg-gradient-to-br from-green-500/15 to-yellow-500/10 border border-green-400/50 rounded-xl p-4 mb-4 text-left">
+                      <h3 className="text-green-400 font-bold mb-3 text-center">🎁 Why Back Us:</h3>
                       <div className="space-y-2">
-                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
                           <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Early bird pricing (20-30% off)</span>
+                          <span className="text-white font-medium text-left">Alt art promo card for every backer</span>
                         </div>
-                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">Exclusive launch day rewards</span>
+                          <span className="text-white font-medium text-left">Stretch goals unlock free items for all backers</span>
                         </div>
-                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
                           <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">First access to Kickstarter page</span>
+                          <span className="text-white font-medium text-left">Help us hit $50K and unlock stretch goals</span>
                         </div>
-                        <div className="flex items-center bg-purple-900/30 rounded-lg p-3">
+                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
                           <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium">VIP status in community</span>
+                          <span className="text-white font-medium text-left">VIP status in community</span>
                         </div>
                       </div>
                     </div>
 
-                    {/* EMAIL CAPTURE FORM */}
+                    {/* PRIMARY CTA: Kickstarter */}
+                    <a
+                      href="https://www.kickstarter.com/projects/elemental-games/elekin"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block w-full mb-4"
+                      onClick={() => setShowExitIntent(false)}
+                    >
+                      <Button className="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-5 text-xl rounded-xl shadow-2xl shadow-green-500/30 transform hover:scale-105 transition-all duration-200 border border-green-400/50">
+                        Back Us on Kickstarter →
+                      </Button>
+                    </a>
+
+                    {/* Secondary: Email signup */}
+                    <p className="text-green-300 text-sm mb-2">Want campaign updates?</p>
                     <SignupForm 
-                      buttonClassName="w-full bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 text-purple-900 font-bold py-5 text-xl rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-200"
+                      buttonClassName="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-4 text-lg rounded-xl border border-green-500/50"
                       onSuccess={handleExitIntentEmailSuccess}
                       source="exit_intent_popup"
                     />
 
                     <button 
                       onClick={() => setShowExitIntent(false)}
-                      className="w-full text-purple-300 hover:text-white text-sm mt-3 transition-colors"
+                      className="w-full text-green-300 hover:text-white text-sm mt-3 transition-colors"
                     >
                       Maybe later
                     </button>
@@ -268,32 +290,34 @@ const LandingPage = () => {
         )}
       </AnimatePresence>
 
-      {/* STICKY FLOATING EMAIL CAPTURE BUTTON */}
+      {/* STICKY FLOATING KICKSTARTER BUTTON */}
       <div className="fixed bottom-6 right-6 z-50 lg:hidden">
-        <SubscribeButton 
-          className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold shadow-2xl rounded-full px-6 py-4 animate-pulse hover:animate-none"
-          showIcon={true}
-          iconClassName="mr-2 h-5 w-5"
+        <a
+          href={kickstarterConfig.url}
+          target="_blank"
+          rel="noopener noreferrer"
         >
-          Get Free Access
-        </SubscribeButton>
+          <Button className="bg-green-500 hover:bg-green-400 text-white font-bold shadow-2xl rounded-full px-6 py-4 animate-pulse hover:animate-none">
+            Back on Kickstarter
+          </Button>
+        </a>
       </div>
 
 
       
-      {/* HERO SECTION - KICKSTARTER FOCUSED */}
+      {/* HERO SECTION - KICKSTARTER LIVE */}
       <section className="container mx-auto px-4 py-16 lg:py-24 relative z-10 -mb-20">
         <div className="max-w-6xl mx-auto text-center -mt-20">
-          <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-6">
-            <Star className="w-4 h-4 text-yellow-400 mr-2" />
-            <span className="text-yellow-300 font-semibold">KICKSTARTER LAUNCH</span>
+          <div className="inline-flex items-center bg-green-500/20 border border-green-500/50 rounded-full px-6 py-2 mb-6">
+            <Star className="w-4 h-4 text-green-400 mr-2" />
+            <span className="text-green-300 font-semibold">KICKSTARTER IS LIVE</span>
           </div>
 
           <h1 className="text-5xl lg:text-7xl font-bold mb-4">
-            Kickstarter Launch:
+            We&apos;re Live on
             <br />
             <motion.span 
-              className="bg-gradient-to-r from-yellow-400 via-purple-400 to-yellow-400 bg-clip-text text-transparent bg-[length:200%_100%]"
+              className="bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent bg-[length:200%_100%]"
               animate={{
                 backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
               }}
@@ -303,39 +327,33 @@ const LandingPage = () => {
                 ease: "easeInOut"
               }}
             >
-              February 17, 2026
+              Kickstarter
             </motion.span>
           </h1>
 
           <p className="text-xl lg:text-2xl text-purple-200 mb-6 max-w-4xl mx-auto">
-            Get Early Access + Exclusive Rewards
+            Help us manufacture Elekin&apos;s first set and unlock stretch goals for all backers
           </p>
 
-          {/* Countdown Timer */}
-          <div className="mb-8 flex justify-center">
-            <KickstarterCountdown showLabel={false} />
+          {/* Funding Progress */}
+          <div className="mb-8">
+            <KickstarterProgress />
           </div>
 
-          {/* Email Capture Form - Primary CTA */}
-          <div className="max-w-md mx-auto mb-8">
-            <SignupForm 
-              buttonClassName="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-6 text-lg" 
-              source="kickstarter_landing_hero"
-            />
-          </div>
-
-          {/* Secondary CTA - Shop Now */}
-          <div className="mt-8">
-            <TrackedLink to="/shop">
+          {/* Primary CTA - Back on Kickstarter */}
+          <div className="mb-6">
+            <a
+              href={kickstarterConfig.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Button
-                variant="outline"
                 size="lg"
-                className="bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 font-semibold py-5 px-8 text-xl lg:text-2xl rounded-xl"
+                className="bg-green-500 hover:bg-green-400 text-white font-bold py-6 px-10 text-xl lg:text-2xl rounded-xl shadow-lg shadow-green-500/30 hover:scale-105 transition-all"
               >
-                <ShoppingBag className="mr-3 h-6 w-6 lg:h-7 lg:w-7" />
-                Shop Demo Day Edition
+                Back This Project →
               </Button>
-            </TrackedLink>
+            </a>
           </div>
         </div>
       </section>
@@ -353,7 +371,7 @@ const LandingPage = () => {
               <div className="flex-1 text-center lg:text-left">
                 <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
                   <Store className="w-6 h-6 text-yellow-400" />
-                  <h2 className="text-2xl lg:text-3xl font-bold text-yellow-400">Elekin Now Available in Stores!</h2>
+                  <h2 className="text-2xl lg:text-3xl font-bold text-yellow-400">Demo Day Edition Products Available in Stores</h2>
                 </div>
                 <p className="text-lg text-white mb-2">
                   Find Elekin TCG at <span className="text-yellow-400 font-semibold">5 locations</span> across the US, with demo days and tournaments happening now!

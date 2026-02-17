@@ -9,7 +9,7 @@ const SubscribeButton = ({
   className = "", 
   iconClassName = "mr-2 h-4 w-4",
   showIcon = true,
-  children = "Get Kickstarter Updates" 
+  children = "Get Campaign Updates" 
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 

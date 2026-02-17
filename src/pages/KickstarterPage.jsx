@@ -14,7 +14,7 @@ const KickstarterPage = () => {
     <>
       <Helmet>
         <title>Kickstarter Launch - Elekin TCG</title>
-        <meta name="description" content="Support Elekin TCG on Kickstarter! Get early bird pricing, exclusive rewards, and help bring this epic trading card game to life. Launching February 17, 2026." />
+        <meta name="description" content="Support Elekin TCG on Kickstarter! Help us fund manufacturing and development. Stretch goals unlock free promo cards, playmats, and more for all backers." />
       </Helmet>
       
       <div className="min-h-screen bg-[#1A103C] text-white flex items-center justify-center">

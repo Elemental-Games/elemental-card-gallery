@@ -1,0 +1,28 @@
+---
+
+## r/TCG Post — Elekin: Masters of Kinbrold
+
+**Title:**
+Elekin: Masters of Kinbrold — TCG live on Kickstarter, built for ~30 min matches with 4-element Essence, Agility-based combat, and comeback mechanics
+
+---
+
+**Body:**
+
+Hey r/TCG — we just launched our Kickstarter for **Elekin: Masters of Kinbrold** and wanted to share it here since we built it specifically for players who want strategic depth without 3-hour marathons.
+
+**Quick pitch:** A strategic TCG with ~30-minute matches, low barrier to entry, and a few mechanics we’re pretty proud of:
+
+• **4-element Essence** (Air, Water, Fire, Earth) — Generate from creatures, spend to summon/activate. Carries over turn to turn instead of land/mana screw.
+
+• **Strength/Agility combat** — Agility decides strike order, not just raw stats. Higher Agility hits first. Block, dodge, counter-attack, so positioning and sequencing actually matter.
+
+• **3-tier Shield system** — Shields power up as they break, so comebacks stay possible even when someone’s ahead.
+
+• **QR codes on every card** — Link to stats, lore, and deck-building notes. We’re trying to make it easier to dive into the world and theorycraft.
+
+Already in stores, distribution growing. If you’re into Sorcery, Altered, Rise, or just want something that plays fast and stays tense, we’d love your feedback.
+
+**Kickstarter:** https://www.kickstarter.com/projects/elemental-games/elekin
+
+Happy to answer questions about design, mechanics, or how we approached the resource/combat systems.

@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { X, LayoutGrid } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import SignupForm from '@/components/auth/SignupForm';
 
 const AnimatedCardBackground = () => {
   const [cards, setCards] = useState([]);
@@ -176,23 +175,36 @@ const AnimatedCardBackground = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.6 }}
           >
-            Kickstarter Launch: February 17, 2026
-            <br />
-            Get Early Access + Exclusive Rewards
+            We&apos;re live on Kickstarter! Back us now and help us reach our initial goal — 
+            let's bring Elekin to life!
           </motion.p>
           
-          {/* Email Signup Form */}
-          <motion.div
-            className="pointer-events-auto max-w-lg mx-auto mt-8"
+          {/* Kickstarter CTA */}
+          <motion.a
+            href="https://www.kickstarter.com/projects/elemental-games/elekin"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto inline-block mt-8"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.7, duration: 0.8, ease: "easeOut" }}
           >
-            <SignupForm 
-              buttonClassName="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-7 text-xl w-full"
-              source="animated_background_hero"
-            />
-          </motion.div>
+            <motion.div
+              animate={{
+                boxShadow: [
+                  '0 0 20px rgba(234,179,8,0.4)',
+                  '0 0 40px rgba(234,179,8,0.7)',
+                  '0 0 20px rgba(234,179,8,0.4)',
+                ],
+              }}
+              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="rounded-2xl"
+            >
+              <Button className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-6 text-xl md:text-2xl px-10 md:px-14 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-yellow-300/50">
+                Back Us on Kickstarter →
+              </Button>
+            </motion.div>
+          </motion.a>
         </div>
       </motion.div>
 
@@ -227,7 +239,7 @@ const AnimatedCardBackground = () => {
               
               <h3 className="text-2xl font-bold mb-4 text-white">Explore the Card Gallery</h3>
               <p className="text-purple-200 mb-6">
-                Would you like to browse our collection of cards and discover all the amazing creatures and spells in Elekin?
+                Would you like to browse our collection of cards and discover all the amazing creatures and runes in Elekin?
               </p>
               
               <Button

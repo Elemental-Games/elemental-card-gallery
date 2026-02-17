@@ -54,12 +54,15 @@ export default async function handler(req, res) {
             <li style="margin-bottom: 10px;">⏱️ <strong>Quick Yet Strategic:</strong> Games last around 20 minutes, perfect for both casual and competitive play.</li>
           </ul>
 
-          <h2 style="color: #7c3aed;">Coming Soon:</h2>
+          <h2 style="color: #7c3aed;">We're Live on Kickstarter!</h2>
           <ul style="list-style-type: none; padding-left: 0;">
-            <li style="margin-bottom: 10px;">🎉 <strong>Kickstarter Launch:</strong> Mark your calendar for November 1st, 2024!</li>
-            <li style="margin-bottom: 10px;">🎁 <strong>Early Bird Special:</strong> First 169 backers of $50+ will receive an autographed card of their choice.</li>
-            <li style="margin-bottom: 10px;">🛍️ <strong>Official Marketplace:</strong> Direct card purchases and special weekly discounts.</li>
+            <li style="margin-bottom: 10px;">🎉 <strong>Kickstarter is live!</strong> Back us now to help fund Elekin's first set.</li>
+            <li style="margin-bottom: 10px;">🎁 <strong>Backer Bonus:</strong> Every backer receives an alt art promo card.</li>
+            <li style="margin-bottom: 10px;">🚀 <strong>Stretch Goals:</strong> The more we raise, the more free items every backer unlocks!</li>
           </ul>
+          <div style="text-align: center; margin: 20px 0;">
+            <a href="https://www.kickstarter.com/projects/elemental-games/elekin" style="background-color: #22c55e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Back on Kickstarter →</a>
+          </div>
 
           <div style="text-align: center; margin-top: 30px;">
             <p>Follow us for the latest updates:</p>

@@ -1,0 +1,36 @@
+# Recipients for the Investor/Partnership Kickstarter pitch email
+# These contacts fit "participation, partnership, or collaboration" angle
+# Send the TOUCHED-UP version (see below)
+
+# === INVESTORS / EARLY-STAGE VENTURES ===
+sharktankcasting@yahoo.com
+hello@futurefriendsgames.com
+jp@limitedrungames.com
+creators@rawfury.com
+press@rawfury.com
+steve@kidsbrandinsight.com
+anuj@feedspot.com
+
+# === TCG COMMUNITY (coverage, collaboration, or backing interest) ===
+commandzonecast@gmail.com
+contact@mtggoldfish.com
+creators@fabtcg.com
+advertising@lorcana.gg
+lorcanacollectors@gmail.com
+info@flinamania.com
+jjarmanbusiness@gmail.com
+
+# === DISTRIBUTORS & RETAILERS (partnership = carrying the product) ===
+newaccounts@alliance-games.com
+contact@gamenerdz.com
+evan@coolstuffinc.com
+contact@moxboardinghouse.com
+contact@nobleknight.com
+catalog@tcgplayer.com
+
+# === PUBLISHER BUSINESS DEV (distribution/licensing talks) ===
+BusinessDevelopment@ledergames.com
+clay@ledergames.com
+
+# === TOTAL: ~23 contacts ===
+# DO NOT send this pitch to reviewers, general press, or conventions - they need different messaging

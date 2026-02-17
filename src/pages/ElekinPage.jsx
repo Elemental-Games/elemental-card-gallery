@@ -350,30 +350,39 @@ const ElekinPage = () => {
                   Join us for demo days at our partner stores! Learn how to play, try out different decks, and meet other Elekin players.
                 </p>
                 <div className="space-y-3">
-                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                  <div className="bg-blue-500/10 border border-blue-400/20 rounded-lg p-3 opacity-50">
                     <div className="flex items-start gap-2">
                       <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-white font-semibold">Feb 3rd</p>
-                        <p className="text-purple-200 text-sm">Gamer&apos;s Heaven - Phoenixville, PA</p>
+                        <p className="text-white font-semibold line-through">Feb 3rd</p>
+                        <p className="text-purple-200 text-sm line-through">Gamer&apos;s Heaven - Phoenixville, PA</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                  <div className="bg-blue-500/10 border border-blue-400/20 rounded-lg p-3 opacity-50">
                     <div className="flex items-start gap-2">
                       <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-white font-semibold">Feb 6th</p>
-                        <p className="text-purple-200 text-sm">Alternate Universes - Blue Bell, PA</p>
+                        <p className="text-white font-semibold line-through">Feb 6th</p>
+                        <p className="text-purple-200 text-sm line-through">Alternate Universes - Blue Bell, PA</p>
                       </div>
                     </div>
                   </div>
-                  <div className="bg-blue-500/10 border border-blue-400/30 rounded-lg p-3">
+                  <div className="bg-blue-500/10 border border-blue-400/20 rounded-lg p-3 opacity-50">
                     <div className="flex items-start gap-2">
                       <Calendar className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
                       <div>
-                        <p className="text-white font-semibold">Feb 7th</p>
-                        <p className="text-purple-200 text-sm">Mulligan Games - Warminster, PA</p>
+                        <p className="text-white font-semibold line-through">Feb 7th</p>
+                        <p className="text-purple-200 text-sm line-through">Mulligan Games - Warminster, PA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="bg-yellow-500/10 border border-yellow-400/40 rounded-lg p-3">
+                    <div className="flex items-start gap-2">
+                      <Calendar className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
+                      <div>
+                        <p className="text-yellow-400 font-semibold">More Demo Days Coming Soon!</p>
+                        <p className="text-purple-200 text-sm">New dates will be announced after our Kickstarter campaign</p>
                       </div>
                     </div>
                   </div>
@@ -386,20 +395,26 @@ const ElekinPage = () => {
                   <div className="bg-yellow-500/30 p-3 rounded-lg">
                     <Trophy className="w-8 h-8 text-yellow-400" />
                   </div>
-                  <h3 className="text-2xl font-bold text-white">1st Demo Tournament</h3>
+                  <h3 className="text-2xl font-bold text-white">Tournaments</h3>
                 </div>
                 <p className="text-purple-200 mb-6">
-                  Compete against other players in our first official tournament! Show off your skills and compete for prizes.
+                  Compete against other players in official Elekin tournaments! Show off your skills and compete for prizes.
                 </p>
-                <div className="bg-yellow-500/10 border border-yellow-400/30 rounded-lg p-4">
+                <div className="bg-yellow-500/10 border border-yellow-400/20 rounded-lg p-4 opacity-50 mb-3">
                   <div className="flex items-start gap-2">
                     <Trophy className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-white font-bold text-lg mb-1">Feb 13th</p>
-                      <p className="text-purple-200">Mulligan Games - Warminster, PA</p>
-                      <p className="text-purple-300 text-sm mt-2">
-                        Tournament details and registration information available at the store.
-                      </p>
+                      <p className="text-white font-bold text-lg mb-1 line-through">Feb 13th</p>
+                      <p className="text-purple-200 line-through">Mulligan Games - Warminster, PA</p>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-yellow-500/10 border border-yellow-400/40 rounded-lg p-4">
+                  <div className="flex items-start gap-2">
+                    <Trophy className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="text-yellow-400 font-bold text-lg mb-1">Coming Post-Launch</p>
+                      <p className="text-purple-200">Organized play and tournament events will be announced after our Kickstarter campaign wraps up.</p>
                     </div>
                   </div>
                 </div>

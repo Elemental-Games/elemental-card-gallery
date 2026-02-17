@@ -253,33 +253,12 @@ const HowToPlayPage = () => {
               >
                 Try Interactive Demo →
               </TrackedLink>
-              <button
-                onClick={() => setShowDownloadModal(true)}
-                className="inline-flex items-center justify-center px-5 py-3 rounded-lg bg-purple-900/40 hover:bg-purple-800/50 text-white font-semibold border border-purple-500/30 transition-colors"
-              >
-                Download Rulebook
-              </button>
+              {/* Download Rulebook button temporarily removed */}
             </div>
 
           </motion.div>
 
-          {/* Floating Download Button */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 1.2 }}
-            className="fixed bottom-6 right-6 z-50"
-          >
-            <button 
-              onClick={() => setShowDownloadModal(true)}
-              className="inline-flex items-center justify-center gap-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 
-                font-semibold px-3 py-2 rounded-lg transition-all text-sm shadow-lg hover:shadow-xl hover:scale-105
-                border border-yellow-400 hover:border-yellow-300"
-            >
-              <Download className="w-4 h-4" />
-              Rulebook
-            </button>
-          </motion.div>
+          {/* Floating Download Button temporarily removed */}
 
           {/* Video Tutorials Section */}
           <motion.div
@@ -563,12 +542,12 @@ const HowToPlayPage = () => {
 
                 {/* Desktop tabs */}
                 <div className="hidden md:block">
-                  <TabsList className="grid grid-cols-2 lg:grid-cols-3 gap-2 bg-purple-950/50 border border-purple-500/30 p-2 rounded-lg">
+                  <TabsList className="grid grid-cols-3 lg:grid-cols-5 gap-2 h-auto bg-purple-950/50 border border-purple-500/30 p-2 rounded-lg">
                     {quickLinks.map((link) => (
                       <TabsTrigger
                         key={link.tab}
                         value={link.tab}
-                        className="data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900"
+                        className="data-[state=active]:bg-yellow-500 data-[state=active]:text-purple-900 py-2"
                       >
                         {link.title}
                       </TabsTrigger>
@@ -1723,10 +1702,7 @@ const HowToPlayPage = () => {
         </div>
       </div>
 
-      <RulebookDownloadModal 
-        isOpen={showDownloadModal} 
-        onClose={() => setShowDownloadModal(false)} 
-      />
+      {/* RulebookDownloadModal temporarily removed */}
     </>
   );
 };

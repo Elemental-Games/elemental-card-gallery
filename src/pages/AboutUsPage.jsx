@@ -181,7 +181,7 @@ const AboutUsPage = () => {
                 </p>
                 
                 <p>
-                  We&apos;re currently prepping for our Kickstarter launch and ramping up marketing every single day. It&apos;s been a wild ride, and we&apos;re just getting started. Thanks for being part of this journey with us!
+                  We&apos;re live on Kickstarter right now and working toward our funding goal to manufacture Elekin&apos;s first full set. It&apos;s been a wild ride, and we&apos;re just getting started. Thanks for being part of this journey with us!
                 </p>
               </div>
             </motion.div>

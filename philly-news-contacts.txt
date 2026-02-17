@@ -1,0 +1,55 @@
+# Philadelphia Area News & Media - Elekin TCG / Kickstarter Outreach
+# Local, regional, and gaming/tech outlets that might cover a Philly-area Kickstarter
+
+# === MAJOR PHILLY TV STATIONS ===
+fox29.newsdesk@foxtv.com
+fox29.programming@fox.com
+desk@kywnewsradio.com
+newsprgm@kywnewsradio.com
+# NBC10: use form at nbcphiladelphia.com/contact-us
+# 6abc: use form at 6abc.com (search "press release")
+
+# === NEWSPAPERS & MAGAZINES ===
+breakingnews@inquirer.com
+business@inquirer.com
+features@inquirer.com
+ebenn@inquirer.com
+letters@inquirer.com
+opinion@inquirer.com
+Tips@PhillyVoice.com
+News@PhillyVoice.com
+Jonathan@PhillyVoice.com
+Sports@PhillyVoice.com
+
+# === BILLY PENN / WHYY (local culture, events) ===
+hello@billypenn.com
+tips@billypenn.com
+heather@billypenn.com
+kdonahue@whyy.org
+newsroom@whyy.org
+
+# === TECH / STARTUP / GAMING (great for Kickstarter) ===
+philly@technical.ly
+# Technical.ly covers Philly startups, tech, gaming - pitch directly
+
+# === PHILLY MAGAZINE (culture, lifestyle) ===
+bpearson@phillymag.com
+# tips at phillymag.com/tips/
+
+# === METRO PHILADELPHIA (free daily, commuters) ===
+Melissa.Mitman@metro.us
+Zach.Ciavolella@metro.us
+
+# === BUSINESS ===
+# Philly Business Journal: bizjournals.com/philadelphia/bizspotlight for press releases
+
+# === RADIO ===
+desk@kywnewsradio.com
+newsprgm@kywnewsradio.com
+
+# === PHONE / FORMS (no email) ===
+# NBC10 Newsroom: 215-201-5210
+# 6abc News Tips: 1-866-639-7749 / 6abc.com contact form
+# FOX 29 News Desk: 215-982-5500 / 1-800-220-6397
+# CBS 3: cbsnews.com/philadelphia/contact
+# WHYY: 215-351-0511

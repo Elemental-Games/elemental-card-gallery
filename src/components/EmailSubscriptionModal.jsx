@@ -97,7 +97,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center w-full pr-6">
                 <Mail className="mr-2 h-5 w-5 text-yellow-400" />
-                Get Kickstarter Launch Notifications
+                Get Campaign Updates
               </h2>
               <button 
                 onClick={closeModal}
@@ -112,13 +112,25 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-green-400 mb-2">Welcome! You're Signed Up!</h3>
                 <p className="text-purple-200 mb-6">
-                  You'll now be notified when our <span className="text-yellow-400 font-bold">Kickstarter launches on February 17, 2026</span>! 
-                  <br />Early bird pricing and exclusive rewards await.
+                  Our Kickstarter is <span className="text-green-400 font-bold">live right now</span>! 
+                  You'll get updates on stretch goals, milestones, and campaign exclusives.
                   <br /><span className="text-sm mt-2 block opacity-80">
-                    Check your inbox for your welcome email with launch details and Discord access.
+                    Check your inbox for your welcome email with campaign details and Discord access.
                   </span>
                 </p>
                 <div className="space-y-3">
+                  <a
+                    href="https://www.kickstarter.com/projects/elemental-games/elekin"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    <Button 
+                      className="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-6 text-md"
+                    >
+                      Back on Kickstarter →
+                    </Button>
+                  </a>
                   <Button 
                     onClick={handleDiscordJoin}
                     className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
@@ -135,37 +147,33 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Kickstarter Benefits */}
-                <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-4">
-                  <h3 className="text-yellow-400 font-bold mb-3 text-center">🎁 What You Get:</h3>
+                {/* Campaign Benefits */}
+                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
+                  <h3 className="text-green-400 font-bold mb-3 text-center">🎁 Stay in the loop:</h3>
                   <div className="space-y-2 text-sm text-purple-200">
                     <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Early bird pricing (20-30% off)</span>
+                      <span className="text-green-400 mr-2">✓</span>
+                      <span>Stretch goal announcements</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
-                      <span>Exclusive launch day rewards</span>
+                      <span className="text-green-400 mr-2">✓</span>
+                      <span>Campaign milestone updates</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
-                      <span>First access to Kickstarter page</span>
+                      <span className="text-green-400 mr-2">✓</span>
+                      <span>Backer community access</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
-                      <span>VIP status in community</span>
-                    </div>
-                    <div className="flex items-center">
-                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span className="text-green-400 mr-2">✓</span>
                       <span>Exclusive Discord role</span>
                     </div>
                   </div>
                 </div>
                 
                 <p className="text-purple-200 mb-4 text-center">
-                  <span className="text-yellow-400 font-semibold">Launch Date:</span> February 17, 2026
+                  <span className="text-green-400 font-semibold">Kickstarter is live!</span>
                   <br />
-                  <span className="text-sm opacity-80">Be among the first to know when we go live!</span>
+                  <span className="text-sm opacity-80">Get email updates on stretch goals and campaign milestones.</span>
                 </p>
                 
                 <div className="space-y-2">
@@ -201,7 +209,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                     className="flex-1 bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                     disabled={loading}
                   >
-                    {loading ? 'Signing You Up...' : 'Get Launch Notifications'}
+                    {loading ? 'Signing You Up...' : 'Get Campaign Updates'}
                   </Button>
                 </div>
               </form>

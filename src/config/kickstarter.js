@@ -1,6 +1,6 @@
 export const kickstarterConfig = {
   goal: 50000,
-  raised: 4669,
+  raised: 5150,
   backers: 0,
   url: 'https://www.kickstarter.com/projects/elemental-games/elekin',
   stretchGoals: [

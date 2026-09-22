@@ -43,7 +43,10 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     aiShields,
     aiPhaseMessage,
     pendingDefenseResponse,
+    pendingShieldBreak,
+    lastShieldBreakReveal,
     pendingAbilityPrompt,
+    activeAbilityContext,
     battleLog,
     initializeGame,
     drawCard,
@@ -59,6 +62,8 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     activateCreatureAbility,
     activateHandAbility,
     resolveAbilityPrompt,
+    resolveShieldBreak,
+    dismissShieldBreakReveal,
     endTurn,
     aiTurn,
     resetGame,
@@ -80,6 +85,8 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
   const [battleMode, setBattleMode] = useState(null);
   const [defenseResponseMode, setDefenseResponseMode] = useState(null);
   const [abilitySelections, setAbilitySelections] = useState([]);
+  const [abilityMenuCreature, setAbilityMenuCreature] = useState(null);
+  const [discardViewer, setDiscardViewer] = useState(null); // { label, cards }
   const [logFilter, setLogFilter] = useState("all");
   const [isBattleLogOpen, setIsBattleLogOpen] = useState(false);
 
@@ -112,11 +119,30 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
 
   useEffect(() => {
     if (tutorialMode) return;
+    // Resume the AI after the player answers a defense prompt or shield break.
+    if (pendingDefenseResponse || pendingShieldBreak || lastShieldBreakReveal) return;
     if (currentTurn === "ai" && gameStatus === "playing") {
       const timer = setTimeout(() => aiTurn(), 500);
       return () => clearTimeout(timer);
     }
-  }, [currentTurn, currentPhase, gameStatus, aiTurn, tutorialMode]);
+  }, [currentTurn, currentPhase, gameStatus, aiTurn, tutorialMode, pendingDefenseResponse, pendingShieldBreak, lastShieldBreakReveal]);
+
+  useEffect(() => {
+    if (currentPhase !== "battle") {
+      setBattleMode(null);
+      // Only clear the local overlay when the store prompt is also gone — otherwise a
+      // transient phase flicker would hide the dodge/block modal mid-attack.
+      if (!pendingDefenseResponse) setDefenseResponseMode(null);
+    }
+  }, [currentPhase, pendingDefenseResponse]);
+
+  useEffect(() => {
+    if (pendingDefenseResponse && currentTurn === "ai" && currentPhase === "battle") {
+      setDefenseResponseMode(pendingDefenseResponse);
+    } else if (!pendingDefenseResponse) {
+      setDefenseResponseMode(null);
+    }
+  }, [pendingDefenseResponse, currentTurn, currentPhase]);
 
   useEffect(() => {
     setAbilitySelections([]);
@@ -216,14 +242,25 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         setTimeout(() => setErrorMessage(""), 3000);
       }
     } else if (pendingAbilityPrompt.selectionMode === "multiple") {
-      setAbilitySelections((prev) => (prev.includes(optionId) ? prev.filter((id) => id !== optionId) : [...prev, optionId]));
+      const maxPick = activeAbilityContext?.data?.count;
+      setAbilitySelections((prev) => {
+        if (prev.includes(optionId)) return prev.filter((id) => id !== optionId);
+        if (typeof maxPick === "number" && prev.length >= maxPick) return prev;
+        return [...prev, optionId];
+      });
     }
   };
 
   const handleAbilityConfirm = () => {
     if (!pendingAbilityPrompt) return;
     if (pendingAbilityPrompt.selectionMode === "multiple") {
+      const maxPick = activeAbilityContext?.data?.count;
       if (abilitySelections.length === 0) return;
+      if (typeof maxPick === "number" && abilitySelections.length !== maxPick) {
+        setErrorMessage(`Select exactly ${maxPick} creature(s)`);
+        setTimeout(() => setErrorMessage(""), 3000);
+        return;
+      }
       const result = resolveAbilityPrompt({ optionIds: abilitySelections });
       if (result && !result.success && result.error) {
         setErrorMessage(result.error);
@@ -235,6 +272,17 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         setErrorMessage(result.error);
         setTimeout(() => setErrorMessage(""), 3000);
       }
+    }
+  };
+
+  const handleShieldBreakChoice = (effectId) => {
+    const result = resolveShieldBreak(effectId);
+    if (result?.success) {
+      setPhaseMessage(result.summary ? `Shield effect: ${result.summary}` : "Shield effect resolved.");
+      setTimeout(() => setPhaseMessage(""), 4000);
+    } else if (result?.error) {
+      setErrorMessage(result.error);
+      setTimeout(() => setErrorMessage(""), 3000);
     }
   };
 
@@ -556,19 +604,6 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     }, 2500);
   };
 
-  useEffect(() => {
-    if (currentPhase !== "battle") {
-      setBattleMode(null);
-      setDefenseResponseMode(null);
-    }
-  }, [currentPhase]);
-
-  useEffect(() => {
-    if (pendingDefenseResponse && currentTurn === "ai" && currentPhase === "battle") {
-      setDefenseResponseMode(pendingDefenseResponse);
-    }
-  }, [pendingDefenseResponse, currentTurn, currentPhase]);
-
   if (gameStatus === "player_won" || gameStatus === "ai_won") {
     return (
       <>
@@ -593,7 +628,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     </div>
   );
 
-  const renderDeckStack = ({ deck, discard, label, highlightOnDraw, onDeckClick, badgeColor = "bg-blue-600", tutorialId }) => (
+  const renderDeckStack = ({ deck, discard, label, highlightOnDraw, onDeckClick, onDiscardClick, badgeColor = "bg-blue-600", tutorialId }) => (
     <div className="w-32 flex flex-col gap-3 items-center mx-auto">
       <div className="text-xs text-white/60 font-semibold uppercase tracking-wide">{label}</div>
       <div className="relative cursor-pointer" onClick={onDeckClick} {...(tutorialId ? { 'data-tutorial-id': tutorialId } : {})}>
@@ -601,17 +636,30 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         <div className={`absolute -bottom-2 -right-2 ${badgeColor} text-white text-sm font-bold px-2 py-1 rounded-full`}>{deck.length}</div>
       </div>
       <div className="text-xs text-white/60 font-semibold uppercase tracking-wide">Discard</div>
-      <div className="relative w-24 h-32 rounded bg-black/20 flex items-center justify-center">
+      <button
+        type="button"
+        className={`relative w-24 h-32 rounded bg-black/20 flex items-center justify-center transition ${
+          discard.length > 0 ? "cursor-pointer hover:ring-2 hover:ring-orange-400/80" : "cursor-default"
+        }`}
+        onClick={() => discard.length > 0 && onDiscardClick?.()}
+        aria-label={`View ${label} discard pile`}
+        disabled={discard.length === 0}
+      >
         {discard.length > 0 ? (
-          <img
-            src={discard[discard.length - 1].imagePath || `/images/cards/new/${discard[discard.length - 1].id.replace(/_/g, " ")}.webp`}
-            alt={`${label} Discard`}
-            className="w-full h-full object-contain rounded shadow"
-          />
+          <>
+            <img
+              src={discard[discard.length - 1].imagePath || `/images/cards/new/${discard[discard.length - 1].id.replace(/_/g, " ")}.webp`}
+              alt={`${label} Discard`}
+              className="w-full h-full object-contain rounded shadow"
+            />
+            <div className="absolute -bottom-2 -right-2 bg-slate-700 text-white text-sm font-bold px-2 py-1 rounded-full">
+              {discard.length}
+            </div>
+          </>
         ) : (
           <div className="w-full h-full rounded border-2 border-dashed border-white/20" />
         )}
-      </div>
+      </button>
     </div>
   );
 
@@ -706,10 +754,11 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         {activatedAbilities.length > 0 && (
           <div className="absolute inset-x-1 bottom-1 flex flex-col gap-1">
             {activatedAbilities.map((ability) => {
+              const used = (creature.activatedAbilityIdsThisTurn ?? []).includes(ability.id);
               const canActivateAbility =
                 currentTurn === "player" &&
                 (currentPhase === "main1" || currentPhase === "main2") &&
-                !creature.hasActivatedAbilityThisTurn;
+                !used;
               return (
                 <button
                   key={ability.id}
@@ -722,7 +771,7 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                     if (!canActivateAbility) return;
                     handleActivateAbilityClick(creature, ability);
                   }}
-                  title={ability.description || ability.name}
+                  title={used ? "Already used this turn" : ability.description || ability.name}
                 >
                   {ability.name}
                 </button>
@@ -734,8 +783,32 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
     );
   };
 
+  const formatAbilityCost = (ability) => {
+    const cost = ability.essenceCost;
+    if (!cost?.amount) return null;
+    if (cost.elements?.length) {
+      const label = cost.elements.map((e) => e.charAt(0).toUpperCase() + e.slice(1)).join("/");
+      return `${cost.amount} ${label}`;
+    }
+    if (cost.element) return `${cost.amount} ${cost.element.charAt(0).toUpperCase() + cost.element.slice(1)}`;
+    return `${cost.amount}`;
+  };
+
+  const canAffordAbility = (ability) => {
+    const cost = ability.essenceCost;
+    if (!cost?.amount) return true;
+    if (cost.elements?.length) {
+      const available = cost.elements.reduce((sum, el) => sum + (playerEssence[el] ?? 0), 0);
+      return available >= cost.amount;
+    }
+    if (cost.element) return (playerEssence[cost.element] ?? 0) >= cost.amount;
+    return true;
+  };
+
   const renderPlayerCreature = (creature) => {
     const activatedAbilities = creature.abilities?.filter((ability) => ability.trigger === "activated") || [];
+    const inMain =
+      currentTurn === "player" && (currentPhase === "main1" || currentPhase === "main2");
     return (
       <div
         key={creature.instanceId}
@@ -744,6 +817,8 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
             ? "cursor-pointer ring-2 ring-yellow-400 hover:ring-4 transition-all"
             : currentPhase === "battle" && currentTurn === "player" && !battleMode && creature.hasAction && !creature.exhausted
             ? "cursor-pointer ring-2 ring-green-400 hover:ring-4 transition-all"
+            : inMain && activatedAbilities.length > 0
+            ? "cursor-pointer ring-2 ring-purple-400/60 hover:ring-purple-400 transition-all"
             : ""
         }`}
         onClick={(e) => {
@@ -752,24 +827,37 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
             handleCreatureClick(creature, true);
           } else if (currentPhase === "battle" && currentTurn === "player") {
             handleCreatureClick(creature, true);
+          } else if (inMain && activatedAbilities.length > 0) {
+            setAbilityMenuCreature(creature);
           }
         }}
         onMouseEnter={() => setHoveredCard(creature)}
         onMouseLeave={() => setHoveredCard(null)}
       >
         <Card card={creature} />
-        {activatedAbilities.length > 0 && (
-          <div className="absolute inset-x-1 bottom-1 flex flex-col gap-1">
+        {activatedAbilities.length > 0 && inMain && (
+          <div className="absolute inset-x-0 -bottom-1 flex flex-col gap-0.5 z-20">
             {activatedAbilities.map((ability) => {
-              const canActivateAbility =
-                currentTurn === "player" &&
-                (currentPhase === "main1" || currentPhase === "main2") &&
-                !creature.hasActivatedAbilityThisTurn;
+              const afford = canAffordAbility(ability);
+              const used = (creature.activatedAbilityIdsThisTurn ?? []).includes(ability.id);
+              const canActivateAbility = !used && afford;
+              const costLabel = formatAbilityCost(ability);
+              const reason = used
+                ? "Already used this turn"
+                : !afford
+                ? `Need ${costLabel}`
+                : ability.description || ability.name;
               return (
                 <button
                   key={ability.id}
-                  className={`text-xs font-semibold rounded bg-orange-600/90 text-white px-2 py-1 shadow-lg hover:bg-orange-500 transition ${
-                    canActivateAbility ? "" : "opacity-40 cursor-not-allowed"
+                  className={`text-[10px] leading-tight font-semibold rounded px-1.5 py-0.5 shadow-lg transition ${
+                    ability.isEnhanced
+                      ? canActivateAbility
+                        ? "bg-yellow-500 text-slate-900 hover:bg-yellow-400"
+                        : "bg-yellow-900/70 text-yellow-200/50 cursor-not-allowed"
+                      : canActivateAbility
+                      ? "bg-orange-600/90 text-white hover:bg-orange-500"
+                      : "bg-orange-900/70 text-orange-200/50 cursor-not-allowed"
                   }`}
                   disabled={!canActivateAbility}
                   onClick={(e) => {
@@ -777,9 +865,10 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                     if (!canActivateAbility) return;
                     handleActivateAbilityClick(creature, ability);
                   }}
-                  title={ability.description || ability.name}
+                  title={reason}
                 >
                   {ability.name}
+                  {costLabel ? ` (${costLabel})` : ""}
                 </button>
               );
             })}
@@ -955,6 +1044,8 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                       return (
                         <div
                           key={`player-empty-${index}`}
+                          role="button"
+                          aria-label={`Empty creature slot ${index + 1}`}
                           className="w-24 h-32 rounded border-2 border-dashed border-white/20 flex items-center justify-center text-xs text-white/30"
                         >
                           {index + 1}
@@ -970,6 +1061,8 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
                     {playerRuneCounterZone.map((card, i) => (
                       <div
                         key={i}
+                        role="button"
+                        aria-label={card ? `Rune/Counter slot ${i + 1}: ${card.faceDown ? "face-down card" : card.name}` : `Empty Rune/Counter slot ${i + 1}`}
                         className="w-24 h-32 rounded border-2 border-dashed border-white/20 flex items-center justify-center text-xs text-white/30 cursor-pointer hover:border-white/40 transition-all"
                         onClick={() => handleZoneClick("runeCounter", i)}
                         onMouseEnter={() => card && setHoveredCard(card)}
@@ -1034,6 +1127,11 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
               label: "AI Deck",
               highlightOnDraw: false,
               onDeckClick: () => {},
+              onDiscardClick: () =>
+                setDiscardViewer({
+                  label: "Opponent Discard",
+                  cards: [...aiDiscard].reverse(),
+                }),
               badgeColor: "bg-blue-600",
               tutorialId: "aiDeck",
             })}
@@ -1062,6 +1160,11 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
               label: "Your Deck",
               highlightOnDraw: currentTurn === "player" && currentPhase === "draw",
               onDeckClick: handleDeckClick,
+              onDiscardClick: () =>
+                setDiscardViewer({
+                  label: "Your Discard",
+                  cards: [...playerDiscard].reverse(),
+                }),
               badgeColor: "bg-orange-500",
               tutorialId: "playerDeck",
             })}
@@ -1167,14 +1270,54 @@ export default function TCGGameBoard({ playerDeck = "crystal", playerGoesFirst =
         activateHandAbility={activateHandAbility}
       />
 
+      {abilityMenuCreature && (
+        <CreatureAbilityMenu
+          creature={
+            playerBoard.find((c) => c.instanceId === abilityMenuCreature.instanceId) ||
+            abilityMenuCreature
+          }
+          playerEssence={playerEssence}
+          onActivate={(ability) => {
+            setAbilityMenuCreature(null);
+            handleActivateAbilityClick(abilityMenuCreature, ability);
+          }}
+          onClose={() => setAbilityMenuCreature(null)}
+          formatAbilityCost={formatAbilityCost}
+          canAffordAbility={canAffordAbility}
+        />
+      )}
+
+      {pendingShieldBreak?.controller === "player" && (
+        <ShieldBreakOverlay
+          shield={pendingShieldBreak.shield}
+          onChoose={handleShieldBreakChoice}
+        />
+      )}
+
+      {lastShieldBreakReveal?.controller === "ai" && (
+        <AiShieldBreakRevealOverlay
+          reveal={lastShieldBreakReveal}
+          onDismiss={dismissShieldBreakReveal}
+        />
+      )}
+
       {pendingAbilityPrompt && (
         <AbilityPromptOverlay
           pendingAbilityPrompt={pendingAbilityPrompt}
           abilitySource={abilitySource}
           abilitySelections={abilitySelections}
+          maxSelections={activeAbilityContext?.data?.count}
           onSelect={handleAbilityOptionClick}
           onConfirm={handleAbilityConfirm}
           onSkip={handleAbilitySkip}
+        />
+      )}
+
+      {discardViewer && (
+        <DiscardPileOverlay
+          label={discardViewer.label}
+          cards={discardViewer.cards}
+          onClose={() => setDiscardViewer(null)}
         />
       )}
 
@@ -1280,26 +1423,37 @@ function ShieldCard({ shield, isPlayer, onClick, highlight }) {
   const getImagePath = () => `/images/cards/new/${shield.id.replace(/_/g, " ")}.webp`;
   const showDetails = isPlayer || !shield.faceDown;
   const canHover = isPlayer || !shield.faceDown;
+  // Face-down: rotate the card back into the horizontal shield slot.
+  // Face-up: keep the art upright so the effect text is readable in that same slot.
+  const faceUp = !shield.faceDown;
 
   return (
     <>
       <div
-        className={`relative flex items-center justify-center cursor-pointer transition-all ${highlight || ""}`}
+        className={`relative flex items-center justify-center cursor-pointer transition-all overflow-hidden rounded ${highlight || ""}`}
         onMouseEnter={() => canHover && setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         onClick={() => onClick && onClick(shield, isPlayer)}
         style={{ width: "160px", height: "88px" }}
       >
         <img
-          src={shield.faceDown ? "/Card_Back.png" : getImagePath()}
-          alt={shield.faceDown ? "Face-down Shield" : shield.name}
-          className="object-contain rounded shadow-lg"
-          style={{ width: "88px", height: "160px", transform: "rotate(90deg)", transformOrigin: "center" }}
+          src={faceUp ? getImagePath() : "/Card_Back.png"}
+          alt={faceUp ? shield.name : "Face-down Shield"}
+          className={`rounded shadow-lg ${faceUp ? "object-cover w-full h-full" : "object-contain"}`}
+          style={
+            faceUp
+              ? undefined
+              : { width: "88px", height: "160px", transform: "rotate(90deg)", transformOrigin: "center" }
+          }
         />
         {showDetails && (
           <>
-            <div className="absolute top-1 left-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">{shield.currentHealth} HP</div>
-            <div className="absolute bottom-1 right-1 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md">T{shield.currentTier}</div>
+            <div className="absolute top-1 left-1 bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10">
+              {shield.currentHealth} HP
+            </div>
+            <div className="absolute bottom-1 right-1 bg-purple-600 text-white text-xs font-bold px-2 py-1 rounded shadow-md z-10">
+              T{shield.currentTier}
+            </div>
           </>
         )}
       </div>
@@ -1322,6 +1476,15 @@ function ShieldCard({ shield, isPlayer, onClick, highlight }) {
               <p className="text-sm text-purple-300 mt-4 text-center">
                 {shield.element.charAt(0).toUpperCase() + shield.element.slice(1)} Shield
               </p>
+              {shield.effects?.length > 0 && (
+                <div className="mt-4 text-left text-sm text-purple-100 space-y-2 w-full">
+                  {shield.effects.map((effect, i) => (
+                    <p key={effect.id}>
+                      <span className="font-semibold text-yellow-300">Effect {i + 1}:</span> {effect.label}
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -1349,6 +1512,20 @@ function HandOverlay({ playerHand, selectedCardIndex, setHoveredCard, handleCard
                   return (
                     <div
                       key={`${card.id}-${index}`}
+                      role="button"
+                      tabIndex={0}
+                      aria-pressed={selectedCardIndex === index}
+                      aria-label={
+                        card.cardType === "creature"
+                          ? `${card.name} — creature, ${card.cost ? `${card.cost} ${card.element} essence` : "free"}`
+                          : `${card.name} — ${card.cardType}, set for free`
+                      }
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          handleCardSelect(card, index);
+                        }
+                      }}
                       className={`relative flex-shrink-0 transition-transform duration-200 ${
                         selectedCardIndex === index ? "ring-4 ring-yellow-400/80 scale-105" : "hover:scale-105"
                       }`}
@@ -1388,10 +1565,18 @@ function HandOverlay({ playerHand, selectedCardIndex, setHoveredCard, handleCard
   );
 }
 
-function AbilityPromptOverlay({ pendingAbilityPrompt, abilitySource, abilitySelections, onSelect, onConfirm, onSkip }) {
+function AbilityPromptOverlay({ pendingAbilityPrompt, abilitySource, abilitySelections, maxSelections, onSelect, onConfirm, onSkip }) {
+  const showCardArt = pendingAbilityPrompt.options.some((o) => o.metadata?.imagePath);
+  const confirmDisabled =
+    pendingAbilityPrompt.selectionMode === "multiple"
+      ? typeof maxSelections === "number"
+        ? abilitySelections.length !== maxSelections
+        : abilitySelections.length === 0
+      : pendingAbilityPrompt.selectionMode !== "none" && abilitySelections.length === 0;
+
   return (
     <div className="fixed inset-0 z-[10002] bg-black/70 flex items-center justify-center px-4">
-      <div className="bg-slate-900/95 border border-purple-500/60 rounded-2xl shadow-2xl max-w-3xl w-full p-6">
+      <div className="bg-slate-900/95 border border-purple-500/60 rounded-2xl shadow-2xl max-w-3xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <h2 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-400 mb-4">
           Ability Resolution
         </h2>
@@ -1412,9 +1597,14 @@ function AbilityPromptOverlay({ pendingAbilityPrompt, abilitySource, abilitySele
         ) : (
           <div className="mb-4 text-sm text-purple-200/80">Resolve ability prompt</div>
         )}
-        <p className="text-slate-200 mb-4 text-sm leading-relaxed">{pendingAbilityPrompt.message}</p>
+        <p className="text-slate-200 mb-2 text-sm leading-relaxed">{pendingAbilityPrompt.message}</p>
+        {pendingAbilityPrompt.selectionMode === "multiple" && typeof maxSelections === "number" && (
+          <p className="text-xs text-purple-300 mb-4">
+            Selected {abilitySelections.length} / {maxSelections}
+          </p>
+        )}
         {pendingAbilityPrompt.options.length > 0 ? (
-          <div className="grid gap-3">
+          <div className={showCardArt ? "grid grid-cols-2 sm:grid-cols-3 gap-3" : "grid gap-3"}>
             {pendingAbilityPrompt.options.map((option) => {
               const isSelected = abilitySelections.includes(option.id);
               const selectionClass = pendingAbilityPrompt.selectionMode === "multiple"
@@ -1425,9 +1615,16 @@ function AbilityPromptOverlay({ pendingAbilityPrompt, abilitySource, abilitySele
               return (
                 <button
                   key={option.id}
-                  className={`text-left px-4 py-3 rounded-xl border transition-all text-sm text-slate-200 ${selectionClass}`}
+                  className={`text-left px-3 py-3 rounded-xl border transition-all text-sm text-slate-200 ${selectionClass}`}
                   onClick={() => onSelect(option.id)}
                 >
+                  {option.metadata?.imagePath && (
+                    <img
+                      src={option.metadata.imagePath}
+                      alt={option.metadata.name || option.label}
+                      className="w-full h-28 object-contain mb-2 rounded"
+                    />
+                  )}
                   <div className="font-semibold text-slate-100">{option.label}</div>
                   {option.description && <div className="text-slate-300/80">{option.description}</div>}
                 </button>
@@ -1448,14 +1645,184 @@ function AbilityPromptOverlay({ pendingAbilityPrompt, abilitySource, abilitySele
           )}
           <button
             onClick={onConfirm}
-            disabled={pendingAbilityPrompt.selectionMode !== "none" && abilitySelections.length === 0}
+            disabled={confirmDisabled}
             className={`px-5 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white font-semibold transition ${
-              pendingAbilityPrompt.selectionMode !== "none" && abilitySelections.length === 0 ? "opacity-50 cursor-not-allowed" : ""
+              confirmDisabled ? "opacity-50 cursor-not-allowed" : ""
             }`}
           >
             {pendingAbilityPrompt.selectionMode === "none" ? "Acknowledge" : "Confirm"}
           </button>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function DiscardPileOverlay({ label, cards, onClose }) {
+  return (
+    <div className="fixed inset-0 z-[10002] bg-black/75 backdrop-blur-sm flex items-center justify-center p-4" onClick={onClose}>
+      <div
+        className="bg-slate-900 border border-orange-500/40 rounded-2xl shadow-2xl max-w-3xl w-full max-h-[85vh] overflow-hidden flex flex-col"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+          <div>
+            <div className="text-xs uppercase tracking-widest text-orange-300 font-semibold">Discard Pile</div>
+            <h2 className="text-xl font-bold text-white">{label}</h2>
+            <p className="text-xs text-white/50 mt-1">Top → bottom ({cards.length} cards)</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            className="px-3 py-1.5 rounded-lg bg-slate-700 hover:bg-slate-600 text-white text-sm font-semibold"
+          >
+            Close
+          </button>
+        </div>
+        <div className="overflow-y-auto p-4 space-y-2">
+          {cards.map((card, index) => (
+            <div
+              key={`${card.id}-${index}`}
+              className="flex items-center gap-3 bg-black/30 border border-white/10 rounded-xl px-3 py-2"
+            >
+              <span className="text-xs text-white/40 w-6 text-right font-mono">{index + 1}</span>
+              <img
+                src={card.imagePath || `/images/cards/new/${card.id.replace(/_/g, " ")}.webp`}
+                alt={card.name}
+                className="w-12 h-16 object-contain rounded shadow"
+              />
+              <div className="min-w-0">
+                <div className="font-semibold text-white truncate">{card.name}</div>
+                <div className="text-xs text-white/50 capitalize">{card.cardType}{card.element ? ` · ${card.element}` : ""}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function CreatureAbilityMenu({ creature, onActivate, onClose, formatAbilityCost, canAffordAbility }) {
+  const abilities = creature.abilities?.filter((a) => a.trigger === "activated") || [];
+  const usedIds = creature.activatedAbilityIdsThisTurn ?? [];
+
+  return (
+    <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-[60] p-6" onClick={onClose}>
+      <div
+        className="bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-purple-500/50 rounded-2xl shadow-2xl max-w-md w-full p-6"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="text-center mb-4">
+          <div className="text-sm font-semibold tracking-widest text-purple-300 mb-1">ABILITIES</div>
+          <h2 className="text-2xl font-bold text-white">{creature.name}</h2>
+          <p className="text-xs text-slate-400 mt-1">Each ability may be used once per turn</p>
+        </div>
+
+        <div className="space-y-3">
+          {abilities.map((ability) => {
+            const afford = canAffordAbility(ability);
+            const used = usedIds.includes(ability.id);
+            const canUse = !used && afford;
+            const costLabel = formatAbilityCost(ability);
+            return (
+              <button
+                key={ability.id}
+                disabled={!canUse}
+                onClick={() => canUse && onActivate(ability)}
+                className={`w-full text-left p-4 rounded-xl border-2 transition ${
+                  canUse
+                    ? ability.isEnhanced
+                      ? "border-yellow-500/60 bg-yellow-500/10 hover:bg-yellow-500/20"
+                      : "border-orange-500/60 bg-orange-500/10 hover:bg-orange-500/20"
+                    : "border-slate-700 bg-slate-800/50 opacity-50 cursor-not-allowed"
+                }`}
+              >
+                <div className="flex items-center justify-between gap-3 mb-1">
+                  <span className="font-bold text-white">
+                    {ability.name}
+                    {ability.isEnhanced ? " · Enhanced" : ""}
+                  </span>
+                  {used ? (
+                    <span className="text-xs font-semibold text-slate-400">Used</span>
+                  ) : costLabel ? (
+                    <span className={`text-xs font-semibold ${afford ? "text-yellow-300" : "text-red-300"}`}>
+                      {afford ? costLabel : `Need ${costLabel}`}
+                    </span>
+                  ) : null}
+                </div>
+                <p className="text-sm text-slate-300 leading-relaxed">{ability.description}</p>
+              </button>
+            );
+          })}
+        </div>
+
+        <button
+          onClick={onClose}
+          className="mt-5 w-full py-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-white font-semibold"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function ShieldBreakOverlay({ shield, onChoose }) {
+  const tierNumeral = { 1: "I", 2: "II", 3: "III" }[shield.tier] ?? shield.tier;
+
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[60] p-6">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-yellow-500/60 rounded-2xl shadow-2xl max-w-2xl w-full p-8">
+        <div className="text-center mb-6">
+          <div className="text-sm font-semibold tracking-widest text-yellow-400 mb-1">SHIELD BROKEN</div>
+          <h2 className="text-3xl font-bold text-white">{shield.name}</h2>
+          <p className="text-slate-400 text-sm mt-1">Tier {tierNumeral} · Choose one effect to resolve</p>
+        </div>
+
+        <div className="grid gap-4">
+          {(shield.effects ?? []).map((effect, index) => (
+            <button
+              key={effect.id}
+              onClick={() => onChoose(effect.id)}
+              className="text-left p-5 rounded-xl border-2 border-slate-700 bg-slate-800/70 hover:border-yellow-500 hover:bg-slate-800 transition-all group"
+            >
+              <div className="text-xs font-bold text-yellow-500/80 group-hover:text-yellow-400 mb-2">
+                EFFECT {index + 1}
+              </div>
+              <div className="text-slate-100 leading-relaxed">{effect.label}</div>
+            </button>
+          ))}
+        </div>
+
+        <p className="text-center text-xs text-slate-500 mt-6">
+          This choice is mandatory and cannot be countered.
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function AiShieldBreakRevealOverlay({ reveal, onDismiss }) {
+  return (
+    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-[60] p-6">
+      <div className="bg-gradient-to-br from-slate-900 to-slate-800 border-2 border-orange-500/60 rounded-2xl shadow-2xl max-w-xl w-full p-8 text-center">
+        <div className="text-sm font-semibold tracking-widest text-orange-400 mb-1">OPPONENT SHIELD BROKEN</div>
+        <h2 className="text-3xl font-bold text-white mb-2">{reveal.shieldName}</h2>
+        <p className="text-slate-400 text-sm mb-6">The AI chose this effect:</p>
+        <div className="text-left p-5 rounded-xl border-2 border-orange-500/40 bg-slate-800/70 mb-6">
+          <div className="text-xs font-bold text-orange-400 mb-2">CHOSEN EFFECT</div>
+          <div className="text-slate-100 leading-relaxed">{reveal.effectLabel}</div>
+          {reveal.summary && (
+            <div className="text-sm text-slate-400 mt-3">Resolved: {reveal.summary}</div>
+          )}
+        </div>
+        <button
+          onClick={onDismiss}
+          className="px-8 py-3 rounded-xl bg-orange-500 hover:bg-orange-400 text-slate-900 font-bold transition"
+        >
+          Continue
+        </button>
       </div>
     </div>
   );
@@ -1588,14 +1955,16 @@ function DefenseOverlay({
             </button>
           )}
 
-          {(defenseResponseMode.isExhaustedTarget || defenseResponseMode.isShieldAttack) && (
-            <button
-              onClick={() => execute("none")}
-              className="w-full py-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold text-lg transition-all cursor-pointer"
-            >
-              {defenseResponseMode.isShieldAttack ? "⚔️ Do Nothing (Let attack hit shield)" : "⚔️ Do Nothing (Let attack hit exhausted creature)"}
-            </button>
-          )}
+          <button
+            onClick={() => execute("none")}
+            className="w-full py-4 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold text-lg transition-all cursor-pointer"
+          >
+            {defenseResponseMode.isShieldAttack
+              ? "⚔️ Do Nothing (let the attack hit your shield)"
+              : defenseResponseMode.isExhaustedTarget
+              ? "⚔️ Do Nothing (let the attack hit your exhausted creature)"
+              : "⚔️ Take the hit (no counterattack, keep your action)"}
+          </button>
 
           {defenseResponseMode.potentialBlockers?.length > 0 && (
             <div className="space-y-2">
@@ -1613,14 +1982,6 @@ function DefenseOverlay({
           )}
         </div>
 
-        <div className="pointer-events-auto">
-          <button
-            onClick={() => execute("defend")}
-            className="w-full py-3 bg-gray-600 hover:bg-gray-700 text-white rounded-lg font-bold cursor-pointer"
-          >
-            Cancel (Default: Defend)
-          </button>
-        </div>
       </div>
     </div>
   );

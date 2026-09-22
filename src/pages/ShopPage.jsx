@@ -3,8 +3,28 @@ import { Helmet } from 'react-helmet-async';
 import { Button } from '@/components/ui/button';
 import { useCart } from '@/hooks/useCart';
 import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Sparkles, Truck, ChevronLeft, ChevronRight, Clock, X, Store, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Sparkles, ChevronLeft, ChevronRight, Store, Mail } from 'lucide-react';
+import { trackShopVisit } from '@/utils/analytics';
+import { isPhysicalShopPaused } from '@/config/site';
+import PhysicalProductNotice from '@/components/PhysicalProductNotice';
+
+const comingSoonDecks = [
+  {
+    id: 'frost',
+    title: 'Frost Starter Deck',
+    elements: 'Water + Air',
+    blurb: 'Control the board with ice and tempo. Releases after Lightning and Crystal sell through.',
+    icon: '/icons/Frost.png',
+  },
+  {
+    id: 'lava',
+    title: 'Lava Starter Deck',
+    elements: 'Earth + Fire',
+    blurb: 'Overwhelm with burn and raw power. Releases after Lightning and Crystal sell through.',
+    icon: '/icons/Lava.png',
+  },
+];
 
 const products = [
     {
@@ -63,10 +83,11 @@ const ShopPage = () => {
   const { addToCart } = useCart();
   const [sparks, setSparks] = useState([]);
   const [showCurtain, setShowCurtain] = useState(true);
-  const [showPromoBanner, setShowPromoBanner] = useState(true);
+  const shopPaused = isPhysicalShopPaused();
 
   // Generate sparkling particles on page load
   useEffect(() => {
+    trackShopVisit();
     const generateSparks = () => {
       const newSparks = [];
       for (let i = 0; i < 15; i++) {
@@ -91,24 +112,14 @@ const ShopPage = () => {
     return () => clearTimeout(timer);
   }, [showCurtain]);
 
-  // Check if promo banner was dismissed
-  useEffect(() => {
-    const dismissed = localStorage.getItem('shopKickstarterBannerDismissed');
-    if (dismissed) {
-      setShowPromoBanner(false);
-    }
-  }, []);
-
-  const handleDismissPromoBanner = () => {
-    setShowPromoBanner(false);
-    localStorage.setItem('shopKickstarterBannerDismissed', 'true');
-  };
-
   return (
     <div className="bg-[#1A103C] text-white min-h-screen relative overflow-hidden">
       <Helmet>
-        <title>Shop - Elekin TCG</title>
-        <meta name="description" content="Shop for the latest Elekin TCG products and get exclusive rewards." />
+        <title>Elekin Shop — Physical product status</title>
+        <meta
+          name="description"
+          content="Physical Elekin TCG orders are paused while Elemental Games focuses on the Elekin MMOTCG in Kinbrold. Card gallery and browser Quickplay remain available."
+        />
       </Helmet>
 
       {/* Curtain Opening Overlay */}
@@ -156,7 +167,9 @@ const ShopPage = () => {
 
       <div className="container mx-auto px-4 py-16 relative z-10">
 
-        {/* Available in Stores Link */}
+        {shopPaused && <PhysicalProductNotice variant="shop" />}
+
+        {!shopPaused && (
         <motion.div 
           className="max-w-4xl mx-auto mb-6"
           initial={{ opacity: 0, y: -20 }}
@@ -167,14 +180,15 @@ const ShopPage = () => {
             <div className="bg-gradient-to-r from-green-500/20 via-yellow-500/20 to-purple-500/20 border-2 border-yellow-500/50 rounded-xl p-6 text-center hover:border-yellow-400 transition-all duration-300 cursor-pointer group">
               <div className="flex items-center justify-center gap-3 mb-2">
                 <Store className="w-6 h-6 text-yellow-400 group-hover:scale-110 transition-transform" />
-                <h3 className="text-xl lg:text-2xl font-bold text-yellow-400">Elekin Available in Stores</h3>
+                <h3 className="text-xl lg:text-2xl font-bold text-yellow-400">Stores sold out — restocking soon</h3>
               </div>
               <p className="text-purple-200 text-sm md:text-base">
-                Find Elekin at 3 locations across the US. View store locations, demo days, and tournament info →
+                Mulligan, Noble Knight, and Frank&apos;s are out for now. Hoping to restock soon. Shop online in the meantime →
               </p>
             </div>
           </Link>
         </motion.div>
+        )}
 
         <motion.div 
           className="max-w-4xl mx-auto text-center mb-12"
@@ -183,10 +197,14 @@ const ShopPage = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
         >
           <h1 className="text-5xl lg:text-7xl font-bold mb-4 bg-gradient-to-r from-purple-400 via-yellow-400 to-purple-400 bg-clip-text text-transparent">
-            Elekin TCG Shop
+            {shopPaused ? 'Physical Elekin TCG' : 'Elekin TCG Shop'}
           </h1>
           <p className="text-xl lg:text-2xl text-purple-200">
-            Limited Demo Day Edition products - <span className="text-red-400 font-bold">Limited quantities available!</span>
+            {shopPaused ? (
+              <>Catalog for reference — <span className="text-yellow-400 font-bold">new orders paused</span> while we build the MMOTCG.</>
+            ) : (
+              <>Limited Lightning & Crystal stock — <span className="text-yellow-400 font-bold">Frost and Lava drop after these sell through.</span></>
+            )}
           </p>
         </motion.div>
 
@@ -290,10 +308,10 @@ const ShopPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
             >
-              {/* Limited Edition Badge */}
-              <div className="absolute top-3 right-3 bg-red-500/90 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1 z-10">
-                <Clock className="w-3 h-3" />
-                Ending Soon
+              <div className={`absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-bold z-10 ${
+                shopPaused ? 'bg-purple-800/90 text-purple-200' : 'bg-yellow-500/90 text-purple-900'
+              }`}>
+                {shopPaused ? 'Orders paused' : 'Available now'}
               </div>
               
                 <ProductImageCarousel product={product} />
@@ -312,19 +330,61 @@ const ShopPage = () => {
                 <p className="text-2xl font-bold text-yellow-400">${product.price}</p>
                 <p className="text-lg text-gray-400 line-through">${product.oldPrice}</p>
               </div>
-              <Button
-                size="lg"
-                className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
-                onClick={() => addToCart(product)}
-              >
-                Add to Cart
-              </Button>
+              {shopPaused ? (
+                <Button size="lg" className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold" asChild>
+                  <Link to="/alpha">Join the Alpha list</Link>
+                </Button>
+              ) : (
+                <Button
+                  size="lg"
+                  className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold"
+                  onClick={() => addToCart(product)}
+                >
+                  Add to Cart
+                </Button>
+              )}
             </motion.div>
             );
           })}
         </motion.div>
 
+        <motion.div
+          className="mt-20 mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.7 }}
+        >
+          <h2 className="text-3xl lg:text-4xl font-bold text-center mb-4 bg-gradient-to-r from-cyan-400 via-purple-300 to-orange-400 bg-clip-text text-transparent">
+            Next combination decks
+          </h2>
+          <p className="text-center text-purple-200 mb-8 max-w-2xl mx-auto">
+            Frost (Water/Air) and Lava (Earth/Fire) print after Lightning and Crystal sell out. Sand and Poison come after those — the last two of the six combinations. No preorder.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            {comingSoonDecks.map((deck) => (
+              <div
+                key={deck.id}
+                className="bg-purple-900/40 rounded-lg p-6 text-center border border-purple-500/40 relative overflow-hidden"
+              >
+                <div className="absolute top-3 right-3 bg-purple-800/90 text-cyan-200 px-3 py-1 rounded-full text-xs font-bold">
+                  After sell-through
+                </div>
+                <div className="h-40 flex items-center justify-center mb-4">
+                  <img src={deck.icon} alt="" className="h-28 w-auto object-contain opacity-90" />
+                </div>
+                <h3 className="text-2xl font-bold mb-1">{deck.title}</h3>
+                <p className="text-yellow-400 text-sm font-semibold mb-3">{deck.elements}</p>
+                <p className="text-purple-200 text-sm mb-4">{deck.blurb}</p>
+                <Button size="lg" className="w-full bg-purple-800 text-purple-200 cursor-not-allowed" disabled>
+                  Coming soon
+                </Button>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
         {/* Wholesale Pricing Section */}
+        {!shopPaused && (
         <motion.div 
           className="max-w-4xl mx-auto mt-16 mb-8"
           initial={{ opacity: 0, y: 20 }}
@@ -354,47 +414,8 @@ const ShopPage = () => {
             </p>
           </div>
         </motion.div>
-      </div>
-
-      {/* Sticky Kickstarter Banner at Bottom */}
-      <AnimatePresence>
-        {showPromoBanner && (
-          <motion.div 
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            transition={{ duration: 0.3 }}
-            className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-r from-green-600/95 to-emerald-600/95 border-t border-green-400/50 backdrop-blur-sm"
-          >
-          <div className="container mx-auto px-4 py-3">
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 relative">
-              <button
-                onClick={handleDismissPromoBanner}
-                className="absolute top-0 right-0 md:right-4 text-green-200 hover:text-white transition-colors p-1"
-                aria-label="Close banner"
-              >
-                <X className="w-5 h-5" />
-              </button>
-              <div className="flex items-center gap-2">
-                <span className="text-lg">🚀</span>
-                <span className="text-base md:text-lg font-semibold text-white">
-                  Our Kickstarter is live! Help us fund Elekin&apos;s first set.
-                </span>
-              </div>
-              <a
-                href="https://www.kickstarter.com/projects/elemental-games/elekin"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Button className="bg-white hover:bg-gray-100 text-green-700 font-bold px-6 py-1.5 text-sm rounded-lg whitespace-nowrap">
-                  Back Us on Kickstarter →
-                </Button>
-              </a>
-            </div>
-          </div>
-          </motion.div>
         )}
-      </AnimatePresence>
+      </div>
     </div>
   );
 };

@@ -65,22 +65,17 @@ const SignupForm = ({ buttonClassName, onSuccess, source = 'signup_form', inputS
         <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
         <h3 className="text-xl font-bold text-green-400 mb-2">Thank You!</h3>
         <p className="text-purple-200 mb-6">
-          You&apos;re now on our mailing list! You&apos;ll be among the first to know when Elekin launches.
+          You&apos;re on the list. We&apos;ll share Alpha and Elekin updates by email.
           <br /><span className="text-sm mt-2 block opacity-80">
             A welcome email should arrive in your inbox shortly.
           </span>
         </p>
         <div className="space-y-3">
-          <a
-            href="https://www.kickstarter.com/projects/elemental-games/elekin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block"
-          >
+          <a href="/alpha" className="block">
             <Button 
               className={`w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md ${buttonClassName}`}
             >
-              🔔 Follow us on Kickstarter!
+              Join the Alpha List
             </Button>
           </a>
         </div>

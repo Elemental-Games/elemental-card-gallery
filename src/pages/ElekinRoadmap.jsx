@@ -2,35 +2,42 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { Star, Users, Trophy, Sparkles } from 'lucide-react';
+import { Star, Snowflake, Wind, Swords, Sparkles } from 'lucide-react';
 
 const ElekinRoadmap = () => {
   const roadmapItems = [
     {
-      title: "Physical TCG Development",
-      date: "Current - June 2025",
-      description: "Development of the core physical card game including 169 cards, complete ruleset, and extensive playtesting. Culminating in a Kickstarter campaign to fund initial print run and digital development.",
+      title: "Lightning & Crystal",
+      date: "Now",
+      description: "The two starter decks you can buy and play today — on the table (~30–45 min) or in the browser beta (~30 min).",
       icon: Star,
       status: "current"
     },
     {
-      title: "Digital TCG Launch",
-      date: "Q4 2025",
-      description: "Launch of Elekin Online featuring digital card system, player accounts, matchmaking, collection management, and comprehensive tutorial system.",
-      icon: Users,
+      title: "Frost & Lava",
+      date: "Next print",
+      description: "Water/Air and Earth/Fire. These go on sale once Lightning and Crystal sell through.",
+      icon: Snowflake,
       status: "upcoming"
     },
     {
-      title: "Enhanced Online Features",
-      date: "Q1 2026",
-      description: "Introduction of friend system, trading, tournaments, chat features, and competitive ranking system.",
-      icon: Trophy,
+      title: "Sand & Poison",
+      date: "After Frost & Lava",
+      description: "Air/Earth and Water/Fire — the last two of the six combination decks.",
+      icon: Wind,
       status: "upcoming"
     },
     {
-      title: "MMO Evolution",
-      date: "Q3 2026",
-      description: "Evolution into Kinbrold: Elekin Masters - a full MMO with elemental cities, card battle arenas, guild systems, and an expansive world to explore.",
+      title: "Skirmish in Kinbrold",
+      date: "After the six decks",
+      description: "Quickplay: 5–15 minute matches inside the world. Click someone in Kinbrold, play a short game, get back to walking around.",
+      icon: Swords,
+      status: "upcoming"
+    },
+    {
+      title: "Kinbrold MMOTCG",
+      date: "The long game",
+      description: "A persistent world whose combat is Elekin. Towns, NPCs, other players — grown one kingdom at a time. An MMORPG that plays like a TCG.",
       icon: Sparkles,
       status: "upcoming"
     }
@@ -39,8 +46,8 @@ const ElekinRoadmap = () => {
   return (
     <>
       <Helmet>
-        <title>Elekin Development Roadmap - Masters of Kinbrold</title>
-        <meta name="description" content="Follow the development journey of Elekin: Masters of Kinbrold and see what exciting features are coming next." />
+        <title>Elekin Roadmap — What&apos;s next</title>
+        <meta name="description" content="Elekin now: Lightning and Crystal. Then Frost and Lava, Sand and Poison, short Skirmish matches in Kinbrold, and a Kinbrold MMOTCG." />
       </Helmet>
       
       <div className="min-h-screen bg-[#1A103C]">
@@ -53,7 +60,7 @@ const ElekinRoadmap = () => {
           >
             <h1 className="text-4xl font-bold text-white mb-4">Development Roadmap</h1>
             <p className="text-xl text-purple-200 max-w-2xl mx-auto">
-              Follow our journey as we build and expand the world of Elekin
+              We&apos;re putting decks in people&apos;s hands first. When those exist, we build the world they belong in.
             </p>
           </motion.div>
 
@@ -61,43 +68,44 @@ const ElekinRoadmap = () => {
           <div className="max-w-4xl mx-auto">
             {roadmapItems.map((item, index) => {
               const Icon = item.icon;
+              const isFirst = index === 0;
+              const isLast = index === roadmapItems.length - 1;
               return (
                 <motion.div
                   key={item.title}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.2 }}
-                  className="relative pl-8 pb-12 last:pb-0"
+                  className="flex gap-4"
                 >
-                  {/* Timeline line */}
-                  {index !== roadmapItems.length - 1 && (
-                    <div className="absolute left-[27px] top-10 w-[2px] h-full bg-purple-500/30" />
-                  )}
-                  
-                  {/* Timeline item */}
-                  <div className="relative">
-                    {/* Icon */}
-                    <div className={`absolute left-[-27px] w-14 h-14 rounded-full flex items-center justify-center
-                      ${item.status === 'current' ? 'bg-yellow-500' : 'bg-purple-900/50 border border-purple-500/30'}`}
-                    >
-                      <Icon className={`w-6 h-6 ${item.status === 'current' ? 'text-purple-900' : 'text-yellow-500'}`} />
-                    </div>
-                    
-                    {/* Content */}
-                    <div className="ml-12">
-                      <div className="bg-purple-900/30 p-6 rounded-lg border border-purple-500/30">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="text-2xl font-bold text-white">{item.title}</h3>
-                          <span className="text-yellow-500 font-semibold">{item.date}</span>
-                        </div>
-                        <p className="text-purple-200">{item.description}</p>
-                        {item.status === 'current' && (
-                          <div className="mt-4 inline-block px-3 py-1 bg-yellow-500/20 text-yellow-500 rounded-full text-sm font-semibold">
-                            Currently in Development
-                          </div>
-                        )}
+                  <div className="flex w-14 shrink-0 flex-col items-center">
+                    <div className="flex w-full min-h-0 flex-1 flex-col items-center">
+                      <div className={`w-0.5 flex-1 ${isFirst ? 'bg-transparent' : 'bg-purple-500/30'}`} />
+                      <div className={`relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full
+                        ${item.status === 'current' ? 'bg-yellow-500' : 'bg-purple-900/50 border border-purple-500/30'}`}
+                      >
+                        <Icon className={`w-6 h-6 ${item.status === 'current' ? 'text-purple-900' : 'text-yellow-500'}`} />
                       </div>
+                      <div className={`w-0.5 flex-1 ${isLast ? 'bg-transparent' : 'bg-purple-500/30'}`} />
                     </div>
+                    {!isLast && (
+                      <div className="h-12 w-0.5 shrink-0 bg-purple-500/30" />
+                    )}
+                  </div>
+                  <div className="flex min-w-0 flex-1 flex-col">
+                    <div className="flex-1 bg-purple-900/30 p-6 rounded-lg border border-purple-500/30">
+                      <div className="flex items-start justify-between mb-2 gap-4">
+                        <h3 className="text-2xl font-bold text-white">{item.title}</h3>
+                        <span className="text-yellow-500 font-semibold shrink-0">{item.date}</span>
+                      </div>
+                      <p className="text-purple-200">{item.description}</p>
+                      {item.status === 'current' && (
+                        <div className="mt-4 inline-block px-3 py-1 bg-yellow-500/20 text-yellow-500 rounded-full text-sm font-semibold">
+                          Currently available
+                        </div>
+                      )}
+                    </div>
+                    {!isLast && <div className="h-12 shrink-0" />}
                   </div>
                 </motion.div>
               );
@@ -111,18 +119,28 @@ const ElekinRoadmap = () => {
             transition={{ delay: 0.8 }}
             className="text-center mt-16"
           >
-            <h2 className="text-2xl font-bold text-white mb-4">Want to Help Shape the Future?</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Follow along</h2>
             <p className="text-purple-200 mb-8">
-              Join our beta and provide feedback to influence the development of Elekin
+              If you want to be part of it now: play the beta, grab a Lightning or Crystal deck, and hang out in Discord.
             </p>
-            <Link to="/join">
-              <Button 
-                size="lg"
-                className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-8 py-6"
-              >
-                Join Now
-              </Button>
-            </Link>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/tcg">
+                <Button 
+                  size="lg"
+                  className="bg-purple-300 text-[#1A103C] border-2 border-[#1A103C] hover:bg-purple-200 font-bold px-8 py-6"
+                >
+                  Play the Beta
+                </Button>
+              </Link>
+              <Link to="/shop">
+                <Button 
+                  size="lg"
+                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-8 py-6"
+                >
+                  Shop Decks
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { X, LayoutGrid } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const AnimatedCardBackground = () => {
@@ -175,36 +175,26 @@ const AnimatedCardBackground = () => {
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 1.6, duration: 0.6 }}
           >
-            We&apos;re live on Kickstarter! Back us now and help us reach our initial goal — 
-            let's bring Elekin to life!
+            Play free in the browser, pick up Lightning and Crystal on the table, and step into Kinbrold.
           </motion.p>
           
-          {/* Kickstarter CTA */}
-          <motion.a
-            href="https://www.kickstarter.com/projects/elemental-games/elekin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pointer-events-auto inline-block mt-8"
+          <motion.div
+            className="pointer-events-auto mt-8 flex flex-col sm:flex-row gap-4 justify-center"
             initial={{ y: 30, opacity: 0, scale: 0.9 }}
             animate={{ y: 0, opacity: 1, scale: 1 }}
             transition={{ delay: 1.7, duration: 0.8, ease: "easeOut" }}
           >
-            <motion.div
-              animate={{
-                boxShadow: [
-                  '0 0 20px rgba(234,179,8,0.4)',
-                  '0 0 40px rgba(234,179,8,0.7)',
-                  '0 0 20px rgba(234,179,8,0.4)',
-                ],
-              }}
-              transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-              className="rounded-2xl"
-            >
-              <Button className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-6 text-xl md:text-2xl px-10 md:px-14 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-yellow-300/50">
-                Back Us on Kickstarter →
+            <Link to="/tcg">
+              <Button className="bg-purple-300 text-[#1A103C] border-2 border-[#1A103C] hover:bg-purple-200 font-bold py-6 text-xl md:text-2xl px-10 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300">
+                Play the Beta →
               </Button>
-            </motion.div>
-          </motion.a>
+            </Link>
+            <Link to="/shop">
+              <Button className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold py-6 text-xl md:text-2xl px-10 rounded-xl shadow-2xl hover:scale-105 transition-all duration-300 border-2 border-yellow-300/50">
+                Shop Decks
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </motion.div>
 

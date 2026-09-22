@@ -97,7 +97,7 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-2xl font-bold text-white flex items-center justify-center w-full pr-6">
                 <Mail className="mr-2 h-5 w-5 text-yellow-400" />
-                Get Campaign Updates
+                Get Elekin Updates
               </h2>
               <button 
                 onClick={closeModal}
@@ -112,28 +112,21 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
                 <CheckCircle className="h-16 w-16 text-green-400 mx-auto mb-4" />
                 <h3 className="text-xl font-bold text-green-400 mb-2">Welcome! You're Signed Up!</h3>
                 <p className="text-purple-200 mb-6">
-                  Our Kickstarter is <span className="text-green-400 font-bold">live right now</span>! 
-                  You'll get updates on stretch goals, milestones, and campaign exclusives.
+                  Lightning and Crystal decks are in the shop. You&apos;ll hear when Frost, Lava, and the Kinbrold world drop.
                   <br /><span className="text-sm mt-2 block opacity-80">
-                    Check your inbox for your welcome email with campaign details and Discord access.
+                    Check your inbox for a welcome email, then hop in Discord.
                   </span>
                 </p>
                 <div className="space-y-3">
-                  <a
-                    href="https://www.kickstarter.com/projects/elemental-games/elekin"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block"
+                  <Button 
+                    onClick={() => { window.location.href = '/shop'; }}
+                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
                   >
-                    <Button 
-                      className="w-full bg-green-500 hover:bg-green-400 text-white font-semibold py-6 text-md"
-                    >
-                      Back on Kickstarter →
-                    </Button>
-                  </a>
+                    Shop Lightning & Crystal →
+                  </Button>
                   <Button 
                     onClick={handleDiscordJoin}
-                    className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-semibold py-6 text-md"
+                    className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-6 text-md"
                   >
                     Join Our Discord Community →
                   </Button>
@@ -147,33 +140,33 @@ const EmailSubscriptionModal = ({ isOpen, onClose }) => {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-4">
-                {/* Campaign Benefits */}
-                <div className="bg-green-500/10 border border-green-500/30 rounded-lg p-4 mb-4">
-                  <h3 className="text-green-400 font-bold mb-3 text-center">🎁 Stay in the loop:</h3>
+                {/* Why subscribe */}
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-lg p-4 mb-4">
+                  <h3 className="text-yellow-400 font-bold mb-3 text-center">You&apos;ll hear about:</h3>
                   <div className="space-y-2 text-sm text-purple-200">
                     <div className="flex items-center">
-                      <span className="text-green-400 mr-2">✓</span>
-                      <span>Stretch goal announcements</span>
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>New decks after Lightning & Crystal sell through</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-green-400 mr-2">✓</span>
-                      <span>Campaign milestone updates</span>
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Browser play and Kinbrold world updates</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-green-400 mr-2">✓</span>
-                      <span>Backer community access</span>
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Store nights and community events</span>
                     </div>
                     <div className="flex items-center">
-                      <span className="text-green-400 mr-2">✓</span>
-                      <span>Exclusive Discord role</span>
+                      <span className="text-yellow-400 mr-2">✓</span>
+                      <span>Discord and card reveals</span>
                     </div>
                   </div>
                 </div>
                 
                 <p className="text-purple-200 mb-4 text-center">
-                  <span className="text-green-400 font-semibold">Kickstarter is live!</span>
+                  <span className="text-yellow-400 font-semibold">Play free. Buy the boxes. Watch the world grow.</span>
                   <br />
-                  <span className="text-sm opacity-80">Get email updates on stretch goals and campaign milestones.</span>
+                  <span className="text-sm opacity-80">Stay in the loop as we build Kinbrold.</span>
                 </p>
                 
                 <div className="space-y-2">

@@ -109,7 +109,7 @@ const InteractiveMap = () => {
       const canvas = canvasRef.current;
       const ctx = canvas.getContext('2d');
       const img = new Image();
-      img.src = '/breakdown.jpg';
+      img.src = '/images/mmo-kinbrold-map.jpg';
       img.onload = () => {
         canvas.width = img.width * scale;
         canvas.height = img.height * scale;

@@ -26,6 +26,15 @@ export interface CreatureAbility {
   name: string;
   trigger: AbilityTriggerType;
   description?: string;
+  // Enhanced abilities cost essence. Single-element costs use `element`;
+  // dual-element (Crystal / Lightning) costs use `elements` and may be paid
+  // with any mix of those elements (rulebook 4.1.2).
+  isEnhanced?: boolean;
+  essenceCost?: {
+    amount: number;
+    element?: Element;
+    elements?: Element[];
+  };
 }
 
 export type AbilityOptionType = "creature" | "shield" | "rune" | "element" | "card" | "confirm";
@@ -75,6 +84,8 @@ export interface CreatureCard extends BaseCard {
   abilities?: CreatureAbility[];
   imagePath?: string;
   essenceGeneration?: number; // How much essence this creature generates per turn (default: 1)
+  isDragon?: boolean; // Dragons are dual-element and never generate essence (rulebook 3.2.2)
+  isTitan?: boolean; // Titans are searchable by Titan's Shield
 }
 
 export interface SpellCard extends BaseCard {
@@ -94,9 +105,16 @@ export interface CounterCard extends BaseCard {
   effect: string;
 }
 
+export interface ShieldEffect {
+  id: string;
+  label: string; // Full card text, shown verbatim on the break prompt
+}
+
 export interface ShieldCard extends BaseCard {
   cardType: "shield";
   tier: 1 | 2 | 3;
+  // Every shield carries two effects; the controller picks exactly one on break (rulebook 5.3.2)
+  effects?: [ShieldEffect, ShieldEffect];
 }
 
 // Board Shield (with current health and tier state)
@@ -118,8 +136,11 @@ export interface BoardCreature extends CreatureCard {
   isBlocking?: boolean;
   equippedCards?: RuneCard[]; // Equipment rune cards attached to this creature
   exhausted?: boolean; // Visual state - true if horizontal/rotated (no action)
-  hasActivatedAbilityThisTurn?: boolean;
+  hasActivatedAbilityThisTurn?: boolean; // legacy; prefer activatedAbilityIdsThisTurn
+  // Each activated ability (regular or enhanced) may be used once per turn
+  activatedAbilityIdsThisTurn?: string[];
   temporaryStrengthBonus?: number;
+  shieldStrengthBonusUntilEndOfTurn?: number;
   doubleStrikeUntilEndOfTurn?: boolean;
   pierceUntilEndOfTurn?: boolean;
   cannotBeBlocked?: boolean;
@@ -152,6 +173,8 @@ export interface GameState {
   currentTurn: "player" | "ai";
   currentPhase: Phase;
   turnNumber: number;
+  // Whoever took the first turn skips their Draw and Battle phases that turn (rulebook 3.1.3)
+  firstPlayer: "player" | "ai";
   gameStatus: "setup" | "playing" | "player_won" | "ai_won" | "conceded";
   
   // Essence tracking
@@ -211,6 +234,23 @@ export interface GameState {
     originalShieldId?: string; // Tracks original shield target when blockers intervene
   };
   
+  // A broken shield stops the game until its controller picks one of its two effects
+  pendingShieldBreak?: {
+    controller: "player" | "ai";
+    shield: BoardShield;
+    overflowDamage: number;
+    attackerInstanceId?: string;
+  };
+
+  // Broken shields go to the discard pile. When the AI chooses an effect, park a
+  // reveal so the player can see what was picked before play continues.
+  lastShieldBreakReveal?: {
+    controller: "player" | "ai";
+    shieldName: string;
+    effectLabel: string;
+    summary?: string;
+  };
+
   pendingAbilityPrompt?: PendingAbilityPrompt;
   activeAbilityContext?: AbilityContext;
   battleLog: BattleLogEntry[];

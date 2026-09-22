@@ -99,7 +99,7 @@ export default async function handler(req, res) {
                         <td style="position: relative;">
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
                                 <tr>
-                                    <td style="background-image: url('https://elementalgames.gg/images/kingdom-headers/zalos-header.webp'); background-size: cover; background-position: center; height: 320px; position: relative;">
+                                    <td style="background-image: url('https://elementalgames.gg/images/mmo-zalos.jpg'); background-size: cover; background-position: center; height: 320px; position: relative;">
                                         <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);"></div>
                                         <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="height: 320px;">
                                             <tr>

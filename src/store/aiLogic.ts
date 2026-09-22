@@ -378,6 +378,7 @@ export const aiBattlePhase = async (
     initiateAttack: (attackerId: string, targetId: string, targetType: "creature" | "shield" | "face", isPlayer: boolean) => any;
     handleDefenseResponse: (defenderId: string, responseType: "defend" | "dodge" | "block" | "none", attackerId: string, isPlayer: boolean, blockerId?: string) => any;
     setAIPhaseMessage: (message: string | null) => void;
+    setPendingDefenseResponse?: (pending: GameState["pendingDefenseResponse"]) => void;
   },
   delay: (ms: number) => Promise<void>
 ): Promise<boolean> => {
@@ -400,7 +401,15 @@ export const aiBattlePhase = async (
   // Attack with each creature that has an action
   for (const attacker of attackers) {
     await delay(500);
-    
+
+    // Shield breaks end the Battle Phase immediately — stop attacking.
+    if (getState().currentPhase !== "battle") {
+      actions.setAIPhaseMessage("Battle Phase ended (shield broke)");
+      await delay(1200);
+      actions.setAIPhaseMessage(null);
+      return true;
+    }
+
     // Get fresh state after each attack (creatures may have been destroyed)
     const currentState = getState();
     const freshPlayerBoard = currentState.playerBoard.filter(c => c.currentHealth > 0);
@@ -564,20 +573,43 @@ export const aiBattlePhase = async (
         if (result && result.success) {
           // Handle defense response if needed
           if (result.requiresResponse) {
-            // Wait for player's defense response to be resolved
-            // Poll until pendingDefenseResponse is cleared (player made their choice)
+            // Belt-and-suspenders: never let an attack claim a response is required while
+            // leaving the pending prompt empty — that made the wait loop exit immediately
+            // and the attack vanish without dealing damage or exhausting anyone.
+            if (!getState().pendingDefenseResponse) {
+              const pending = {
+                attackerId: result.attackerId || freshAttacker.instanceId,
+                defenderId: result.defenderId || bestTarget.id,
+                canDodge: !!result.canDodge,
+                potentialBlockers: result.potentialBlockers || [],
+                isExhaustedTarget: !!result.exhaustedTarget,
+                isShieldAttack: !!result.isShieldAttack,
+                originalShieldId: result.originalShieldId,
+              };
+              if (actions.setPendingDefenseResponse) {
+                actions.setPendingDefenseResponse(pending);
+              }
+            }
+
+            if (!getState().pendingDefenseResponse) {
+              console.error("AI attack requires a defense response but none is pending", result);
+              actions.setAIPhaseMessage(null);
+              continue;
+            }
+
+            actions.setAIPhaseMessage(
+              `Waiting for your defense response against ${freshAttacker.name}...`
+            );
+
             let waitCount = 0;
-            const maxWaitTime = 300000; // 5 minutes max wait (should never happen, but safety)
+            const maxWaitTime = 300000;
             while (getState().pendingDefenseResponse && waitCount < maxWaitTime) {
-              await delay(100); // Check every 100ms
+              await delay(100);
               waitCount += 100;
             }
-            
-            // Clear the message after player's choice
+
             actions.setAIPhaseMessage(null);
             await delay(500);
-            
-            // Continue to next attacker (the actual resolution happened in handleDefenseResponse)
             continue;
           } else if (result.exhaustedTarget) {
             actions.setAIPhaseMessage(`Attacked exhausted creature! Dealt ${result.damage} damage.`);

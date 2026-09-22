@@ -17,34 +17,40 @@ export default function TCGTurnOrder({ onSelect }) {
         {/* Options */}
         <div className="grid grid-cols-2 gap-8 mt-12">
           {/* Go First */}
-          <div
+          <button
+            type="button"
             onClick={() => onSelect(true)}
-            className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20 border-2 border-slate-700 hover:border-green-500"
+            aria-label="Go first — you skip your Draw Phase and Battle Phase on turn 1"
+            className="group relative w-full text-center bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-green-500/20 border-2 border-slate-700 hover:border-green-500"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-green-500 to-emerald-500 opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300" />
-            
+
             <div className="relative">
               <div className="text-6xl mb-4">🏁</div>
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-400">
                 1st
               </h2>
+              <p className="mt-3 text-sm text-slate-400">No draw and no Battle Phase on your first turn</p>
             </div>
-          </div>
+          </button>
 
           {/* Go Second */}
-          <div
+          <button
+            type="button"
             onClick={() => onSelect(false)}
-            className="group relative bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 border-2 border-slate-700 hover:border-blue-500"
+            aria-label="Go second — you draw and may attack on turn 1"
+            className="group relative w-full text-center bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-blue-500/20 border-2 border-slate-700 hover:border-blue-500"
           >
             <div className="absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-0 group-hover:opacity-20 rounded-2xl transition-opacity duration-300" />
-            
+
             <div className="relative">
               <div className="text-6xl mb-4">⏩</div>
               <h2 className="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
                 2nd
               </h2>
+              <p className="mt-3 text-sm text-slate-400">You draw and may attack on your first turn</p>
             </div>
-          </div>
+          </button>
         </div>
       </div>
     </div>

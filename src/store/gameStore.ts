@@ -1,6 +1,7 @@
 import { create } from "zustand";
-import { GameState, Card, BoardCreature, BoardShield, Element, PendingAbilityPrompt, AbilityContext, CreatureCard, AbilityOption } from "../types/tcg";
+import { GameState, Card, BoardCreature, BoardShield, Element, PendingAbilityPrompt, AbilityContext, CreatureCard, AbilityOption, CreatureAbility } from "../types/tcg";
 import { getStarterDeck, drawCards } from "../data/decks";
+import { getStarterShields } from "../data/shields";
 import { v4 as uuidv4 } from "uuid";
 import * as aiLogic from "./aiLogic";
 
@@ -32,9 +33,17 @@ interface GameActions {
   aiTurn: () => void;
   concede: () => void;
   resetGame: () => void;
+  // Resolve a broken shield by choosing one of its two effects (rulebook 5.3.2)
+  resolveShieldBreak: (effectId: string) => { success: boolean; error?: string; summary?: string };
+  dismissShieldBreakReveal: () => void;
 }
 
 type GameStore = GameState & GameActions;
+
+// Rulebook limits (2.3.2, 2.2.1, 2.2.3)
+const MAX_ESSENCE_PER_ELEMENT = 20;
+const MAX_HAND_SIZE = 7;
+const MAX_CREATURES_ON_FIELD = 5;
 
 const initialGameState: GameState = {
   playerHealth: 500,
@@ -46,6 +55,7 @@ const initialGameState: GameState = {
   currentTurn: "player",
   currentPhase: "draw",
   turnNumber: 1,
+  firstPlayer: "player",
   gameStatus: "setup",
   playerEssence: { fire: 0, water: 0, earth: 0, air: 0 },
   aiEssence: { fire: 0, water: 0, earth: 0, air: 0 },
@@ -63,6 +73,8 @@ const initialGameState: GameState = {
   aiShields: [],
   playerDiscard: [],
   aiDiscard: [],
+  pendingShieldBreak: undefined,
+  lastShieldBreakReveal: undefined,
   pendingAbilityPrompt: undefined,
   activeAbilityContext: undefined,
   battleLog: [],
@@ -101,7 +113,57 @@ export const useGameStore = create<GameStore>((set, get) => {
     if (abilities.includes("meks_fury")) {
       modifiers.doubleStrike = true;
     }
+    if (creature.shieldStrengthBonusUntilEndOfTurn) {
+      modifiers.strengthBonus += creature.shieldStrengthBonusUntilEndOfTurn;
+    }
+    if (creature.doubleStrikeUntilEndOfTurn) {
+      modifiers.doubleStrike = true;
+    }
+    if (creature.pierceUntilEndOfTurn) {
+      modifiers.pierce = true;
+    }
     return modifiers;
+  };
+
+  const canPayAbilityCost = (controller: "player" | "ai", ability: CreatureAbility) => {
+    const cost = ability.essenceCost;
+    if (!cost || cost.amount <= 0) return true;
+    const essence = get()[getEssenceKey(controller)];
+    if (cost.elements?.length) {
+      const available = cost.elements.reduce((sum, el) => sum + (essence[el] ?? 0), 0);
+      return available >= cost.amount;
+    }
+    if (cost.element) return (essence[cost.element] ?? 0) >= cost.amount;
+    return true;
+  };
+
+  // Spend essence for an enhanced ability. Dual-element costs drain from the richest
+  // pool first so the player isn't forced to micromanage the split.
+  const payAbilityCost = (controller: "player" | "ai", ability: CreatureAbility) => {
+    const cost = ability.essenceCost;
+    if (!cost || cost.amount <= 0) return { success: true };
+    if (!canPayAbilityCost(controller, ability)) {
+      return { success: false, error: "Not enough essence for this ability" };
+    }
+
+    const essenceKey = getEssenceKey(controller);
+    const essence = { ...get()[essenceKey] };
+
+    if (cost.elements?.length) {
+      let remaining = cost.amount;
+      const order = [...cost.elements].sort((a, b) => (essence[b] ?? 0) - (essence[a] ?? 0));
+      for (const el of order) {
+        if (remaining <= 0) break;
+        const take = Math.min(essence[el] ?? 0, remaining);
+        essence[el] = (essence[el] ?? 0) - take;
+        remaining -= take;
+      }
+    } else if (cost.element) {
+      essence[cost.element] = (essence[cost.element] ?? 0) - cost.amount;
+    }
+
+    set({ [essenceKey]: essence } as Partial<GameState>);
+    return { success: true };
   };
 
   const getBlockerStrengthBonus = (blocker?: BoardCreature, isShieldAttack?: boolean) => {
@@ -421,7 +483,8 @@ export const useGameStore = create<GameStore>((set, get) => {
     controller: "player" | "ai",
     shieldId: string,
     damage: number,
-    reveal = true
+    reveal = true,
+    attackerInstanceId?: string
   ) => {
     if (damage <= 0) {
       return { success: true, destroyed: false, damageDealt: 0 };
@@ -439,36 +502,373 @@ export const useGameStore = create<GameStore>((set, get) => {
     let updatedShields = [...shields];
 
     if (newHealth <= 0) {
+      // Only the damage needed to break counts; the rest is lost unless the source has Pierce.
+      const damageAbsorbed = targetShield.currentHealth;
       updatedShields = updatedShields.filter((shield) => shield.id !== shieldId);
       set({ [shieldsKey]: updatedShields } as Partial<GameState>);
-      return { success: true, destroyed: true, damageDealt: targetShield.currentHealth };
+      breakShield(controller, targetShield, attackerInstanceId);
+      return {
+        success: true,
+        destroyed: true,
+        damageDealt: damageAbsorbed,
+        overflow: damage - damageAbsorbed,
+      };
     }
 
-    let updatedShield = {
+    // A shield's tier never changes; only its HP does. The End Phase restores it to the
+    // highest threshold at or below its remaining HP (rulebook 5.3.2).
+    updatedShields[shieldIndex] = {
       ...targetShield,
       currentHealth: newHealth,
       faceDown: reveal ? false : targetShield.faceDown,
     };
-
-    if (damage >= 150) {
-      if (targetShield.currentTier === 3) {
-        updatedShield = {
-          ...updatedShield,
-          currentTier: 2,
-          currentHealth: Math.min(newHealth, targetShield.maxHealthByTier[2]),
-        };
-      } else if (targetShield.currentTier === 2) {
-        updatedShield = {
-          ...updatedShield,
-          currentTier: 1,
-          currentHealth: Math.min(newHealth, targetShield.maxHealthByTier[1]),
-        };
-      }
-    }
-
-    updatedShields[shieldIndex] = updatedShield;
     set({ [shieldsKey]: updatedShields } as Partial<GameState>);
     return { success: true, destroyed: false, damageDealt: damage };
+  };
+
+  // Breaking a shield removes it from the game and forces its controller to pick one of its two effects.
+  // A shield break also ends the Battle Phase immediately (How to Play / table rules).
+  const breakShield = (
+    controller: "player" | "ai",
+    shield: BoardShield,
+    attackerInstanceId?: string
+  ) => {
+    // Broken shields go to the discard pile with everything else.
+    const discardKey = getDiscardKey(controller);
+    const state = get();
+    const endBattle = state.currentPhase === "battle";
+
+    set({
+      [discardKey]: [...state[discardKey], shield as unknown as Card],
+      pendingShieldBreak: { controller, shield, overflowDamage: 0, attackerInstanceId },
+      ...(endBattle
+        ? {
+            currentPhase: "main2" as const,
+            aiPhaseMessage:
+              `${shield.name} broke! The Battle Phase ends — moving to Main Phase 2.`,
+          }
+        : {}),
+    } as Partial<GameState>);
+
+    addLogEntry(
+      controller,
+      `${shield.name} (Tier ${shield.tier}) broke — ${controller === "player" ? "choose" : "the AI chooses"} one of its two effects.`,
+      "system"
+    );
+    if (endBattle) {
+      addLogEntry("system", "Battle Phase ends — now Main Phase 2.", "system");
+    }
+
+    // The choice is mandatory, so the AI resolves its own breaks straight away rather than
+    // leaving the game paused waiting on a prompt it will never see.
+    if (controller === "ai") {
+      const effectId = chooseShieldEffectForAI(shield);
+      if (effectId) get().resolveShieldBreak(effectId);
+    }
+  };
+
+  // Picks whichever of the two effects actually accomplishes something given the board.
+  const chooseShieldEffectForAI = (shield: BoardShield): string | undefined => {
+    const effects = shield.effects;
+    if (!effects?.length) return undefined;
+
+    const state = get();
+    const ownBoard = state.aiBoard;
+    const foeBoard = state.playerBoard;
+    const ownDiscard = state.aiDiscard;
+    const freeInDiscard = ownDiscard.filter((c) => c.cardType === "creature" && totalEssenceCost(c) === 0).length;
+    const cheapInDiscard = ownDiscard.filter((c) => c.cardType === "creature" && totalEssenceCost(c) <= 5).length;
+    const roomOnBoard = MAX_CREATURES_ON_FIELD - ownBoard.length;
+
+    const viable = (id: string): boolean => {
+      switch (id) {
+        case "radiant_buckler_mute": return foeBoard.length > 0;
+        case "radiant_buckler_empower": return ownBoard.length > 0;
+        case "spectral_shield_revive_two": return roomOnBoard >= 2 && freeInDiscard >= 2;
+        case "spectral_shield_revive_one": return roomOnBoard >= 1 && cheapInDiscard >= 1;
+        case "titans_shield_summon_titan": return roomOnBoard >= 1 && state.aiDeck.some((c) => !!(c as any).isTitan);
+        case "titans_shield_pierce_summon": return roomOnBoard >= 1 && state.aiHand.some((c) => c.cardType === "creature");
+        case "mystic_ward_destroy_rune": return state.playerRuneCounterZone.some((slot) => slot !== null);
+        case "mystic_ward_weaken": return foeBoard.length > 0;
+        case "mythical_barrier_draw": return state.aiDeck.length > 0;
+        case "mythical_barrier_discard": return state.playerHand.length > 0;
+        case "elemental_shield_revive": return roomOnBoard >= 1 && ownDiscard.some((c) => c.cardType === "creature" && !(c as any).isDragon);
+        case "elemental_shield_drain": return true;
+        default: return true;
+      }
+    };
+
+    return (effects.find((e) => viable(e.id)) ?? effects[0]).id;
+  };
+
+  const summonFromPile = (
+    controller: "player" | "ai",
+    pileKey: "playerDiscard" | "aiDiscard" | "playerHand" | "aiHand",
+    predicate: (card: Card) => boolean,
+    count: number,
+    overrides: Partial<BoardCreature> = {}
+  ) => {
+    const summoned: BoardCreature[] = [];
+    for (let i = 0; i < count; i++) {
+      const pile = get()[pileKey];
+      const board = get()[getBoardKey(controller)];
+      if (board.length >= MAX_CREATURES_ON_FIELD) break;
+      const index = pile.findIndex((c) => c.cardType === "creature" && predicate(c));
+      if (index === -1) break;
+      const card = pile[index];
+      set({ [pileKey]: pile.filter((_, idx) => idx !== index) } as Partial<GameState>);
+      const result = addCreatureToBoard(controller, card, overrides);
+      if (result.success && result.creature) summoned.push(result.creature);
+    }
+    return summoned;
+  };
+
+  const totalEssenceCost = (card: any) =>
+    (card.cost ?? 0) + (card.secondaryCost?.amount ?? 0);
+
+  // Attaches a broken shield to a creature as an equipment rune, which several shields do.
+  const equipShieldToCreature = (
+    shield: BoardShield,
+    effectId: string,
+    target: { controller: "player" | "ai"; instanceId: string },
+    statChange: { strength?: number; agility?: number } = {}
+  ) => {
+    updateCreatureOnBoard(target.controller, target.instanceId, (creature) => ({
+      ...creature,
+      strength: Math.max(0, (creature.strength ?? 0) + (statChange.strength ?? 0)),
+      currentHealth: Math.max(1, (creature.currentHealth ?? 0) + (statChange.strength ?? 0)),
+      agility: Math.max(0, (creature.agility ?? 0) + (statChange.agility ?? 0)),
+      equippedCards: [
+        ...(creature.equippedCards ?? []),
+        { ...(shield as any), id: effectId, cardType: "rune" },
+      ],
+    }));
+  };
+
+  const pickCreatureTarget = (controller: "player" | "ai", preferOpponent: boolean) => {
+    const own = get()[getBoardKey(controller)];
+    const foe = get()[getBoardKey(controller === "player" ? "ai" : "player")];
+    const list = preferOpponent ? (foe.length ? foe : own) : own.length ? own : foe;
+    if (!list.length) return undefined;
+    // Strongest creature is the most meaningful target either way.
+    const best = [...list].sort((a, b) => getBaseStrength(b) - getBaseStrength(a))[0];
+    const isFoe = foe.some((c) => c.instanceId === best.instanceId);
+    return {
+      controller: (isFoe ? (controller === "player" ? "ai" : "player") : controller) as "player" | "ai",
+      instanceId: best.instanceId,
+    };
+  };
+
+  const applyShieldEffect = (
+    controller: "player" | "ai",
+    shield: BoardShield,
+    effectId: string
+  ) => {
+    const opponent: "player" | "ai" = controller === "player" ? "ai" : "player";
+    const notes: string[] = [];
+
+    switch (effectId) {
+      // ---- Radiant Buckler (Tier 1, Crystal) ----
+      case "radiant_buckler_mute": {
+        const target = pickCreatureTarget(controller, true);
+        if (!target) { notes.push("no creature to equip"); break; }
+        equipShieldToCreature(shield, effectId, target);
+        notes.push("equipped: target no longer generates essence");
+        break;
+      }
+      case "radiant_buckler_empower": {
+        const target = pickCreatureTarget(controller, false);
+        if (!target) { notes.push("no creature to equip"); break; }
+        equipShieldToCreature(shield, effectId, target, { strength: 30, agility: 10 });
+        notes.push("equipped: +30 Strength, +10 Agility");
+        break;
+      }
+
+      // ---- Spectral Shield (Tier 2, Crystal) ----
+      case "spectral_shield_revive_two": {
+        const discardKey = getDiscardKey(controller);
+        const eligible = get()[discardKey]
+          .map((card, index) => ({ card, index }))
+          .filter(({ card }) => card.cardType === "creature" && totalEssenceCost(card) === 0);
+
+        if (eligible.length === 0) {
+          notes.push("no 0-cost creatures in the discard pile");
+          break;
+        }
+
+        if (controller === "ai") {
+          const revived = summonFromPile(controller, discardKey, (c) => totalEssenceCost(c) === 0, 2);
+          notes.push(`special summoned ${revived.length} free creature(s) from the discard pile`);
+          break;
+        }
+
+        const maxPick = Math.min(2, eligible.length, MAX_CREATURES_ON_FIELD - get()[getBoardKey(controller)].length);
+        if (maxPick <= 0) {
+          notes.push("Creature Zone is full");
+          break;
+        }
+
+        const options: AbilityOption[] = eligible.map(({ card, index }) => ({
+          id: String(index),
+          label: `${card.name} (0 essence)`,
+          type: "card",
+          metadata: {
+            discardIndex: index,
+            cardId: card.id,
+            imagePath: card.imagePath || `/images/cards/new/${card.id.replace(/_/g, " ")}.webp`,
+            name: card.name,
+          },
+        }));
+
+        enqueueAbilityPrompt(
+          controller,
+          "spectral-shield",
+          maxPick === 2
+            ? "Spectral Shield: Choose 2 creatures from your discard to special summon (0-cost only)."
+            : `Spectral Shield: Choose ${maxPick} creature(s) from your discard to special summon (0-cost only).`,
+          options,
+          "multiple",
+          false,
+          { abilityId: "spectral_shield_revive_two", count: maxPick }
+        );
+        notes.push("choose creatures from your discard");
+        break;
+      }
+      case "spectral_shield_revive_one": {
+        const discardKey = getDiscardKey(controller);
+        const eligible = get()[discardKey]
+          .map((card, index) => ({ card, index }))
+          .filter(({ card }) => card.cardType === "creature" && totalEssenceCost(card) <= 5);
+
+        if (eligible.length === 0) {
+          notes.push("no eligible creature in the discard pile");
+          break;
+        }
+
+        if (controller === "ai") {
+          const revived = summonFromPile(controller, discardKey, (c) => totalEssenceCost(c) <= 5, 1);
+          notes.push(revived.length ? `special summoned ${revived[0].name}` : "no eligible creature in the discard pile");
+          break;
+        }
+
+        if (get()[getBoardKey(controller)].length >= MAX_CREATURES_ON_FIELD) {
+          notes.push("Creature Zone is full");
+          break;
+        }
+
+        const options: AbilityOption[] = eligible.map(({ card, index }) => ({
+          id: String(index),
+          label: `${card.name} (cost ${totalEssenceCost(card)})`,
+          type: "card",
+          metadata: {
+            discardIndex: index,
+            cardId: card.id,
+            imagePath: card.imagePath || `/images/cards/new/${card.id.replace(/_/g, " ")}.webp`,
+            name: card.name,
+          },
+        }));
+
+        enqueueAbilityPrompt(
+          controller,
+          "spectral-shield",
+          "Spectral Shield: Choose 1 creature from your discard to special summon (5 essence or less).",
+          options,
+          "single",
+          false,
+          { abilityId: "spectral_shield_revive_one" }
+        );
+        notes.push("choose a creature from your discard");
+        break;
+      }
+
+      // ---- Titan's Shield (Tier 3, Crystal) ----
+      case "titans_shield_summon_titan": {
+        const summoned = summonFromPile(controller, getDeckKey(controller), (c) => !!(c as any).isTitan, 1);
+        if (!summoned.length) { notes.push("no Titan left in the deck"); break; }
+        equipShieldToCreature(shield, effectId, { controller, instanceId: summoned[0].instanceId }, { strength: 50 });
+        updateCreatureOnBoard(controller, summoned[0].instanceId, (c) => ({ ...c, hasTaunt: true } as any));
+        notes.push(`special summoned ${summoned[0].name} with +50 Strength and Taunt`);
+        break;
+      }
+      case "titans_shield_pierce_summon": {
+        const summoned = summonFromPile(controller, getHandKey(controller), () => true, 1, {
+          pierceUntilEndOfTurn: true,
+        });
+        notes.push(summoned.length ? `special summoned ${summoned[0].name} with Pierce` : "no creature in hand");
+        break;
+      }
+
+      // ---- Mystic Ward (Tier 1, Lightning) ----
+      case "mystic_ward_destroy_rune": {
+        const zoneKey = opponent === "player" ? "playerRuneCounterZone" : "aiRuneCounterZone";
+        const zone = get()[zoneKey];
+        const index = zone.findIndex((slot) => slot !== null);
+        if (index === -1) { notes.push("opponent has no Rune/Counter cards to destroy"); break; }
+        const removed = zone[index]!;
+        const updated = [...zone];
+        updated[index] = null;
+        set({
+          [zoneKey]: updated,
+          [getDiscardKey(opponent)]: [...get()[getDiscardKey(opponent)], removed as unknown as Card],
+        } as Partial<GameState>);
+        notes.push(`destroyed ${removed.faceDown ? "a face-down card" : removed.name}`);
+        break;
+      }
+      case "mystic_ward_weaken": {
+        const target = pickCreatureTarget(controller, true);
+        if (!target) { notes.push("no creature to equip"); break; }
+        equipShieldToCreature(shield, effectId, target, { strength: -30, agility: -10 });
+        notes.push("equipped: target loses 30 Strength and 10 Agility");
+        break;
+      }
+
+      // ---- Mythical Barrier (Tier 2, Lightning) ----
+      case "mythical_barrier_draw": {
+        let drew = 0;
+        for (let i = 0; i < 3; i++) if (drawCardToHand(controller)) drew++;
+        notes.push(`drew ${drew} card(s)`);
+        break;
+      }
+      case "mythical_barrier_discard": {
+        const handKey = getHandKey(opponent);
+        const hand = get()[handKey];
+        const taken = hand.slice(-3);
+        set({
+          [handKey]: hand.slice(0, Math.max(0, hand.length - 3)),
+          [getDiscardKey(opponent)]: [...get()[getDiscardKey(opponent)], ...taken],
+        } as Partial<GameState>);
+        notes.push(`opponent discarded ${taken.length} card(s)`);
+        break;
+      }
+
+      // ---- Elemental Shield (Tier 3, Lightning) ----
+      case "elemental_shield_revive": {
+        const revived = summonFromPile(controller, getDiscardKey(controller), (c) => !(c as any).isDragon, 1);
+        if (!revived.length) { notes.push("no eligible creature in the discard pile"); break; }
+        grantEssence(controller, revived[0].element, 5);
+        notes.push(`special summoned ${revived[0].name} and gained 5 ${revived[0].element} essence`);
+        break;
+      }
+      case "elemental_shield_drain": {
+        let drew = 0;
+        for (let i = 0; i < 2; i++) if (drawCardToHand(controller)) drew++;
+        // Drain the opponent's two fullest pools, which is always their most costly loss.
+        const foeEssence = { ...get()[getEssenceKey(opponent)] };
+        const richest = (Object.keys(foeEssence) as Element[])
+          .sort((a, b) => foeEssence[b] - foeEssence[a])
+          .slice(0, 2);
+        for (const el of richest) foeEssence[el] = Math.max(0, foeEssence[el] - 5);
+        set({ [getEssenceKey(opponent)]: foeEssence } as Partial<GameState>);
+        notes.push(`drew ${drew} card(s) and drained 5 ${richest.join(" and 5 ")} essence`);
+        break;
+      }
+
+      default:
+        notes.push(`effect "${effectId}" is not implemented`);
+        break;
+    }
+
+    return notes.join("; ");
   };
 
   const restoreShieldToOriginal = (controller: "player" | "ai", shieldId: string) => {
@@ -552,6 +952,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       exhausted: overrides.exhausted ?? false,
       canAttack: overrides.canAttack ?? false,
       hasActivatedAbilityThisTurn: overrides.hasActivatedAbilityThisTurn ?? false,
+      activatedAbilityIdsThisTurn: overrides.activatedAbilityIdsThisTurn ?? [],
       temporaryStrengthBonus: overrides.temporaryStrengthBonus ?? 0,
       doubleStrikeUntilEndOfTurn: overrides.doubleStrikeUntilEndOfTurn ?? false,
       pierceUntilEndOfTurn: overrides.pierceUntilEndOfTurn ?? false,
@@ -573,6 +974,7 @@ export const useGameStore = create<GameStore>((set, get) => {
       exhausted,
       canAttack,
       hasActivatedAbilityThisTurn,
+      activatedAbilityIdsThisTurn,
       temporaryStrengthBonus,
       doubleStrikeUntilEndOfTurn,
       pierceUntilEndOfTurn,
@@ -665,12 +1067,21 @@ export const useGameStore = create<GameStore>((set, get) => {
     setPendingAbilityPrompt(undefined);
   };
 
-  const markCreatureAbilityUsed = (controller: "player" | "ai", instanceId: string) => {
-    updateCreatureOnBoard(controller, instanceId, (creature) => ({
-      ...creature,
-      hasActivatedAbilityThisTurn: true,
-    }));
+  const markCreatureAbilityUsed = (controller: "player" | "ai", instanceId: string, abilityId?: string) => {
+    updateCreatureOnBoard(controller, instanceId, (creature) => {
+      const used = [...(creature.activatedAbilityIdsThisTurn ?? [])];
+      if (abilityId && !used.includes(abilityId)) used.push(abilityId);
+      return {
+        ...creature,
+        activatedAbilityIdsThisTurn: used,
+        // Keep the legacy flag true once any ability has been used (older UI paths)
+        hasActivatedAbilityThisTurn: used.length > 0 || !!creature.hasActivatedAbilityThisTurn,
+      };
+    });
   };
+
+  const hasUsedAbilityThisTurn = (creature: BoardCreature, abilityId: string) =>
+    (creature.activatedAbilityIdsThisTurn ?? []).includes(abilityId);
 
   const setCreatureExhausted = (
     controller: "player" | "ai",
@@ -926,9 +1337,23 @@ export const useGameStore = create<GameStore>((set, get) => {
     set({
       [essenceKey]: {
         ...essence,
-        [element]: (essence[element] ?? 0) + amount,
+        // Pools cap at 20 per element and excess generation is lost (rulebook 2.3.2)
+        [element]: Math.min(MAX_ESSENCE_PER_ELEMENT, (essence[element] ?? 0) + amount),
       },
     } as Partial<GameState>);
+  };
+
+  // Life Points cannot go below 0, and hitting 0 ends the game immediately (rulebook 5.3.3)
+  const damageLifePoints = (controller: "player" | "ai", damage: number) => {
+    if (damage <= 0) return { newHealth: get()[controller === "player" ? "playerHealth" : "aiHealth"] };
+    const healthKey = controller === "player" ? "playerHealth" : "aiHealth";
+    const newHealth = Math.max(0, get()[healthKey] - damage);
+    set({ [healthKey]: newHealth } as Partial<GameState>);
+    if (newHealth <= 0) {
+      set({ gameStatus: controller === "player" ? "ai_won" : "player_won" });
+      addLogEntry("system", `${controller === "player" ? "You" : "The AI"} ran out of Life Points.`, "system");
+    }
+    return { newHealth };
   };
 
   const addLogEntry = (
@@ -962,25 +1387,13 @@ export const useGameStore = create<GameStore>((set, get) => {
     const { drawn: aiHand, remaining: aiRemaining } = drawCards(aiFullDeck, 5);
 
     // Set first player
-    const firstPlayer = playerGoesFirst ? "player" : "ai";
+    const firstPlayer: "player" | "ai" = playerGoesFirst ? "player" : "ai";
 
-    // Initialize shields based on deck type
-    const crystalShields: BoardShield[] = [
-      { id: "radiant_buckler", name: "Radiant Buckler", tier: 1, element: "water", cost: 0, rarity: "common", cardType: "shield", currentHealth: 150, currentTier: 1, faceDown: true, maxHealthByTier: { 1: 150, 2: 150, 3: 150 } },
-      { id: "spectral_shield", name: "Spectral Shield", tier: 2, element: "water", cost: 0, rarity: "uncommon", cardType: "shield", currentHealth: 300, currentTier: 2, faceDown: true, maxHealthByTier: { 1: 150, 2: 300, 3: 300 } },
-      { id: "titans_shield", name: "Titan's Shield", tier: 3, element: "earth", cost: 0, rarity: "rare", cardType: "shield", currentHealth: 450, currentTier: 3, faceDown: true, maxHealthByTier: { 1: 150, 2: 300, 3: 450 } },
-    ];
+    // Each deck ships 3 shields (one per tier), each carrying its own two break effects
+    const initialPlayerShields = getStarterShields(playerDeck);
+    const initialAiShields = getStarterShields(aiDeck);
 
-    const lightningShields: BoardShield[] = [
-      { id: "mystic_ward", name: "Mystic Ward", tier: 1, element: "air", cost: 0, rarity: "common", cardType: "shield", currentHealth: 150, currentTier: 1, faceDown: true, maxHealthByTier: { 1: 150, 2: 150, 3: 150 } },
-      { id: "mythical_barrier", name: "Mythical Barrier", tier: 2, element: "air", cost: 0, rarity: "uncommon", cardType: "shield", currentHealth: 300, currentTier: 2, faceDown: true, maxHealthByTier: { 1: 150, 2: 300, 3: 300 } },
-      { id: "elemental_shield", name: "Elemental Shield", tier: 3, element: "fire", cost: 0, rarity: "rare", cardType: "shield", currentHealth: 450, currentTier: 3, faceDown: true, maxHealthByTier: { 1: 150, 2: 300, 3: 450 } },
-    ];
-
-    const initialPlayerShields = playerDeck === "crystal" ? crystalShields : lightningShields;
-    const initialAiShields = aiDeck === "crystal" ? crystalShields : lightningShields;
-    
-    // Shuffle AI shields so they're in random positions
+    // The AI chooses its own shield order, so randomize it
     const shuffledAiShields = [...initialAiShields].sort(() => Math.random() - 0.5);
 
     set({
@@ -997,8 +1410,20 @@ export const useGameStore = create<GameStore>((set, get) => {
       aiMaxMana: 1,
       gameStatus: "playing",
       turnNumber: 1,
+      firstPlayer,
       playerHealth: 500,
       aiHealth: 500,
+      playerDiscard: [],
+      aiDiscard: [],
+      pendingShieldBreak: undefined,
+      lastShieldBreakReveal: undefined,
+      playerBoard: [],
+      aiBoard: [],
+      playerRuneCounterZone: Array(5).fill(null),
+      aiRuneCounterZone: Array(5).fill(null),
+      playerEssence: { fire: 0, water: 0, earth: 0, air: 0 },
+      aiEssence: { fire: 0, water: 0, earth: 0, air: 0 },
+      battleLog: [],
       hasNormalSummonedThisTurn: false,
       playerDeckType: playerDeck,
       aiDeckType: aiDeck,
@@ -1137,16 +1562,21 @@ export const useGameStore = create<GameStore>((set, get) => {
       return { success: true };
     }
     
-    // Check if trying to normal summon a creature
-    if (card.cardType === "creature" && zoneType === "creature") {
-      // Check if in Main Phase 1 or Main Phase 2
+    // Normal summon restrictions apply however the summon was requested, not just via the
+    // creature zone, otherwise callers that omit zoneType bypass every limit.
+    if (card.cardType === "creature") {
+      // One normal summon per turn, in Main Phase 1 or Main Phase 2
       if (state.currentPhase !== "main1" && state.currentPhase !== "main2") {
-        return { success: false, error: "Can only summon creatures in Main Phase!" };
+        return { success: false, error: "You can only normal summon during a Main Phase." };
       }
-      
-      // Check if already normal summoned this turn
+
       if (state.hasNormalSummonedThisTurn) {
-        return { success: false, error: "Already normal summoned this turn!" };
+        return { success: false, error: "You have already normal summoned this turn." };
+      }
+
+      // The Creature Zone holds at most 5 (rulebook 2.2.3)
+      if (board.length >= MAX_CREATURES_ON_FIELD) {
+        return { success: false, error: `Your Creature Zone is full (${MAX_CREATURES_ON_FIELD}).` };
       }
     }
     
@@ -1721,30 +2151,22 @@ export const useGameStore = create<GameStore>((set, get) => {
         return { success: false, error: "Cannot attack face while shields remain" };
       }
       // Direct face attack - deal strength damage
-      const damage = attacker.strength || attacker.attack;
+      const damage = getBaseStrength(attacker);
       const attackerController: "player" | "ai" = isPlayer ? "player" : "ai";
+      const defenderController: "player" | "ai" = isPlayer ? "ai" : "player";
       addLogEntry(attackerController, `${attacker.name} strikes directly for ${damage} damage`, "attack");
-      const newOpponentHealth = isPlayer ? state.aiHealth - damage : state.playerHealth - damage;
-      
+
       // Exhaust attacker
-      const newBoard = board.map(c => 
-        c.instanceId === attackerId 
+      const newBoard = board.map(c =>
+        c.instanceId === attackerId
           ? { ...c, hasAction: false, exhausted: true }
           : c
       );
-      
-      if (isPlayer) {
-        set({ playerBoard: newBoard, aiHealth: newOpponentHealth });
-      } else {
-        set({ aiBoard: newBoard, playerHealth: newOpponentHealth });
-      }
-      
-      // Check win condition
-      if (newOpponentHealth <= 0) {
-        set({ gameStatus: isPlayer ? "player_won" : "ai_won" });
-      }
-      
-      return { success: true, damage };
+      set({ [getBoardKey(attackerController)]: newBoard } as Partial<GameState>);
+
+      const { newHealth } = damageLifePoints(defenderController, damage);
+
+      return { success: true, damage, targetHealth: newHealth };
     }
     
     // Handle shield attack
@@ -1795,7 +2217,7 @@ export const useGameStore = create<GameStore>((set, get) => {
 
       setCreatureExhausted(attackerController, attackerId, true);
 
-      const shieldResult = damageShield(defenderController, targetId, attackerStrength, true);
+      const shieldResult = damageShield(defenderController, targetId, attackerStrength, true, attackerId);
       const damageDealt = shieldResult.damageDealt ?? attackerStrength;
 
       if (shieldResult.destroyed) {
@@ -1963,21 +2385,25 @@ export const useGameStore = create<GameStore>((set, get) => {
         return { success: true, damage, exhaustedTarget: true };
       }
       
-      // Defender has action - requires response
+      // Defender still has its action, so its controller always gets a say: it may Defend
+      // (needs only an action), Dodge (needs higher Agility), let a faster creature Block,
+      // or take the hit. Prompt whenever the AI attacks — never return requiresResponse
+      // without also parking the pending prompt, or the AI battle loop will skip the attack.
       const defenderAgility = defender.agility || 0;
-      
-      // If AI is attacking player creature, set pending defense response
-      if (!isPlayer && potentialBlockers.length > 0) {
+      const canDodge = defenderAgility > attackerAgility;
+      const blockerList = potentialBlockers.map(c => ({
+        instanceId: c.instanceId,
+        name: c.name,
+        agility: c.agility || 0,
+      }));
+
+      if (!isPlayer) {
         set({
           pendingDefenseResponse: {
             attackerId,
             defenderId: targetId,
-            canDodge: defenderAgility > attackerAgility,
-            potentialBlockers: potentialBlockers.map(c => ({
-              instanceId: c.instanceId,
-              name: c.name,
-              agility: c.agility || 0,
-            })),
+            canDodge,
+            potentialBlockers: blockerList,
             isExhaustedTarget: false,
           }
         });
@@ -1988,12 +2414,8 @@ export const useGameStore = create<GameStore>((set, get) => {
         requiresResponse: true,
         attackerId,
         defenderId: targetId,
-        canDodge: defenderAgility > attackerAgility,
-        potentialBlockers: potentialBlockers.map(c => ({
-          instanceId: c.instanceId,
-          name: c.name,
-          agility: c.agility || 0,
-        })),
+        canDodge,
+        potentialBlockers: blockerList,
       };
     }
     
@@ -2174,58 +2596,58 @@ export const useGameStore = create<GameStore>((set, get) => {
       const isShieldAttack = pendingDefense?.isShieldAttack || false;
       
       if (isShieldAttack && responseType === "none") {
-        // Let shield attack proceed - shield takes damage
+        // Let the shield take the hit. Route through damageShield so tier thresholds,
+        // reveal, removal and the break-effect prompt all behave the same as any other hit.
         const targetShield = (isPlayer ? state.aiShields : state.playerShields).find(s => s.id === defenderId);
         if (!targetShield) {
           return { success: false, error: "Shield not found" };
         }
-        
-        const damage = attacker.strength || attacker.attack;
-        const newHealth = targetShield.currentHealth - damage;
-        
-        // Exhaust attacker
-        const newAttackerBoard = attackerBoard.map(c => 
-          c.instanceId === attackerId 
-            ? { ...c, hasAction: false, exhausted: true }
-            : c
+
+        const modifiers = getShieldAttackModifiers(attacker);
+        const damage = getBaseStrength(attacker) + modifiers.strengthBonus;
+
+        setCreatureExhausted(attackerController, attackerId, true);
+        const shieldResult = damageShield(defenderController, defenderId, damage, true, attackerId);
+        set({ pendingDefenseResponse: undefined });
+
+        addLogEntry(
+          attackerController,
+          shieldResult.destroyed
+            ? `${attacker.name} shatters ${targetShield.name}`
+            : `${attacker.name} deals ${shieldResult.damageDealt} damage to ${targetShield.name}`,
+          "attack"
         );
-        
-        let newOpponentShields = [...(isPlayer ? state.aiShields : state.playerShields)];
-        if (newHealth <= 0) {
-          // Shield destroyed
-          newOpponentShields = newOpponentShields.filter(s => s.id !== defenderId);
-        } else {
-          // Update shield health and reveal
-          const shieldIndex = newOpponentShields.findIndex(s => s.id === defenderId);
-          let updatedShield = {
-            ...targetShield,
-            currentHealth: newHealth,
-            faceDown: false,
-          };
-          
-          // Check if shield should drop to next tier (if damage >= 150)
-          if (damage >= 150) {
-            if (targetShield.currentTier === 3) {
-              updatedShield.currentTier = 2;
-              updatedShield.currentHealth = Math.min(newHealth, targetShield.maxHealthByTier[2]);
-            } else if (targetShield.currentTier === 2) {
-              updatedShield.currentTier = 1;
-              updatedShield.currentHealth = Math.min(newHealth, targetShield.maxHealthByTier[1]);
-            }
-          }
-          
-          newOpponentShields[shieldIndex] = updatedShield;
-        }
-        
-        if (isPlayer) {
-          set({ aiBoard: newAttackerBoard, aiShields: newOpponentShields });
-        } else {
-          set({ playerBoard: newAttackerBoard, playerShields: newOpponentShields });
-        }
-        
-        return { success: true, damage, destroyed: newHealth <= 0, shieldHit: true };
+
+        return {
+          success: true,
+          shieldHit: true,
+          damage: shieldResult.damageDealt ?? damage,
+          destroyed: !!shieldResult.destroyed,
+        };
       }
-      
+
+      // A live defender that declines to defend simply takes the damage. It does not strike
+      // back (that costs the action) and keeps its action for a later block this turn.
+      if (!isShieldAttack && responseType === "none") {
+        const damage = getBaseStrength(attacker);
+        setCreatureExhausted(attackerController, attackerId, true);
+        const dmgResult = damageCreature(defenderController, defenderId, damage);
+        set({ pendingDefenseResponse: undefined });
+
+        addLogEntry(
+          attackerController,
+          `${attacker.name} hits ${defender.name} for ${damage}${dmgResult.destroyed ? " — destroyed" : ""} (no counterattack)`,
+          "attack"
+        );
+
+        return {
+          success: true,
+          damage,
+          defenderDestroyed: !!dmgResult.destroyed,
+          tookTheHit: true,
+        };
+      }
+
       // Check if defender is exhausted - if so, "none" means let attack proceed without blocking
       const isExhausted = defender.exhausted || !defender.hasAction;
       if (isExhausted && responseType === "none") {
@@ -2450,7 +2872,9 @@ export const useGameStore = create<GameStore>((set, get) => {
         hasAction: true,
         exhausted: false,
         hasActivatedAbilityThisTurn: false,
+        activatedAbilityIdsThisTurn: [],
         temporaryStrengthBonus: 0,
+        shieldStrengthBonusUntilEndOfTurn: 0,
         doubleStrikeUntilEndOfTurn: false,
         pierceUntilEndOfTurn: false,
       };
@@ -2479,10 +2903,11 @@ export const useGameStore = create<GameStore>((set, get) => {
       end: "End Phase",
     };
     
-    // Turn 1 Rule: Skip Battle Phase for the first player
-    if (state.turnNumber === 1 && state.currentPhase === "main1") {
+    // Only the player who took the first turn loses their Battle Phase (rulebook 3.1.3).
+    // The second player has no restrictions, even though it is still turn 1.
+    if (state.turnNumber === 1 && state.currentTurn === state.firstPlayer && state.currentPhase === "main1") {
       const controller = state.currentTurn;
-      addLogEntry(controller, `→ ${phaseNames["main2"]}`, "system");
+      addLogEntry(controller, `First turn: no Battle Phase. → ${phaseNames["main2"]}`, "system");
       set({ currentPhase: "main2" });
       return;
     }
@@ -2508,26 +2933,37 @@ export const useGameStore = create<GameStore>((set, get) => {
         // Count essence generation from creatures
         const generation = { fire: 0, water: 0, earth: 0, air: 0 };
         board.forEach(creature => {
-          if (creature.element in generation) {
-            // Get base generation amount (default to 1 if not specified)
-            const baseGeneration = creature.essenceGeneration || 1;
-            
-            // Check if creature has Essence Amplifier equipped
-            const hasEssenceAmplifier = creature.equippedCards?.some(
-              (card: any) => card.id === "essence_amplifier"
-            );
-            
-            // Double the generation if Essence Amplifier is equipped
-            const multiplier = hasEssenceAmplifier ? 2 : 1;
-            generation[creature.element as keyof typeof generation] += baseGeneration * multiplier;
-          }
+          if (!(creature.element in generation)) return;
+
+          // Dragons never generate essence (rulebook 3.2.2)
+          if (creature.isDragon) return;
+
+          // Radiant Buckler's first break effect silences generation on the creature it equips
+          const isMuted = creature.equippedCards?.some(
+            (card: any) => card.id === "radiant_buckler_mute"
+          );
+          if (isMuted) return;
+
+          // Get base generation amount (default to 1 if not specified)
+          const baseGeneration = creature.essenceGeneration || 1;
+
+          // Check if creature has Essence Amplifier equipped
+          const hasEssenceAmplifier = creature.equippedCards?.some(
+            (card: any) => card.id === "essence_amplifier"
+          );
+
+          // Double the generation if Essence Amplifier is equipped
+          const multiplier = hasEssenceAmplifier ? 2 : 1;
+          generation[creature.element as keyof typeof generation] += baseGeneration * multiplier;
         });
-        
+
+        // Pools cap at 20 per element; anything over that is lost (rulebook 2.3.2)
+        const cap = (v: number) => Math.min(MAX_ESSENCE_PER_ELEMENT, v);
         const newEssence = {
-          fire: essence.fire + generation.fire,
-          water: essence.water + generation.water,
-          earth: essence.earth + generation.earth,
-          air: essence.air + generation.air,
+          fire: cap(essence.fire + generation.fire),
+          water: cap(essence.water + generation.water),
+          earth: cap(essence.earth + generation.earth),
+          air: cap(essence.air + generation.air),
         };
         
         addLogEntry(controller, `→ ${phaseNames[nextPhase]}`, "system");
@@ -2552,6 +2988,12 @@ export const useGameStore = create<GameStore>((set, get) => {
 
   endTurn: () => {
     const state = get();
+
+    // A broken shield must be resolved before the turn can end (rulebook 5.3.2)
+    if (state.pendingShieldBreak) {
+      return;
+    }
+
     const nextTurn = state.currentTurn === "player" ? "ai" : "player";
     const newTurnNumber = nextTurn === "player" ? state.turnNumber + 1 : state.turnNumber;
 
@@ -2602,6 +3044,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         const updated = {
           ...creature,
           temporaryStrengthBonus: 0,
+          shieldStrengthBonusUntilEndOfTurn: 0,
           doubleStrikeUntilEndOfTurn: false,
           pierceUntilEndOfTurn: false,
         };
@@ -2612,8 +3055,24 @@ export const useGameStore = create<GameStore>((set, get) => {
       });
     };
 
-    const restoredPlayerShields = nextTurn === "player" ? restoreShields(state.playerShields) : state.playerShields;
-    const restoredAiShields = nextTurn === "ai" ? restoreShields(state.aiShields) : state.aiShields;
+    // Shields regenerate at the End Phase of the turn in which they were damaged, which is
+    // the turn now ending, so restore the shields belonging to whoever was being attacked.
+    const restoredPlayerShields = state.currentTurn === "ai" ? restoreShields(state.playerShields) : state.playerShields;
+    const restoredAiShields = state.currentTurn === "player" ? restoreShields(state.aiShields) : state.aiShields;
+
+    // Hand size is checked in the End Phase, discarding the excess (rulebook 3.2.6)
+    const handKey = state.currentTurn === "player" ? "playerHand" : "aiHand";
+    const discardKey = state.currentTurn === "player" ? "playerDiscard" : "aiDiscard";
+    const endingHand = state[handKey];
+    let trimmedHand = endingHand;
+    let grownDiscard = state[discardKey];
+    if (endingHand.length > MAX_HAND_SIZE) {
+      // Discard from the end of the hand; a human player picks these in the UI.
+      const overflow = endingHand.length - MAX_HAND_SIZE;
+      trimmedHand = endingHand.slice(0, MAX_HAND_SIZE);
+      grownDiscard = [...grownDiscard, ...endingHand.slice(MAX_HAND_SIZE)];
+      addLogEntry(state.currentTurn, `Discarded ${overflow} card(s) down to the ${MAX_HAND_SIZE} card hand limit.`, "system");
+    }
     
     // Restore creature health at end phase
     const restoredPlayerBoard = restoreCreatureHealth(state.playerBoard);
@@ -2627,6 +3086,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       aiBoard: restoredAiBoard,
       playerShields: restoredPlayerShields,
       aiShields: restoredAiShields,
+      [handKey]: trimmedHand,
+      [discardKey]: grownDiscard,
       hasNormalSummonedThisTurn: false, // Reset normal summon for new turn
       hasDrawnThisTurn: false,
       // Reset turn-long rune effects
@@ -2647,8 +3108,20 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     const deck = isPlayer ? state.playerDeck : state.aiDeck;
     const hand = isPlayer ? state.playerHand : state.aiHand;
+    const controller: "player" | "ai" = isPlayer ? "player" : "ai";
+
+    // Failing a mandatory Draw Phase draw loses you the game (rulebook 3.3.2)
     if (deck.length === 0) {
-      return { success: false, error: "No cards left to draw" };
+      set({ gameStatus: isPlayer ? "ai_won" : "player_won" });
+      addLogEntry("system", `${isPlayer ? "You" : "The AI"} could not draw and lost the duel.`, "system");
+      return { success: false, error: "Deck empty — you lose the duel", deckOut: true };
+    }
+
+    // At the hand limit, the Draw Phase draw is simply skipped (rulebook 3.2.1)
+    if (hand.length >= MAX_HAND_SIZE) {
+      set({ hasDrawnThisTurn: true });
+      addLogEntry(controller, `Hand is full (${MAX_HAND_SIZE}) — no card drawn this turn.`, "system");
+      return { success: true, skipped: true };
     }
 
     const [drawn, ...remaining] = deck;
@@ -2700,8 +3173,8 @@ export const useGameStore = create<GameStore>((set, get) => {
       return { success: false, error: "Ability cannot be activated manually" };
     }
 
-    if (creature.hasActivatedAbilityThisTurn) {
-      return { success: false, error: "Ability already used this turn" };
+    if (hasUsedAbilityThisTurn(creature, abilityId)) {
+      return { success: false, error: "That ability was already used this turn" };
     }
 
     const currentTurnMatches = state.currentTurn === controller;
@@ -2711,6 +3184,17 @@ export const useGameStore = create<GameStore>((set, get) => {
 
     if (state.currentPhase !== "main1" && state.currentPhase !== "main2") {
       return { success: false, error: "Abilities can only be activated during Main Phases" };
+    }
+
+    // Cheap precondition checks before spending essence on enhanced abilities.
+    if (abilityId === "retreat") {
+      const anyExhausted = [...state.playerBoard, ...state.aiBoard].some((c) => c.exhausted || !c.hasAction);
+      if (!anyExhausted) return { success: false, error: "No exhausted creatures on the field" };
+    }
+
+    if (ability.isEnhanced || ability.essenceCost) {
+      const paid = payAbilityCost(controller, ability);
+      if (!paid.success) return paid;
     }
 
     addLogEntry(controller, `${creature.name} activates ${ability.name}`, "ability");
@@ -2729,9 +3213,6 @@ export const useGameStore = create<GameStore>((set, get) => {
               ...state.playerEssence,
               fire: state.playerEssence.fire + fireCount,
             },
-            playerBoard: state.playerBoard.map((c) =>
-              c.instanceId === creature.instanceId ? { ...c, hasActivatedAbilityThisTurn: true } : c
-            ),
           });
         } else {
           set({
@@ -2739,11 +3220,9 @@ export const useGameStore = create<GameStore>((set, get) => {
               ...state.aiEssence,
               fire: state.aiEssence.fire + fireCount,
             },
-            aiBoard: state.aiBoard.map((c) =>
-              c.instanceId === creature.instanceId ? { ...c, hasActivatedAbilityThisTurn: true } : c
-            ),
           });
         }
+        markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
         return { success: true };
       }
       case "combustion": {
@@ -2830,7 +3309,7 @@ export const useGameStore = create<GameStore>((set, get) => {
             } else {
               damageShield(target.controller, target.id, 30);
             }
-            markCreatureAbilityUsed(controller, creature.instanceId);
+            markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
           }
           return { success: true };
         }
@@ -2865,7 +3344,7 @@ export const useGameStore = create<GameStore>((set, get) => {
         if (controller === "ai") {
           const targetShield = (damagedShields.length > 0 ? damagedShields : shields)[0];
           restoreShieldToOriginal(controller, targetShield.id);
-          markCreatureAbilityUsed(controller, creature.instanceId);
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
           return { success: true };
         }
 
@@ -2946,7 +3425,7 @@ export const useGameStore = create<GameStore>((set, get) => {
               revealRuneTemporarily(opponent, runeIndex);
             }
           }
-          markCreatureAbilityUsed(controller, creature.instanceId);
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
           return { success: true };
         }
 
@@ -2990,7 +3469,7 @@ export const useGameStore = create<GameStore>((set, get) => {
               addCardToHand(controller, removal.card);
             }
           }
-          markCreatureAbilityUsed(controller, creature.instanceId);
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
           return { success: true };
         }
 
@@ -3037,7 +3516,7 @@ export const useGameStore = create<GameStore>((set, get) => {
               setCreatureExhausted(enemyActive.controller, enemyActive.creature.instanceId, true);
             }
           }
-          markCreatureAbilityUsed(controller, creature.instanceId);
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
           return { success: true };
         }
 
@@ -3058,6 +3537,121 @@ export const useGameStore = create<GameStore>((set, get) => {
           "single",
           true,
           { abilityId: ability.id }
+        );
+        return { success: true, awaitingResolution: true };
+      }
+      case "bulwark": {
+        updateCreatureOnBoard(controller, creature.instanceId, (c) => ({
+          ...c,
+          doubleStrikeUntilEndOfTurn: true,
+        }));
+        markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
+        return { success: true };
+      }
+      case "shield_crusher": {
+        updateCreatureOnBoard(controller, creature.instanceId, (c) => ({
+          ...c,
+          shieldStrengthBonusUntilEndOfTurn: (c.shieldStrengthBonusUntilEndOfTurn ?? 0) + 25,
+        }));
+        markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
+        return { success: true };
+      }
+      case "seismic_tremor": {
+        const opponent: "player" | "ai" = controller === "player" ? "ai" : "player";
+        const foeKey = getEssenceKey(opponent);
+        const foeEssence = { ...get()[foeKey] };
+        // Drain 2 total from the opponent's richest pools.
+        let remaining = 2;
+        const order = (Object.keys(foeEssence) as Element[]).sort((a, b) => foeEssence[b] - foeEssence[a]);
+        for (const el of order) {
+          if (remaining <= 0) break;
+          const take = Math.min(foeEssence[el], remaining);
+          foeEssence[el] -= take;
+          remaining -= take;
+        }
+        set({ [foeKey]: foeEssence } as Partial<GameState>);
+        markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
+        return { success: true };
+      }
+      case "retreat": {
+        const exhausted = [
+          ...state.playerBoard.map((c) => ({ controller: "player" as const, creature: c })),
+          ...state.aiBoard.map((c) => ({ controller: "ai" as const, creature: c })),
+        ].filter((entry) => entry.creature.exhausted || !entry.creature.hasAction);
+
+        if (exhausted.length === 0) {
+          return { success: false, error: "No exhausted creatures on the field" };
+        }
+
+        if (controller === "ai") {
+          const target = exhausted.find((e) => e.controller === "player") ?? exhausted[0];
+          const boardKey = getBoardKey(target.controller);
+          const handKey = getHandKey(target.controller);
+          const removed = get()[boardKey].find((c) => c.instanceId === target.creature.instanceId);
+          if (removed) {
+            set({
+              [boardKey]: get()[boardKey].filter((c) => c.instanceId !== removed.instanceId),
+              [handKey]: [...get()[handKey], removed as unknown as Card],
+            } as Partial<GameState>);
+          }
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
+          return { success: true };
+        }
+
+        const options: AbilityOption[] = exhausted.map((entry) => ({
+          id: entry.creature.instanceId,
+          label: `${entry.creature.name} (${entry.controller === "player" ? "You" : "Opponent"})`,
+          type: "creature",
+          metadata: { controller: entry.controller },
+        }));
+
+        enqueueAbilityPrompt(
+          controller,
+          creature.instanceId,
+          "Retreat: Send an exhausted creature to its owner's hand.",
+          options,
+          "single",
+          true,
+          { abilityId: ability.id, markAbilityUsed: true }
+        );
+        return { success: true, awaitingResolution: true };
+      }
+      case "stormy_forecast": {
+        const elements: Element[] = ["fire", "water", "earth", "air"];
+        if (controller === "ai") {
+          // Hit whichever element the player has the most of on board.
+          const counts = Object.fromEntries(elements.map((el) => [el, state.playerBoard.filter((c) => c.element === el).length])) as Record<Element, number>;
+          const chosen = elements.sort((a, b) => counts[b] - counts[a])[0];
+          const boardKey = getBoardKey("player");
+          const survivors = get()[boardKey].filter((c) => {
+            if (c.element !== chosen) return true;
+            const newHp = c.currentHealth - 50;
+            if (newHp <= 0) {
+              set({ playerDiscard: [...get().playerDiscard, c as unknown as Card] });
+              return false;
+            }
+            return true;
+          }).map((c) => (c.element === chosen ? { ...c, currentHealth: c.currentHealth - 50 } : c));
+          set({ [boardKey]: survivors } as Partial<GameState>);
+          markCreatureAbilityUsed(controller, creature.instanceId, abilityId);
+          return { success: true };
+        }
+
+        const options: AbilityOption[] = elements.map((el) => ({
+          id: el,
+          label: el.charAt(0).toUpperCase() + el.slice(1),
+          type: "element",
+          metadata: { element: el },
+        }));
+
+        enqueueAbilityPrompt(
+          controller,
+          creature.instanceId,
+          "Stormy Forecast: Choose an element. Deal 50 damage to each opposing creature of that element.",
+          options,
+          "single",
+          true,
+          { abilityId: ability.id, markAbilityUsed: true }
         );
         return { success: true, awaitingResolution: true };
       }
@@ -3133,7 +3727,7 @@ export const useGameStore = create<GameStore>((set, get) => {
     const cleanup = (result: any, markUsedOverride?: boolean) => {
       const shouldMark = markUsedOverride ?? (context.data?.markAbilityUsed && !result?.skipped);
       if (shouldMark && context.sourceInstanceId) {
-        markCreatureAbilityUsed(context.controller, context.sourceInstanceId);
+        markCreatureAbilityUsed(context.controller, context.sourceInstanceId, context.abilityId);
       }
       clearAbilityPrompt();
       return result;
@@ -3191,6 +3785,61 @@ export const useGameStore = create<GameStore>((set, get) => {
         }
         addCreatureToBoard(context.controller, removed.card, { hasAction: false, exhausted: true });
         return cleanup({ success: true }, false);
+      }
+      case "spectral_shield_revive_two": {
+        const ids = selection.optionIds ?? (selection.optionId ? [selection.optionId] : []);
+        const maxPick = Number(context.data?.count ?? 2);
+        if (ids.length === 0 || ids.length > maxPick) {
+          return cleanup({ success: false, error: `Select up to ${maxPick} creature(s)` }, false);
+        }
+        // Sort descending so splice indices stay valid as we remove
+        const indices = ids
+          .map((id) => Number(optionById(id)?.metadata?.discardIndex ?? id))
+          .filter((n) => !Number.isNaN(n))
+          .sort((a, b) => b - a);
+        if (indices.length !== ids.length) {
+          return cleanup({ success: false, error: "Invalid selection" }, false);
+        }
+        const summonedNames: string[] = [];
+        for (const discardIndex of indices) {
+          if (get()[getBoardKey(context.controller)].length >= MAX_CREATURES_ON_FIELD) break;
+          const removed = removeCardFromDiscard(context.controller, discardIndex);
+          if (!removed.success || !removed.card) continue;
+          const result = addCreatureToBoard(context.controller, removed.card, {
+            hasAction: false,
+            exhausted: true,
+          });
+          if (result.success && result.creature) summonedNames.push(result.creature.name);
+        }
+        addLogEntry(context.controller, `Spectral Shield revived ${summonedNames.join(", ") || "nothing"}`, "ability");
+        return cleanup({ success: true, summary: `revived ${summonedNames.join(", ") || "nothing"}` }, false);
+      }
+      case "spectral_shield_revive_one": {
+        if (selection.skip || !selection.optionId) {
+          return cleanup({ success: false, error: "Choose a creature" }, false);
+        }
+        const option = optionById(selection.optionId);
+        const discardIndex = option?.metadata?.discardIndex ?? Number(selection.optionId);
+        if (Number.isNaN(Number(discardIndex))) {
+          return cleanup({ success: false, error: "Invalid selection" }, false);
+        }
+        if (get()[getBoardKey(context.controller)].length >= MAX_CREATURES_ON_FIELD) {
+          return cleanup({ success: false, error: "Creature Zone is full" }, false);
+        }
+        const removed = removeCardFromDiscard(context.controller, Number(discardIndex));
+        if (!removed.success || !removed.card) {
+          return cleanup(removed, false);
+        }
+        const result = addCreatureToBoard(context.controller, removed.card, {
+          hasAction: false,
+          exhausted: true,
+        });
+        addLogEntry(
+          context.controller,
+          `Spectral Shield revived ${result.creature?.name ?? removed.card.name}`,
+          "ability"
+        );
+        return cleanup({ success: true, summary: `revived ${result.creature?.name ?? removed.card.name}` }, false);
       }
       case "storm_surge": {
         if (selection.skip || !selection.optionId) {
@@ -3353,6 +4002,52 @@ export const useGameStore = create<GameStore>((set, get) => {
         setCreatureExhausted(targetController, option.id, !shouldRefresh);
         return cleanup({ success: true }, true);
       }
+      case "retreat": {
+        if (selection.skip || !selection.optionId) {
+          return cleanup({ success: true, skipped: true }, false);
+        }
+        const option = optionById(selection.optionId);
+        if (!option || !option.metadata?.controller) {
+          return cleanup({ success: false, error: "Invalid selection" }, false);
+        }
+        const targetController = option.metadata.controller as "player" | "ai";
+        const boardKey = getBoardKey(targetController);
+        const handKey = getHandKey(targetController);
+        const removed = get()[boardKey].find((c) => c.instanceId === option.id);
+        if (!removed) {
+          return cleanup({ success: false, error: "Target not found" }, false);
+        }
+        set({
+          [boardKey]: get()[boardKey].filter((c) => c.instanceId !== removed.instanceId),
+          [handKey]: [...get()[handKey], removed as unknown as Card],
+        } as Partial<GameState>);
+        return cleanup({ success: true }, true);
+      }
+      case "stormy_forecast": {
+        if (selection.skip || !selection.optionId) {
+          return cleanup({ success: true, skipped: true }, false);
+        }
+        const element = selection.optionId as Element;
+        const opponent = context.controller === "player" ? "ai" : "player";
+        const boardKey = getBoardKey(opponent);
+        const discardKey = getDiscardKey(opponent);
+        const survivors: BoardCreature[] = [];
+        const destroyed: Card[] = [];
+        for (const c of get()[boardKey]) {
+          if (c.element !== element) {
+            survivors.push(c);
+            continue;
+          }
+          const newHp = c.currentHealth - 50;
+          if (newHp <= 0) destroyed.push(c as unknown as Card);
+          else survivors.push({ ...c, currentHealth: newHp });
+        }
+        set({
+          [boardKey]: survivors,
+          [discardKey]: [...get()[discardKey], ...destroyed],
+        } as Partial<GameState>);
+        return cleanup({ success: true }, true);
+      }
       case "fiery_birth": {
         const stage = context.data?.stage ?? "sacrifice";
         const controller = context.controller;
@@ -3420,6 +4115,11 @@ export const useGameStore = create<GameStore>((set, get) => {
   aiTurn: async () => {
     const state = get();
     if (state.currentTurn !== "ai" || state.gameStatus !== "playing") return;
+
+    // Never advance the AI while the player still owes a defense response.
+    // A second aiTurn tick from the React effect would otherwise call nextPhase and
+    // make the attack vanish without resolving.
+    if (state.pendingDefenseResponse || state.pendingShieldBreak || state.lastShieldBreakReveal) return;
     
     // Helper delay function
     const delay = (ms: number) => new Promise<void>((resolve) => setTimeout(resolve, ms));
@@ -3450,6 +4150,9 @@ export const useGameStore = create<GameStore>((set, get) => {
       activateCreatureAbility: (creatureInstanceId: string, abilityId: string) => {
         return get().activateCreatureAbility(creatureInstanceId, abilityId);
       },
+      setPendingDefenseResponse: (pending: GameState["pendingDefenseResponse"]) => {
+        set({ pendingDefenseResponse: pending });
+      },
     };
     
     try {
@@ -3476,23 +4179,25 @@ export const useGameStore = create<GameStore>((set, get) => {
           break;
           
         case "battle":
-          // Turn 1 rule: First player skips battle phase
-          if (state.turnNumber === 1) {
-            await delay(500);
-            get().nextPhase();
-          } else {
-            await aiLogic.aiBattlePhase(
-              get,
-              {
-                initiateAttack: get().initiateAttack,
-                handleDefenseResponse: get().handleDefenseResponse,
-                setAIPhaseMessage: get().setAIPhaseMessage,
+          // First-player battle skip is handled by nextPhase when leaving main1.
+          // Do not re-check turnNumber here — the second player is entitled to battle on turn 1.
+          await aiLogic.aiBattlePhase(
+            get,
+            {
+              initiateAttack: get().initiateAttack,
+              handleDefenseResponse: get().handleDefenseResponse,
+              setAIPhaseMessage: get().setAIPhaseMessage,
+              setPendingDefenseResponse: (pending: GameState["pendingDefenseResponse"]) => {
+                set({ pendingDefenseResponse: pending });
               },
-              delay
-            );
-            await delay(500);
-            get().nextPhase();
-          }
+            },
+            delay
+          );
+          // If the player still owes a defense response, stop here — the React effect will
+          // resume aiTurn once pendingDefenseResponse clears.
+          if (get().pendingDefenseResponse) return;
+          await delay(500);
+          get().nextPhase();
           break;
           
         case "main2":
@@ -3512,6 +4217,45 @@ export const useGameStore = create<GameStore>((set, get) => {
       // On error, just advance phase to prevent game lock
       get().nextPhase();
     }
+  },
+
+  resolveShieldBreak: (effectId: string) => {
+    const pending = get().pendingShieldBreak;
+    if (!pending) return { success: false, error: "No shield is waiting to be resolved" };
+
+    const chosen = pending.shield.effects?.find((e) => e.id === effectId);
+    if (!chosen) return { success: false, error: "That effect does not belong to this shield" };
+
+    const summary = applyShieldEffect(pending.controller, pending.shield, effectId);
+
+    // Always clear the pending break. When the AI chose, also park a reveal so the
+    // player can read the effect before the match continues.
+    const reveal =
+      pending.controller === "ai"
+        ? {
+            controller: "ai" as const,
+            shieldName: pending.shield.name,
+            effectLabel: chosen.label,
+            summary,
+          }
+        : undefined;
+
+    set({
+      pendingShieldBreak: undefined,
+      ...(reveal ? { lastShieldBreakReveal: reveal } : {}),
+    });
+
+    addLogEntry(
+      pending.controller,
+      `${pending.shield.name}: ${chosen.label}${summary ? ` (${summary})` : ""}`,
+      "ability"
+    );
+
+    return { success: true, summary };
+  },
+
+  dismissShieldBreakReveal: () => {
+    set({ lastShieldBreakReveal: undefined });
   },
 
   concede: () => {

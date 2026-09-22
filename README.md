@@ -17,6 +17,19 @@ Alternatively, you can run this command using the Supabase CLI:
 supabase db execute < src/db/setup-subscribers-table.sql
 ```
 
+### Alpha waitlist & Creator applications
+
+The site stores **Alpha tester** signups in `alpha_waitlist` (email first, then profile fields) and **Creator Program** submissions in `creator_applications`. Client helpers live in `src/lib/supabase.js`.
+
+Apply the schema to your Supabase project (linked project: **Elemental-Games's Project**):
+
+1. **Preferred:** from the repo root, run `supabase db push` (you will be prompted for the database password from [Project Settings → Database](https://supabase.com/dashboard/project/qhjppfhodxyrkbbcztld/settings/database)).
+2. **Or:** open the SQL Editor and paste `src/db/setup-alpha-creator-tables.sql`.
+
+Required env vars (already used elsewhere): `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY`.
+
+**RLS:** anonymous users can insert (and update `alpha_waitlist` for the questionnaire). Only the **service role** can read rows—use the Supabase dashboard or a script with `SUPABASE_SERVICE_ROLE_KEY` to export applicants.
+
 ## Features
 
 - Browse elemental cards and their details

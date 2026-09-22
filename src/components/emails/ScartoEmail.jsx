@@ -55,7 +55,7 @@ const ScartoEmail = () => {
       <div 
         className="relative h-80 bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/images/kingdom-headers/scarto-header.webp)',
+          backgroundImage: 'url(/images/mmo-scarto.jpg)',
           backgroundPosition: 'center'
         }}
       >

@@ -13,7 +13,7 @@ const KinbroldHistory = ({ setSelectedDragon, setSelectedElementalist }) => {
               <div>
                 <h3 className="text-2xl font-heading mb-4">The Dawn of Kinbrold</h3>
                 <p className="text-muted-foreground leading-relaxed">
-                  In the beginning, Kinbrold was a realm untamed, where ancient dragons soared freely across unified lands. These weren't mere beasts, but manifestations of elemental power in their purest form. The skies thundered with the wings of Air dragons, the seas churned with Water wyrms, the mountains trembled with Earth drakes, and valleys blazed with Fire serpents.
+                  In the beginning, Kinbrold was a realm untamed, where ancient dragons soared freely across unified lands. These weren't mere beasts, but manifestations of elemental power in their purest form. The skies thundered with the wings of Air dragons, the seas churned with Water wyrms, the mountains trembled with Earth drakes, and valleys blazed with Fire serpents. These ancient beasts became extinct centuries ago, leaving behind tales of their time and new legends of dual-elemental dragons that may still roam the land today.
                 </p>
               </div>
 

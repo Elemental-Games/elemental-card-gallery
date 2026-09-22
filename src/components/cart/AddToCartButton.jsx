@@ -1,10 +1,21 @@
 import { useCart } from '@/hooks/useCart';
 import { Button } from '@/components/ui/button';
 import { Plus, Minus } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { isPhysicalShopPaused } from '@/config/site';
 
 const AddToCartButton = ({ product }) => {
   const { items, addToCart, updateQuantity } = useCart();
+  const shopPaused = isPhysicalShopPaused();
   const itemInCart = items.find(item => item.id === product.id);
+
+  if (shopPaused) {
+    return (
+      <Button size="lg" className="w-full bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold" asChild>
+        <Link to="/alpha">Orders paused — Join Alpha</Link>
+      </Button>
+    );
+  }
 
   if (itemInCart) {
     return (

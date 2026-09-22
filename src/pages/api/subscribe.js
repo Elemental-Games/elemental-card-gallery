@@ -51,17 +51,17 @@ export default async function handler(req, res) {
             <li style="margin-bottom: 10px;">🌍 <strong>Rich World:</strong> Explore 5 unique kingdoms and 6 connecting regions in the world of Kinbrold.</li>
             <li style="margin-bottom: 10px;">🐉 <strong>Diverse Creatures:</strong> Command creatures of Air, Water, Fire, and Earth, plus exotic combinational elements!</li>
             <li style="margin-bottom: 10px;">⚔️ <strong>Unique Battle System:</strong> Experience our innovative shield system and strategic combat mechanics.</li>
-            <li style="margin-bottom: 10px;">⏱️ <strong>Quick Yet Strategic:</strong> Games last around 20 minutes, perfect for both casual and competitive play.</li>
+            <li style="margin-bottom: 10px;">⏱️ <strong>Strategic matches:</strong> Table games run about 30–45 minutes.</li>
           </ul>
 
-          <h2 style="color: #7c3aed;">We're Live on Kickstarter!</h2>
+          <h2 style="color: #7c3aed;">What's next:</h2>
           <ul style="list-style-type: none; padding-left: 0;">
-            <li style="margin-bottom: 10px;">🎉 <strong>Kickstarter is live!</strong> Back us now to help fund Elekin's first set.</li>
-            <li style="margin-bottom: 10px;">🎁 <strong>Backer Bonus:</strong> Every backer receives an alt art promo card.</li>
-            <li style="margin-bottom: 10px;">🚀 <strong>Stretch Goals:</strong> The more we raise, the more free items every backer unlocks!</li>
+            <li style="margin-bottom: 10px;">⚡ <strong>Lightning & Crystal</strong> starter decks are available in the shop now.</li>
+            <li style="margin-bottom: 10px;">🌋 <strong>Frost & Lava</strong> combination decks release after those sell through.</li>
+            <li style="margin-bottom: 10px;">🎮 <strong>Play free</strong> in the browser beta while we build the world of Kinbrold.</li>
           </ul>
           <div style="text-align: center; margin: 20px 0;">
-            <a href="https://www.kickstarter.com/projects/elemental-games/elekin" style="background-color: #22c55e; color: white; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Back on Kickstarter →</a>
+            <a href="https://elementalgames.gg/shop" style="background-color: #eab308; color: #1A103C; padding: 12px 24px; text-decoration: none; border-radius: 8px; font-weight: bold;">Shop the Decks →</a>
           </div>
 
           <div style="text-align: center; margin-top: 30px;">

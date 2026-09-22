@@ -38,3 +38,5 @@ export const subscribeEmail = async (email) => {
     };
   }
 };
+
+export { submitAlphaApplication, submitCreatorApplication } from '../lib/supabase';

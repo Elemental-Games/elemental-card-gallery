@@ -11,62 +11,73 @@ import { Button } from '@/components/ui/button';
 import { Menu, ShoppingCart } from 'lucide-react';
 import { useCart } from '@/hooks/useCart';
 import TrackedLink from '@/components/TrackedLink';
+import { trackAlphaCtaClick, trackShopVisit } from '@/utils/analytics';
+import { isPhysicalShopPaused } from '@/config/site';
 
 const Header = () => {
   const { toggleCart, items } = useCart();
   const location = useLocation();
-  const isShopPage = location.pathname.startsWith('/shop') || location.pathname.startsWith('/product') || location.pathname.startsWith('/bundle');
+  const isShopPage =
+    location.pathname.startsWith('/shop') ||
+    location.pathname.startsWith('/product') ||
+    location.pathname.startsWith('/bundle');
 
   const totalItems = items.reduce((acc, item) => acc + item.quantity, 0);
   const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  const shopPaused = isPhysicalShopPaused();
+  const showCart = isShopPage && !shopPaused;
 
   return (
     <>
-      <nav className="bg-darkPurple/80 backdrop-blur-sm sticky top-0 z-40 w-full border-b border-purple-500/30">
-        <div className="container mx-auto">
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center justify-between h-20">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/Elekin.png" 
-                alt="Elekin TCG Logo" 
-                className="h-24 w-auto"
-              />
+      <nav className="bg-darkPurple/80 backdrop-blur-sm sticky top-0 z-40 w-full border-b border-yellow-400/25">
+        <div className="container mx-auto px-4">
+          {/* Desktop */}
+          <div className="hidden md:flex items-center justify-between h-24">
+            <Link to="/" className="flex items-center gap-3 shrink-0" aria-label="Elekin home">
+              <img src="/Elekin.png" alt="Elekin" className="h-[5.25rem] w-auto" />
             </Link>
-            
-            <div className="flex items-center space-x-4">
+
+            <div className="flex items-center gap-3">
               <NavigationMenu>
                 <NavigationMenuList>
-                  {navItems.filter(item => item.title !== 'Kickstarter').map((item) => (
+                  {navItems.map((item) => (
                     <NavigationMenuItem key={item.title}>
                       {item.subPages ? (
                         <>
-                          <NavigationMenuTrigger className="text-white hover:text-accent transition-colors duration-200 font-sans bg-transparent hover:bg-white/10 px-3 py-2 rounded">
-                            <Link 
-                              to={item.to}
-                              className="text-white hover:text-accent transition-colors duration-200 font-sans mr-2"
-                            >
+                          <NavigationMenuTrigger className="text-white hover:text-yellow-400 transition-colors font-sans text-base lg:text-lg bg-transparent hover:bg-yellow-400/10 px-3 py-2 rounded">
+                            <Link to={item.to} className="mr-1">
                               {item.title}
                             </Link>
                           </NavigationMenuTrigger>
                           <NavigationMenuContent>
-                            <div className="w-48 bg-darkPurple/95 backdrop-blur-sm p-2 rounded-lg border border-purple-500/30">
-                              {item.subPages.map((subItem) => (
-                                <Link 
-                                  key={subItem.title}
-                                  to={subItem.to} 
-                                  className="block py-2 px-4 text-white hover:text-accent hover:bg-white/10 transition-colors duration-200 font-sans rounded"
-                                >
-                                  {subItem.title}
-                                </Link>
-                              ))}
+                            <div className="w-52 bg-darkPurple/95 backdrop-blur-sm p-2 rounded-lg border border-yellow-400/30">
+                              {item.subPages.map((subItem) => {
+                                const isShop = subItem.to === '/shop';
+                                const shopLabel = shopPaused ? 'Shop (paused)' : subItem.title;
+                                const linkClass =
+                                  'block py-2 px-4 text-white hover:text-yellow-400 hover:bg-yellow-400/10 transition-colors font-sans rounded text-base';
+                                return isShop ? (
+                                  <TrackedLink
+                                    key={subItem.title}
+                                    to={subItem.to}
+                                    onClick={() => trackShopVisit()}
+                                    className={linkClass}
+                                  >
+                                    {shopLabel}
+                                  </TrackedLink>
+                                ) : (
+                                  <Link key={subItem.title} to={subItem.to} className={linkClass}>
+                                    {subItem.title}
+                                  </Link>
+                                );
+                              })}
                             </div>
                           </NavigationMenuContent>
                         </>
                       ) : (
-                        <Link 
-                          to={item.to} 
-                          className="text-white hover:text-accent transition-colors duration-200 font-sans px-3 py-2 rounded hover:bg-white/10"
+                        <Link
+                          to={item.to}
+                          className="transition-colors font-sans px-3 py-2 rounded hover:bg-yellow-400/10 text-base lg:text-lg text-white hover:text-yellow-400"
                         >
                           {item.title}
                         </Link>
@@ -75,39 +86,31 @@ const Header = () => {
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
-              
-              <div className="flex items-center gap-4">
-                {/* Shop Button - Between nav and Kickstarter */}
-                <TrackedLink 
-                  to="/shop" 
-                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-bold transition-colors duration-200 shadow-lg hover:shadow-xl"
+
+              <div className="flex items-center gap-2 ml-2">
+                <Link
+                  to="/alpha"
+                  onClick={() => trackAlphaCtaClick('header_desktop')}
+                  className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 px-5 py-2.5 rounded-lg font-bold text-base lg:text-lg transition-colors shadow-lg hover:shadow-xl"
                 >
-                  Shop
-                </TrackedLink>
-                
-                {/* Kickstarter Button - Right Side in Green */}
-                <a 
-                  href="https://www.kickstarter.com/projects/elemental-games/elekin" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="bg-green-600 hover:bg-green-500 text-white font-bold px-4 py-2 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
-                >
-                  Kickstarter
-                </a>
-                {isShopPage && (
+                  Join Alpha
+                </Link>
+                {showCart && (
                   <>
                     {items.length > 0 && (
                       <div className="text-right cursor-pointer" onClick={toggleCart}>
-                        <p className="font-bold text-white">{totalItems} Item{totalItems > 1 ? 's' : ''}</p>
-                        <p className="text-sm text-yellow-400">${subtotal.toFixed(2)}</p>
+                        <p className="font-bold text-white text-sm">
+                          {totalItems} Item{totalItems > 1 ? 's' : ''}
+                        </p>
+                        <p className="text-xs text-yellow-400">${subtotal.toFixed(2)}</p>
                       </div>
                     )}
                     <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
                       <ShoppingCart className="h-6 w-6 text-white" />
                       {items.length > 0 && (
                         <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
+                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" />
+                          <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500" />
                         </span>
                       )}
                     </Button>
@@ -117,84 +120,90 @@ const Header = () => {
             </div>
           </div>
 
-          {/* Mobile Navigation */}
-          <div className="md:hidden flex items-center justify-between">
-            <Link to="/" className="flex items-center">
-              <img 
-                src="/Elekin.png" 
-                alt="Elekin TCG Logo" 
-                className="h-20 w-auto"
-              />
+          {/* Mobile */}
+          <div className="md:hidden flex items-center justify-between py-2.5">
+            <Link to="/" className="flex items-center shrink-0" aria-label="Elekin home">
+              <img src="/Elekin.png" alt="Elekin" className="h-[4.25rem] w-auto" />
             </Link>
 
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <NavigationMenuTrigger className="bg-transparent hover:bg-white/10">
-                    <Menu className="h-6 w-6 text-white" />
-                  </NavigationMenuTrigger>
-                  <NavigationMenuContent>
-                    <div className="w-[calc(100vw-6rem)] sm:w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg ml-[-1rem]">
-                      {navItems.filter(item => item.title !== 'Kickstarter').map((item) => (
-                        <div key={item.title}>
-                          <Link 
-                            to={item.to} 
-                            className="block py-2 px-4 text-white hover:text-accent transition-colors duration-200 font-sans"
+            <div className="flex items-center gap-2">
+              <Link
+                to="/alpha"
+                onClick={() => trackAlphaCtaClick('header_mobile')}
+                className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 px-3.5 py-2 rounded-lg font-bold text-sm shadow-md"
+              >
+                Join Alpha
+              </Link>
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="bg-transparent hover:bg-yellow-400/10">
+                      <Menu className="h-6 w-6 text-white" />
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                      <div className="w-[calc(100vw-5rem)] max-w-[300px] bg-darkPurple/95 backdrop-blur-sm p-4 rounded-lg border border-yellow-400/30">
+                        {navItems.map((item) => (
+                          <div key={item.title}>
+                            <Link
+                              to={item.to}
+                              className="block py-2 px-3 text-base text-white hover:text-yellow-400 transition-colors font-sans"
+                            >
+                              {item.title}
+                            </Link>
+                            {item.subPages && (
+                              <div className="ml-3 border-l border-yellow-400/25 mb-2">
+                                {item.subPages.map((subItem) => {
+                                  const isShop = subItem.to === '/shop';
+                                  const shopLabel = shopPaused ? 'Shop (paused)' : subItem.title;
+                                  const linkClass =
+                                    'block py-1 px-3 text-purple-200 hover:text-yellow-400 text-base';
+                                  return isShop ? (
+                                    <TrackedLink
+                                      key={subItem.title}
+                                      to={subItem.to}
+                                      onClick={() => trackShopVisit()}
+                                      className={linkClass}
+                                    >
+                                      {shopLabel}
+                                    </TrackedLink>
+                                  ) : (
+                                    <Link key={subItem.title} to={subItem.to} className={linkClass}>
+                                      {subItem.title}
+                                    </Link>
+                                  );
+                                })}
+                              </div>
+                            )}
+                          </div>
+                        ))}
+                        <div className="pt-3 mt-2 border-t border-yellow-400/25">
+                          <Link
+                            to="/alpha"
+                            onClick={() => trackAlphaCtaClick('header_mobile_menu')}
+                            className="block py-2 px-3 text-base text-yellow-400 font-bold"
                           >
-                            {item.title}
+                            Join Alpha
                           </Link>
-                          {item.subPages && (
-                            <div className="ml-4 border-l border-purple-500/30">
-                              {item.subPages.map((subItem) => (
-                                <Link 
-                                  key={subItem.title}
-                                  to={subItem.to} 
-                                  className="block py-1 px-4 text-purple-200 hover:text-accent transition-colors duration-200 font-sans text-sm"
-                                >
-                                  {subItem.title}
-                                </Link>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                      
-                      <div className="pt-4 border-t border-purple-500/30 space-y-2">
-                        <TrackedLink 
-                          to="/shop" 
-                          className="block py-2 px-4 text-yellow-400 hover:text-yellow-300 font-bold transition-colors duration-200"
-                        >
-                          Shop
-                        </TrackedLink>
-                        <div className="flex justify-start">
-                          <a 
-                            href="https://www.kickstarter.com/projects/elemental-games/elekin" 
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block py-1.5 px-2.5 bg-green-600 hover:bg-green-500 text-white font-bold rounded transition-colors duration-200 text-s whitespace-nowrap ml-1"
-                          >
-                            Kickstarter
-                          </a>
                         </div>
                       </div>
-                    </div>
-                  </NavigationMenuContent>
-                </NavigationMenuItem>
-                {isShopPage && (
-                  <NavigationMenuItem>
-                    <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
-                      <ShoppingCart className="h-6 w-6 text-white" />
-                      {items.length > 0 && (
-                        <span className="absolute -top-1 -right-1 flex h-3 w-3">
-                          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                          <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500"></span>
-                        </span>
-                      )}
-                    </Button>
+                    </NavigationMenuContent>
                   </NavigationMenuItem>
-                )}
-              </NavigationMenuList>
-            </NavigationMenu>
+                  {showCart && (
+                    <NavigationMenuItem>
+                      <Button variant="ghost" size="icon" onClick={toggleCart} className="relative">
+                        <ShoppingCart className="h-6 w-6 text-white" />
+                        {items.length > 0 && (
+                          <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75" />
+                            <span className="relative inline-flex rounded-full h-3 w-3 bg-yellow-500" />
+                          </span>
+                        )}
+                      </Button>
+                    </NavigationMenuItem>
+                  )}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
           </div>
         </div>
       </nav>

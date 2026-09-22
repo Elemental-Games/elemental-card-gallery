@@ -10,8 +10,7 @@
  * July 28th - Full Map Unlocked
  */
 
-import { useState, useEffect } from 'react';
-import { Sparkles } from 'lucide-react';
+import { MMO_IMAGES } from '@/config/site';
 
 const InteractiveKinbroldMap = () => {
   return (
@@ -23,12 +22,12 @@ const InteractiveKinbroldMap = () => {
            }}>
         {/* Current Kingdom Image Display */}
         <div className="relative w-full h-full rounded-xl overflow-hidden">
-          <img 
-            src="/images/cards/new-marketing/full-u.webp"
-            alt="World of Kinbrold"
-            className="w-full h-full object-contain transition-all duration-1000"
+          <img
+            src={MMO_IMAGES.kinbroldMap}
+            alt="Map of Kinbrold"
+            className="w-full h-full object-cover transition-all duration-1000"
             style={{
-              filter: 'brightness(1.1) contrast(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.3))' 
+              filter: 'brightness(1.05) contrast(1.08) drop-shadow(0 0 20px rgba(255,255,255,0.2))',
             }}
           />
         </div>

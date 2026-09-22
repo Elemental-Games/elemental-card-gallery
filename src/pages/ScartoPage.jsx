@@ -1,13 +1,16 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { MMO_IMAGES } from '@/config/site';
 
 const ScartoPage = () => {
+  const art = MMO_IMAGES.scarto;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-red-800/10 to-red-800/30">
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/images/kingdom-headers/scarto-header.webp" 
+          src={art}
           alt="Volcanic Scarto" 
           className="w-full h-full object-cover"
         />
@@ -34,9 +37,6 @@ const ScartoPage = () => {
             we transformed these molten peaks into a thriving civilization. Our cities rise from the heat, protected by advanced 
             cooling systems and powered by the endless energy of the earth's core.
           </p>
-          <p className="text-xs text-gray-400 italic mt-4">
-            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
-          </p>
         </Card>
 
         {/* Life Amid the Flames */}
@@ -50,7 +50,7 @@ const ScartoPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/scarto_daily.png" 
+            src={art} 
             alt="Daily Life in Scarto" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -59,7 +59,7 @@ const ScartoPage = () => {
         {/* The Way of Fire */}
         <div className="grid md:grid-cols-2 gap-6">
           <img 
-            src="/kingdoms/scarto_flame.png" 
+            src={art} 
             alt="Fire Training" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -90,7 +90,7 @@ const ScartoPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/scarto_young.png" 
+            src={art} 
             alt="Young Fire Elementals" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -114,7 +114,7 @@ const ScartoPage = () => {
               <li>The Obsidian Markets: Our renowned trading district</li>
             </ul>
             <img 
-              src="/kingdoms/scarto_grand.png" 
+              src={art} 
               alt="Grand Architecture of Scarto" 
               className="w-full h-full object-cover rounded-lg shadow-xl"
             />
@@ -123,7 +123,7 @@ const ScartoPage = () => {
           <div className="mt-8 p-6 bg-red-800/20 rounded-lg border border-red-300/50">
             <h2 className="text-2xl font-heading mb-4 text-yellow-400">Wisdom of the Flame</h2>
             <img 
-              src="/kingdoms/scarto_meditate.png" 
+              src={art} 
               alt="Meditation in Scarto" 
               className="w-full h-64 object-cover object-center rounded-lg shadow-xl mb-4"
             />

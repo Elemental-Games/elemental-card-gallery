@@ -1,479 +1,475 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
-import { Button } from '@/components/ui/button';
-import { Book, LayoutGrid, Map, Star, X, Gift, Users, MapPin, Store } from 'lucide-react';
-import AnimatedCardBackground from '@/components/landing/AnimatedCardBackground';
-import KeyFeatures from '../components/KeyFeatures';
-import CardsOfTheWeek from '../components/CardsOfTheWeek';
-import SubscribeButton from '@/components/SubscribeButton';
-import { motion, AnimatePresence } from 'framer-motion';
-import TrackedLink from '@/components/TrackedLink';
-import KickstarterProgress from '@/components/KickstarterProgress';
-import SignupForm from '@/components/auth/SignupForm';
-import { kickstarterConfig } from '@/config/kickstarter';
+import { motion } from 'framer-motion';
+import { ArrowRight, Map, Swords, Gem, Hammer, Layers, Trophy, Sparkles } from 'lucide-react';
+import {
+  trackAlphaCtaClick,
+  trackCreatorCtaClick,
+  trackDiscordClick,
+} from '@/utils/analytics';
+import { SITE, MMO_IMAGES, hasDiscordInvite, isPhysicalShopPaused } from '@/config/site';
+import AlphaWaitlistCapture from '@/components/alpha/AlphaWaitlistCapture';
+import AlphaSignupModal from '@/components/alpha/AlphaSignupModal';
+import CreatorInterestCapture from '@/components/creators/CreatorInterestCapture';
 
-const kingdoms = [
-  { name: 'Grivoss', element: 'Earth', description: 'Mountain fortresses carved from living stone.', color: 'bg-green-300', hoverColor: 'hover:bg-green-400', path: '/kinbrold/grivoss', icon: 'images/cards/new-marketing/earth silver.webp' },
-  { name: 'Zalos', element: 'Air', description: 'Sky cities that float among the clouds.', color: 'bg-gray-300', hoverColor: 'hover:bg-gray-400', path: '/kinbrold/zalos', icon: 'images/cards/new-marketing/air silver.webp' },
-  { name: 'Scarto', element: 'Fire', description: 'Volcanic cities built inside active craters.', color: 'bg-red-300', hoverColor: 'hover:bg-red-400', path: '/kinbrold/scarto', icon: 'images/cards/new-marketing/fire silver.webp' },
-  { name: 'Tsunareth', element: 'Water', description: 'Riverside cities accompanied by the tides.', color: 'bg-blue-300', hoverColor: 'hover:bg-blue-400', path: '/kinbrold/tsunareth', icon: 'images/cards/new-marketing/water silver.webp' },
+const loopSteps = [
+  { title: 'Explore', subtitle: 'Kinbrold', icon: Map },
+  { title: 'Hunt', subtitle: 'Creatures', icon: Swords },
+  { title: 'Collect', subtitle: 'Rare drops & Essence', icon: Gem },
+  { title: 'Craft', subtitle: 'Elekin cards', icon: Hammer },
+  { title: 'Build', subtitle: 'Your deck', icon: Layers },
+  { title: 'Compete', subtitle: 'In Quickplay', icon: Trophy },
+];
+
+const alphaAreas = [
+  {
+    name: 'Evermere',
+    image: MMO_IMAGES.evermereStreet,
+    blurb: 'The starting settlement and your introduction to Kinbrold.',
+  },
+  {
+    name: 'The Road to Scarto',
+    image: MMO_IMAGES.roadToScarto,
+    blurb: 'A transitional region with stronger enemies, materials, and progression.',
+  },
+  {
+    name: 'Scarto',
+    image: MMO_IMAGES.scarto,
+    blurb: 'The Fire Kingdom — the first major kingdom Closed Alpha players will reach.',
+  },
 ];
 
 const LandingPage = () => {
-  const [showExitIntent, setShowExitIntent] = useState(false);
-  const [hasTriggeredExitIntent, setHasTriggeredExitIntent] = useState(false);
-  const [exitIntentSuccess, setExitIntentSuccess] = useState(false);
-
-  // Exit intent detection
-  useEffect(() => {
-    const handleMouseLeave = (e) => {
-      if (e.clientY <= 0 && !hasTriggeredExitIntent) {
-        setShowExitIntent(true);
-        setHasTriggeredExitIntent(true);
-      }
-    };
-
-    document.addEventListener('mouseleave', handleMouseLeave);
-    return () => document.removeEventListener('mouseleave', handleMouseLeave);
-  }, [hasTriggeredExitIntent]);
-
-  // Discord link handler for exit intent popup
-  const handleDiscordJoinFromExitIntent = () => {
-    window.open('https://discord.gg/QyNDMYprCg', '_blank', 'noopener,noreferrer');
-    setShowExitIntent(false);
-    setExitIntentSuccess(false);
-  };
-
-  // Handle email signup success in exit intent
-  const handleExitIntentEmailSuccess = () => {
-    setExitIntentSuccess(true);
-  };
+  const [alphaModalOpen, setAlphaModalOpen] = useState(false);
 
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
-        <title>Elekin TCG - Live on Kickstarter Now</title>
-        <meta name="description" content="Elekin TCG is live on Kickstarter! Back us now to help bring the next great trading card game to life. Stretch goals unlock free items for all backers." />
-        <meta property="og:title" content="Elekin TCG - Live on Kickstarter Now" />
-        <meta property="og:description" content="Elekin TCG is live on Kickstarter! Back us now to help bring the next great trading card game to life. Stretch goals unlock free items for all backers." />
+        <title>Elekin — Explore. Hunt. Craft. Collect. Compete.</title>
+        <meta
+          name="description"
+          content="Elekin is an MMOTCG set in Kinbrold. Closed Alpha opens October 1. Explore the world, hunt creatures, craft cards, and compete in Elekin TCG Quickplay."
+        />
+        <meta property="og:title" content="Elekin — An MMOTCG in Kinbrold" />
+        <meta
+          property="og:description"
+          content="What if the creatures you discovered in an MMO became the cards in your TCG collection? Closed Alpha opens October 1."
+        />
         <meta property="og:image" content="/Elekin_Kinbrold.png" />
+        <meta name="twitter:title" content="Elekin — An MMOTCG in Kinbrold" />
+        <meta
+          name="twitter:description"
+          content="Explore Kinbrold. Craft Elekin cards from your adventures. Closed Alpha opens October 1."
+        />
+        <link rel="canonical" href="https://elementalgames.gg/" />
       </Helmet>
-      
-      <AnimatedCardBackground />
-      
-      {/* Game Overview Section */}
-      <section className="container mx-auto px-4 py-8 lg:py-16 relative z-10">
-        <div className="max-w-7xl mx-auto">
-          {/* Title and Introduction */}
-          <div className="mb-12 text-center">
-            <div className="flex flex-col lg:flex-row items-center justify-center mb-6 space-y-4 lg:space-y-0 lg:space-x-4">
-              <img 
-                src="/Elekin_Kinbrold.png" 
-                alt="Elekin Logo" 
-                className="w-64 lg:w-96 h-auto -mb-2 -mr-5 -mt-10"
+
+      {/* HERO */}
+      <section className="relative min-h-[92vh] flex items-end overflow-hidden">
+        <img
+          src={MMO_IMAGES.landingHero}
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-[18%_48%] sm:object-[24%_47%] md:object-[30%_46%] lg:object-[36%_45%]"
+          aria-hidden
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#1A103C]/95 via-[#1A103C]/40 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#1A103C]/10 to-[#1A103C]/78" />
+        <div className="absolute bottom-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
+
+        <div className="relative z-10 container mx-auto px-4 pb-28 sm:pb-32 md:pb-40 lg:pb-48 pt-28 md:pt-32 flex justify-end">
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="max-w-6xl w-full text-right"
+          >
+            <p className="text-yellow-400 text-sm md:text-base lg:text-lg font-semibold tracking-[0.2em] uppercase mb-2 md:mb-3">
+              An MMOTCG in development by {SITE.studioName}
+            </p>
+            <h1 className="my-0 leading-none flex justify-end">
+              <img
+                src="/Elekin.png"
+                alt="Elekin"
+                className="block w-64 sm:w-80 md:w-[28rem] h-auto drop-shadow-[0_0_25px_rgba(234,179,8,0.35)] -my-1 md:-my-2"
               />
-              <h2 className="text-3xl lg:text-5xl font-bold">Why TCG Players Choose Elekin</h2>
+            </h1>
+            <p
+              className="whitespace-nowrap font-semibold text-yellow-400 mb-4 md:mb-5 leading-tight tracking-tight sm:tracking-normal text-[clamp(0.72rem,0.4rem+2.1vw,2.5rem)]"
+            >
+              Explore. Hunt. Craft. Collect. Compete.
+            </p>
+            <p className="text-lg md:text-xl lg:text-2xl text-purple-100/90 max-w-2xl mb-8 leading-relaxed ml-auto">
+              Explore the world of {SITE.worldName} in a new MMOTCG where your adventures build your card collection.
+            </p>
+            <div className="flex flex-col sm:flex-row sm:justify-end gap-3 sm:gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  trackAlphaCtaClick('homepage_hero');
+                  setAlphaModalOpen(true);
+                }}
+                className="inline-flex items-center justify-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-[#1A103C] font-bold text-lg px-8 py-4 rounded-xl transition-colors shadow-[0_0_30px_rgba(234,179,8,0.35)]"
+              >
+                Become an Alpha Tester
+                <ArrowRight className="w-5 h-5" />
+              </button>
+              <Link
+                to="/creators"
+                onClick={() => trackCreatorCtaClick('homepage_hero')}
+                className="inline-flex items-center justify-center gap-2 border-2 border-yellow-400/60 hover:border-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20 text-yellow-300 font-semibold text-lg px-8 py-4 rounded-xl transition-colors backdrop-blur-sm"
+              >
+                <Sparkles className="w-5 h-5" />
+                Creator Program
+              </Link>
             </div>
-            <p className="text-lg text-purple-200 max-w-3xl mx-auto">
-              Revolutionary mechanics that reward strategic thinking. Perfect for new and veteran TCG players seeking the next best TCG to hit the market.
+            <p className="mt-5 text-sm md:text-base text-yellow-400/80 font-medium">
+              Closed Alpha opens October 1 · Internal testing now
+            </p>
+          </motion.div>
+        </div>
+        <AlphaSignupModal
+          open={alphaModalOpen}
+          onOpenChange={setAlphaModalOpen}
+          placement="homepage_hero"
+        />
+      </section>
+
+      {/* CORE LOOP */}
+      <section className="relative py-20 md:py-28 overflow-hidden border-y border-yellow-400/25">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: `url('${MMO_IMAGES.evermereStreet}')` }}
+          aria-hidden
+        />
+        <div className="absolute inset-0 bg-[#1A103C]/82" aria-hidden />
+        <div
+          className="absolute inset-0 bg-gradient-to-b from-[#1A103C]/95 via-[#1A103C]/55 to-[#1A103C]/95"
+          aria-hidden
+        />
+        <div
+          className="absolute inset-0 bg-gradient-to-r from-[#1A103C]/90 via-transparent to-[#1A103C]/90"
+          aria-hidden
+        />
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/50 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-yellow-400/35 to-transparent" />
+
+        <div className="relative z-10 container mx-auto px-4">
+          <div className="text-center mb-10 md:mb-14 max-w-3xl mx-auto">
+            <p className="inline-block text-yellow-400 text-sm md:text-base font-bold tracking-[0.25em] uppercase mb-3 px-4 py-1 rounded-full border border-yellow-400/30 bg-[#1A103C]/60 backdrop-blur-sm">
+              Core Loop
+            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3 text-white drop-shadow-[0_2px_24px_rgba(0,0,0,0.8)]">
+              The <span className="text-yellow-400">Elekin</span> Loop
+            </h2>
+            <p className="text-purple-100/90 max-w-2xl mx-auto text-lg md:text-xl drop-shadow-md">
+              What if the creatures you discovered in an MMO became the cards in your TCG collection?
             </p>
           </div>
-          
-                     {/* Features in full width */}
-           <div className="w-full">
-             <KeyFeatures />
-           </div>
-           
-           {/* Three Button CTA Section */}
-           <motion.div
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ delay: 1.0 }}
-             className="mt-8 flex flex-col lg:flex-row justify-center items-center lg:items-stretch gap-6 mb-10"
-           >
-             {/* Instagram Button */}
-             <a
-               href="https://www.instagram.com/elekin_tcg/"
-               target="_blank"
-               rel="noopener noreferrer"
-               className="group"
-             >
-               <div className="bg-gradient-to-br from-pink-950/70 to-purple-900/50 border-2 border-pink-500/60 rounded-xl p-4
-                               shadow-[0_0_20px_rgba(236,72,153,0.4)] hover:shadow-[0_0_35px_rgba(236,72,153,0.6)]
-                               transition-all duration-300 hover:scale-105 cursor-pointer">
-                 <button className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-400 hover:to-purple-400 
-                                    text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
-                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                     <path fillRule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.467.398.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clipRule="evenodd" />
-                   </svg>
-                   Instagram
-                 </button>
-               </div>
-             </a>
 
-             {/* Learn More About Elekin Button */}
-             <Link to="/elekin" className="group">
-               <div className="bg-gradient-to-br from-purple-950/70 to-purple-900/50 border-2 border-yellow-500/60 rounded-xl p-4
-                               shadow-[0_0_20px_rgba(234,179,8,0.4)] hover:shadow-[0_0_35px_rgba(234,179,8,0.6)]
-                               transition-all duration-300 hover:scale-105 cursor-pointer">
-                 <button className="bg-gradient-to-r from-yellow-500 to-yellow-400 hover:from-yellow-400 hover:to-yellow-300 
-                                    text-purple-900 font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
-                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                   <Book className="w-5 h-5" />
-                   Learn More
-                 </button>
-               </div>
-             </Link>
-
-             {/* Join Discord Button */}
-             <a
-               href="https://discord.gg/QyNDMYprCg"
-               target="_blank"
-               rel="noopener noreferrer"
-               className="group"
-             >
-               <div className="bg-gradient-to-br from-indigo-950/70 to-indigo-900/50 border-2 border-indigo-500/60 rounded-xl p-4
-                               shadow-[0_0_20px_rgba(99,102,241,0.4)] hover:shadow-[0_0_35px_rgba(99,102,241,0.6)]
-                               transition-all duration-300 hover:scale-105 cursor-pointer">
-                 <button className="bg-gradient-to-r from-indigo-500 to-indigo-400 hover:from-indigo-400 hover:to-indigo-300 
-                                    text-white font-bold text-lg px-6 py-3 rounded-xl shadow-lg 
-                                    transition-all duration-300 hover:scale-105 flex items-center gap-2">
-                   <Users className="w-5 h-5" />
-                   Discord
-                 </button>
-               </div>
-             </a>
-           </motion.div>
-         </div>
-       </section>
-      
-      {/* EXIT INTENT POPUP */}
-      <AnimatePresence>
-        {showExitIntent && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 z-[60]"
-            onClick={() => setShowExitIntent(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0, y: 50 }}
-              animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.9, opacity: 0, y: 50 }}
-              className="bg-gradient-to-br from-green-950 to-emerald-950 border-2 border-green-500 rounded-xl shadow-2xl shadow-green-500/20 max-w-md w-full mx-4 p-6 relative max-h-[90vh] overflow-y-auto"
-              onClick={(e) => e.stopPropagation()}
+          {/* Desktop: connected HUD track (single row) */}
+          <div className="hidden lg:block relative max-w-7xl mx-auto">
+            <div
+              className="absolute top-[2.85rem] left-[6%] right-[6%] h-[2px] rounded-full overflow-hidden pointer-events-none"
+              aria-hidden
             >
-              <button 
-                onClick={() => setShowExitIntent(false)}
-                className="absolute top-4 right-4 text-gray-400 hover:text-white transition-colors"
-              >
-                <X className="h-6 w-6" />
-              </button>
+              <div className="absolute inset-0 bg-yellow-400/15" />
+              <motion.div
+                className="absolute inset-y-0 w-1/3 bg-gradient-to-r from-transparent via-yellow-400/70 to-transparent"
+                animate={{ left: ['-33%', '100%'] }}
+                transition={{ duration: 4.5, repeat: Infinity, ease: 'linear' }}
+              />
+            </div>
 
-              <div className="text-center">
-                {exitIntentSuccess ? (
-                  // SUCCESS STATE - Thank you message
-                  <>
-                    <div className="mb-6">
-                      <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg className="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                      <h2 className="text-3xl font-bold mb-2 text-green-400">You&apos;re Signed Up!</h2>
-                      <p className="text-xl text-green-300 font-semibold">Campaign updates confirmed!</p>
+            <ol className="grid grid-cols-6 gap-3 list-none p-0 m-0">
+              {loopSteps.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <motion.li
+                    key={step.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-40px' }}
+                    transition={{ delay: i * 0.07, duration: 0.45 }}
+                    className="relative group"
+                  >
+                    <div className="absolute -top-1 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+                      <div className="w-3 h-3 rotate-45 bg-yellow-400 shadow-[0_0_12px_rgba(234,179,8,0.9)] ring-2 ring-[#1A103C] group-hover:scale-125 transition-transform duration-300" />
                     </div>
 
-                    <div className="bg-green-500/10 border border-green-400/40 rounded-lg p-6 mb-6">
-                      <p className="text-white mb-4">
-                        We&apos;ll keep you posted on campaign exclusives, stretch goals, and more.
+                    <div className="relative mt-4 pt-6 pb-5 px-3 lg:px-4 text-center rounded-lg border border-yellow-400/25 bg-[#140d32]/75 backdrop-blur-md shadow-[0_8px_32px_rgba(0,0,0,0.45)] transition-all duration-300 group-hover:border-yellow-400/60 group-hover:bg-[#140d32]/90 group-hover:-translate-y-1 group-hover:shadow-[0_12px_40px_rgba(234,179,8,0.15)]">
+                      <span className="absolute top-2 left-2 w-4 h-4 border-l-2 border-t-2 border-yellow-400/50 group-hover:border-yellow-400 transition-colors" />
+                      <span className="absolute top-2 right-2 w-4 h-4 border-r-2 border-t-2 border-yellow-400/50 group-hover:border-yellow-400 transition-colors" />
+                      <span className="absolute bottom-2 left-2 w-4 h-4 border-l-2 border-b-2 border-yellow-400/50 group-hover:border-yellow-400 transition-colors" />
+                      <span className="absolute bottom-2 right-2 w-4 h-4 border-r-2 border-b-2 border-yellow-400/50 group-hover:border-yellow-400 transition-colors" />
+
+                      <div className="mx-auto mb-3 w-12 h-12 flex items-center justify-center">
+                        <div
+                          className="absolute w-12 h-12 rotate-45 rounded-sm border border-yellow-400/40 bg-yellow-400/10 group-hover:bg-yellow-400/20 group-hover:border-yellow-400/70 transition-colors"
+                          aria-hidden
+                        />
+                        <Icon className="relative w-6 h-6 text-yellow-400 drop-shadow-[0_0_8px_rgba(234,179,8,0.5)]" />
+                      </div>
+
+                      <p className="text-[10px] lg:text-xs font-black tracking-[0.2em] text-yellow-400/90 mb-1">
+                        {String(i + 1).padStart(2, '0')}
                       </p>
-                      <p className="text-green-200 text-sm mb-4">
-                        Don&apos;t forget — our Kickstarter is live! Back now to help us reach our goal.
-                      </p>
+                      <h3 className="font-bold text-white text-base lg:text-lg leading-tight">{step.title}</h3>
+                      <p className="text-xs lg:text-sm text-purple-200/75 mt-1.5 leading-snug">{step.subtitle}</p>
                     </div>
-
-                    <a
-                      href="https://www.kickstarter.com/projects/elemental-games/elekin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full mb-3"
-                      onClick={() => setShowExitIntent(false)}
-                    >
-                      <Button className="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-4 text-lg rounded-lg shadow-lg border border-green-400/50">
-                        Back on Kickstarter →
-                      </Button>
-                    </a>
-
-                    <Button
-                      onClick={handleDiscordJoinFromExitIntent}
-                      className="w-full bg-green-900/50 hover:bg-green-800/50 text-green-200 hover:text-white border border-green-500/40 font-medium py-4 text-lg rounded-lg mb-4"
-                    >
-                      Join Discord Community →
-                    </Button>
-
-                    <button 
-                      onClick={() => {setShowExitIntent(false); setExitIntentSuccess(false);}}
-                      className="w-full text-green-300 hover:text-white text-sm transition-colors"
-                    >
-                      Continue exploring
-                    </button>
-                  </>
-                ) : (
-                  // KICKSTARTER LIVE STATE
-                  <>
-                    <div className="mb-6">
-                      <div className="bg-green-500/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <Star className="w-8 h-8 text-yellow-400" />
-                      </div>
-                      <h2 className="text-2xl lg:text-3xl font-bold mb-2 bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent">We&apos;re Live on Kickstarter!</h2>
-                      <p className="text-base lg:text-lg text-green-200 font-medium">Help bring Elekin to life — every pledge gets us closer</p>
-                    </div>
-
-                    <div className="bg-gradient-to-br from-green-500/15 to-yellow-500/10 border border-green-400/50 rounded-xl p-4 mb-4 text-left">
-                      <h3 className="text-green-400 font-bold mb-3 text-center">🎁 Why Back Us:</h3>
-                      <div className="space-y-2">
-                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
-                          <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium text-left">Alt art promo card for every backer</span>
-                        </div>
-                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
-                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium text-left">Stretch goals unlock free items for all backers</span>
-                        </div>
-                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
-                          <Star className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium text-left">Help us hit $50K and unlock stretch goals</span>
-                        </div>
-                        <div className="flex items-center bg-green-900/40 rounded-lg p-3 border border-green-500/20">
-                          <Gift className="w-5 h-5 text-yellow-400 mr-3 flex-shrink-0" />
-                          <span className="text-white font-medium text-left">VIP status in community</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* PRIMARY CTA: Kickstarter */}
-                    <a
-                      href="https://www.kickstarter.com/projects/elemental-games/elekin"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block w-full mb-4"
-                      onClick={() => setShowExitIntent(false)}
-                    >
-                      <Button className="w-full bg-green-500 hover:bg-green-400 text-white font-bold py-5 text-xl rounded-xl shadow-2xl shadow-green-500/30 transform hover:scale-105 transition-all duration-200 border border-green-400/50">
-                        Back Us on Kickstarter →
-                      </Button>
-                    </a>
-
-                    {/* Secondary: Email signup */}
-                    <p className="text-green-300 text-sm mb-2">Want campaign updates?</p>
-                    <SignupForm 
-                      buttonClassName="w-full bg-green-800 hover:bg-green-700 text-white font-bold py-4 text-lg rounded-xl border border-green-500/50"
-                      onSuccess={handleExitIntentEmailSuccess}
-                      source="exit_intent_popup"
-                    />
-
-                    <button 
-                      onClick={() => setShowExitIntent(false)}
-                      className="w-full text-green-300 hover:text-white text-sm mt-3 transition-colors"
-                    >
-                      Maybe later
-                    </button>
-                  </>
-                )}
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* STICKY FLOATING KICKSTARTER BUTTON */}
-      <div className="fixed bottom-6 right-6 z-50 lg:hidden">
-        <a
-          href={kickstarterConfig.url}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Button className="bg-green-500 hover:bg-green-400 text-white font-bold shadow-2xl rounded-full px-6 py-4 animate-pulse hover:animate-none">
-            Back on Kickstarter
-          </Button>
-        </a>
-      </div>
-
-
-      
-      {/* HERO SECTION - KICKSTARTER LIVE */}
-      <section className="container mx-auto px-4 py-16 lg:py-24 relative z-10 -mb-20">
-        <div className="max-w-6xl mx-auto text-center -mt-20">
-          <div className="inline-flex items-center bg-green-500/20 border border-green-500/50 rounded-full px-6 py-2 mb-6">
-            <Star className="w-4 h-4 text-green-400 mr-2" />
-            <span className="text-green-300 font-semibold">KICKSTARTER IS LIVE</span>
+                  </motion.li>
+                );
+              })}
+            </ol>
           </div>
 
-          <h1 className="text-5xl lg:text-7xl font-bold mb-4">
-            We&apos;re Live on
-            <br />
-            <motion.span 
-              className="bg-gradient-to-r from-green-400 via-yellow-400 to-green-400 bg-clip-text text-transparent bg-[length:200%_100%]"
-              animate={{
-                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%']
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            >
-              Kickstarter
-            </motion.span>
-          </h1>
-
-          <p className="text-xl lg:text-2xl text-purple-200 mb-6 max-w-4xl mx-auto">
-            Help us manufacture Elekin&apos;s first set and unlock stretch goals for all backers
-          </p>
-
-          {/* Funding Progress */}
-          <div className="mb-8">
-            <KickstarterProgress />
-          </div>
-
-          {/* Primary CTA - Back on Kickstarter */}
-          <div className="mb-6">
-            <a
-              href={kickstarterConfig.url}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <Button
-                size="lg"
-                className="bg-green-500 hover:bg-green-400 text-white font-bold py-6 px-10 text-xl lg:text-2xl rounded-xl shadow-lg shadow-green-500/30 hover:scale-105 transition-all"
-              >
-                Back This Project →
-              </Button>
-            </a>
+          {/* Mobile + tablet: swipeable quest steps */}
+          <div className="lg:hidden">
+            <p className="text-center text-xs text-yellow-400/70 tracking-widest uppercase mb-4 font-semibold">
+              Swipe the loop →
+            </p>
+            <div className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-4 px-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+              {loopSteps.map((step, i) => {
+                const Icon = step.icon;
+                return (
+                  <motion.article
+                    key={step.title}
+                    initial={{ opacity: 0, scale: 0.96 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.05 }}
+                    className="relative flex-shrink-0 w-[78%] max-w-[320px] snap-center"
+                  >
+                    <div className="absolute top-0 left-6 right-6 h-0.5 bg-gradient-to-r from-yellow-400/0 via-yellow-400/50 to-yellow-400/0" />
+                    <div className="mt-3 pt-6 pb-6 px-5 rounded-xl border border-yellow-400/30 bg-[#140d32]/85 backdrop-blur-lg shadow-[0_12px_40px_rgba(0,0,0,0.5)]">
+                      <div className="flex items-start justify-between gap-3 mb-4">
+                        <span className="text-3xl font-black text-yellow-400/25 leading-none">
+                          {String(i + 1).padStart(2, '0')}
+                        </span>
+                        <div className="relative w-14 h-14 flex items-center justify-center">
+                          <div className="absolute inset-0 rotate-45 rounded-md border border-yellow-400/50 bg-yellow-400/15" />
+                          <Icon className="relative w-7 h-7 text-yellow-400" />
+                        </div>
+                      </div>
+                      <h3 className="text-2xl font-bold text-white mb-1">{step.title}</h3>
+                      <p className="text-purple-200/80 text-base">{step.subtitle}</p>
+                      {i < loopSteps.length - 1 && (
+                        <p className="mt-4 text-xs font-bold text-yellow-400/60 uppercase tracking-wider">
+                          Next: {loopSteps[i + 1].title}
+                        </p>
+                      )}
+                    </div>
+                  </motion.article>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ELEKIN IN STORES BANNER */}
-      <section className="container mx-auto px-4 py-8 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="max-w-6xl mx-auto"
-        >
-          <div className="bg-gradient-to-r from-green-500/20 via-yellow-500/20 to-purple-500/20 border-2 border-yellow-500/50 rounded-xl p-6 lg:p-8 shadow-[0_0_30px_rgba(234,179,8,0.3)]">
-            <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-              <div className="flex-1 text-center lg:text-left">
-                <div className="flex items-center justify-center lg:justify-start gap-2 mb-3">
-                  <Store className="w-6 h-6 text-yellow-400" />
-                  <h2 className="text-2xl lg:text-3xl font-bold text-yellow-400">Demo Day Edition Products Available in Stores</h2>
-                </div>
-                <p className="text-lg text-white mb-2">
-                  Find Elekin TCG at <span className="text-yellow-400 font-semibold">5 locations</span> across the US, with demo days and tournaments happening now!
-                </p>
-                <p className="text-purple-200 text-sm">
-                  Visit our partner stores to try Elekin, join demo days, and compete in upcoming tournaments.
-                </p>
+      {/* WHAT IS ELEKIN */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <p className="text-yellow-400 text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-3">Two Connected Experiences</p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-3">
+              What is <span className="text-yellow-400">Elekin</span>?
+            </h2>
+            <p className="text-purple-200/75 max-w-2xl mx-auto text-lg md:text-xl">
+              The MMO feeds the TCG. Your adventures become your collection.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+            <div className="rounded-2xl overflow-hidden border border-yellow-400/30 bg-[#140d32] shadow-[0_0_40px_rgba(234,179,8,0.08)]">
+              <div
+                className="h-48 bg-cover bg-center border-b border-yellow-400/20"
+                style={{ backgroundImage: `url('${MMO_IMAGES.creatureBattle}')` }}
+              />
+              <div className="p-6 md:p-8">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-yellow-400">Adventure Through Kinbrold</h3>
+                <ul className="space-y-2.5 text-purple-100/80 text-base md:text-lg">
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Explore the world as your character
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Fight creatures directly in overworld combat
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Level abilities, obtain equipment, complete quests
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Chase rare drops and gather Essence
+                  </li>
+                </ul>
               </div>
-              <Link to="/elekin/overview#where-to-find-elekin" className="flex-shrink-0">
-                <Button
-                  className="bg-yellow-500 hover:bg-yellow-400 text-purple-900 font-bold px-6 py-3 text-lg rounded-xl shadow-lg hover:scale-105 transition-all"
-                >
-                  <MapPin className="mr-2 h-5 w-5" />
-                  Find Stores
-                </Button>
+            </div>
+
+            <div className="rounded-2xl overflow-hidden border border-yellow-400/30 bg-[#140d32] shadow-[0_0_40px_rgba(234,179,8,0.08)]">
+              <div
+                className="h-48 bg-cover bg-center border-b border-yellow-400/20"
+                style={{ backgroundImage: `url('${MMO_IMAGES.evermereCrafting}')` }}
+              />
+              <div className="p-6 md:p-8">
+                <h3 className="text-2xl md:text-3xl font-bold mb-3 text-yellow-400">Build Your Elekin TCG Collection</h3>
+                <ul className="space-y-2.5 text-purple-100/80 text-base md:text-lg">
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Craft Elekin cards from materials earned in Kinbrold
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Build decks from cards you actually earned through play
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Challenge others in Elekin TCG Quickplay
+                  </li>
+                  <li className="flex gap-3 items-start">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-yellow-400 shadow-[0_0_6px_rgba(234,179,8,0.75)]" aria-hidden />
+                    Your adventure becomes your collection
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ALPHA PREVIEW */}
+      <section className="py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-10">
+            <div>
+              <p className="text-yellow-400 text-sm md:text-base font-semibold tracking-wider uppercase mb-2">
+                Closed Alpha · Opens October 1
+              </p>
+              <h2 className="text-4xl md:text-5xl font-bold">First Playable Areas</h2>
+              <p className="text-purple-200/70 mt-2 max-w-xl text-lg md:text-xl">
+                We&apos;re testing internally now. Closed Alpha goes live October 1 — join the tester list to be considered for access.
+              </p>
+            </div>
+            <div className="w-full max-w-md">
+              <AlphaWaitlistCapture
+                placement="homepage_alpha_preview"
+                layout="row"
+                buttonLabel="Become an Alpha Tester"
+              />
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-5">
+            {alphaAreas.map((area) => (
+              <div
+                key={area.name}
+                className="group rounded-2xl overflow-hidden border border-yellow-400/25 bg-[#140d32] hover:border-yellow-400/55 transition-colors"
+              >
+                <div
+                  className="h-44 bg-cover bg-center transition-transform duration-500 group-hover:scale-105 border-b border-yellow-400/15"
+                  style={{ backgroundImage: `url('${area.image}')` }}
+                />
+                <div className="p-5">
+                  <h3 className="text-xl md:text-2xl font-bold mb-2 text-yellow-400">{area.name}</h3>
+                  <p className="text-base md:text-lg text-purple-200/70 leading-relaxed">{area.blurb}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* TCG + CREATORS + COMMUNITY */}
+      <section className="py-14 bg-[#140d32] border-y border-yellow-400/20">
+        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-6">
+          <div className="rounded-2xl border border-yellow-400/25 p-6 bg-yellow-400/5 hover:border-yellow-400/50 transition-colors">
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-yellow-400">Elekin TCG</h3>
+            <p className="text-base md:text-lg text-purple-200/70 mb-4">
+              The card game connected to Kinbrold — gallery, how to play, and browser Quickplay.
+            </p>
+            <div className="flex flex-wrap gap-3 text-base font-semibold">
+              <Link to="/cards" className="text-yellow-400 hover:text-yellow-300">
+                Card Gallery
+              </Link>
+              <Link to="/tcg" className="text-yellow-400 hover:text-yellow-300">
+                Play Quickplay
+              </Link>
+              <Link to="/shop" className="text-yellow-400 hover:text-yellow-300">
+                {isPhysicalShopPaused() ? 'Physical TCG (paused)' : 'Shop'}
               </Link>
             </div>
           </div>
-        </motion.div>
-      </section>
 
-      {/* Cards of the Week Section */}
-      <div className="container mx-auto px-4 py-12">
-        <div className="bg-purple-800 bg-opacity-40 rounded-xl p-6 mb-20">
-          <div className="max-w-5xl mx-auto">
-            <CardsOfTheWeek />
-          </div>
-          </div>
-        </div>
-
-      {/* EXPLORE THE WORLD OF KINBROLD */}
-      <section className="container mx-auto px-4 py-16 relative z-10">
-        <Link to="/kinbrold">
-          <h2 className="text-4xl font-bold mb-8 text-center items-center flex-wrap cursor-pointer hover:text-accent transition-colors">
-            Explore the World of Kinbrold
-          </h2>
-        </Link>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-          {kingdoms.map((kingdom) => (
-            <Link to={kingdom.path} key={kingdom.name} className={`${kingdom.color} bg-opacity-30 p-6 rounded-lg shadow-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-xl ${kingdom.hoverColor} flex flex-col`}>
-              <div className="flex-grow">
-                <div className="h-24 flex justify-center items-center">
-                  <img 
-                    src={`/${kingdom.icon}`}
-                    alt={`${kingdom.element} Icon`}
-                    className="max-h-full w-auto object-contain"
-                  />
-                </div>
-                <h3 className="text-center text-2xl font-semibold mt-4 mb-2">{kingdom.name}</h3>
-                <h4 className="text-center text-sm font-semibold mb-2"><span className="text-sm font-bold">the {kingdom.element} Kingdom</span></h4>
-                <p className="mb-2 text-center">{kingdom.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-        {/* Explore More Section */}
-        <section className="container mx-auto px-4 py-16 text-center">
-          <h2 className="text-4xl font-bold mb-12 text-white">Explore More</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          <TrackedLink to="/shop">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <LayoutGrid className="mr-3 h-8 w-8" />
-              Shop Demo Day Products
-              </Button>
-            </TrackedLink>
-            <Link to="/elekin/how-to-play">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <Book className="mr-3 h-8 w-8" />
-                View Rulebook
-              </Button>
-            </Link>
-            <Link to="/kinbrold">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              >
-                <Map className="mr-3 h-8 w-8" />
-                Explore Lore
-              </Button>
-            </Link>
-            <SubscribeButton 
-              variant="outline"
-              size="lg"
-              className="w-full bg-purple-900/30 border-purple-500/30 text-white hover:text-yellow-400 hover:bg-purple-800/30 h-[100px] text-lg font-semibold"
-              iconClassName="mr-3 h-8 w-8"
+          <div
+            className="rounded-2xl border-2 border-yellow-400/50 p-6 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-transparent shadow-[0_0_30px_rgba(234,179,8,0.15)]"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <Sparkles className="w-5 h-5 text-yellow-400" />
+              <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-yellow-400">Now recruiting</span>
+            </div>
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">Creator Program</h3>
+            <p className="text-base md:text-lg text-purple-100/80 mb-4">
+              Early Kinbrold looks, creator testing, and limited slots before Elekin goes wide.
+            </p>
+            <CreatorInterestCapture placement="homepage_grid" />
+            <Link
+              to="/creators"
+              onClick={() => trackCreatorCtaClick('homepage')}
+              className="inline-flex items-center gap-2 mt-4 text-sm font-bold text-yellow-400 hover:text-yellow-300"
             >
-              Join Email List
-            </SubscribeButton>
+              Full application <ArrowRight className="w-4 h-4" />
+            </Link>
           </div>
-        </section>
+
+          <div className="rounded-2xl border border-yellow-400/25 p-6 bg-yellow-400/5 hover:border-yellow-400/50 transition-colors">
+            <h3 className="text-xl md:text-2xl font-bold mb-2 text-yellow-400">Community</h3>
+            <p className="text-base md:text-lg text-purple-200/70 mb-4">
+              The official Elekin Discord is being prepared for the MMOTCG phase.
+            </p>
+            {hasDiscordInvite() ? (
+              <a
+                href={SITE.discordInviteUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackDiscordClick('homepage')}
+                className="text-base font-bold text-yellow-400 hover:text-yellow-300"
+              >
+                Join the Elekin Community →
+              </a>
+            ) : (
+              <Link to="/community" className="text-base font-bold text-yellow-400/70 hover:text-yellow-400">
+                Discord — Coming Soon →
+              </Link>
+            )}
+          </div>
+        </div>
+      </section>
+
+      {/* FINAL CTA */}
+      <section className="py-20 md:py-28 relative">
+        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent" />
+        <div className="container mx-auto px-4 text-center max-w-2xl">
+          <p className="text-yellow-400 text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4">
+            Opens October 1
+          </p>
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+            Be among the first to enter <span className="text-yellow-400">Kinbrold</span>
+          </h2>
+          <p className="text-purple-200/75 mb-8 text-lg md:text-xl">
+            Closed Alpha opens October 1. We&apos;re testing internally right now — join the tester list to be considered for early access.
+          </p>
+          <div className="max-w-md mx-auto text-left">
+            <AlphaWaitlistCapture
+              placement="homepage_footer"
+              layout="stacked"
+              buttonLabel="Become an Alpha Tester"
+            />
+          </div>
+        </div>
+      </section>
     </div>
   );
 };

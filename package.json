@@ -10,6 +10,8 @@
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "start": "node server.js",
+    "playtest": "esbuild scripts/playtest/duel.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/elekin-duel.mjs --log-level=error && node node_modules/.cache/elekin-duel.mjs",
+    "rules": "esbuild scripts/playtest/rules-suite.ts --bundle --platform=node --format=esm --outfile=node_modules/.cache/elekin-rules.mjs --log-level=error && node node_modules/.cache/elekin-rules.mjs",
     "convert-cards": "node convert-excel-to-json.js",
     "create-bundle-images": "node scripts/create-bundle-images.js"
   },

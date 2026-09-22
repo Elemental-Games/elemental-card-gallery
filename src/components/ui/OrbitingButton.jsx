@@ -37,7 +37,7 @@ const OrbitingButton = () => {
       
       {/* Button */}
       <Link
-        to="/join-now"
+        to="/tcg"
         className="relative block px-8 py-4 bg-yellow-500 text-purple-900 font-bold rounded-full 
           hover:bg-yellow-400 transition-colors duration-300"
       >

@@ -1,13 +1,15 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { MMO_IMAGES } from '@/config/site';
 
 const ZalosPage = () => {
+  const art = MMO_IMAGES.zalos;
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/images/kingdom-headers/zalos-header.webp" 
+          src={art} 
           alt="Zalos Citadels" 
           className="w-full h-full object-cover"
         />
@@ -34,9 +36,6 @@ const ZalosPage = () => {
             Through her mastery of air, she in accordance with our ancestors, learned to lift entire islands into the sky, creating the 
             floating kingdom we call home today.
           </p>
-          <p className="text-xs text-gray-400 italic mt-4">
-            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
-          </p>
         </Card>
 
         {/* Life Among the Clouds */}
@@ -55,7 +54,7 @@ const ZalosPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/zalos_floating.png" 
+            src={art} 
             alt="Floating Cities of Zalos" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -64,7 +63,7 @@ const ZalosPage = () => {
         {/* The Way of Air */}
         <div className="grid md:grid-cols-2 gap-6">
           <img 
-            src="/kingdoms/zalos_dance.png" 
+            src={art} 
             alt="Wind Dancing in Zalos" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -90,7 +89,7 @@ const ZalosPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/zalos_dojo.png" 
+            src={art} 
             alt="Training in Zalos" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -99,7 +98,7 @@ const ZalosPage = () => {
         {/* Innovation and Progress */}
         <div className="grid md:grid-cols-2 gap-6">
           <img 
-            src="/kingdoms/zalos_innovation.png" 
+            src={art} 
             alt="Innovation in Zalos" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -136,7 +135,7 @@ const ZalosPage = () => {
               <li>Skybridge Network: Our famous transportation system</li>
             </ul>
             <img 
-              src="/kingdoms/zalos_zen.png" 
+              src={art} 
               alt="Meditation in Zalos" 
               className="w-full h-full object-cover rounded-lg shadow-xl self-end"
             />

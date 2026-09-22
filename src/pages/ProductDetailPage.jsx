@@ -5,6 +5,8 @@ import { useCart } from '@/hooks/useCart';
 import AddToCartButton from '@/components/cart/AddToCartButton';
 import { useState, useEffect } from 'react';
 import { useToast } from '@/components/ui/use-toast';
+import { isPhysicalShopPaused } from '@/config/site';
+import PhysicalProductNotice from '@/components/PhysicalProductNotice';
 
 // This would typically come from an API, but we're using the local list for now
 const products = [
@@ -119,6 +121,7 @@ const ProductDetailPage = () => {
   }, [product]);
 
   const handleBuyNow = async () => {
+    if (isPhysicalShopPaused()) return;
     setIsBuying(true);
     try {
       await buyNow(product);
@@ -137,12 +140,19 @@ const ProductDetailPage = () => {
     return <div>Product not found</div>;
   }
 
+  const shopPaused = isPhysicalShopPaused();
+
   return (
     <div className="bg-[#1A103C] text-white min-h-screen">
       <Helmet>
-        <title>{product.title} - Elekin TCG Shop</title>
+        <title>{product.title} — Elekin (physical orders paused)</title>
         <meta name="description" content={product.description} />
       </Helmet>
+      {shopPaused && (
+        <div className="container mx-auto px-4 pt-8 max-w-3xl">
+          <PhysicalProductNotice variant="compact" />
+        </div>
+      )}
       <div className="container mx-auto px-4 py-16">
         <div className="grid lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
@@ -211,6 +221,7 @@ const ProductDetailPage = () => {
             <div className="mb-8">
               <div className="flex flex-col gap-4">
                 <AddToCartButton product={product} />
+                {!shopPaused && (
                 <Button 
                   size="lg" 
                   variant="outline" 
@@ -220,6 +231,7 @@ const ProductDetailPage = () => {
                 >
                   {isBuying ? 'Processing...' : 'Buy Now'}
                 </Button>
+                )}
               </div>
             </div>
             <h2 className="text-2xl font-bold mb-4">Why not add...</h2>
@@ -233,7 +245,9 @@ const ProductDetailPage = () => {
                     </Link>
                     <p className="text-yellow-400">${p.price}</p>
                   </div>
-                  <Button size="sm" className="ml-auto" onClick={() => addToCart(p)}>Add</Button>
+                  <Button size="sm" className="ml-auto" onClick={() => !shopPaused && addToCart(p)} disabled={shopPaused}>
+                    {shopPaused ? 'Paused' : 'Add'}
+                  </Button>
                 </div>
               ))}
             </div>
@@ -242,6 +256,7 @@ const ProductDetailPage = () => {
         <div className="mt-8 lg:hidden">
           <div className="flex items-center gap-4 justify-center mb-8">
             <AddToCartButton product={product} />
+            {!shopPaused && (
             <Button 
               size="lg" 
               variant="outline" 
@@ -251,6 +266,7 @@ const ProductDetailPage = () => {
             >
               {isBuying ? 'Processing...' : 'Buy Now'}
             </Button>
+            )}
           </div>
         </div>
         <div className="mt-16 lg:hidden">

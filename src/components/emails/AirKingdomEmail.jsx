@@ -52,7 +52,7 @@ const AirKingdomEmail = () => {
       <div 
         className="relative h-80 bg-cover bg-center flex items-center justify-center"
         style={{
-          backgroundImage: 'url(/images/kingdom-headers/zalos-header.webp)',
+          backgroundImage: 'url(/images/mmo-zalos.jpg)',
           backgroundPosition: 'center'
         }}
       >

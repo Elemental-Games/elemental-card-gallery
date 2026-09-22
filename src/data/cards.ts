@@ -185,6 +185,7 @@ const Tuskhammer: CreatureCard = {
 };
 const Torrent: CreatureCard = {
   id: "torrent",
+  isTitan: true,
   name: "Torrent",
   element: "water",
   cost: 4,
@@ -202,10 +203,19 @@ const Torrent: CreatureCard = {
       trigger: "passive",
       description: "Gain Double Strike when attacking a shield (persists if a blocker intercepts).",
     },
+    {
+      id: "shield_crusher",
+      name: "Shield Crusher",
+      trigger: "activated",
+      isEnhanced: true,
+      essenceCost: { amount: 2, element: "water" },
+      description: "Gain 25 Strength when attacking Shields until the end of the turn.",
+    },
   ],
 };
 const Terra: CreatureCard = {
   id: "terra",
+  isTitan: true,
   name: "Terra",
   element: "earth",
   cost: 4,
@@ -223,10 +233,19 @@ const Terra: CreatureCard = {
       trigger: "activated",
       description: "Refresh or exhaust any creature on the field other than Terra.",
     },
+    {
+      id: "seismic_tremor",
+      name: "Seismic Tremor",
+      trigger: "activated",
+      isEnhanced: true,
+      essenceCost: { amount: 2, element: "earth" },
+      description: "Deplete 2 essence from your opponent's essence pool.",
+    },
   ],
 };
 const Diamoria: CreatureCard = {
   id: "diamoria",
+  isDragon: true,
   name: "Diamoria",
   element: "earth",
   cost: 5,
@@ -244,6 +263,14 @@ const Diamoria: CreatureCard = {
       trigger: "activated",
       description: "Restore one of your shields to its original tier and full health.",
     },
+    {
+      id: "bulwark",
+      name: "Bulwark",
+      trigger: "activated",
+      isEnhanced: true,
+      essenceCost: { amount: 3, elements: ["water", "earth"] },
+      description: "This creature gains Double Strike until the end of the turn.",
+    },
   ],
 };
 
@@ -254,8 +281,8 @@ const PyroMites: CreatureCard = {
   cost: 0,
     attack: 1,
     health: 1,
-  strength: 90,
-  agility: 35,
+  strength: 85,
+  agility: 65,
     rarity: "common",
     cardType: "creature",
   imagePath: "/images/cards/new/pyro mites.webp",
@@ -309,8 +336,8 @@ const Lavrok: CreatureCard = {
   cost: 1,
     attack: 3,
     health: 2,
-  strength: 125,
-  agility: 50,
+  strength: 145,
+  agility: 30,
     rarity: "uncommon",
     cardType: "creature",
   imagePath: "/images/cards/new/lavrok.webp",
@@ -517,10 +544,19 @@ const Aeris: CreatureCard = {
       trigger: "activated",
       description: "Refresh or exhaust any creature on the field other than Aeris.",
     },
+    {
+      id: "retreat",
+      name: "Retreat",
+      trigger: "activated",
+      isEnhanced: true,
+      essenceCost: { amount: 3, element: "air" },
+      description: "Send 1 Exhausted creature from the field to the owner's hand.",
+    },
   ],
 };
 const Nimbus: CreatureCard = {
   id: "nimbus",
+  isTitan: true,
   name: "Nimbus",
   element: "air",
     cost: 5,
@@ -541,6 +577,7 @@ const Nimbus: CreatureCard = {
 };
 const Veton: CreatureCard = {
   id: "veton",
+  isDragon: true,
   name: "Veton",
   element: "air",
   cost: 5,
@@ -557,6 +594,14 @@ const Veton: CreatureCard = {
       name: "Chainlink",
       trigger: "onSummon",
       description: "You may choose an element and deal 75 damage to all enemy creatures of that element.",
+    },
+    {
+      id: "stormy_forecast",
+      name: "Stormy Forecast",
+      trigger: "activated",
+      isEnhanced: true,
+      essenceCost: { amount: 3, elements: ["air", "fire"] },
+      description: "Choose one element and deal 50 damage to all opponent's creatures of the chosen element.",
     },
   ],
 };

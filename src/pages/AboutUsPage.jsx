@@ -71,7 +71,7 @@ const AboutUsPage = () => {
       name: "Scarlett Roberts",
       role: "Editor & Graphic Designer",
       specialty: "Content editing and visual design",
-      notableWork: ["Kickstarter Visuals", "Product Design", "Website Graphics", "Marketing Materials"],
+      notableWork: ["Marketing Visuals", "Product Design", "Website Graphics"],
       imagePlaceholder: "/artists/scarlett-roberts.jpg",
       link: "https://www.scarlettedits.com/"
     },
@@ -90,23 +90,36 @@ const AboutUsPage = () => {
   return (
     <>
       <Helmet>
-        <title>Meet the Elekin Team</title>
-        <meta name="description" content="Meet the Elekin team - founder Mark Diorio and our talented artists building the future of TCGs." />
-        <meta name="keywords" content="Elekin team, Mark Diorio, Elemental Games, card game artists, TCG development" />
-        <meta property="og:title" content="About Us - Meet the Team Behind Elekin TCG" />
-        <meta property="og:description" content="Discover the passionate team creating Elekin: Masters of Kinbrold, from game design to stunning artwork." />
+        <title>About Elemental Games — Building Elekin</title>
+        <meta name="description" content="Elemental Games is building Elekin, a connected game universe where exploration, creature hunting, progression, collection, and trading-card strategy meet inside Kinbrold." />
+        <meta name="keywords" content="Elemental Games, Elekin, Kinbrold, MMOTCG, Elekin TCG" />
+        <meta property="og:title" content="Elemental Games — Studio behind Elekin" />
+        <meta property="og:description" content="Elemental Games is building Elekin, where adventures in Kinbrold build your card collection." />
         <link rel="canonical" href="https://elementalgames.gg/about" />
       </Helmet>
 
       <div className="min-h-screen bg-[#1A103C]">
-        {/* Page Title */}
+        {/* Studio intro */}
         <section className="container mx-auto px-4 pt-16 pb-8">
-          <div className="text-center">
-            <h1 className="text-5xl lg:text-7xl font-bold mb-6 text-white">
-              Meet the Elekin Team
+          <div className="text-center max-w-3xl mx-auto">
+            <p className="text-yellow-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">Elemental Games</p>
+            <h1 className="text-4xl lg:text-6xl font-bold mb-6 text-white">
+              Introducing Elekin
             </h1>
-            <p className="text-xl lg:text-2xl text-purple-200 max-w-3xl mx-auto">
-              One developer and three talented artists and editors working together to bring Elekin TCG and the world of Kinbrold to life
+            <p className="text-lg lg:text-xl text-purple-200 leading-relaxed">
+              Elemental Games is building Elekin, a connected game universe where exploration, creature hunting, progression, collection, and trading-card strategy meet inside the world of Kinbrold.
+            </p>
+          </div>
+        </section>
+
+        {/* Page Title */}
+        <section className="container mx-auto px-4 pt-8 pb-8">
+          <div className="text-center">
+            <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
+              The Team
+            </h2>
+            <p className="text-lg text-purple-200 max-w-3xl mx-auto">
+              An independent studio building Elekin with a focused creative team — ambitious, professional, and grounded in the world of Kinbrold.
             </p>
           </div>
         </section>
@@ -181,7 +194,7 @@ const AboutUsPage = () => {
                 </p>
                 
                 <p>
-                  We&apos;re live on Kickstarter right now and working toward our funding goal to manufacture Elekin&apos;s first full set. It&apos;s been a wild ride, and we&apos;re just getting started. Thanks for being part of this journey with us!
+                  Lightning and Crystal are on shelves and in the shop now. After those sell through we&apos;ll release Frost and Lava, then Sand and Poison — that&apos;s all six combination decks. Then we put short games in Kinbrold and grow it into an MMOTCG. Thanks for sticking with us.
                 </p>
               </div>
             </motion.div>
@@ -347,8 +360,8 @@ const AboutUsPage = () => {
                 asChild
                 className="bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-3 shadow-[0_0_25px_rgba(234,179,8,0.6)] hover:shadow-[0_0_40px_rgba(234,179,8,0.8)] border-2 border-yellow-500/50 hover:border-yellow-400/80 transition-all duration-300 hover:scale-105"
               >
-                <Link to="/join-now">
-                  Sign Up for Early Access
+                <Link to="/shop">
+                  Shop Lightning & Crystal
                 </Link>
               </Button>
             </div>

@@ -9,6 +9,7 @@ import { subscribeEmail } from '@/utils/api';
 import confetti from 'canvas-confetti';
 import { CheckCircle, Info as InfoIcon } from 'lucide-react';
 import CardDetailSidebar from '@/components/CardDetailSidebar';
+import PhysicalProductNotice from '@/components/PhysicalProductNotice';
 
 const ElekinPage = () => {
   const location = useLocation();
@@ -115,11 +116,12 @@ const ElekinPage = () => {
   return (
     <>
       <Helmet>
-        <title>Elekin: Masters of Kinbrold - Strategic TCG with Elemental Mastery</title>
-        <meta name="description" content="Master the elements in Elekin: Masters of Kinbrold. Strategic TCG featuring Air, Water, Fire, and Earth elements with revolutionary combat mechanics." />
+        <title>Elekin TCG — Cards Born from Kinbrold</title>
+        <meta name="description" content="Elekin TCG is the trading card system connected to the Elekin MMOTCG. Build decks, learn to play, and compete in Quickplay — cards earned through adventures in Kinbrold." />
       </Helmet>
       
       <div className="min-h-screen bg-[#1A103C] relative overflow-hidden">
+        <PhysicalProductNotice variant="strip" />
         {/* Hero Section - TCG Introduction */}
         <section className="container mx-auto px-4 py-16">
           <div className="max-w-6xl mx-auto text-center">
@@ -232,13 +234,13 @@ const ElekinPage = () => {
             >
               <div className="inline-flex items-center bg-yellow-500/20 border border-yellow-500/50 rounded-full px-6 py-2 mb-4">
                 <Store className="w-5 h-5 text-yellow-400 mr-2" />
-                <span className="text-yellow-300 font-semibold">NOW IN STORES</span>
+                <span className="text-yellow-300 font-semibold">PARTNER STORES</span>
               </div>
               <h2 className="text-4xl lg:text-5xl font-bold text-yellow-400 mb-4">
                 Where to Find Elekin
               </h2>
               <p className="text-xl text-purple-200 max-w-3xl mx-auto">
-                Elekin is now available at select game stores across the US. Visit these locations to pick up your deck, join demo days, and compete in tournaments!
+                Mulligan Games, Noble Knight, and Frank&apos;s have sold out. We&apos;re hoping to restock them soon. You can still grab Lightning and Crystal in the shop.
               </p>
             </motion.div>
 
@@ -247,9 +249,9 @@ const ElekinPage = () => {
               {/* Top 3 stores */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
                 {[
-                  { name: 'Mulligan Games', location: 'Warminster, PA', url: 'https://www.instagram.com/mulligangames/?hl=en', inStock: true },
-                  { name: 'Noble Knight Games', location: 'Fitchburg, WI', url: 'https://www.nobleknight.com/', inStock: true },
-                  { name: "Frank's Card Shop", location: 'Sicklerville, NJ', url: 'https://frankscardshopnj.com', inStock: true }
+                  { name: 'Mulligan Games', location: 'Warminster, PA', url: 'https://www.instagram.com/mulligangames/?hl=en', soldOut: true },
+                  { name: 'Noble Knight Games', location: 'Fitchburg, WI', url: 'https://www.nobleknight.com/', soldOut: true },
+                  { name: "Frank's Card Shop", location: 'Sicklerville, NJ', url: 'https://frankscardshopnj.com', soldOut: true }
                 ].map((store, index) => (
                   <motion.a
                     key={store.name}
@@ -274,6 +276,15 @@ const ElekinPage = () => {
                           <MapPin className="w-4 h-4 mr-2 text-purple-300" />
                           <span>{store.location}</span>
                         </div>
+                        {store.soldOut && (
+                          <div className="flex flex-col gap-1 mt-1">
+                            <div className="flex items-center gap-2">
+                              <div className="w-3 h-3 bg-red-400/80 rounded-full"></div>
+                              <span className="text-xs font-semibold text-red-300">Sold out</span>
+                            </div>
+                            <span className="text-xs text-yellow-400/90">Hoping to restock soon</span>
+                          </div>
+                        )}
                         {store.inStock && (
                           <div className="flex items-center gap-2 mt-1">
                             <div className="relative flex items-center justify-center">
@@ -382,7 +393,7 @@ const ElekinPage = () => {
                       <Calendar className="w-4 h-4 text-yellow-400 mt-0.5 flex-shrink-0" />
                       <div>
                         <p className="text-yellow-400 font-semibold">More Demo Days Coming Soon!</p>
-                        <p className="text-purple-200 text-sm">New dates will be announced after our Kickstarter campaign</p>
+                        <p className="text-purple-200 text-sm">Watch Discord and this page for new store nights.</p>
                       </div>
                     </div>
                   </div>
@@ -413,8 +424,8 @@ const ElekinPage = () => {
                   <div className="flex items-start gap-2">
                     <Trophy className="w-5 h-5 text-yellow-400 mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="text-yellow-400 font-bold text-lg mb-1">Coming Post-Launch</p>
-                      <p className="text-purple-200">Organized play and tournament events will be announced after our Kickstarter campaign wraps up.</p>
+                      <p className="text-yellow-400 font-bold text-lg mb-1">Coming Soon</p>
+                      <p className="text-purple-200">Organized play dates will be posted here and in Discord when they&apos;re locked.</p>
                     </div>
                   </div>
                 </div>

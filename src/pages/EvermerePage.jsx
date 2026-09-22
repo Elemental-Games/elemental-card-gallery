@@ -1,13 +1,17 @@
 
 import { Card } from "@/components/ui/card";
+import { MMO_IMAGES } from '@/config/site';
 
 const EvermerePage = () => {
+  const street = MMO_IMAGES.evermereStreet;
+  const crafting = MMO_IMAGES.evermereCrafting;
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-purple-800/10 to-purple-800/30">
       {/* Hero Section */}
       <section className="relative h-[60vh] overflow-hidden">
         <img 
-          src="/Evermere - street.jpg" 
+          src={street}
           alt="Evermere Streets" 
           className="w-full h-full object-cover"
         />
@@ -32,7 +36,7 @@ const EvermerePage = () => {
             <div className="flex flex-col lg:flex-row">
               <div className="lg:w-1/2">
                 <img 
-                  src="/Evermere_-_card_crafting-min.jpg" 
+                  src={crafting}
                   alt="Card Crafting in Evermere"
                   className="w-full h-64 lg:h-full object-cover"
                 />
@@ -72,12 +76,9 @@ const EvermerePage = () => {
               The streets buzz with the energy of multiple elements, while citizens from all kingdoms 
               come together in celebration of their shared heritage.
             </p>
-            <p className="text-xs text-gray-400 italic mt-4">
-              The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
-            </p>
           </Card>
           <img 
-            src="/kingdoms/evermere_life.png" 
+            src={street} 
             alt="Daily Life" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -86,7 +87,7 @@ const EvermerePage = () => {
         {/* Innovation Hub */}
         <div className="grid md:grid-cols-2 gap-6">
           <img 
-            src="/kingdoms/evermere_innovation.png" 
+            src={crafting} 
             alt="Innovation in Evermere" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -111,7 +112,7 @@ const EvermerePage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/evermere_training.png" 
+            src={street} 
             alt="Training Grounds" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -129,7 +130,7 @@ const EvermerePage = () => {
               <li>The Harmony Gardens: A place of meditation and peace</li>
             </ul>
             <img 
-              src="/kingdoms/evermere_wisdom.png" 
+              src={crafting} 
               alt="Wisdom of Evermere" 
               className="w-full h-full object-cover rounded-lg shadow-xl"
             />

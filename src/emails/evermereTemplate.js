@@ -62,10 +62,10 @@ module.exports = `
                         <td style="padding: 0; margin: 0;">
                             <!--[if gte mso 9]>
                             <v:rect xmlns:v='urn:schemas-microsoft-com:vml' fill='true' stroke='false' style='width:600px;height:300px;'>
-                              <v:fill type='frame' src='https://elementalgames.gg/Evermere%20-%20street.jpg' color='#6b7280' />
+                              <v:fill type='frame' src='https://elementalgames.gg/images/mmo-evermere-street.jpg' color='#6b7280' />
                               <v:textbox inset='0,0,0,0'>
                             <![endif]-->
-                            <div style="background-image: url('https://elementalgames.gg/Evermere%20-%20street.jpg'); background-size: cover; background-position: center; height: 300px; width: 100%; min-width: 100%; position: relative;">
+                            <div style="background-image: url('https://elementalgames.gg/images/mmo-evermere-street.jpg'); background-size: cover; background-position: center; height: 300px; width: 100%; min-width: 100%; position: relative;">
                                 <div style="width: 100%; height: 100%; background: rgba(0,0,0,0.6); position: absolute; top: 0; left: 0;"></div>
                                 <div style="position: relative; z-index: 2; color: #fff; text-align: center; padding: 40px 20px; height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
                                     <h2 class="hero-text" style="margin: 0 0 24px; font-size: 44px; font-weight: 900; letter-spacing: 2px; text-shadow: 0 2px 12px #6D28D9, 0 0 8px #fff, 2px 2px 4px rgba(0,0,0,0.8);">WELCOME TO EVERMERE</h2>
@@ -95,7 +95,7 @@ module.exports = `
                             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%" style="margin: 40px 0; border: 1px solid #e5e7eb; border-radius: 8px; overflow: hidden;">
                                 <tr>
                                     <td style="width: 200px; vertical-align: top;">
-                                        <img src="https://elementalgames.gg/Evermere_-_card_crafting-min.jpg" alt="Card Crafting in Evermere" style="width: 100%; max-width: 420px; height: auto; display: block; border-radius: 16px;">
+                                        <img src="https://elementalgames.gg/images/mmo-evermere-crafting.jpg" alt="Card Crafting in Evermere" style="width: 100%; max-width: 420px; height: auto; display: block; border-radius: 16px;">
                                     </td>
                                     <td style="padding: 30px; vertical-align: top;">
                                         <h4 style="margin: 0 0 15px; color: #7c3aed; font-size: 24px; font-weight: bold;">The Art of Card Crafting</h4>

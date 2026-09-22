@@ -9,10 +9,10 @@ const features = [
     highlight: '2 Players'
   },
   {
-    title: 'Quick 25-40 Minute Games',
-    description: 'Fast-paced matches that fit into any schedule. Strategic depth without the time commitment of longer TCGs.',
+    title: '30–45 Minute Matches',
+    description: 'Full table games last about 30–45 minutes. The browser duel targets ~30 minutes; short Skirmish games come later inside Kinbrold.',
     icon: <Clock className="w-8 h-8 text-purple-400" />,
-    highlight: '25-40 Min'
+    highlight: '30–45 Min'
   },
   {
     title: 'Essence Currency System',

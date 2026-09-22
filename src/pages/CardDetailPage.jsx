@@ -318,7 +318,7 @@ const CardDetailPage = () => {
                 })}
               </ul>
             ) : (
-              <p className="text-purple-400 text-sm italic">No decks added yet. Check back after the successful conclusion of our Kickstarter.</p>
+              <p className="text-purple-400 text-sm italic">No decks added yet. Check back as we add more deck data.</p>
             )}
           </div>
 
@@ -344,7 +344,7 @@ const CardDetailPage = () => {
                 })}
               </div>
             ) : (
-              <p className="text-purple-400 text-sm italic">No synergies added yet. Check back after the successful conclusion of our Kickstarter.</p>
+              <p className="text-purple-400 text-sm italic">No synergies added yet. Check back as we add more deck data.</p>
             )}
           </div>
 
@@ -370,7 +370,7 @@ const CardDetailPage = () => {
                 })}
               </div>
             ) : (
-              <p className="text-purple-400 text-sm italic">No counters added yet. Check back after the successful conclusion of our Kickstarter.</p>
+              <p className="text-purple-400 text-sm italic">No counters added yet. Check back as we add more deck data.</p>
             )}
           </div>
 
@@ -396,7 +396,7 @@ const CardDetailPage = () => {
                 })}
               </div>
             ) : (
-              <p className="text-purple-400 text-sm italic">No combos added yet. Check back after the successful conclusion of our Kickstarter.</p>
+              <p className="text-purple-400 text-sm italic">No combos added yet. Check back as we add more deck data.</p>
             )}
           </div>
         </div>

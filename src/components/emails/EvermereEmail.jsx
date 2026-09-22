@@ -54,7 +54,7 @@ const EvermereEmail = () => {
       {/* Hero Section */}
       <div className="relative h-80 w-full flex items-center justify-center overflow-hidden">
         <img
-          src="/Evermere - street.jpg"
+          src="/images/mmo-evermere-street.jpg"
           alt="Evermere Street View"
           className="absolute inset-0 w-full h-full object-cover z-0"
           style={{ minHeight: '100%', minWidth: '100%' }}
@@ -85,7 +85,7 @@ const EvermereEmail = () => {
           <div className="flex flex-col md:flex-row">
             <div className="md:w-1/3">
               <img 
-                src="/Evermere_-_card_crafting-min.jpg" 
+                src="/images/mmo-evermere-crafting.jpg" 
                 alt="Card Crafting in Evermere"
                 className="w-full h-64 md:h-full object-cover"
               />

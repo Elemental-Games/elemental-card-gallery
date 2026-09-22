@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import CardGrid from '../components/organisms/CardGrid';
 import FilterOptions from '../components/organisms/FilterOptions';
+import { trackTcgGalleryVisit } from '../utils/analytics';
 
 const allowedCardIds = [
   'mek', 'osao', 'galea', 'balon', 'diamoria', 'veton', 'aridus', 'noxilus', 
@@ -36,6 +37,10 @@ const CardGalleryPage = () => {
 
   const nonElementalTypes = ['Rune', 'Counter', 'Shield'];
   const isElementFilterDisabled = nonElementalTypes.includes(filters.type);
+
+  useEffect(() => {
+    trackTcgGalleryVisit();
+  }, []);
 
   useEffect(() => {
     const fetchCards = async () => {
@@ -106,26 +111,14 @@ const CardGalleryPage = () => {
   return (
     <>
       <Helmet>
-        <title>Card Gallery - Elekin TCG</title>
-        <meta name="description" content="Browse the complete collection of Elekin TCG cards. Filter by element, rarity, and more." />
+        <title>Explore the Elekin TCG Collection</title>
+        <meta name="description" content="Browse Elekin TCG cards from the world of Kinbrold. Filter by element and type. Craft cards through adventure in Elekin." />
       </Helmet>
       <div className="container mx-auto px-4 py-8">
-        <h1 className="text-4xl font-bold text-center mb-8 text-white">Card Gallery</h1>
-        
-        {/* Demo Day Edition Info Banner */}
-        <div className="bg-gradient-to-r from-yellow-500/20 via-purple-500/20 to-yellow-500/20 border-2 border-yellow-500/50 rounded-xl p-4 md:p-6 mb-8 max-w-4xl mx-auto">
-          <div className="text-center">
-            <p className="text-sm md:text-base text-purple-200 mb-2">
-              These are just <span className="text-yellow-400 font-semibold">60 out of 175 cards</span> launching in our <span className="text-yellow-400 font-semibold">1st set</span>.
-            </p>
-            <p className="text-sm md:text-base text-purple-200 mb-2">
-              These 60 cards are the only ones available in our <span className="text-yellow-400 font-semibold">Demo Day Edition</span> products.
-            </p>
-            <p className="text-sm md:text-base text-purple-200">
-              The full <span className="text-yellow-400 font-semibold">175 card collection</span> will be released upon <span className="text-yellow-400 font-semibold">Kickstarter completion</span>.
-            </p>
-          </div>
-        </div>
+        <h1 className="text-4xl font-bold text-center mb-4 text-white">Explore the Elekin TCG Collection</h1>
+        <p className="text-center text-purple-200/80 max-w-2xl mx-auto mb-8">
+          Cards from the Elekin universe — the collection connected to your adventures in Kinbrold.
+        </p>
         
         <FilterOptions 
           filters={filters}

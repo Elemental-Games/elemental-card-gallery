@@ -1,5 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ThemeProvider } from 'next-themes';
 import { HelmetProvider } from 'react-helmet-async';
 import { Toaster } from "@/components/ui/sonner";
@@ -42,11 +42,9 @@ import ProtectedRoute from './components/ProtectedRoute';
 import ProfilePage from './pages/ProfilePage';
 import DeckBuilderWizardPage from "./pages/DeckBuilderWizardPage";
 import AboutUsPage from "./pages/AboutUsPage";
-import JoinNowPage from './pages/JoinNowPage';
 import LegalPage from './pages/LegalPage';
 import UnsubscribePage from './pages/UnsubscribePage';
 import EmailPreviewPage from './pages/EmailPreviewPage';
-import KickstarterPage from './pages/KickstarterPage';
 import VipKickstarterEmailPage from './pages/VipKickstarterEmailPage';
 import ShopPage from './pages/ShopPage';
 import PostPurchasePage from './pages/PostPurchasePage';
@@ -57,6 +55,10 @@ import ShippingPolicyPage from './pages/ShippingPolicyPage';
 import InvestorPitchPage from './pages/InvestorPitchPage';
 import PasswordProtectedRoute from './components/PasswordProtectedRoute';
 import TCGLanding from './pages/TCGLanding';
+import ElekinRoadmap from './pages/ElekinRoadmap';
+import AlphaPage from './pages/AlphaPage';
+import CreatorsPage from './pages/CreatorsPage';
+import CommunityPage from './pages/CommunityPage';
 
 const queryClient = new QueryClient();
 
@@ -187,11 +189,15 @@ const App = () => (
                       <Route path="/elekin/how-to-play/interactive-demo" element={<HowToPlayInteractiveDemoPage />} />
                       <Route path="/kinbrold" element={<KinbroldPage />} />
                       <Route path="/about" element={<AboutUsPage />} />
-                      <Route path="/join-now" element={<JoinNowPage />} />
+                      <Route path="/alpha" element={<AlphaPage />} />
+                      <Route path="/creators" element={<CreatorsPage />} />
+                      <Route path="/community" element={<CommunityPage />} />
+                      <Route path="/news" element={<Navigate to="/" replace />} />
+                      <Route path="/join-now" element={<Navigate to="/alpha" replace />} />
                       <Route path="/legal" element={<LegalPage />} />
                       <Route path="/unsubscribe" element={<UnsubscribePage />} />
                       <Route path="/admin/email-preview" element={<EmailPreviewPage />} />
-                      <Route path="/kickstarter" element={<KickstarterPage />} />
+                      <Route path="/kickstarter" element={<Navigate to="/" replace />} />
                       <Route path="/invest" element={
                         <PasswordProtectedRoute password={import.meta.env.VITE_INVESTOR_PASSWORD}>
                           <InvestorPitchPage />
@@ -199,6 +205,7 @@ const App = () => (
                       } />
                       <Route path="/admin/vip-kickstarter" element={<VipKickstarterEmailPage />} />
                       <Route path="/tcg" element={<TCGLanding />} />
+                      <Route path="/roadmap" element={<ElekinRoadmap />} />
                     </Routes>
                   </main>
                   <Footer />

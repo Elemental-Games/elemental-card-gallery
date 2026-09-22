@@ -1,13 +1,15 @@
 import React from 'react';
 import { Card } from "@/components/ui/card";
+import { MMO_IMAGES } from '@/config/site';
 
 const TsunarethPage = () => {
+  const art = MMO_IMAGES.tsunareth;
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-800/10 to-blue-800/30">
       {/* Hero Section */}
       <section className="relative h-[70vh] overflow-hidden">
         <img 
-          src="/images/kingdom-headers/tsunareth-header.webp" 
+          src={art} 
           alt="Tsunareth Crystal City" 
           className="w-full h-full object-cover"
         />
@@ -33,9 +35,6 @@ const TsunarethPage = () => {
             When Mek founded our kingdom, they recognized the power in adaptability. Our civilization spans three tiers - surface harbors for commerce, 
             mid-level coral cities for daily life, and the sacred depths where our most ancient secrets dwell.
           </p>
-          <p className="text-xs text-gray-400 italic mt-4">
-            The below images are AI generated solely for story-reference purposes, and will be professionally illustrated post-launch.
-          </p>
         </Card>
 
         {/* Life Beneath the Waves */}
@@ -49,7 +48,7 @@ const TsunarethPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/tsunareth_tiered.png" 
+            src={art} 
             alt="Life in Tsunareth" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -58,7 +57,7 @@ const TsunarethPage = () => {
         {/* The Way of Water */}
         <div className="grid md:grid-cols-2 gap-6">
           <img 
-            src="/kingdoms/tsunareth_training.png" 
+            src={art} 
             alt="Water Training" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -88,7 +87,7 @@ const TsunarethPage = () => {
             </p>
           </Card>
           <img 
-            src="/kingdoms/tsunareth_young.png" 
+            src={art} 
             alt="Young Water Elementals" 
             className="w-full h-full object-cover rounded-lg shadow-xl"
           />
@@ -112,7 +111,7 @@ const TsunarethPage = () => {
               <li>The Coral Markets: Our renowned underwater trading centers</li>
             </ul>
             <img 
-              src="/kingdoms/tsunareth_ancient.png" 
+              src={art} 
               alt="Sacred Depths of Tsunareth" 
               className="w-full h-full object-cover rounded-lg shadow-xl"
             />

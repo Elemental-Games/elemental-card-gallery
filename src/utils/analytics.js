@@ -202,6 +202,51 @@ export const trackCountdownView = () => {
   });
 };
 
+/** Funnel events for the Elekin MMOTCG relaunch */
+export const trackFunnelEvent = (eventName, properties = {}) => {
+  track(eventName, {
+    ...properties,
+    timestamp: new Date().toISOString(),
+  });
+
+  if (typeof window !== 'undefined' && window.gtag) {
+    window.gtag('event', eventName, {
+      event_category: 'funnel',
+      ...properties,
+    });
+  }
+};
+
+export const trackAlphaCtaClick = (placement = 'unknown') =>
+  trackFunnelEvent('alpha_cta_click', { placement });
+
+export const trackAlphaApplicationStart = () =>
+  trackFunnelEvent('alpha_application_start');
+
+export const trackAlphaApplicationComplete = () =>
+  trackFunnelEvent('alpha_application_complete');
+
+export const trackCreatorCtaClick = (placement = 'unknown') =>
+  trackFunnelEvent('creator_cta_click', { placement });
+
+export const trackCreatorApplicationStart = () =>
+  trackFunnelEvent('creator_application_start');
+
+export const trackCreatorApplicationComplete = () =>
+  trackFunnelEvent('creator_application_complete');
+
+export const trackDiscordClick = (placement = 'unknown') =>
+  trackFunnelEvent('discord_click', { placement });
+
+export const trackGameplayWatch = (placement = 'unknown') =>
+  trackFunnelEvent('gameplay_watch', { placement });
+
+export const trackTcgGalleryVisit = () =>
+  trackFunnelEvent('tcg_gallery_visit');
+
+export const trackShopVisit = () =>
+  trackFunnelEvent('shop_visit');
+
 // Analytics dashboard data
 export const getAnalyticsData = () => {
   const status = getCampaignStatus();

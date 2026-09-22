@@ -32,7 +32,7 @@ const MapComponent = ({ showInteractivity, width, height }) => {
   return (
     <div className="relative" ref={mapRef} style={{ width: `${width}px`, height: `${height}px` }}>
       <img 
-        src="/kinbrold_map.jpg" 
+        src="/images/mmo-kinbrold-map.jpg" 
         alt="Kinbrold Map" 
         className="w-full h-full object-cover"
         id="map"

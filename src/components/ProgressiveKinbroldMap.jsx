@@ -219,7 +219,7 @@ const ProgressiveKinbroldMap = () => {
               <div className="relative" style={{ width: '100vw', height: '100vh', minWidth: '1200px', minHeight: '800px' }}>
                 {/* Background Map Image - Full Width */}
                 <img 
-                  src="/kinbrold_map.jpg" 
+                  src="/images/mmo-kinbrold-map.jpg" 
                   alt="World of Kinbrold"
                   className="w-full h-full object-cover"
                   style={{

@@ -61,7 +61,7 @@ export const navItems = [
         page: <CardGalleryPage />,
       },
       {
-        title: "Play Quickplay",
+        title: "TCG Beta",
         to: "/tcg",
         page: <TCGLanding />,
       },

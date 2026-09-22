@@ -9,6 +9,8 @@ export const DEFAULT_DISCORD_INVITE_URL = 'https://discord.gg/JVcMMqTADB';
 export const MMO_IMAGES = {
   landingHero: '/elekin-landing-hero.jpg',
   kinbroldMap: '/images/mmo-kinbrold-map.jpg',
+  /** Labeled regions omitted — decorative backgrounds */
+  kinbroldMapNoNames: '/images/mmo-kinbrold-map-nonames.jpg',
   evermereStreet: '/images/mmo-evermere-street.jpg',
   evermereCrafting: '/images/mmo-evermere-crafting.jpg',
   scarto: '/images/mmo-scarto.jpg',

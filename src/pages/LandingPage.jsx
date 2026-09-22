@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { ArrowRight, Map, Swords, Gem, Hammer, Layers, Trophy, Sparkles } from 'lucide-react';
-import {
-  trackAlphaCtaClick,
-  trackCreatorCtaClick,
-  trackDiscordClick,
-} from '@/utils/analytics';
-import { SITE, MMO_IMAGES, hasDiscordInvite, isPhysicalShopPaused } from '@/config/site';
+import { trackAlphaCtaClick, trackCreatorCtaClick } from '@/utils/analytics';
+import { SITE, MMO_IMAGES } from '@/config/site';
 import AlphaWaitlistCapture from '@/components/alpha/AlphaWaitlistCapture';
 import AlphaSignupModal from '@/components/alpha/AlphaSignupModal';
 import CreatorInterestCapture from '@/components/creators/CreatorInterestCapture';
@@ -382,94 +378,70 @@ const LandingPage = () => {
         </div>
       </section>
 
-      {/* TCG + CREATORS + COMMUNITY */}
-      <section className="py-14 bg-[#140d32] border-y border-yellow-400/20">
-        <div className="container mx-auto px-4 grid md:grid-cols-3 gap-6">
-          <div className="rounded-2xl border border-yellow-400/25 p-6 bg-yellow-400/5 hover:border-yellow-400/50 transition-colors">
-            <h3 className="text-xl md:text-2xl font-bold mb-2 text-yellow-400">Elekin TCG</h3>
-            <p className="text-base md:text-lg text-purple-200/70 mb-4">
-              The card game connected to Kinbrold — gallery, how to play, and browser Quickplay.
-            </p>
-            <div className="flex flex-wrap gap-3 text-base font-semibold">
-              <Link to="/cards" className="text-yellow-400 hover:text-yellow-300">
-                Card Gallery
-              </Link>
-              <Link to="/tcg" className="text-yellow-400 hover:text-yellow-300">
-                Play Quickplay
-              </Link>
-              <Link to="/shop" className="text-yellow-400 hover:text-yellow-300">
-                {isPhysicalShopPaused() ? 'Physical TCG (paused)' : 'Shop'}
-              </Link>
-            </div>
-          </div>
-
-          <div
-            className="rounded-2xl border-2 border-yellow-400/50 p-6 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-transparent shadow-[0_0_30px_rgba(234,179,8,0.15)]"
-          >
-            <div className="flex items-center gap-2 mb-2">
+      {/* CREATOR PROGRAM */}
+      <section className="py-16 md:py-20 bg-[#140d32] border-y border-yellow-400/20">
+        <div className="container mx-auto px-4 max-w-3xl">
+          <div className="rounded-2xl border-2 border-yellow-400/50 p-8 md:p-10 bg-gradient-to-br from-yellow-400/20 via-yellow-500/10 to-transparent shadow-[0_0_40px_rgba(234,179,8,0.12)]">
+            <div className="flex items-center justify-center gap-2 mb-3">
               <Sparkles className="w-5 h-5 text-yellow-400" />
-              <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-yellow-400">Now recruiting</span>
+              <span className="text-xs md:text-sm font-bold uppercase tracking-wider text-yellow-400">
+                Now recruiting
+              </span>
             </div>
-            <h3 className="text-xl md:text-2xl font-bold mb-2 text-white">Creator Program</h3>
-            <p className="text-base md:text-lg text-purple-100/80 mb-4">
-              Early Kinbrold looks, creator testing, and limited slots before Elekin goes wide.
+            <h2 className="text-3xl md:text-4xl font-black text-center mb-3 text-white">Creator Program</h2>
+            <p className="text-base md:text-lg text-purple-100/85 text-center mb-8 max-w-xl mx-auto leading-relaxed">
+              Be among the first creators to enter {SITE.worldName} — early looks, exclusive reveals, creator testing,
+              and consideration for Alpha access before Closed Alpha opens October 1.
             </p>
-            <CreatorInterestCapture placement="homepage_grid" />
-            <Link
-              to="/creators"
-              onClick={() => trackCreatorCtaClick('homepage')}
-              className="inline-flex items-center gap-2 mt-4 text-sm font-bold text-yellow-400 hover:text-yellow-300"
-            >
-              Full application <ArrowRight className="w-4 h-4" />
-            </Link>
-          </div>
-
-          <div className="rounded-2xl border border-yellow-400/25 p-6 bg-yellow-400/5 hover:border-yellow-400/50 transition-colors">
-            <h3 className="text-xl md:text-2xl font-bold mb-2 text-yellow-400">Community</h3>
-            <p className="text-base md:text-lg text-purple-200/70 mb-4">
-              The official Elekin Discord is being prepared for the MMOTCG phase.
-            </p>
-            {hasDiscordInvite() ? (
-              <a
-                href={SITE.discordInviteUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={() => trackDiscordClick('homepage')}
-                className="text-base font-bold text-yellow-400 hover:text-yellow-300"
+            <CreatorInterestCapture placement="homepage_creator" className="max-w-lg mx-auto" />
+            <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/creators"
+                onClick={() => trackCreatorCtaClick('homepage')}
+                className="inline-flex items-center gap-2 bg-yellow-400 hover:bg-yellow-300 text-[#1A103C] font-bold px-6 py-3 rounded-xl transition-colors"
               >
-                Join the Elekin Community →
-              </a>
-            ) : (
-              <Link to="/community" className="text-base font-bold text-yellow-400/70 hover:text-yellow-400">
-                Discord — Coming Soon →
+                Apply to the Creator Program
+                <ArrowRight className="w-5 h-5" />
               </Link>
-            )}
+              <Link
+                to="/creators"
+                onClick={() => trackCreatorCtaClick('homepage_creator_learn')}
+                className="text-sm font-semibold text-yellow-400/90 hover:text-yellow-300"
+              >
+                See benefits & requirements
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* FINAL CTA */}
-      <section className="py-20 md:py-28 relative">
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-yellow-400/40 to-transparent" />
-        <div className="container mx-auto px-4 text-center max-w-2xl">
-          <p className="text-yellow-400 text-sm md:text-base font-semibold tracking-[0.2em] uppercase mb-4">
-            Opens October 1
-          </p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-            Be among the first to enter <span className="text-yellow-400">Kinbrold</span>
+      {/* LORE */}
+      <section className="relative py-16 md:py-24 overflow-hidden border-b border-yellow-400/20">
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-45"
+          style={{ backgroundImage: `url('${MMO_IMAGES.kinbroldMapNoNames}')` }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1A103C]/88 via-[#1A103C]/72 to-[#1A103C]/88" />
+        <div className="relative container mx-auto px-4 max-w-4xl text-center">
+          <p className="text-yellow-400 text-sm font-semibold tracking-[0.2em] uppercase mb-3">Lore</p>
+          <h2 className="text-3xl md:text-5xl font-black mb-4">
+            Explore the world of <span className="text-yellow-400">{SITE.worldName}</span>
           </h2>
-          <p className="text-purple-200/75 mb-8 text-lg md:text-xl">
-            Closed Alpha opens October 1. We&apos;re testing internally right now — join the tester list to be considered for early access.
+          <p className="text-lg md:text-xl text-purple-100/85 mb-8 max-w-2xl mx-auto leading-relaxed">
+            Kingdoms, history, and the places you&apos;ll adventure through in the MMOTCG — from Evermere to the edges of
+            the map. Dive in before you step into Closed Alpha.
           </p>
-          <div className="max-w-md mx-auto text-left">
-            <AlphaWaitlistCapture
-              placement="homepage_footer"
-              layout="stacked"
-              buttonLabel="Become an Alpha Tester"
-            />
-          </div>
+          <Link
+            to="/kinbrold"
+            className="inline-flex items-center gap-2 border-2 border-yellow-400/60 hover:border-yellow-400 bg-yellow-400/10 hover:bg-yellow-400/20 text-yellow-300 font-bold text-lg px-8 py-4 rounded-xl transition-colors"
+          >
+            <Map className="w-5 h-5" />
+            Explore Lore
+            <ArrowRight className="w-5 h-5" />
+          </Link>
         </div>
       </section>
+
     </div>
   );
 };
